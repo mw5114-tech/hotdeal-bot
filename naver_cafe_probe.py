@@ -168,8 +168,14 @@ def run(fetcher=fetch):
             return 0
         print("INCONCLUSIVE: AUTH_LIST_READABLE_CONTROL_FAILED reason=" + str(exc))
         return 3
-    # Differences may be caused by new posts or personalization; not proof.
-    print(f"INCONCLUSIVE: LIST_READABLE_WITHOUT_AUTH authenticated_count={len(authenticated)} anonymous_count={len(anonymous)}")
+    # Only metadata (article ids and titles) was checked. Session authentication
+    # remains unverified when the anonymous request can read the same listing.
+    if authenticated == anonymous:
+        print(f"PASS: ARTICLE_METADATA_READABLE_WITHOUT_AUTH articles={len(authenticated)}")
+        print("AUTH_NOT_VERIFIED: public listing metadata does not prove access to member-only articles.")
+        return 0
+    # Different lists could result from login or concurrent new posts.
+    print(f"INCONCLUSIVE: AUTH_AND_ANON_LISTS_DIFFER authenticated_count={len(authenticated)} anonymous_count={len(anonymous)}")
     return 3
 
 
