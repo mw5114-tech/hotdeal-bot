@@ -230,13 +230,11 @@ def run(mode="run", fetcher=fetch_listing, sender=send_post):
         if mode == "preview":
             print("JIRUM_PREVIEW: baseline missing; no send and no state change")
         else:
-            # One recent item proves that a working PURCHASE link reaches the bot.
-            deal = next((p for p in reversed(posts) if p["product_url"]), None)
-            if deal is None:
-                raise RuntimeError("No purchase link available for baseline verification")
-            sender(deal)
+            # A manual verify-repost may already have sent the latest post.
+            # On the first scheduled run, only create the baseline to avoid
+            # echoing that same item to the personal chat and group again.
             save({"last_seen_id": latest, "initialized_at": datetime.now(timezone.utc).isoformat()})
-            print(f"JIRUM_BASELINE_REPOSTED: post={deal['id']} latest_seen={latest}; older skipped")
+            print(f"JIRUM_BASELINE_SAVED: latest_seen={latest}; historical posts not resent")
         return 0
     fresh = [p for p in posts if p["id"] > state["last_seen_id"]]
     print(f"JIRUM_SCAN: previous={state['last_seen_id']} fresh={len(fresh)} mode={mode}")
