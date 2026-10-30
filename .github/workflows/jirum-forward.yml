@@ -38,8 +38,8 @@ jobs:
           python-version: '3.11'
       - name: Verify Jirum watcher code
         run: |
-          python -m py_compile jirum_forward.py
-          python -m unittest -v test_jirum_forward.py
+          python -m py_compile jirum_forward.py telegram_delivery.py telegram_group_setup.py
+          python -m unittest -v test_jirum_forward.py test_telegram_delivery.py
       - name: Repost public Jirum deals with original purchase links
         run: python jirum_forward.py --mode "$JIRUM_MODE"
       # Persist successful reposts even if a later message delivery fails.
