@@ -7,6 +7,7 @@ from pathlib import Path
 from urllib import request
 from urllib.parse import urlencode
 import naver_cafe_probe as cafe
+from hotdeal_message import format_hotdeal_message
 
 STATE = Path(__file__).resolve().parent / "state" / "naver_seen_articles.json"
 MAX_ALERTS = 10
@@ -54,7 +55,7 @@ def notify(article_id, title):
     if not token or not chat:
         raise RuntimeError("Telegram secrets are missing")
     url = ARTICLE_URL.format(article_id)
-    msg = "🆕 [네이버 카페 새 핫딜 글]\n📝 " + title[:180] + "\n🔗 " + url
+    msg = format_hotdeal_message(title, url)
     data = urlencode({"chat_id": chat, "text": msg, "disable_web_page_preview": "true"}).encode()
     req = request.Request("https://api.telegram.org/bot" + token + "/sendMessage",
                           data=data, method="POST")
