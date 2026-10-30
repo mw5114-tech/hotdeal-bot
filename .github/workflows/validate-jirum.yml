@@ -1,0 +1,29 @@
+name: Validate Jirum repost parser and Telegram payload
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - jirum_forward.py
+      - test_jirum_forward.py
+      - .github/workflows/jirum-forward.yml
+      - .github/workflows/validate-jirum.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run Jirum repost unit tests (no Telegram message sent)
+        run: |
+          python -m py_compile jirum_forward.py
+          python -m unittest -v test_jirum_forward.py
