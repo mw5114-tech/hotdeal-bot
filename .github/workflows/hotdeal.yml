@@ -37,8 +37,8 @@ jobs:
       - name: Check both scanners and unit tests
         id: checks
         run: |
-          python -m py_compile new_items.py naver_cafe_probe.py naver_new_posts.py
-          python -m unittest -v test_new_items.py test_naver_cafe_probe.py test_naver_new_posts.py
+          python -m py_compile new_items.py naver_cafe_probe.py naver_new_posts.py hotdeal_message.py
+          python -m unittest -v test_new_items.py test_naver_cafe_probe.py test_naver_new_posts.py test_hotdeal_message.py
       - name: DealSpot first-page scan
         id: dealspot_scan
         continue-on-error: true
