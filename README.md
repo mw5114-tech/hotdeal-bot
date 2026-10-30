@@ -25,6 +25,8 @@
 - Repository Variable: `BOT_ENABLED=true`일 때 예약 실행 활성화.
 - Repository Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`. 네이버 카페 감시에는 `NAVER_COOKIE`가 필요 없습니다.
 - 한 번 실행할 때 두 스캐너를 별도의 단계로 실행합니다. 한쪽이 실패해도 나머지 스캔은 진행하며, 이미 보낸 메시지의 기록을 GitHub에 커밋합니다. 실패 사실은 작업 결과에 표시합니다.
+- 읽기 전용 `preview=true` 실행은 `hotdeal-preview` 그룹으로 분리되어 정기 실행의 `hotdeal-state` 대기열을 막지 않습니다. 실제 전송 실행은 기존 기록 충돌 방지를 위해 `hotdeal-state`에서 순차 진행합니다.
+- GitHub Actions 서비스 자체에서 비정상 대기 상태가 생기는 것까지 코드로 완전히 예방할 수는 없습니다.
 - **무료 사용량:** 예약 실행 횟수가 2배로 늘지는 않지만, 합쳐진 작업의 실행 시간이 1분 단위 과금 경계를 넘으면 사용량이 증가할 수 있습니다.
 
 ## 수동 점검
