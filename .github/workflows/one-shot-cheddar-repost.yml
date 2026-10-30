@@ -1,0 +1,59 @@
+name: One-time repeat cheddar Telegram delivery test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-shot-cheddar-repost.yml
+
+permissions:
+  contents: read
+
+jobs:
+  resend-cheddar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Resend exactly Jirum cheddar post 94635 to private and MUSE group
+        run: |
+          python - <<'PY'
+          import jirum_forward as app
+          from urllib import request
+          from urllib.parse import urlsplit
+
+          TARGET_ID = 94635
+          posts = app.fetch_listing()
+          matching = [post for post in posts if post["id"] == TARGET_ID]
+          if not matching:
+              req = request.Request(
+                  app.PUBLIC_URL + "?before=94636",
+                  headers={"User-Agent": "Mozilla/5.0", "Accept": "text/html"},
+              )
+              with request.urlopen(req, timeout=20) as response:
+                  if urlsplit(response.geturl()).hostname != "t.me":
+                      raise RuntimeError("Unexpected Telegram redirect; abort")
+                  body = response.read(2000001)
+              if len(body) > 2000000:
+                  raise RuntimeError("Oversized response; abort")
+              matching = [
+                  post for post in app.parse_listing(body.decode("utf-8-sig", "replace"))
+                  if post["id"] == TARGET_ID
+              ]
+          if len(matching) != 1:
+              raise RuntimeError("Cannot find original Jirum cheddar post 94635")
+          post = matching[0]
+          if not post["product_url"]:
+              raise RuntimeError("Cheddar product URL missing; no send")
+          if not any(t in post["text"].lower() for t in ("체다", "cheddar")):
+              raise RuntimeError("ID 94635 is not the verified cheddar product; no send")
+          print("CHEDDAR_VERIFIED: id=94635 title=" + post["title"][:100])
+          app.send_post(post)
+          print("CHEDDAR_REPEAT_SENT: id=94635 state_unchanged=true")
+          PY
