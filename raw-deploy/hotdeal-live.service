@@ -1,0 +1,39 @@
+[Unit]
+Description=Jirum Telegram event watcher
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=hotdeal-live
+Group=hotdeal-live
+WorkingDirectory=/opt/hotdeal-live
+EnvironmentFile=/etc/hotdeal-live.env
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/opt/hotdeal-live/.venv/bin/python /opt/hotdeal-live/watcher.py run
+Restart=always
+RestartSec=10
+TimeoutStopSec=45
+StateDirectory=hotdeal-live
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/hotdeal-live
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hotdeal-live
+
+[Install]
+WantedBy=multi-user.target
