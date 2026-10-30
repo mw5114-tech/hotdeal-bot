@@ -11,13 +11,14 @@ class Tests(unittest.TestCase):
     def test_canonical(self):
         self.assertEqual(app.canonical("/deal/abc/"),"https://deal.korea-inc.com/deal/abc/")
         self.assertIsNone(app.canonical("https://other.example/deal/abc/"))
-    def test_collect_dedupe_and_page(self):
-        pages=[html("a","b"), html("b","c"),html("b","c")]
+    def test_collect_first_page_only(self):
+        calls=[]
         def fake(url):
-            page=int(app.parse_qs(app.urlsplit(url).query).get("page",["1"])[0])
-            return pages[page-1]
-        result=app.collect(fetch=fake, max_pages=10, pause=0)
-        self.assertEqual(len(result),3)
+            calls.append(url)
+            return html("a","b")
+        result=app.collect(fetch=fake)
+        self.assertEqual(len(result),2)
+        self.assertEqual(calls,[app.BASE + "/deals/"])
     def test_first_run_no_alert(self):
         with tempfile.TemporaryDirectory() as d:
             with patch.object(app,"STATE",Path(d)/"seen.json"),patch.object(app,"collect",return_value={"https://deal.korea-inc.com/deal/a/":"Item A"}),patch.object(app,"notify",side_effect=AssertionError("should not send")):
