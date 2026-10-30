@@ -79,27 +79,13 @@ def extract(html):
         items[url] = title[:180]
     return items
 
-def collect(fetch=get, max_pages=MAX_PAGES, pause=0.35):
-    found = {}
-    for page in range(1, max_pages + 1):
-        url = BASE + LIST_PATH + ("" if page == 1 else "?" + urlencode({"page": page}))
-        items = extract(fetch(url))
-        if not items:
-            if page == 1:
-                raise RuntimeError("First listing page contained no product links")
-            break
-        newly_seen_on_page = sum(url not in found for url in items)
-        found.update(items)
-        print(f"page={page} items={len(items)} unique_total={len(found)}")
-        if newly_seen_on_page == 0:
-            break
-        if page < max_pages and pause:
-            time.sleep(pause)
-    if not found:
-        raise RuntimeError("No products discovered; refusing to alter baseline")
-    if page == max_pages:
-        raise RuntimeError("Listing exceeded MAX_PAGES: refusing to record an incomplete baseline")
-    return found
+def collect(fetch=get, max_pages=1, pause=0):
+    """Only watch the first /deals/ page (assumed newest-first)."""
+    items = extract(fetch(BASE + LIST_PATH))
+    if not items:
+        raise RuntimeError("First listing page contained no product links")
+    print(f"page=1 items={len(items)} unique_total={len(items)}")
+    return items
 
 def load():
     if not STATE.exists():
