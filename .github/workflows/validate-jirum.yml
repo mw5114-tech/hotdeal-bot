@@ -1,4 +1,5 @@
 name: Validate Jirum repost parser and Telegram payload
+# Includes regression coverage: manual verify followed by first scheduled run must not duplicate.
 
 on:
   push:
