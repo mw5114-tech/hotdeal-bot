@@ -1,0 +1,30 @@
+name: Naver Cafe manual access probe
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-cafe-access-probe
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline unit tests
+        run: python -m unittest -v test_naver_cafe_probe.py
+      - name: Read-only authenticated access probe
+        env:
+          NAVER_COOKIE: ${{ secrets.NAVER_COOKIE }}
+        run: python naver_cafe_probe.py
+
