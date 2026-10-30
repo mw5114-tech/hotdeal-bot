@@ -1,4 +1,4 @@
-name: DealSpot new product alerts
+name: DealSpot + Naver Cafe new-item alerts
 
 on:
   schedule:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       preview:
-        description: 'Preview without sending Telegram messages'
+        description: 'Preview both sites without sending Telegram messages'
         required: true
         default: true
         type: boolean
@@ -14,6 +14,7 @@ on:
 permissions:
   contents: write
 
+# The manual Naver verification workflow uses the same group to avoid state races.
 concurrency:
   group: hotdeal-state
   cancel-in-progress: false
@@ -23,41 +24,64 @@ jobs:
     if: ${{ github.event_name == 'workflow_dispatch' || vars.BOT_ENABLED == 'true' }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      PREVIEW: ${{ github.event_name == 'workflow_dispatch' && inputs.preview && 'true' || 'false' }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Check syntax
+      - name: Check both scanners and unit tests
+        id: checks
         run: |
-          python -m py_compile new_items.py
-          python -m unittest -v test_new_items.py
-      - name: Preview or send alerts
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          PREVIEW: ${{ github.event_name == 'workflow_dispatch' && inputs.preview && 'true' || 'false' }}
+          python -m py_compile new_items.py naver_cafe_probe.py naver_new_posts.py
+          python -m unittest -v test_new_items.py test_naver_cafe_probe.py test_naver_new_posts.py
+      - name: DealSpot first-page scan
+        id: dealspot_scan
+        continue-on-error: true
         run: |
           if [ "$PREVIEW" = "true" ]; then
             python new_items.py --preview
           else
-            if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
-              echo "Missing Telegram Secrets"
-              exit 2
-            fi
             python new_items.py
           fi
-      - name: Persist alert history
-        if: ${{ success() && (github.event_name == 'schedule' || !inputs.preview) }}
+      - name: Naver Cafe first-page scan (public metadata)
+        id: naver_scan
+        continue-on-error: true
         run: |
-          if [ -f state/seen_products.json ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add state/seen_products.json
-            if ! git diff --cached --quiet; then
-              git commit -m "chore: persist sent hotdeal prices [skip ci]"
-              git push origin "HEAD:${GITHUB_REF_NAME}"
+          if [ "$PREVIEW" = "true" ]; then
+            python naver_new_posts.py --preview
+          else
+            python naver_new_posts.py
+          fi
+      # Save both histories even if one scanner failed after sending some messages.
+      # This avoids redelivering successful messages at the next scheduled scan.
+      - name: Persist both alert histories
+        if: ${{ !cancelled() && steps.checks.outcome == 'success' && (github.event_name == 'schedule' || !inputs.preview) }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for state in state/seen_products.json state/naver_seen_articles.json; do
+            if [ -f "$state" ]; then
+              git add -- "$state"
             fi
+          done
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: persist hotdeal alert histories [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+      # continue-on-error isolates sources but this final step preserves error visibility.
+      - name: Check both scan results
+        if: ${{ !cancelled() && steps.checks.outcome == 'success' }}
+        env:
+          DEALSPOT_RESULT: ${{ steps.dealspot_scan.outcome }}
+          NAVER_RESULT: ${{ steps.naver_scan.outcome }}
+        run: |
+          echo "DealSpot result: $DEALSPOT_RESULT"
+          echo "Naver result: $NAVER_RESULT"
+          if [ "$DEALSPOT_RESULT" != "success" ] || [ "$NAVER_RESULT" != "success" ]; then
+            echo "::error::At least one source failed. Other source was still scanned, and successful alert histories were persisted."
+            exit 1
           fi
