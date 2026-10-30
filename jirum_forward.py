@@ -14,6 +14,7 @@ import re
 from urllib import error, request
 from urllib.parse import urlencode, urlsplit
 from telegram_delivery import send_text
+from coupang_manual_links import resolve_manual_link
 
 PUBLIC_URL = "https://t.me/s/jirum"
 STATE = Path(__file__).resolve().parent / "state" / "jirum_last_forwarded.json"
@@ -192,13 +193,14 @@ def save(value):
 def make_message(post):
     """AI-friendly fields first; retain public source text for context and disclosures."""
     title = post["title"] or f"뽐질 핫딜 #{post['id']}"
-    url = post["product_url"]
-    if not url:
+    original_url = post["product_url"]
+    if not original_url:
         raise ValueError("Missing purchase URL")
+    url = resolve_manual_link(original_url)
     head = f"🆕 [HOTDEAL]\n\n상품명: {title}\n\n상품링크: {url}"
     # Avoid pasting the product URL twice; original source copy still includes
     # discount details and affiliate disclosure when present.
-    source = post["text"].replace(url, "")
+    source = post["text"].replace(original_url, "")
     source = "\n".join(x.strip() for x in source.splitlines() if x.strip())
     if source:
         remaining = MAX_MESSAGE_LENGTH - len(head) - len("\n\n원문:\n")
