@@ -22,6 +22,25 @@ class Tests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             app.parse_listing("<html>no posts</html>")
 
+    def test_telegram_forward_uses_original_channel_id_not_rewritten_text(self):
+        import io
+        import os
+        from urllib.parse import parse_qs
+        with patch.dict(os.environ, {
+            "TELEGRAM_BOT_TOKEN": "dummy-test-token",
+            "TELEGRAM_CHAT_ID": "12345678",
+        }):
+            with patch.object(
+                app.request, "urlopen", return_value=io.BytesIO(b'{"ok": true}')
+            ) as urlopen:
+                app.forward_message(87548)
+        request_obj = urlopen.call_args.args[0]
+        self.assertTrue(request_obj.full_url.endswith("/forwardMessage"))
+        self.assertEqual(
+            parse_qs(request_obj.data.decode("utf-8")),
+            {"chat_id": ["12345678"], "from_chat_id": ["@jirum"], "message_id": ["87548"]},
+        )
+
     def test_initial_baseline_forwards_only_latest_once(self):
         with tempfile.TemporaryDirectory() as folder:
             with patch.object(app, "STATE", Path(folder) / "jirum.json"):
