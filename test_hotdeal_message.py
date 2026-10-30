@@ -26,7 +26,7 @@ class HotdealMessageTests(unittest.TestCase):
         )
 
     def assert_sent_message(self, app, args, expected_text):
-        with patch.dict(os.environ, {
+        with patch("telegram_delivery.target_chats", return_value=[("personal", "1234")]), patch.dict(os.environ, {
             "TELEGRAM_BOT_TOKEN": "test-bot-token",
             "TELEGRAM_CHAT_ID": "1234",
         }):
