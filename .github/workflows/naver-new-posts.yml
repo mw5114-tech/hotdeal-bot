@@ -1,0 +1,60 @@
+name: Naver Cafe new-post alerts (manual verification)
+
+on:
+  workflow_dispatch:
+    inputs:
+      preview:
+        description: 'Preview only (no messages and no state changes)'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hotdeal-state
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check syntax and public metadata watcher tests
+        run: |
+          python -m py_compile naver_cafe_probe.py naver_new_posts.py
+          python -m unittest -v test_naver_cafe_probe.py test_naver_new_posts.py
+      - name: Read public article metadata and preview or send alerts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PREVIEW: ${{ inputs.preview && 'true' || 'false' }}
+        run: |
+          if [ "$PREVIEW" = "true" ]; then
+            python naver_new_posts.py --preview
+          else
+            if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+              echo "Missing Telegram Secrets"
+              exit 2
+            fi
+            python naver_new_posts.py
+          fi
+      - name: Persist Naver article history
+        if: ${{ success() && !inputs.preview }}
+        run: |
+          if [ -f state/naver_seen_articles.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/naver_seen_articles.json
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: persist Naver article history [skip ci]"
+              git push origin "HEAD:${GITHUB_REF_NAME}"
+            fi
+          fi
