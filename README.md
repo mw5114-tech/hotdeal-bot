@@ -83,3 +83,13 @@
 - 코드는 `test_jirum_forward.py`에 테스트하며, 별도 `validate-jirum.yml`에서 테스트와 공개 페이지 구매 링크 조회를 수행하되 텔레그램 메시지는 보내지 않습니다.
 - 공개 웹 첫 페이지의 게시물만 확인하므로 글이 아주 빠르게 쌓이거나 GitHub가 오랫동안 지연되면 일부 누락 가능성이 있습니다.
 - 기존 딜스팟·네이버 카페 30분 알림은 변경하지 않았습니다.
+
+## 텔레그램 알림 개인 채팅 + 핫딜 MUSE용 그룹 동시 발송
+
+- 딜스팟, 네이버 카페, 뽐질의 새 핫딜 알림은 `telegram_delivery.py` 공용 코드로 **개인 채팅과 확인된 '핫딜 MUSE용' 그룹**에 동일한 문구와 상품 링크를 순서대로 보냅니다.
+- 개인 채팅은 기존 GitHub Actions Secret `TELEGRAM_CHAT_ID`와 `TELEGRAM_BOT_TOKEN`을 그대로 사용합니다.
+- 그룹 채팅 ID는 워크플로 **Configure Telegram group delivery** (`.github/workflows/setup-telegram-group.yml`)에서 텔레그램 `getUpdates`로 탐색한 뒤 `getChat`에서 정확히 `핫딜 MUSE용`인지 재확인합니다.
+- 그룹과 개인 채팅 각각 메시지 테스트가 성공해야 비공개 저장소 `state/telegram_group_chat.json`에 그룹 ID가 기록됩니다. 그룹 ID가 아직 없으면 기존 개인 알림만 전송합니다.
+- 그룹이 검색되지 않으면 **'핫딜 MUSE용' 그룹 안에서 봇에게 `/chatid` 또는 `/chatid@봇아이디` 명령**을 보낸 다음 Actions → Configure Telegram group delivery → Run workflow를 다시 실행하세요. 개인방에서 보내면 그룹 ID를 알 수 없습니다.
+- 봇이 그룹 대화를 읽을 권한은 필요 없으며, 다른 사람의 일반 대화를 수집하지 않습니다. 봇이 그룹에 메시지를 작성할 권한은 있어야 합니다.
+- 그룹 전송이 실패하면 기존 성공 기록에 새 항목을 추가하지 않고 다음 검사에서 재시도합니다. 개인방 발송 후 그룹만 실패한 경우 개인방에는 일시적으로 같은 알림이 다시 올 수 있습니다.
