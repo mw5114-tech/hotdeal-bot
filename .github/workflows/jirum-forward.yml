@@ -1,0 +1,73 @@
+name: Jirum original Telegram posts forwarder
+
+on:
+  schedule:
+    - cron: '3-58/5 * * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview = read only; verify-forward = forward latest without changing state; run = normal'
+        type: choice
+        options:
+          - preview
+          - verify-forward
+          - run
+        default: preview
+
+permissions:
+  contents: write
+
+# Serialize only this source; preview can run independently.
+concurrency:
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.mode == 'preview' && 'jirum-preview' || 'jirum-forward' }}
+  cancel-in-progress: false
+
+jobs:
+  forward:
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.BOT_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      JIRUM_MODE: ${{ github.event_name == 'schedule' && 'run' || inputs.mode }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify Jirum watcher code
+        run: |
+          python -m py_compile jirum_forward.py
+          python -m unittest -v test_jirum_forward.py
+      - name: Forward original new posts from public Jirum channel
+        run: python jirum_forward.py --mode "$JIRUM_MODE"
+      # Persist successful deliveries even if a later post forwarding fails.
+      # Rebase is necessary when the combined alert workflow commits other state.
+      - name: Persist Jirum delivery checkpoint
+        if: ${{ always() && !cancelled() && (github.event_name == 'schedule' || inputs.mode == 'run') }}
+        run: |
+          set -euo pipefail
+          if [ ! -f state/jirum_last_forwarded.json ]; then
+            echo "No Jirum checkpoint exists yet."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state/jirum_last_forwarded.json
+          if git diff --cached --quiet; then
+            echo "No new Jirum posts to checkpoint."
+            exit 0
+          fi
+          git commit -m "chore: persist Jirum forwarded post checkpoint [skip ci]"
+          for attempt in 1 2 3; do
+            git fetch origin "$GITHUB_REF_NAME"
+            git rebase "origin/$GITHUB_REF_NAME"
+            if git push origin "HEAD:$GITHUB_REF_NAME"; then
+              echo "Jirum history saved."
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          echo "::error::Unable to persist Jirum forwarded history after 3 retries."
+          exit 1
