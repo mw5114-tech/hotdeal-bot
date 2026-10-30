@@ -1,118 +1,158 @@
-"""Unit checks for public channel IDs, exact forwarding, baseline and retries."""
+"""Tests for Jirum public HTML parsing, original purchase links, and Telegram send."""
+import io
 import json
+import os
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
+from urllib.parse import parse_qs
 
 import jirum_forward as app
 
+SAMPLE = """
+<div class="tgme_widget_message_wrap">
+ <div class="tgme_widget_message" data-post="jirum/94630">
+  <div class="tgme_widget_message_bubble">
+   <div class="tgme_widget_message_text js-message_text" dir="auto">
+    ❤️초대박 14,100원 (25.8% 할인)<br/>
+    카리어왕 치즈 앤 코코넛, 108g, 6개<br/>
+    📌 가격 현황<br/>- 정상가: 19,010원<br/>- 할인: 4,910원<br/>
+    📦 특가 바로가기<br/>
+    <a href="https://link.coupang.com/a/iha660uGR2">https://link.coupang.com/a/iha660uGR2</a><br/>
+    이 포스팅은 쿠팡 파트너스 활동의 일환으로 수수료를 제공받습니다.
+   </div>
+   <a class="tgme_widget_message_date" href="https://t.me/jirum/94630">date</a>
+  </div>
+ </div>
+</div>
+<div class="tgme_widget_message_wrap">
+ <div class="tgme_widget_message" data-post="jirum/94631">
+  <div class="tgme_widget_message_text js-message_text">
+   👍대박 11,000원 (32.0% 할인)<br/>
+   토스쇼핑 123 상품<br/>
+   📦 특가 바로가기<br/>
+   <a href="https://toss.im/_m/LLGfxTy3">특가 보러가기</a><br/>
+   ✱ 이 포스팅은 토스쇼핑 쉐어링크 활동의 일환으로, 수수료를 제공받습니다.
+  </div>
+ </div>
+</div>
+<div class="tgme_widget_message" data-post="elsewhere/9999">
+ <div class="tgme_widget_message_text">무관한 사이트</div>
+</div>
+"""
 
-HTML = '''<html><div class="tgme_widget_message" data-post="jirum/100">A</div>
-<div class="tgme_widget_message" data-post="jirum/102">B</div>
-<div data-post="some_other_channel/104">C</div>
-<div data-post="jirum/101">D</div></html>'''
 
+class RepostTests(unittest.TestCase):
+    def test_public_html_parses_original_coupang_link_and_product(self):
+        posts = app.parse_listing(SAMPLE)
+        self.assertEqual([p["id"] for p in posts], [94630, 94631])
+        self.assertEqual(posts[0]["title"], "카리어왕 치즈 앤 코코넛, 108g, 6개")
+        self.assertEqual(posts[0]["product_url"], "https://link.coupang.com/a/iha660uGR2")
+        self.assertIn("25.8% 할인", posts[0]["text"])
+        self.assertIn("수수료", posts[0]["text"])
+        self.assertNotIn("date", posts[0]["text"])
 
-class Tests(unittest.TestCase):
-    def test_forward_http_error_shows_safe_telegram_description_not_token(self):
-        import io
-        import os
-        from urllib.error import HTTPError
-        from unittest.mock import patch
-        body = io.BytesIO(b'{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}')
-        err = HTTPError("https://api.telegram.org/redacted", 400, "Bad Request", {}, body)
-        with patch.dict(os.environ, {
-            "TELEGRAM_BOT_TOKEN": "dummy-secret-token",
-            "TELEGRAM_CHAT_ID": "123456",
-        }), patch.object(app.request, "urlopen", side_effect=err):
-            with self.assertRaises(RuntimeError) as caught:
-                app.forward_message(94633)
-        self.assertIn("Bad Request: chat not found", str(caught.exception))
-        self.assertNotIn("dummy-secret-token", str(caught.exception))
+    def test_toss_anchor_label_still_returns_original_href(self):
+        post = app.parse_listing(SAMPLE)[1]
+        self.assertEqual(post["product_url"], "https://toss.im/_m/LLGfxTy3")
+        self.assertEqual(post["title"], "토스쇼핑 123 상품")
 
-    def test_parse_listing(self):
-        self.assertEqual(app.parse_listing(HTML), [100, 101, 102])
-
-    def test_parse_empty_refuses_to_reset(self):
-        with self.assertRaises(RuntimeError):
-            app.parse_listing("<html>no posts</html>")
-
-    def test_telegram_forward_uses_original_channel_id_not_rewritten_text(self):
-        import io
-        import os
-        from urllib.parse import parse_qs
-        with patch.dict(os.environ, {
-            "TELEGRAM_BOT_TOKEN": "dummy-test-token",
-            "TELEGRAM_CHAT_ID": "12345678",
-        }):
-            with patch.object(
-                app.request, "urlopen", return_value=io.BytesIO(b'{"ok": true}')
-            ) as urlopen:
-                app.forward_message(87548)
-        request_obj = urlopen.call_args.args[0]
-        self.assertTrue(request_obj.full_url.endswith("/forwardMessage"))
+    def test_no_bogus_telegram_channel_link_selected(self):
+        self.assertIsNone(app.valid_product_url("https://t.me/jirum/123"))
+        self.assertIsNone(app.valid_product_url("javascript:evil()"))
+        self.assertIsNone(app.valid_product_url("http://localhost/test"))
         self.assertEqual(
-            parse_qs(request_obj.data.decode("utf-8")),
-            {"chat_id": ["12345678"], "from_chat_id": ["@jirum"], "message_id": ["87548"]},
+            app.choose_product_link("📦 특가 바로가기", [("https://t.me/jirum/1", "")]),
+            None,
         )
 
-    def test_initial_baseline_forwards_only_latest_once(self):
-        with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                forwarded = []
-                app.run(fetcher=lambda: [100, 101], forwarder=forwarded.append)
-                self.assertEqual(forwarded, [101])
-                self.assertEqual(app.load()["last_seen_id"], 101)
+    def test_link_in_plain_text_without_anchor(self):
+        p = app.parse_listing('''<div data-post="jirum/94632">
+          <div class="tgme_widget_message_text">가격 안내<br>맥북<br>📦 특가 바로가기<br>
+          https://link.coupang.com/a/hello</div></div>''')
+        self.assertEqual(p[0]["product_url"], "https://link.coupang.com/a/hello")
 
-    def test_new_messages_only_and_in_chronological_order(self):
+    def test_missing_every_purchase_link_fails_closed(self):
+        with self.assertRaises(RuntimeError):
+            app.parse_listing('<div data-post="jirum/123"><div class="tgme_widget_message_text">아무 링크 없음</div></div>')
+
+    def test_telegram_message_contains_clickable_original_url(self):
+        post = app.parse_listing(SAMPLE)[0]
+        message = app.make_message(post)
+        self.assertTrue(message.startswith("🆕 [HOTDEAL]\n\n상품명: 카리어왕"))
+        self.assertIn("상품링크: https://link.coupang.com/a/iha660uGR2", message)
+        self.assertIn("25.8% 할인", message)
+        self.assertLessEqual(len(message), 4096)
+
+    def test_send_message_uses_original_link_and_existing_bot_secrets(self):
+        post = app.parse_listing(SAMPLE)[1]
+        with patch.dict(os.environ, {
+            "TELEGRAM_BOT_TOKEN": "dummy-token",
+            "TELEGRAM_CHAT_ID": "8888",
+        }), patch.object(app.request, "urlopen", return_value=io.BytesIO(b'{"ok":true}')) as send:
+            app.send_post(post)
+        req = send.call_args.args[0]
+        self.assertTrue(req.full_url.endswith("/sendMessage"))
+        self.assertNotIn("/forwardMessage", req.full_url)
+        payload = parse_qs(req.data.decode("utf-8"))
+        self.assertEqual(payload["chat_id"], ["8888"])
+        self.assertIn("상품링크: https://toss.im/_m/LLGfxTy3", payload["text"][0])
+        self.assertEqual(payload["disable_web_page_preview"], ["true"])
+
+    def test_first_live_run_sends_only_one_latest(self):
         with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                app.save({"last_seen_id": 100})
-                forwarded = []
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                sent = []
+                app.run(fetcher=lambda: app.parse_listing(SAMPLE), sender=lambda p: sent.append(p["id"]))
+                self.assertEqual(sent, [94631])
+                self.assertEqual(app.load()["last_seen_id"], 94631)
+
+    def test_preview_no_send_no_state(self):
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                app.run(mode="preview", fetcher=lambda: app.parse_listing(SAMPLE),
+                        sender=lambda _: self.fail("Should not send"))
+                self.assertIsNone(app.load())
+
+    def test_manual_verify_no_state_write(self):
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                delivered = []
+                app.run(mode="verify-repost", fetcher=lambda: app.parse_listing(SAMPLE),
+                        sender=lambda p: delivered.append(p["id"]))
+                self.assertEqual(delivered, [94631])
+                self.assertIsNone(app.load())
+
+    def test_new_posts_sent_once_and_ordered(self):
+        with tempfile.TemporaryDirectory() as folder:
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                app.save({"last_seen_id": 94629})
+                sent = []
                 for _ in range(2):
-                    app.run(fetcher=lambda: [103, 101, 102, 100], forwarder=forwarded.append)
-                self.assertEqual(forwarded, [101, 102, 103])
-                self.assertEqual(app.load()["last_seen_id"], 103)
+                    app.run(fetcher=lambda: app.parse_listing(SAMPLE),
+                            sender=lambda p: sent.append(p["id"]))
+                self.assertEqual(sent, [94630, 94631])
+                self.assertEqual(app.load()["last_seen_id"], 94631)
 
-    def test_partial_forward_failure_retries_next_time(self):
+    def test_error_does_not_mark_failed_message_delivered(self):
         with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                app.save({"last_seen_id": 100})
-                calls = []
-                def forward(id):
-                    calls.append(id)
-                    if id == 102:
-                        raise RuntimeError("Telegram unavailable")
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                app.save({"last_seen_id": 94629})
+                def send(p):
+                    if p["id"] == 94631:
+                        raise RuntimeError("Telegram down")
                 with self.assertRaises(RuntimeError):
-                    app.run(fetcher=lambda: [100, 101, 102, 103], forwarder=forward)
-                self.assertEqual(app.load()["last_seen_id"], 101)
-                forwarded = []
-                app.run(fetcher=lambda: [100, 101, 102, 103], forwarder=forwarded.append)
-                self.assertEqual(forwarded, [102, 103])
+                    app.run(fetcher=lambda: app.parse_listing(SAMPLE), sender=send)
+                self.assertEqual(app.load()["last_seen_id"], 94630)
 
-    def test_preview_does_not_forward_or_write(self):
+    def test_invalid_state_blocks_reset(self):
         with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                app.save({"last_seen_id": 100})
-                app.run("preview", lambda: [101, 102], lambda _: self.fail("forwarded in preview"))
-                self.assertEqual(app.load()["last_seen_id"], 100)
-
-    def test_manual_verify_forwards_latest_without_changing_state(self):
-        with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                app.save({"last_seen_id": 100})
-                forwarded = []
-                app.run("verify-forward", lambda: [101, 102], forwarded.append)
-                self.assertEqual(forwarded, [102])
-                self.assertEqual(app.load()["last_seen_id"], 100)
-
-    def test_invalid_state_blocks_baseline_reset(self):
-        with tempfile.TemporaryDirectory() as folder:
-            with patch.object(app, "STATE", Path(folder) / "jirum.json"):
-                app.STATE.write_text(json.dumps({"last_seen_id": "oops"}))
+            with patch.object(app, "STATE", Path(folder) / "seen.json"):
+                app.STATE.write_text(json.dumps({"last_seen_id": "invalid"}), encoding="utf-8")
                 with self.assertRaises(RuntimeError):
-                    app.run(fetcher=lambda: [123], forwarder=lambda _: self.fail("invalid state"))
+                    app.run(fetcher=lambda: app.parse_listing(SAMPLE),
+                            sender=lambda _: self.fail("Must not send"))
 
 
 if __name__ == "__main__":
