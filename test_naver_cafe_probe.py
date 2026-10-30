@@ -57,6 +57,16 @@ class Tests(unittest.TestCase):
                 app.parse_listing(json.dumps({"message": {"status": "403", "error": message}}).encode())
             self.assertEqual(str(ctx.exception), code)
 
+    def test_safe_numeric_status_diagnostics(self):
+        accepted = json.loads(listing())
+        accepted["message"]["status"] = 200
+        self.assertEqual(app.parse_listing(json.dumps(accepted).encode()), {112028: "private fixture title"})
+        for status in ("400", "500", 403):
+            payload = json.dumps({"message": {"status": status, "error": "unknown"}}).encode()
+            with self.assertRaises(app.ProbeError) as ctx:
+                app.parse_listing(payload)
+            self.assertEqual(str(ctx.exception), "API_STATUS_" + str(status))
+
     def run_probe(self, fetcher, cookie=COOKIE):
         output = io.StringIO()
         with patch.dict(os.environ, {"NAVER_COOKIE": cookie, "GITHUB_ACTIONS": "false"}), contextlib.redirect_stdout(output):
