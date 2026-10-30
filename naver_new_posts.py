@@ -14,6 +14,14 @@ KST = timezone(timedelta(hours=9))
 ARTICLE_URL = "https://cafe.naver.com/f-e/cafes/24651941/articles/{}"
 
 
+COUPANG_PREFIXES = ("[ㅋㅍ]", "[ㅋㅍ프레시]")
+
+
+def is_coupang(title):
+    """Only exact Coupang labels at the very beginning of a post title."""
+    return isinstance(title, str) and title.lstrip().startswith(COUPANG_PREFIXES)
+
+
 def collect(fetcher=None):
     """Read metadata from the first, newest-first, all-articles page."""
     body = cafe.fetch() if fetcher is None else fetcher()
@@ -73,17 +81,26 @@ def run(preview=False, collector=collect, notifier=notify):
     seen = state["seen"]
     fresh = [(article_id, title) for article_id, title in articles.items()
              if str(article_id) not in seen]
-    print(f"NAVER_SCAN: seen={len(seen)} fresh={len(fresh)} preview={preview}")
-    # On an overloaded interval, remaining unsent articles are retried next scan.
-    for article_id, title in fresh[:MAX_ALERTS]:
+    coupang = [(article_id, title) for article_id, title in fresh if is_coupang(title)]
+    excluded = [(article_id, title) for article_id, title in fresh if not is_coupang(title)]
+    print(f"NAVER_SCAN: seen={len(seen)} fresh={len(fresh)} "
+          f"coupang_new={len(coupang)} excluded={len(excluded)} preview={preview}")
+    # Record non-Coupang posts as observed, so edited titles won't cause old-post alerts.
+    # Never change state in preview. Keep not-yet-sent Coupang posts unseen.
+    if not preview and excluded:
+        for article_id, title in excluded:
+            seen[str(article_id)] = title
+        save(state)
+    # On an overloaded interval, unsent Coupang posts can be retried next scan.
+    for article_id, title in coupang[:MAX_ALERTS]:
         if preview:
-            print(f"NAVER_PREVIEW_NEW: id={article_id}")
+            print(f"NAVER_PREVIEW_NEW_COUPANG: id={article_id}")
         else:
             notifier(article_id, title)
             seen[str(article_id)] = title
             save(state)
-            print(f"NAVER_SENT: id={article_id}")
-    print(f"NAVER_ALERTS: processed={min(len(fresh), MAX_ALERTS)}")
+            print(f"NAVER_SENT_COUPANG: id={article_id}")
+    print(f"NAVER_ALERTS: processed={min(len(coupang), MAX_ALERTS)}")
     return 0
 
 
