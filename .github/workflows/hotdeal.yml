@@ -31,7 +31,8 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check syntax
-        run: python -m py_compile new_items.py
+        run: |
+          python -m py_compile new_items.py
           python -m unittest -v test_new_items.py
       - name: Preview or send alerts
         env:
