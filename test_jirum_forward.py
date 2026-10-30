@@ -22,12 +22,12 @@ class Tests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             app.parse_listing("<html>no posts</html>")
 
-    def test_initial_baseline_no_historical_spam(self):
+    def test_initial_baseline_forwards_only_latest_once(self):
         with tempfile.TemporaryDirectory() as folder:
             with patch.object(app, "STATE", Path(folder) / "jirum.json"):
                 forwarded = []
                 app.run(fetcher=lambda: [100, 101], forwarder=forwarded.append)
-                self.assertEqual(forwarded, [])
+                self.assertEqual(forwarded, [101])
                 self.assertEqual(app.load()["last_seen_id"], 101)
 
     def test_new_messages_only_and_in_chronological_order(self):
