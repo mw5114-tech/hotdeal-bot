@@ -8,6 +8,7 @@ from urllib import request
 from urllib.parse import urlencode
 import naver_cafe_probe as cafe
 from hotdeal_message import format_hotdeal_message
+from telegram_delivery import send_text
 
 STATE = Path(__file__).resolve().parent / "state" / "naver_seen_articles.json"
 MAX_ALERTS = 10
@@ -50,22 +51,8 @@ def save(value):
 
 
 def notify(article_id, title):
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    chat = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if not token or not chat:
-        raise RuntimeError("Telegram secrets are missing")
     url = ARTICLE_URL.format(article_id)
-    msg = format_hotdeal_message(title, url)
-    data = urlencode({"chat_id": chat, "text": msg, "disable_web_page_preview": "true"}).encode()
-    req = request.Request("https://api.telegram.org/bot" + token + "/sendMessage",
-                          data=data, method="POST")
-    try:
-        with request.urlopen(req, timeout=20) as resp:
-            result = json.load(resp)
-        if not isinstance(result, dict) or result.get("ok") is not True:
-            raise RuntimeError("Telegram rejected message")
-    except Exception:
-        raise RuntimeError("Telegram delivery failed (credentials hidden)") from None
+    send_text(format_hotdeal_message(title, url))
 
 
 def run(preview=False, collector=collect, notifier=notify):
