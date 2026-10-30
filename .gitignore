@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Live watcher authentication and persistent local delivery data
+*.session
+*.session-*
+*.session.*
+*.sqlite3
+*.sqlite3-*
+live-data/
+.env.*
+!.env.example
+*.pem
+*.key
