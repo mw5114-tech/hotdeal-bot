@@ -1,0 +1,28 @@
+name: One-time Jirum latest deal Telegram delivery test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/jirum-one-shot-test.yml
+
+permissions:
+  contents: read
+
+jobs:
+  send-latest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Send exactly one latest Jirum deal without altering checkpoints
+        run: |
+          python -m py_compile jirum_forward.py
+          python jirum_forward.py --mode verify-repost
