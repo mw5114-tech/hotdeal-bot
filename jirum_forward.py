@@ -88,14 +88,23 @@ def forward_message(message_id):
         with request.urlopen(req, timeout=25) as response:
             result = json.load(response)
     except error.HTTPError as ex:
-        # Never print the Telegram endpoint, which contains the private bot token.
-        if ex.code in (400, 403):
-            raise RuntimeError(
-                f"Telegram forwardMessage rejected source @{SOURCE_CHAT[1:]} "
-                f"post {message_id} (HTTP {ex.code}). Bot source access or "
-                "channel forwarding protection may prevent an exact forward."
-            ) from None
-        raise RuntimeError(f"Telegram forwardMessage HTTP {ex.code}") from None
+        # Telegram supplies an actionable 'description' in failed Bot API responses.
+        # Show only that description, NEVER the endpoint or its embedded bot token.
+        try:
+            payload = json.loads(ex.read(4096))
+            description = payload.get("description", "") if isinstance(payload, dict) else ""
+        except (ValueError, UnicodeDecodeError, OSError):
+            description = ""
+        if not isinstance(description, str):
+            description = ""
+        description = " ".join(description.split())[:240].replace(token, "[REDACTED]")
+        # Avoid writing unexpected server-origin text or credentials to Actions logs.
+        if not description.startswith(("Bad Request:", "Forbidden:", "Too Many Requests:")):
+            description = "No safe Telegram error description available"
+        raise RuntimeError(
+            f"Telegram forwardMessage failed for @{SOURCE_CHAT[1:]} "
+            f"post {message_id} (HTTP {ex.code}): {description}"
+        ) from None
     except Exception:
         raise RuntimeError("Telegram forwardMessage request failed (credentials hidden)") from None
     if not isinstance(result, dict) or result.get("ok") is not True:
