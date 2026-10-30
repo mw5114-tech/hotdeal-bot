@@ -95,7 +95,8 @@ def parse_listing(data):
     message = obj.get("message") if isinstance(obj, dict) else None
     if not isinstance(message, dict):
         raise ProbeError("SCHEMA_CHANGED")
-    if message.get("status") != "200":
+    status = message.get("status")
+    if status not in ("200", 200):
         # Restrict keyword search to error envelopes, never article titles.
         lower = json.dumps(message, ensure_ascii=False).lower()
         if any(s in lower for s in ("captcha", "자동입력", "보안문자", "추가인증", "추가 인증")):
@@ -104,6 +105,9 @@ def parse_listing(data):
             raise ProbeError("LOGIN_REQUIRED")
         if any(s in lower for s in ("멤버", "회원", "등급", "권한", "member", "permission")):
             raise ProbeError("MEMBERSHIP_OR_PERMISSION_REQUIRED")
+        # Only expose a three-digit status code; never output Naver's response body.
+        if isinstance(status, (int, str)) and re.fullmatch(r"[1-5][0-9]{2}", str(status)):
+            raise ProbeError("API_STATUS_" + str(status))
         raise ProbeError("API_REJECTED_OR_SCHEMA_CHANGED")
     result = message.get("result")
     if not isinstance(result, dict) or not isinstance(result.get("articleList"), list):
