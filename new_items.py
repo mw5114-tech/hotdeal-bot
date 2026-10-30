@@ -11,6 +11,7 @@ import time
 from urllib import request, error
 from urllib.parse import urljoin, urlsplit, parse_qs, urlencode, unquote
 from hotdeal_message import format_hotdeal_message
+from telegram_delivery import send_text
 
 BASE = "https://deal.korea-inc.com"
 LIST_PATH = "/deals/"
@@ -103,20 +104,7 @@ def save(value):
     os.replace(tmp, STATE)
 
 def notify(name, url):
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    chat = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if not token or not chat:
-        raise RuntimeError("Telegram secrets are missing")
-    msg = format_hotdeal_message(name, url)
-    data = urlencode({"chat_id":chat,"text":msg,"disable_web_page_preview":"true"}).encode()
-    req = request.Request("https://api.telegram.org/bot"+token+"/sendMessage",data=data,method="POST")
-    try:
-        with request.urlopen(req, timeout=20) as resp:
-            result = json.load(resp)
-            if not result.get("ok"):
-                raise RuntimeError("Telegram rejected message")
-    except Exception:
-        raise RuntimeError("Telegram delivery error; credentials hidden") from None
+    send_text(format_hotdeal_message(name, url))
 
 def run(preview=False):
     catalog = collect()
