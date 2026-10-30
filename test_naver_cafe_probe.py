@@ -32,6 +32,25 @@ class Tests(unittest.TestCase):
         obj["message"]["result"]["noticeList"] = [{"articleId": 1, "subject": "notice"}]
         self.assertEqual(app.parse_listing(json.dumps(obj).encode()), {112028: "private fixture title"})
 
+    def test_current_boardlist_api_nested_rows(self):
+        data = {
+            "result": {"articleList": [
+                {"type": "NOTICE", "item": {"articleId": 11, "subject": "Pinned notice"}},
+                {"type": "ARTICLE", "item": {"articleId": "112028", "subject": "New hot deal"}},
+                {"type": "ARTICLE", "item": {"articleId": 112029, "subject": "Next deal"}}
+            ]}
+        }
+        self.assertEqual(app.parse_listing(json.dumps(data).encode()),
+                         {112028: "New hot deal", 112029: "Next deal"})
+        data = {"articles": [{"articleId": 112028, "title": "New hot deal"}]}
+        self.assertEqual(app.parse_listing(json.dumps(data).encode()), {112028: "New hot deal"})
+
+    def test_current_boardlist_error_envelope(self):
+        data = {"error": {"errorCode": "LOGIN_REQUIRED", "reason": "로그인 필요"}}
+        with self.assertRaises(app.ProbeError) as ctx:
+            app.parse_listing(json.dumps(data).encode())
+        self.assertEqual(str(ctx.exception), "LOGIN_REQUIRED")
+
     def test_notice_like_title_is_not_a_challenge(self):
         self.assertEqual(len(app.parse_listing(listing([{"articleId": 2, "subject": "로그인 CAPTCHA 문의"}]))), 1)
 
