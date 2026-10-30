@@ -100,11 +100,18 @@ class RepostTests(unittest.TestCase):
         self.assertIn("상품링크: https://toss.im/_m/LLGfxTy3", payload["text"][0])
         self.assertEqual(payload["disable_web_page_preview"], ["true"])
 
-    def test_first_live_run_sends_only_one_latest(self):
+    def test_first_live_run_records_baseline_without_reposting_latest(self):
         with tempfile.TemporaryDirectory() as folder:
             with patch.object(app, "STATE", Path(folder) / "seen.json"):
                 sent = []
-                app.run(fetcher=lambda: app.parse_listing(SAMPLE), sender=lambda p: sent.append(p["id"]))
+                posts = lambda: app.parse_listing(SAMPLE)
+                # Simulate a previous one-off verification message.
+                app.run(mode="verify-repost", fetcher=posts,
+                        sender=lambda p: sent.append(p["id"]))
+                self.assertEqual(sent, [94631])
+                # First real scheduled scan must not resend the same item.
+                app.run(fetcher=posts, sender=lambda p: sent.append(p["id"]))
+                app.run(fetcher=posts, sender=lambda p: sent.append(p["id"]))
                 self.assertEqual(sent, [94631])
                 self.assertEqual(app.load()["last_seen_id"], 94631)
 
