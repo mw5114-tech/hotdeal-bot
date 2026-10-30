@@ -1,0 +1,41 @@
+name: One-time resend of latest actually delivered hotdeal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-shot-latest-hotdeal-repost.yml
+
+permissions:
+  contents: read
+
+jobs:
+  resend-one-item:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Resend previously delivered Naver Cafe post 112029 once to personal and group
+        run: |
+          python - <<'PY'
+          import naver_new_posts as app
+
+          article_id = 112029
+          state = app.load()
+          if not state:
+              raise RuntimeError("Missing existing delivery checkpoint; no test sent")
+          title = state["seen"].get(str(article_id))
+          if not title or not app.is_coupang(title):
+              raise RuntimeError("Expected sent Coupang post missing; no test sent")
+          if "세타필" not in title or "591ml" not in title:
+              raise RuntimeError("Article title changed; no test sent")
+          print("ONE_SHOT_MATCHED: naver_article=112029 title=" + title[:160])
+          app.notify(article_id, title)
+          print("ONE_SHOT_RESENT: naver_article=112029 personal_and_group=true state_unchanged=true")
+          PY
