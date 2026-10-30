@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 from urllib import error, request
 from urllib.parse import urlencode, urlsplit
+from telegram_delivery import send_text
 
 PUBLIC_URL = "https://t.me/s/jirum"
 STATE = Path(__file__).resolve().parent / "state" / "jirum_last_forwarded.json"
@@ -207,30 +208,7 @@ def make_message(post):
 
 
 def send_post(post):
-    token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-    chat = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if not token or not chat:
-        raise RuntimeError("Telegram secrets are missing")
-    payload = urlencode({
-        "chat_id": chat,
-        "text": make_message(post),
-        "disable_web_page_preview": "true",
-    }).encode()
-    req = request.Request(
-        "https://api.telegram.org/bot" + token + "/sendMessage",
-        data=payload,
-        method="POST",
-    )
-    try:
-        with request.urlopen(req, timeout=25) as response:
-            result = json.load(response)
-    except error.HTTPError as exc:
-        # Never print a token-bearing endpoint or raw response.
-        raise RuntimeError(f"Telegram sendMessage failed (HTTP {exc.code}; credentials hidden)") from None
-    except Exception:
-        raise RuntimeError("Telegram sendMessage request failed (credentials hidden)") from None
-    if not isinstance(result, dict) or result.get("ok") is not True:
-        raise RuntimeError("Telegram sendMessage rejected the post")
+    send_text(make_message(post))
 
 
 def run(mode="run", fetcher=fetch_listing, sender=send_post):
