@@ -10,6 +10,7 @@ import re
 import time
 from urllib import request, error
 from urllib.parse import urljoin, urlsplit, parse_qs, urlencode, unquote
+from hotdeal_message import format_hotdeal_message
 
 BASE = "https://deal.korea-inc.com"
 LIST_PATH = "/deals/"
@@ -106,7 +107,7 @@ def notify(name, url):
     chat = os.environ.get("TELEGRAM_CHAT_ID", "")
     if not token or not chat:
         raise RuntimeError("Telegram secrets are missing")
-    msg = "🆕 [딜스팟 새 상품 등록]\n🛒 " + name + "\n🔗 " + url + "\n⚠️ 가격·할인율은 확인되지 않은 신규 등록 알림입니다."
+    msg = format_hotdeal_message(name, url)
     data = urlencode({"chat_id":chat,"text":msg,"disable_web_page_preview":"true"}).encode()
     req = request.Request("https://api.telegram.org/bot"+token+"/sendMessage",data=data,method="POST")
     try:
