@@ -55,3 +55,16 @@
 4. 로그에서 `DealSpot first-page scan`, `Naver Cafe first-page scan`, `Persist both alert histories` 순서로 확인합니다.
 
 이전 `Naver Cafe new-post alerts (manual verification)`와 `Naver Cafe manual access probe` 워크플로는 스케줄이 없는 별도 점검용 파일이며, 자동 검사 횟수를 늘리지 않습니다.
+
+## 뽐질(@jirum) 원본 텔레그램 전달 — 별도 5분 작업
+
+- 워크플로: .github/workflows/jirum-forward.yml (Jirum original Telegram posts forwarder)
+- 5분마다 공개 채널 https://t.me/s/jirum 을 확인하여 최근 메시지의 원본 ID를 읽습니다. 실제 작업 시작은 지연될 수 있습니다.
+- Telegram Bot API forwardMessage(from_chat_id=@jirum)를 사용합니다. 원본 문구·링크·서식·미디어를 텔레그램 자체 전달 방식으로 전달하려는 구조이며 기존 [HOTDEAL] 형식으로 재작성하지 않습니다.
+- 기존 TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID Secrets와 BOT_ENABLED=true 변수를 재사용합니다.
+- 최초 자동 실행에서는 과거 메시지 폭주를 막기 위해 가장 최신 게시글 1개만 전달하여 실제 권한을 확인합니다. 성공하면 state/jirum_last_forwarded.json에 기준 ID를 저장하고 이후에는 새 글만 전달합니다.
+- 수동 검증: Actions → Jirum original Telegram posts forwarder → Run workflow → mode: verify-forward. 최신 게시물 1개를 보내되 기록은 변경하지 않습니다. preview는 전송하지 않는 읽기 전용입니다.
+- 오류가 발생한 글은 성공으로 기록하지 않고 다음 실행에서 다시 시도하며, 성공 처리한 글의 기록은 별도로 저장합니다.
+- 중요: 뽐질이 봇에게 메시지 접근·전달을 허용하지 않거나 보호된 콘텐츠라면 원본을 전달할 수 없습니다. HTTP 400/403 오류로 확인하며, 이 경우 메시지를 비슷하게 재작성한 뒤 원본이라고 속여 전송하지 않습니다. 실제 Telegram API 호출을 통해 최종 검증해야 합니다.
+- 공개 웹에 표시되는 최근 메시지만 수집하므로 GitHub 실행 지연 또는 게시글 유입이 과도할 때는 일부를 놓칠 수 있습니다.
+- 기존 딜스팟·네이버 카페 30분 자동화와 별개로 동작합니다.
