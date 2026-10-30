@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - jirum_forward.py
-      - test_jirum_forward.py
+      - test_jirum_forward.py test_telegram_delivery.py
       - .github/workflows/jirum-forward.yml
       - .github/workflows/validate-jirum.yml
   workflow_dispatch:
@@ -25,8 +25,8 @@ jobs:
           python-version: '3.11'
       - name: Run Jirum repost unit tests (no Telegram message sent)
         run: |
-          python -m py_compile jirum_forward.py
-          python -m unittest -v test_jirum_forward.py
+          python -m py_compile jirum_forward.py telegram_delivery.py telegram_group_setup.py
+          python -m unittest -v test_jirum_forward.py test_telegram_delivery.py
       - name: Verify live public Jirum posts contain purchase URLs (read only)
         run: |
           python - <<'PY'
