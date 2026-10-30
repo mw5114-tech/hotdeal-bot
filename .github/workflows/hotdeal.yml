@@ -1,0 +1,61 @@
+name: Hotdeal bot (DealSpot)
+
+on:
+  schedule:
+    - cron: '17 */3 * * *'
+  workflow_dispatch:
+    inputs:
+      preview:
+        description: 'Preview without sending Telegram messages'
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hotdeal-state
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    if: ${{ github.event_name == 'workflow_dispatch' || vars.BOT_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check syntax
+        run: python -m py_compile scanner.py
+      - name: Preview or send alerts
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PREVIEW: ${{ github.event_name == 'workflow_dispatch' && inputs.preview && 'true' || 'false' }}
+        run: |
+          if [ "$PREVIEW" = "true" ]; then
+            python scanner.py --preview
+          else
+            if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+              echo "Missing Telegram Secrets"
+              exit 2
+            fi
+            python scanner.py
+          fi
+      - name: Persist alert history
+        if: ${{ success() && (github.event_name == 'schedule' || !inputs.preview) }}
+        run: |
+          if [ -f state/sent.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add state/sent.json
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: persist sent hotdeal prices [skip ci]"
+              git push origin "HEAD:${GITHUB_REF_NAME}"
+            fi
+          fi
