@@ -196,8 +196,26 @@ def run(preview=False):
         if len(candidates) >= 10:
             break
         try:
-            d = detail(fetch(url, detail=True), url)
-            d = score(d, now) if d else None
+            raw = detail(fetch(url, detail=True), url)
+            if preview:
+                if raw is None:
+                    print("SKIP_PARSE_OR_CATEGORY:", url)
+                else:
+                    age_hours = (now - raw["measured"]).total_seconds() / 3600
+                    fall = round((raw["average"] - raw["price"]) / raw["average"] * 100, 1) if raw["average"] > 0 else 0
+                    reasons = []
+                    if raw["price"] < 100 or raw["price"] > 100000:
+                        reasons.append("price_out_of_range")
+                    if raw["samples"] < 3:
+                        reasons.append("insufficient_samples")
+                    if age_hours < -1 or age_hours > 48:
+                        reasons.append("outdated_price")
+                    if raw["average"] <= raw["price"] or fall < 20:
+                        reasons.append("insufficient_price_drop")
+                    print("CHECK:", raw["name"][:45], "price=", raw["price"],
+                          "samples=", raw["samples"], "age_hours=", round(age_hours, 1),
+                          "drop_pct=", fall, "result=", ",".join(reasons) or "PASS")
+            d = score(raw, now) if raw else None
             if d:
                 candidates.append(d)
         except Exception as exc:
