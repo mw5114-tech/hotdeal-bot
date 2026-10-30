@@ -87,7 +87,7 @@ class RepostTests(unittest.TestCase):
 
     def test_send_message_uses_original_link_and_existing_bot_secrets(self):
         post = app.parse_listing(SAMPLE)[1]
-        with patch.dict(os.environ, {
+        with patch("telegram_delivery.target_chats", return_value=[("personal", "8888")]), patch.dict(os.environ, {
             "TELEGRAM_BOT_TOKEN": "dummy-token",
             "TELEGRAM_CHAT_ID": "8888",
         }), patch.object(app.request, "urlopen", return_value=io.BytesIO(b'{"ok":true}')) as send:
