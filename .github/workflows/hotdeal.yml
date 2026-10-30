@@ -1,8 +1,8 @@
-name: Hotdeal bot (DealSpot)
+name: DealSpot new product alerts
 
 on:
   schedule:
-    - cron: '17 */3 * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
       preview:
@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Check syntax
-        run: python -m py_compile scanner.py
+        run: python -m py_compile new_items.py
       - name: Preview or send alerts
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
@@ -39,21 +39,21 @@ jobs:
           PREVIEW: ${{ github.event_name == 'workflow_dispatch' && inputs.preview && 'true' || 'false' }}
         run: |
           if [ "$PREVIEW" = "true" ]; then
-            python scanner.py --preview
+            python new_items.py --preview
           else
             if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
               echo "Missing Telegram Secrets"
               exit 2
             fi
-            python scanner.py
+            python new_items.py
           fi
       - name: Persist alert history
         if: ${{ success() && (github.event_name == 'schedule' || !inputs.preview) }}
         run: |
-          if [ -f state/sent.json ]; then
+          if [ -f state/seen_products.json ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add state/sent.json
+            git add state/seen_products.json
             if ! git diff --cached --quiet; then
               git commit -m "chore: persist sent hotdeal prices [skip ci]"
               git push origin "HEAD:${GITHUB_REF_NAME}"
