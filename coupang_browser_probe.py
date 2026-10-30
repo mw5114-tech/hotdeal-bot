@@ -6,7 +6,8 @@ automation. Login in the visible Playwright Chromium window yourself.
 Run:
   python -m pip install playwright
   python -m playwright install chromium
-  python coupang_browser_probe.py --product-url "https://www.coupang.com/vp/products/123456789?itemId=123&vendorItemId=456"
+  python coupang_browser_probe.py --source-url "https://link.coupang.com/a/exampleCode"
+  # or: --product-url "https://www.coupang.com/vp/products/123456789?itemId=123&vendorItemId=456"
 
 Do not run this in CI: account login and user confirmation are required.
 """
@@ -15,7 +16,7 @@ from pathlib import Path
 import re
 import sys
 import time
-from urllib.parse import urlsplit, parse_qs
+from urllib.parse import urlsplit, parse_qs, urlencode
 
 PARTNERS_URL = "https://partners.coupang.com/"
 PROFILE_DIR = Path(__file__).resolve().parent / ".coupang_partner_profile"
@@ -53,6 +54,74 @@ def validate_personal_link(url):
         raise ValueError("Expected a standard https://link.coupang.com/a/<code> URL")
     return url.strip()
 
+
+
+def validate_source_url(url):
+    """A source must be one exact Coupang partner shortlink, never arbitrary URLs."""
+    if not isinstance(url, str) or len(url) > 500:
+        raise ValueError("A Coupang affiliate shortlink is required")
+    p = urlsplit(url.strip())
+    if (p.scheme != "https" or p.hostname != "link.coupang.com"
+            or p.port not in (None, 443) or p.username is not None
+            or p.password is not None or p.fragment
+            or not SHORT_PATTERN.fullmatch(p.path)):
+        raise ValueError("Expected https://link.coupang.com/a/<code> (no extra fragment)")
+    return url.strip()
+
+
+def canonical_direct_product_url(url):
+    """Resolve only an unambiguous product+item+seller option and drop referral tags.
+
+    A resolved URL with just /vp/products/<id> is NOT enough to assert the
+    original sale option, so never guess missing itemId/vendorItemId.
+    """
+    if not isinstance(url, str) or len(url) > 3000:
+        raise ValueError("Coupang destination URL missing or oversized")
+    p = urlsplit(url.strip())
+    if p.scheme != "https" or p.username or p.password or p.fragment or p.port not in (None, 443):
+        raise ValueError("Unsafe Coupang destination URL")
+    if p.hostname in ("coupang.com", "www.coupang.com"):
+        match = re.fullmatch(r"/vp/products/(\d+)/?", p.path)
+    elif p.hostname == "m.coupang.com":
+        match = re.fullmatch(r"/vm/products/(\d+)/?", p.path)
+    else:
+        raise ValueError("Shortlink did not resolve to a recognized Coupang product page")
+    if not match:
+        raise ValueError("Shortlink resolved to a category, promotion, or unsupported product route")
+    query = parse_qs(p.query, keep_blank_values=True)
+    options = {}
+    for key in ("itemId", "vendorItemId"):
+        value = query.get(key, [])
+        if len(value) != 1 or not value[0].isdigit():
+            raise ValueError("Could not confirm original product option: missing " + key)
+        options[key] = value[0]
+    return "https://www.coupang.com/vp/products/" + match.group(1) + "?" + urlencode(options)
+
+
+def resolve_shortlink_once(playwright, url):
+    """Open one source affiliate link in an isolated, throwaway browser.
+
+    No cookie/profile data is shared with the personal Coupang Partners login.
+    The navigation may count as a referral click; never repeat it in a loop
+    or make purchases through one's own partner referral link.
+    """
+    validate_source_url(url)
+    browser = playwright.chromium.launch(headless=False)
+    try:
+        context = browser.new_context()
+        page = context.new_page()
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=30000)
+            page.wait_for_timeout(1700)  # Allow ordinary JS redirects, not bot challenges.
+            destination = page.url
+            # No scraping of hidden data and no direct calls to undocumented APIs.
+            cleaned = canonical_direct_product_url(destination)
+            print("SOURCE_RESOLVED: confirmed Coupang product with itemId and vendorItemId")
+            return cleaned
+        finally:
+            context.close()
+    finally:
+        browser.close()
 
 def _first_visible_unique(locators):
     for loc in locators:
@@ -125,10 +194,16 @@ def _find_generated_link(page):
 
 def main():
     parser = argparse.ArgumentParser(description="Local assisted test of one Coupang Partners quick link; sends no Telegram alerts.")
-    parser.add_argument("--product-url", required=True, help="Direct Coupang product URL, including itemId and vendorItemId.")
+    selection = parser.add_mutually_exclusive_group(required=True)
+    selection.add_argument("--source-url", help="Original https://link.coupang.com/a/... affiliate shortlink")
+    selection.add_argument("--product-url", help="Direct Coupang product URL with itemId and vendorItemId")
     args = parser.parse_args()
     try:
-        product_url = validate_product_url(args.product_url)
+        if args.source_url:
+            validate_source_url(args.source_url)
+            product_url = None
+        else:
+            product_url = canonical_direct_product_url(validate_product_url(args.product_url))
     except (ValueError, OverflowError) as exc:
         parser.error(str(exc))
     try:
@@ -144,6 +219,20 @@ def main():
     print("Use the Partners menu '링크 생성 > 간편 링크 만들기'.")
     PROFILE_DIR.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as playwright:
+        if args.source_url:
+            print("The original partner link will be opened ONCE in an isolated browser.")
+            print("This may register a partner referral click. Do not self-purchase or repeatedly click.")
+            if input("Run one-link source resolution test? Type YES to proceed: ").strip() != "YES":
+                print("Cancelled; no URL visited.")
+                return 0
+            try:
+                product_url = resolve_shortlink_once(playwright, args.source_url)
+            except Exception as exc:
+                print("SOURCE_UNRESOLVED:", type(exc).__name__ + ": " + str(exc)[:180])
+                print("No partner URL generated. If the link opens an app or hides item/vendor IDs,")
+                print("open it manually, choose the exact option, then run --product-url with the full destination.")
+                return 1
+        print("Verified option-bearing Coupang destination:", product_url)
         context = playwright.chromium.launch_persistent_context(
             str(PROFILE_DIR), headless=False, viewport={"width": 1280, "height": 880}
         )
@@ -182,7 +271,7 @@ def main():
             print("\n=== 제휴 링크 형식 검증 성공 (상품 동일성은 아직 사람이 확인해야 함) ===")
             print(result)
             print("원본 제품의 옵션·수량·판매자가 정확히 같은지 브라우저 화면에서 확인해.")
-            print("이 테스트는 링크를 실제로 따라가 클릭하지 않으며, 어떠한 Telegram 메시지도 보내지 않음.")
+            print("원본 링크를 1회 확인했을 수 있지만 구매 클릭/텔레그램 전송은 하지 않았음.")
             input("결과를 확인했으면 Enter를 눌러 브라우저 종료: ")
             return 0
         finally:
