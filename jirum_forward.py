@@ -118,8 +118,11 @@ def run(mode="run", fetcher=fetch_listing, forwarder=forward_message):
         if mode == "preview":
             print("JIRUM_PREVIEW: baseline not present; no messages and no state changes")
         else:
+            # Forward only the latest visible post as a one-time real delivery check.
+            # If it fails, preserve the uninitialized state and report the error.
+            forwarder(ids[-1])
             save({"last_seen_id": ids[-1], "initialized_at": datetime.now(timezone.utc).isoformat()})
-            print(f"JIRUM_BASELINE: last_seen_id={ids[-1]}; no historical messages forwarded")
+            print(f"JIRUM_BASELINE_VERIFIED: forwarded_latest={ids[-1]}; older posts skipped")
         return 0
     fresh = [post_id for post_id in ids if post_id > state["last_seen_id"]]
     print(f"JIRUM_SCAN: previous={state['last_seen_id']} new={len(fresh)} mode={mode}")
