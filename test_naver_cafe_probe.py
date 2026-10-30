@@ -52,7 +52,7 @@ class Tests(unittest.TestCase):
         for message, code in [("로그인 필요", "LOGIN_REQUIRED"),
                               ("카페 회원 권한 필요", "MEMBERSHIP_OR_PERMISSION_REQUIRED"),
                               ("추가 인증 captcha", "CHALLENGE_STOPPED"),
-                              ("unknown", "API_REJECTED_OR_SCHEMA_CHANGED")]:
+                              ("unknown", "API_STATUS_403")]:
             with self.subTest(code=code), self.assertRaises(app.ProbeError) as ctx:
                 app.parse_listing(json.dumps({"message": {"status": "403", "error": message}}).encode())
             self.assertEqual(str(ctx.exception), code)
