@@ -15,6 +15,22 @@ HTML = '''<html><div class="tgme_widget_message" data-post="jirum/100">A</div>
 
 
 class Tests(unittest.TestCase):
+    def test_forward_http_error_shows_safe_telegram_description_not_token(self):
+        import io
+        import os
+        from urllib.error import HTTPError
+        from unittest.mock import patch
+        body = io.BytesIO(b'{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}')
+        err = HTTPError("https://api.telegram.org/redacted", 400, "Bad Request", {}, body)
+        with patch.dict(os.environ, {
+            "TELEGRAM_BOT_TOKEN": "dummy-secret-token",
+            "TELEGRAM_CHAT_ID": "123456",
+        }), patch.object(app.request, "urlopen", side_effect=err):
+            with self.assertRaises(RuntimeError) as caught:
+                app.forward_message(94633)
+        self.assertIn("Bad Request: chat not found", str(caught.exception))
+        self.assertNotIn("dummy-secret-token", str(caught.exception))
+
     def test_parse_listing(self):
         self.assertEqual(app.parse_listing(HTML), [100, 101, 102])
 
