@@ -56,15 +56,30 @@
 
 이전 `Naver Cafe new-post alerts (manual verification)`와 `Naver Cafe manual access probe` 워크플로는 스케줄이 없는 별도 점검용 파일이며, 자동 검사 횟수를 늘리지 않습니다.
 
-## 뽐질(@jirum) 원본 텔레그램 전달 — 별도 5분 작업
+## 뽐질(@jirum) 공개 핫딜 재전송 — 별도 5분 작업
 
-- 워크플로: .github/workflows/jirum-forward.yml (Jirum original Telegram posts forwarder)
-- 5분마다 공개 채널 https://t.me/s/jirum 을 확인하여 최근 메시지의 원본 ID를 읽습니다. 실제 작업 시작은 지연될 수 있습니다.
-- Telegram Bot API forwardMessage(from_chat_id=@jirum)를 사용합니다. 원본 문구·링크·서식·미디어를 텔레그램 자체 전달 방식으로 전달하려는 구조이며 기존 [HOTDEAL] 형식으로 재작성하지 않습니다.
-- 기존 TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID Secrets를 재사용합니다. **현재 자동 실행은 안전을 위해 보류 중**입니다. 봇의 원본 채널 접근 검증이 끝난 뒤 BOT_ENABLED=true와 별도 Repository Variable `JIRUM_ENABLED=true`를 함께 설정하면 5분 예약 실행이 활성화됩니다. 수동 preview/verify-forward는 보류 중에도 실행할 수 있습니다.
-- 최초 자동 실행에서는 과거 메시지 폭주를 막기 위해 가장 최신 게시글 1개만 전달하여 실제 권한을 확인합니다. 성공하면 state/jirum_last_forwarded.json에 기준 ID를 저장하고 이후에는 새 글만 전달합니다.
-- 수동 검증: Actions → Jirum original Telegram posts forwarder → Run workflow → mode: verify-forward. 최신 게시물 1개를 보내되 기록은 변경하지 않습니다. preview는 전송하지 않는 읽기 전용입니다.
-- 오류가 발생한 글은 성공으로 기록하지 않고 다음 실행에서 다시 시도하며, 성공 처리한 글의 기록은 별도로 저장합니다.
-- 중요: 뽐질이 봇에게 메시지 접근·전달을 허용하지 않거나 보호된 콘텐츠라면 원본을 전달할 수 없습니다. HTTP 400/403 오류로 확인하며, 이 경우 메시지를 비슷하게 재작성한 뒤 원본이라고 속여 전송하지 않습니다. 실제 Telegram API 호출을 통해 최종 검증해야 합니다.
-- 공개 웹에 표시되는 최근 메시지만 수집하므로 GitHub 실행 지연 또는 게시글 유입이 과도할 때는 일부를 놓칠 수 있습니다.
-- 기존 딜스팟·네이버 카페 30분 자동화와 별개로 동작합니다.
+- 워크플로: `.github/workflows/jirum-forward.yml` (**Jirum hotdeal repost to Telegram**).
+- 5분마다 공개 채널 https://t.me/s/jirum 의 최근 글을 확인합니다. GitHub 서버 사정으로 실행이 늦어질 수 있습니다.
+- 텔레그램 `forwardMessage` API는 봇의 채널 접근 권한 부족으로 실제 테스트에서 거절되어 사용하지 않습니다. 대신 공개 게시물의 본문과 **실제 링크 href**를 읽고, 기존 텔레그램 봇의 `sendMessage`로 새로운 메시지를 발송합니다.
+- **원문에서 추출한 구매 링크를 변경·리다이렉트하지 않습니다.** 쿠팡 `link.coupang.com`, 토스 `toss.im` 등 판매처 구분 없이 실제 게시글의 외부 구매 URL을 전송합니다.
+- AI 카페 게시 자동화와 호환되도록 다음 형식을 사용합니다:
+
+```text
+🆕 [HOTDEAL]
+
+상품명: {뽐질 상품명}
+
+상품링크: {게시글의 원본 구매 URL}
+
+원문:
+{뽐질 글 내용·가격·할인 및 제휴 안내}
+```
+
+- 원문 공개 본문만 텍스트로 재구성하므로 **뽐질 원본 사진, 이모티콘의 모양, 폰트/서식까지 동일하지는 않습니다.** 필요한 건 원본 상품 링크이며 그것을 가장 우선합니다.
+- 예약 실행은 기존 Repository Variable `BOT_ENABLED=true`를 사용합니다. 기존 `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` Secrets를 재사용합니다. 별도의 `JIRUM_ENABLED` 설정은 필요 없습니다.
+- **첫 정상 실행 시 최신 글 1개만 전송**하고 기준 ID를 저장하여 예전 글을 한꺼번에 보내지 않습니다. 이후에는 신규 글만 순서대로 최대 30개씩 전송합니다. 실제 전송 성공한 뒤 ID를 기록하고, 실패 시 해당 글부터 다음 실행에 다시 시도합니다.
+- 구매 링크가 없는 일반 공지글은 전송하지 않습니다. 모든 공개 글의 구매 링크가 파싱되지 않는다면 데이터 구조 변경 가능성이 있어 기록을 변경하지 않고 오류를 발생시킵니다.
+- 수동 점검: Actions → Jirum hotdeal repost to Telegram → Run workflow → `preview` (조회만), `verify-repost` (최근 글 1개 전송, 기록 변경 없음), `run` (실제 자동 동작).
+- 코드는 `test_jirum_forward.py`에 테스트하며, 별도 `validate-jirum.yml`에서 테스트와 공개 페이지 구매 링크 조회를 수행하되 텔레그램 메시지는 보내지 않습니다.
+- 공개 웹 첫 페이지의 게시물만 확인하므로 글이 아주 빠르게 쌓이거나 GitHub가 오랫동안 지연되면 일부 누락 가능성이 있습니다.
+- 기존 딜스팟·네이버 카페 30분 알림은 변경하지 않았습니다.
