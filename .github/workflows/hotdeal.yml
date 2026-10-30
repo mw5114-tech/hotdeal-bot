@@ -14,9 +14,10 @@ on:
 permissions:
   contents: write
 
-# The manual Naver verification workflow uses the same group to avoid state races.
+# Preview is read-only and must not block scheduled state-changing scans.
+# Scheduled/real scans stay serialized with the manual Naver verification workflow.
 concurrency:
-  group: hotdeal-state
+  group: ${{ github.event_name == 'workflow_dispatch' && inputs.preview && 'hotdeal-preview' || 'hotdeal-state' }}
   cancel-in-progress: false
 
 jobs:
