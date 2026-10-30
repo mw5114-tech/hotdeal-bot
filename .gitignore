@@ -230,3 +230,11 @@ live-data/
 !.env.example
 *.pem
 *.key
+
+# Local Coupang Partners Playwright browser profile (contains login cookies)
+.coupang_partner_profile/
+**/.coupang_partner_profile/
+*.session
+*.session-journal
+.env
+.env.*
