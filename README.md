@@ -61,7 +61,7 @@
 - 워크플로: .github/workflows/jirum-forward.yml (Jirum original Telegram posts forwarder)
 - 5분마다 공개 채널 https://t.me/s/jirum 을 확인하여 최근 메시지의 원본 ID를 읽습니다. 실제 작업 시작은 지연될 수 있습니다.
 - Telegram Bot API forwardMessage(from_chat_id=@jirum)를 사용합니다. 원본 문구·링크·서식·미디어를 텔레그램 자체 전달 방식으로 전달하려는 구조이며 기존 [HOTDEAL] 형식으로 재작성하지 않습니다.
-- 기존 TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID Secrets와 BOT_ENABLED=true 변수를 재사용합니다.
+- 기존 TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID Secrets를 재사용합니다. **현재 자동 실행은 안전을 위해 보류 중**입니다. 봇의 원본 채널 접근 검증이 끝난 뒤 BOT_ENABLED=true와 별도 Repository Variable `JIRUM_ENABLED=true`를 함께 설정하면 5분 예약 실행이 활성화됩니다. 수동 preview/verify-forward는 보류 중에도 실행할 수 있습니다.
 - 최초 자동 실행에서는 과거 메시지 폭주를 막기 위해 가장 최신 게시글 1개만 전달하여 실제 권한을 확인합니다. 성공하면 state/jirum_last_forwarded.json에 기준 ID를 저장하고 이후에는 새 글만 전달합니다.
 - 수동 검증: Actions → Jirum original Telegram posts forwarder → Run workflow → mode: verify-forward. 최신 게시물 1개를 보내되 기록은 변경하지 않습니다. preview는 전송하지 않는 읽기 전용입니다.
 - 오류가 발생한 글은 성공으로 기록하지 않고 다음 실행에서 다시 시도하며, 성공 처리한 글의 기록은 별도로 저장합니다.
