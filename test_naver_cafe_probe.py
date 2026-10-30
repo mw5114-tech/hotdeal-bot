@@ -108,8 +108,16 @@ class Tests(unittest.TestCase):
 
     def test_public_list_does_not_prove_auth(self):
         code, output = self.run_probe(lambda cookie=None: listing())
+        self.assertEqual(code, 0)
+        self.assertIn("ARTICLE_METADATA_READABLE_WITHOUT_AUTH", output)
+        self.assertIn("AUTH_NOT_VERIFIED", output)
+
+    def test_different_anon_and_auth_lists_are_inconclusive(self):
+        def fetch(cookie=None):
+            return listing() if cookie else listing([{"articleId": 112029, "subject": "public metadata"}])
+        code, output = self.run_probe(fetch)
         self.assertEqual(code, 3)
-        self.assertIn("LIST_READABLE_WITHOUT_AUTH", output)
+        self.assertIn("AUTH_AND_ANON_LISTS_DIFFER", output)
 
     def test_challenge_stops_without_control_or_retry(self):
         calls = []
