@@ -1,0 +1,57 @@
+name: Kakao OG authenticated one-link browser check (opt-in)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/kakao-og-authenticated.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-guards:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Python Playwright package only (no actual browser requests)
+        run: python -m pip install --disable-pip-version-check playwright
+      - name: Syntax and cookie-domain/link safety tests
+        run: |
+          python -m py_compile gh_only/kakao_og_authenticated_probe.py
+          python -m unittest -v gh_only.test_kakao_og_authenticated_probe
+  optional-authenticated-ui:
+    needs: offline-guards
+    if: vars.GH_ONLY_KAKAO_OG_UI_TEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated browser
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: One read-only Kakao metadata UI lookup with existing session, no login attempts
+        run: python -m gh_only.kakao_og_authenticated_probe
+      - name: Private diagnostic metadata only; never capture or upload session files
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kakao-one-link-authenticated-og-diagnostic
+          path: kakao_authenticated_og_ui_report.json
+          if-no-files-found: warn
+          retention-days: 3
