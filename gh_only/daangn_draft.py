@@ -157,8 +157,7 @@ def build_draft(deal: dict, proof: dict | None = None) -> dict | None:
     }
 
 
-def build_bundle(html: str, max_posts: int = 8) -> dict:
-    records = enrich_posts(html, max_posts=max_posts)
+def build_bundle_from_records(records: list[dict]) -> dict:
     drafts = [build_draft(record) for record in records]
     drafts = [draft for draft in drafts if draft is not None]
     return {
@@ -172,20 +171,30 @@ def build_bundle(html: str, max_posts: int = 8) -> dict:
         "drafts": drafts,
     }
 
+def build_bundle(html: str, max_posts: int = 8) -> dict:
+    return build_bundle_from_records(enrich_posts(html, max_posts=max_posts))
+
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=("fixture", "live"), default="fixture")
+    parser.add_argument("--mode", choices=("fixture", "live", "evidence"), default="fixture")
+    parser.add_argument("--evidence-json")
     parser.add_argument("--fixture-html")
     parser.add_argument("--output", default="gh_only_daangn_drafts.json")
     args = parser.parse_args()
-    if args.mode == "fixture":
+    if args.mode == "evidence":
+        if not args.evidence_json:
+            raise ValueError("evidence_json_required")
+        evidence = json.loads(Path(args.evidence_json).read_text(encoding="utf-8"))
+        if evidence.get("schema") != "github-only-deal-probe.v1":
+            raise ValueError("unexpected_source_evidence")
+        result = build_bundle_from_records(evidence["deals"])
+    elif args.mode == "fixture":
         if not args.fixture_html:
             raise ValueError("fixture_html_required")
-        html = Path(args.fixture_html).read_text(encoding="utf-8")
+        result = build_bundle(Path(args.fixture_html).read_text(encoding="utf-8"))
     else:
-        html = fetch_public_html()
-    result = build_bundle(html)
+        result = build_bundle(fetch_public_html())
     Path(args.output).write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n",
                                  encoding="utf-8")
     print("JIRUM_DAANGN_DRAFTS " + json.dumps({
