@@ -1,0 +1,33 @@
+name: Jirum Coupang one-hop redirect-only diagnostic
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-link-onehop.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  single-redirect-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test one public Coupang shortlink (do not follow redirect)
+        run: python -m gh_only.shortlink_probe --url 'https://link.coupang.com/a/iiCmQxWdUG' --output shortlink_diagnostic.json
+      - name: Store sanitized IDs and status only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-onehop-link-info
+          path: shortlink_diagnostic.json
+          if-no-files-found: warn
+          retention-days: 3
