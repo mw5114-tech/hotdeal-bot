@@ -1,0 +1,25 @@
+name: Slim runner network compatibility check
+on:
+  pull_request:
+    paths:
+      - coupang_github_slim_probe.py
+      - .github/workflows/slim-runner-network-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-network-check:
+    runs-on: ubuntu-slim
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute one-shot network compatibility check
+        run: python3 coupang_github_slim_probe.py
+      - name: Preserve diagnostic summary
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: slim-network-diagnostic
+          path: coupang-slim-diagnostic.json
+          retention-days: 2
+          if-no-files-found: ignore
