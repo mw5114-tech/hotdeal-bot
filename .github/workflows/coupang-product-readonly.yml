@@ -6,6 +6,7 @@ on:
       - test/coupang-product-readonly-20261031
     paths:
       - .github/workflows/coupang-product-readonly.yml
+      - experimental/coupang_product_readonly_probe.py
   workflow_dispatch:
 
 permissions:
