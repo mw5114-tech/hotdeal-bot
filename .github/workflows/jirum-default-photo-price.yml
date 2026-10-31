@@ -45,3 +45,5 @@ jobs:
           path: default-deal-drafts/
           if-no-files-found: warn
           retention-days: 5
+
+# One-off verification of requested three-line caption layout, no production changes.
