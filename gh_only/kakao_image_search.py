@@ -69,7 +69,8 @@ def normalize_search_results(payload: dict, product_id: str, item_id: str) -> di
     for doc in docs[:MAX_RESULTS]:
         if not isinstance(doc, dict):
             continue
-        image_url, thumbnail_url = useful_image(doc)
+        original_url, thumbnail_url = useful_image(doc)
+        image_url = original_url or thumbnail_url
         source = doc.get("doc_url")
         if not image_url or not safe_https(source):
             continue
@@ -79,6 +80,7 @@ def normalize_search_results(payload: dict, product_id: str, item_id: str) -> di
         height = height if type(height) is int and 0 < height <= 20000 else None
         evidence = {
             "source_match": match, "image_url_candidate": image_url,
+            "image_origin": "indexed_original" if original_url else "indexed_thumbnail_fallback",
             "thumbnail_url": thumbnail_url,
             "source_page_url": source,
             "source_site": doc.get("display_sitename"),
