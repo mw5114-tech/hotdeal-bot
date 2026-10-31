@@ -58,12 +58,20 @@ function inputInPage(url) {
                      el.getAttribute("name"),el.getAttribute("id"),
                      el.closest("label")?.textContent].filter(Boolean).join(" ");
     let score = 0;
-    if (/쿠팡\s*URL|쿠팡\s*링크|쿠팡\s*주소/i.test(details)) score += 10;
-    if (/상품\s*URL|상품\s*링크|상품\s*주소/i.test(details)) score += 6;
-    if (/\bURL\b|주소/i.test(details)) score += 2;
+    // Real Coupang's single product URL field is labelled simply "url".
+    if (/쿠팡\s*URL|쿠팡\s*링크|쿠팡\s*주소/i.test(details)) score += 12;
+    if (/상품\s*URL|상품\s*링크|상품\s*주소/i.test(details)) score += 10;
+    if (/\burl\b|주소/i.test(details)) score += 8;
+    if (/coupang|producturl|product-url/i.test(details)) score += 6;
     return {el,score,details:details.slice(0,65)};
   }).sort((a,b)=>b.score-a.score);
-  if (!ranked.length || ranked[0].score < 5 ||
+  // A future renamed field is safe only if the ONE editable input is under
+  // a visible form labelled "쿠팡 URL". Do not guess between multiple fields.
+  const formLabel = Array.from(document.querySelectorAll("label, h1, h2, h3, h4"))
+    .filter(el => el.getClientRects().length > 0)
+    .some(el => /쿠팡\s*URL/i.test(el.innerText || el.textContent || ""));
+  const onlyInputOnKnownForm = ranked.length === 1 && formLabel;
+  if (!ranked.length || (ranked[0].score < 5 && !onlyInputOnKnownForm) ||
       (ranked.length > 1 && ranked[0].score === ranked[1].score)) {
     return {status:"INPUT_UNCONFIRMED", visibleInputCount:nodes.length,
             candidates:ranked.slice(0,5).map(x=>x.details)};
@@ -78,7 +86,11 @@ function inputInPage(url) {
   input.dispatchEvent(new Event("input",{bubbles:true}));
   input.dispatchEvent(new Event("change",{bubbles:true}));
   input.focus();
-  return {status:"FILLED",label:ranked[0].details};
+  if ((input.value || "").trim() !== url) {
+    return {status:"INPUT_VALUE_NOT_SET"};
+  }
+  return {status:"FILLED",label:ranked[0].details,
+          exactValueConfirmed:true};
 }
 
 function generateInPage(expectedProductURL) {
