@@ -73,10 +73,10 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertTrue(r["history_avg_accepted"])
         self.assertEqual(r["caption"]["approx_discount_vs_historical_mean_pct"], 65)
         self.assertEqual(r["caption"]["observed_average_krw"], 34575)
-        self.assertEqual(r["caption"]["caption"].splitlines()[:3], [
-            "💰 뽐질 특가 12,050원",
-            "📉 로우차트 관측 평균가 대비 약 65% 할인",
-            "📊 로우차트 관측 평균가 34,575원"
+        self.assertEqual(r["caption"]["caption"].splitlines(), [
+            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개",
+            "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
+            "🔥 핫딜 특가 : 12,050원 (상세페이지 참고 / 약 65% 혜택)",
         ])
         self.assertNotIn("59.8%", r["caption"]["caption"])
         self.assertFalse(r["caption"]["auto_publish_ready"])
@@ -92,8 +92,8 @@ class AutomatedDefaultTests(unittest.TestCase):
                              lambda link, state: bad, never, never, "fake")
         self.assertFalse(result["kakao_product_match"])
         self.assertEqual(result["caption"]["caption"].splitlines()[0],
-                         "💰 뽐질 특가 12,050원")
-        self.assertNotIn("% 할인", result["caption"]["caption"])
+                         "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개")
+        self.assertNotIn("% 혜택", result["caption"]["caption"])
         self.assertEqual(calls, [])
 
     def test_inexact_link_does_not_submit_url_to_kakao(self):
@@ -103,7 +103,7 @@ class AutomatedDefaultTests(unittest.TestCase):
                           lambda link: {"status": "EXACT_ITEM_ID_MISSING"},
                           never, never, never, "")
         self.assertEqual(out["kakao_status"], "UNRESOLVED_COUPANG_ITEM")
-        self.assertNotIn("% 할인", out["caption"]["caption"])
+        self.assertNotIn("% 혜택", out["caption"]["caption"])
 
     def test_history_wrong_option_is_safely_ignored(self):
         def wrong(*args):
@@ -114,7 +114,8 @@ class AutomatedDefaultTests(unittest.TestCase):
                           lambda link, state: OG, wrong,
                           lambda *args: {"status":"NO_DOWNLOAD"}, "fake")
         self.assertIsNone(out["caption"]["approx_discount_vs_historical_mean_pct"])
-        self.assertNotIn("관측 평균가 대비", out["caption"]["caption"])
+        self.assertIn("관측 평균) : 확인 중", out["caption"]["caption"])
+        self.assertNotIn("% 혜택", out["caption"]["caption"])
 
 
 if __name__=="__main__":
