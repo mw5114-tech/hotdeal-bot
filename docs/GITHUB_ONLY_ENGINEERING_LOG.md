@@ -177,3 +177,13 @@ No main branch, scheduled collector, personal partner link, Daangn publisher or 
 - This is a user-interface debugging tool, not an official documented bulk OG-image REST API. Treat as a low-volume one-off feasibility result, do not enable production cron or auto-post based solely on the outcome.
 
 Production main unchanged; existing separate 30-minute workflow unchanged. PR remains DRAFT.
+
+## 2026-11-01: Fresh Coupang price retrieval test with exact itemId
+
+- User wanted to learn whether a product page reachable from Kakao `og:url` yields a live price, and how to handle Telegram hotdeals that omit normal/original price.
+- A web index returned historical archived Coupang product+item HTML for `productId=6221369038`, `itemId=12453073752`, including 5,660 KRW sale price, 5,880 KRW comparison price, 3% badge; search snapshot was approximately three months stale, NOT a live merchant quote. Opening product ID without itemId instead produced a different option (500g x 20 units, 50,600 KRW) in another archived snapshot. Never treat productId-alone price as exact product.
+- **Fresh GitHub Actions one-shot direct request** (run 41231038597): requested `https://www.coupang.com/vp/products/6221369038?itemId=12453073752`, returned **HTTP 403**, no product HTML or live pricing extracted. No retries, login, proxy or bypass. Thus cached search-index access does not imply GitHub's price parser can access Coupang live.
+- A separate third-party hotdeal price-history page https://hotduk.com/deal/156817 shows this sale at 3,180 KRW and historical 184-day low 3,180, average 4,266, high 4,750 KRW. This may provide independent historical benchmarks. These are NOT official list price, may describe different price/period conditions and cannot be substituted into '정상가' or imply a precise percentage discount.
+- Fallback policy when @jirum Telegram post only gives a sale price: publish candidate draft with '게시글 표기 특가' only; DO NOT invent '정상가', discount rate, or compare to stale cached Coupang price. Can optionally add separate '외부 가격 이력/관측 가격' in manual review with source and as-of date, exact item option confirmation required.
+- Kakao URL metadata OG title/description/image contains no guaranteed `product:price:amount`; it is a social preview, not live price API. Coupang Partners product API account approval was not obtained. Any posted price can change, so label source and date.
+- New isolated diagnostic modules: `gh_only/coupang_live_price_probe.py`, `.github/workflows/coupang-direct-item-probe.yml`; only exact item target tested and no production behavior altered.
