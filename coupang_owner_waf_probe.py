@@ -21,7 +21,13 @@ TARGET = "https://partners.coupang.com/"
 HEADER_NAME = "X-Coupang-Owner-Test"
 DENIED = re.compile(r"access\s*denied|forbidden|request\s*blocked|접근[이\s]*차단|captcha|verify\s+you\s+are\s+human", re.I)
 PARTNERS = re.compile(r"쿠팡\s*파트너스|coupang\s*partners", re.I)
+AKAMAI_REFERENCE = re.compile(r"Reference\s*#\s*([A-Za-z0-9.:-]{6,120})", re.I)
 MAX_READ = 20000
+
+
+def akamai_reference(page_text: str) -> str | None:
+    match = AKAMAI_REFERENCE.search(page_text)
+    return match.group(1) if match else None
 
 
 def validate_owner_token(token: str) -> str:
@@ -80,6 +86,7 @@ def request_public_page(token: str) -> dict:
         host = urlsplit(response.url).hostname or ""
         return {"status": status, "host": host,
                 "classification": classify(status, host, "", body),
+                "akamai_reference": akamai_reference(body),
                 "response_headers": safe_headers(response.headers)}
 
 
@@ -108,6 +115,7 @@ def browser_public_page(token: str) -> dict:
                     result = {
                         "status": status, "host": host,
                         "classification": classify(status, host, title, body),
+                        "akamai_reference": akamai_reference(title + "\n" + body),
                         "response_headers": safe_headers(response.headers) if response else {},
                         "is_access_denied_title": bool(DENIED.search(title)),
                         "login_attempted": False,
