@@ -1,0 +1,23 @@
+name: Test free pre-issued affiliate link reuse
+on:
+  pull_request:
+    paths:
+      - jirum_forward.py
+      - coupang_manual_links.py
+      - test_coupang_manual_links.py
+      - .github/workflows/test-free-link-reuse.yml
+permissions:
+  contents: read
+jobs:
+  offline-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run strictly offline forwarding and affiliate mapping tests
+        run: |
+          python -m py_compile jirum_forward.py coupang_manual_links.py
+          python -m unittest -v test_coupang_manual_links.py test_jirum_forward.py

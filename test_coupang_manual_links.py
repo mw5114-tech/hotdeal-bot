@@ -60,7 +60,7 @@ class CoupangManualLinksTests(unittest.TestCase):
             }
             with patch.object(affiliate, "CONFIG", config):
                 message = jirum.make_message(post)
-            self.assertIn("상품링크: " + OWN, message)
+            self.assertIn("특가 바로가기\n" + OWN, message)
             self.assertNotIn(OLD, message)
             self.assertIn("수수료를 제공받습니다", message)
 

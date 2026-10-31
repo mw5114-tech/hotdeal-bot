@@ -14,6 +14,7 @@ import re
 from urllib import error, request
 from urllib.parse import urlencode, urlsplit
 from telegram_delivery import send_text
+from coupang_manual_links import resolve_manual_link
 
 PUBLIC_URL = "https://t.me/s/jirum"
 STATE = Path(__file__).resolve().parent / "state" / "jirum_last_forwarded.json"
@@ -190,10 +191,21 @@ def save(value):
 
 
 def make_message(post):
-    """Send visible source text only: no headers, marketing or link substitutions."""
+    """Preserve source text, optionally replacing an exact, pre-issued Coupang URL.
+
+    This never creates a new affiliate URL or contacts Coupang. An empty mapping
+    file keeps the original message byte-for-byte unchanged.
+    """
     message = post["text"]
     if not isinstance(message, str) or not message:
         raise ValueError("Missing source text")
+    original = post.get("product_url")
+    if isinstance(original, str) and original in message:
+        personal = resolve_manual_link(original)
+        if personal != original:
+            # Only an exact registered source URL may be substituted. The
+            # shared module validates the personal Coupang domain and format.
+            message = message.replace(original, personal)
     if len(message.encode("utf-16-le")) // 2 > MAX_MESSAGE_LENGTH:
         raise ValueError("Source message exceeds Telegram limit")
     return message
