@@ -22,8 +22,15 @@ def classify(raw):
         return "NOT_PLAYWRIGHT_STORAGE_STATE"
     if any(not isinstance(c, dict) for c in data["cookies"]):
         return "INVALID_COOKIE_RECORD"
-    if any(c.get("domain") not in ALLOWED for c in data["cookies"]):
-        return "COOKIE_DOMAIN_WHITELIST_TOO_STRICT"
+    unusual = [str(c.get("domain", "")).lstrip(".").lower()
+               for c in data["cookies"] if c.get("domain") not in ALLOWED]
+    if unusual:
+        if all(d == "kakao.com" or d.endswith(".kakao.com") for d in unusual):
+            return "KAKAO_SUBDOMAIN_COOKIE_ONLY"
+        if all(d == "daum.net" or d.endswith(".daum.net") or
+               d == "kakao.com" or d.endswith(".kakao.com") for d in unusual):
+            return "KAKAO_OR_DAUM_COOKIE_ONLY"
+        return "UNRELATED_COOKIE_DOMAIN_PRESENT"
     for entry in data.get("origins", []):
         if not isinstance(entry, dict):
             return "INVALID_ORIGIN_RECORD"
