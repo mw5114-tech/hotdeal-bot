@@ -1,0 +1,36 @@
+name: Jirum exact-item Lowchart reference price (read-only)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-lowchart-average.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lowchart-average-source:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline exact-item and historical-average tests
+        run: |
+          python -m py_compile gh_only/lowchart_price_reference.py
+          python -m unittest -v gh_only.test_lowchart_price_reference
+      - name: One public Lowchart page and summary read, not an API
+        run: python -m gh_only.lowchart_price_reference --out lowchart_price_reference.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lowchart-history-avg-exact-item-proof
+          path: lowchart_price_reference.json
+          if-no-files-found: warn
+          retention-days: 7
