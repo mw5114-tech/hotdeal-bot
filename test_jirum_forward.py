@@ -77,13 +77,13 @@ class RepostTests(unittest.TestCase):
         posts = app.parse_listing('<div data-post="jirum/123"><div class="tgme_widget_message_text">아무 링크 없음</div></div>')
         self.assertEqual(posts[0]['text'], '아무 링크 없음')
 
-    def test_telegram_message_contains_clickable_original_url(self):
+    def test_source_text_without_added_headers(self):
         post = app.parse_listing(SAMPLE)[0]
         message = app.make_message(post)
-        self.assertTrue(message.startswith("🆕 [HOTDEAL]\n\n상품명: 카리어왕"))
+        self.assertEqual(message, post["text"])
+        self.assertNotIn("🆕 [HOTDEAL]", message)
+        self.assertNotIn("상품명:", message)
         self.assertIn("https://link.coupang.com/a/iha660uGR2", message)
-        self.assertIn("25.8% 할인", message)
-        self.assertEqual(message, post["text"])\n        self.assertNotIn("상품명:", message)\n        self.assertNotIn("원문:", message)
 
     def test_send_message_uses_original_link_and_existing_bot_secrets(self):
         post = app.parse_listing(SAMPLE)[1]
