@@ -1,0 +1,52 @@
+name: GitHub independent proxy egress verification
+on:
+  pull_request:
+    paths:
+      - coupang_independent_proxy_probe.py
+      - test_coupang_independent_proxy_probe.py
+      - .github/workflows/coupang-independent-proxy-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: independent-egress-manual
+  cancel-in-progress: false
+jobs:
+  configuration-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test egress configuration offline
+        run: python -m unittest -v test_coupang_independent_proxy_probe.py
+  actual-egress-check:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install real browser before changing its egress
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Verify external proxy, compare egress IP, then check public page once
+        env:
+          EGRESS_PROXY_SERVER: ${{ secrets.EGRESS_PROXY_SERVER }}
+          EGRESS_PROXY_USER: ${{ secrets.EGRESS_PROXY_USER }}
+          EGRESS_PROXY_PASSWORD: ${{ secrets.EGRESS_PROXY_PASSWORD }}
+        run: python coupang_independent_proxy_probe.py
+      - name: Upload sanitized test classification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: independent-proxy-egress-observation
+          path: proxy-egress-observation.json
+          retention-days: 2
+          if-no-files-found: ignore
