@@ -1,4 +1,4 @@
-name: Coupang single-product read-only access test
+name: Coupang Windows single-product read-only test
 
 on:
   push:
@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   read-only-probe:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 9
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
       - name: Install isolated browser test dependencies
         run: |
           python -m pip install --disable-pip-version-check playwright
-          python -m playwright install --with-deps chromium
+          python -m playwright install chromium
       - name: Run exactly one product-page navigation (no login and no retry)
         run: python experimental/coupang_product_readonly_probe.py
       - name: Preserve diagnostic JSON report
