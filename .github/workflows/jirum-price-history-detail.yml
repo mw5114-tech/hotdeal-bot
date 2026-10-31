@@ -1,0 +1,55 @@
+name: Jirum lowchart and Jigeumsa deeper one-item read-only UI checks
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-price-history-detail.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lowchart-detail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read one Lowchart product+item page and capture visible history labels
+        run: python -m gh_only.lowchart_detail_probe
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lowchart-exact-item-diagnostic
+          path: lowchart_detail_diagnostic.json
+          if-no-files-found: warn
+          retention-days: 7
+  jigeumsa-public-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install one isolated headless Chromium browser
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Submit one original Coupang URL through public link-price lookup UI
+        run: python -m gh_only.jigeumsa_ui_probe
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: jigeumsa-exact-item-ui-diagnostic
+          path: jigeumsa_link_lookup_diagnostic.json
+          if-no-files-found: warn
+          retention-days: 7
