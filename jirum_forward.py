@@ -14,7 +14,6 @@ import re
 from urllib import error, request
 from urllib.parse import urlencode, urlsplit
 from telegram_delivery import send_text
-from coupang_manual_links import resolve_manual_link
 
 PUBLIC_URL = "https://t.me/s/jirum"
 STATE = Path(__file__).resolve().parent / "state" / "jirum_last_forwarded.json"
@@ -154,8 +153,8 @@ def parse_listing(html):
     if not posts:
         raise RuntimeError("No public @jirum posts found; refusing to update history")
     ordered = [posts[post_id] for post_id in sorted(posts)]
-    if not any(post["product_url"] for post in ordered):
-        raise RuntimeError("Jirum purchase links missing from ALL visible posts; refusing to update history")
+    if not any(post["text"] for post in ordered):
+        raise RuntimeError("Jirum message text missing from ALL visible posts; refusing to update history")
     return ordered
 
 
@@ -191,23 +190,13 @@ def save(value):
 
 
 def make_message(post):
-    """AI-friendly fields first; retain public source text for context and disclosures."""
-    title = post["title"] or f"뽐질 핫딜 #{post['id']}"
-    original_url = post["product_url"]
-    if not original_url:
-        raise ValueError("Missing purchase URL")
-    url = resolve_manual_link(original_url)
-    head = f"🆕 [HOTDEAL]\n\n상품명: {title}\n\n상품링크: {url}"
-    # Avoid pasting the product URL twice; original source copy still includes
-    # discount details and affiliate disclosure when present.
-    source = post["text"].replace(original_url, "")
-    source = "\n".join(x.strip() for x in source.splitlines() if x.strip())
-    if source:
-        remaining = MAX_MESSAGE_LENGTH - len(head) - len("\n\n원문:\n")
-        if remaining > 0:
-            head += "\n\n원문:\n" + source[:remaining]
-    return head[:MAX_MESSAGE_LENGTH]
-
+    """Send visible source text only: no headers, marketing or link substitutions."""
+    message = post["text"]
+    if not isinstance(message, str) or not message:
+        raise ValueError("Missing source text")
+    if len(message.encode("utf-16-le")) // 2 > MAX_MESSAGE_LENGTH:
+        raise ValueError("Source message exceeds Telegram limit")
+    return message
 
 def send_post(post):
     send_text(make_message(post))
@@ -221,7 +210,7 @@ def run(mode="run", fetcher=fetch_listing, sender=send_post):
     latest = posts[-1]["id"]
     print(f"JIRUM_LIST: count={len(posts)} first={posts[0]['id']} last={latest} mode={mode}")
     if mode == "verify-repost":
-        deal = next((p for p in reversed(posts) if p["product_url"]), None)
+        deal = next((p for p in reversed(posts) if p["text"]), None)
         if deal is None:
             raise RuntimeError("No deal with a purchase URL is visible")
         sender(deal)
@@ -244,11 +233,11 @@ def run(mode="run", fetcher=fetch_listing, sender=send_post):
         if mode == "preview":
             print(f"JIRUM_PREVIEW_POST: {post['id']} link_present={bool(post['product_url'])}")
             continue
-        if post["product_url"]:
+        if post["text"]:
             sender(post)
             print(f"JIRUM_REPOSTED: post={post['id']}")
         else:
-            print(f"JIRUM_SKIPPED_NO_LINK: post={post['id']}")
+            print(f"JIRUM_SKIPPED_NO_TEXT: post={post['id']}")
         state["last_seen_id"] = post["id"]
         save(state)
     if len(fresh) > MAX_ALERTS:
