@@ -9,6 +9,7 @@ unsupported private API calls. An uncertain click is never retried.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -166,17 +167,43 @@ def setup_profile(profile_dir: Path) -> None:
             context.close()
 
 
+def validate_request_packet(packet: dict) -> tuple[str, str]:
+    """Reject stale, edited, or unverified GitHub-generated requests."""
+    if not isinstance(packet, dict) or packet.get("schema") != "jirum-partners-one-link-request-v1":
+        raise ValueError("INVALID_REQUEST_PACKET")
+    if (packet.get("status") != "READY_FOR_AUTHENTICATED_PARTNERS_UI" or
+            packet.get("personal_affiliate_link_generated") is not False or
+            packet.get("publish_count") != 0):
+        raise ValueError("REQUEST_NOT_READY")
+    mid = packet.get("source_message_id")
+    if not isinstance(mid, int) or isinstance(mid, bool) or mid < 1:
+        raise ValueError("INVALID_MESSAGE_ID")
+    url = canonical_product_url(packet.get("canonical_product_url", ""))
+    expected = hashlib.sha256((str(mid) + "\n" + url).encode()).hexdigest()[:20]
+    if packet.get("request_id") != expected:
+        raise ValueError("REQUEST_ID_MISMATCH")
+    return url, expected
+
+
 def cli() -> int:
     parser = argparse.ArgumentParser(description="Trusted GitHub self-hosted Partners UI worker")
     parser.add_argument("--mode", choices=("fixture", "setup-profile", "read-only", "generate-one"),
                         default="fixture")
     parser.add_argument("--product-url")
+    parser.add_argument("--request-file")
     parser.add_argument("--profile-dir", default=os.getenv("PARTNERS_PROFILE_DIR", ""))
     args = parser.parse_args()
     output: dict = {"status": "NOT_RUN", "clicks": 0, "auto_posted": False}
     try:
+        requested_url = args.product_url
+        request_id = None
+        if args.request_file:
+            packet = json.loads(Path(args.request_file).read_text(encoding="utf-8"))
+            requested_url, request_id = validate_request_packet(packet)
+            if args.product_url and canonical_product_url(args.product_url) != requested_url:
+                raise ValueError("REQUEST_URL_MISMATCH")
         if args.mode == "fixture":
-            canonical = canonical_product_url(args.product_url or
+            canonical = canonical_product_url(requested_url or
                 "https://www.coupang.com/vp/products/9217210892?itemId=27232840915&vendorItemId=94199974724")
             output = {"status": "FIXTURE_ONLY_NO_NETWORK", "clicks": 0,
                       "auto_posted": False, "canonical_product_url": canonical}
@@ -188,9 +215,11 @@ def cli() -> int:
                 setup_profile(profile)
                 output = {"status": "MANUAL_SETUP_FINISHED", "clicks": 0, "auto_posted": False}
             else:
-                if args.mode == "generate-one" and not args.product_url:
+                if args.mode == "generate-one" and not requested_url:
                     raise ValueError("PRODUCT_URL_REQUIRED")
-                output = {**output, **run_live(args.mode, args.product_url, profile)}
+                output = {**output, **run_live(args.mode, requested_url, profile)}
+        if request_id:
+            output["request_id"] = request_id
     except Exception as exc:
         # Never print exceptions that could include cookies, account details or
         # browser profile contents. Only safe known failure reason types.
