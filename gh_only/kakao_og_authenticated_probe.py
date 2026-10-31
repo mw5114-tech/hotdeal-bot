@@ -17,7 +17,7 @@ from urllib.parse import urlsplit
 
 from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
 
-TOOL_URL = "https://developers.kakao.com/tool/debugger"
+TOOL_URL = "https://developers.kakao.com/tool/debugger/sharing"
 SOURCE = "https://link.coupang.com/a/iiCmQxWdUG"
 OUT = Path("kakao_authenticated_og_ui_report.json")
 PROVIDER_ROOT_DOMAINS = ("kakao.com", "daum.net")
@@ -129,8 +129,13 @@ def run():
                     elif urlsplit(page.url).hostname != "developers.kakao.com":
                         report["result"] = "UNEXPECTED_PAGE"
                     else:
+                        try:
+                            page.wait_for_load_state("networkidle", timeout=9000)
+                        except PlaywrightTimeout:
+                            pass
                         selectors = ['input[placeholder*="URL"]',
-                                     'input[aria-label*="URL"]', 'input[type="url"]']
+                                     'input[aria-label*="URL"]', 'input[type="url"]',
+                                     'input[placeholder*="url"]']
                         field = None
                         for selector in selectors:
                             q = page.locator(selector)
