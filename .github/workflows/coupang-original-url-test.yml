@@ -1,0 +1,37 @@
+name: Coupang original link one-shot comparison
+
+on:
+  push:
+    branches: [test/coupang-product-readonly-20261031]
+    paths:
+      - .github/workflows/coupang-original-url-test.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  original-url:
+    runs-on: windows-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright binding
+        shell: pwsh
+        run: python -m pip install --disable-pip-version-check playwright
+      - name: One original-link product visit without retries or login
+        shell: pwsh
+        run: python experimental/coupang_original_url_probe.py
+      - name: Archive diagnostic result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-original-link-result
+          path: coupang_probe_original_url.json
+          if-no-files-found: warn
+          retention-days: 7
