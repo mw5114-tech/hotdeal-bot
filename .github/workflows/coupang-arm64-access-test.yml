@@ -1,0 +1,65 @@
+name: One-time GitHub ARM64 Coupang public accessibility test
+on:
+  pull_request:
+    paths:
+      - .github/workflows/coupang-arm64-access-test.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  arm64-onepass:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare official Playwright Chromium on ARM64
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: One public Python and browser request, no credentials
+        shell: bash
+        run: |
+          set +e
+          python coupang_owner_waf_probe.py
+          result=$?
+          echo "DIAGNOSTIC_EXIT_CODE=$result"
+          exit 0
+      - name: Summarize actual access state
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p = Path('owner-waf-probe.json')
+          if not p.exists():
+              print('DIAGNOSTIC_SETUP_FAILED')
+              raise SystemExit(1)
+          data = json.loads(p.read_text(encoding='utf-8'))
+          ip = data.get('egress', {}).get('ip')
+          x = data.get('chromium', {})
+          y = data.get('python_https', {})
+          status = 'ACCESS_CONFIRMED' if data.get('site_access_confirmed') else 'ACCESS_NOT_CONFIRMED'
+          print(status)
+          print('Python:', y.get('status'), y.get('classification'))
+          print('Chromium:', x.get('status'), x.get('classification'))
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as f:
+              f.write('# GitHub ARM64 Coupang public access diagnostic\n\n')
+              f.write(f"- Result: **{status}**\n")
+              f.write(f"- Egress IP (this job only): \`{ip}\`\n")
+              f.write(f"- Python: {y.get('status')} / {y.get('classification')}\n")
+              f.write(f"- Chromium: {x.get('status')} / {x.get('classification')}\n")
+              f.write('- No login, credentials, account or link generation attempted.\n')
+          PY
+      - name: Store sanitized test report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-arm64-public-observation
+          path: owner-waf-probe.json
+          retention-days: 2
+          if-no-files-found: ignore
