@@ -57,3 +57,5 @@ jobs:
           retention-days: 3
 
 # One-shot verification after user confirmed Kakao session secret already exists.
+
+# Retest provider-only cookie scope after safe JSON validation diagnosis.
