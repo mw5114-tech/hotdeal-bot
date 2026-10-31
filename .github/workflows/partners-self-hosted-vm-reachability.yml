@@ -1,6 +1,10 @@
 name: Coupang Partners self-hosted VM reachability (manual only, no account actions)
 
 on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-self-hosted-vm-reachability.yml'
   workflow_dispatch:
 
 permissions:
@@ -8,6 +12,7 @@ permissions:
 
 jobs:
   vm-plain-reachability-only:
+    if: vars.GH_ONLY_PARTNERS_SELFHOSTED_ENABLED == 'true'
     # Requires a user-installed GitHub Actions runner with custom label coupang-partners.
     # Cannot start unless user explicitly connects a trusted Linux VM as a runner.
     runs-on: [self-hosted, linux, x64, coupang-partners]
