@@ -106,3 +106,25 @@ New modules gh_only/indexed_image_probe.py (+ tests) and gh_only/cdn_image_probe
 ### Resulting technical decision
 
 Photo transport is SOLVED for a *known* public image URL; automatic image URL discovery and exact-option confirmation are UNSOLVED. Do not extrapolate from the CDN test to stable sourcing of every hotdeal image. Future preferred paths: source-attached Telegram media when available; approved personal Coupang Partners product data/search API if eligible, validating productId+itemId+vendorItemId and image asset license; otherwise strictly mark alternative listing images unverified and do not autopublish. Avoid arbitrary lookalikes and avoid scraping Coupang blocked pages.
+
+## 2026-10-31 Photo discovery investigation — no Coupang approval or photo in @jirum
+
+Confirmed user constraints: Coupang Partners final approval NOT yet obtained; source @jirum text posts do NOT attach product photos; GitHub-hosted Coupang product-page browser requests have shown 403/access-denied. We can parse productId/itemId from an original link one-hop 302 without fetching product-page HTML.
+
+### Discovery options tested
+
+- Existing Coupang CDN address CAN be fetched by GitHub (run 41209723121, HTTP 200, JPEG 74,713 bytes); image discovered on another product listing and NOT verified for source itemId.
+- Bing exact and relaxed image index HTML runs 41209523593 / 41209858666: HTTP 200, zero parseable image cards. Not a dependable address finder.
+- Google public indexed images run 41210728078: HTTP 200, 0 Coupang CDN URLs observed, no explicit CAPTCHA markers. Not viable as tested.
+- Same Coupang productId can have multiple itemIds and photos; itemId is a catalog/item identifier, not the hashed Coupang CDN filename. There is no verified formula mapping those two numbers to a publicly exposed picture URL.
+
+### New best free candidate: Kakao/Daum image search REST API
+
+- Official API https://dapi.kakao.com/v2/search/image, app-scoped Kakao REST API key, published free DAILY IMAGE search quota 30,000. No Coupang Partners approval required. This is NOT paid APICK.
+- API response includes original image URL, thumbnail, width, height, and original source doc_url, unlike HTML scraping where image cards were missing.
+- Implemented gh_only/kakao_image_search.py: two max queries per test, exact IDs and descriptive product name; only image candidates whose doc_url literally contains source Coupang productId AND itemId are marked exact-URL source match; this still NEVER proves the image content is correct or reuse rights are granted.
+- Workflow .github/workflows/jirum-kakao-image.yml has read-only offline tests and gated real query. Secret KAKAO_REST_API_KEY and repository variable GH_ONLY_KAKAO_PHOTO_TEST_ENABLED=true are required before a live query. No credentials exist in code, no automatic live run was performed.
+- Kakao isolated offline run 41210581016: 10/10 tests PASS; optional live search intentionally SKIPPED due missing opt-in variable. Main prototype run 41210551066: total 69/69 offline unit tests PASS.
+- Naver legacy Shopping Search API officially terminated 2026-07-31, not suitable as a new free integration. Google Custom Search JSON API closed to new customers, not proposed.
+
+Production main, 30-min scheduler, Muse VM, affiliate link generation and Daangn posting all unchanged. Future step needs the USER to create a Kakao Developers REST API key and enter it directly into GitHub Actions repository Secrets, never in chat, then set the test variable. No schedule or posting will be enabled until results verified.
