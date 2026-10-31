@@ -1,0 +1,221 @@
+name: Coupang Windows login UI inspection (no authentication)
+run-name: Coupang Windows login UI inspection - no credentials
+
+on:
+  push:
+    branches: [codex/coupang-login-ui-inspection-20261031]
+    paths: [.github/workflows/coupang-windows-login-inspection.yml]
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: coupang-windows-login-ui-inspection
+  cancel-in-progress: false
+
+jobs:
+  login-ui-only:
+    if: github.run_attempt == 1
+    runs-on: windows-latest
+    timeout-minutes: 4
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+    steps:
+      - name: Install controller only (no browser download)
+        run: python -m pip install --disable-pip-version-check --retries 0 playwright==1.64.1
+      - name: Inspect login entry and empty form without submitting credentials
+        run: |
+          @'
+          """Inspect public login UI only: no values, cookies, profile exports or submissions."""
+          import json
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urlsplit, urlunsplit, parse_qs
+          
+          TARGET = 'https://partners.coupang.com/'
+          
+          
+          def url_info(value):
+              u = urlsplit(value)
+              fragment = u.fragment if re.fullmatch(r'/[A-Za-z0-9/_-]{0,120}', u.fragment) else ''
+              return {'url': urlunsplit((u.scheme, u.hostname or '', u.path,
+                                        'REDACTED' if u.query else '', fragment)),
+                      'query_keys': sorted(parse_qs(u.query, keep_blank_values=True)),
+                      'fragment_omitted': bool(u.fragment and not fragment)}
+          
+          
+          def security(title, body, status=None, captcha=False):
+              return {'access_denied': bool(re.search(r'access\s*denied|접근[이\s]*차단', title + '\n' + body, re.I)),
+                      'http_blocked': status in (401, 403, 429),
+                      'captcha_or_human_check': captcha or bool(re.search(
+                          r'verify you are human|robot check|로봇이 아닙니다|보안문자를 입력', title + '\n' + body, re.I))}
+          
+          
+          def inspect_frame(frame):
+              body = frame.locator('body').inner_text(timeout=5000)[:20000]
+              fields = frame.locator('input').all()
+              types = {}
+              autocomplete = set()
+              identifier = False
+              for field in fields:
+                  if not field.is_visible():
+                      continue
+                  kind = (field.get_attribute('type') or 'text').lower()
+                  if kind == 'hidden':
+                      continue
+                  types[kind] = types.get(kind, 0) + 1
+                  attr = field.get_attribute('autocomplete') or ''
+                  if attr in ('username', 'current-password', 'one-time-code', 'webauthn'):
+                      autocomplete.add(attr)
+                  hint = ' '.join(field.get_attribute(k) or '' for k in ('placeholder', 'aria-label'))
+                  identifier = identifier or kind == 'email' or attr == 'username' or bool(re.search('이메일|아이디|email', hint, re.I))
+              forms = []
+              for form in frame.locator('form').all():
+                  if form.is_visible():
+                      action = form.get_attribute('action') or ''
+                      from urllib.parse import urljoin
+                      forms.append({'method': (form.get_attribute('method') or 'get').upper(),
+                                    'action': url_info(urljoin(frame.url, action))})
+              captcha = any(el.is_visible() for el in frame.locator(
+                  'iframe[src*="captcha"],iframe[title*="CAPTCHA"],iframe[title*="캡차"]').all())
+              return {'location': url_info(frame.url), 'visible_input_types': types,
+                      'autocomplete_hints': sorted(autocomplete), 'identifier_input_visible': identifier,
+                      'password_input_visible': types.get('password', 0) > 0,
+                      'otp_input_visible': 'one-time-code' in autocomplete,
+                      'qr_login_text_visible': bool(re.search(r'QR\s*(코드|로그인)|QR\s*code', body, re.I)),
+                      'phone_verification_text_visible': bool(re.search(r'휴대폰\s*인증|문자\s*인증|인증번호', body)),
+                      'two_factor_text_visible': bool(re.search(r'2단계|이중\s*인증|two.factor|OTP', body, re.I)),
+                      'forms': forms, 'security': security(frame.title(), body, captcha=captcha)}
+          
+          
+          def official_url(value):
+              u = urlsplit(value)
+              return u.scheme == 'https' and (u.hostname == 'coupang.com' or (u.hostname or '').endswith('.coupang.com'))
+          
+          
+          def run():
+              report = {'probe': 'LOGIN_UI_NO_AUTHENTICATION', 'outcome': 'SETUP_FAILED',
+                        'credentials_entered': False, 'login_form_submitted': False,
+                        'cookies_or_tokens_read': False, 'authentication_state_exported': False,
+                        'homepage_navigation_attempts': 0, 'login_entry_clicks': 0,
+                        'document_responses': [], 'headless': False,
+                        'image_os': os.environ.get('ImageOS'), 'image_version': os.environ.get('ImageVersion'),
+                        'mfa_requirement_after_credentials': 'NOT_TESTED',
+                        'authenticated_session_persistence': 'NOT_TESTED'}
+              try:
+                  if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('RUNNER_OS') != 'Windows':
+                      raise RuntimeError('GITHUB_WINDOWS_RUNNER_REQUIRED')
+                  if os.environ.get('GITHUB_RUN_ATTEMPT', '1') != '1':
+                      raise RuntimeError('RERUN_REFUSED')
+                  from playwright.sync_api import sync_playwright
+                  chrome = next((Path(os.environ[root]) / 'Google/Chrome/Application/chrome.exe'
+                                 for root in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA')
+                                 if os.environ.get(root) and (Path(os.environ[root]) / 'Google/Chrome/Application/chrome.exe').is_file()), None)
+                  if chrome is None:
+                      raise RuntimeError('GOOGLE_CHROME_NOT_FOUND')
+                  with sync_playwright() as pw:
+                      browser = pw.chromium.launch(channel='chrome', executable_path=str(chrome),
+                                                   headless=False, chromium_sandbox=True, timeout=30000)
+                      try:
+                          report['chrome_version'] = browser.version
+                          context = browser.new_context(accept_downloads=False)
+                          def attach(page):
+                              def response(resp):
+                                  if resp.request.is_navigation_request() and resp.frame == page.main_frame:
+                                      report['document_responses'].append({'status': resp.status, **url_info(resp.url)})
+                              page.on('response', response)
+                          context.on('page', attach)
+                          page = context.new_page()
+                          report['homepage_navigation_attempts'] = 1
+                          resp = page.goto(TARGET, wait_until='domcontentloaded', timeout=30000)
+                          page.wait_for_timeout(3000)
+                          home = inspect_frame(page.main_frame)
+                          home['http_status'] = resp.status if resp else None
+                          report['homepage'] = home
+                          if any(home['security'].values()) or home['http_status'] in (401, 403, 429):
+                              raise RuntimeError('HOMEPAGE_BLOCKED_STOP')
+                          # Record only selected public UI labels/links; never full page HTML/text.
+                          report['homepage_feature_links'] = []
+                          for anchor in page.get_by_role('link').all():
+                              if not anchor.is_visible():
+                                  continue
+                              label = anchor.inner_text().strip()
+                              if re.fullmatch(r'(로그인|회원가입|이용가이드|도움말|공지사항|약관|운영정책|FAQ|링크\s*생성|상품\s*링크|간편\s*링크\s*만들기|리포트|정산)', label):
+                                  href = anchor.get_attribute('href') or ''
+                                  from urllib.parse import urljoin
+                                  report['homepage_feature_links'].append({'label': label, **url_info(urljoin(page.url, href))})
+                          if not home['password_input_visible']:
+                              choices = []
+                              login_label = re.compile(r'^\s*(로그인|Login|Log in)\s*$', re.I)
+                              for role in ('link', 'button'):
+                                  for element in page.get_by_role(role, name=login_label).all():
+                                      if element.is_visible() and not element.evaluate('(el) => !!el.closest("form")'):
+                                          choices.append(element)
+                              report['login_entry_candidates'] = len(choices)
+                              if len(choices) != 1:
+                                  raise RuntimeError('LOGIN_ENTRY_NOT_UNIQUE_STOP')
+                              href = choices[0].get_attribute('href')
+                              if href:
+                                  from urllib.parse import urljoin
+                                  resolved = urljoin(page.url, href)
+                                  if not official_url(resolved):
+                                      raise RuntimeError('UNEXPECTED_AUTH_DESTINATION_STOP')
+                                  report['login_entry_target'] = url_info(resolved)
+                              report['login_entry_clicks'] = 1
+                              choices[0].click(timeout=10000)  # Public entry only; never a form submit.
+                              page.wait_for_timeout(5000)
+                          report['pages_after_login_entry'] = []
+                          usable = []
+                          for current in context.pages:
+                              if current.is_closed():
+                                  continue
+                              report['pages_after_login_entry'].append(url_info(current.url))
+                              if not official_url(current.url):
+                                  continue
+                              for frame in current.frames:
+                                  if not official_url(frame.url):
+                                      continue
+                                  item = inspect_frame(frame)
+                                  usable.append(item)
+                          report['login_page_observations'] = usable
+                          blocked = any(any(item['security'].values()) for item in usable)
+                          rendered = any(item['password_input_visible'] and item['identifier_input_visible'] for item in usable)
+                          report['outcome'] = 'BLOCKED' if blocked else ('LOGIN_FORM_RENDERED' if rendered else 'LOGIN_UI_INCONCLUSIVE')
+                      finally:
+                          browser.close()
+              except Exception as exc:
+                  report['error_type'] = type(exc).__name__
+                  if isinstance(exc, RuntimeError) and re.fullmatch('[A-Z_]+', str(exc)):
+                      report['reason'] = str(exc)
+                  code = re.search(r'net::ERR_[A-Z_]+', str(exc))
+                  if code:
+                      report['network_error'] = code.group(0)
+              output = Path('login-inspection-results')
+              output.mkdir(exist_ok=True)
+              text = json.dumps(report, ensure_ascii=True, indent=2)
+              (output / 'result.json').write_text(text + '\n', encoding='utf-8')
+              print(text)
+              if os.environ.get('GITHUB_STEP_SUMMARY'):
+                  with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf-8') as handle:
+                      handle.write('## Public login UI inspection (no credentials)\n\n```json\n' + text + '\n```\n')
+              return 0 if report['outcome'] == 'LOGIN_FORM_RENDERED' else 1
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(run())
+          '@ | Set-Content -Encoding utf8 "$env:RUNNER_TEMP\coupang_login_inspection.py"
+          python "$env:RUNNER_TEMP\coupang_login_inspection.py"
+          exit $LASTEXITCODE
+      - name: Upload sanitized observation only (never browser profile)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-windows-login-ui-observation
+          path: login-inspection-results/result.json
+          retention-days: 3
+          if-no-files-found: warn
+
