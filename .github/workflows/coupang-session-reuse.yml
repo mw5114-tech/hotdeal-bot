@@ -79,7 +79,7 @@ jobs:
                   raise ValueError('MEMBER_URL_INVALID')
               u = urlsplit(value)
               if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
-                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.fragment and not re.fullmatch('/?[A-Za-z0-9/_-]+', u.fragment))
                       or (u.path in ('', '/') and not u.fragment)
                       or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
                   raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
@@ -345,7 +345,7 @@ jobs:
                   raise ValueError('MEMBER_URL_INVALID')
               u = urlsplit(value)
               if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
-                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.fragment and not re.fullmatch('/?[A-Za-z0-9/_-]+', u.fragment))
                       or (u.path in ('', '/') and not u.fragment)
                       or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
                   raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
@@ -602,7 +602,7 @@ jobs:
                   raise ValueError('MEMBER_URL_INVALID')
               u = urlsplit(value)
               if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
-                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.fragment and not re.fullmatch('/?[A-Za-z0-9/_-]+', u.fragment))
                       or (u.path in ('', '/') and not u.fragment)
                       or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
                   raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
