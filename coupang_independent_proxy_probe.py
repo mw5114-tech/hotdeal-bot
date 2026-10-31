@@ -38,6 +38,8 @@ def proxy_config(server: str, username: str = "", password: str = "") -> dict:
         raise ValueError("PROXY_SERVER_INVALID")
     if bool(username) != bool(password):
         raise ValueError("PROXY_CREDS_INCOMPLETE")
+    if u.scheme == "socks5" and username:
+        raise ValueError("SOCKS5_AUTH_UNSUPPORTED_BY_CHROMIUM")
     config = {"server": server}
     if username:
         config["username"] = username
