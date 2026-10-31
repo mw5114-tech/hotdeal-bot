@@ -63,3 +63,5 @@ jobs:
 # One-off check for the sharing-specific OG debugger URL.
 
 # Retest OG row parsing for tab-separated labels and CDN URLs.
+
+# Final single lookup check for corrected tab-delimited OG image parsing.
