@@ -1,0 +1,80 @@
+name: Coupang owner WAF access check (GitHub only)
+on:
+  pull_request:
+    paths:
+      - coupang_owner_waf_probe.py
+      - test_coupang_owner_waf_probe.py
+      - .github/workflows/coupang-owner-waf-probe.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: coupang-owner-waf-check
+  cancel-in-progress: false
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test classification without accessing Coupang
+        run: python -m unittest -v test_coupang_owner_waf_probe.py
+  current-runner-baseline:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Capture one no-secret public homepage diagnostic
+        shell: bash
+        run: |
+          set +e
+          python coupang_owner_waf_probe.py
+          result=$?
+          echo "PROBE_EXIT_CODE=$result"
+          exit 0
+      - name: Save categorized public response data only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-owner-waf-baseline
+          path: owner-waf-probe.json
+          if-no-files-found: ignore
+          retention-days: 2
+  verified-site-visit:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install public browser for one verified landing-page request
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Run site-owner-authorized homepage check
+        env:
+          COUPANG_WAF_TEST_TOKEN: ${{ secrets.COUPANG_WAF_TEST_TOKEN }}
+        run: python coupang_owner_waf_probe.py
+      - name: Upload diagnostics (no tokens, cookies, html or screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-owner-waf-diagnostic
+          path: owner-waf-probe.json
+          if-no-files-found: ignore
+          retention-days: 2
