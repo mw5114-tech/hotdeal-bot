@@ -1,0 +1,40 @@
+name: Coupang affiliate API gateway reachability (no credentials)
+on:
+  pull_request:
+    paths:
+      - .github/workflows/coupang-affiliate-api-gateway.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Check API gateway connectivity without any login or API key
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json, ssl, urllib.request, urllib.error, socket
+          from urllib.parse import urlsplit
+          urls = [
+              "https://api-gateway.coupang.com/",
+              "https://api-gateway.coupang.com/v2/providers/affiliate_open_api/apis/openapi/v1/deeplink",
+          ]
+          results = []
+          for url in urls:
+              req = urllib.request.Request(url, method="HEAD")
+              path = urlsplit(url).path
+              try:
+                  with urllib.request.urlopen(req, timeout=15) as response:
+                      status = response.status
+                      results.append({"path": path, "status": status, "http_response": True})
+              except urllib.error.HTTPError as exc:
+                  # 401/403 can be *authorization*, not necessarily an IP block.
+                  results.append({"path": path, "status": exc.code, "http_response": True})
+              except Exception as exc:
+                  results.append({"path": path, "status": None,
+                                  "http_response": False, "error_type": type(exc).__name__})
+          print(json.dumps({"api_key_used": False, "authenticated": False,
+                            "results": results}, indent=2))
+          PY
