@@ -53,3 +53,5 @@ jobs:
           path: jigeumsa_link_lookup_diagnostic.json
           if-no-files-found: warn
           retention-days: 7
+
+# Follow-up: retry user-facing Jigeumsa URL form after page hydration.
