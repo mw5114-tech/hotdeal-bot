@@ -93,7 +93,7 @@ async def read_live(source: str, image_dir: Path, limit: int = 8) -> list[dict]:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source", default=os.environ.get("GH_ONLY_SOURCE_USERNAME", "jirum"))
+    parser.add_argument("--source", default=os.environ.get("GH_ONLY_SOURCE_USERNAME") or "jirum")
     parser.add_argument("--output", default="gh_only_mtproto_report.json")
     parser.add_argument("--images", default="gh_only_mtproto_images")
     args = parser.parse_args()
