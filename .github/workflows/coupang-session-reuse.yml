@@ -1,0 +1,802 @@
+name: Coupang session reuse (dummy default; no login clicks)
+on:
+  push:
+    branches: [codex/coupang-session-reuse-20261031]
+    paths: [.github/workflows/coupang-session-reuse.yml]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dummy = synthetic state only; session = explicitly user-prepared Secrets'
+        required: true
+        default: dummy
+        type: choice
+        options: [dummy, session]
+permissions: {}
+concurrency:
+  group: coupang-session-reuse
+  cancel-in-progress: false
+defaults:
+  run:
+    shell: pwsh
+env:
+  PYTHONUTF8: '1'
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+jobs:
+  dummy-prepare:
+    if: github.run_attempt == 1 && (github.event_name == 'push' || inputs.mode == 'dummy')
+    runs-on: windows-latest
+    timeout-minutes: 3
+    steps:
+      - name: Install controller and authenticated encryption library
+        run: python -m pip install --disable-pip-version-check --retries 0 playwright==1.64.1 cryptography==50.0.2
+      - name: Write state restoration probe (no login automation)
+        shell: pwsh
+        run: |
+          @'
+          """Restore supplied state in memory; never logs credentials, clicks login or exports live state."""
+          import argparse
+          import base64
+          from datetime import datetime, timezone
+          import json
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urlsplit
+          
+          SCHEMA = 'hotdeal.coupang.session.v1'
+          AAD = SCHEMA.encode()
+          DUMMY_KEY = base64.b64encode(bytes(range(32))).decode()  # Synthetic fixture only. Not a credential.
+          DUMMY_ORIGIN = 'http://127.0.0.1:8765'
+          
+          
+          def encrypt(payload, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              key = base64.b64decode(key_text, validate=True)
+              iv = os.urandom(12)
+              ciphertext = AESGCM(key).encrypt(iv, json.dumps(payload).encode(), AAD)
+              return dict(schema=SCHEMA, cipher='AES-256-GCM', iv=base64.b64encode(iv).decode(),
+                          ciphertext=base64.b64encode(ciphertext).decode())
+          
+          
+          def decrypt(envelope_text, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              if len(envelope_text.encode()) > 47000:
+                  raise ValueError('STATE_TOO_LARGE')
+              envelope = json.loads(envelope_text)
+              if envelope.get('schema') != SCHEMA or envelope.get('cipher') != 'AES-256-GCM':
+                  raise ValueError('STATE_FORMAT_INVALID')
+              key = base64.b64decode(key_text, validate=True)
+              iv = base64.b64decode(envelope['iv'], validate=True)
+              if len(key) != 32 or len(iv) != 12:
+                  raise ValueError('STATE_KEY_INVALID')
+              return json.loads(AESGCM(key).decrypt(iv, base64.b64decode(envelope['ciphertext'], validate=True), AAD))
+          
+          
+          def member_url(value, dummy=False):
+              if dummy and value == DUMMY_ORIGIN + '/member':
+                  return value
+              if not isinstance(value, str) or len(value) > 2000:
+                  raise ValueError('MEMBER_URL_INVALID')
+              u = urlsplit(value)
+              if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
+                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.path in ('', '/') and not u.fragment)
+                      or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
+                  raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
+              return value
+          
+          
+          def validate_payload(payload, dummy=False):
+              if payload.get('schema') != 'hotdeal.coupang.session.payload.v1':
+                  raise ValueError('PAYLOAD_SCHEMA_INVALID')
+              member_url(payload.get('memberUrl'), dummy)
+              created = datetime.fromisoformat(payload['createdAt'].replace('Z', '+00:00'))
+              if created.tzinfo is None:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              age = (datetime.now(timezone.utc) - created).total_seconds()
+              if age < -300:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              state = payload.get('state')
+              if not isinstance(state, dict) or not isinstance(state.get('cookies'), list) or not isinstance(state.get('origins'), list):
+                  raise ValueError('STATE_SHAPE_INVALID')
+              if not state['cookies']:
+                  raise ValueError('STATE_EMPTY')
+              for c in state['cookies']:
+                  allowed = ('127.0.0.1',) if dummy else ('partners.coupang.com', 'coupang.com')
+                  if c.get('domain', '').lstrip('.') not in allowed or not isinstance(c.get('name'), str) or not isinstance(c.get('value'), str):
+                      raise ValueError('COOKIE_SCOPE_INVALID')
+                  if 'partitionKey' in c:
+                      raise ValueError('PARTITIONED_STATE_UNSUPPORTED')
+              for origin in state['origins']:
+                  if origin.get('origin') != (DUMMY_ORIGIN if dummy else 'https://partners.coupang.com'):
+                      raise ValueError('STORAGE_ORIGIN_INVALID')
+                  if set(origin) != {'origin', 'localStorage'}:
+                      raise ValueError('STORAGE_TYPE_UNSUPPORTED')
+              return state
+          
+          
+          def dummy_payload():
+              return dict(schema='hotdeal.coupang.session.payload.v1', createdAt=datetime.now(timezone.utc).isoformat(),
+                          memberUrl=DUMMY_ORIGIN + '/member', state={
+                              'cookies':[dict(name='DUMMY_SESSION', value='SYNTHETIC_ONLY', domain='127.0.0.1',
+                                  path='/', expires=-1, httpOnly=True, secure=False, sameSite='Lax')],
+                              'origins':[{'origin':DUMMY_ORIGIN, 'localStorage':[{'name':'DUMMY_FLAG','value':'SYNTHETIC_ONLY'}]}]})
+          
+          
+          def browser_path():
+              for root in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA'):
+                  if os.environ.get(root):
+                      path = Path(os.environ[root]) / 'Google/Chrome/Application/chrome.exe'
+                      if path.is_file():
+                          return str(path)
+              raise ValueError('INSTALLED_CHROME_MISSING')
+          
+          
+          def dummy_restore(pw, payload, report):
+              from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+              import threading
+              class Handler(BaseHTTPRequestHandler):
+                  def do_GET(self):
+                      allowed = self.path == '/member' and 'DUMMY_SESSION=SYNTHETIC_ONLY' in (self.headers.get('Cookie') or '')
+                      self.send_response(200 if allowed else 401)
+                      self.send_header('Content-Type','text/html; charset=utf-8')
+                      self.end_headers()
+                      body = '''<body>AUTH_REQUIRED<script>
+                      if (localStorage.getItem('DUMMY_FLAG') === 'SYNTHETIC_ONLY') document.body.textContent='DUMMY_MEMBER_READY';
+                      </script>''' if allowed else '<body>AUTH_REQUIRED</body>'
+                      self.wfile.write(body.encode())
+                  def log_message(self, *args):
+                      pass
+              server = ThreadingHTTPServer(('127.0.0.1',8765), Handler)
+              thread = threading.Thread(target=server.serve_forever, daemon=True)
+              thread.start()
+              try:
+                  browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+                  try:
+                      report['chrome_version'] = browser.version
+                      empty = browser.new_context()
+                      p = empty.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      report['dummy_without_state_http'] = response.status
+                      empty.close()
+                      context = browser.new_context(storage_state=validate_payload(payload, dummy=True))
+                      p = context.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      p.get_by_text('DUMMY_MEMBER_READY', exact=True).wait_for(timeout=5000)
+                      report['dummy_restored_member_http'] = response.status
+                      report['outcome'] = 'DUMMY_RESTORE_CONFIRMED' if response.status == 200 and report['dummy_without_state_http'] == 401 else 'DUMMY_FAILED'
+                  finally:
+                      browser.close()
+              finally:
+                  server.shutdown(); server.server_close(); thread.join(timeout=5)
+          
+          
+          def real_restore(pw, payload, report):
+              state = validate_payload(payload)
+              browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+              try:
+                  report['chrome_version'] = browser.version
+                  context = browser.new_context(storage_state=state, accept_downloads=False)
+                  stop = {'reason':None}
+                  def guard(route):
+                      req = route.request
+                      u = urlsplit(req.url)
+                      if req.is_navigation_request() and re.search(r'prelogin|/login|sign.?in', u.path, re.I):
+                          stop['reason'] = 'AUTH_REDIRECT_STOP'
+                          route.abort()
+                      else:
+                          route.continue_()
+                  context.route('**/*', guard)  # Only blocks authentication navigation; never changes headers or bypasses restrictions.
+                  page = context.new_page()
+                  def response(resp):
+                      u = urlsplit(resp.url)
+                      if (u.hostname or '').endswith('.coupang.com') and resp.status in (401,403,429):
+                          stop['reason'] = 'HTTP_BLOCKED_STOP'
+                          report['blocked_http_status'] = resp.status
+                  page.on('response', response)
+                  for stage, url in [('homepage','https://partners.coupang.com/'), ('member',payload['memberUrl'])]:
+                      try:
+                          resp = page.goto(url, wait_until='domcontentloaded', timeout=30000)
+                          page.wait_for_timeout(2000)
+                      except Exception:
+                          raise ValueError(stop['reason'] or 'NAVIGATION_FAILED_STOP') from None
+                      report[stage + '_http_status'] = resp.status if resp else None
+                      if stop['reason']:
+                          raise ValueError(stop['reason'])
+                      body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
+                      if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
+                          raise ValueError('ADDITIONAL_AUTH_STOP')
+                      if urlsplit(page.url).hostname != 'partners.coupang.com':
+                          raise ValueError('UNEXPECTED_DESTINATION_STOP')
+                  visible = lambda loc: any(el.is_visible() for el in loc.all())
+                  logout = visible(page.get_by_text(re.compile(r'^\s*로그아웃\s*$')))
+                  heading = visible(page.get_by_text(re.compile(r'^\s*간편\s*링크\s*만들기\s*$')))
+                  field = visible(page.locator('input[placeholder*="URL"],input[aria-label*="URL"],textarea[placeholder*="URL"]'))
+                  generate = visible(page.get_by_role('button', name=re.compile(r'^링크\s*생성$')))
+                  same_route = page.url.rstrip('/') == payload['memberUrl'].rstrip('/')
+                  report['member_ui_signals'] = dict(logout=logout,quick_link_heading=heading,url_input=field,
+                                                      generate_button=generate,expected_route=same_route)
+                  if not (logout and heading and field and generate and same_route):
+                      raise ValueError('MEMBER_AUTH_NOT_CONFIRMED_STOP')
+                  report['outcome'] = 'MEMBER_UI_CONFIRMED'
+              finally:
+                  browser.close()
+          
+          
+          def main():
+              parser = argparse.ArgumentParser()
+              parser.add_argument('mode', choices=['dummy-export','dummy-restore','live'])
+              parser.add_argument('--envelope', default='dummy-state/envelope.json')
+              args = parser.parse_args()
+              report = dict(mode=args.mode, outcome='FAILED', login_clicks=0, credential_inputs=0,
+                            live_authentication_verified=False, live_state_exported=False,
+                            image_os=os.environ.get('ImageOS'), image_version=os.environ.get('ImageVersion'))
+              try:
+                  if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('RUNNER_OS') != 'Windows':
+                      raise ValueError('GITHUB_WINDOWS_REQUIRED')
+                  if os.environ.get('GITHUB_RUN_ATTEMPT','1') != '1':
+                      raise ValueError('RERUN_REFUSED')
+                  if args.mode == 'dummy-export':
+                      path = Path(args.envelope); path.parent.mkdir(exist_ok=True, parents=True)
+                      path.write_text(json.dumps(encrypt(dummy_payload(), DUMMY_KEY)), encoding='utf-8')
+                      report['outcome'] = 'SYNTHETIC_ENVELOPE_PREPARED'
+                  else:
+                      if args.mode == 'live':
+                          # Remove secrets before launching child processes. Never print or write them.
+                          envelope = os.environ.pop('COUPANG_SESSION_ENVELOPE','')
+                          key = os.environ.pop('COUPANG_SESSION_KEY','')
+                          if not envelope or not key:
+                              raise ValueError('USER_PREPARED_STATE_MISSING')
+                          payload = decrypt(envelope, key)
+                          del envelope, key
+                      else:
+                          payload = decrypt(Path(args.envelope).read_text(encoding='utf-8'), DUMMY_KEY)
+                      from playwright.sync_api import sync_playwright
+                      with sync_playwright() as pw:
+                          if args.mode == 'live':
+                              real_restore(pw, payload, report)
+                              report['live_authentication_verified'] = report['outcome'] == 'MEMBER_UI_CONFIRMED'
+                          else:
+                              dummy_restore(pw, payload, report)
+              except Exception as exc:
+                  message = str(exc)
+                  report['reason'] = message if isinstance(exc, ValueError) and re.fullmatch('[A-Z_]+',message) else 'STATE_OR_BROWSER_OPERATION_FAILED'
+                  report['error_type'] = type(exc).__name__
+              text = json.dumps(report, indent=2)
+              print(text)  # Only status booleans and fixed diagnostics. No state, names, values, screenshots, URLs or HTML.
+              if os.environ.get('GITHUB_STEP_SUMMARY'):
+                  with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+                      f.write('## Session reuse probe\n\n```json\n'+text+'\n```\n')
+              return 0 if report['outcome'] in ('SYNTHETIC_ENVELOPE_PREPARED','DUMMY_RESTORE_CONFIRMED','MEMBER_UI_CONFIRMED') else 1
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '@ | Set-Content -Encoding utf8 "$env:RUNNER_TEMP\session_probe.py"
+      - name: Prepare synthetic state only
+        run: python "$env:RUNNER_TEMP\session_probe.py" dummy-export
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SYNTHETIC-ONLY-encrypted-state
+          path: dummy-state/envelope.json
+          retention-days: 1
+  dummy-restore-on-new-vm:
+    needs: dummy-prepare
+    runs-on: windows-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: SYNTHETIC-ONLY-encrypted-state
+          path: dummy-state
+      - name: Install controller and authenticated encryption library
+        run: python -m pip install --disable-pip-version-check --retries 0 playwright==1.64.1 cryptography==50.0.2
+      - name: Write state restoration probe (no login automation)
+        shell: pwsh
+        run: |
+          @'
+          """Restore supplied state in memory; never logs credentials, clicks login or exports live state."""
+          import argparse
+          import base64
+          from datetime import datetime, timezone
+          import json
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urlsplit
+          
+          SCHEMA = 'hotdeal.coupang.session.v1'
+          AAD = SCHEMA.encode()
+          DUMMY_KEY = base64.b64encode(bytes(range(32))).decode()  # Synthetic fixture only. Not a credential.
+          DUMMY_ORIGIN = 'http://127.0.0.1:8765'
+          
+          
+          def encrypt(payload, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              key = base64.b64decode(key_text, validate=True)
+              iv = os.urandom(12)
+              ciphertext = AESGCM(key).encrypt(iv, json.dumps(payload).encode(), AAD)
+              return dict(schema=SCHEMA, cipher='AES-256-GCM', iv=base64.b64encode(iv).decode(),
+                          ciphertext=base64.b64encode(ciphertext).decode())
+          
+          
+          def decrypt(envelope_text, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              if len(envelope_text.encode()) > 47000:
+                  raise ValueError('STATE_TOO_LARGE')
+              envelope = json.loads(envelope_text)
+              if envelope.get('schema') != SCHEMA or envelope.get('cipher') != 'AES-256-GCM':
+                  raise ValueError('STATE_FORMAT_INVALID')
+              key = base64.b64decode(key_text, validate=True)
+              iv = base64.b64decode(envelope['iv'], validate=True)
+              if len(key) != 32 or len(iv) != 12:
+                  raise ValueError('STATE_KEY_INVALID')
+              return json.loads(AESGCM(key).decrypt(iv, base64.b64decode(envelope['ciphertext'], validate=True), AAD))
+          
+          
+          def member_url(value, dummy=False):
+              if dummy and value == DUMMY_ORIGIN + '/member':
+                  return value
+              if not isinstance(value, str) or len(value) > 2000:
+                  raise ValueError('MEMBER_URL_INVALID')
+              u = urlsplit(value)
+              if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
+                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.path in ('', '/') and not u.fragment)
+                      or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
+                  raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
+              return value
+          
+          
+          def validate_payload(payload, dummy=False):
+              if payload.get('schema') != 'hotdeal.coupang.session.payload.v1':
+                  raise ValueError('PAYLOAD_SCHEMA_INVALID')
+              member_url(payload.get('memberUrl'), dummy)
+              created = datetime.fromisoformat(payload['createdAt'].replace('Z', '+00:00'))
+              if created.tzinfo is None:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              age = (datetime.now(timezone.utc) - created).total_seconds()
+              if age < -300:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              state = payload.get('state')
+              if not isinstance(state, dict) or not isinstance(state.get('cookies'), list) or not isinstance(state.get('origins'), list):
+                  raise ValueError('STATE_SHAPE_INVALID')
+              if not state['cookies']:
+                  raise ValueError('STATE_EMPTY')
+              for c in state['cookies']:
+                  allowed = ('127.0.0.1',) if dummy else ('partners.coupang.com', 'coupang.com')
+                  if c.get('domain', '').lstrip('.') not in allowed or not isinstance(c.get('name'), str) or not isinstance(c.get('value'), str):
+                      raise ValueError('COOKIE_SCOPE_INVALID')
+                  if 'partitionKey' in c:
+                      raise ValueError('PARTITIONED_STATE_UNSUPPORTED')
+              for origin in state['origins']:
+                  if origin.get('origin') != (DUMMY_ORIGIN if dummy else 'https://partners.coupang.com'):
+                      raise ValueError('STORAGE_ORIGIN_INVALID')
+                  if set(origin) != {'origin', 'localStorage'}:
+                      raise ValueError('STORAGE_TYPE_UNSUPPORTED')
+              return state
+          
+          
+          def dummy_payload():
+              return dict(schema='hotdeal.coupang.session.payload.v1', createdAt=datetime.now(timezone.utc).isoformat(),
+                          memberUrl=DUMMY_ORIGIN + '/member', state={
+                              'cookies':[dict(name='DUMMY_SESSION', value='SYNTHETIC_ONLY', domain='127.0.0.1',
+                                  path='/', expires=-1, httpOnly=True, secure=False, sameSite='Lax')],
+                              'origins':[{'origin':DUMMY_ORIGIN, 'localStorage':[{'name':'DUMMY_FLAG','value':'SYNTHETIC_ONLY'}]}]})
+          
+          
+          def browser_path():
+              for root in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA'):
+                  if os.environ.get(root):
+                      path = Path(os.environ[root]) / 'Google/Chrome/Application/chrome.exe'
+                      if path.is_file():
+                          return str(path)
+              raise ValueError('INSTALLED_CHROME_MISSING')
+          
+          
+          def dummy_restore(pw, payload, report):
+              from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+              import threading
+              class Handler(BaseHTTPRequestHandler):
+                  def do_GET(self):
+                      allowed = self.path == '/member' and 'DUMMY_SESSION=SYNTHETIC_ONLY' in (self.headers.get('Cookie') or '')
+                      self.send_response(200 if allowed else 401)
+                      self.send_header('Content-Type','text/html; charset=utf-8')
+                      self.end_headers()
+                      body = '''<body>AUTH_REQUIRED<script>
+                      if (localStorage.getItem('DUMMY_FLAG') === 'SYNTHETIC_ONLY') document.body.textContent='DUMMY_MEMBER_READY';
+                      </script>''' if allowed else '<body>AUTH_REQUIRED</body>'
+                      self.wfile.write(body.encode())
+                  def log_message(self, *args):
+                      pass
+              server = ThreadingHTTPServer(('127.0.0.1',8765), Handler)
+              thread = threading.Thread(target=server.serve_forever, daemon=True)
+              thread.start()
+              try:
+                  browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+                  try:
+                      report['chrome_version'] = browser.version
+                      empty = browser.new_context()
+                      p = empty.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      report['dummy_without_state_http'] = response.status
+                      empty.close()
+                      context = browser.new_context(storage_state=validate_payload(payload, dummy=True))
+                      p = context.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      p.get_by_text('DUMMY_MEMBER_READY', exact=True).wait_for(timeout=5000)
+                      report['dummy_restored_member_http'] = response.status
+                      report['outcome'] = 'DUMMY_RESTORE_CONFIRMED' if response.status == 200 and report['dummy_without_state_http'] == 401 else 'DUMMY_FAILED'
+                  finally:
+                      browser.close()
+              finally:
+                  server.shutdown(); server.server_close(); thread.join(timeout=5)
+          
+          
+          def real_restore(pw, payload, report):
+              state = validate_payload(payload)
+              browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+              try:
+                  report['chrome_version'] = browser.version
+                  context = browser.new_context(storage_state=state, accept_downloads=False)
+                  stop = {'reason':None}
+                  def guard(route):
+                      req = route.request
+                      u = urlsplit(req.url)
+                      if req.is_navigation_request() and re.search(r'prelogin|/login|sign.?in', u.path, re.I):
+                          stop['reason'] = 'AUTH_REDIRECT_STOP'
+                          route.abort()
+                      else:
+                          route.continue_()
+                  context.route('**/*', guard)  # Only blocks authentication navigation; never changes headers or bypasses restrictions.
+                  page = context.new_page()
+                  def response(resp):
+                      u = urlsplit(resp.url)
+                      if (u.hostname or '').endswith('.coupang.com') and resp.status in (401,403,429):
+                          stop['reason'] = 'HTTP_BLOCKED_STOP'
+                          report['blocked_http_status'] = resp.status
+                  page.on('response', response)
+                  for stage, url in [('homepage','https://partners.coupang.com/'), ('member',payload['memberUrl'])]:
+                      try:
+                          resp = page.goto(url, wait_until='domcontentloaded', timeout=30000)
+                          page.wait_for_timeout(2000)
+                      except Exception:
+                          raise ValueError(stop['reason'] or 'NAVIGATION_FAILED_STOP') from None
+                      report[stage + '_http_status'] = resp.status if resp else None
+                      if stop['reason']:
+                          raise ValueError(stop['reason'])
+                      body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
+                      if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
+                          raise ValueError('ADDITIONAL_AUTH_STOP')
+                      if urlsplit(page.url).hostname != 'partners.coupang.com':
+                          raise ValueError('UNEXPECTED_DESTINATION_STOP')
+                  visible = lambda loc: any(el.is_visible() for el in loc.all())
+                  logout = visible(page.get_by_text(re.compile(r'^\s*로그아웃\s*$')))
+                  heading = visible(page.get_by_text(re.compile(r'^\s*간편\s*링크\s*만들기\s*$')))
+                  field = visible(page.locator('input[placeholder*="URL"],input[aria-label*="URL"],textarea[placeholder*="URL"]'))
+                  generate = visible(page.get_by_role('button', name=re.compile(r'^링크\s*생성$')))
+                  same_route = page.url.rstrip('/') == payload['memberUrl'].rstrip('/')
+                  report['member_ui_signals'] = dict(logout=logout,quick_link_heading=heading,url_input=field,
+                                                      generate_button=generate,expected_route=same_route)
+                  if not (logout and heading and field and generate and same_route):
+                      raise ValueError('MEMBER_AUTH_NOT_CONFIRMED_STOP')
+                  report['outcome'] = 'MEMBER_UI_CONFIRMED'
+              finally:
+                  browser.close()
+          
+          
+          def main():
+              parser = argparse.ArgumentParser()
+              parser.add_argument('mode', choices=['dummy-export','dummy-restore','live'])
+              parser.add_argument('--envelope', default='dummy-state/envelope.json')
+              args = parser.parse_args()
+              report = dict(mode=args.mode, outcome='FAILED', login_clicks=0, credential_inputs=0,
+                            live_authentication_verified=False, live_state_exported=False,
+                            image_os=os.environ.get('ImageOS'), image_version=os.environ.get('ImageVersion'))
+              try:
+                  if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('RUNNER_OS') != 'Windows':
+                      raise ValueError('GITHUB_WINDOWS_REQUIRED')
+                  if os.environ.get('GITHUB_RUN_ATTEMPT','1') != '1':
+                      raise ValueError('RERUN_REFUSED')
+                  if args.mode == 'dummy-export':
+                      path = Path(args.envelope); path.parent.mkdir(exist_ok=True, parents=True)
+                      path.write_text(json.dumps(encrypt(dummy_payload(), DUMMY_KEY)), encoding='utf-8')
+                      report['outcome'] = 'SYNTHETIC_ENVELOPE_PREPARED'
+                  else:
+                      if args.mode == 'live':
+                          # Remove secrets before launching child processes. Never print or write them.
+                          envelope = os.environ.pop('COUPANG_SESSION_ENVELOPE','')
+                          key = os.environ.pop('COUPANG_SESSION_KEY','')
+                          if not envelope or not key:
+                              raise ValueError('USER_PREPARED_STATE_MISSING')
+                          payload = decrypt(envelope, key)
+                          del envelope, key
+                      else:
+                          payload = decrypt(Path(args.envelope).read_text(encoding='utf-8'), DUMMY_KEY)
+                      from playwright.sync_api import sync_playwright
+                      with sync_playwright() as pw:
+                          if args.mode == 'live':
+                              real_restore(pw, payload, report)
+                              report['live_authentication_verified'] = report['outcome'] == 'MEMBER_UI_CONFIRMED'
+                          else:
+                              dummy_restore(pw, payload, report)
+              except Exception as exc:
+                  message = str(exc)
+                  report['reason'] = message if isinstance(exc, ValueError) and re.fullmatch('[A-Z_]+',message) else 'STATE_OR_BROWSER_OPERATION_FAILED'
+                  report['error_type'] = type(exc).__name__
+              text = json.dumps(report, indent=2)
+              print(text)  # Only status booleans and fixed diagnostics. No state, names, values, screenshots, URLs or HTML.
+              if os.environ.get('GITHUB_STEP_SUMMARY'):
+                  with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+                      f.write('## Session reuse probe\n\n```json\n'+text+'\n```\n')
+              return 0 if report['outcome'] in ('SYNTHETIC_ENVELOPE_PREPARED','DUMMY_RESTORE_CONFIRMED','MEMBER_UI_CONFIRMED') else 1
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '@ | Set-Content -Encoding utf8 "$env:RUNNER_TEMP\session_probe.py"
+      - name: Restore in another Windows VM and check local fixture member page
+        run: python "$env:RUNNER_TEMP\session_probe.py" dummy-restore
+  actual-member-probe:
+    if: github.run_attempt == 1 && github.event_name == 'workflow_dispatch' && inputs.mode == 'session'
+    runs-on: windows-latest
+    timeout-minutes: 4
+    steps:
+      - name: Install controller and authenticated encryption library
+        run: python -m pip install --disable-pip-version-check --retries 0 playwright==1.64.1 cryptography==50.0.2
+      - name: Write state restoration probe (no login automation)
+        shell: pwsh
+        run: |
+          @'
+          """Restore supplied state in memory; never logs credentials, clicks login or exports live state."""
+          import argparse
+          import base64
+          from datetime import datetime, timezone
+          import json
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urlsplit
+          
+          SCHEMA = 'hotdeal.coupang.session.v1'
+          AAD = SCHEMA.encode()
+          DUMMY_KEY = base64.b64encode(bytes(range(32))).decode()  # Synthetic fixture only. Not a credential.
+          DUMMY_ORIGIN = 'http://127.0.0.1:8765'
+          
+          
+          def encrypt(payload, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              key = base64.b64decode(key_text, validate=True)
+              iv = os.urandom(12)
+              ciphertext = AESGCM(key).encrypt(iv, json.dumps(payload).encode(), AAD)
+              return dict(schema=SCHEMA, cipher='AES-256-GCM', iv=base64.b64encode(iv).decode(),
+                          ciphertext=base64.b64encode(ciphertext).decode())
+          
+          
+          def decrypt(envelope_text, key_text):
+              from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+              if len(envelope_text.encode()) > 47000:
+                  raise ValueError('STATE_TOO_LARGE')
+              envelope = json.loads(envelope_text)
+              if envelope.get('schema') != SCHEMA or envelope.get('cipher') != 'AES-256-GCM':
+                  raise ValueError('STATE_FORMAT_INVALID')
+              key = base64.b64decode(key_text, validate=True)
+              iv = base64.b64decode(envelope['iv'], validate=True)
+              if len(key) != 32 or len(iv) != 12:
+                  raise ValueError('STATE_KEY_INVALID')
+              return json.loads(AESGCM(key).decrypt(iv, base64.b64decode(envelope['ciphertext'], validate=True), AAD))
+          
+          
+          def member_url(value, dummy=False):
+              if dummy and value == DUMMY_ORIGIN + '/member':
+                  return value
+              if not isinstance(value, str) or len(value) > 2000:
+                  raise ValueError('MEMBER_URL_INVALID')
+              u = urlsplit(value)
+              if (u.scheme != 'https' or u.hostname != 'partners.coupang.com' or u.port or u.username or u.password or u.query
+                      or (u.fragment and not re.fullmatch('/[A-Za-z0-9/_-]+', u.fragment))
+                      or (u.path in ('', '/') and not u.fragment)
+                      or re.search(r'login|prelogin|sign.?in|/api/', u.path + '/' + u.fragment, re.I)):
+                  raise ValueError('DIRECT_MEMBER_URL_REQUIRED')
+              return value
+          
+          
+          def validate_payload(payload, dummy=False):
+              if payload.get('schema') != 'hotdeal.coupang.session.payload.v1':
+                  raise ValueError('PAYLOAD_SCHEMA_INVALID')
+              member_url(payload.get('memberUrl'), dummy)
+              created = datetime.fromisoformat(payload['createdAt'].replace('Z', '+00:00'))
+              if created.tzinfo is None:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              age = (datetime.now(timezone.utc) - created).total_seconds()
+              if age < -300:
+                  raise ValueError('STATE_TIMESTAMP_INVALID')
+              state = payload.get('state')
+              if not isinstance(state, dict) or not isinstance(state.get('cookies'), list) or not isinstance(state.get('origins'), list):
+                  raise ValueError('STATE_SHAPE_INVALID')
+              if not state['cookies']:
+                  raise ValueError('STATE_EMPTY')
+              for c in state['cookies']:
+                  allowed = ('127.0.0.1',) if dummy else ('partners.coupang.com', 'coupang.com')
+                  if c.get('domain', '').lstrip('.') not in allowed or not isinstance(c.get('name'), str) or not isinstance(c.get('value'), str):
+                      raise ValueError('COOKIE_SCOPE_INVALID')
+                  if 'partitionKey' in c:
+                      raise ValueError('PARTITIONED_STATE_UNSUPPORTED')
+              for origin in state['origins']:
+                  if origin.get('origin') != (DUMMY_ORIGIN if dummy else 'https://partners.coupang.com'):
+                      raise ValueError('STORAGE_ORIGIN_INVALID')
+                  if set(origin) != {'origin', 'localStorage'}:
+                      raise ValueError('STORAGE_TYPE_UNSUPPORTED')
+              return state
+          
+          
+          def dummy_payload():
+              return dict(schema='hotdeal.coupang.session.payload.v1', createdAt=datetime.now(timezone.utc).isoformat(),
+                          memberUrl=DUMMY_ORIGIN + '/member', state={
+                              'cookies':[dict(name='DUMMY_SESSION', value='SYNTHETIC_ONLY', domain='127.0.0.1',
+                                  path='/', expires=-1, httpOnly=True, secure=False, sameSite='Lax')],
+                              'origins':[{'origin':DUMMY_ORIGIN, 'localStorage':[{'name':'DUMMY_FLAG','value':'SYNTHETIC_ONLY'}]}]})
+          
+          
+          def browser_path():
+              for root in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA'):
+                  if os.environ.get(root):
+                      path = Path(os.environ[root]) / 'Google/Chrome/Application/chrome.exe'
+                      if path.is_file():
+                          return str(path)
+              raise ValueError('INSTALLED_CHROME_MISSING')
+          
+          
+          def dummy_restore(pw, payload, report):
+              from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+              import threading
+              class Handler(BaseHTTPRequestHandler):
+                  def do_GET(self):
+                      allowed = self.path == '/member' and 'DUMMY_SESSION=SYNTHETIC_ONLY' in (self.headers.get('Cookie') or '')
+                      self.send_response(200 if allowed else 401)
+                      self.send_header('Content-Type','text/html; charset=utf-8')
+                      self.end_headers()
+                      body = '''<body>AUTH_REQUIRED<script>
+                      if (localStorage.getItem('DUMMY_FLAG') === 'SYNTHETIC_ONLY') document.body.textContent='DUMMY_MEMBER_READY';
+                      </script>''' if allowed else '<body>AUTH_REQUIRED</body>'
+                      self.wfile.write(body.encode())
+                  def log_message(self, *args):
+                      pass
+              server = ThreadingHTTPServer(('127.0.0.1',8765), Handler)
+              thread = threading.Thread(target=server.serve_forever, daemon=True)
+              thread.start()
+              try:
+                  browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+                  try:
+                      report['chrome_version'] = browser.version
+                      empty = browser.new_context()
+                      p = empty.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      report['dummy_without_state_http'] = response.status
+                      empty.close()
+                      context = browser.new_context(storage_state=validate_payload(payload, dummy=True))
+                      p = context.new_page()
+                      response = p.goto(payload['memberUrl'], wait_until='domcontentloaded')
+                      p.get_by_text('DUMMY_MEMBER_READY', exact=True).wait_for(timeout=5000)
+                      report['dummy_restored_member_http'] = response.status
+                      report['outcome'] = 'DUMMY_RESTORE_CONFIRMED' if response.status == 200 and report['dummy_without_state_http'] == 401 else 'DUMMY_FAILED'
+                  finally:
+                      browser.close()
+              finally:
+                  server.shutdown(); server.server_close(); thread.join(timeout=5)
+          
+          
+          def real_restore(pw, payload, report):
+              state = validate_payload(payload)
+              browser = pw.chromium.launch(channel='chrome', executable_path=browser_path(), headless=False, chromium_sandbox=True)
+              try:
+                  report['chrome_version'] = browser.version
+                  context = browser.new_context(storage_state=state, accept_downloads=False)
+                  stop = {'reason':None}
+                  def guard(route):
+                      req = route.request
+                      u = urlsplit(req.url)
+                      if req.is_navigation_request() and re.search(r'prelogin|/login|sign.?in', u.path, re.I):
+                          stop['reason'] = 'AUTH_REDIRECT_STOP'
+                          route.abort()
+                      else:
+                          route.continue_()
+                  context.route('**/*', guard)  # Only blocks authentication navigation; never changes headers or bypasses restrictions.
+                  page = context.new_page()
+                  def response(resp):
+                      u = urlsplit(resp.url)
+                      if (u.hostname or '').endswith('.coupang.com') and resp.status in (401,403,429):
+                          stop['reason'] = 'HTTP_BLOCKED_STOP'
+                          report['blocked_http_status'] = resp.status
+                  page.on('response', response)
+                  for stage, url in [('homepage','https://partners.coupang.com/'), ('member',payload['memberUrl'])]:
+                      try:
+                          resp = page.goto(url, wait_until='domcontentloaded', timeout=30000)
+                          page.wait_for_timeout(2000)
+                      except Exception:
+                          raise ValueError(stop['reason'] or 'NAVIGATION_FAILED_STOP') from None
+                      report[stage + '_http_status'] = resp.status if resp else None
+                      if stop['reason']:
+                          raise ValueError(stop['reason'])
+                      body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
+                      if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
+                          raise ValueError('ADDITIONAL_AUTH_STOP')
+                      if urlsplit(page.url).hostname != 'partners.coupang.com':
+                          raise ValueError('UNEXPECTED_DESTINATION_STOP')
+                  visible = lambda loc: any(el.is_visible() for el in loc.all())
+                  logout = visible(page.get_by_text(re.compile(r'^\s*로그아웃\s*$')))
+                  heading = visible(page.get_by_text(re.compile(r'^\s*간편\s*링크\s*만들기\s*$')))
+                  field = visible(page.locator('input[placeholder*="URL"],input[aria-label*="URL"],textarea[placeholder*="URL"]'))
+                  generate = visible(page.get_by_role('button', name=re.compile(r'^링크\s*생성$')))
+                  same_route = page.url.rstrip('/') == payload['memberUrl'].rstrip('/')
+                  report['member_ui_signals'] = dict(logout=logout,quick_link_heading=heading,url_input=field,
+                                                      generate_button=generate,expected_route=same_route)
+                  if not (logout and heading and field and generate and same_route):
+                      raise ValueError('MEMBER_AUTH_NOT_CONFIRMED_STOP')
+                  report['outcome'] = 'MEMBER_UI_CONFIRMED'
+              finally:
+                  browser.close()
+          
+          
+          def main():
+              parser = argparse.ArgumentParser()
+              parser.add_argument('mode', choices=['dummy-export','dummy-restore','live'])
+              parser.add_argument('--envelope', default='dummy-state/envelope.json')
+              args = parser.parse_args()
+              report = dict(mode=args.mode, outcome='FAILED', login_clicks=0, credential_inputs=0,
+                            live_authentication_verified=False, live_state_exported=False,
+                            image_os=os.environ.get('ImageOS'), image_version=os.environ.get('ImageVersion'))
+              try:
+                  if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('RUNNER_OS') != 'Windows':
+                      raise ValueError('GITHUB_WINDOWS_REQUIRED')
+                  if os.environ.get('GITHUB_RUN_ATTEMPT','1') != '1':
+                      raise ValueError('RERUN_REFUSED')
+                  if args.mode == 'dummy-export':
+                      path = Path(args.envelope); path.parent.mkdir(exist_ok=True, parents=True)
+                      path.write_text(json.dumps(encrypt(dummy_payload(), DUMMY_KEY)), encoding='utf-8')
+                      report['outcome'] = 'SYNTHETIC_ENVELOPE_PREPARED'
+                  else:
+                      if args.mode == 'live':
+                          # Remove secrets before launching child processes. Never print or write them.
+                          envelope = os.environ.pop('COUPANG_SESSION_ENVELOPE','')
+                          key = os.environ.pop('COUPANG_SESSION_KEY','')
+                          if not envelope or not key:
+                              raise ValueError('USER_PREPARED_STATE_MISSING')
+                          payload = decrypt(envelope, key)
+                          del envelope, key
+                      else:
+                          payload = decrypt(Path(args.envelope).read_text(encoding='utf-8'), DUMMY_KEY)
+                      from playwright.sync_api import sync_playwright
+                      with sync_playwright() as pw:
+                          if args.mode == 'live':
+                              real_restore(pw, payload, report)
+                              report['live_authentication_verified'] = report['outcome'] == 'MEMBER_UI_CONFIRMED'
+                          else:
+                              dummy_restore(pw, payload, report)
+              except Exception as exc:
+                  message = str(exc)
+                  report['reason'] = message if isinstance(exc, ValueError) and re.fullmatch('[A-Z_]+',message) else 'STATE_OR_BROWSER_OPERATION_FAILED'
+                  report['error_type'] = type(exc).__name__
+              text = json.dumps(report, indent=2)
+              print(text)  # Only status booleans and fixed diagnostics. No state, names, values, screenshots, URLs or HTML.
+              if os.environ.get('GITHUB_STEP_SUMMARY'):
+                  with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as f:
+                      f.write('## Session reuse probe\n\n```json\n'+text+'\n```\n')
+              return 0 if report['outcome'] in ('SYNTHETIC_ENVELOPE_PREPARED','DUMMY_RESTORE_CONFIRMED','MEMBER_UI_CONFIRMED') else 1
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(main())
+          '@ | Set-Content -Encoding utf8 "$env:RUNNER_TEMP\session_probe.py"
+      - name: Restore approved session in memory and verify member UI (no artifacts)
+        env:
+          COUPANG_SESSION_ENVELOPE: ${{ secrets.COUPANG_SESSION_ENVELOPE }}
+          COUPANG_SESSION_KEY: ${{ secrets.COUPANG_SESSION_KEY }}
+        run: python "$env:RUNNER_TEMP\session_probe.py" live
+
