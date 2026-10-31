@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -55,7 +56,7 @@ def run():
          "login_attempted": False, "links_created": 0,
          "anti_bot_bypass_attempted": False,
          "input_field_visible": False, "quick_link_text_visible": False}
-    raw = os.getenv(SECRET_ENV, "")
+    raw = os.environ.pop(SECRET_ENV, "")
     if not raw:
         r["status"] = "SESSION_SECRET_MISSING"
     else:
@@ -89,14 +90,16 @@ def run():
                             "간편 링크" in text or "간편링크" in text
                         )
                         r["input_field_visible"] = (
-                            page.locator('input[placeholder*="쿠팡"]').count() > 0
-                            or page.locator('input[placeholder*="URL"]').count() > 0
+                            page.locator("input#url").is_visible()
                         )
+                        r["generate_button_visible"] = page.get_by_role("button", name=re.compile(r"^링크\\s*생성[\\s\\u200b]*$")).is_visible()
+                        r["expected_route"] = page.url.rstrip("/") == TOOL.rstrip("/")
                         if r["access_denied"]:
                             r["status"] = "ACCESS_DENIED_EVEN_WITH_SESSION"
                         elif u.hostname != "partners.coupang.com":
                             r["status"] = "LOGIN_REDIRECT_OR_OTHER_HOST"
-                        elif r["quick_link_text_visible"] and r["input_field_visible"]:
+                        elif (r["quick_link_text_visible"] and r["input_field_visible"]
+                              and r["generate_button_visible"] and r["expected_route"] and not r["login_visible"]):
                             r["status"] = "QUICK_LINK_FORM_REACHABLE"
                         elif r["login_visible"]:
                             r["status"] = "SESSION_EXPIRED_OR_REJECTED"
