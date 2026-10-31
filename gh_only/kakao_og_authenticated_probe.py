@@ -68,13 +68,13 @@ def safe_session_state(raw: str) -> dict:
 
 
 def parse_og_row(text: str, key: str) -> str | None:
+    """Split the Kakao label from its value on whitespace, TAB or newline."""
     if not isinstance(text, str) or key not in OG_KEYS:
         return None
-    m = re.match(r"^\\s*" + re.escape(key) + r"(?:\\s+|$)", text)
-    if not m:
+    parts = text.strip().split(maxsplit=1)
+    if len(parts) != 2 or parts[0] != key:
         return None
-    return text[m.end():].strip() or None
-
+    return parts[1].strip() or None
 
 def extract_og_table(page):
     """Read visible, labeled OG table cells. Never inspect raw session/header data."""
