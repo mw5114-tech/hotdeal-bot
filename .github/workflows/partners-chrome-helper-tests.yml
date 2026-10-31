@@ -27,4 +27,24 @@ jobs:
       - name: JS syntax and manifest/permissions static contracts, no websites
         run: |
           node --check experiments/partners-chrome-helper/popup.js
+          node experiments/partners-chrome-helper/test_selectors.cjs
           python -m unittest discover -v -s experiments/partners-chrome-helper -p 'test_*.py'
+
+      - name: Package only verified extension files as easy-install ZIP
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root = Path("experiments/partners-chrome-helper")
+          target = Path("partners-chrome-helper-v0.2.zip")
+          with ZipFile(target, "w", compression=ZIP_DEFLATED) as archive:
+              for name in ("manifest.json", "popup.js", "popup.html", "popup.css", "README.md"):
+                  archive.write(root / name, arcname="partners-chrome-helper/" + name)
+          print("Created", target, "with 5 selected extension files")
+          PY
+      - name: Make ZIP available as GitHub Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: partners-chrome-helper-v0-2
+          path: partners-chrome-helper-v0.2.zip
+          retention-days: 7
