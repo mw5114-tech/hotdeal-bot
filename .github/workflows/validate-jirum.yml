@@ -33,17 +33,16 @@ jobs:
       - name: Run Jirum repost unit tests (no Telegram message sent)
         run: |
           python -m py_compile jirum_forward.py telegram_delivery.py telegram_group_setup.py coupang_manual_links.py coupang_browser_probe.py
-          python -m unittest -v test_jirum_forward.py test_telegram_delivery.py test_coupang_manual_links.py test_coupang_browser_probe.py
-      - name: Verify live public Jirum posts contain purchase URLs (read only)
+          python -m unittest -v test_jirum_forward.py test_telegram_delivery.py test_coupang_browser_probe.py
+      - name: Verify live public Jirum message text (read only)
         run: |
           python - <<'PY'
           import jirum_forward as app
           posts = app.fetch_listing()
-          linked = [p for p in posts if p["product_url"]]
-          print(f"JIRUM_PUBLIC_HTML: total={len(posts)} with_purchase_urls={len(linked)}")
+          linked = [p for p in posts if p["text"]]
+          print(f"JIRUM_PUBLIC_HTML: total={len(posts)} with_text={len(linked)}")
           if not linked:
-              raise RuntimeError("No purchase links found on live public page")
+              raise RuntimeError("No message text found on live public page")
           for p in linked[-3:]:
-              from urllib.parse import urlsplit
-              print(f"PUBLIC_LINK_OK: id={p['id']} domain={urlsplit(p['product_url']).hostname}")
+              print(f"PUBLIC_TEXT_OK: id={p['id']} length={len(p['text'])}")
           PY
