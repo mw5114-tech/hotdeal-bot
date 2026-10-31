@@ -1,0 +1,43 @@
+name: Whikare real second-item Kakao photo + Lowchart historical price (one-shot)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/whikare-one-shot.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-item-read-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install one isolated browser with Playwright
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Validate item identity, text arithmetic, OG and history safety
+        run: |
+          python -m py_compile gh_only/whikare_image_price_trial.py
+          python -m unittest -v gh_only.test_whikare_image_price_trial gh_only.test_lowchart_price_reference gh_only.test_kakao_og_authenticated_probe
+      - name: Whikare exact item one-shot history + Kakao OG image and JPG download
+        run: python -m gh_only.whikare_image_price_trial
+      - name: Upload report and product image, never browser session
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: whikare-second-product-read-only-result
+          path: whikare-test-output/
+          if-no-files-found: warn
+          retention-days: 5
