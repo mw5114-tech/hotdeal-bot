@@ -1,0 +1,93 @@
+name: Partners personal link worker (fixture + opt-in self-hosted Chrome)
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths: ['.github/workflows/partners-persistent-worker.yml']
+  workflow_dispatch:
+    inputs:
+      live:
+        description: 'Generate one link only on a trusted self-hosted runner, never GitHub cloud'
+        required: true
+        type: boolean
+        default: false
+      product_url:
+        description: 'Exact ordinary https://www.coupang.com/vp/products/...?... URL'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: partners-self-hosted-one-writer
+  cancel-in-progress: false
+
+jobs:
+  hosted-fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline identity, single-click, and safety contract tests
+        run: |
+          python -m py_compile gh_only/partners_persistent_worker.py
+          python -m unittest -v gh_only.test_partners_persistent_worker gh_only.test_partners_draft_handoff
+          python -m gh_only.partners_persistent_worker --mode fixture
+      - uses: actions/upload-artifact@v4
+        with:
+          name: partners-offline-fixture-only-no-link
+          path: partners_worker_result.json
+          retention-days: 3
+
+  self-hosted-read-only:
+    needs: hosted-fixture
+    # The user must connect their OWN trusted host with Chrome and an authenticated
+    # dedicated profile. This job is never scheduled or enabled by default.
+    if: vars.GH_ONLY_PARTNERS_SELFHOSTED_ENABLED == 'true' && inputs.live != true
+    runs-on: [self-hosted, linux, x64, coupang-partners]
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Existing dedicated Chrome profile, read only
+        env:
+          PARTNERS_PROFILE_DIR: ${{ vars.PARTNERS_PROFILE_DIR }}
+        run: xvfb-run -a python3 -m gh_only.partners_persistent_worker --mode read-only
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: partners-self-hosted-read-only-status
+          path: partners_worker_result.json
+          if-no-files-found: warn
+          retention-days: 2
+
+  self-hosted-one-link:
+    needs: hosted-fixture
+    # Only available after the workflow exists on default branch and owner
+    # explicitly dispatches a one-off with the extra enable switch.
+    if: github.event_name == 'workflow_dispatch' && inputs.live == true && vars.GH_ONLY_PARTNERS_SELFHOSTED_ENABLED == 'true' && vars.GH_ONLY_PARTNERS_GENERATE_ENABLED == 'true'
+    runs-on: [self-hosted, linux, x64, coupang-partners]
+    timeout-minutes: 5
+    env:
+      PARTNERS_PROFILE_DIR: ${{ vars.PARTNERS_PROFILE_DIR }}
+      GH_ONLY_PARTNERS_GENERATE_ENABLED: 'true'
+      PRODUCT_URL: ${{ inputs.product_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: One authorized official quick-link UI click, no auto posting or retry
+        run: xvfb-run -a python3 -m gh_only.partners_persistent_worker --mode generate-one --product-url "$PRODUCT_URL"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: partners-one-verified-link-or-status
+          path: partners_worker_result.json
+          if-no-files-found: warn
+          retention-days: 2

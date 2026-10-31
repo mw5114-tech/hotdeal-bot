@@ -1,0 +1,33 @@
+name: One direct Coupang item URL price access diagnostic (read-only)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/coupang-direct-item-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-request-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One direct product+item URL request, no retry or login
+        run: python -m gh_only.coupang_live_price_probe
+      - name: Save diagnostic without cookies or page HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: single-coupang-item-price-access-diagnostic
+          path: coupang_live_price_probe.json
+          if-no-files-found: warn
+          retention-days: 3

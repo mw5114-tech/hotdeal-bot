@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>뽐질 → 내 파트너스 링크</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main>
+    <h1>쿠팡 파트너스 링크 도우미</h1>
+    <p class="detail">기존 크롬 로그인 그대로 사용 · API/쿠키 수집 없음 · 1건 수동 검증</p>
+    <label for="source">상품 URL (GitHub가 정리한 일반 쿠팡 URL)</label>
+    <textarea id="source" rows="3" placeholder="https://www.coupang.com/vp/products/9217210892?itemId=27232840915&vendorItemId=94199974724"></textarea>
+    <button id="open">① 간편 링크 화면 열기</button>
+    <button id="fill">② 상품 URL 입력</button>
+    <button id="generate">③ 공식 링크 생성 버튼 누르기</button>
+    <button id="extract">④ 생성된 내 링크 읽기</button>
+    <div id="status" role="status" aria-live="polite">사용자가 각 버튼을 눌러야 다음 단계가 진행됩니다.</div>
+    <section id="answer" hidden>
+      <label for="result">생성된 링크 (내 계정 소유는 파트너스 화면에서 확인)</label>
+      <input id="result" readonly>
+      <button id="copy">복사</button>
+    </section>
+    <p class="disclaimer">확장 프로그램은 로그인·인증·CAPTCHA를 조작하지 않으며, 결과나 쿠키를 외부에 전송하지 않습니다. 접근 거부 시 중단하세요.</p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

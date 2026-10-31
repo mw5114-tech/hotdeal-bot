@@ -1,0 +1,37 @@
+name: Jirum manually verified Kakao OG image 640px check
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-kakao-og-640.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  kakao-og-photo-asset:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Pillow for image dimensions
+        run: python -m pip install 'Pillow>=10,<13'
+      - name: Download one OG image explicitly shown in Kakao URL metadata
+        run: python -m gh_only.kakao_og_640_proof
+      - name: Preserve photo and match report as private diagnostic artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hotcake-manually-observed-kakao-og-640
+          path: |
+            hotcake_og_640.jpg
+            hotcake_og_640_report.json
+          if-no-files-found: warn
+          retention-days: 3

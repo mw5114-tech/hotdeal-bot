@@ -1,0 +1,52 @@
+name: Partners Chrome helper offline extension contract
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-chrome-helper-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JS syntax and manifest/permissions static contracts, no websites
+        run: |
+          node --check experiments/partners-chrome-helper/popup.js
+          node experiments/partners-chrome-helper/test_selectors.cjs
+          node experiments/partners-chrome-helper/test_open.cjs
+          node experiments/partners-chrome-helper/test_input.cjs
+          python -m unittest discover -v -s experiments/partners-chrome-helper -p 'test_*.py'
+
+      - name: Package only verified extension files as easy-install ZIP
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root = Path("experiments/partners-chrome-helper")
+          target = Path("partners-chrome-helper-v0.4.zip")
+          with ZipFile(target, "w", compression=ZIP_DEFLATED) as archive:
+              for name in ("manifest.json", "popup.js", "popup.html", "popup.css", "README.md"):
+                  archive.write(root / name, arcname="partners-chrome-helper/" + name)
+          print("Created", target, "with 5 selected extension files")
+          PY
+      - name: Make ZIP available as GitHub Actions artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: partners-chrome-helper-v0-4
+          path: partners-chrome-helper-v0.4.zip
+          retention-days: 7

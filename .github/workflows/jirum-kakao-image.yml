@@ -1,0 +1,51 @@
+name: Jirum photo search via Kakao official API (gated, no publishing)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-kakao-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run official Kakao API adapter unit tests without credential
+        run: python -m unittest -v gh_only.test_kakao_image_search
+  optional-live-photo-lookup:
+    needs: offline-tests
+    if: vars.GH_ONLY_KAKAO_PHOTO_TEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    env:
+      KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Search exact IDs then product title, max 2 requests
+        run: python -m gh_only.kakao_image_search --product-id 6221369038 --item-id 12453073752 --name '오뚜기 핫케이크 믹스 1kg 1개' --out kakao_image_candidates.json
+      - name: Save candidate metadata for review, no downloading or posting
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-kakao-photo-candidates
+          path: kakao_image_candidates.json
+          if-no-files-found: warn
+          retention-days: 3
+
+# One-shot live test enabled by user after setting GitHub secret and variable.

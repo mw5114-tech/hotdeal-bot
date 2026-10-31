@@ -1,0 +1,49 @@
+name: Jirum default photo and observed-average 5pct captions (one item, read-only)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-default-photo-price.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jirum-default-photo-price-test
+  cancel-in-progress: false
+
+jobs:
+  minimal-default-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated browser
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Offline default formatting and product identity guard tests
+        run: |
+          python -m py_compile gh_only/default_deal_format.py gh_only/default_deal_automation.py
+          python -m unittest -v gh_only.test_default_deal_format gh_only.test_default_deal_automation
+      - name: One recent public Jirum Coupang post, Kakao OG and Lowchart mean
+        run: python -m gh_only.default_deal_automation --max-source-posts 8 --output-dir default-deal-drafts
+      - name: Private generated caption, metadata and product photo only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-default-price-and-kakao-photo
+          path: default-deal-drafts/
+          if-no-files-found: warn
+          retention-days: 5
+
+# One-off verification of requested three-line caption layout, no production changes.

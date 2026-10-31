@@ -1,0 +1,39 @@
+name: One-time GitHub-hosted OS comparison to Coupang Partners (anonymous)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-os-compare.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+
+jobs:
+  windows-direct:
+    runs-on: windows-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One anonymous request only
+        shell: pwsh
+        run: python -m gh_only.partners_github_runner_compare
+  macos-direct:
+    runs-on: macos-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One anonymous request only
+        run: python -m gh_only.partners_github_runner_compare

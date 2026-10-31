@@ -1,0 +1,37 @@
+name: Coupang Partners self-hosted VM reachability (manual only, no account actions)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-self-hosted-vm-reachability.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  vm-plain-reachability-only:
+    if: vars.GH_ONLY_PARTNERS_SELFHOSTED_ENABLED == 'true'
+    # Requires a user-installed GitHub Actions runner with custom label coupang-partners.
+    # Cannot start unless user explicitly connects a trusted Linux VM as a runner.
+    runs-on: [self-hosted, linux, x64, coupang-partners]
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check Partners homepage without session or creating links
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error
+          url = 'https://partners.coupang.com/'
+          try:
+              with urllib.request.urlopen(urllib.request.Request(url, headers={'Accept':'text/html'}), timeout=20) as r:
+                  print('PARTNERS_VM_HTTP_STATUS', r.status)
+          except urllib.error.HTTPError as e:
+              print('PARTNERS_VM_HTTP_STATUS', e.code)
+          except Exception as e:
+              print('PARTNERS_VM_CONNECTION_ERROR_CLASS', type(e).__name__)
+          PY

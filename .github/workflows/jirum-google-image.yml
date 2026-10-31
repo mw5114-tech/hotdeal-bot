@@ -1,0 +1,32 @@
+name: Jirum Google indexed photo probe (one fetch only)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-google-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-public-index-read:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One unauthenticated public Google image-search page, no followups
+        run: python -m gh_only.google_public_image_probe --output google_index_diagnostic.json
+      - name: Upload read-only metadata for diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-google-index-photo-metadata
+          path: google_index_diagnostic.json
+          retention-days: 3
