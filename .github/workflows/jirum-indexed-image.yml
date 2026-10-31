@@ -24,7 +24,7 @@ jobs:
       - name: Offline source-ID matching checks first
         run: python -m unittest -v gh_only.test_indexed_image_probe
       - name: One public indexed-image lookup, no Coupang page visit and no posting
-        run: python -m gh_only.indexed_image_probe --output indexed_image_probe_result.json
+        run: python -m gh_only.indexed_image_probe --query-mode relaxed --output indexed_image_probe_result.json
       - name: Save only test diagnostic report
         if: always()
         uses: actions/upload-artifact@v4
