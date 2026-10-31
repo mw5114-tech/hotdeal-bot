@@ -28,9 +28,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Static syntax check
-        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py
+        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py
       - name: Deterministic tests (no credentials / no network)
-        run: python -m unittest -v gh_only.test_pipeline
+        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api
       - name: Build fixture evidence report
         run: python -m gh_only.pipeline --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_deal_report.json
       - name: Archive fixture report
