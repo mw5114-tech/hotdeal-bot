@@ -1,0 +1,53 @@
+name: Partners session UI regression and opt-in restore
+on:
+  push:
+    branches: [codex/partners-session-ui-20261101]
+    paths: ['gh_only/**', '.github/workflows/partners-session-ui.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  ui-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m unittest -v gh_only.test_partners_authenticated_access_probe
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - run: python -m gh_only.check_partners_ui_fixture
+  live-restore:
+    needs: ui-regression
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Restore existing session and inspect form
+        env:
+          COUPANG_PARTNERS_STORAGE_STATE_JSON: ${{ secrets.COUPANG_PARTNERS_STORAGE_STATE_JSON }}
+        run: python -m gh_only.partners_authenticated_access_probe
+      - name: Report outcome without session data
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads(Path("partners_authenticated_access_probe.json").read_text())
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
+              f.write("Session probe outcome: " + data["status"])
+          if data["status"] != "QUICK_LINK_FORM_REACHABLE":
+              raise SystemExit(1)
+          PY
