@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+from collections import Counter
 from html import unescape
 from html.parser import HTMLParser
 import json
@@ -101,7 +102,7 @@ class PostPhotoParser(HTMLParser):
                 if found:
                     self.post_id = int(found.group(1))
                     self.post_depth = self.depth
-        if self.post_id is not None and tag == "a":
+        if self.post_id is not None and tag in ("a", "div"):
             classes = props.get("class", "").split()
             if "tgme_widget_message_photo_wrap" in classes:
                 found = IMAGE_STYLE.search(props.get("style", ""))
@@ -115,6 +116,42 @@ class PostPhotoParser(HTMLParser):
         if self.post_id is not None and self.depth == self.post_depth:
             self.post_id, self.post_depth = None, None
         self.depth = max(0, self.depth - 1)
+
+
+class MarkupInspector(HTMLParser):
+    """Only count public Telegram media element types; never log page HTML."""
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.class_counts = Counter()
+        self.inline_image_tags = 0
+        self.background_styles = 0
+        self.posted_photos = 0
+        self._post_depth = None
+        self._depth = 0
+
+    def handle_starttag(self, tag, attrs):
+        props = dict(attrs)
+        if tag == "div":
+            self._depth += 1
+            if self._post_depth is None and POST_RE.fullmatch(props.get("data-post", "")):
+                self._post_depth = self._depth
+        if self._post_depth is not None:
+            classes = props.get("class", "").split()
+            if tag == "img":
+                self.inline_image_tags += 1
+            if "background-image" in props.get("style", ""):
+                self.background_styles += 1
+            for cls in classes:
+                if any(key in cls for key in ("photo", "image", "media", "preview")):
+                    self.class_counts[cls] += 1
+                    if cls == "tgme_widget_message_photo_wrap":
+                        self.posted_photos += 1
+
+    def handle_endtag(self, tag):
+        if tag == "div":
+            if self._post_depth == self._depth:
+                self._post_depth = None
+            self._depth = max(0, self._depth - 1)
 
 
 def identify_url(raw: str | None) -> dict:
@@ -197,6 +234,8 @@ def run(mode: str, output: Path, html_path: Path | None = None):
     else:
         html = fetch_public_html()
     deals = enrich_posts(html)
+    inspector = MarkupInspector()
+    inspector.feed(html)
     report = {
         "schema": "github-only-deal-probe.v1",
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -206,7 +245,14 @@ def run(mode: str, output: Path, html_path: Path | None = None):
         "post_sale_prices_available": sum(d["sale_price_krw"] is not None for d in deals),
         "post_original_prices_available": sum(d["original_price_krw"] is not None for d in deals),
         "exact_options_verified": 0, "affiliate_links_generated": 0,
-        "posts_published": 0, "deals": deals,
+        "posts_published": 0,
+        "media_markup_diagnostic": {
+            "inline_image_tags": inspector.inline_image_tags,
+            "background_style_elements": inspector.background_styles,
+            "photo_wrap_elements": inspector.posted_photos,
+            "relevant_class_counts": dict(inspector.class_counts.most_common(12)),
+        },
+        "deals": deals,
     }
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
