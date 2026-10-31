@@ -139,8 +139,6 @@ def main():
         report["access"] = "error"
         report["error"] = f"{type(exc).__name__}: {str(exc)[:180]}"
     finally:
-        if browser:
-            browser.close()
         OUTPUT.write_text(json.dumps(report, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
         print("=== COUPANG READ-ONLY PROBE ===")
         print(OUTPUT.read_text(encoding="utf-8"))
