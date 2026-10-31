@@ -50,8 +50,16 @@ class InputPrepTests(unittest.TestCase):
 
     def test_cannot_use_different_vendor_option(self):
         r = prepare_url("https://www.coupang.com/vp/products/9217210892?itemId=27232840915&vendorItemId=other")
-        self.assertEqual(r["status"], "INPUT_READY") # invalid vendor id is discarded by identify_url
-        self.assertIsNone(r["vendor_item_id"])
+        self.assertEqual(r["status"], "INVALID_VENDOR_ITEM_ID")
+        self.assertIsNone(r["canonical_url"])
+
+    def test_duplicate_item_or_vendor_id_is_rejected(self):
+        for query, expected in (
+            ("itemId=27232840915&itemId=99999", "INVALID_ITEM_ID"),
+            ("itemId=27232840915&vendorItemId=94199974724&vendorItemId=9999", "INVALID_VENDOR_ITEM_ID"),
+        ):
+            r = prepare_url("https://www.coupang.com/vp/products/9217210892?" + query)
+            self.assertEqual(r["status"], expected)
 
     def test_cannot_reuse_link_without_affiliate_id_proof(self):
         r = prepare_url("https://www.coupang.com/vp/products/6221369038?itemId=12453073752")
