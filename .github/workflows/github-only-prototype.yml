@@ -28,9 +28,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Static syntax check
-        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py
+        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py gh_only/mtproto_reader.py gh_only/test_mtproto_reader.py
       - name: Deterministic tests (no credentials / no network)
-        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api
+        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader
       - name: Build fixture evidence report
         run: python -m gh_only.pipeline --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_deal_report.json
       - name: Archive fixture report
@@ -63,3 +63,34 @@ jobs:
           path: live_deal_report.json
           if-no-files-found: warn
           retention-days: 7
+
+  optional-telegram-attachment-reader:
+    if: vars.GH_ONLY_MT_READER_TEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    env:
+      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+      GH_ONLY_SOURCE_USERNAME: ${{ vars.GH_ONLY_SOURCE_USERNAME }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install free Telegram MTProto client (explicit opt-in only)
+        run: python -m pip install 'telethon>=1.37,<2'
+      - name: Read eight messages with existing user authorization, no login prompts
+        run: python -m gh_only.mtproto_reader
+      - name: Preserve diagnostic metadata and downloaded media
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-only-telegram-mtproto-evidence
+          path: |
+            gh_only_mtproto_report.json
+            gh_only_mtproto_images/
+          if-no-files-found: warn
+          retention-days: 3
