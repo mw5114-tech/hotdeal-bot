@@ -20,8 +20,10 @@ from urllib.parse import parse_qs, urlsplit
 from jirum_forward import PUBLIC_URL, parse_listing
 
 PRICE_RE = re.compile(r"(?<!\d)(\d{1,3}(?:,\d{3})+|\d{1,8})\s*원")
-SALE_RE = re.compile(r"(?:판매가|최종가|특가|할인가|할인\s*가격|쿠폰\s*적용가|와우가|대박)\s*[:：]?\s*(\d[\d,]*)\s*원")
+SALE_RE = re.compile(r"(?:판매가|최종가|특가|할인가|할인\s*가격|쿠폰\s*적용가|와우가|대박|무지성)\s*[:：]?\s*(\d[\d,]*)\s*원")
 ORIGINAL_RE = re.compile(r"(?:정상가|정가|원가|정상가격|원래\s*가격|소비자가)\s*[:：]?\s*(\d[\d,]*)\s*원")
+DISCOUNT_AMOUNT_RE = re.compile(r"^[\s\-•]*할인\s*[:：]\s*(\d[\d,]*)\s*원")
+DISCOUNT_PERCENT_RE = re.compile(r"\((\d{1,3}(?:\.\d+)?)\s*%\s*할인\)")
 IMAGE_STYLE = re.compile(r"background-image\s*:\s*url\(\s*['\"]?(https://[^'\"\s)]+)", re.I)
 POST_RE = re.compile(r"jirum/(\d+)")
 NON_SALE = re.compile(r"배송비|적립|캐시|할인\s*쿠폰|쿠폰\s*할인|정상가|정가|원가|최대\s*할인|소비자가")
@@ -36,11 +38,19 @@ def amount(raw: str) -> int | None:
 
 
 def price_info(text: str) -> dict:
-    """Source-post labels only; do NOT imply live Coupang prices."""
+    """Source Telegram prices ONLY, never live Coupang prices.
+
+    Detect offer/sale vs discount *amount*: '정상가 6,235원 / 할인:
+    3,055원 / 무지성 3,180원' means 3,180 sale, NOT 3,055 sale.
+    Price conflicts fail closed rather than making up an offer.
+    """
     sales: set[int] = set()
     originals: set[int] = set()
+    discounts: set[int] = set()
+    percentages: set[float] = set()
     unlabeled: set[int] = set()
     for line in text.splitlines():
+        line = line.strip()
         for match in SALE_RE.finditer(line):
             value = amount(match.group(1))
             if value is not None:
@@ -49,27 +59,53 @@ def price_info(text: str) -> dict:
             value = amount(match.group(1))
             if value is not None:
                 originals.add(value)
-        if not NON_SALE.search(line) and not SALE_RE.search(line) and not ORIGINAL_RE.search(line):
-            matches = [amount(m.group(1)) for m in PRICE_RE.finditer(line)]
-            unlabeled.update(p for p in matches if p is not None)
+        discount_match = DISCOUNT_AMOUNT_RE.search(line)
+        if discount_match:
+            value = amount(discount_match.group(1))
+            if value is not None:
+                discounts.add(value)
+        for match in DISCOUNT_PERCENT_RE.finditer(line):
+            val = float(match.group(1))
+            if 0 <= val <= 100:
+                percentages.add(val)
+        if not (NON_SALE.search(line) or SALE_RE.search(line)
+                or ORIGINAL_RE.search(line) or discount_match):
+            vals = [amount(m.group(1)) for m in PRICE_RE.finditer(line)]
+            unlabeled.update(p for p in vals if p is not None)
     if len(sales) == 1:
-        sale = next(iter(sales))
-        kind = "labeled_telegram_price"
+        sale, kind = next(iter(sales)), "labeled_telegram_price"
     elif len(sales) > 1:
         sale, kind = None, "conflicting_telegram_prices"
     elif len(unlabeled) == 1:
         sale, kind = next(iter(unlabeled)), "unlabeled_telegram_price"
     else:
-        sale = None
-        kind = "conflicting_telegram_prices" if len(unlabeled) > 1 else "no_price_in_post"
+        sale, kind = None, ("conflicting_telegram_prices" if len(unlabeled) > 1
+                            else "no_price_in_post")
     original = next(iter(originals)) if len(originals) == 1 else None
-    if original is not None and sale is not None and original <= sale:
-        original = None
-    discount = round((original - sale) * 100 / original, 1) if sale and original else None
-    return {"sale_price_krw": sale, "original_price_krw": original,
-            "discount_percent_computed": discount, "price_provenance": "telegram_source_post",
-            "price_confidence": kind, "original_price_confirmed": original is not None}
+    discount_amount = next(iter(discounts)) if len(discounts) == 1 else None
 
+    if sale is not None and original is not None:
+        if original <= sale:
+            original = None
+        elif discount_amount is not None and original - sale != discount_amount:
+            sale, kind = None, "conflicting_discount_arithmetic"
+        elif percentages and any(
+            abs(((original - sale) / original * 100) - p) > 0.55
+            for p in percentages
+        ):
+            sale, kind = None, "conflicting_discount_percentage"
+
+    computed_discount = round((original - sale) * 100 / original, 1) if sale and original else None
+    return {
+        "sale_price_krw": sale, "original_price_krw": original,
+        "discount_amount_krw": discount_amount,
+        "discount_percent_computed": computed_discount,
+        "price_provenance": "telegram_source_post",
+        "price_confidence": kind,
+        # 'confirmed' means unambiguous text in a Telegram post, NOT a Coupang verification.
+        "original_price_confirmed": original is not None,
+        "live_coupang_price_verified": False,
+    }
 
 def image_url(url: str) -> str | None:
     """Only accept an explicitly attached Telegram photo, never preview thumbnails."""
@@ -209,6 +245,7 @@ def enrich_posts(html: str, max_posts: int = 8) -> list[dict]:
             "source": "public_telegram_jirum", "source_message_id": post["id"],
             "source_post_url": f"https://t.me/jirum/{post['id']}",
             "title": post["title"], "original_purchase_url": post["product_url"],
+            "source_text": post["text"],
             "image_url_candidate": chosen_image,
             "image_provenance": image_source,
             "image_verified_for_exact_option": False,
