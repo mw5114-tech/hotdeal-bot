@@ -61,3 +61,5 @@ jobs:
 # Retest provider-only cookie scope after safe JSON validation diagnosis.
 
 # One-off check for the sharing-specific OG debugger URL.
+
+# Retest OG row parsing for tab-separated labels and CDN URLs.
