@@ -1,0 +1,45 @@
+name: Coupang Firefox WebKit one-shot comparison
+
+on:
+  push:
+    branches: [test/coupang-product-readonly-20261031]
+    paths:
+      - .github/workflows/coupang-browser-comparison.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compare-browsers:
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [firefox, webkit]
+    runs-on: windows-latest
+    timeout-minutes: 10
+    env:
+      PROBE_ENGINE: ${{ matrix.engine }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright and selected browser
+        shell: pwsh
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install ${{ matrix.engine }}
+      - name: Open one product page exactly once, no login or retry
+        shell: pwsh
+        run: python experimental/coupang_browser_alt_probe.py
+      - name: Upload diagnostic JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-${{ matrix.engine }}-read-only
+          path: coupang_probe_${{ matrix.engine }}.json
+          if-no-files-found: warn
+          retention-days: 7
