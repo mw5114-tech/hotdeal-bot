@@ -1,8 +1,7 @@
 name: Jirum hotdeal repost to Telegram
 
 on:
-  schedule:
-    - cron: '3-58/5 * * * *'
+  # Automatic Jirum polling disabled; cloud watcher handles deliveries.
   workflow_dispatch:
     inputs:
       mode:
