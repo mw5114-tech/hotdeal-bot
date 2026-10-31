@@ -76,3 +76,18 @@ a commit or logs. The gated step would upload media artifacts for three days in 
 - Check exact price and image against matching product/item/vendor IDs before posting.
 - Create durable no-duplicate publish ledger and independently test Daangn publisher.
 - Integrate only after a full isolated no-publish end-to-end dry run passes.
+
+## 2026-10-31 Jirum-only Daangn draft iteration
+
+- The new draft builder ingests ONLY public @jirum Telegram channel messages, not DealSpot/Naver sources. Does not log in or post to Daangn.
+- gh_only/daangn_draft.py composes a neutral title, Telegram-post sale/normal prices and calculated discount. All article text excludes the original author's Coupang affiliate URL, and includes a placeholder for the user's OWN unverified affiliate link.
+- Sample screenshot: Ottogi hotcake mix; sale 3,180 KRW, normal 6,235, discount AMOUNT 3,055, reduction 49.0%. Price arithmetic checks passed. The discount amount must never be interpreted as the sale price.
+- GitHub Actions run 41208493211: 44 offline tests PASS, 8 latest public messages processed, 6 Coupang-only draft articles, 6 source-price candidates, 0 image candidates matching Coupang deals, 0 own affiliate URLs, 0 published posts.
+- Github Actions one-hop run 41208692250: public shortlink https://link.coupang.com/a/iiCmQxWdUG returned HTTP 302, destination www.coupang.com, productId 6221369038 and itemId 12453073752. No product-page HTML request. URL-level ID candidates do NOT prove exact option product rendering or live price.
+- GitHub Actions run 41208675520: all 49 offline contract tests PASS, real one-fetch public source and draft generation PASS.
+
+New modules: gh_only/daangn_draft.py, gh_only/test_daangn_draft.py, gh_only/shortlink_probe.py, gh_only/test_shortlink_probe.py, .github/workflows/jirum-link-onehop.yml.
+
+Remaining blockers: no confirmed corresponding Coupang item photo from latest messages; live merchant price not independently verified; personal affiliate link creation requires own approved Partners account/authentication; Daangn login/publishing not tested; de-duplication and receipt ledger not implemented.
+
+Do not use unrelated photos from the channel Media gallery: those images are not linked to the shown post. Do not reuse original @jirum partner tracking links. No new scheduled posting is enabled.
