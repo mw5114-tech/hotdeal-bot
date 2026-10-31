@@ -47,3 +47,5 @@ jobs:
           path: kakao_image_candidates.json
           if-no-files-found: warn
           retention-days: 3
+
+# One-shot live test enabled by user after setting GitHub secret and variable.
