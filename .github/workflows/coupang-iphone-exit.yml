@@ -1,0 +1,61 @@
+name: Coupang GitHub via iPhone Tailscale exit node
+on:
+  pull_request:
+    paths:
+      - coupang_github_iphone_exit.py
+      - test_coupang_github_iphone_exit.py
+      - .github/workflows/coupang-iphone-exit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: coupang-iphone-exit-manual
+  cancel-in-progress: false
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest -v test_coupang_github_iphone_exit.py
+  real-iphone-route:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install a real browser before VPN routing
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Connect runner to user's Tailnet
+        uses: tailscale/github-action@v4
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          version: latest
+      - name: Select iPhone as the exit node and verify online status
+        env:
+          TAILSCALE_IPHONE_EXIT_IP: ${{ secrets.TAILSCALE_IPHONE_EXIT_IP }}
+        run: python coupang_github_iphone_exit.py setup
+      - name: One Python request and one real browser visit through iPhone
+        run: python coupang_github_network_probe.py --channel chromium
+      - name: Require site access (not HTTP 403)
+        run: python coupang_github_iphone_exit.py verify
+      - name: Upload only sanitized diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-iphone-exit-diagnosis
+          path: coupang-github-transport-report.json
+          retention-days: 3
+          if-no-files-found: ignore
+      - name: Release exit node route
+        if: always()
+        run: sudo tailscale set --exit-node= || true
