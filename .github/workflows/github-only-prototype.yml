@@ -28,17 +28,21 @@ jobs:
         with:
           python-version: '3.11'
       - name: Static syntax check
-        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py gh_only/mtproto_reader.py gh_only/test_mtproto_reader.py
+        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py gh_only/mtproto_reader.py gh_only/test_mtproto_reader.py gh_only/daangn_draft.py gh_only/test_daangn_draft.py
       - name: Deterministic tests (no credentials / no network)
-        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader
+        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader gh_only.test_daangn_draft
       - name: Build fixture evidence report
         run: python -m gh_only.pipeline --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_deal_report.json
+      - name: Build synthetic Jirum Daangn drafts (no posting)
+        run: python -m gh_only.daangn_draft --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_daangn_drafts.json
       - name: Archive fixture report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: github-only-fixture-evidence
-          path: fixture_deal_report.json
+          path: |
+            fixture_deal_report.json
+            fixture_daangn_drafts.json
           if-no-files-found: warn
           retention-days: 7
 
@@ -55,12 +59,16 @@ jobs:
           python-version: '3.11'
       - name: One public Telegram listing request, no Coupang access, no posting
         run: python -m gh_only.pipeline --mode live --output live_deal_report.json
+      - name: Prepare Daangn drafts from the same Telegram response (no extra requests)
+        run: python -m gh_only.daangn_draft --mode evidence --evidence-json live_deal_report.json --output live_daangn_drafts.json
       - name: Archive public-only evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: github-only-public-telegram-evidence
-          path: live_deal_report.json
+          path: |
+            live_deal_report.json
+            live_daangn_drafts.json
           if-no-files-found: warn
           retention-days: 7
 
