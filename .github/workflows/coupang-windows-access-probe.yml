@@ -1,0 +1,168 @@
+name: Coupang Windows public access probe (one visit)
+run-name: Coupang Windows unauthenticated one-visit probe
+
+on:
+  push:
+    branches: [codex/coupang-windows-access-probe-20261031]
+    paths: [.github/workflows/coupang-windows-access-probe.yml]
+  workflow_dispatch:
+
+permissions: {}
+concurrency:
+  group: coupang-windows-public-access-probe
+  cancel-in-progress: false
+
+jobs:
+  public-page-once:
+    if: github.run_attempt == 1
+    runs-on: windows-latest
+    timeout-minutes: 4
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PYTHONUTF8: '1'
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+    steps:
+      - name: Install controller only (no browser download)
+        run: python -m pip install --disable-pip-version-check --retries 0 playwright==1.64.1
+      - name: Visit public homepage exactly once with installed Google Chrome
+        run: |
+          @'
+          """One unauthenticated public-page visit, only on a GitHub-hosted Windows runner."""
+          import json
+          import os
+          from pathlib import Path
+          import re
+          from urllib.parse import urlsplit, urlunsplit
+          
+          TARGET = 'https://partners.coupang.com/'
+          
+          
+          def safe_url(value):
+              try:
+                  url = urlsplit(value)
+                  # No query, fragment, userinfo, cookies, headers or page HTML in artifacts.
+                  return urlunsplit((url.scheme, url.hostname or '', url.path,
+                                     'REDACTED' if url.query else '', ''))
+              except ValueError:
+                  return 'UNPARSEABLE_URL'
+          
+          
+          def classify(status, final_url, title, body, captcha=False, error=None):
+              denied = bool(re.search(r'access\s*denied|접근[이\s]*차단', title + '\n' + body, re.I))
+              challenge = captcha or bool(re.search(
+                  r'verify you are human|robot check|로봇이 아닙니다|보안문자를 입력', title + '\n' + body, re.I))
+              blocked_status = status in (401, 403, 429)
+              official = urlsplit(final_url).hostname == 'partners.coupang.com'
+              recognizable = bool(re.search(r'쿠팡\s*파트너스|coupang\s*partners', title + '\n' + body, re.I))
+              if denied or challenge or blocked_status:
+                  outcome = 'BLOCKED'
+              elif error:
+                  outcome = 'NAVIGATION_FAILED'
+              elif status is None or not 200 <= status < 300:
+                  outcome = 'HTTP_FAILED'
+              elif not official or not recognizable or len(body.strip()) < 40:
+                  outcome = 'INCONCLUSIVE'
+              else:
+                  outcome = 'PUBLIC_PAGE_ACCESSIBLE'
+              return dict(outcome=outcome, access_denied_text=denied, security_challenge=challenge,
+                          blocked_http_status=blocked_status, official_host=official,
+                          recognizable_partners_page=recognizable)
+          
+          
+          def chrome_path():
+              for name in ('PROGRAMFILES', 'PROGRAMFILES(X86)', 'LOCALAPPDATA'):
+                  if os.environ.get(name):
+                      candidate = Path(os.environ[name]) / 'Google/Chrome/Application/chrome.exe'
+                      if candidate.is_file():
+                          return candidate
+              raise RuntimeError('INSTALLED_GOOGLE_CHROME_NOT_FOUND')
+          
+          
+          def run():
+              report = dict(target=TARGET, navigation_attempts=0, login_attempted=False,
+                            link_generation_attempted=False, imported_authentication=False,
+                            http_status=None, initial_http_status=None, final_url=None,
+                            main_document_responses=[], outcome='SETUP_FAILED',
+                            access_denied_text=None, security_challenge=None,
+                            headless=False, image_os=os.environ.get('ImageOS'),
+                            image_version=os.environ.get('ImageVersion'))
+              try:
+                  if os.environ.get('GITHUB_ACTIONS') != 'true' or os.environ.get('RUNNER_OS') != 'Windows':
+                      raise RuntimeError('GITHUB_WINDOWS_RUNNER_REQUIRED')
+                  if os.environ.get('GITHUB_RUN_ATTEMPT', '1') != '1':
+                      raise RuntimeError('RERUN_REFUSED_NO_AUTOMATIC_RETRIES')
+                  from playwright.sync_api import sync_playwright
+                  executable = chrome_path()
+                  report['chrome_executable'] = str(executable)
+                  with sync_playwright() as playwright:
+                      browser = playwright.chromium.launch(
+                          channel='chrome', executable_path=str(executable), headless=False,
+                          chromium_sandbox=True, timeout=30000)
+                      try:
+                          report['chrome_version'] = browser.version
+                          # Fresh ephemeral context. No user profile, storage_state, auth or saved cookies.
+                          context = browser.new_context(accept_downloads=False)
+                          page = context.new_page()
+                          def on_response(response):
+                              if response.request.is_navigation_request() and response.frame == page.main_frame:
+                                  report['main_document_responses'].append({
+                                      'status': response.status, 'url': safe_url(response.url)})
+                          page.on('response', on_response)
+                          error = None
+                          report['navigation_attempts'] = 1
+                          try:
+                              page.goto(TARGET, wait_until='domcontentloaded', timeout=30000)  # Exactly one navigation.
+                              page.wait_for_timeout(3000)  # Observe JS-rendered page; never reload or retry.
+                          except Exception as exc:
+                              # Error type / network code only: no arbitrary browser exception dumps.
+                              net_error = re.search(r'net::ERR_[A-Z_]+', str(exc))
+                              error = type(exc).__name__ + (':' + net_error.group(0) if net_error else '')
+                              report['navigation_error'] = error
+                          report['final_url'] = safe_url(page.url)
+                          chain = report['main_document_responses']
+                          if chain:
+                              report['initial_http_status'] = chain[0]['status']
+                              report['http_status'] = chain[-1]['status']
+                          title = page.title()
+                          body = page.locator('body').inner_text(timeout=5000)[:20000]
+                          captcha = any(el.is_visible() for el in page.locator(
+                              'iframe[src*="captcha"],iframe[title*="CAPTCHA"],iframe[title*="캡차"]').all())
+                          report.update(classify(report['http_status'], page.url, title, body, captcha, error))
+                      finally:
+                          browser.close()
+              except Exception as exc:
+                  report['setup_or_observation_error'] = type(exc).__name__
+                  if isinstance(exc, RuntimeError) and re.fullmatch('[A-Z_]+', str(exc)):
+                      report['setup_or_observation_reason'] = str(exc)
+                  if report['outcome'] == 'PUBLIC_PAGE_ACCESSIBLE':
+                      report['outcome'] = 'OBSERVATION_FAILED'
+              report['further_automation_allowed_by_this_test'] = report['outcome'] == 'PUBLIC_PAGE_ACCESSIBLE'
+              report['limits'] = 'Public homepage only. No conclusion about login, session persistence, link generation, or another server/IP.'
+              output = Path('probe-results')
+              output.mkdir(exist_ok=True)
+              rendered = json.dumps(report, ensure_ascii=True, indent=2)
+              (output / 'result.json').write_text(rendered + '\n', encoding='utf-8')
+              print(rendered)
+              summary = os.environ.get('GITHUB_STEP_SUMMARY')
+              if summary:
+                  with open(summary, 'a', encoding='utf-8') as handle:
+                      handle.write('## Coupang Windows one-visit probe\n\n```json\n' + rendered + '\n```\n')
+              return 0 if report['outcome'] == 'PUBLIC_PAGE_ACCESSIBLE' else 1
+          
+          
+          if __name__ == '__main__':
+              raise SystemExit(run())
+          '@ | Set-Content -Encoding utf8 "$env:RUNNER_TEMP\coupang_public_probe.py"
+          python "$env:RUNNER_TEMP\coupang_public_probe.py"
+          exit $LASTEXITCODE
+      - name: Upload sanitized observation only (never browser profile)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-windows-public-observation
+          path: probe-results/result.json
+          retention-days: 3
+          if-no-files-found: warn
+
