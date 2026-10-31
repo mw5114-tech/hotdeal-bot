@@ -1,0 +1,25 @@
+name: GitHub browser proxy transport end-to-end test
+on:
+  pull_request:
+    paths:
+      - test_coupang_proxy_browser_transport.py
+      - .github/workflows/github-proxy-transport-test.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  chromium-proxy-transport:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Chromium via Playwright
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Prove authenticated Chromium -> local HTTP proxy routing
+        run: python test_coupang_proxy_browser_transport.py
