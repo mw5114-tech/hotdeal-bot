@@ -194,7 +194,11 @@ def enrich_deal(deal: dict, output_dir: Path,
     fallback_title = normalized_title(deal.get("source_text") or "") or deal.get("title")
     identity = resolver(link)
     p, i = identity.get("product_id"), identity.get("item_id")
-    og = og_lookup(link, session_secret)
+    # Do not submit arbitrary or unresolved URLs to the signed-in Kakao tool.
+    og = (og_lookup(link, session_secret)
+          if identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+          else {"status": "UNRESOLVED_COUPANG_ITEM", "og_title": None,
+                "og_url": None, "og_image": None})
     og_title = og.get("og_title") if isinstance(og.get("og_title"), str) else None
     # Safety: if OG explicitly contradicts link product/vendor, do not use its
     # image or price-title identity. Still keep the source sale.
