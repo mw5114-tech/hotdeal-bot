@@ -48,11 +48,11 @@ class KakaoOGTests(unittest.TestCase):
 
     def test_kakao_tab_separated_og_image_row(self):
         url = "https://thumbnail.coupangcdn.com/image/retail/sample.jpg"
-        self.assertEqual(parse_og_row("og:image\\t" + url, "og:image"), url)
-        self.assertTrue(image_is_cdn(parse_og_row("og:image\\t" + url, "og:image")))
+        self.assertEqual(parse_og_row("og:image" + chr(9) + url, "og:image"), url)
+        self.assertTrue(image_is_cdn(parse_og_row("og:image" + chr(9) + url, "og:image")))
 
     def test_kakao_multiline_og_row(self):
-        self.assertEqual(parse_og_row("og:title\\n오뚜기 핫케이크 믹스", "og:title"),
+        self.assertEqual(parse_og_row("og:title" + chr(10) + "오뚜기 핫케이크 믹스", "og:title"),
                          "오뚜기 핫케이크 믹스")
         self.assertIsNone(parse_og_row("og:description something", "og:image"))
 
