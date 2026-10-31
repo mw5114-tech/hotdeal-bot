@@ -67,6 +67,15 @@ def safe_session_state(raw: str) -> dict:
     return {"cookies": cookies, "origins": scoped_origins}
 
 
+def parse_og_row(text: str, key: str) -> str | None:
+    if not isinstance(text, str) or key not in OG_KEYS:
+        return None
+    m = re.match(r"^\\s*" + re.escape(key) + r"(?:\\s+|$)", text)
+    if not m:
+        return None
+    return text[m.end():].strip() or None
+
+
 def extract_og_table(page):
     """Read visible, labeled OG table cells. Never inspect raw session/header data."""
     data = {}
@@ -78,8 +87,9 @@ def extract_og_table(page):
             text = cell.first.locator("xpath=..").inner_text(timeout=1200)
         except Exception:
             continue
-        lines = [x.strip() for x in text.splitlines() if x.strip()]
-        value = "\n".join(x for x in lines if x != key).strip()
+        # Kakao's table places label and value in the same row, often
+        # separated by a TAB rather than a newline.
+        value = parse_og_row(text, key)
         if value:
             data[key] = value[:1600]
     return data
