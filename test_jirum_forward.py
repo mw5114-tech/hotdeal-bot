@@ -81,9 +81,9 @@ class RepostTests(unittest.TestCase):
         post = app.parse_listing(SAMPLE)[0]
         message = app.make_message(post)
         self.assertTrue(message.startswith("🆕 [HOTDEAL]\n\n상품명: 카리어왕"))
-        self.assertIn("상품링크: https://link.coupang.com/a/iha660uGR2", message)
+        self.assertIn("https://link.coupang.com/a/iha660uGR2", message)
         self.assertIn("25.8% 할인", message)
-        self.assertLessEqual(len(message), 4096)
+        self.assertEqual(message, post["text"])\n        self.assertNotIn("상품명:", message)\n        self.assertNotIn("원문:", message)
 
     def test_send_message_uses_original_link_and_existing_bot_secrets(self):
         post = app.parse_listing(SAMPLE)[1]
@@ -97,7 +97,7 @@ class RepostTests(unittest.TestCase):
         self.assertNotIn("/forwardMessage", req.full_url)
         payload = parse_qs(req.data.decode("utf-8"))
         self.assertEqual(payload["chat_id"], ["8888"])
-        self.assertIn("상품링크: https://toss.im/_m/LLGfxTy3", payload["text"][0])
+        self.assertIn("특가 보러가기", payload["text"][0])
         self.assertEqual(payload["disable_web_page_preview"], ["true"])
 
     def test_first_live_run_records_baseline_without_reposting_latest(self):
