@@ -64,7 +64,6 @@ def visible_links(page) -> set[str]:
 
 
 def check_form(page) -> tuple:
-    from playwright.sync_api import Error as PWError
     if urlsplit(page.url).hostname != "partners.coupang.com":
         raise RuntimeError("NOT_ON_PARTNERS_PAGE")
     input_el = page.locator("input#url")
