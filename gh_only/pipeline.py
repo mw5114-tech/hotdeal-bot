@@ -92,6 +92,7 @@ class PostPhotoParser(HTMLParser):
         self.post_id = None
         self.post_depth = None
         self.photos: dict[int, list[str]] = {}
+        self.previews: dict[int, list[str]] = {}
 
     def handle_starttag(self, tag, attrs):
         props = dict(attrs)
@@ -102,13 +103,17 @@ class PostPhotoParser(HTMLParser):
                 if found:
                     self.post_id = int(found.group(1))
                     self.post_depth = self.depth
-        if self.post_id is not None and tag in ("a", "div"):
+        if self.post_id is not None and tag in ("a", "div", "span", "img"):
             classes = props.get("class", "").split()
-            if "tgme_widget_message_photo_wrap" in classes:
-                found = IMAGE_STYLE.search(props.get("style", ""))
-                photo = image_url(found.group(1)) if found else None
-                if photo and photo not in self.photos.setdefault(self.post_id, []):
+            found = IMAGE_STYLE.search(props.get("style", ""))
+            raw = found.group(1) if found else props.get("src", "") if tag == "img" else ""
+            photo = image_url(raw) if raw else None
+            if photo and "tgme_widget_message_photo_wrap" in classes:
+                if photo not in self.photos.setdefault(self.post_id, []):
                     self.photos[self.post_id].append(photo)
+            elif photo and "link_preview_right_image" in classes:
+                if photo not in self.previews.setdefault(self.post_id, []):
+                    self.previews[self.post_id].append(photo)
 
     def handle_endtag(self, tag):
         if tag != "div":
@@ -190,20 +195,28 @@ def enrich_posts(html: str, max_posts: int = 8) -> list[dict]:
     deals = []
     for post in posts[-max_posts:]:
         photos = media.photos.get(post["id"], [])
+        previews = media.previews.get(post["id"], [])
+        chosen_image = photos[0] if len(photos) == 1 else (
+            previews[0] if not photos and len(previews) == 1 else None
+        )
+        image_source = ("telegram_attached_photo" if len(photos) == 1
+                        else "telegram_link_preview_unverified" if not photos and len(previews) == 1
+                        else "ambiguous_telegram_images" if len(photos) > 1 or len(previews) > 1
+                        else "photo_not_visible")
         prices = price_info(post["text"])
         ids = identify_url(post["product_url"])
         deals.append({
             "source": "public_telegram_jirum", "source_message_id": post["id"],
             "source_post_url": f"https://t.me/jirum/{post['id']}",
             "title": post["title"], "original_purchase_url": post["product_url"],
-            "image_url_candidate": photos[0] if len(photos) == 1 else None,
-            "image_provenance": "telegram_attached_photo" if len(photos) == 1 else
-                                ("ambiguous_telegram_photos" if photos else "photo_not_visible"),
+            "image_url_candidate": chosen_image,
+            "image_provenance": image_source,
             "image_verified_for_exact_option": False,
             "own_affiliate_url": None, "auto_publish_ready": False,
             "blockers": [
                 *([] if prices["sale_price_krw"] else ["PRICE_UNAVAILABLE"]),
-                *([] if len(photos) == 1 else ["SINGLE_SOURCE_IMAGE_UNAVAILABLE"]),
+                *([] if chosen_image else ["SINGLE_SOURCE_IMAGE_UNAVAILABLE"]),
+                *([] if image_source == "telegram_attached_photo" else ["IMAGE_NOT_FROM_ORIGINAL_POST_PHOTO"]),
                 "EXACT_OPTION_NOT_VERIFIED", "OWN_AFFILIATE_LINK_NOT_CREATED",
                 "PUBLISHER_NOT_INTEGRATED",
             ],
@@ -241,7 +254,9 @@ def run(mode: str, output: Path, html_path: Path | None = None):
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "mode": mode, "source": "https://t.me/s/jirum",
         "total_posts_sampled": len(deals),
-        "post_photos_available": sum(d["image_url_candidate"] is not None for d in deals),
+        "post_photos_available": sum(d["image_provenance"] == "telegram_attached_photo" for d in deals),
+        "link_preview_images_available": sum(d["image_provenance"] == "telegram_link_preview_unverified" for d in deals),
+        "image_candidates_available": sum(d["image_url_candidate"] is not None for d in deals),
         "post_sale_prices_available": sum(d["sale_price_krw"] is not None for d in deals),
         "post_original_prices_available": sum(d["original_price_krw"] is not None for d in deals),
         "exact_options_verified": 0, "affiliate_links_generated": 0,
