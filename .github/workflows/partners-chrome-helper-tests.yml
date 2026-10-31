@@ -29,6 +29,7 @@ jobs:
           node --check experiments/partners-chrome-helper/popup.js
           node experiments/partners-chrome-helper/test_selectors.cjs
           node experiments/partners-chrome-helper/test_open.cjs
+          node experiments/partners-chrome-helper/test_input.cjs
           python -m unittest discover -v -s experiments/partners-chrome-helper -p 'test_*.py'
 
       - name: Package only verified extension files as easy-install ZIP
@@ -37,7 +38,7 @@ jobs:
           from pathlib import Path
           from zipfile import ZipFile, ZIP_DEFLATED
           root = Path("experiments/partners-chrome-helper")
-          target = Path("partners-chrome-helper-v0.3.zip")
+          target = Path("partners-chrome-helper-v0.4.zip")
           with ZipFile(target, "w", compression=ZIP_DEFLATED) as archive:
               for name in ("manifest.json", "popup.js", "popup.html", "popup.css", "README.md"):
                   archive.write(root / name, arcname="partners-chrome-helper/" + name)
@@ -46,6 +47,6 @@ jobs:
       - name: Make ZIP available as GitHub Actions artifact
         uses: actions/upload-artifact@v4
         with:
-          name: partners-chrome-helper-v0-3
-          path: partners-chrome-helper-v0.3.zip
+          name: partners-chrome-helper-v0-4
+          path: partners-chrome-helper-v0.4.zip
           retention-days: 7
