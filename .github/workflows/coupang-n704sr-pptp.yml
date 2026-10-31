@@ -1,0 +1,76 @@
+name: Coupang N704SR PPTP from GitHub runner
+on:
+  pull_request:
+    paths:
+      - coupang_github_pptp_route.py
+      - test_coupang_github_pptp_route.py
+      - .github/workflows/coupang-n704sr-pptp.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  synthetic-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest -v test_coupang_github_pptp_route.py
+  real-router-check:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PPTP client and real browser
+        run: |
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ppp pptp-linux
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Create temporary private VPN profile
+        env:
+          COUPANG_PPTP_ENDPOINT: ${{ secrets.COUPANG_PPTP_ENDPOINT }}
+          COUPANG_PPTP_USER: ${{ secrets.COUPANG_PPTP_USER }}
+          COUPANG_PPTP_PASSWORD: ${{ secrets.COUPANG_PPTP_PASSWORD }}
+        run: sudo -E python coupang_github_pptp_route.py profile
+      - name: Connect once to home ipTIME PPTP server
+        run: |
+          if sudo timeout 55 pppd call coupang-pptp updetach > /dev/null 2>&1; then
+            echo "PPTP_PPPD_START_RETURNED"
+          else
+            echo "PPTP_CONNECT_FAILED (verify router's external IPv4, TCP 1723 + GRE 47 and MPPE)"
+            exit 1
+          fi
+          if sudo ip link show ppp0 > /dev/null 2>&1; then
+            echo "PPTP_INTERFACE_PRESENT"
+          else
+            echo "PPTP_INTERFACE_MISSING"
+            exit 1
+          fi
+      - name: Route only Coupang Partners destinations via home connection
+        run: python coupang_github_pptp_route.py route
+      - name: Check Coupang HTML from GitHub over home route
+        run: python coupang_github_network_probe.py --channel chromium
+      - name: Reject HTTP blocks and access-denied HTML
+        run: |
+          python -c "import json,sys; r=json.load(open('coupang-github-transport-report.json',encoding='utf-8'))['browser_http']; s=r.get('main_status'); ok=r.get('result')=='BROWSER_RESPONSE' and isinstance(s,int) and 200<=s<300 and not r.get('signals',{}).get('deny_or_challenge_marker') and r.get('final_host')=='partners.coupang.com'; print('COUPANG_GITHUB_HOME_PPTP_WEB_ACCESS_OK' if ok else 'COUPANG_GITHUB_HOME_PPTP_WEB_ACCESS_FAILED'); sys.exit(0 if ok else 1)"
+      - name: Save sanitized report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-n704sr-pptp-result
+          path: coupang-github-transport-report.json
+          retention-days: 3
+          if-no-files-found: ignore
+      - name: Remove VPN connection and secrets from runner
+        if: always()
+        run: |
+          sudo poff coupang-pptp > /dev/null 2>&1 || true
+          sudo rm -f /etc/ppp/peers/coupang-pptp
