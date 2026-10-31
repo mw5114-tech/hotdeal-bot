@@ -163,3 +163,17 @@ Updated complete status: 1 source-link preview photo proven downloadable by GH A
 - Stability risks: authenticated Kakao session may expire or be rejected across datacenter IPs, 2FA may require manual re-authentication, page layout changes, and use of developer-debugging UI for batch extraction might not be supported by Kakao policy. Treat as one-shot feasibility experiment, not a certified production API.
 
 No main branch, scheduled collector, personal partner link, Daangn publisher or Muse VM modified. PR remains DRAFT.
+
+## 2026-11-01: Kakao existing-login session debugging and successful read-only OG discovery
+
+- Root cause of previous `ValueError`: hardcoded exact cookie-domain list rejected valid Playwright storage state containing unrelated cookies. No cookie values or domain names from the user state were logged. Safe diagnosis run 41230028294 returned `COOKIE_DOMAIN_WHITELIST_TOO_STRICT`, follow-up run 41230088100 returned `UNRELATED_COOKIE_DOMAIN_PRESENT` (coarse classification only).
+- Updated `safe_session_state()` to filter in memory and import only Kakao and Daum-owned cookie and localStorage domains. Unrelated domains are never loaded into the remote browser context; `KAKAO_DEV_STORAGE_STATE_JSON` GitHub Secret was not read back, replaced, or echoed. Provider login can still expire.
+- Corrected the OG debugger path from `/tool/debugger` to `/tool/debugger/sharing`, which exposes the real metadata form.
+- Kakao's OG table uses tab-delimited `og:image` label and image URL in the same row. Simplified `parse_og_row()` to split on the first whitespace; unit tests cover tab and newline.
+- **FULL LIVE SUCCESS**: GitHub Actions run 41230577260 restored user-authorized Kakao session, filled the @jirum original Coupang shortlink exactly once, clicked metadata lookup, and returned `OG_CDN_IMAGE_FOUND`, `submitted_requests=1`, `has_image_candidate=true`, zero posts/messages/cache reset.
+- Verified run's private JSON artifact 13052429563: `cdn_image_url_candidate=https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/retail/images/87060605900171-f042e02a-7905-47b9-8c3f-24f261864cf5.jpg`, OG title `오뚜기 핫케이크 믹스, 1kg, 1개 - 빵 믹스/가루 | 쿠팡`.
+- The 640x640 CDN URL is exactly the same one previously proven downloadable (run 41227876467). **This is the first end-to-end AUTOMATED discovery of a valid OG photo URL via Kakao UI on GitHub-only runner, after user-supplied login session**. Actual photo downloading in the same new run is not yet wired.
+- These are test evidence for ONE exact link, NOT proof of recurring login stability, support for arbitrary links, correct vendor/item option, current live price or rights to republish.
+- This is a user-interface debugging tool, not an official documented bulk OG-image REST API. Treat as a low-volume one-off feasibility result, do not enable production cron or auto-post based solely on the outcome.
+
+Production main unchanged; existing separate 30-minute workflow unchanged. PR remains DRAFT.
