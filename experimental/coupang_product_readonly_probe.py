@@ -26,7 +26,7 @@ def flatten_ld(value):
 
 
 def clean_text(value):
-    return re.sub(r"\\s+", " ", str(value or "")).strip()[:400] or None
+    return re.sub(r"\s+", " ", str(value or "")).strip()[:400] or None
 
 
 def first_text(page, selectors):
