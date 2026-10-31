@@ -1,0 +1,23 @@
+{
+  "date_kst": "2026-11-01",
+  "source_post": "https://t.me/jirum/94717",
+  "source_link": "https://link.coupang.com/a/iiPBYpVHae",
+  "title": "휘카레 셰프 오리지널 소스 순한맛, 230g, 20개",
+  "product_id": "9217210892",
+  "item_id": "27232840915",
+  "vendor_item_id": "94199974724",
+  "clean_input_url": "https://www.coupang.com/vp/products/9217210892?itemId=27232840915&vendorItemId=94199974724",
+  "generated_own_link": "https://link.coupang.com/a/iiWaXQoeOW",
+  "generation_method": "authenticated in-app browser quick-link UI",
+  "generation_succeeded": true,
+  "source_price_krw": 12050,
+  "observed_product_price_krw": 48230,
+  "price_discrepancy": true,
+  "publish_ready": false,
+  "published": false,
+  "blockers": [
+    "PRICE_MISMATCH",
+    "GITHUB_RUNNER_AUTH_REUSE_NOT_VERIFIED"
+  ],
+  "note": "Creation confirmed in own authenticated Partners UI. Generated link not opened to avoid self-referral test clicks. No login cookies or tokens copied into GitHub. Browser success does not establish unattended GitHub runner capability."
+}
