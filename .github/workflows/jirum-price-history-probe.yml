@@ -1,0 +1,37 @@
+name: Jirum historical price source probe (three public GETs)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-price-history-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  price-history-one-shot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline exact option matching tests
+        run: |
+          python -m py_compile gh_only/price_history_probe.py
+          python -m unittest -v gh_only.test_price_history_probe
+      - name: One GET per public site, no Coupang product page requests
+        run: python -m gh_only.price_history_probe --report jirim_price_history_probe.json
+      - name: Archive sanitized pricing diagnosis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-price-history-source-evidence
+          path: jirim_price_history_probe.json
+          if-no-files-found: warn
+          retention-days: 7
