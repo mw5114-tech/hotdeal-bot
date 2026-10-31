@@ -34,9 +34,28 @@ def run():
                 if urlsplit(page.url).hostname not in ("jigeumsa.com","www.jigeumsa.com"):
                     result["state"]="UNEXPECTED_REDIRECT"
                     return result
+                try:
+                    page.wait_for_load_state("networkidle", timeout=13000)
+                except PWTimeout:
+                    pass
+                try:
+                    page.locator('input[placeholder*="쿠팡"]').first.wait_for(timeout=6500)
+                except Exception:
+                    pass
                 inputs=page.locator('input[placeholder*="쿠팡 상품 URL"]')
                 if inputs.count()==0:
+                    inputs=page.locator('input[placeholder*="쿠팡"],input[placeholder*="URL"],input[type="url"]')
+                if inputs.count()==0:
                     result["state"]="PRODUCT_URL_FIELD_NOT_FOUND"
+                    result["final_host"]=urlsplit(page.url).hostname
+                    result["page_title"]=page.title()[:100]
+                    result["input_count"]=page.locator("input").count()
+                    result["placeholder_labels"]=[
+                        x[:80] for x in page.locator("input[placeholder]").evaluate_all(
+                            "(els) => els.map(el => el.placeholder).slice(0,12)"
+                        )
+                    ]
+                    result["body_excerpt"]=" ".join(page.locator("body").inner_text(timeout=5000).split())[:350]
                     return result
                 inputs.first.fill(PRODUCT)
                 button=page.get_by_role("button",name="가격조회",exact=True)
