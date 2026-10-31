@@ -42,3 +42,16 @@ A trusted Linux x64 machine MUST be running whenever GitHub schedules work; an a
 - Existing main and 30-minute DealSpot/Naver workflows were NOT modified.
 
 Reference: https://github.com/mw5114-tech/hotdeal-bot/actions/runs/41244865358
+
+
+## Integrated Jirum → Partners request bridge added and tested
+
+- gh_only/partners_draft_handoff.py reads the existing Jirum default photo/caption report (drafts.json). It will only create a request when there is exactly one draft with confirmed Kakao product match and exact Coupang productId/itemId/vendorItemId. It does not access Partners or generate a personal link.
+- gh_only/test_partners_draft_handoff.py: 7 deterministic offline tests. gh_only/test_partners_persistent_worker.py has 11 tests including request-packet integrity checks.
+- gh_only/partners_persistent_worker.py now supports --request-file partners-link-request.json, strictly verifies request_id = SHA256(source_message_id + newline + canonical URL) prefix, and rejects edited/unready packets before any browser click.
+- .github/workflows/partners-bridge-one-shot.yml (guarded): GitHub-hosted job prepares 1 Jirum photo + text + one exact item request; a separate trusted persistent self-hosted runner optionally consumes the request and creates exactly one verified option-matching affiliate link. Disabled by default: requires repo variable GH_ONLY_PARTNERS_BRIDGE_ENABLED=true, plus GH_ONLY_PARTNERS_SELFHOSTED_ENABLED=true, GH_ONLY_PARTNERS_GENERATE_ENABLED=true, a connected runner, an authenticated Chrome profile, and explicit manual dispatch. NO cron and NO Daangn publishing.
+- GitHub offline CI [41245194086](https://github.com/mw5114-tech/hotdeal-bot/actions/runs/41245194086): 18/18 offline tests PASS; live self-hosted jobs SKIPPED.
+- Bridge workflow [41245213499](https://github.com/mw5114-tech/hotdeal-bot/actions/runs/41245213499): both jobs SKIPPED as default opt-in variables are not enabled. This is expected. Never claim it generated a link.
+
+**Critical:** User has no verified always-on host/VM. There is currently no evidence that an external cloud VM will be allowed into the Partners site. True PC-off live generation is NOT delivered until that execution environment is provided and read-only access passes.
+
