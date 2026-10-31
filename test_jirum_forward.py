@@ -73,9 +73,9 @@ class RepostTests(unittest.TestCase):
           https://link.coupang.com/a/hello</div></div>''')
         self.assertEqual(p[0]["product_url"], "https://link.coupang.com/a/hello")
 
-    def test_missing_every_purchase_link_fails_closed(self):
-        with self.assertRaises(RuntimeError):
-            app.parse_listing('<div data-post="jirum/123"><div class="tgme_widget_message_text">아무 링크 없음</div></div>')
+    def test_text_without_purchase_link_is_allowed(self):
+        posts = app.parse_listing('<div data-post="jirum/123"><div class="tgme_widget_message_text">아무 링크 없음</div></div>')
+        self.assertEqual(posts[0]['text'], '아무 링크 없음')
 
     def test_telegram_message_contains_clickable_original_url(self):
         post = app.parse_listing(SAMPLE)[0]
