@@ -36,7 +36,7 @@ jobs:
       - name: Offline identity, single-click, and safety contract tests
         run: |
           python -m py_compile gh_only/partners_persistent_worker.py
-          python -m unittest -v gh_only.test_partners_persistent_worker
+          python -m unittest -v gh_only.test_partners_persistent_worker gh_only.test_partners_draft_handoff
           python -m gh_only.partners_persistent_worker --mode fixture
       - uses: actions/upload-artifact@v4
         with:
