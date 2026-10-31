@@ -1,0 +1,73 @@
+name: Coupang GitHub runner via home router WireGuard
+on:
+  pull_request:
+    paths:
+      - coupang_github_wg_route.py
+      - test_coupang_github_wg_route.py
+      - .github/workflows/coupang-github-home-router.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m unittest -v test_coupang_github_wg_route.py
+  test-home-router-route:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install WireGuard and Chromium
+        run: |
+          if ! command -v wg >/dev/null; then sudo apt-get update -qq && sudo apt-get install -y -qq wireguard-tools; fi
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Generate tunnel configuration in runner temp
+        env:
+          COUPANG_WG_PRIVATE_KEY: ${{ secrets.COUPANG_WG_PRIVATE_KEY }}
+          COUPANG_WG_ADDRESS: ${{ secrets.COUPANG_WG_ADDRESS }}
+          COUPANG_WG_PEER_PUBLIC_KEY: ${{ secrets.COUPANG_WG_PEER_PUBLIC_KEY }}
+          COUPANG_WG_ENDPOINT: ${{ secrets.COUPANG_WG_ENDPOINT }}
+        run: python coupang_github_wg_route.py config --out "$RUNNER_TEMP/coupang-wg0.conf"
+      - name: Bring up WireGuard without modifying the GitHub runner's default route
+        run: |
+          sudo install -m 600 "$RUNNER_TEMP/coupang-wg0.conf" /etc/wireguard/wg0.conf
+          rm "$RUNNER_TEMP/coupang-wg0.conf"
+          sudo wg-quick up wg0
+      - name: Route only Coupang Partners destination addresses through home router
+        run: python coupang_github_wg_route.py route
+      - name: Diagnose real Partners access from GitHub through home router
+        run: python coupang_github_network_probe.py --channel chromium
+      - name: Confirm VPN actually exchanged traffic
+        run: |
+          if sudo wg show wg0 latest-handshakes | awk '{if ($2 > 0) ok=1} END {exit !ok}'; then
+            echo "WIREGUARD_PEER_HANDSHAKE_CONFIRMED"
+          else
+            echo "WIREGUARD_PEER_HANDSHAKE_MISSING"
+            exit 1
+          fi
+      - name: Require a browser response not rejected by Coupang
+        run: |
+          python -c "import json,sys; r=json.load(open('coupang-github-transport-report.json',encoding='utf-8'))['browser_http']; good=r.get('result')=='BROWSER_RESPONSE' and isinstance(r.get('main_status'),int) and r['main_status'] not in (401,403,429) and not r.get('signals',{}).get('deny_or_challenge_marker'); print('PARTNERS_ENTRY_REACHED' if good else 'PARTNERS_ACCESS_STILL_BLOCKED'); sys.exit(0 if good else 1)"
+      - name: Save sanitized diagnostic only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-github-home-router-report
+          path: coupang-github-transport-report.json
+          retention-days: 3
+          if-no-files-found: ignore
+      - name: Tear down temporary VPN
+        if: always()
+        run: sudo wg-quick down wg0 || true
