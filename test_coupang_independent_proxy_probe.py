@@ -27,6 +27,10 @@ class IndependentProxyTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             proxy_config("http://proxy.example.org:8080", "alice", "")
 
+    def test_authenticated_socks5_is_rejected(self):
+        with self.assertRaises(ValueError):
+            proxy_config("socks5://proxy.example.org:1080", "alice", "password")
+
     def test_ip_parser(self):
         self.assertEqual(read_ip("203.0.113.5\n"), "203.0.113.5")
         self.assertEqual(read_ip("2001:db8::1"), "2001:db8::1")
