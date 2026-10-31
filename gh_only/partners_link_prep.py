@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import json
 import re
+from urllib.parse import parse_qs, urlsplit
 
 from gh_only.pipeline import identify_url
 from gh_only.partner_api import canonical_product_url, safe_link
@@ -27,6 +28,17 @@ def prepare_url(input_url: str, resolve=one_hop) -> dict:
             return {"status": "UNRESOLVED_SHORTLINK", "canonical_url": None}
         pid, iid, vid = hop.get("product_id"), hop.get("item_id"), hop.get("vendor_item_id")
     elif kind == "coupang_product":
+        # A malformed or duplicated vendorItemId must not silently select a
+        # different seller option. Reject instead of discarding it.
+        query = parse_qs(urlsplit(input_url).query, keep_blank_values=True)
+        if "vendorItemId" in query and (
+            len(query["vendorItemId"]) != 1 or not query["vendorItemId"][0].isdigit()
+        ):
+            return {"status": "INVALID_VENDOR_ITEM_ID", "canonical_url": None}
+        if "itemId" in query and (
+            len(query["itemId"]) != 1 or not query["itemId"][0].isdigit()
+        ):
+            return {"status": "INVALID_ITEM_ID", "canonical_url": None}
         pid, iid, vid = (record.get("product_id"), record.get("item_id"),
                          record.get("vendor_item_id"))
     else:
