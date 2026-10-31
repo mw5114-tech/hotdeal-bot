@@ -1,0 +1,30 @@
+name: Partners Chrome helper offline extension contract
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-chrome-helper-tests.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JS syntax and manifest/permissions static contracts, no websites
+        run: |
+          node --check experiments/partners-chrome-helper/popup.js
+          python -m unittest -v discover -s experiments/partners-chrome-helper -p 'test_*.py'
