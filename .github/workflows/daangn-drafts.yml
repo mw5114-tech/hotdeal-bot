@@ -1,0 +1,46 @@
+name: Daangn review drafts (no publishing)
+on:
+  push:
+    branches: [codex/daangn-drafts-20261031]
+    paths: ['gh_only/**', '.github/workflows/daangn-drafts.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: daangn-drafts-review
+  cancel-in-progress: false
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify extraction and affiliate-link isolation
+        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader gh_only.test_daangn_drafts
+      - name: Read public channel and build blocked drafts
+        run: python -m gh_only.daangn_drafts --output daangn-drafts
+      - name: Save review files
+        uses: actions/upload-artifact@v4
+        with:
+          name: daangn-review-drafts
+          path: daangn-drafts/
+          retention-days: 7
+          if-no-files-found: error
+      - name: Show result
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          data = json.loads(Path("daangn-drafts/drafts.json").read_text())
+          lines = ["## 당근 카페 초안 검토", "", f"초안 {len(data['drafts'])}건 · 실제 게시 0건",
+                   "", "모든 초안은 본인 링크 발급 및 동일 옵션 확인 전까지 보류됩니다.",
+                   "본문에는 원래 제휴 링크가 포함되지 않습니다.",
+                   "", "Artifacts의 daangn-review-drafts에서 drafts.txt를 확인하세요."]
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("\n".join(lines))
+          PY
