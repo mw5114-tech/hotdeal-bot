@@ -1,0 +1,37 @@
+name: Kakao OG debugger UI reachability (single browser test)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/kakao-og-debugger-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  one-unauthenticated-access:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated browser
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Open developer OG tool without login; stop if redirected
+        run: python -m gh_only.kakao_og_ui_probe
+      - name: Save safe diagnostic metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kakao-og-tool-access-diagnostic
+          path: kakao_og_tool_browser_diagnostic.json
+          if-no-files-found: warn
+          retention-days: 3
