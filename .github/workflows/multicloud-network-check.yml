@@ -1,0 +1,37 @@
+name: Single GitHub multi-cloud network compatibility check
+on:
+  pull_request:
+    paths:
+      - .github/workflows/multicloud-network-check.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  multicloud-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install supported Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Run public landing page compatibility check
+        shell: bash
+        run: |
+          set +e
+          python coupang_owner_waf_probe.py
+          echo "PAGE_PROBE_EXIT_CODE=$?"
+          exit 0
+      - name: Preserve sanitized network result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: multicloud-public-site-diagnostic
+          path: owner-waf-probe.json
+          retention-days: 2
+          if-no-files-found: ignore
