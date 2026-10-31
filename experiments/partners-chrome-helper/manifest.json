@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "뽐질 → 내 쿠팡 파트너스 간편링크 (실험용)",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "이미 로그인된 크롬의 공식 쿠팡 파트너스 간편 링크 페이지에서 상품 URL 입력/생성 버튼을 수동 보조합니다. API와 쿠키 수집 없음.",
   "permissions": [
     "tabs",
