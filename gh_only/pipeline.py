@@ -103,7 +103,7 @@ class PostPhotoParser(HTMLParser):
                 if found:
                     self.post_id = int(found.group(1))
                     self.post_depth = self.depth
-        if self.post_id is not None and tag in ("a", "div", "span", "img"):
+        if self.post_id is not None:
             classes = props.get("class", "").split()
             found = IMAGE_STYLE.search(props.get("style", ""))
             raw = found.group(1) if found else props.get("src", "") if tag == "img" else ""
