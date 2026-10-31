@@ -1,0 +1,20 @@
+name: Decodo official gateway TCP reachability
+on:
+  pull_request:
+    paths:
+      - test_decodo_gateway_reachability.py
+      - .github/workflows/decodo-gateway-preflight.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  proxy-provider-entry-node:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check proxy gateway DNS and TCP only (without credentials)
+        run: python test_decodo_gateway_reachability.py
