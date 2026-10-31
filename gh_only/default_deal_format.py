@@ -1,4 +1,4 @@
-"""Default minimal Jirum deal copy: Telegram sale first, historical comparison second.
+"""Default Jirum deal copy: product, historical observed reference, Telegram hot deal.
 
 Pure functions only: no site access, posting, affiliate links, or credentials.
 IMPORTANT: source "observed average" is NOT Coupang official list/normal price.
@@ -72,14 +72,23 @@ def create_default_preview(sale: int | None, title: str | None,
     sale = sale if type(sale) is int and 0 < sale <= 100_000_000 else None
     average = average if type(average) is int and 0 < average <= 100_000_000 else None
     approx = nearest_five_discount(sale, average)
-    lines = [f"💰 뽐질 특가 {sale:,}원" if sale is not None
-             else "💰 뽐질 특가 미확인"]
-    if approx is not None:
-        lines.append(f"📉 로우차트 관측 평균가 대비 약 {approx}% 할인")
+    # Requested three-line layout. The reference MUST remain clearly labeled
+    # as Lowchart's observed historical average, not an official Coupang list price.
+    product = title.strip()[:150] if isinstance(title, str) and title.strip() else "상품명 확인 중"
+    lines = [f"📦 상품명 : {product}"]
     if average is not None:
-        lines.append(f"📊 로우차트 관측 평균가 {average:,}원")
-    if isinstance(title, str) and title.strip():
-        lines.append(f"📦 {title.strip()[:150]}")
+        lines.append(f"💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 {average:,}원")
+    else:
+        lines.append("💸 쿠팡 평소 판매가(로우차트 관측 평균) : 확인 중")
+    if sale is not None:
+        price_text = f"🔥 핫딜 특가 : {sale:,}원"
+        if approx is not None:
+            price_text += f" (상세페이지 참고 / 약 {approx}% 혜택)"
+        else:
+            price_text += " (상세페이지 참고)"
+    else:
+        price_text = "🔥 핫딜 특가 : 확인 중"
+    lines.append(price_text)
     return {
         "source_message_id": source_id,
         "sale_price_krw": sale,
