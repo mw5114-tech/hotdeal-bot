@@ -204,6 +204,8 @@ jobs:
                       if stop['reason']:
                           raise ValueError(stop['reason'])
                       body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if any(el.is_visible() for el in page.locator('iframe[src*="captcha"],iframe[title*="CAPTCHA"],iframe[title*="캡차"]').all()):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
                           raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
@@ -468,6 +470,8 @@ jobs:
                       if stop['reason']:
                           raise ValueError(stop['reason'])
                       body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if any(el.is_visible() for el in page.locator('iframe[src*="captcha"],iframe[title*="CAPTCHA"],iframe[title*="캡차"]').all()):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
                           raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
@@ -723,6 +727,8 @@ jobs:
                       if stop['reason']:
                           raise ValueError(stop['reason'])
                       body = page.locator('body').inner_text(timeout=5000)[:20000]
+                      if any(el.is_visible() for el in page.locator('iframe[src*="captcha"],iframe[title*="CAPTCHA"],iframe[title*="캡차"]').all()):
+                          raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'access\s*denied|로봇이 아닙니다|verify you are human|보안문자를 입력', page.title()+'\n'+body, re.I):
                           raise ValueError('SECURITY_CHALLENGE_STOP')
                       if re.search(r'추가\s*인증이\s*필요|인증번호를\s*입력|2단계\s*인증', body):
