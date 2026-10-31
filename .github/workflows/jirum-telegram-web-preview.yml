@@ -1,0 +1,55 @@
+name: Jirum Telegram server preview photo diagnostic
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-telegram-web-preview.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-preview-unit-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate safe URL and preview handling without network
+        run: python -m unittest -v gh_only.test_telegram_preview_probe
+  preview-one-link-read-only:
+    needs: offline-preview-unit-tests
+    if: vars.GH_ONLY_TG_PREVIEW_TEST_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+      TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+      TELEGRAM_STRING_SESSION: ${{ secrets.TELEGRAM_STRING_SESSION }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Telegram client library
+        run: python -m pip install 'telethon>=1.37,<2'
+      - name: Request one official webpage preview WITHOUT sending any chat message
+        run: python -m gh_only.telegram_preview_probe --report telegram_preview_report.json
+      - name: Private preview metadata and candidate photo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: telegram-preview-candidate
+          path: |
+            telegram_preview_report.json
+            telegram_preview_candidate.jpg
+          if-no-files-found: warn
+          retention-days: 3
