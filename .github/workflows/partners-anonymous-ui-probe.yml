@@ -1,0 +1,37 @@
+name: Coupang Partners anonymous GitHub browser login and quick-link UI probe
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/partners-anonymous-ui-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  anonymous-browser-diagnostic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install one ordinary Chromium browser, no stealth
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Open public partners.coupang.com page once without login credentials
+        run: python -m gh_only.partners_anonymous_ui_probe
+      - name: Save sanitized page state only (no session or screenshots)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: partners-public-login-discovery
+          path: partners_anonymous_ui_diagnostic.json
+          if-no-files-found: warn
+          retention-days: 3
