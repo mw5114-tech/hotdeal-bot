@@ -45,13 +45,12 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertFalse(same_named_option(OG, LOW_TITLE.replace("230g", "300g")))
         self.assertFalse(same_named_option(None, LOW_TITLE))
 
-    def test_telegram_sale_first_then_comparison(self):
+    def test_product_then_usual_price_then_hot_deal(self):
         caption = create_default_preview(12050, "휘카레 소스", 34575, 123)
         self.assertEqual(caption["caption"].splitlines(), [
-            "💰 뽐질 특가 12,050원",
-            "📉 로우차트 관측 평균가 대비 약 65% 할인",
-            "📊 로우차트 관측 평균가 34,575원",
-            "📦 휘카레 소스",
+            "📦 상품명 : 휘카레 소스",
+            "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
+            "🔥 핫딜 특가 : 12,050원 (상세페이지 참고 / 약 65% 혜택)",
         ])
         self.assertEqual(caption["rounded_discount_step"], 5)
         self.assertFalse(caption["official_normal_price_quoted"])
@@ -60,13 +59,30 @@ class DefaultFormatTests(unittest.TestCase):
     def test_missing_mean_leaves_price_not_fake_discount(self):
         preview = create_default_preview(12050, "휘카레 소스", None)
         self.assertEqual(preview["caption"],
-                         "💰 뽐질 특가 12,050원\n📦 휘카레 소스")
+                         "📦 상품명 : 휘카레 소스\n"
+                         "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 확인 중\n"
+                         "🔥 핫딜 특가 : 12,050원 (상세페이지 참고)")
         self.assertIsNone(preview["approx_discount_vs_historical_mean_pct"])
 
     def test_mean_below_sale_doesnt_claim_discount(self):
         preview = create_default_preview(12050, "휘카레 소스", 10000)
-        self.assertNotIn("% 할인", preview["caption"])
-        self.assertIn("관측 평균가 10,000원", preview["caption"])
+        self.assertNotIn("% 혜택", preview["caption"])
+        self.assertIn("관측 평균) : 약 10,000원", preview["caption"])
+
+    def test_missing_sale_is_not_invented(self):
+        preview = create_default_preview(None, "휘카레 소스", 34575)
+        self.assertEqual(preview["caption"].splitlines(), [
+            "📦 상품명 : 휘카레 소스",
+            "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
+            "🔥 핫딜 특가 : 확인 중",
+        ])
+        self.assertNotIn("% 혜택", preview["caption"])
+
+    def test_reference_not_renamed_official_coupang_price(self):
+        preview = create_default_preview(12050, "휘카레 소스", 34575)
+        self.assertIn("로우차트 관측 평균", preview["caption"])
+        self.assertNotIn("쿠팡 공식 정상가", preview["caption"])
+        self.assertFalse(preview["official_normal_price_quoted"])
 
     def test_source_post_discounts_do_not_override_lowchart(self):
         raw = """🔥 무지성 12,050원 (59.8% 할인)
@@ -76,7 +92,7 @@ class DefaultFormatTests(unittest.TestCase):
         price = price_info(raw)
         self.assertEqual(price["sale_price_krw"], 12050)
         preview = create_default_preview(price["sale_price_krw"], "휘카레", 34575)
-        self.assertIn("약 65% 할인", preview["caption"])
+        self.assertIn("약 65% 혜택", preview["caption"])
         self.assertNotIn("59.8%", preview["caption"])
         self.assertNotIn("30,000원", preview["caption"])
 
