@@ -57,9 +57,18 @@ class ImageAPITests(unittest.TestCase):
         u = "https://www.other-shop.example/product/6221369038?itemId=12453073752"
         self.assertEqual(url_product_identity(u, PRODUCT, ITEM), "OTHER_SITE")
 
-    def test_bad_image_scheme_ignored(self):
+    def test_http_original_uses_https_thumbnail_without_claiming_verification(self):
         result = normalize_search_results(
             fake_payload(item(EXACT, img="http://insecure.example/a.jpg")), PRODUCT, ITEM)
+        self.assertEqual(len(result["exact_source_url_candidates"]), 1)
+        candidate = result["exact_source_url_candidates"][0]
+        self.assertEqual(candidate["image_origin"], "indexed_thumbnail_fallback")
+        self.assertFalse(candidate["image_verified_for_exact_option"])
+
+    def test_insecure_without_thumbnail_ignored(self):
+        doc = item(EXACT, img="http://insecure.example/a.jpg")
+        doc["thumbnail_url"] = "http://insecure.example/preview.jpg"
+        result = normalize_search_results(fake_payload(doc), PRODUCT, ITEM)
         self.assertEqual(len(result["exact_source_url_candidates"]), 0)
 
     def test_keyword_search_fallback_when_no_exact(self):
