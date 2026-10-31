@@ -57,6 +57,9 @@ jobs:
             echo "WIREGUARD_PEER_HANDSHAKE_MISSING"
             exit 1
           fi
+      - name: Require a browser response not rejected by Coupang
+        run: |
+          python -c "import json,sys; r=json.load(open('coupang-github-transport-report.json',encoding='utf-8'))['browser_http']; good=r.get('result')=='BROWSER_RESPONSE' and isinstance(r.get('main_status'),int) and r['main_status'] not in (401,403,429) and not r.get('signals',{}).get('deny_or_challenge_marker'); print('PARTNERS_ENTRY_REACHED' if good else 'PARTNERS_ACCESS_STILL_BLOCKED'); sys.exit(0 if good else 1)"
       - name: Save sanitized diagnostic only
         if: always()
         uses: actions/upload-artifact@v4
