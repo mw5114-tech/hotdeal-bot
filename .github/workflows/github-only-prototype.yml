@@ -1,0 +1,65 @@
+name: GitHub-only deal evidence prototype (read-only)
+
+on:
+  push:
+    branches:
+      - test/github-only-pipeline-20261031
+    paths:
+      - 'gh_only/**'
+      - '.github/workflows/github-only-prototype.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-only-deal-prototype
+  cancel-in-progress: false
+
+jobs:
+  offline-contract-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Static syntax check
+        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py
+      - name: Deterministic tests (no credentials / no network)
+        run: python -m unittest -v gh_only.test_pipeline
+      - name: Build fixture evidence report
+        run: python -m gh_only.pipeline --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_deal_report.json
+      - name: Archive fixture report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-only-fixture-evidence
+          path: fixture_deal_report.json
+          if-no-files-found: warn
+          retention-days: 7
+
+  read-public-telegram-once:
+    needs: offline-contract-tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: One public Telegram listing request, no Coupang access, no posting
+        run: python -m gh_only.pipeline --mode live --output live_deal_report.json
+      - name: Archive public-only evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-only-public-telegram-evidence
+          path: live_deal_report.json
+          if-no-files-found: warn
+          retention-days: 7
