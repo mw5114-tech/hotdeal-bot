@@ -32,3 +32,12 @@ https://www.coupang.com/vp/products/9217210892?itemId=27232840915&vendorItemId=9
 ## 코드 검증
 
 GitHub Actions: `.github/workflows/partners-chrome-helper-tests.yml`에서 JS 구문 검사, Manifest V3 권한 최소화, 명시적 수동 클릭, 쿠키 접근 금지 등 오프라인 테스트 통과. 실제 일반 Chrome 사이트 동작은 **사용자 수동 실험 대기 중**.
+
+## 0.2 수정 (2026-11-01): 실제 쿠팡 화면 ③/④ 오류 피드백 반영
+
+- 사용자의 스크린샷에서 **① 간편 링크 화면 정상 접근, ② 쿠팡 URL 정상 입력** 확인. 파란 `링크 생성` 버튼이 보이지만 기존 정확한 글자 비교가 `GENERATE_BUTTON_UNCONFIRMED`를 반환한 문제를 수정했음.
+- ③: 정확한 상품 URL이 실제 페이지 입력칸에 있는지 확인한 뒤, 버튼의 `innerText/textContent/value/aria-label/title`을 검사하고 숨겨진 문자, 불규칙 공백, 중첩 글자에 견고하게 대응. 후보가 0개 또는 여러 개면 클릭하지 않음.
+- ④: 생성 결과가 input/anchor뿐 아니라 모달/일반 텍스트에 출력되어도 `https://link.coupang.com/a/...` 등 알려진 패턴만 추출. 쿠키, 페이지 원문, 로그인 식별값 저장/전송 안 함. 후보가 여러 개면 선택하지 않고 진단만 보여줌.
+- GitHub에서 정적 테스트를 통과해도 **실제 쿠팡 로그인 화면에서의 선택자 동작은 아직 재검증되지 않음**. 클릭 후 결과를 확인할 필요 있음.
+- 구버전 설치했으면 `partners-chrome-helper-v0.2.zip`을 풀어 새 폴더로 교체하고 크롬의 `chrome://extensions`에서 기존 확장을 **삭제**한 뒤 새 `partners-chrome-helper` 폴더를 로드하면 확실함. 또는 동일한 경로에 파일을 덮어쓰고 확장 카드의 새로고침을 클릭.
+- 정상 화면이라면 `② 상품 URL 입력` → `③ 공식 링크 생성 버튼 누르기` → 결과창 표시 확인 → `④ 생성된 내 링크 읽기` 순서로 시도. ③ 결과가 계속 실패하면 팝업에 표시되는 짧은 `status`, `relevantButtonLabels` 부분만 공유하면 다음 선택자를 개선할 수 있음.
