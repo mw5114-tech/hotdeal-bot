@@ -25,3 +25,5 @@ jobs:
           python-version: '3.11'
       - name: Classify failure without printing session data or making browser requests
         run: python gh_only/kakao_session_diagnostic.py
+
+# Classify provider-owned cookie domains safely.
