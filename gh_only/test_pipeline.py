@@ -74,15 +74,17 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(d["image_provenance"], "telegram_attached_photo")
         self.assertFalse(d["image_verified_for_exact_option"])
 
-    def test_link_preview_is_not_accepted_as_product_photo(self):
+    def test_link_preview_is_available_but_unverified(self):
         d = self.deals[1]
-        self.assertIsNone(d["image_url_candidate"])
-        self.assertEqual(d["image_provenance"], "photo_not_visible")
+        self.assertEqual(d["image_url_candidate"], "https://untrusted.example/preview.jpg")
+        self.assertEqual(d["image_provenance"], "telegram_link_preview_unverified")
+        self.assertFalse(d["image_verified_for_exact_option"])
+        self.assertIn("IMAGE_NOT_FROM_ORIGINAL_POST_PHOTO", d["blockers"])
 
     def test_ambiguous_photo_blocks(self):
         d = self.deals[2]
         self.assertIsNone(d["image_url_candidate"])
-        self.assertEqual(d["image_provenance"], "ambiguous_telegram_photos")
+        self.assertEqual(d["image_provenance"], "ambiguous_telegram_images")
 
     def test_not_published_or_minted(self):
         for d in self.deals:
