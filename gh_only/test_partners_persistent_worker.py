@@ -1,5 +1,6 @@
 """Offline regression checks: no browser, network, cookies or credentials."""
 import unittest
+from gh_only.partners_draft_handoff import request_from_report
 from unittest import mock
 from gh_only import partners_persistent_worker as worker
 
@@ -123,6 +124,37 @@ class Tests(unittest.TestCase):
             with TemporaryDirectory() as profile:
                 with self.assertRaisesRegex(ValueError,"EXPLICIT_GENERATE_OPT_IN_REQUIRED"):
                     worker.run_live("generate-one",PRODUCT,Path(profile))
+
+    def test_request_packet_integrity(self):
+        report={
+            "schema":"github-jirum-default-price-photo-v1",
+            "drafts":[{
+                "status":"DRAFT_ONLY_DO_NOT_PUBLISH","kakao_product_match":True,
+                "personal_affiliate_link_created":False,
+                "source_message_id":94718,
+                "product_identity":{
+                    "status":"EXACT_ITEM_IDENTIFIED",
+                    "product_id":"9217210892","item_id":"27232840915",
+                    "vendor_item_id":"94199974724",
+                }
+            }]
+        }
+        packet=request_from_report(report)
+        url, ident=worker.validate_request_packet(packet)
+        self.assertEqual(url,PRODUCT)
+        self.assertEqual(ident,packet["request_id"])
+        packet["canonical_product_url"]=PRODUCT.replace("27232840915","000")
+        with self.assertRaisesRegex(ValueError,"REQUEST_ID_MISMATCH"):
+            worker.validate_request_packet(packet)
+
+    def test_reject_unready_packet(self):
+        with self.assertRaisesRegex(ValueError,"INVALID_REQUEST_PACKET"):
+            worker.validate_request_packet({})
+        with self.assertRaisesRegex(ValueError,"REQUEST_NOT_READY"):
+            worker.validate_request_packet({
+                "schema":"jirum-partners-one-link-request-v1",
+                "status":"ALREADY_USED"
+            })
 
 if __name__=="__main__":
     unittest.main()
