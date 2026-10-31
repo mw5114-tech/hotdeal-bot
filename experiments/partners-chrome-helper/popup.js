@@ -183,10 +183,28 @@ async function execute(action) {
   try {
     $("answer").hidden = true;
     if (action === "open") {
-      const canonical = canonicalProductURL($("source").value);
-      await chrome.storage.local.set({pendingProductURL:canonical});
-      await chrome.tabs.create({url:QUICK_LINK_PAGE});
-      show("간편 링크 탭을 열었음. 기존 쿠팡 로그인 상태인지 확인한 다음 이 확장 프로그램을 다시 열어 ② 진행.");
+      // ① must never depend on an input value: reinstallation gives a fresh
+      // extension with empty local storage. Validate the product only at ②.
+      const raw = $("source").value.trim();
+      let invalidInput = false;
+      if (raw) {
+        try {
+          const canonical = canonicalProductURL(raw);
+          // Saving a valid draft is optional; storage issues must not block
+          // opening the official page in an already signed-in normal Chrome.
+          try {
+            await chrome.storage.local.set({pendingProductURL:canonical});
+          } catch (_) {
+            // No credential/session data is involved. Continue opening tab.
+          }
+        } catch (_) {
+          invalidInput = true;
+        }
+      }
+      await chrome.tabs.create({url:QUICK_LINK_PAGE,active:true});
+      show(invalidInput
+        ? "① 간편 링크 화면을 열었음. 입력 URL은 유효하지 않으니 ② 누르기 전에 일반 쿠팡 상품 URL을 확인해."
+        : "① 간편 링크 화면을 열었음. 기존 로그인 확인 후 ② 상품 URL 입력을 진행해.");
       return;
     }
     if (action === "fill") {
