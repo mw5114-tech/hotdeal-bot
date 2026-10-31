@@ -1,0 +1,37 @@
+name: Jirum photo CDN fetch proof (one candidate, no publishing)
+
+on:
+  push:
+    branches: [test/github-only-pipeline-20261031]
+    paths:
+      - '.github/workflows/jirum-cdn-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  image-transport:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test image validation offline
+        run: python -m unittest -v gh_only.test_cdn_image_probe
+      - name: Fetch one publicly indexed Coupang photo candidate
+        run: python -m gh_only.cdn_image_probe --report coupang_cdn_image_report.json --image coupang_candidate.jpg
+      - name: Save diagnostic and private image candidate for manual examination
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: single-coupang-cdn-image-candidate-private-test
+          path: |
+            coupang_cdn_image_report.json
+            coupang_candidate.jpg
+          if-no-files-found: warn
+          retention-days: 3
