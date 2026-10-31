@@ -272,6 +272,13 @@ def run(mode: str, output: Path, html_path: Path | None = None):
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(json.dumps({k: v for k, v in report.items() if k != "deals"}, ensure_ascii=False))
+    # Public source IDs and parsed numbers only; never echo URLs, text, or secrets.
+    print("DEAL_EVIDENCE_SUMMARY " + json.dumps([
+        {"source_id": d["source_message_id"], "sale": d["sale_price_krw"],
+         "original": d["original_price_krw"], "price_quality": d["price_confidence"],
+         "image_source": d["image_provenance"], "url_kind": d["url_kind"]}
+        for d in deals
+    ], ensure_ascii=False))
 
 
 if __name__ == "__main__":
