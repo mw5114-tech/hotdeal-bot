@@ -2,7 +2,7 @@
 import unittest
 import json
 from gh_only.kakao_og_authenticated_probe import (
-    safe_session_state, provider_domain_allowed, image_is_cdn
+    safe_session_state, provider_domain_allowed, image_is_cdn, parse_og_row
 )
 
 class KakaoOGTests(unittest.TestCase):
@@ -45,6 +45,16 @@ class KakaoOGTests(unittest.TestCase):
     def test_malformed_json_rejected(self):
         with self.assertRaises(ValueError):
             safe_session_state("not-json")
+
+    def test_kakao_tab_separated_og_image_row(self):
+        url = "https://thumbnail.coupangcdn.com/image/retail/sample.jpg"
+        self.assertEqual(parse_og_row("og:image\\t" + url, "og:image"), url)
+        self.assertTrue(image_is_cdn(parse_og_row("og:image\\t" + url, "og:image")))
+
+    def test_kakao_multiline_og_row(self):
+        self.assertEqual(parse_og_row("og:title\\n오뚜기 핫케이크 믹스", "og:title"),
+                         "오뚜기 핫케이크 믹스")
+        self.assertIsNone(parse_og_row("og:description something", "og:image"))
 
     def test_image_cdn_only(self):
         self.assertTrue(image_is_cdn(
