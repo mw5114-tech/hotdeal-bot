@@ -55,3 +55,5 @@ jobs:
           path: kakao_authenticated_og_ui_report.json
           if-no-files-found: warn
           retention-days: 3
+
+# One-shot verification after user confirmed Kakao session secret already exists.
