@@ -91,3 +91,18 @@ New modules: gh_only/daangn_draft.py, gh_only/test_daangn_draft.py, gh_only/shor
 Remaining blockers: no confirmed corresponding Coupang item photo from latest messages; live merchant price not independently verified; personal affiliate link creation requires own approved Partners account/authentication; Daangn login/publishing not tested; de-duplication and receipt ledger not implemented.
 
 Do not use unrelated photos from the channel Media gallery: those images are not linked to the shown post. Do not reuse original @jirum partner tracking links. No new scheduled posting is enabled.
+
+## 2026-10-31 Image-source research and live GitHub tests
+
+- **Source finding:** web search indexed the EXACT Coupang productId 6221369038 and itemId 12453073752 as Ottogi Hotcake Mix 1kg x1. This establishes option description from a previously crawled listing, not a live Coupang quote or reusable image license.
+- **Alternative-image caveat:** publicly indexed image URL from another Coupang listing depicts the same-looking Ottogi 1kg packaging, but is NOT verified to be the exact `itemId=12453073752` listing photo. Do not auto-post it as a confirmed match.
+- **GitHub indexed image search, exact ID:** Actions run 41209523593 succeeded as a job; Bing returned HTTP 200 but **zero parseable image cards**. This is not photo retrieval success.
+- **GitHub CDN single image GET:** Actions run 41209723121 returned HTTP **200 image/jpeg**, valid JPEG magic bytes, **74,713 bytes**, SHA256 03bc55ea4c7178c991008e58c87bf1f97bf90bbcffbcadf024732a84bcf70b64. File preserved in private test artifact for three days. This proves GitHub-hosted runner CAN download public Coupang CDN image bytes if URL is already known.
+- **GitHub indexed image search, relaxed product name:** Actions run 41209858666 returned HTTP 200, **zero image result cards**, 0 `murl` and `iusc` markers, no explicit CAPTCHA marker. Therefore this Bing page is not an automation-ready discovery source in the tested configuration.
+- **Offline contract suite:** Actions run 41209846875 **59/59 tests PASS**. No image was automatically mapped to exact itemId; no partner deeplink minted; zero Daangn posts.
+
+New modules gh_only/indexed_image_probe.py (+ tests) and gh_only/cdn_image_probe.py (+ tests); separate single-shot Actions diagnostic workflows. All writes remain in experimental branch, no schedules enabled.
+
+### Resulting technical decision
+
+Photo transport is SOLVED for a *known* public image URL; automatic image URL discovery and exact-option confirmation are UNSOLVED. Do not extrapolate from the CDN test to stable sourcing of every hotdeal image. Future preferred paths: source-attached Telegram media when available; approved personal Coupang Partners product data/search API if eligible, validating productId+itemId+vendorItemId and image asset license; otherwise strictly mark alternative listing images unverified and do not autopublish. Avoid arbitrary lookalikes and avoid scraping Coupang blocked pages.
