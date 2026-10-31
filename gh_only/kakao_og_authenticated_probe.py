@@ -20,25 +20,51 @@ from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeo
 TOOL_URL = "https://developers.kakao.com/tool/debugger"
 SOURCE = "https://link.coupang.com/a/iiCmQxWdUG"
 OUT = Path("kakao_authenticated_og_ui_report.json")
-ALLOWED_SESSION_DOMAINS = {"kakao.com", ".kakao.com", "accounts.kakao.com",
-                           "developers.kakao.com"}
+PROVIDER_ROOT_DOMAINS = ("kakao.com", "daum.net")
 OG_KEYS = ("og:url", "og:title", "og:description", "og:image", "og:site_name")
 
 
+def provider_domain_allowed(domain: str) -> bool:
+    """Accept real Kakao/Daum subdomains, never unrelated or lookalike hosts."""
+    if not isinstance(domain, str):
+        return False
+    host = domain.lstrip(".").lower()
+    return any(host == root or host.endswith("." + root)
+               for root in PROVIDER_ROOT_DOMAINS)
+
+
 def safe_session_state(raw: str) -> dict:
-    """Check structure, not validity. No session bytes are ever printed."""
+    """Return provider-scoped state only; discard third-party cookies in memory.
+
+    Never print, archive, or echo authentication values.
+    """
     state = json.loads(raw)
     if not isinstance(state, dict) or not isinstance(state.get("cookies"), list):
         raise ValueError("INVALID_AUTH_STATE")
-    for c in state["cookies"]:
-        if not isinstance(c, dict) or c.get("domain") not in ALLOWED_SESSION_DOMAINS:
-            raise ValueError("SESSION_HAS_UNEXPECTED_DOMAIN")
-    for entry in state.get("origins", []):
-        origin = entry.get("origin", "") if isinstance(entry, dict) else ""
-        if not origin.startswith("https://") or urlsplit(origin).hostname not in {
-            "developers.kakao.com", "accounts.kakao.com"}:
-            raise ValueError("SESSION_HAS_UNEXPECTED_ORIGIN")
-    return state
+    if any(not isinstance(cookie, dict) for cookie in state["cookies"]):
+        raise ValueError("INVALID_COOKIE_RECORD")
+    cookies = [cookie for cookie in state["cookies"]
+               if provider_domain_allowed(cookie.get("domain"))]
+    if not cookies:
+        raise ValueError("NO_KAKAO_LOGIN_COOKIES")
+
+    origins = state.get("origins", [])
+    if not isinstance(origins, list):
+        raise ValueError("INVALID_ORIGINS")
+    scoped_origins = []
+    for entry in origins:
+        if not isinstance(entry, dict):
+            continue
+        url = entry.get("origin")
+        if not isinstance(url, str):
+            continue
+        try:
+            uri = urlsplit(url)
+            if uri.scheme == "https" and provider_domain_allowed(uri.hostname):
+                scoped_origins.append(entry)
+        except ValueError:
+            continue
+    return {"cookies": cookies, "origins": scoped_origins}
 
 
 def extract_og_table(page):
