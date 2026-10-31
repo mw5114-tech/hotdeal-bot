@@ -81,33 +81,102 @@ function inputInPage(url) {
   return {status:"FILLED",label:ranked[0].details};
 }
 
-function generateInPage() {
-  const buttons = Array.from(document.querySelectorAll("button, input[type=button], input[type=submit]"))
-    .filter(el=>el.getClientRects().length && !el.disabled);
-  const matches = buttons.filter(el =>
-    (el.innerText || el.value || el.getAttribute("aria-label") || "").trim().replace(/\s+/g," ") === "링크 생성");
-  if (matches.length !== 1) {
-    return {status:"GENERATE_BUTTON_UNCONFIRMED",candidateCount:matches.length,
-            visibleButtonLabels:buttons.slice(0,15).map(b=>(b.innerText||b.value||"").trim().slice(0,35))};
+function generateInPage(expectedProductURL) {
+  // Self-contained: chrome.scripting serializes this function into the tab.
+  // Require the exact expected plain Coupang URL to be visible in the page.
+  const visible = el => !!(el && el.getClientRects().length && !el.disabled &&
+    getComputedStyle(el).visibility !== "hidden");
+  const fields = Array.from(document.querySelectorAll("input, textarea"))
+    .filter(visible)
+    .filter(el => (el.value || "").trim() === expectedProductURL);
+  if (fields.length !== 1) {
+    return {status:"PRODUCT_URL_NOT_IN_PAGE", matchingFields:fields.length};
   }
+
+  // Coupang currently renders a blue "링크 생성" button. In its DOM the visible
+  // label may contain invisible chars, SVG text, nested spans, or accessibility
+  // labels, even if it looks exactly like "링크 생성" in the browser.
+  const clean = value => String(value ?? "").normalize("NFKC")
+    .replace(/[\u200B-\u200F\u2060\uFEFF]/g,"")
+    .replace(/[\s\u00A0]+/g,"")
+    .trim();
+  const textOptions = el => [el.innerText,el.textContent,el.value,
+                            el.getAttribute("aria-label"),el.getAttribute("title")];
+  const isCreateLabel = value => {
+    const t=clean(value);
+    return t === "링크생성" || (t.startsWith("링크생성") && t.length <= 18);
+  };
+  // Prefer real buttons over their clickable wrapper so one user click means
+  // exactly one click on the target. Never blindly click the first button.
+  const native = Array.from(document.querySelectorAll(
+    "button, input[type=button], input[type=submit]"
+  )).filter(visible);
+  let matches = native.filter(el=>textOptions(el).some(isCreateLabel));
+  if (matches.length === 0) {
+    const roleButtons = Array.from(document.querySelectorAll("[role=button]"))
+      .filter(visible);
+    matches=roleButtons.filter(el=>textOptions(el).some(isCreateLabel));
+  }
+  if (matches.length !== 1) {
+    const relevant=native.filter(el=>textOptions(el).some(x=>clean(x).includes("링크")));
+    return {
+      status:"GENERATE_BUTTON_UNCONFIRMED",
+      candidateCount:matches.length,
+      visibleButtonCount:native.length,
+      matchingFieldCount:fields.length,
+      // Short public UI label diagnostic only, never page HTML, cookies or account data.
+      relevantButtonLabels:relevant.slice(0,5).map(el=>({
+        tag:el.tagName,
+        innerText:clean(el.innerText).slice(0,45),
+        textContent:clean(el.textContent).slice(0,45),
+        aria:clean(el.getAttribute("aria-label")).slice(0,45),
+      }))
+    };
+  }
+
   matches[0].click();
-  return {status:"GENERATE_CLICKED",linkVerified:false};
+  return {status:"GENERATE_CLICKED",linkVerified:false,buttonTag:matches[0].tagName};
 }
 
 function readGeneratedLinkInPage() {
+  // Inspect only visible user-facing link results on the official site. Never
+  // capture full page text in logs or any browser auth state.
   const allowed = /^https:\/\/(?:link\.coupang\.com\/a\/[A-Za-z0-9_-]+|coupa\.ng\/[A-Za-z0-9_-]+)\/?$/;
+  const findLinks = /https:\/\/(?:link\.coupang\.com\/a\/[A-Za-z0-9_-]+|coupa\.ng\/[A-Za-z0-9_-]+)/g;
   const candidates = [];
-  const elements = Array.from(document.querySelectorAll("input,textarea,a[href]"));
-  for (const element of elements) {
-    if (!element.getClientRects().length) continue;
-    for (const value of [element.value,element.getAttribute?.("href")]) {
-      const maybe = typeof value === "string" ? value.trim() : "";
-      if (allowed.test(maybe) && !candidates.includes(maybe)) candidates.push(maybe);
-    }
+  const add = raw => {
+    if (typeof raw !== "string") return;
+    const text=raw.trim();
+    if (allowed.test(text) && !candidates.includes(text)) candidates.push(text);
+    const matches=text.match(findLinks) || [];
+    for (const m of matches) if (allowed.test(m) && !candidates.includes(m)) candidates.push(m);
+  };
+  const elements = Array.from(document.querySelectorAll(
+    "input, textarea, a[href], [data-clipboard-text], [data-clipboard-target], [role=textbox]"
+  ));
+  for (const el of elements) {
+    if (!el.getClientRects().length) continue;
+    add(el.value);
+    add(el.getAttribute("href"));
+    add(el.getAttribute("data-clipboard-text"));
+    add(el.innerText);
   }
-  return {status:candidates.length === 1?"ONE_LINK_FOUND":
-    candidates.length === 0?"LINK_NOT_FOUND":"MULTIPLE_LINKS_REVIEW_REQUIRED",
-    candidates:candidates.slice(0,5)};
+  // Many modal dialogs print the generated URL as plain text inside a <div>
+  // instead of as an <input> or <a>. Search only for exact URL patterns.
+  const pageText = document.body?.innerText || "";
+  add(pageText);
+  return {
+    status:candidates.length === 1 ? "ONE_LINK_FOUND"
+      : candidates.length === 0 ? "LINK_NOT_FOUND" : "MULTIPLE_LINKS_REVIEW_REQUIRED",
+    candidates:candidates.slice(0,5),
+    hints:{
+      visibleInputCount:elements.filter(x=>x.tagName==="INPUT"&&x.getClientRects().length).length,
+      hasPartnerLinkLabel:/파트너스\s*URL|파트너스\s*링크|생성된\s*링크/.test(pageText),
+      dialogVisible:Array.from(document.querySelectorAll('[role=dialog]')).some(
+        el=>el.getClientRects().length>0
+      )
+    }
+  };
 }
 
 async function execute(action) {
@@ -129,7 +198,8 @@ async function execute(action) {
       return;
     }
     if (action === "generate") {
-      const r=await runOnPartner(generateInPage);
+      const url=canonicalProductURL($("source").value);
+      const r=await runOnPartner(generateInPage,[url]);
       show(r.status === "GENERATE_CLICKED" ?
         "공식 '링크 생성' 버튼 클릭함. 페이지에서 결과가 보이면 ④ 눌러. 아직 내 계정 링크라고 검증된 것은 아님."
         : "생성 버튼 식별 안 됨: " + JSON.stringify(r),r.status !== "GENERATE_CLICKED");
