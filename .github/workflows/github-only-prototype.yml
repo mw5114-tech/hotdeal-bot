@@ -28,9 +28,9 @@ jobs:
         with:
           python-version: '3.11'
       - name: Static syntax check
-        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py gh_only/mtproto_reader.py gh_only/test_mtproto_reader.py gh_only/daangn_draft.py gh_only/test_daangn_draft.py gh_only/shortlink_probe.py gh_only/test_shortlink_probe.py gh_only/indexed_image_probe.py gh_only/test_indexed_image_probe.py
+        run: python -m py_compile gh_only/pipeline.py gh_only/test_pipeline.py gh_only/partner_api.py gh_only/test_partner_api.py gh_only/mtproto_reader.py gh_only/test_mtproto_reader.py gh_only/daangn_draft.py gh_only/test_daangn_draft.py gh_only/shortlink_probe.py gh_only/test_shortlink_probe.py gh_only/indexed_image_probe.py gh_only/test_indexed_image_probe.py gh_only/cdn_image_probe.py gh_only/test_cdn_image_probe.py
       - name: Deterministic tests (no credentials / no network)
-        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader gh_only.test_daangn_draft gh_only.test_shortlink_probe gh_only.test_indexed_image_probe
+        run: python -m unittest -v gh_only.test_pipeline gh_only.test_partner_api gh_only.test_mtproto_reader gh_only.test_daangn_draft gh_only.test_shortlink_probe gh_only.test_indexed_image_probe gh_only.test_cdn_image_probe
       - name: Build fixture evidence report
         run: python -m gh_only.pipeline --mode fixture --fixture-html gh_only/fixtures/jirum_sample.html --output fixture_deal_report.json
       - name: Build synthetic Jirum Daangn drafts (no posting)
