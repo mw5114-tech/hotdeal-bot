@@ -89,9 +89,15 @@ def browser_public_page(token: str) -> dict:
         with sync_playwright() as playwright:
             browser = playwright.chromium.launch(headless=True, timeout=30000)
             try:
-                ctx = browser.new_context(extra_http_headers={HEADER_NAME: token} if token else {},
-                                          accept_downloads=False)
+                ctx = browser.new_context(accept_downloads=False)
                 page = ctx.new_page()
+                if token:
+                    # Only transmit the owner token to the exact first-party host.
+                    def first_party_route(route):
+                        headers = route.request.headers
+                        headers[HEADER_NAME.lower()] = token
+                        route.continue_(headers=headers)
+                    page.route("https://partners.coupang.com/**", first_party_route)
                 try:
                     response = page.goto(TARGET, wait_until="domcontentloaded", timeout=28000)
                     page.wait_for_timeout(1200)
