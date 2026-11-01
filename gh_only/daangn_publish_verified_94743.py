@@ -74,7 +74,24 @@ def publish_once() -> dict:
                 fields = prepare_browser_editor(page, article, "오늘의 핫딜")
                 out["editor_status"] = fields.get("status")
                 out["editor_checks"] = fields
-                if fields.get("status") != "EDITOR_INPUTS_FILLED_DRY_RUN":
+                # The photo widget can temporarily expose the word '준비중'
+                # in inner_text even after its thumbnail has loaded.
+                # Never click publish until all extraneous status text is gone.
+                if (fields.get("status") != "EDITOR_INPUTS_FILLED_DRY_RUN"
+                        and fields.get("body_filled") is False
+                        and fields.get("title_filled") is True):
+                    try:
+                        page.wait_for_function("""(expected) => {
+                           const e=document.querySelector('div.ProseMirror[contenteditable=true]');
+                           return !!e && e.innerText.replace(/\\s+/g,'') === expected;
+                        }""", normalized(article["body"]), timeout=19000)
+                        fields["body_filled"] = True
+                        fields["status"] = "EDITOR_INPUTS_FILLED_AFTER_UPLOAD"
+                        out["editor_status"] = fields["status"]
+                    except Exception:
+                        out["pending_photo_upload_text_still_visible"] = True
+                if fields.get("status") not in ("EDITOR_INPUTS_FILLED_DRY_RUN",
+                                                "EDITOR_INPUTS_FILLED_AFTER_UPLOAD"):
                     actual = page.locator("div.ProseMirror[contenteditable=true]").inner_text()
                     expected = article["body"]
                     title_actual = page.locator('input[placeholder="제목을 입력해주세요."]').input_value()
