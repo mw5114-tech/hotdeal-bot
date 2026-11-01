@@ -77,6 +77,22 @@ class DispatchHttpTests(unittest.TestCase):
         self.assertFalse(coupang_event({"id": 101, "text": "https://link.coupang.com@evil.com/a", "entities": []}))
         self.assertTrue(coupang_event({"id": 101, "text": "https://link.coupang.com/a/xyz).", "entities": []}))
 
+    def test_safe_smoke_input_is_explicit_never_used_by_normal_dispatch(self):
+        data = []
+        class Resp:
+            status = 204
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+        def opened(req, timeout):
+            data.append(json.loads(req.data))
+            return Resp()
+        workflow_dispatch("fake-token", opener=opened)
+        workflow_dispatch("fake-token", opener=opened, smoke_test=True)
+        self.assertEqual(data[0], {"ref": "main"})
+        self.assertEqual(data[1], {
+            "ref": "main", "inputs": {"smoke_test": "true"}
+        })
+
     def test_only_exact_https_coupang_hosts_trigger(self):
         for url in (
             "https://link.coupang.com/a/deal",

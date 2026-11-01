@@ -18,34 +18,46 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
-      - name: Use GitHub API to dispatch the production workflow in SAFE smoke mode
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Feed a synthetic RAW_MODE Coupang event into the real bridge
         env:
           GH_DISPATCH_TOKEN: ${{ github.token }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
         run: |
           python - <<'PY'
-          import json
-          import os
-          from urllib import request
+          import asyncio
+          from pathlib import Path
+          import tempfile
+          from live_store import Store
+          from jirum_github_dispatch import (
+              GitHubEventBridge, workflow_dispatch, LAST_ACK_ID_KEY,
+              PENDING_KEY,
+          )
 
-          repo = os.environ["GITHUB_REPOSITORY"]
-          # The only permitted target is the existing FIFO workflow's read-only
-          # smoke job. The real drain job is explicitly skipped for this input.
-          url = (f"https://api.github.com/repos/{repo}/actions/workflows/"
-                 "daangn-jirum-manual-fifo.yml/dispatches")
-          body = json.dumps({
-              "ref": "main",
-              "inputs": {"smoke_test": "true"},
-          }).encode("utf-8")
-          req = request.Request(url, data=body, method="POST", headers={
-              "Accept": "application/vnd.github+json",
-              "Authorization": "Bearer " + os.environ["GH_DISPATCH_TOKEN"],
-              "Content-Type": "application/json",
-              "X-GitHub-Api-Version": "2022-11-28",
-              "User-Agent": "JirumSafeDispatchSmoke/1.0",
-          })
-          with request.urlopen(req, timeout=22) as resp:
-              status = resp.status
-          assert status == 204, f"Unexpected dispatch status: {status}"
-          print("GITHUB_DISPATCH_HTTP_204_ACCEPTED_SAFE_SMOKE_ONLY")
+          with tempfile.TemporaryDirectory() as folder:
+              store = Store(Path(folder) / "test-bridge.sqlite3")
+              try:
+                  store.initialize(100, [("personal", "123"), ("group", "-456")])
+                  now = [10000.]
+                  bridge = GitHubEventBridge(
+                      store, __import__("os").environ["GH_DISPATCH_TOKEN"],
+                      clock=lambda: now[0],
+                      sender=lambda token: workflow_dispatch(token, smoke_test=True),
+                  )
+                  # Actual RAW_MODE shape includes text and hidden entity URL.
+                  synthetic = {"id": 101, "text": "쿠팡 새 딜 구매하기",
+                               "entities": [{
+                                   "type": "text_link",
+                                   "url": "https://link.coupang.com/a/safe-smoke",
+                               }]}
+                  assert bridge.observe(synthetic)
+                  now[0] += 21
+                  assert asyncio.run(bridge.process_once())
+                  # A GitHub HTTP denial leaves the pending event intact.
+                  assert store.get(LAST_ACK_ID_KEY) == 101, "HTTP dispatch not accepted"
+                  assert store.get(PENDING_KEY) == 0, "Pending signal not checkpointed"
+                  print("RAW_BRIDGE_REAL_GITHUB_API_DISPATCH_ACCEPTED_SAFE_SMOKE")
+              finally:
+                  store.close()
           PY
