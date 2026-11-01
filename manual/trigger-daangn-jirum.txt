@@ -1,0 +1,3 @@
+Manual FIFO publish trigger
+Requested once by user on 2026-11-01.
+Nonce: 20261101-manual-001
