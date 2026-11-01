@@ -1,0 +1,23 @@
+name: Coupang fresh link offline feasibility validation
+on:
+  pull_request:
+    paths:
+      - coupang_fresh_link_research.py
+      - test_coupang_fresh_link_research.py
+      - .github/workflows/coupang-fresh-link-research.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  controlled-candidate-validation:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate product matching and unverified tag formatting offline
+        run: |
+          python -m py_compile coupang_fresh_link_research.py
+          python -m unittest -v test_coupang_fresh_link_research.py
