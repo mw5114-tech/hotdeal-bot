@@ -102,6 +102,40 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertTrue(hist["usable_historical_reference"])
         self.assertEqual(validated_history(hist, PID, IID, OG), 34575)
 
+    def test_actual_imac_generic_og_title_accepts_exact_lowchart_sku(self):
+        p, i = "8444033257", "24426437522"
+        og = "Apple 아이맥 24 M4칩 - 일체형PC | 쿠팡"
+        low_title = ("Apple 아이맥 24 M4칩, 핑크, M4 8코어, 8코어 GPU, "
+                     "16GB, 256GB, 스탠다드 글래스 - 2,116,500원 - 로우차트")
+        html = (f"<html><title>{low_title}</title><body>"
+                f"상품번호 {p} 옵션 {i} 현재가 2,116,500원 관측 최저가 1,950,000원 "
+                "관측 최고가 2,800,000원 관측 평균가 2,265,732원 "
+                "최근 변동일 2026-10-31</body></html>")
+        ref = parse_reference(html, build_url(p, i), p, i, ("Apple",), 1743000)
+        self.assertTrue(ref["usable_historical_reference"])
+        self.assertTrue(same_named_option(og, low_title))
+        self.assertEqual(validated_history(ref, p, i, og), 2265732)
+        out = create_default_preview(1743000, "Apple 아이맥 24 M4칩", 2265732)
+        self.assertIn("약 2,265,732원", out["caption"])
+        self.assertIn("1,743,000원 (약 25% 할인 / 상세페이지 참고)", out["caption"])
+
+    def test_generic_og_title_cannot_override_wrong_exact_item(self):
+        p, i = "8444033257", "24426437522"
+        og = "Apple 아이맥 24 M4칩 - 일체형PC | 쿠팡"
+        title = "Apple 아이맥 24 M4칩, 핑크, 16GB, 256GB - 로우차트"
+        hist = {
+            "usable_historical_reference": True,
+            "official_normal_price": False,
+            "source_item_identifiers_present": True,
+            "title_option_matches": True,
+            "product_id": p,
+            "item_id": "24948353594",
+            "source_url": build_url(p, i),
+            "page_title": title,
+            "observed_average_krw": 2265732,
+        }
+        self.assertIsNone(validated_history(hist, p, i, og))
+
     def test_wrong_item_history_rejected(self):
         hist = parse_reference(LOW_BODY, build_url(PID, IID), PID, IID,
                                ("휘카레", "230g", "20개"), 12050)
