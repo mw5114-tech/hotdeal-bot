@@ -1,0 +1,36 @@
+name: Verify Daangn test post exactly once (read-only)
+on:
+  push:
+    branches:
+      - test/daangn-onepost-20261101
+    paths:
+      - .github/workflows/daangn-verify-onepost.yml
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    env:
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Read newly published exact post URL, verify name, price, owner tag
+        run: python -m gh_only.daangn_verify_published
+      - name: Save read-only verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verified-daangn-post-94737
+          path: daangn-verify-once/
+          if-no-files-found: warn
+          retention-days: 1
