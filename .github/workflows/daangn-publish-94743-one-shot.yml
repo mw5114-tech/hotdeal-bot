@@ -45,3 +45,4 @@ jobs:
             one-post-test-result/
           retention-days: 1
           if-no-files-found: warn
+# Second run: editor diagnostics enabled; still rejects publish on mismatch.
