@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94812,
+  "last_scanned_id": 94813,
   "pending": [
     {
       "id": 94789,
@@ -193,6 +193,14 @@
       "source_text": "👍대박 8,090원 (30.6% 할인)\n위크위크서울 바질페스토 소스, 100g, 1개\n📌 가격 현황\n- 정상가: 11,660원\n- 할인: 3,570원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikXDCZ5h2O\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "위크위크서울 바질페스토 소스, 100g, 1개",
       "sale_price_krw": 8090
+    },
+    {
+      "id": 94813,
+      "source_post_url": "https://t.me/jirum/94813",
+      "original_purchase_url": "https://link.coupang.com/a/ikX8ldGpZA",
+      "source_text": "👍대박 20,870원 (37.0% 할인)\n츠바키 파인투데이 프리미엄 리페어 샴푸 리필용\n📌 가격 현황\n- 정상가: 33,127원\n- 할인: 12,257원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikX8ldGpZA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "츠바키 파인투데이 프리미엄 리페어 샴푸 리필용",
+      "sale_price_krw": 20870
     }
   ],
   "in_flight": null,
