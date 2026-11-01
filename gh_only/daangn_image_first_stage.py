@@ -101,6 +101,9 @@ def open_prepare(page, article):
             page.keyboard.insert_text(line)
         if idx < len(article["body"].split("\n"))-1:
             page.keyboard.press("Enter")
+    # Press Enter after the complete URL before blur: Tiptap's linkify-on-
+    # paste may not activate until the user commits the final paragraph.
+    page.keyboard.press("Enter")
     # Move focus out to trigger ProseMirror's autolink recognition.
     title=page.locator('input[placeholder="제목을 입력해주세요."]')
     if title.count()!=1:raise RuntimeError("TITLE_AMBIGUOUS")
@@ -118,6 +121,7 @@ def open_prepare(page, article):
             "(es)=>es.map(e=>e.getAttribute('href'))")
         return len(values)==1 and values[0]==article["candidate_url"]
     result["anchor_exact"]=href_match()
+    result["anchor_count_initial"]=editor.locator("a").count()
     # Some ProseMirror autolink implementations only run after whitespace.
     if not result["anchor_exact"]:
         editor.press("ControlOrMeta+End")
