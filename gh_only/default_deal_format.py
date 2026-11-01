@@ -83,7 +83,7 @@ def create_default_preview(sale: int | None, title: str | None,
     if sale is not None:
         price_text = f"🔥 핫딜 특가 : {sale:,}원"
         if approx is not None:
-            price_text += f" (상세페이지 참고 / 약 {approx}% 혜택)"
+            price_text += f" (약 {approx}% 할인 / 상세페이지 참고)"
         else:
             price_text += " (상세페이지 참고)"
     else:
