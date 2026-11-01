@@ -1,0 +1,25 @@
+name = "jirum-telegram-webhook"
+main = "src/index.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[triggers]
+# Cheap cloud check for pending queue only. Does not run GitHub on empty input.
+crons = ["* * * * *"]
+
+[vars]
+ENABLE_DISPATCH = "false"
+MAX_DAILY_DISPATCHES = "12"
+# Set the true IDs in Cloudflare dashboard or with wrangler secret:
+# TELEGRAM_GROUP_CHAT_ID=-100...
+# TRUSTED_RELAY_BOT_ID=... (the bot which forwards @jirum to the group)
+# TELEGRAM_WEBHOOK_SECRET=... (1-256 chars allowed by Bot API)
+# GITHUB_TOKEN=... (fine-grained PAT, repository Actions: write,
+#                     Contents: read)
+# NEVER put bot tokens or GitHub tokens into this file.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "jirum-telegram-trigger"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
