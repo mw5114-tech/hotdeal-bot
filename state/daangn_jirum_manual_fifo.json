@@ -3,14 +3,6 @@
   "last_scanned_id": 94769,
   "pending": [
     {
-      "id": 94765,
-      "source_post_url": "https://t.me/jirum/94765",
-      "original_purchase_url": "https://link.coupang.com/a/ijQp8Gs1ZI",
-      "source_text": "👍대박 3,270원 (34.6% 할인)\n해찬들 사계절쌈장, 300g, 3개\n📌 가격 현황\n- 정상가: 5,000원\n- 할인: 1,730원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijQp8Gs1ZI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "해찬들 사계절쌈장, 300g, 3개",
-      "sale_price_krw": 3270
-    },
-    {
       "id": 94766,
       "source_post_url": "https://t.me/jirum/94766",
       "original_purchase_url": "https://link.coupang.com/a/ijRsBRmyJ2",
@@ -43,12 +35,7 @@
       "sale_price_krw": 12750
     }
   ],
-  "in_flight": {
-    "id": 94765,
-    "status": "CLAIMED",
-    "run_id": "41289051562",
-    "at": "2026-11-01T08:29:58.967772+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -173,6 +160,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%8C%80%EC%83%81-%EC%A2%85%EA%B0%80-%EC%B4%9D%EA%B0%81%EA%B9%80%EC%B9%98-23kg-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dXEVqz5j?from=write",
       "at": "2026-11-01T08:29:50.250668+00:00",
+      "run_id": "41289051562"
+    },
+    "94765": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%95%B4%EC%B0%AC%EB%93%A4-%EC%82%AC%EA%B3%84%EC%A0%88%EC%8C%88%EC%9E%A5-300g-3%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dpWGDBqP?from=write",
+      "at": "2026-11-01T08:30:14.479031+00:00",
       "run_id": "41289051562"
     }
   },
