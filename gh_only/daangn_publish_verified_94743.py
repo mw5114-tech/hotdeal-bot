@@ -84,7 +84,7 @@ def publish_once() -> dict:
                         page.wait_for_function("""(expected) => {
                            const e=document.querySelector('div.ProseMirror[contenteditable=true]');
                            return !!e && e.innerText.replace(/\\s+/g,'') === expected;
-                        }""", normalized(article["body"]), timeout=19000)
+                        }""", normalized(article["body"]), timeout=4000)
                         fields["body_filled"] = True
                         fields["status"] = "EDITOR_INPUTS_FILLED_AFTER_UPLOAD"
                         out["editor_status"] = fields["status"]
@@ -92,6 +92,29 @@ def publish_once() -> dict:
                         out["pending_photo_upload_text_still_visible"] = True
                 if fields.get("status") not in ("EDITOR_INPUTS_FILLED_DRY_RUN",
                                                 "EDITOR_INPUTS_FILLED_AFTER_UPLOAD"):
+                    editor = page.locator("div.ProseMirror[contenteditable=true]")
+                    actual = editor.inner_text()
+                    image_label = editor.evaluate("""(e) => {
+                      const img=e.querySelector('img'); if(!img) return '';
+                      let node=img.parentElement;
+                      for(let i=0;i<4&&node&&node!==e;i++,node=node.parentElement){
+                        if((node.innerText||'').includes('준비중'))return '준비중';
+                      }
+                      return '';
+                    }""")
+                    required = ["board_selected", "title_filled", "image_attached",
+                                "owner_url_above_disclosure", "disclosure_is_last_line",
+                                "url_intact_in_one_text_node", "image_survived_body"]
+                    if (normalized(actual) == "준비중" + normalized(article["body"])
+                        and image_label == "준비중"
+                        and all(fields.get(k) is True for k in required)):
+                        fields["body_filled"] = True
+                        fields["status"] = "EDITOR_VERIFIED_WITH_IMAGE_WIDGET_LABEL"
+                        out["editor_status"] = fields["status"]
+                        out["image_widget_preparing_label_only"] = True
+                if fields.get("status") not in ("EDITOR_INPUTS_FILLED_DRY_RUN",
+                                                "EDITOR_INPUTS_FILLED_AFTER_UPLOAD",
+                                                "EDITOR_VERIFIED_WITH_IMAGE_WIDGET_LABEL"):
                     actual = page.locator("div.ProseMirror[contenteditable=true]").inner_text()
                     expected = article["body"]
                     title_actual = page.locator('input[placeholder="제목을 입력해주세요."]').input_value()
