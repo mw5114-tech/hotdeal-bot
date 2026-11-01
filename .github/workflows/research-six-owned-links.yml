@@ -1,0 +1,21 @@
+name: Compare six owned Coupang quick links against unissued AFFSDP
+on:
+  pull_request:
+    paths:
+      - research_six_owner_shortlinks.py
+      - .github/workflows/research-six-owned-links.yml
+permissions:
+  contents: read
+jobs:
+  six-link-onetime-study:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate script syntax
+        run: python -m py_compile research_six_owner_shortlinks.py
+      - name: Inspect six first-party redirects and one exact-matched candidate
+        run: python research_six_owner_shortlinks.py
