@@ -150,7 +150,17 @@ class GitHubEventBridge:
 
     async def run(self, stopped: asyncio.Event) -> None:
         while not stopped.is_set():
-            await self.process_once()
+            try:
+                await self.process_once()
+            except Exception:
+                # An optional GitHub bridge must never take down the existing
+                # Telegram watcher. Keep the pending SQLite signal intact.
+                self.logger("GITHUB_BRIDGE_RETRY_LATER", reason="STATE_ERROR")
+                try:
+                    await asyncio.wait_for(stopped.wait(), timeout=60)
+                except asyncio.TimeoutError:
+                    pass
+                continue
             self.wake.clear()
             try:
                 await asyncio.wait_for(self.wake.wait(), timeout=2)
