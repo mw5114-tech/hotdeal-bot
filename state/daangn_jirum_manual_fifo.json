@@ -3,14 +3,6 @@
   "last_scanned_id": 94748,
   "pending": [
     {
-      "id": 94745,
-      "source_post_url": "https://t.me/jirum/94745",
-      "original_purchase_url": "https://link.coupang.com/a/ijx6ub7G9c",
-      "source_text": "👍대박 13,320원 (39.0% 할인)\n[로켓프레시] 한우 1등급 숙성등심 구이용 (냉장)\n📌 가격 현황\n- 정상가: 21,836원\n- 할인: 8,516원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijx6ub7G9c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "[로켓프레시] 한우 1등급 숙성등심 구이용 (냉장)",
-      "sale_price_krw": 13320
-    },
-    {
       "id": 94746,
       "source_post_url": "https://t.me/jirum/94746",
       "original_purchase_url": "https://link.coupang.com/a/ijy2SGlBme",
@@ -35,12 +27,7 @@
       "sale_price_krw": 11280
     }
   ],
-  "in_flight": {
-    "id": 94745,
-    "status": "CLAIMED",
-    "run_id": "41272538040",
-    "at": "2026-11-01T04:18:39.252776+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -58,6 +45,12 @@
       "audit_run_id": "41272059780",
       "audit_result": "POST_EXISTS_LINK_NOTICES_VERIFIED_BUT_PRODUCT_IMAGE_MISSING",
       "note": "Do not repost. Existing post requires image edit only."
+    },
+    "94745": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%95%9C%EC%9A%B0-1%EB%93%B1%EA%B8%89-%EC%88%99%EC%84%B1%EB%93%B1%EC%8B%AC-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-200g-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PNDEG3rj?from=write",
+      "at": "2026-11-01T04:18:56.037546+00:00",
+      "run_id": "41272538040"
     }
   },
   "skipped_non_coupang": 0
