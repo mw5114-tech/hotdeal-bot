@@ -1,0 +1,25 @@
+name: Coupang Influencers public Chromium render verification
+on:
+  pull_request:
+    paths:
+      - coupang_influencers_chromium_public_check.py
+      - .github/workflows/coupang-influencers-public-ui.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-ui-chromium:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Check one public page in actual Chromium (no login)
+        run: python coupang_influencers_chromium_public_check.py
