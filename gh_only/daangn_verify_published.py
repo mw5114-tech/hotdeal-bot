@@ -44,6 +44,14 @@ def main():
                 result["has_hotdeal_board"]="오늘의 핫딜" in body
                 result["img_count"]=page.locator("img").count()
                 result["image_candidate_in_post"]=page.locator("article img, [data-testid*=post] img").count()
+                result["image_geometry"]=page.evaluate("""() => [...document.images].map((img)=>({
+                    width: img.naturalWidth, height: img.naturalHeight,
+                    renderedWidth:Math.round(img.getBoundingClientRect().width),
+                    renderedHeight:Math.round(img.getBoundingClientRect().height),
+                    alt:(img.alt||'').slice(0,70),
+                    sourceHost:(()=>{try{return new URL(img.currentSrc||img.src).hostname}catch{return ''}})(),
+                    inRichContent:!!img.closest('.ProseMirror,.tiptap,[class*=postContent],[class*=PostContent]')
+                })).slice(0,28)""")
                 result["page_h1"]=[x.strip()[:100] for x in page.locator("h1").all_inner_texts()][:4]
                 result["text_tail"]=body[-580:]
                 result["post_visible"]=(result["http_status"]==200
