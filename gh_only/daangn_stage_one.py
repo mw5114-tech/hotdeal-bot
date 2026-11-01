@@ -20,12 +20,16 @@ def get_payload():
     item=read_one_draft(SOURCE)
     text=item["body"]
     original_line="🛒 상품 링크 (수익 귀속 미검증) : "
-    if not text.splitlines()[-2].startswith(original_line):  # existing code appends disclosure last
+    suffix="\n\n"+DISCLOSURE
+    if not text.endswith(suffix):
+        raise ValueError("UNEXPECTED_DISCLOSURE_SUFFIX")
+    caption=text[:-len(suffix)]
+    lines=caption.splitlines()
+    if not lines[-1].startswith(original_line):
         raise ValueError("UNEXPECTED_LINK_DISCLOSURE_LAYOUT")
-    lines=text.splitlines()
-    # The last line must be the owner's URL as expressly requested. Disclosure precedes it.
-    ownlink=lines[-2]
-    body="\n".join(lines[:-2]).rstrip()+"\n\n"+DISCLOSURE+"\n\n"+ownlink
+    # The last line must be the owner's URL as expressly requested.
+    ownlink=lines[-1]
+    body="\n".join(lines[:-1]).rstrip()+"\n\n"+DISCLOSURE+"\n\n"+ownlink
     if not body.endswith(ownlink) or not item["image"]:
         raise ValueError("NO_EXACT_PRODUCT_IMAGE_OR_OWN_URL")
     return {**item,"body":body}
