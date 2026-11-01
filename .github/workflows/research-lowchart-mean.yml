@@ -5,6 +5,7 @@ on:
       - feat/daangn-caption-lowchart-disclosure-last-20261101
     paths:
       - .github/workflows/research-lowchart-mean.yml
+      - gh_only/default_deal_format.py
 permissions:
   contents: read
 jobs:
