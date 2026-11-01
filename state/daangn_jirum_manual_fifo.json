@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94775,
-  "pending": [],
+  "last_scanned_id": 94776,
+  "pending": [
+    {
+      "id": 94776,
+      "source_post_url": "https://t.me/jirum/94776",
+      "original_purchase_url": "https://link.coupang.com/a/ijYVZm6Jrg",
+      "source_text": "🔥🔥🔥무지성 2,200원 (63.0% 할인)🔥🔥🔥\n쁘띠첼 요거젤리 딸기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 5,946원\n- 할인: 3,746원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYVZm6Jrg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "쁘띠첼 요거젤리 딸기",
+      "sale_price_krw": 2200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
