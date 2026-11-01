@@ -28,6 +28,15 @@ class FakeClock:
 
 
 class DispatchHttpTests(unittest.TestCase):
+    def test_visible_urls_stop_at_real_whitespace_not_letter_s(self):
+        from jirum_github_dispatch import VISIBLE_URL_RE
+        url = "https://www.coupang.com/vp/products/123"
+        for separator in (" ", "\n", "\t", "\r\n"):
+            text = "특가 " + url + separator + "설명 https://example.com/other"
+            self.assertEqual(VISIBLE_URL_RE.findall(text), [url, "https://example.com/other"])
+            self.assertTrue(coupang_event({"id": 101, "text": text, "entities": []}))
+        self.assertFalse(coupang_event({"id": 101, "text": "https://link.coupang.coms.evil/offer", "entities": []}))
+
     def test_official_workflow_dispatch_endpoint_with_main_and_auth(self):
         seen = {}
         class Response:

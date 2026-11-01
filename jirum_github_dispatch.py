@@ -31,7 +31,7 @@ RETRY_AT_KEY = "github_dispatch_retry_at"
 COUPANG_HOSTS = frozenset({
     "link.coupang.com", "coupang.com", "www.coupang.com", "m.coupang.com"
 })
-VISIBLE_URL_RE = re.compile(r"https?://[^\\s<>\"']+", re.IGNORECASE)
+VISIBLE_URL_RE = re.compile(r"https?://[^\s<>\"']+", re.IGNORECASE)
 
 
 def coupang_event(post: dict) -> bool:
