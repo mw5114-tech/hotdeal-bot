@@ -73,7 +73,18 @@ def publish_once() -> dict:
                 page.wait_for_timeout(1400)
                 fields = prepare_browser_editor(page, article, "오늘의 핫딜")
                 out["editor_status"] = fields.get("status")
+                out["editor_checks"] = fields
                 if fields.get("status") != "EDITOR_INPUTS_FILLED_DRY_RUN":
+                    actual = page.locator("div.ProseMirror[contenteditable=true]").inner_text()
+                    expected = article["body"]
+                    title_actual = page.locator('input[placeholder="제목을 입력해주세요."]').input_value()
+                    out["editor_actual_length"] = len(normalized(actual))
+                    out["editor_expected_length"] = len(normalized(expected))
+                    out["title_matches"] = title_actual == article["title"]
+                    out["actual_prefix"] = actual[:80]
+                    out["actual_suffix"] = actual[-125:]
+                    out["expected_suffix"] = expected[-125:]
+                    page.screenshot(path=str(RESULT / "failed_editor.png"), timeout=9000)
                     raise RuntimeError("EDITOR_VALIDATION_FAILED")
                 if urlsplit(page.url).path != "/i-gagyeog-mos-c/posts/new":
                     raise RuntimeError("WRONG_POST_EDITOR_ROUTE")
