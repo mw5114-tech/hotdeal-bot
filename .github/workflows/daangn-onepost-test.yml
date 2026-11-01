@@ -1,0 +1,40 @@
+name: One-time own Daangn Cafe post editor inspection
+on:
+  push:
+    branches:
+      - test/daangn-onepost-20261101
+    paths:
+      - .github/workflows/daangn-onepost-test.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: daangn-first-post-diagnostics-20261101
+  cancel-in-progress: false
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    env:
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Inspect user's actual Daangn Cafe post-new editor with secret state
+        run: python -m gh_only.daangn_live_inspect
+      - name: Save status and private screenshot for troubleshooting
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daangn-own-cafe-session-editor-inspection
+          path: daangn-post-test/
+          if-no-files-found: warn
+          retention-days: 1
