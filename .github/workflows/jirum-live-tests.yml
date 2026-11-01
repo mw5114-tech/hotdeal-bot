@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'jirum_live.py'
+      - 'jirum_github_dispatch.py'
+      - 'test_jirum_github_dispatch.py'
       - 'live_store.py'
       - 'live_telegram.py'
       - 'test_jirum_live.py'
