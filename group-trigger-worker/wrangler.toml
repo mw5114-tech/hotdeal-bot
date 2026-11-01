@@ -8,9 +8,9 @@ workers_dev = true
 [vars]
 # Exact group ID already verified in state/telegram_group_chat.json.
 MUSE_GROUP_CHAT_ID = "-5254258160"
-# REPLACE with the numeric getMe ID of '이 가격 못 참지 BOT'.
-# 0 intentionally disables accepting Telegram events.
-SOURCE_SENDER_BOT_ID = "0"
+# Sender identity verified via read-only Telegram getMe: @mokchamji_hotdeal_bot
+# Only messages posted by this bot in the MUSE group can trigger an Action.
+SOURCE_SENDER_BOT_ID = "9233582187"
 
 [[queues.producers]]
 binding = "EVENT_QUEUE"
