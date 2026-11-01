@@ -317,8 +317,12 @@ def main():
         json.dumps(r, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print("DAANGN_EDITOR_PROBE " + json.dumps(r, ensure_ascii=False))
-    # Dry-run failure states intentionally don't fail the workflow; evidence saved.
+    # The private artifact is uploaded with 'if: always()' even if this job
+    # fails. Do not show a green check when login, editor or photo failed.
+    ok = (r.get("status") == "EDITOR_INPUTS_FILLED_DRY_RUN"
+          and r.get("editor_fields", {}).get("image_attached") is True)
+    return 0 if ok else 2
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
