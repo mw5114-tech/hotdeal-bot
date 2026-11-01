@@ -1,0 +1,32 @@
+name: Tests | MUSE group listener to GitHub (offline)
+
+on:
+  push:
+    branches:
+      - feat/telegram-group-bot-cloudflare-queue-dispatch-20261101
+    paths:
+      - 'group-trigger-worker/**'
+      - '.github/workflows/muse-group-trigger-tests.yml'
+  pull_request:
+    paths:
+      - 'group-trigger-worker/**'
+      - '.github/workflows/muse-group-trigger-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  worker-offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test webhook validation, bot-only filtering and GitHub retry
+        run: node --test group-trigger-worker/index.test.mjs
+      - name: Check syntax of Cloudflare Worker and test suite
+        run: node --check group-trigger-worker/index.mjs && node --check group-trigger-worker/index.test.mjs
