@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'jirum_live.py'
+      - 'jirum_github_dispatch.py'
+      - 'test_jirum_github_dispatch.py'
       - 'live_store.py'
       - 'live_telegram.py'
       - 'test_jirum_live.py'
@@ -33,6 +35,8 @@ jobs:
         with:
           python-version: '3.11'
       - run: python -m pip install -r requirements-live.txt
-      - run: python -m unittest discover -v
-      - run: python -m py_compile jirum_live.py live_store.py live_telegram.py deploy/configure_live.py deploy/backup_state.py
+      # Only the watcher/relay tests. Unrelated Coupang session-export tests
+      # depend on optional cryptography not installed on the live server.
+      - run: python -m unittest -v test_jirum_live test_jirum_github_dispatch test_jirum_forward test_telegram_delivery
+      - run: python -m py_compile jirum_live.py jirum_github_dispatch.py live_store.py live_telegram.py deploy/configure_live.py deploy/backup_state.py
       - run: bash -n deploy/install.sh
