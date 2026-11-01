@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94783,
-  "pending": [],
+  "last_scanned_id": 94784,
+  "pending": [
+    {
+      "id": 94784,
+      "source_post_url": "https://t.me/jirum/94784",
+      "original_purchase_url": "https://link.coupang.com/a/ika1DuUUW4",
+      "source_text": "☆특가 47,590원\n테팔 매트 프라이팬 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/ika1DuUUW4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 47,590원",
+      "sale_price_krw": 47590
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
