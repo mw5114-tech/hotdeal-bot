@@ -3,14 +3,6 @@
   "last_scanned_id": 94769,
   "pending": [
     {
-      "id": 94767,
-      "source_post_url": "https://t.me/jirum/94767",
-      "original_purchase_url": "https://link.coupang.com/a/ijSJYOFEgm",
-      "source_text": "☆특가 28,900원\nHanilMedical 탄소열선 고급전기요 비숑 HL-203D(22)\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijSJYOFEgm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 28,900원",
-      "sale_price_krw": 28900
-    },
-    {
       "id": 94768,
       "source_post_url": "https://t.me/jirum/94768",
       "original_purchase_url": "https://link.coupang.com/a/ijSV2evpaS",
@@ -27,12 +19,7 @@
       "sale_price_krw": 12750
     }
   ],
-  "in_flight": {
-    "id": 94767,
-    "status": "CLAIMED",
-    "run_id": "41289051562",
-    "at": "2026-11-01T08:30:45.586385+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -169,6 +156,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%82%A8%EC%96%91%EC%9D%B4%EC%98%A4-%EC%9C%A0%EC%82%B0%EA%B7%A0-%EC%9D%8C%EB%A3%8C-190ml-24%EA%B0%9C-dagLW77A?from=write",
       "at": "2026-11-01T08:30:38.006897+00:00",
+      "run_id": "41289051562"
+    },
+    "94767": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-HanilMedical-%ED%83%84%EC%86%8C%EC%97%B4%EC%84%A0-%EA%B3%A0%EA%B8%89-%EC%A0%84%EA%B8%B0%EC%9A%94-HL-D20525-P5nO46yd?from=write",
+      "at": "2026-11-01T08:31:01.040694+00:00",
       "run_id": "41289051562"
     }
   },
