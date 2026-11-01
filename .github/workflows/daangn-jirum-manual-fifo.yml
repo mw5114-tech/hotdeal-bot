@@ -1,10 +1,10 @@
-name: Jirum Coupang | Daangn FIFO drain (30min + manual)
+name: Jirum Coupang | Daangn FIFO drain (5min + manual)
 
 on:
-  # Off-peak minute avoids top-of-hour GitHub scheduler congestion.
-  # GitHub schedule may run later than the exact cron minute.
+  # Every 5 minutes at minute 2,7,12,...57, avoiding :00 congestion.
+  # GitHub can delay or skip cron triggers under high load.
   schedule:
-    - cron: '7,37 * * * *'
+    - cron: '2-57/5 * * * *'
   workflow_dispatch:
   # Optional user-triggered action via GitHub connector, independent of cron.
   push:
@@ -89,6 +89,6 @@ jobs:
           retention-days: 1
           if-no-files-found: ignore
 
-# 30-minute cron + on-demand manual. Each run posts ALL available pending
+# 5-minute cron + on-demand manual. Each run posts ALL available pending
 # oldest-first, with a conservative runtime budget. Backlog that cannot finish
 # safely resumes next schedule. Never retry an uncertain post; stop on error.
