@@ -1,5 +1,7 @@
 # Telegram 그룹 이벤트 → GitHub Actions → 당근카페 FIFO
 
+기존 Oracle 수신기를 재사용하는 경로는 [Oracle 배포 안내](../../docs/ORACLE_GITHUB_DISPATCH.md)를 참고하세요. 두 실행기를 동시에 활성화하지 않습니다.
+
 ## 원리
 - 새로 들어온 **텔레그램 그룹 메시지 이벤트**를 Cloudflare Workers 웹훅이 수신합니다.
 - 지정한 그룹 채팅 ID + 지정한 릴레이 봇 ID를 모두 통과하고, 본문 또는 링크 엔티티에 **쿠팡 상품 URL**이 있는 경우에만 처리합니다.
@@ -38,7 +40,7 @@ Cloudflare 무료 계정에서:
 - 배포 시 Workers 도메인 URL을 확인합니다.
 - Telegram Bot API setWebhook에서 https://<worker-host>/telegram/webhook 주소를 등록하고, allowed_updates를 ["message"]로 선택합니다. secret_token은 Cloudflare TELEGRAM_WEBHOOK_SECRET과 똑같아야 합니다.
 - URL에 사용되는 **봇 토큰은 @BotFather에서 받은 토큰**입니다. 환경변수로 다루고 저장소에 넣지 마세요.
-- 처음에는 ENABLE_DISPATCH=false여서 GitHub에 전혀 발행 요청이 나가지 않습니다. 이 상태에서 웹훅에 메시지를 보내면 503을 반환하며 Telegram이 재전송할 수 있으므로 **실제 웹훅을 연결하기 전에 설정과 오프라인 테스트를 완료**하세요.
+- ENABLE_DISPATCH=false에서는 인증된 메시지를 D1에 저장하고 200을 반환하지만 GitHub를 호출하지 않습니다. 먼저 수신 전용 상태에서 검증하세요. 테스트 이벤트는 활성화 전에 검토해야 합니다.
 - 그룹에서 실제 봇 메시지가 보이는지, @BotFather의 Bot-to-Bot Communication Mode가 켜졌는지 먼저 확인하세요. 그 다음 ENABLE_DISPATCH="true"로 변경·배포하고 Telegram setWebhook으로 연결하세요. 활성화 이후 테스트 메시지도 조건에 맞으면 실제 GitHub Actions를 부를 수 있습니다.
 - 리스너 봇이 이미 다른 웹훅 또는 getUpdates 사용 중이라면 충돌하지 않도록 기존 프로세스에 코드를 통합하는 방법을 선택해야 합니다.
 
@@ -51,3 +53,18 @@ Cloudflare 무료 계정에서:
 - 원래 쿠팡 파트너스 링크는 공식 발급/수익 귀속이 검증되지 않은 AFFSDP 후보입니다. 자동 수익 보장을 의미하지 않습니다.
 - 1분마다 돌아가는 것은 **Cloudflare 측 복구용 확인만**이고, GitHub Actions가 매분 실행되지는 않습니다.
 - Cloudflare Worker, D1 무료 사용량과 GitHub Actions 분량은 별도 제한입니다. 실제 계정의 요금제 사용량을 확인하세요.
+
+## Durable dispatch / direct group payload update
+
+Apply migration `0002_dispatch_attempts.sql` before deploying the updated Worker.
+Every POST, including backlog-only dispatches, first creates a unique active
+`dispatch_attempts` row. A lost response stays uncertain indefinitely. Accepted
+requests must match exactly one `telegram-<request UUID>` workflow run and complete
+successfully before further dispatches. Failed runs no longer auto-retry after a
+30-minute cooldown. Legacy events without captured payload require manual review.
+
+The webhook now stores exact text, purchase URL and group/message/source IDs in
+`payload_json`. Actions receives this as a JSON input (environment variable, never
+shell interpolation), saves it to the existing FIFO, and consumes the UUID before
+publishing. Group-only products no longer require a matching public-channel post.
+The existing manual public scan and cafe publisher remain available.

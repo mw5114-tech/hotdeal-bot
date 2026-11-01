@@ -1,7 +1,17 @@
 name: MANUAL | Jirum Coupang FIFO to Daangn (ONE post)
+run-name: ${{ inputs.request_id && format('telegram-{0}', inputs.request_id) || 'Manual Jirum FIFO' }}
 
 on:
   workflow_dispatch:
+    inputs:
+      request_id:
+        description: Durable Cloudflare dispatch ID
+        type: string
+        default: ''
+      telegram_payload:
+        description: Trusted group product JSON, or empty object for backlog
+        type: string
+        default: '{}'
   # User-triggered GitHub connector write of this command file launches one run.
   # No schedule; state commits never match this trigger.
   push:
@@ -24,6 +34,8 @@ jobs:
     timeout-minutes: 15
     env:
       GH_STATE_TOKEN: ${{ github.token }}
+      TELEGRAM_REQUEST_ID: ${{ inputs.request_id }}
+      TELEGRAM_PAYLOAD: ${{ inputs.telegram_payload }}
       COUPANG_PARTNER_LPTAG: AF9668915
       KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}

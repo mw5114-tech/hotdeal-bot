@@ -1,4 +1,8 @@
 import test from "node:test";
+import {DatabaseSync} from "node:sqlite";
+import {readFileSync,unlinkSync} from "node:fs";
+import {tmpdir} from "node:os";
+import {join} from "node:path";
 import assert from "node:assert/strict";
 import {classifyUpdate,coupangUrl,checkRunGate,processQueue,handleWebhook} from "./index.mjs";
 
@@ -14,57 +18,23 @@ const stateTemplate={
   pending:[], in_flight:null,
   published:{"94737":{},"94738":{},"94743":{}},
 };
-function db() {
-  const events = new Map();
-  const store={events,held:0};
-  store.prepare=function(sql) {
-    let args=[];
-    const q={
-      bind(...a){args=a;return this;},
-      async run(){
-        let changed=0;
-        if(sql.startsWith("INSERT OR IGNORE INTO telegram_events")) {
-          const key=args[0]+"/"+args[1];
-          if(!events.has(key)){
-            events.set(key,{chat_id:args[0],message_id:args[1],
-              source_id:args[2],status:"pending",created_at_ms:args[3]});
-            changed=1;
-          }
-        } else if(sql.startsWith("UPDATE telegram_events SET status = 'dispatch_uncertain'")) {
-          const item=events.get(args[0]+"/"+args[1]);
-          if(item?.status==="pending"){item.status="dispatch_uncertain";changed=1;}
-        } else if(sql.startsWith("UPDATE telegram_events SET status = 'dispatched'")) {
-          const item=events.get(args[0]+"/"+args[1]);
-          if(item?.status==="dispatch_uncertain"){item.status="dispatched";changed=1;}
-        } else if(sql.startsWith("UPDATE telegram_events SET status = 'already_scanned'")) {
-          const item=events.get(args[0]+"/"+args[1]);
-          if(item?.status==="pending"){item.status="already_scanned";changed=1;}
-        } else if(sql.startsWith("UPDATE dispatch_lock SET held_until_ms = ?")) {
-          if(store.held < args[1]){store.held=args[0];changed=1;}
-        } else if(sql.startsWith("UPDATE dispatch_lock SET held_until_ms = 0")) {
-          store.held=0;changed=1;
-        } else throw Error("UNMATCHED_RUN_SQL:"+sql);
-        return {meta:{changes:changed}};
-      },
-      async first(){
-        if(sql.startsWith("SELECT chat_id,message_id FROM telegram_events WHERE status = 'dispatch_uncertain'")) {
-          const item=[...events.values()].find(x=>x.status==="dispatch_uncertain");
-          return item?{chat_id:item.chat_id,message_id:item.message_id}:null;
-        }
-        if(sql.startsWith("SELECT chat_id,message_id,source_id FROM telegram_events")){
-          return [...events.values()].filter(x=>x.status==="pending")
-            .sort((a,b)=>a.created_at_ms-b.created_at_ms || a.message_id-b.message_id)[0] || null;
-        }
-        if(sql.startsWith("SELECT status FROM telegram_events")){
-          const r=events.get(args[0]+"/"+args[1]);
-          return r?{status:r.status}:null;
-        }
-        throw Error("UNMATCHED_FIRST_SQL:"+sql);
-      },
-    };
-    return q;
+function db(path=":memory:",initialize=true) {
+  const sql = new DatabaseSync(path);
+  for (const name of initialize ? ["0001_init.sql", "0002_dispatch_attempts.sql"] : []) {
+    sql.exec(readFileSync(new URL("../migrations/"+name,import.meta.url),"utf8"));
+  }
+  return {sql,
+    events:{
+      get size(){return sql.prepare("SELECT COUNT(*) n FROM telegram_events").get().n;},
+      get(key){const [chat,mid]=key.split("/");return sql.prepare("SELECT * FROM telegram_events WHERE chat_id=? AND message_id=?").get(chat,Number(mid));},
+      set(key,e){sql.prepare("INSERT INTO telegram_events(chat_id,message_id,source_id,status,created_at_ms) VALUES(?,?,?,?,?)").run(e.chat_id,e.message_id,e.source_id,e.status,e.created_at_ms);}
+    },
+    prepare(query){let args=[];return {
+      bind(...values){args=values;return this;},
+      async run(){return {meta:{changes:sql.prepare(query).run(...args).changes}};},
+      async first(){return sql.prepare(query).get(...args) || null;}
+    };}
   };
-  return store;
 }
 function create(envOverrides={},stateOverrides={},runs=[]) {
   const mem=db();
@@ -72,7 +42,7 @@ function create(envOverrides={},stateOverrides={},runs=[]) {
   const state={...stateTemplate,...stateOverrides};
   const calls=[];
   async function mockFetch(url,opts={}) {
-    calls.push({url,method:opts.method||"GET"});
+    calls.push({url,method:opts.method||"GET",body:opts.body});
     if(url.includes("/contents/state/")) {
       return {status:200,json:async()=>({
         encoding:"base64",content:Buffer.from(JSON.stringify(state)).toString("base64"),
@@ -199,20 +169,20 @@ test("daily cap of 12 Github Actions runs protects free quota",async()=>{
     "DAILY_RUN_BUDGET");
   assert.equal(postCount(c),0);
 });
-test("received event already scanned and no backlog is NOT dispatched",async()=>{
+test("source watermark does not discard group product content",async()=>{
   const c=create({}, {last_scanned_id:94755});
   const e=event("https://t.me/jirum/94750 https://link.coupang.com/a/ABCxyz12");
   const context=ctx();await handleWebhook(req(e),c.env,context,c.mockFetch);
   await Promise.all(context.promises);
-  assert.equal(postCount(c),0);
-  assert.equal(c.mem.events.get("-100321/123").status,"already_scanned");
+  assert.equal(postCount(c),1);
+  assert.equal(c.mem.events.get("-100321/123").status,"dispatched");
 });
 test("dispatch gate allows old success and throttles recent failed runs",()=>{
   assert.equal(checkRunGate([],12,now),"READY");
   assert.equal(checkRunGate([{
     head_branch:"main",event:"workflow_dispatch",status:"completed",
     conclusion:"failure",created_at:new Date(now-60000).toISOString(),
-  }],12,now),"LAST_RUN_FAILED_COOLDOWN");
+  }],12,now),"LAST_RUN_FAILED_REVIEW_REQUIRED");
 });
 test("unconfirmed GitHub dispatch blocks all future automatic actions",async()=>{
   const c=create({}, {pending:[{id:94744}]});
@@ -228,4 +198,98 @@ test("worker disabled by default",async()=>{
   const c=create({ENABLE_DISPATCH:"false"});
   assert.equal((await processQueue(c.env,c.mockFetch,now)).status,"NOT_ARMED");
   assert.equal(postCount(c),0);
+});
+
+for (const withEvent of [false,true]) test(`lost dispatch response persists global stop (event=${withEvent})`,async()=>{
+  const c=create({}, {pending:[{id:94744}]});
+  let posts=0;
+  const failed=async(url,opts={})=>{
+    if(opts.method==="POST"){posts++;throw Error("response lost");}
+    return c.mockFetch(url,opts);
+  };
+  if(withEvent){
+    const context=ctx();
+    await handleWebhook(req(event()),c.env,context,failed);
+    await Promise.all(context.promises);
+  } else await assert.rejects(processQueue(c.env,failed,now),/response lost/);
+  // Fresh invocation, expired lease, same persistent database.
+  const later=Date.now()+86400000;
+  assert.equal((await processQueue(c.env,failed,later)).status,"DISPATCH_UNCERTAIN_REVIEW_REQUIRED");
+  assert.equal(posts,1);
+  assert.equal(c.mem.sql.prepare("SELECT status FROM dispatch_attempts").get().status,"uncertain");
+});
+
+test("accepted request not visible in runs never causes another POST",async()=>{
+  const c=create({}, {pending:[{id:94744}]});
+  await processQueue(c.env,c.mockFetch,now);
+  assert.equal((await processQueue(c.env,c.mockFetch,now+600000)).status,"DISPATCH_VISIBILITY_REVIEW_REQUIRED");
+  assert.equal(postCount(c),1);
+});
+
+test("group-only content is transmitted intact as JSON input",async()=>{
+  const c=create(); const context=ctx();
+  const e=event('상품 9,900원 https://link.coupang.com/a/AB12\n$(never execute)');
+  await handleWebhook(req(e),c.env,context,c.mockFetch); await Promise.all(context.promises);
+  const input=JSON.parse(c.calls.find(x=>x.method==="POST").body).inputs;
+  assert.equal(JSON.parse(input.telegram_payload).text,e.message.text);
+  assert.equal(JSON.parse(input.telegram_payload).source_id,null);
+  assert.match(input.request_id,/^[a-f0-9-]{36}$/);
+});
+
+test("capture-only receives and deduplicates without GitHub calls",async()=>{
+  const c=create({ENABLE_DISPATCH:"false"});const context=ctx();
+  await handleWebhook(req(event()),c.env,context,c.mockFetch);
+  await handleWebhook(req(event()),c.env,context,c.mockFetch);
+  await Promise.all(context.promises);
+  assert.equal(c.mem.events.size,1);assert.equal(c.calls.length,0);
+  assert.equal(c.mem.events.get("-100321/123").status,"pending");
+});
+
+test("non-Coupang webhook never stores or dispatches",async()=>{
+  const c=create();const context=ctx();
+  await handleWebhook(req(event('https://11st.co.kr/product/123')),c.env,context,c.mockFetch);
+  await Promise.all(context.promises);
+  assert.equal(c.mem.events.size,0);assert.equal(c.calls.length,0);
+});
+
+test("SQLite unique constraint prevents overlapping attempts even after lease expiry",()=>{
+  const c=create();
+  c.mem.sql.prepare("INSERT INTO dispatch_attempts VALUES(?,?,?)").run("one","accepted",now);
+  assert.throws(()=>c.mem.sql.prepare("INSERT INTO dispatch_attempts VALUES(?,?,?)").run("two","uncertain",now+600000),/UNIQUE/);
+});
+
+test("failed run remains blocked after thirty minutes",()=>{
+  assert.equal(checkRunGate([{head_branch:"main",event:"workflow_dispatch",status:"completed",conclusion:"failure",created_at:new Date(now-86400000).toISOString()}],12,now),"LAST_RUN_FAILED_REVIEW_REQUIRED");
+});
+
+test("closed and reopened database retains uncertain backlog dispatch",async()=>{
+  const path=join(tmpdir(),`hotdeal-test-${crypto.randomUUID()}.sqlite`);
+  const c=create({}, {pending:[{id:94744}]});
+  let disk=db(path);c.env.DB=disk;let posts=0;
+  const failed=async(url,opts={})=>{if(opts.method==='POST'){posts++;throw Error('lost');}return c.mockFetch(url,opts);};
+  try {
+    await assert.rejects(processQueue(c.env,failed,now),/lost/);
+    disk.sql.close();disk=db(path,false);c.env.DB=disk;
+    assert.equal((await processQueue(c.env,failed,now+86400000)).status,'DISPATCH_UNCERTAIN_REVIEW_REQUIRED');
+    assert.equal(posts,1);
+  } finally {disk.sql.close();unlinkSync(path);}
+});
+
+test("accepted successful run permits next queued event only after completion",async()=>{
+  const runs=[];const c=create({}, {pending:[{id:94744}]},runs);
+  await processQueue(c.env,c.mockFetch,now);
+  const input=JSON.parse(c.calls.find(x=>x.method==='POST').body).inputs;
+  runs.push({display_title:'telegram-'+input.request_id,head_branch:'main',event:'workflow_dispatch',status:'completed',conclusion:'success',created_at:new Date(now).toISOString()});
+  c.state.pending=[];
+  assert.equal((await processQueue(c.env,c.mockFetch,now+600000)).status,'NO_NEW_COUPANG_DEAL');
+  assert.equal(postCount(c),1);
+});
+
+test("daily cap leaves event pending and resumes after rolling window",async()=>{
+  const runs=Array.from({length:12},()=>({head_branch:'main',event:'workflow_dispatch',status:'completed',conclusion:'success',created_at:new Date(Date.now()-60000).toISOString()}));
+  const c=create({}, {},runs);const context=ctx();
+  await handleWebhook(req(event()),c.env,context,c.mockFetch);await Promise.all(context.promises);
+  assert.equal(postCount(c),0);assert.equal(c.mem.events.get('-100321/123').status,'pending');
+  assert.equal((await processQueue(c.env,c.mockFetch,Date.now()+86400000)).status,'GITHUB_WORKFLOW_DISPATCHED');
+  assert.equal(postCount(c),1);
 });

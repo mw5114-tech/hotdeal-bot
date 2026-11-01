@@ -1,4 +1,7 @@
 # Byte-compiled / optimized / DLL files
+.wrangler/
+.dev.vars*
+node_modules/
 __pycache__/
 *.py[codz]
 *$py.class

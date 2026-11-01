@@ -60,7 +60,8 @@ export function classifyUpdate(update, env) {
   const deal = extractUrls(msg).map(coupangUrl).find(Boolean);
   if (!deal) return {kind:"IGNORE_NOT_COUPANG"};
   return {kind:"COUPANG", chatId:String(msg.chat.id),
-          messageId:msg.message_id, sourceId:sid};
+          messageId:msg.message_id, sourceId:sid, payload:{chat_id:String(msg.chat.id),
+          message_id:msg.message_id, source_id:sid, text:msg.text || msg.caption || "", url:deal}};
 }
 function checkEnv(env) {
   if (!env?.DB || typeof env.DB.prepare !== "function") throw Error("D1_BINDING_MISSING");
@@ -97,8 +98,7 @@ export function checkRunGate(runs, cap, nowMs) {
   });
   if (withinDay.length >= cap) return "DAILY_RUN_BUDGET";
   const latest = own.slice().sort((a,b)=>Date.parse(b.created_at)-Date.parse(a.created_at))[0];
-  if (latest && latest.conclusion !== "success" &&
-      nowMs-Date.parse(latest.created_at) < 1800000) return "LAST_RUN_FAILED_COOLDOWN";
+  if (latest && latest.conclusion !== "success") return "LAST_RUN_FAILED_REVIEW_REQUIRED";
   return "READY";
 }
 async function readGithubState(env, fetcher) {
@@ -132,29 +132,35 @@ export async function processQueue(env, fetcher = fetch, nowMs = Date.now()) {
   try {
     // A POST with a lost/failed response may have reached GitHub.
     // Stop all follow-up automated dispatches until manually reconciled.
+    const active = await env.DB.prepare("SELECT * FROM dispatch_attempts WHERE status != 'completed' LIMIT 1").first();
+    if (active) {
+      if (active.status === "uncertain") return {status:"DISPATCH_UNCERTAIN_REVIEW_REQUIRED"};
+      const observed = await ghGet(env, GH + "/actions/workflows/" + WORKFLOW + "/runs?branch=main&per_page=100",fetcher);
+      const matches = observed.workflow_runs.filter(r=>r.display_title === "telegram-" + active.request_id);
+      if (matches.length !== 1) return {status:"DISPATCH_VISIBILITY_REVIEW_REQUIRED"};
+      if (matches[0].status !== "completed") return {status:"WORKFLOW_IN_PROGRESS"};
+      if (matches[0].conclusion !== "success") return {status:"LAST_RUN_FAILED_REVIEW_REQUIRED"};
+      await env.DB.prepare("UPDATE dispatch_attempts SET status = 'completed' WHERE request_id = ? AND status = 'accepted'").bind(active.request_id).run();
+    }
     const uncertain = await env.DB.prepare(
       "SELECT chat_id,message_id FROM telegram_events WHERE status = 'dispatch_uncertain' ORDER BY created_at_ms LIMIT 1"
     ).first();
     if (uncertain) return {status:"DISPATCH_UNCERTAIN_REVIEW_REQUIRED"};
     event=await env.DB.prepare(
-      "SELECT chat_id,message_id,source_id FROM telegram_events WHERE status = 'pending' ORDER BY created_at_ms, message_id LIMIT 1"
+      "SELECT chat_id,message_id,source_id,payload_json FROM telegram_events WHERE status = 'pending' ORDER BY created_at_ms, message_id LIMIT 1"
     ).first();
     // One inexpensive GitHub state read per minute, but no idle Actions runs.
     const state = await readGithubState(env, fetcher);
     if (state.in_flight !== null) return {status:"POST_CLAIM_OR_REVIEW_REQUIRED"};
     const backlog = state.pending.length > 0;
-    if (event && event.source_id != null &&
-        event.source_id <= state.last_scanned_id && !backlog) {
-      await env.DB.prepare(
-        "UPDATE telegram_events SET status = 'already_scanned' WHERE chat_id = ? AND message_id = ? AND status = 'pending'"
-      ).bind(event.chat_id,event.message_id).run();
-      return {status:"SOURCE_ALREADY_SCANNED"};
-    }
+    if (event && !event.payload_json) return {status:"LEGACY_EVENT_REVIEW_REQUIRED"};
     if (!event && !backlog) return {status:"NO_NEW_COUPANG_DEAL"};
     const runs = await ghGet(env, GH + "/actions/workflows/" +
       WORKFLOW + "/runs?branch=main&per_page=100",fetcher);
     const gate = checkRunGate(runs.workflow_runs,Number(env.MAX_DAILY_DISPATCHES || "12"),nowMs);
     if (gate !== "READY") return {status:gate};
+    const requestId = crypto.randomUUID();
+    await env.DB.prepare("INSERT INTO dispatch_attempts(request_id,status,created_at_ms) VALUES(?,'uncertain',?)").bind(requestId,nowMs).run();
     // Mark uncertain BEFORE making any outgoing dispatch POST. If the
     // API response is lost, an automatic duplicate POST is not allowed.
     if (event) {
@@ -165,7 +171,7 @@ export async function processQueue(env, fetcher = fetch, nowMs = Date.now()) {
     }
     const response = await fetcher(GH+"/actions/workflows/"+WORKFLOW+"/dispatches",{
       method:"POST", headers:{...ghHeaders(env),"Content-Type":"application/json"},
-      body:JSON.stringify({ref:"main"}),redirect:"manual",
+      body:JSON.stringify({ref:"main",inputs:{request_id:requestId,telegram_payload:event?.payload_json || "{}"}}),redirect:"manual",
     });
     if (response.status !== 204) throw Error("DISPATCH_HTTP_"+response.status);
     dispatched = true;
@@ -174,6 +180,7 @@ export async function processQueue(env, fetcher = fetch, nowMs = Date.now()) {
         "UPDATE telegram_events SET status = 'dispatched' WHERE chat_id = ? AND message_id = ? AND status = 'dispatch_uncertain'"
       ).bind(event.chat_id,event.message_id).run();
     }
+    await env.DB.prepare("UPDATE dispatch_attempts SET status = 'accepted' WHERE request_id = ? AND status = 'uncertain'").bind(requestId).run();
     return {status:"GITHUB_WORKFLOW_DISPATCHED",reason:backlog?"FIFO_BACKLOG":"NEW_COUPANG"};
   } finally {
     // Keep 3-min guard after POST (success or unknown) so GitHub's newly
@@ -199,7 +206,7 @@ export async function handleWebhook(request, env, context, fetcher=fetch) {
       request.headers.get("X-Telegram-Bot-Api-Secret-Token") !== env.TELEGRAM_WEBHOOK_SECRET) {
     return new Response("Forbidden",{status:403});
   }
-  if (!checkEnv(env)) return new Response("Not armed",{status:503});
+  checkEnv(env);
   const raw=await request.text();
   if (raw.length > 50000) return new Response("Too large",{status:413});
   let update;
@@ -207,8 +214,8 @@ export async function handleWebhook(request, env, context, fetcher=fetch) {
   const match=classifyUpdate(update,env);
   if (match.kind !== "COUPANG") return new Response("Ignored",{status:200});
   const recorded=await env.DB.prepare(
-    "INSERT OR IGNORE INTO telegram_events(chat_id,message_id,source_id,status,created_at_ms) VALUES(?,?,?,'pending',?)"
-  ).bind(match.chatId,match.messageId,match.sourceId,Date.now()).run();
+    "INSERT OR IGNORE INTO telegram_events(chat_id,message_id,source_id,status,created_at_ms,payload_json) VALUES(?,?,?,'pending',?,?)"
+  ).bind(match.chatId,match.messageId,match.sourceId,Date.now(),JSON.stringify(match.payload)).run();
   if (recorded.meta?.changes === 1) {
     context.waitUntil(processQueue(env,fetcher).then(
       x=>console.log("TELEGRAM_DISPATCH "+x.status),

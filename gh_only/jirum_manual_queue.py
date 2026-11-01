@@ -43,10 +43,14 @@ def validate_state(s: dict) -> None:
     if not isinstance(pending, list) or len(pending) > MAX_PENDING:
         raise ValueError("INVALID_FIFO_PENDING")
     ids = [r.get("id") for r in pending if isinstance(r, dict)]
-    if len(ids) != len(pending) or any(type(i) is not int or i <= START_AFTER or i > h for i in ids):
+    if len(ids) != len(pending) or any(type(i) is not int or i == 0 or (i > 0 and (i <= START_AFTER or i > h)) for i in ids):
         raise ValueError("INVALID_FIFO_IDS")
-    if ids != sorted(set(ids)):
+    public_ids = [i for i in ids if i > 0]
+    if len(set(ids)) != len(ids) or public_ids != sorted(public_ids):
         raise ValueError("UNSORTED_OR_DUPLICATE_FIFO")
+    for row in pending:
+        if row["id"] < 0 and row.get("telegram_key") != f"{row.get('telegram_chat_id')}/{-row['id']}":
+            raise ValueError("INVALID_TELEGRAM_IDENTITY")
     published = s.get("published")
     if not isinstance(published, dict) or any(str(i) in published for i in ids):
         raise ValueError("PUBLISHED_ITEM_STILL_QUEUED")
@@ -86,6 +90,9 @@ def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
             continue
         if mid in existing or str(mid) in out["published"]:
             continue
+        if any(r.get("original_source_id") == mid or r.get("original_purchase_url") == d.get("original_purchase_url")
+               for r in [*out["pending"], *out["published"].values()]):
+            continue
         # Preserve source evidence so the oldest queued item remains usable
         # even after it scrolls off Telegram's latest public page.
         row = {
@@ -101,7 +108,7 @@ def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
         out["pending"].append(row)
         existing.add(mid)
         added += 1
-    out["pending"].sort(key=lambda r: r["id"])
+    # New public rows are already sorted; preserve older group FIFO entries.
     if len(out["pending"]) > MAX_PENDING:
         raise RuntimeError("PENDING_BACKLOG_OVER_LIMIT_NO_PROGRESS")
     if rows:
@@ -296,11 +303,13 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
     if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" and outcome.get("post_url"):
         if state["pending"][0]["id"] != source_id:
             raise RuntimeError("FIFO_HEAD_CHANGED")
-        state["pending"].pop(0)
+        completed = state["pending"].pop(0)
         state["published"][str(source_id)] = {
             "status": "PUBLISHED_VERIFIED",
             "post_url": outcome["post_url"],
             "at": now_utc(), "run_id": run_id,
+            "original_purchase_url": completed["original_purchase_url"],
+            "original_source_id": completed.get("original_source_id"),
         }
         state["in_flight"] = None
     elif outcome.get("status") == "ABORTED_BEFORE_SUBMIT" and outcome.get("submit_attempted") is False:
@@ -327,6 +336,78 @@ def check_manual_trigger() -> None:
         raise RuntimeError("NOT_MANUAL_MAIN_FIRST_ATTEMPT")
 
 
+def ingest_telegram(s: dict, payload: dict) -> dict:
+    """Persist a group-only product without relying on the public channel.
+
+    Negative IDs form a separate namespace; bind it permanently to one group.
+    Keep the public watermark untouched. Never interpolate this data into shell.
+    """
+    import re
+    from gh_only.pipeline import price_info
+    validate_state(s)
+    if s["in_flight"] is not None:
+        raise RuntimeError("IN_FLIGHT_REQUIRES_MANUAL_REVIEW")
+    if not payload:
+        return s
+    chat, mid = payload.get("chat_id"), payload.get("message_id")
+    text, url = payload.get("text"), payload.get("url")
+    if (not isinstance(chat, str) or not re.fullmatch(r"-\d+", chat)
+        or type(mid) is not int or not 0 < mid < 2**53
+        or not isinstance(text, str) or len(text) > 16000 or not isinstance(url, str)):
+        raise ValueError("INVALID_TELEGRAM_PAYLOAD")
+    u = urlsplit(url)
+    if (u.scheme != "https" or u.username or u.password or u.port
+        or not ((u.hostname == "link.coupang.com" and re.fullmatch(r"/a/[A-Za-z0-9]+/?", u.path))
+                or (u.hostname in ("coupang.com", "www.coupang.com") and re.fullmatch(r"/vp/products/\d+/?", u.path)))):
+        raise ValueError("INVALID_TELEGRAM_COUPANG_URL")
+    out = json.loads(json.dumps(s))
+    if out.get("telegram_chat_id", chat) != chat:
+        raise ValueError("TELEGRAM_GROUP_CHANGED_REVIEW_REQUIRED")
+    out["telegram_chat_id"] = chat
+    key = f"{chat}/{mid}"
+    receipts = out.setdefault("telegram_receipts", {})
+    if key in receipts:
+        return out
+    sid = payload.get("source_id")
+    if sid is not None and (type(sid) is not int or sid <= START_AFTER):
+        raise ValueError("INVALID_TELEGRAM_SOURCE_ID")
+    # A known original ID or exact purchase URL joins the existing record.
+    existing = next((r for r in out["pending"] if (sid is not None and (r["id"] == sid or r.get("original_source_id") == sid)) or r.get("original_purchase_url") == url), None)
+    published = next((k for k, r in out["published"].items() if (sid is not None and (k == str(sid) or r.get("original_source_id") == sid)) or r.get("original_purchase_url") == url), None)
+    if existing or published:
+        receipts[key] = existing["id"] if existing else int(published)
+        return out
+    row_id = -mid
+    if str(row_id) in out["published"] or any(r["id"] == row_id for r in out["pending"]):
+        raise ValueError("TELEGRAM_ID_COLLISION")
+    receipts[key] = row_id
+    out["pending"].append({
+        "id": row_id, "telegram_key": key, "telegram_chat_id": chat,
+        "original_source_id": sid,
+        "source_post_url": f"https://t.me/c/{chat[4:]}/{mid}" if chat.startswith("-100") else "",
+        "original_purchase_url": url, "source_text": text,
+        "title": text.splitlines()[0][:150] if text else "",
+        "sale_price_krw": price_info(text)["sale_price_krw"],
+    })
+    validate_state(out)
+    if len(json.dumps(out).encode()) > MAX_STATE_BYTES:
+        raise RuntimeError("STATE_TOO_LARGE_NO_PROGRESS")
+    return out
+
+
+def scan_telegram(store: GithubState, payload: dict, request_id: str) -> dict:
+    state, sha = store.read()
+    import re
+    if not re.fullmatch(r"[a-f0-9-]{36}", request_id):
+        raise ValueError("INVALID_DISPATCH_ID")
+    if request_id in state.get("telegram_dispatches", {}):
+        raise RuntimeError("DISPATCH_ALREADY_CONSUMED_DO_NOT_REPLAY")
+    new = ingest_telegram(state, payload)
+    new.setdefault("telegram_dispatches", {})[request_id] = os.getenv("GITHUB_RUN_ID", "local")
+    store.write(new, sha, "state: persist Telegram group product and consume dispatch before publishing")
+    return {"has_deal": bool(new["pending"]), "pending": len(new["pending"])}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("scan", "publish"))
@@ -334,7 +415,11 @@ def main():
     check_manual_trigger()
     store = GithubState()
     if args.command == "scan":
-        result = scan(store)
+        # Worker dispatches never depend on public-channel availability.
+        if os.getenv("TELEGRAM_REQUEST_ID"):
+            result = scan_telegram(store, json.loads(os.getenv("TELEGRAM_PAYLOAD", "{}")), os.environ["TELEGRAM_REQUEST_ID"])
+        else:
+            result = scan(store)
         output = os.getenv("GITHUB_OUTPUT")
         if output:
             with open(output, "a", encoding="utf-8") as f:

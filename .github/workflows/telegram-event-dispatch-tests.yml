@@ -4,9 +4,14 @@ on:
   push:
     branches:
       - feat/jirum-group-webhook-to-github-20261101
+      - fix/telegram-durable-dispatch
     paths:
       - 'cloudflare/jirum-telegram-webhook/**'
       - '.github/workflows/telegram-event-dispatch-tests.yml'
+      - 'gh_only/jirum_manual_queue.py'
+      - 'gh_only/test_telegram_group_queue.py'
+      - 'oracle_dispatch.py'
+      - 'test_oracle_dispatch.py'
 
 permissions:
   contents: read
@@ -17,7 +22,14 @@ jobs:
     timeout-minutes: 3
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
       - name: Run local-only Telegram/D1/GitHub mocked tests (no publishing)
         run: |
           node --check cloudflare/jirum-telegram-webhook/src/index.mjs
           node --test cloudflare/jirum-telegram-webhook/src/index.test.mjs
+          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_telegram_group_queue test_oracle_dispatch

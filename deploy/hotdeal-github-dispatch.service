@@ -1,0 +1,29 @@
+[Unit]
+Description=Read-only Telegram inbox to conditional GitHub FIFO dispatcher
+Wants=network-online.target
+After=network-online.target hotdeal-receiver.service
+
+[Service]
+Type=simple
+User=hotdeal-live
+Group=hotdeal-live
+WorkingDirectory=/opt/hotdeal-github-dispatch
+EnvironmentFile=/etc/hotdeal-github-dispatch.env
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/hotdeal-github-dispatch/oracle_dispatch.py
+Restart=on-failure
+RestartSec=15
+StateDirectory=hotdeal-github-dispatch
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/var/lib/hotdeal-live /var/lib/hotdeal-receiver
+ReadWritePaths=/var/lib/hotdeal-github-dispatch
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
