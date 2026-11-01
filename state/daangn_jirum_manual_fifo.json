@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94782,
-  "pending": [],
+  "last_scanned_id": 94783,
+  "pending": [
+    {
+      "id": 94783,
+      "source_post_url": "https://t.me/jirum/94783",
+      "original_purchase_url": "https://link.coupang.com/a/ikaEgvv9We",
+      "source_text": "☆특가 650원\n삼립 포켓몬 리자몽의 불대문자 핵불닭팡 90g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikaEgvv9We\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 650원",
+      "sale_price_krw": 650
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
