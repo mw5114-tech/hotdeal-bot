@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94771,
-  "pending": [],
+  "last_scanned_id": 94772,
+  "pending": [
+    {
+      "id": 94772,
+      "source_post_url": "https://t.me/jirum/94772",
+      "original_purchase_url": "https://link.coupang.com/a/ijYAhTjM60",
+      "source_text": "🔥🔥🔥무지성 9,130원 (46.0% 할인)🔥🔥🔥\n루솔 과채플랜 사과당근 20p\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 16,907원\n- 할인: 7,777원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYAhTjM60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "루솔 과채플랜 사과당근 20p",
+      "sale_price_krw": 9130
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
