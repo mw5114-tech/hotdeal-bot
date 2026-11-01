@@ -19,6 +19,22 @@ def norm(s: str) -> str:
     return re.sub(r"\s+", "", s or "")
 
 
+def fit_title_to_limit(title: str, max_length: int) -> str:
+    """Preserve the [NN%할인] suffix when Daangn limits post title length."""
+    if not isinstance(max_length, int) or max_length < 20 or max_length > 200:
+        raise ValueError("UNSAFE_DAANGN_TITLE_LIMIT")
+    if len(title) <= max_length:
+        return title
+    discount = re.search(r" (\\[\\d+%할인\\])$", title)
+    if discount:
+        suffix = discount.group(0)
+        keep = max_length - len(suffix)
+        if keep < 15:
+            raise ValueError("DAANGN_TITLE_LIMIT_TOO_SHORT_FOR_DISCOUNT")
+        return title[:keep].rstrip() + suffix
+    return title[:max_length].rstrip()
+
+
 def choose_editor_submit_index(candidates: list[dict]) -> int | None:
     """Choose only one visible exact-label button positioned below editor top."""
     eligible = [row["index"] for row in candidates
@@ -155,9 +171,44 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 title_input = page.locator('input[placeholder="제목을 입력해주세요."]')
                 if title_input.count() != 1:
                     raise RuntimeError("TITLE_NOT_UNIQUE")
-                title_input.fill(article["title"])
+                original_title = article["title"]
+                html_max_length = title_input.get_attribute("maxlength")
+                max_length = (
+                    int(html_max_length) if html_max_length
+                    and html_max_length.isdecimal() else None
+                )
+                post_title = (
+                    fit_title_to_limit(original_title, max_length)
+                    if max_length and len(original_title) > max_length
+                    else original_title
+                )
+                title_input.fill(post_title)
                 page.wait_for_timeout(1200)
-                if title_input.input_value() != article["title"]:
+                observed_title = title_input.input_value()
+                result["title_checks"] = {
+                    "original_length": len(original_title),
+                    "html_max_length": max_length,
+                    "attempted_length": len(post_title),
+                    "observed_length": len(observed_title),
+                    "matched": observed_title == post_title,
+                }
+                if observed_title != post_title:
+                    # When React or a maxlength rule silently clips a title,
+                    # derive the real limit from the observed prefix and retry
+                    # once, preserving the discount suffix.
+                    if (len(observed_title) >= 20 and
+                        post_title.startswith(observed_title) and
+                        len(observed_title) < len(post_title)):
+                        post_title = fit_title_to_limit(
+                            original_title, len(observed_title)
+                        )
+                    title_input.fill(post_title)
+                    page.wait_for_timeout(700)
+                    result["title_checks"]["retried_length"] = len(post_title)
+                    result["title_checks"]["matched_after_retry"] = (
+                        title_input.input_value() == post_title
+                    )
+                if title_input.input_value() != post_title:
                     raise RuntimeError("TITLE_NOT_VERIFIED")
                 result["failure_stage"] = "VERIFY_EDITOR_BODY"
                 # Store booleans/counts only, never the editable page contents.
@@ -277,7 +328,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     "카페 가입 알림 설정하고 꿀템 챙겨가세요.",
                     DISCLOSURE,
                 ))
-                title_ok = article["title"] in content
+                title_ok = post_title in content
                 board_ok = "오늘의 핫딜" in content
                 result.update({
                     "affiliate_href_full": same_link,
