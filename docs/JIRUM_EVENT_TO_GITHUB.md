@@ -1,66 +1,93 @@
-# 기존 뽐질 Telethon 감시 서버 → GitHub Actions 이벤트 실행
+# Oracle 뽐질 RAW_MODE 감시 서버 → GitHub Actions 이벤트 발행
 
-## 선택한 방식
+## 실제 운영 진입점 — 중요
 
-기존 `jirum_live.py`가 `@jirum`에서 새 메시지를 받을 때, 메시지에 쿠팡 구매 링크가 있으면 GitHub Actions의 **기존 당근카페 FIFO drain**을 공식 REST API(`workflow_dispatch`)로 요청합니다.
+`RAW_MODE.md` 및 `raw-deploy/hotdeal-live.service` 기준 **실제 운영 진입점은 `watcher.py → raw_runtime.py`** 이다.
+기존 PR #45의 `jirum_live.py` 연동만 배포하면 **현재 원문 전달형 서버에서는 호출되지 않는다.**
+이번 수정은 `raw_runtime.py`에도 연결했으며 기존 텔레그램 개인방·핫딜 MUSE용 그룹 **원문 그대로 재전송** 기능을 유지한다.
 
-- 새 서버, Cloudflare, Telegram 웹훅, 보조 봇 불필요
-- 원래 개인 채팅·핫딜 MUSE용 그룹에 텔레그램 봇으로 보내는 기능은 그대로
-- 20초 동안 새 상품 이벤트를 묶어 Actions 실행 1회로 처리
-- 성공 요청 사이 최소 75초 간격을 두어 실행 남발 방지
-- GitHub API 오류 시 대기 신호를 SQLite에 보존하고 180초 뒤 재요청
-- GitHub Actions는 기존대로 원본 뽐질 채널을 재검사하고 GitHub state의 `pending`을 오래된 순서로 모두 발행
-- 각 상품별 사전 claim, 사진 업로드 완료 확인, 발행 검증 및 불확실 상태 중복 방지 유지
-- 텔레그램 감시 서버는 GitHub에 상품 전문이나 인증 정보를 전송하지 않음
-- `JIRUM_GITHUB_DISPATCH_ENABLED=false` 기본 비활성. **이 저장소에 PR을 병합하는 것만으로는 실제 서버에 배포되지 않음.**
+- `NewMessage`와 `MessageEdited`, 재연결 후 gap recovery를 모두 처리
+- raw text에 보이는 쿠팡 링크와 Telegram `text_link`의 **숨긴 쿠팡 URL** 모두 판별
+- 다른 쇼핑몰·일반 공지는 GitHub 요청하지 않음 (텔레그램 알림은 기존처럼 전달)
+- 20초 내 몰린 이벤트는 1회 실행으로 묶고 성공 요청 사이 최소 75초 간격
+- GitHub 요청이 실패하면 원본 최대 메시지 ID 신호를 기존 SQLite에 보존하고 3분 후 재시도
+- GitHub가 HTTP 204를 반환하면 '요청 접수'로 기록. **카페 발행 성공을 뜻하지는 않는다.**
+- 실행된 기존 FIFO workflow가 뽐질 채널을 재검사 → GitHub 저장 상태 기반 순차 발행
+- 기존 GitHub 5분 예약은 **서버 실전 작동이 확인될 때까지 유지**
+- `JIRUM_GITHUB_DISPATCH_ENABLED` 기본 비활성. GitHub 병합만으로 운영 서버가 자동 업데이트되지는 않음.
 
-## 운영 서버에 배포하기 전 조건
+## 1. 서버 운영 경로 확인
 
-현재 운영 중인 서버가 실제로 `jirum_live.py`/systemd `hotdeal-live.service`를 사용 중인지 확인합니다.
+Oracle 서버에 SSH로 접속한 터미널에서 다음을 실행한다.
 
-서버의 GitHub API 호출에는 비공개 저장소 `mw5114-tech/hotdeal-bot`에 접근 가능한 **fine-grained personal access token**이 필요합니다.
+```bash
+sudo systemctl is-active hotdeal-live
+sudo systemctl show -p ExecStart hotdeal-live
+sudo journalctl -u hotdeal-live -n 25 --no-pager
+```
 
-1. GitHub → Settings → Developer settings → Personal access tokens → Fine-grained tokens
-2. Repository access는 `Only select repositories`에서 **`mw5114-tech/hotdeal-bot`만** 선택
-3. Repository permissions에서 **Actions: Read and write** 설정
-4. 토큰 값은 반드시 실제 서버의 `/etc/hotdeal-live.env`에만 저장하고, GitHub 소스·로그·채팅에 붙여넣지 않습니다.
+`ExecStart`가 `/opt/hotdeal-live/watcher.py run`이라면 아래 RAW_MODE 배포 절차가 맞다.
+다르면 먼저 실제 실행 파일을 확인해야 하며, 운용 프로세스를 임의로 교체하면 안 된다.
 
-기존 GitHub Actions 안의 `github.token`은 서버 외부에서 재사용할 수 없습니다.
+## 2. GitHub Actions API 토큰
 
-## 실제 서버 배포 (사용자가 서버 SSH에서 수행)
+GitHub **Settings → Developer settings → Personal access tokens → Fine-grained tokens**에서:
+- Resource owner는 자신의 계정, Repository access는 **Only select repositories** → `mw5114-tech/hotdeal-bot` 한 개만
+- Repository permissions → **Actions: Read and write**
+- 짧은 만료 기간을 정하고 갱신 예정일 기록
 
-배포 소스 저장소 디렉터리로 이동하여 최신 main을 반영합니다.
+토큰은 서버에서만 사용한다. **채팅·로그·GitHub 저장소에 복사하지 않는다.** 기존 봇 토큰을 새로 발급할 필요는 없다.
+
+## 3. 기존 Oracle 서버 코드 배포 (기존 DB/세션 그대로)
+
+서버에서 접근 가능한 해당 저장소 체크아웃 디렉터리에서:
 
 ```bash
 git pull --ff-only origin main
+sudo install -o root -g root -m 0644 raw_runtime.py /opt/hotdeal-live/raw_runtime.py
 sudo install -o root -g root -m 0644 jirum_github_dispatch.py /opt/hotdeal-live/jirum_github_dispatch.py
-sudo install -o root -g root -m 0644 jirum_live.py /opt/hotdeal-live/jirum_live.py
-sudo python3 -m py_compile /opt/hotdeal-live/jirum_github_dispatch.py /opt/hotdeal-live/jirum_live.py
+sudo /opt/hotdeal-live/.venv/bin/python -m py_compile /opt/hotdeal-live/raw_runtime.py /opt/hotdeal-live/jirum_github_dispatch.py
 sudoedit /etc/hotdeal-live.env
 ```
 
-기존 값은 그대로 유지하고 아래 두 값만 설정합니다.
+기존 `JIRUM_LIVE_ENABLED=true`와 Telegram 설정은 유지하고 두 줄만 추가/변경:
 
 ```dotenv
 JIRUM_GITHUB_DISPATCH_ENABLED=true
-JIRUM_GITHUB_DISPATCH_TOKEN=발급받은_서버전용_토큰
+JIRUM_GITHUB_DISPATCH_TOKEN=서버에만_보관하는_fine_grained_PAT
 ```
-
-설정 파일은 root 전용으로 보관합니다. 기존 `JIRUM_LIVE_ENABLED=true` 및 텔레그램 봇 설정을 변경할 필요는 없습니다.
 
 ```bash
 sudo chmod 600 /etc/hotdeal-live.env
 sudo systemctl restart hotdeal-live
 sudo systemctl is-active hotdeal-live
-sudo journalctl -u hotdeal-live --since '15 minutes ago' --no-pager
+sudo journalctl -u hotdeal-live --since '10 minutes ago' --no-pager
 ```
 
-로그에서 `GITHUB_DISPATCH_ARMED`를 확인한 뒤, 뽐질 채널에 실제 **신규 쿠팡 메시지**가 도착하면 `GITHUB_EVENT_QUEUED`와 `GITHUB_DISPATCH_ACCEPTED`를 확인합니다. GitHub Actions의 해당 실행 `event=workflow_dispatch`와 당근카페 발행 검증을 별도로 확인합니다. `GITHUB_DISPATCH_ACCEPTED`는 GitHub가 요청을 접수했다는 의미이지 카페 게시 성공을 뜻하지 않습니다.
+`GITHUB_DISPATCH_ARMED`와 `runtime=raw`를 확인한다.
+원문 전달이 정상 동작하는지 확인하고 신규 쿠팡 메시지가 도착하면:
+`SOURCE_EVENT` → `GITHUB_EVENT_QUEUED` → `GITHUB_DISPATCH_ACCEPTED`.
+실행 이력의 `event=workflow_dispatch`, 게시물 `POST_PUBLISHED_AND_FORMAT_VERIFIED` 및 FIFO 상태를 별도 확인한다.
 
-## 5분 스케줄 전환
+## 4. 실전 API 연결 테스트 — 글을 쓰지 않는 방법
 
-**서버 배포·실제 신규 이벤트·GitHub 발행까지 확인하기 전에는 기존 5분 cron을 제거하지 않습니다.**
+`.github/workflows/daangn-jirum-manual-fifo.yml`은 `workflow_dispatch` 입력
+`smoke_test=true`로 실행하면 **scan/claim/upload/post를 전혀 하지 않는 별도 Job**만 실행한다.
 
-전환 확인 후에만 `.github/workflows/daangn-jirum-manual-fifo.yml`에서 `schedule`을 제거하거나 백업용 저빈도로 줄입니다. 워크플로의 `workflow_dispatch`, FIFO 처리, concurrency 설정은 유지합니다.
+GitHub Actions의 `Jirum | GitHub dispatch smoke (NO CAFE POST)` 워크플로를 한 번 실행하면
+GitHub Token으로 **공식 REST API를 실제 호출**하고 HTTP 204 접수 여부를 검사한다.
+성공한 뒤 연결된 원본 FIFO 워크플로의 `smoke-dispatch-only` 작업 로그에서
+`JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST`를 확인한다.
 
-현재 외부 클라우드 서버를 GitHub 연결 도구로 직접 원격 관리할 수는 없기 때문에, GitHub 저장소 코드 수정과 운영 서버 배포는 별도의 작업입니다.
+*이 검증은 GitHub 쪽 REST API 수신과 Actions 실행만 증명한다.*
+Oracle 서버의 PAT·Telethon 실시간 이벤트는 위 3단계에서 별도 실전 확인해야 한다.
+
+## 5. 전환/장애
+
+서버 이벤트 기반 발행을 실제로 확인한 뒤에만 5분 예약을 끄거나 저빈도 복구용으로 낮춘다.
+자동화에 장애가 나면 `/etc/hotdeal-live.env`의
+`JIRUM_GITHUB_DISPATCH_ENABLED=false`로 변경 후 서비스를 재시작해
+**원본 텔레그램 재전송은 그대로 유지**할 수 있다.
+당근카페 게시 결과가 불확실하면 **게시 상태/FIFO 잠금을 먼저 확인**하고 중복 실행하지 않는다.
+
+이 GitHub 연결만으로는 Oracle 서버의 파일 수정, PAT 설정, 프로세스 재시작을 수행할 수 없다.

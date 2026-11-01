@@ -46,6 +46,37 @@ class DispatchHttpTests(unittest.TestCase):
         self.assertEqual(seen["auth"], "Bearer test-token")
         self.assertEqual(seen["timeout"], 22)
 
+    def test_raw_watcher_plain_text_and_hidden_telegram_links(self):
+        # Actual deployed raw_message.extract() shape has no product_url/links.
+        raw_plain = {
+            "id": 101,
+            "text": "🔥 특가 바로가기\\nhttps://link.coupang.com/a/xyz",
+            "entities": [],
+        }
+        raw_hidden = {
+            "id": 102,
+            "text": "🔥 핫딜 구매 링크",
+            "entities": [
+                {"type": "text_link", "offset": 6, "length": 4,
+                 "url": "https://link.coupang.com/a/hidden"}
+            ],
+        }
+        raw_other = {
+            "id": 103,
+            "text": "https://toss.im/abc",
+            "entities": [{"type": "text_link", "url": "https://evil.example/offer"}],
+        }
+        self.assertTrue(coupang_event(raw_plain))
+        self.assertTrue(coupang_event(raw_hidden))
+        self.assertFalse(coupang_event(raw_other))
+
+    def test_bad_raw_entity_and_links_cannot_raise_or_false_trigger(self):
+        self.assertFalse(coupang_event({"id": 101, "text": "no links", "entities": [None, 5, {}]}))
+        self.assertFalse(coupang_event({"id": 101, "text": "https://link.coupang.com.evil/x", "entities": []}))
+        self.assertFalse(coupang_event({"id": 101, "text": "http://link.coupang.com/a", "entities": []}))
+        self.assertFalse(coupang_event({"id": 101, "text": "https://link.coupang.com@evil.com/a", "entities": []}))
+        self.assertTrue(coupang_event({"id": 101, "text": "https://link.coupang.com/a/xyz).", "entities": []}))
+
     def test_only_exact_https_coupang_hosts_trigger(self):
         for url in (
             "https://link.coupang.com/a/deal",

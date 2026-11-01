@@ -4,6 +4,11 @@ on:
   push:
     paths:
       - 'jirum_live.py'
+      - 'raw_runtime.py'
+      - 'raw_message.py'
+      - 'test_raw_recovery.py'
+      - 'test_raw_github_integration.py'
+      - 'test_raw_message.py'
       - 'jirum_github_dispatch.py'
       - 'test_jirum_github_dispatch.py'
       - 'live_store.py'
@@ -37,6 +42,6 @@ jobs:
       - run: python -m pip install -r requirements-live.txt
       # Only the watcher/relay tests. Unrelated Coupang session-export tests
       # depend on optional cryptography not installed on the live server.
-      - run: python -m unittest -v test_jirum_live test_jirum_github_dispatch test_jirum_forward test_telegram_delivery
-      - run: python -m py_compile jirum_live.py jirum_github_dispatch.py live_store.py live_telegram.py deploy/configure_live.py deploy/backup_state.py
-      - run: bash -n deploy/install.sh
+      - run: python -m unittest -v test_jirum_live test_jirum_github_dispatch test_jirum_forward test_telegram_delivery test_raw_recovery test_raw_message test_raw_github_integration
+      - run: python -m py_compile jirum_live.py raw_runtime.py jirum_github_dispatch.py live_store.py live_telegram.py deploy/configure_live.py deploy/backup_state.py
+      - run: bash -n deploy/install.sh raw-deploy/install.sh

@@ -6,6 +6,12 @@ on:
   schedule:
     - cron: '2-57/5 * * * *'
   workflow_dispatch:
+    inputs:
+      smoke_test:
+        description: 'Read-only dispatch handshake (never scan or publish)'
+        required: false
+        default: false
+        type: boolean
   # Optional user-triggered action via GitHub connector, independent of cron.
   push:
     branches:
@@ -22,8 +28,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Verify the actual GitHub REST dispatch endpoint without performing any
+  # scan, state write, login, image upload or post. Used by smoke caller only.
+  smoke-dispatch-only:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.smoke_test == true
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 2
+    steps:
+      - name: Confirm safe dispatch handshake
+        run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
+
   drain-backlog:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'workflow_dispatch' || inputs.smoke_test != true)
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
