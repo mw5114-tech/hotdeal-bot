@@ -17,7 +17,6 @@ from urllib import error, request
 from urllib.parse import urlsplit
 
 from gh_only.pipeline import enrich_posts, fetch_public_html
-from gh_only.default_deal_automation import enrich_deal
 from gh_only.daangn_editor_probe import read_one_draft
 
 STATE_PATH = "state/daangn_jirum_manual_fifo.json"
@@ -254,6 +253,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
 
 
 def build_next(s: dict) -> dict:
+    from gh_only.default_deal_automation import enrich_deal
     validate_state(s)
     if s["in_flight"] is not None or not s["pending"]:
         raise RuntimeError("PENDING_ITEM_NOT_AVAILABLE")
