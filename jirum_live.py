@@ -14,6 +14,7 @@ from urllib.parse import urlsplit
 from jirum_forward import product_title, URL_PATTERN
 from live_store import Store
 from live_telegram import Bot, DeliveryError, targets
+from jirum_github_dispatch import GitHubEventBridge
 
 
 def log(code, **values):
@@ -152,7 +153,7 @@ async def deliver_one(store, bot, scope="live"):
     return True
 
 
-async def reconcile(client, channel, store, configured, wake):
+async def reconcile(client, channel, store, configured, wake, github_bridge=None):
     # This is MTProto gap repair, not the primary new-post detection mechanism.
     # Bounded pages; persist cursor only after durable enqueue in ID order.
     while True:
@@ -160,6 +161,8 @@ async def reconcile(client, channel, store, configured, wake):
         async for message in client.iter_messages(channel, min_id=store.get("cursor"), limit=100, reverse=True):
             post = extract(message)
             store.put(post["id"], post["text"], format_parts(post), configured, scanned=True)
+            if github_bridge and post["id"] > (store.get("baseline") or 0):
+                github_bridge.observe(post)
             count += 1
         wake.set()
         if count < 100:
@@ -212,6 +215,16 @@ async def run_service(store, enabled):
         else:
             store.initialize(store.get("baseline"), configured)
         store.recover()
+        # Keep legacy Telegram relay completely independent from GitHub dispatch.
+        # Both live mode and explicit opt-in are required; shadow never triggers.
+        github_bridge = None
+        if enabled and os.environ.get("JIRUM_GITHUB_DISPATCH_ENABLED") == "true":
+            github_token = os.environ.get("JIRUM_GITHUB_DISPATCH_TOKEN", "")
+            if github_token:
+                github_bridge = GitHubEventBridge(store, github_token, logger=log)
+                log("GITHUB_DISPATCH_ARMED", source="jirum")
+            else:
+                log("GITHUB_DISPATCH_DISABLED", reason="TOKEN_MISSING")
         bot = Bot() if enabled else None
         if bot:
             await asyncio.to_thread(bot.check_targets, configured)
@@ -221,6 +234,8 @@ async def run_service(store, enabled):
             try:
                 post = extract(event.message)
                 store.put(post["id"], post["text"], format_parts(post), configured)
+                if github_bridge and post["id"] > (store.get("baseline") or 0):
+                    github_bridge.observe(post)
                 wake.set()
                 log("SOURCE_EVENT", post=post["id"], edited=event.message.edit_date is not None)
             except Exception:
@@ -230,7 +245,7 @@ async def run_service(store, enabled):
         client.add_event_handler(on_message, events.NewMessage(chats=channel))
         client.add_event_handler(on_message, events.MessageEdited(chats=channel))
         await client.catch_up()
-        await reconcile(client, channel, store, configured, wake)
+        await reconcile(client, channel, store, configured, wake, github_bridge)
 
         async def sender():
             while not stopped.is_set():
@@ -251,11 +266,13 @@ async def run_service(store, enabled):
                 if not client.is_connected():
                     log("RECONNECTING")
                     continue
-                await reconcile(client, channel, store, configured, wake)
+                await reconcile(client, channel, store, configured, wake, github_bridge)
                 log("HEARTBEAT", enabled=enabled, cursor=store.get("cursor"), counts=store.summary()["counts"])
 
         sender_task = asyncio.create_task(sender())
         tasks = [sender_task, asyncio.create_task(recovery())]
+        if github_bridge:
+            tasks.append(asyncio.create_task(github_bridge.run(stopped)))
         loop = asyncio.get_running_loop()
         for sig in (signal.SIGINT, signal.SIGTERM):
             try:
@@ -274,6 +291,8 @@ async def run_service(store, enabled):
         # If systemd kills us, durable 'sending' becomes 'uncertain' next boot.
         stopped.set()
         wake.set()
+        if github_bridge:
+            github_bridge.wake.set()
         if sender_task and not sender_task.done():
             try:
                 await asyncio.wait_for(asyncio.shield(sender_task), timeout=30)
