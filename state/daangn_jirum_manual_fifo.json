@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94806,
+  "last_scanned_id": 94807,
   "pending": [
     {
       "id": 94789,
@@ -145,6 +145,14 @@
       "source_text": "👍대박 8,210원 (31.6% 할인)\n빼빼로 크런키 막대과자 쿠로미 마이멜로디, 39g, 8개\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 3,790원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikU0EnioLc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "빼빼로 크런키 막대과자 쿠로미 마이멜로디, 39g, 8개",
       "sale_price_krw": 8210
+    },
+    {
+      "id": 94807,
+      "source_post_url": "https://t.me/jirum/94807",
+      "original_purchase_url": "https://link.coupang.com/a/ikVkwCqcAS",
+      "source_text": "☆특가 3,800원\n빼빼로 화이트 쿠키 2p x 딸기 2p + 랜덤 한교동 책갈피 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikVkwCqcAS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 3,800원",
+      "sale_price_krw": 3800
     }
   ],
   "in_flight": null,
