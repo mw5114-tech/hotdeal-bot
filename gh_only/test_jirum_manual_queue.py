@@ -5,7 +5,8 @@ import unittest
 from unittest.mock import patch
 
 from gh_only.jirum_manual_queue import (
-    START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest, scan, validate_state,
+    START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest,
+    publish_pending, scan, validate_state,
 )
 
 
@@ -75,6 +76,112 @@ class ManualQueueTests(unittest.TestCase):
             with self.subTest(key=key), patch.dict(os.environ, {**baseline_vars, key: bad_value}):
                 with self.assertRaisesRegex(RuntimeError, "NOT_MAIN_FIRST_ATTEMPT"):
                     check_run_trigger()
+
+    def test_drain_publishes_all_three_in_fifo_order(self):
+        state, _, _ = ingest(baseline(), [deal(94746), deal(94745), deal(94744)])
+        store = FakeStore(state)
+        submitted = []
+
+        def publish(article):
+            submitted.append(article["source_id"])
+            return {
+                "status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                "post_url": f"https://cafe.daangn.com/posts/{article['source_id']}",
+                "submit_attempted": True,
+            }
+
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-drain"}), \
+                patch("gh_only.jirum_manual_queue.build_next",
+                      side_effect=lambda st: {"source_id": st["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      side_effect=publish):
+            code = publish_pending(store, drain=True, clock=lambda: 0)
+
+        self.assertEqual(code, 0)
+        self.assertEqual(submitted, [94744, 94745, 94746])
+        self.assertEqual(store.value["pending"], [])
+        self.assertIsNone(store.value["in_flight"])
+        self.assertTrue(all(store.value["published"][str(i)]["status"]
+                            == "PUBLISHED_VERIFIED" for i in submitted))
+        self.assertEqual(len(store.writes), 6)  # claim + finish per item
+
+    def test_drain_stops_after_pre_submit_failure_no_infinite_retries(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745), deal(94746)])
+        store = FakeStore(state)
+        seen = []
+
+        def publish(article):
+            seen.append(article["source_id"])
+            return {"status": "ABORTED_BEFORE_SUBMIT", "submit_attempted": False}
+
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-fail"}), \
+                patch("gh_only.jirum_manual_queue.build_next",
+                      side_effect=lambda st: {"source_id": st["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      side_effect=publish):
+            code = publish_pending(store, drain=True, clock=lambda: 0)
+
+        self.assertEqual(code, 2)
+        self.assertEqual(seen, [94744])
+        self.assertEqual([x["id"] for x in store.value["pending"]],
+                         [94744, 94745, 94746])
+        self.assertIsNone(store.value["in_flight"])
+
+    def test_drain_uncertain_post_locks_queue_instead_of_replaying(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-uncertain"}), \
+                patch("gh_only.jirum_manual_queue.build_next",
+                      side_effect=lambda st: {"source_id": st["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      return_value={"status": "PUBLISH_UNCERTAIN_DO_NOT_RETRY",
+                                    "submit_attempted": True}) as publish:
+            code = publish_pending(store, drain=True, clock=lambda: 0)
+
+        self.assertEqual(code, 2)
+        self.assertEqual(publish.call_count, 1)
+        self.assertEqual(store.value["in_flight"]["status"], "REVIEW_REQUIRED")
+        self.assertEqual([x["id"] for x in store.value["pending"]], [94744, 94745])
+
+    def test_drain_yields_safely_before_next_item_at_time_budget(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745), deal(94746)])
+        store = FakeStore(state)
+        clock_values = iter([0, 700])
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-budget"}), \
+                patch("gh_only.jirum_manual_queue.build_next",
+                      side_effect=lambda st: {"source_id": st["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      return_value={"status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                    "post_url": "https://cafe.daangn.com/posts/94744",
+                                    "submit_attempted": True}) as publish:
+            code = publish_pending(store, drain=True, clock=lambda: next(clock_values))
+
+        self.assertEqual(code, 0)
+        self.assertEqual(publish.call_count, 1)
+        self.assertEqual([x["id"] for x in store.value["pending"]], [94745, 94746])
+        self.assertEqual(store.value["published"]["94744"]["status"], "PUBLISHED_VERIFIED")
+
+    def test_single_publish_command_still_posts_only_one(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-one"}), \
+                patch("gh_only.jirum_manual_queue.build_next",
+                      side_effect=lambda st: {"source_id": st["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      return_value={"status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                    "post_url": "https://cafe.daangn.com/posts/94744",
+                                    "submit_attempted": True}) as publish:
+            code = publish_pending(store, drain=False, clock=lambda: 0)
+        self.assertEqual(code, 0)
+        self.assertEqual(publish.call_count, 1)
+        self.assertEqual([x["id"] for x in store.value["pending"]], [94745])
+
+    def test_drain_empty_queue_does_not_touch_publisher(self):
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-empty"}), \
+                patch("gh_only.jirum_manual_queue.build_next") as build:
+            code = publish_pending(FakeStore(baseline()), drain=True, clock=lambda: 0)
+        self.assertEqual(code, 0)
+        build.assert_not_called()
 
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
