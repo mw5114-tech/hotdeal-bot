@@ -1,0 +1,19 @@
+name: Compare three owner-issued Coupang shortlinks (HEAD only)
+on:
+  pull_request:
+    paths:
+      - research_official_shortlink_pattern.py
+      - .github/workflows/research-three-official-shorts.yml
+permissions:
+  contents: read
+jobs:
+  compare-three-links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Inspect first redirect of each owner-issued link only
+        run: python research_official_shortlink_pattern.py
