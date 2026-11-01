@@ -13,6 +13,7 @@ on:
       - fix/daangn-wait-image-upload-before-submit-20261101
       - feat/daangn-fifo-drain-backlog-20261101
       - fix/daangn-title-maxlength-preserve-discount-20261101
+      - fix/daangn-editor-image-label-body-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
