@@ -3,14 +3,6 @@
   "last_scanned_id": 94751,
   "pending": [
     {
-      "id": 94750,
-      "source_post_url": "https://t.me/jirum/94750",
-      "original_purchase_url": "https://link.coupang.com/a/ijEY39DfEG",
-      "source_text": "☆특가 13,520원 (24.0% 할인)\n비타500 이온킥 제로 음료\n📌 가격 현황\n- 정상가: 17,789원\n- 할인: 4,269원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijEY39DfEG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "비타500 이온킥 제로 음료",
-      "sale_price_krw": 13520
-    },
-    {
       "id": 94751,
       "source_post_url": "https://t.me/jirum/94751",
       "original_purchase_url": "https://link.coupang.com/a/ijE5QHtPS8",
@@ -19,12 +11,7 @@
       "sale_price_krw": 2180
     }
   ],
-  "in_flight": {
-    "id": 94750,
-    "status": "CLAIMED",
-    "run_id": "41273862170",
-    "at": "2026-11-01T04:39:23.634581+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -65,6 +52,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B0%B1%EC%84%A4-100-%ED%86%B5%EC%B0%B8%EA%B9%A8-%EC%B0%B8%EA%B8%B0%EB%A6%84-320ml-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-A6XYVpvd?from=write",
       "at": "2026-11-01T04:39:15.455060+00:00",
+      "run_id": "41273862170"
+    },
+    "94750": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B9%84%ED%83%80500-%EC%9D%B4%EC%98%A8%ED%82%A5-%EC%A0%9C%EB%A1%9C-%EC%9D%8C%EB%A3%8C-15L-12%EA%B0%9C-20%ED%95%A0%EC%9D%B8-d9XzpxWP?from=write",
+      "at": "2026-11-01T04:39:39.328818+00:00",
       "run_id": "41273862170"
     }
   },
