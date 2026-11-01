@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94783,
-  "pending": [
-    {
-      "id": 94783,
-      "source_post_url": "https://t.me/jirum/94783",
-      "original_purchase_url": "https://link.coupang.com/a/ikaEgvv9We",
-      "source_text": "☆특가 650원\n삼립 포켓몬 리자몽의 불대문자 핵불닭팡 90g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikaEgvv9We\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 650원",
-      "sale_price_krw": 650
-    }
-  ],
-  "in_flight": {
-    "id": 94783,
-    "status": "CLAIMED",
-    "run_id": "41304069281",
-    "at": "2026-11-01T11:56:31.270660+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -244,6 +230,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%86%8C%EA%B3%A0%EA%B8%B0%EB%B2%84%EC%84%AF-%EB%B9%84%EB%B9%94%EB%B0%A5-%EB%83%89%EB%8F%99-424g-3%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PV29mk0P?from=write",
       "at": "2026-11-01T11:44:39.990961+00:00",
       "run_id": "41303178670"
+    },
+    "94783": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%82%BC%EB%A6%BD-%ED%8F%AC%EC%BC%93%EB%AA%AC-%EB%A6%AC%EC%9E%90%EB%AA%BD%EC%9D%98-%EB%B6%88%EB%8C%80%EB%AC%B8%EC%9E%90-%ED%95%B5%EB%B6%88%EB%8B%AD%ED%8C%A1-40%ED%95%A0%EC%9D%B8-Pk6XLYGA?from=write",
+      "at": "2026-11-01T11:56:48.323219+00:00",
+      "run_id": "41304069281"
     }
   },
   "skipped_non_coupang": 3
