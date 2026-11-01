@@ -5,6 +5,7 @@ on:
       - test/daangn-onepost-20261101
     paths:
       - .github/workflows/daangn-onepost-stage.yml
+      - gh_only/daangn_stage_one.py
 permissions:
   contents: read
 jobs:
