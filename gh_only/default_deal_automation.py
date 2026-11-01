@@ -230,7 +230,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     )
     if candidate.get("candidate_url"):
         caption["caption"] += (
-            "\n🛒 상품 링크 (수익 귀속 미검증) : " + candidate["candidate_url"]
+            "\n🛒 상품 링크 : " + candidate["candidate_url"]
         )
     return {
         "source_post_url": deal.get("source_post_url"),
@@ -245,6 +245,12 @@ def enrich_deal(deal: dict, output_dir: Path,
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
+        "observed_low_verified_for_deal": (
+            average is not None
+            and type(history.get("observed_low_krw")) is int
+            and type(sale) is int
+            and sale <= history["observed_low_krw"]
+        ),
         "image_exact_option_verified": False,
         "price_is_live_coupang_verified": False,
         "posts_published": 0,
@@ -258,6 +264,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--output-dir", default="default-deal-drafts")
     parser.add_argument("--max-source-posts", type=int, default=8)
+    parser.add_argument("--exclude-source-id", type=int, action="append", default=[])
+    parser.add_argument("--source-id", type=int, default=None)
     args = parser.parse_args()
     if not 1 <= args.max_source_posts <= 20:
         parser.error("max-source-posts must be 1..20")
@@ -269,9 +277,15 @@ def main():
                 if d.get("url_kind") in ("coupang_shortlink", "coupang_product")
                 and isinstance(d.get("sale_price_krw"), int)
                 and d["sale_price_krw"] > 0]
+    selected = next(
+        (d for d in eligible
+         if d.get("source_message_id") not in args.exclude_source_id
+         and (args.source_id is None or d.get("source_message_id") == args.source_id)),
+        None
+    )
     results = []
-    if eligible:
-        results.append(enrich_deal(eligible[0], root,
+    if selected is not None:
+        results.append(enrich_deal(selected, root,
                                   session_secret=os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", ""),
                                   owner_tag=os.getenv("COUPANG_PARTNER_LPTAG", "")))
     report = {
