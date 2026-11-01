@@ -72,11 +72,15 @@ def coupang_event(post: dict) -> bool:
     return False
 
 
-def workflow_dispatch(token: str, opener=None) -> None:
+def workflow_dispatch(token: str, opener=None, *, smoke_test: bool = False) -> None:
     """Call the official Actions write endpoint; never log the credential."""
     if not token or any(x.isspace() for x in token):
         raise RuntimeError("GITHUB_DISPATCH_TOKEN_INVALID")
-    payload = dumps({"ref": "main"}).encode("utf-8")
+    payload_obj = {"ref": "main"}
+    if smoke_test:
+        # Explicit caller-only option for the safe no-publish API smoke job.
+        payload_obj["inputs"] = {"smoke_test": "true"}
+    payload = dumps(payload_obj).encode("utf-8")
     req = request.Request(
         ENDPOINT,
         data=payload,
