@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94787,
-  "pending": [],
+  "last_scanned_id": 94788,
+  "pending": [
+    {
+      "id": 94788,
+      "source_post_url": "https://t.me/jirum/94788",
+      "original_purchase_url": "https://link.coupang.com/a/ikqfWyAtB6",
+      "source_text": "☆특가 15,560원 (24.1% 할인)\n오뚜기 딸기쨈, 500g, 4개\n📌 가격 현황\n- 정상가: 20,500원\n- 할인: 4,940원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikqfWyAtB6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "오뚜기 딸기쨈, 500g, 4개",
+      "sale_price_krw": 15560
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
