@@ -158,7 +158,7 @@ class AutomatedDefaultTests(unittest.TestCase):
                           lambda link, state: OG, wrong,
                           lambda *args: {"status":"NO_DOWNLOAD"}, "fake")
         self.assertIsNone(out["caption"]["approx_discount_vs_historical_mean_pct"])
-        self.assertIn("관측 평균) : 확인 중", out["caption"]["caption"])
+        self.assertIn("쿠팡 평소 판매가 : 확인 중", out["caption"]["caption"])
         self.assertNotIn("% 혜택", out["caption"]["caption"])
 
 
