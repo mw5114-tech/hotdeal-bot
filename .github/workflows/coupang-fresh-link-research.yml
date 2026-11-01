@@ -4,6 +4,7 @@ on:
     paths:
       - coupang_fresh_link_research.py
       - test_coupang_fresh_link_research.py
+      - coupang_influencer_public_probe.py
       - .github/workflows/coupang-fresh-link-research.yml
   workflow_dispatch:
 permissions:
@@ -21,3 +22,13 @@ jobs:
         run: |
           python -m py_compile coupang_fresh_link_research.py
           python -m unittest -v test_coupang_fresh_link_research.py
+  alternate-public-portal-check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Query public creator landing page once without authentication
+        run: python coupang_influencer_public_probe.py
