@@ -19,6 +19,13 @@ def norm(s: str) -> str:
     return re.sub(r"\s+", "", s or "")
 
 
+def choose_editor_submit_index(candidates: list[dict]) -> int | None:
+    """Choose only one visible exact-label button positioned below editor top."""
+    eligible = [row["index"] for row in candidates
+                if row.get("visible") and row.get("below_editor")]
+    return eligible[0] if len(eligible) == 1 else None
+
+
 def validate_editor_copy(editor, body: str, url: str, image) -> bool:
     observed = editor.inner_text().strip()
     exact = norm(observed) == norm(body)
@@ -184,14 +191,14 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                         "y": round(rect["y"]) if rect else None,
                     })
                 result["submit_checks"]["candidates"] = candidates
-                anchored = [x["index"] for x in candidates if x["below_editor"]]
-                if len(anchored) == 1:
-                    submit = role_submit.nth(anchored[0])
+                anchored_index = choose_editor_submit_index(candidates)
+                if anchored_index is not None:
+                    submit = role_submit.nth(anchored_index)
                     result["submit_checks"]["strategy"] = "single_button_below_editor"
                 elif role_submit.count() == 1 and role_submit.is_visible():
                     # One accessible button, but do not click a header/nav action
                     # when the editor location is available.
-                    if editor_rect and not anchored:
+                    if editor_rect and anchored_index is None:
                         raise RuntimeError("SOLE_SUBMIT_BUTTON_ABOVE_EDITOR")
                     submit = role_submit
                     result["submit_checks"]["strategy"] = "sole_accessible_role"
