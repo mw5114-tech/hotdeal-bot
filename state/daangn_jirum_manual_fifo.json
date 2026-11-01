@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94752,
-  "pending": [
-    {
-      "id": 94752,
-      "source_post_url": "https://t.me/jirum/94752",
-      "original_purchase_url": "https://link.coupang.com/a/ijF1QRRwhE",
-      "source_text": "👍대박 47,590원 (35.0% 할인)\n테팔 매트 프라이팬 세트\n📌 가격 현황\n- 정상가: 73,215원\n- 할인: 25,625원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijF1QRRwhE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "테팔 매트 프라이팬 세트",
-      "sale_price_krw": 47590
-    }
-  ],
-  "in_flight": {
-    "id": 94752,
-    "status": "CLAIMED",
-    "run_id": "41274477612",
-    "at": "2026-11-01T04:48:30.697645+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -70,6 +56,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-CJ%EC%A0%9C%EC%9D%BC%EC%A0%9C%EB%8B%B9-%EC%81%98%EB%9D%A0%EC%B2%BC-%EA%B3%BC%EC%9D%BC%EC%A0%A4%EB%A6%AC-%EB%B3%B5%EC%88%AD%EC%95%84-210g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-d7LX5eRj?from=write",
       "at": "2026-11-01T04:40:03.921178+00:00",
       "run_id": "41273862170"
+    },
+    "94752": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%85%8C%ED%8C%94-%EB%A7%A4%ED%8A%B8-%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC-%EC%84%B8%ED%8A%B8-35%ED%95%A0%EC%9D%B8-jvxb6xmP?from=write",
+      "at": "2026-11-01T04:48:46.919103+00:00",
+      "run_id": "41274477612"
     }
   },
   "skipped_non_coupang": 1
