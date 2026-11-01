@@ -1,8 +1,9 @@
 """Scheduled (30min) or manual Jirum -> Daangn FIFO, persisted via GitHub Contents API.
 
 One invocation scans all visible pages since the persisted watermark,
-queues only clearly identified Coupang purchase URLs, and publishes at most one
-oldest pending entry. No live write is made on an empty queue. Pre-submit claim
+queues only clearly identified Coupang purchase URLs, and drains pending items
+oldest first until empty or a safe time budget is reached. No live write is made
+on an empty queue. Pre-submit claim
 is persisted; uncertain attempts require a human check and are never replayed.
 """
 from __future__ import annotations
@@ -12,6 +13,7 @@ import base64
 from datetime import datetime, timezone
 import json
 import os
+import time
 from pathlib import Path
 from urllib import error, request
 from urllib.parse import urlsplit
@@ -27,6 +29,9 @@ MAX_PENDING = 300
 MAX_STATE_BYTES = 900_000
 COUPANG_KINDS = frozenset(("coupang_shortlink", "coupang_product"))
 DRAFT_DIR = Path("jirum-manual-one-draft")
+# Avoid GitHub 15-minute job cancellation during a live post. A subsequent
+# scheduled run resumes any remaining backlog without ever replaying a post.
+DRAIN_TIME_BUDGET_SECONDS = 11 * 60
 
 
 def now_utc() -> str:
@@ -327,9 +332,91 @@ def check_run_trigger() -> None:
         raise RuntimeError("NOT_MAIN_FIRST_ATTEMPT_OR_WRONG_EVENT")
 
 
+def publish_pending(store: GithubState, *, drain: bool = False,
+                    clock=None) -> int:
+    """Publish FIFO entries sequentially; checkpoint after EVERY verified post.
+
+    Fail closed on any failed or uncertain publish. There is no retry within
+    the same run. The next scheduled scan picks up any unfinished backlog.
+    """
+    clock = clock or time.monotonic
+    started = clock()
+    run_id = os.environ.get("GITHUB_RUN_ID", "")
+    if not run_id:
+        raise RuntimeError("GITHUB_RUN_ID_MISSING")
+    completed = 0
+    while True:
+        state, _ = store.read()
+        if state["in_flight"] is not None:
+            raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
+        if not state["pending"]:
+            print("JIRUM_FIFO_DRAIN_COMPLETE " + json.dumps({
+                "published_this_run": completed,
+                "pending": 0,
+                "reason": "QUEUE_EMPTY",
+            }))
+            return 0
+        # Check budget only BETWEEN posts; never cut off mid-submission.
+        if drain and completed and clock() - started >= DRAIN_TIME_BUDGET_SECONDS:
+            print("JIRUM_FIFO_DRAIN_PAUSED " + json.dumps({
+                "published_this_run": completed,
+                "pending": len(state["pending"]),
+                "reason": "SAFE_RUNTIME_BUDGET_NEXT_SCHEDULE_RESUMES",
+            }))
+            return 0
+
+        article = build_next(state)  # Full evidence validation before claim.
+        source_id = article["source_id"]
+        claim(store, source_id, run_id)  # Durable pre-click checkpoint.
+        outcome = {"status": "PUBLISH_NOT_STARTED", "submit_attempted": False}
+        try:
+            from gh_only.jirum_manual_publisher import publish_one
+            outcome = publish_one(article)
+        except Exception as exc:
+            # Unexpected crash might have happened at the browser boundary;
+            # preserve review status rather than risk a duplicate post.
+            outcome = {
+                "status": "PUBLISH_EXCEPTION_REVIEW",
+                "error_type": type(exc).__name__,
+                "submit_attempted": False,
+            }
+        # If the write fails after clicking, CLAIMED remains, blocking replay.
+        finish(store, source_id, run_id, outcome)
+        print("JIRUM_MANUAL_PUBLISH " + json.dumps({
+            "source_id": source_id, "status": outcome.get("status"),
+            "post_url": outcome.get("post_url"),
+            "submit_attempted": outcome.get("submit_attempted"),
+            "failure_stage": outcome.get("failure_stage"),
+            "error_type": outcome.get("error_type"),
+            "error_reason": outcome.get("error_reason"),
+            "http_status": outcome.get("http_status"),
+            "page_path": outcome.get("page_path"),
+            "editor_checks": outcome.get("editor_checks"),
+            "submit_checks": outcome.get("submit_checks"),
+            "photo_upload_completed": outcome.get("photo_upload_completed"),
+        }, ensure_ascii=False))
+
+        if outcome.get("status") != "POST_PUBLISHED_AND_FORMAT_VERIFIED":
+            # STOP on first failure. For pre-submit failure the head remains,
+            # and for uncertain submissions the queue is review-locked.
+            print("JIRUM_FIFO_DRAIN_STOPPED " + json.dumps({
+                "published_this_run": completed,
+                "failed_source_id": source_id,
+                "status": outcome.get("status"),
+            }))
+            return 2
+        completed += 1
+        print("JIRUM_FIFO_PROGRESS " + json.dumps({
+            "published_this_run": completed,
+            "last_source_id": source_id,
+        }))
+        if not drain:
+            return 0
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=("scan", "publish"))
+    parser.add_argument("command", choices=("scan", "publish", "drain"))
     args = parser.parse_args()
     check_run_trigger()
     store = GithubState()
@@ -340,40 +427,7 @@ def main():
             with open(output, "a", encoding="utf-8") as f:
                 f.write("has_deal=" + ("true" if result.get("has_deal") else "false") + "\n")
         return 0
-    state, _ = store.read()
-    if state["in_flight"] is not None:
-        raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
-    if not state["pending"]:
-        print("NO_NEW_COUPANG_DEAL")
-        return 0
-    article = build_next(state)  # Must finish all data checks before claim
-    source_id = article["source_id"]
-    run_id = os.environ.get("GITHUB_RUN_ID", "")
-    if not run_id:
-        raise RuntimeError("GITHUB_RUN_ID_MISSING")
-    claim(store, source_id, run_id)
-    outcome = {"status": "PUBLISH_NOT_STARTED", "submit_attempted": False}
-    try:
-        from gh_only.jirum_manual_publisher import publish_one
-        outcome = publish_one(article)
-    except Exception as exc:
-        outcome = {"status": "PUBLISH_EXCEPTION_REVIEW", "error_type": type(exc).__name__,
-                   "submit_attempted": False}
-    # If this write fails after the post, CLAIMED persists: fail closed.
-    finish(store, source_id, run_id, outcome)
-    print("JIRUM_MANUAL_PUBLISH " + json.dumps({
-        "source_id": source_id, "status": outcome.get("status"),
-        "post_url": outcome.get("post_url"), "submit_attempted": outcome.get("submit_attempted"),
-        "failure_stage": outcome.get("failure_stage"),
-        "error_type": outcome.get("error_type"),
-        "error_reason": outcome.get("error_reason"),
-        "http_status": outcome.get("http_status"),
-        "page_path": outcome.get("page_path"),
-        "editor_checks": outcome.get("editor_checks"),
-        "submit_checks": outcome.get("submit_checks"),
-        "photo_upload_completed": outcome.get("photo_upload_completed"),
-    }, ensure_ascii=False))
-    return 0 if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" else 2
+    return publish_pending(store, drain=args.command == "drain")
 
 
 if __name__ == "__main__":
