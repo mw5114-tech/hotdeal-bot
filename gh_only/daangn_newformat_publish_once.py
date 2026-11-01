@@ -114,7 +114,19 @@ def run_once():
                 title.fill(article["title"])
                 page.wait_for_timeout(1300)
                 body=editor.inner_text().strip()
-                if title.input_value()!=article["title"] or norm(body)!=norm(article["body"]):
+                result["title_exact_match"]=title.input_value()==article["title"]
+                result["body_normalized_match"]=norm(body)==norm(article["body"])
+                result["expected_body_chars"]=len(article["body"])
+                result["observed_body_chars"]=len(body)
+                if not result["body_normalized_match"]:
+                    expected_compact=norm(article["body"])
+                    actual_compact=norm(body)
+                    at=next((i for i,(a,b) in enumerate(zip(expected_compact,actual_compact)) if a!=b),
+                            min(len(expected_compact),len(actual_compact)))
+                    result["first_mismatch_index"]=at
+                    result["expected_around_mismatch"]=expected_compact[max(0,at-35):at+100]
+                    result["actual_around_mismatch"]=actual_compact[max(0,at-35):at+100]
+                if not result["title_exact_match"] or not result["body_normalized_match"]:
                     raise RuntimeError("BODY_OR_TITLE_MISMATCH")
                 if not editor.evaluate("""(e,url)=>{
                     const walker=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);
@@ -130,6 +142,9 @@ def run_once():
                     raise RuntimeError("DISCLOSURE_NOT_LAST")
                 result["before_post_verified"]=True
                 page.screenshot(path=str(OUT/"before_submit.png"),timeout=10000)
+                if os.getenv("ONEPOST_DRY_RUN")=="true":
+                    result["status"]="STAGING_VERIFIED_NO_PUBLISH"
+                    return result
 
                 submit=page.locator("button.w-full").filter(has_text=re.compile(r"^글쓰기$"))
                 if submit.count()!=1 or not submit.is_enabled():
