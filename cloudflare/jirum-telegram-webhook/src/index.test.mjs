@@ -47,6 +47,10 @@ function db() {
         return {meta:{changes:changed}};
       },
       async first(){
+        if(sql.startsWith("SELECT chat_id,message_id FROM telegram_events WHERE status = 'dispatch_uncertain'")) {
+          const item=[...events.values()].find(x=>x.status==="dispatch_uncertain");
+          return item?{chat_id:item.chat_id,message_id:item.message_id}:null;
+        }
         if(sql.startsWith("SELECT chat_id,message_id,source_id FROM telegram_events")){
           return [...events.values()].filter(x=>x.status==="pending")
             .sort((a,b)=>a.created_at_ms-b.created_at_ms || a.message_id-b.message_id)[0] || null;
@@ -209,6 +213,16 @@ test("dispatch gate allows old success and throttles recent failed runs",()=>{
     head_branch:"main",event:"workflow_dispatch",status:"completed",
     conclusion:"failure",created_at:new Date(now-60000).toISOString(),
   }],12,now),"LAST_RUN_FAILED_COOLDOWN");
+});
+test("unconfirmed GitHub dispatch blocks all future automatic actions",async()=>{
+  const c=create({}, {pending:[{id:94744}]});
+  c.mem.events.set("-100321/123", {
+    chat_id:"-100321",message_id:123,source_id:94744,
+    status:"dispatch_uncertain",created_at_ms:now-60000
+  });
+  assert.equal((await processQueue(c.env,c.mockFetch,now)).status,
+    "DISPATCH_UNCERTAIN_REVIEW_REQUIRED");
+  assert.equal(postCount(c),0);
 });
 test("worker disabled by default",async()=>{
   const c=create({ENABLE_DISPATCH:"false"});
