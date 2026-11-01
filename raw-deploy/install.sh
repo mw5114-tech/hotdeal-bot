@@ -18,7 +18,7 @@ if ! id hotdeal-live >/dev/null 2>&1; then
 fi
 install -d -o root -g root -m 0755 /opt/hotdeal-live
 install -d -o hotdeal-live -g hotdeal-live -m 0700 /var/lib/hotdeal-live
-for file in watcher.py raw_runtime.py raw_message.py raw_delivery.py live_store.py telegram_delivery.py requirements-live.txt; do
+for file in watcher.py raw_runtime.py jirum_github_dispatch.py raw_message.py raw_delivery.py live_store.py telegram_delivery.py requirements-live.txt; do
   install -o root -g root -m 0644 "$src/$file" "/opt/hotdeal-live/$file"
 done
 install -d -o root -g root -m 0755 /opt/hotdeal-live/state
