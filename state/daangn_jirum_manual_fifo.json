@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94772,
-  "pending": [],
+  "last_scanned_id": 94773,
+  "pending": [
+    {
+      "id": 94773,
+      "source_post_url": "https://t.me/jirum/94773",
+      "original_purchase_url": "https://link.coupang.com/a/ijYKtgjQWa",
+      "source_text": "👍대박 17,900원 (39.0% 할인)\n[로켓프레시] 하겐다즈 크리스피 샌드위치 리치 카라멜 아이스크림 (냉동)\n📌 가격 현황\n- 정상가: 29,344원\n- 할인: 11,444원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYKtgjQWa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "[로켓프레시] 하겐다즈 크리스피 샌드위치 리치 카라멜 아이스크림 (냉동)",
+      "sale_price_krw": 17900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
