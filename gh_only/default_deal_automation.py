@@ -26,6 +26,7 @@ from gh_only.kakao_og_authenticated_probe import (
 from gh_only.default_deal_format import (
     create_default_preview, validated_history, normalized_product_name,
 )
+from gh_only.affsdp_candidate import compose_affsdp_candidate
 
 ALLOWED_CDN = ("thumbnail.coupangcdn.com", "image.coupangcdn.com")
 MAX_IMAGE_BYTES = 2_500_000
@@ -186,7 +187,7 @@ def download_og_photo(url: str | None, output: Path, source_message_id: int) -> 
 def enrich_deal(deal: dict, output_dir: Path,
                 resolver=resolve_identity, og_lookup=get_kakao_og,
                 history_fetch=fetch_one, photo_downloader=download_og_photo,
-                session_secret: str = "") -> dict:
+                session_secret: str = "", owner_tag: str = "") -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -219,6 +220,18 @@ def enrich_deal(deal: dict, output_dir: Path,
     if matching and image_is_cdn(og.get("og_image") or ""):
         photo = photo_downloader(og["og_image"], output_dir, source_id)
     caption = create_default_preview(sale, title, average, source_id)
+    # The candidate is composed ONLY from the already-resolved product/item.
+    # It has not been formally issued and its commission credit is unknown.
+    candidate = (
+        compose_affsdp_candidate(identity, owner_tag) if owner_tag else
+        {"status": "OWNER_LPTAG_NOT_CONFIGURED", "candidate_url": None,
+         "official_link_issued": False, "commission_attribution_verified": False,
+         "ready_for_automatic_publication": False}
+    )
+    if candidate.get("candidate_url"):
+        caption["caption"] += (
+            "\n🛒 상품 링크 (수익 귀속 미검증) : " + candidate["candidate_url"]
+        )
     return {
         "source_post_url": deal.get("source_post_url"),
         "source_message_id": source_id,
@@ -236,6 +249,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "price_is_live_coupang_verified": False,
         "posts_published": 0,
         "personal_affiliate_link_created": False,
+        "affsdp": candidate,
+        "composed_affiliate_url": candidate.get("candidate_url"),
     }
 
 
@@ -256,10 +271,11 @@ def main():
                 and d["sale_price_krw"] > 0]
     results = []
     if eligible:
-        results.append(enrich_deal(eligible[0], root, session_secret=
-                                  os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", "")))
+        results.append(enrich_deal(eligible[0], root,
+                                  session_secret=os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", ""),
+                                  owner_tag=os.getenv("COUPANG_PARTNER_LPTAG", "")))
     report = {
-        "schema": "github-jirum-default-price-photo-v1",
+        "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
         "checked_at_utc": datetime.now(timezone.utc).isoformat(),
         "source": "https://t.me/s/jirum",
         "source_posts_sampled": len(evidence),
@@ -267,6 +283,8 @@ def main():
         "attempted_items": len(results),
         "max_metadata_lookups": 1,
         "publish_count": 0,
+        "affiliate_link_issuance_count": 0,
+        "affiliate_commission_verified": False,
         "drafts": results,
     }
     (root / "drafts.json").write_text(
@@ -282,7 +300,9 @@ def main():
         "history_reason": r["history"].get("reason"),
         "og_status": r["kakao_status"],
         "photo_status": r["photo"]["status"],
-        "image_file": r["photo"].get("saved_name")
+        "image_file": r["photo"].get("saved_name"),
+        "affsdp_status": r["affsdp"]["status"],
+        "has_composed_url": bool(r["composed_affiliate_url"])
     } for r in results]
     print("JIRUM_DEFAULT_AUTOMATION " + json.dumps(
         {"source_posts": len(evidence), "eligible": len(eligible),
