@@ -19,6 +19,13 @@ def norm(s: str) -> str:
     return re.sub(r"\s+", "", s or "")
 
 
+def choose_editor_submit_index(candidates: list[dict]) -> int | None:
+    """Choose only one visible exact-label button positioned below editor top."""
+    eligible = [row["index"] for row in candidates
+                if row.get("visible") and row.get("below_editor")]
+    return eligible[0] if len(eligible) == 1 else None
+
+
 def validate_editor_copy(editor, body: str, url: str, image) -> bool:
     observed = editor.inner_text().strip()
     exact = norm(observed) == norm(body)
@@ -168,14 +175,42 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     "legacy_count": legacy_submit.count(),
                     "upload_pending_label": "준비중" in editor.inner_text(),
                 }
-                if role_submit.count() == 1:
+                editor_rect = editor.bounding_box()
+                candidates = []
+                for idx in range(role_submit.count()):
+                    candidate = role_submit.nth(idx)
+                    rect = candidate.bounding_box() if candidate.is_visible() else None
+                    below_editor = bool(
+                        rect and editor_rect and rect["y"] > editor_rect["y"]
+                    )
+                    candidates.append({
+                        "index": idx,
+                        "visible": bool(rect),
+                        "below_editor": below_editor,
+                        "enabled": candidate.is_enabled(),
+                        "y": round(rect["y"]) if rect else None,
+                    })
+                result["submit_checks"]["candidates"] = candidates
+                anchored_index = choose_editor_submit_index(candidates)
+                if anchored_index is not None:
+                    submit = role_submit.nth(anchored_index)
+                    result["submit_checks"]["strategy"] = "single_button_below_editor"
+                elif role_submit.count() == 1 and role_submit.is_visible():
+                    # One accessible button, but do not click a header/nav action
+                    # when the editor location is available.
+                    if editor_rect and anchored_index is None:
+                        raise RuntimeError("SOLE_SUBMIT_BUTTON_ABOVE_EDITOR")
                     submit = role_submit
-                    result["submit_checks"]["strategy"] = "accessible_role_exact"
+                    result["submit_checks"]["strategy"] = "sole_accessible_role"
                 elif legacy_submit.count() == 1:
+                    legacy_rect = legacy_submit.bounding_box()
+                    if (editor_rect and legacy_rect
+                        and legacy_rect["y"] <= editor_rect["y"]):
+                        raise RuntimeError("LEGACY_BUTTON_ABOVE_EDITOR")
                     submit = legacy_submit
                     result["submit_checks"]["strategy"] = "legacy_css"
                 else:
-                    raise RuntimeError("SUBMIT_BUTTON_NOT_FOUND_OR_AMBIGUOUS")
+                    raise RuntimeError("NO_UNIQUE_EDITOR_ANCHORED_SUBMIT_BUTTON")
                 result["failure_stage"] = "WAIT_SUBMIT_ENABLED"
                 submit.wait_for(state="visible", timeout=10000)
                 # Image has appeared locally but may still be uploading.
