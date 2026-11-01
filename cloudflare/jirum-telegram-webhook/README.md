@@ -38,7 +38,8 @@ Cloudflare 무료 계정에서:
 - 배포 시 Workers 도메인 URL을 확인합니다.
 - Telegram Bot API setWebhook에서 https://<worker-host>/telegram/webhook 주소를 등록하고, allowed_updates를 ["message"]로 선택합니다. secret_token은 Cloudflare TELEGRAM_WEBHOOK_SECRET과 똑같아야 합니다.
 - URL에 사용되는 **봇 토큰은 @BotFather에서 받은 토큰**입니다. 환경변수로 다루고 저장소에 넣지 마세요.
-- 처음에는 ENABLE_DISPATCH=false여서 GitHub에 전혀 발행 요청이 나가지 않습니다. 그룹의 테스트 쿠팡 메시지를 보내 웹훅 메시지 수신·전송 봇 식별·D1 INSERT 검증 후 ENABLE_DISPATCH="true"로 변경하고 다시 배포하세요.
+- 처음에는 ENABLE_DISPATCH=false여서 GitHub에 전혀 발행 요청이 나가지 않습니다. 이 상태에서 웹훅에 메시지를 보내면 503을 반환하며 Telegram이 재전송할 수 있으므로 **실제 웹훅을 연결하기 전에 설정과 오프라인 테스트를 완료**하세요.
+- 그룹에서 실제 봇 메시지가 보이는지, @BotFather의 Bot-to-Bot Communication Mode가 켜졌는지 먼저 확인하세요. 그 다음 ENABLE_DISPATCH="true"로 변경·배포하고 Telegram setWebhook으로 연결하세요. 활성화 이후 테스트 메시지도 조건에 맞으면 실제 GitHub Actions를 부를 수 있습니다.
 - 리스너 봇이 이미 다른 웹훅 또는 getUpdates 사용 중이라면 충돌하지 않도록 기존 프로세스에 코드를 통합하는 방법을 선택해야 합니다.
 
 ## 주의
@@ -46,7 +47,7 @@ Cloudflare 무료 계정에서:
 - 메시지를 보낸 봇 숫자 ID와 그룹 채팅 ID를 지정하므로, 다른 봇/그룹의 동일 쿠팡 링크는 트리거하지 않습니다.
 - Telegram 메시지의 forward_origin.channel 메시지 ID 또는 본문의 t.me/jirum/<id>를 확인할 수 있으면 **94743 이하 기존 게시 건**은 무시합니다.
 - GitHub 워크플로가 실제로 상품을 게시하면 영구 FIFO 상태(state/daangn_jirum_manual_fifo.json)가 업데이트됩니다.
-- 텔레그램 메시지 중복, 네트워크 타임아웃, GitHub 응답 불명확 등의 경우 동일 요청을 무조건 재시도하지 않습니다. Github 실행 성공을 단정하기 전에 run 목록과 FIFO 상태를 확인해야 합니다.
+- 텔레그램 메시지 중복, 네트워크 타임아웃, GitHub 응답 불명확 등의 경우 동일 요청을 무조건 재시도하지 않습니다. `dispatch_uncertain` 상태는 모든 자동 재호출을 차단하므로 GitHub runs와 FIFO 상태를 직접 확인 후 수동으로 처리해야 합니다.
 - 원래 쿠팡 파트너스 링크는 공식 발급/수익 귀속이 검증되지 않은 AFFSDP 후보입니다. 자동 수익 보장을 의미하지 않습니다.
 - 1분마다 돌아가는 것은 **Cloudflare 측 복구용 확인만**이고, GitHub Actions가 매분 실행되지는 않습니다.
 - Cloudflare Worker, D1 무료 사용량과 GitHub Actions 분량은 별도 제한입니다. 실제 계정의 요금제 사용량을 확인하세요.
