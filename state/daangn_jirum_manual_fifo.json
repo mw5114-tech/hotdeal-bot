@@ -3,14 +3,6 @@
   "last_scanned_id": 94763,
   "pending": [
     {
-      "id": 94760,
-      "source_post_url": "https://t.me/jirum/94760",
-      "original_purchase_url": "https://link.coupang.com/a/ijLBo8qu1A",
-      "source_text": "☆특가 10,170원\n사무실 인기과자 11p 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijLBo8qu1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 10,170원",
-      "sale_price_krw": 10170
-    },
-    {
       "id": 94762,
       "source_post_url": "https://t.me/jirum/94762",
       "original_purchase_url": "https://link.coupang.com/a/ijOg14in4C",
@@ -27,12 +19,7 @@
       "sale_price_krw": 8440
     }
   ],
-  "in_flight": {
-    "id": 94760,
-    "status": "CLAIMED",
-    "run_id": "41282508505",
-    "at": "2026-11-01T06:53:50.996727+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -133,6 +120,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B0%94%EB%A6%AC%EC%8A%A4%ED%83%80%EB%A3%B0%EC%8A%A4-%EC%97%90%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C-%EB%9D%BC%EB%96%BC-250ml-6%EA%B0%9C-jvxZnrqP?from=write",
       "at": "2026-11-01T06:53:43.598621+00:00",
+      "run_id": "41282508505"
+    },
+    "94760": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%82%AC%EB%AC%B4%EC%8B%A4-%EC%9D%B8%EA%B8%B0%EA%B3%BC%EC%9E%90-11p-%EC%84%B8%ED%8A%B8-25%ED%95%A0%EC%9D%B8-dg36e8Kd?from=write",
+      "at": "2026-11-01T06:54:06.709780+00:00",
       "run_id": "41282508505"
     }
   },
