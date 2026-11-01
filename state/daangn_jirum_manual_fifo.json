@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94776,
-  "pending": [
-    {
-      "id": 94776,
-      "source_post_url": "https://t.me/jirum/94776",
-      "original_purchase_url": "https://link.coupang.com/a/ijYVZm6Jrg",
-      "source_text": "🔥🔥🔥무지성 2,200원 (63.0% 할인)🔥🔥🔥\n쁘띠첼 요거젤리 딸기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 5,946원\n- 할인: 3,746원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYVZm6Jrg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "쁘띠첼 요거젤리 딸기",
-      "sale_price_krw": 2200
-    }
-  ],
-  "in_flight": {
-    "id": 94776,
-    "status": "CLAIMED",
-    "run_id": "41292077596",
-    "at": "2026-11-01T09:12:37.691451+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -208,6 +194,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%99%88%EC%8A%A4%ED%83%80-%EB%BF%8C%EB%A6%AC%EB%8A%94-%EA%B3%B0%ED%8C%A1%EC%9D%B4-%EC%8B%B9-%EC%84%B8%EC%A0%95%EC%A0%9C-900ml-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-P21k1aWA?from=write",
       "at": "2026-11-01T09:12:00.665335+00:00",
       "run_id": "41291974564"
+    },
+    "94776": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%81%98%EB%9D%A0%EC%B2%BC-%EC%9A%94%EA%B1%B0%EC%A0%A4%EB%A6%AC-%EB%94%B8%EA%B8%B0-210g-2%EA%B0%9C-60%ED%95%A0%EC%9D%B8-PmVzVG2d?from=write",
+      "at": "2026-11-01T09:12:53.925898+00:00",
+      "run_id": "41292077596"
     }
   },
   "skipped_non_coupang": 2
