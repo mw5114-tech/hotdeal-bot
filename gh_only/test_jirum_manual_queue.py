@@ -1,10 +1,11 @@
 """Offline FIFO regression tests. Never contact Telegram, GitHub or Daangn."""
 import copy
+import os
 import unittest
 from unittest.mock import patch
 
 from gh_only.jirum_manual_queue import (
-    START_AFTER, SCHEMA, collect_since, finish, ingest, scan, validate_state,
+    START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest, scan, validate_state,
 )
 
 
@@ -52,6 +53,29 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_schedule_trigger_runs_only_on_main_first_attempt(self):
+        for event in ("schedule", "workflow_dispatch", "push"):
+            with self.subTest(event=event), patch.dict(os.environ, {
+                "GITHUB_ACTIONS": "true", "GITHUB_REF": "refs/heads/main",
+                "GITHUB_RUN_ATTEMPT": "1", "GITHUB_EVENT_NAME": event,
+            }):
+                check_run_trigger()
+
+    def test_duplicate_or_untrusted_scheduled_events_are_blocked(self):
+        baseline_vars = {
+            "GITHUB_ACTIONS": "true", "GITHUB_REF": "refs/heads/main",
+            "GITHUB_RUN_ATTEMPT": "1", "GITHUB_EVENT_NAME": "schedule",
+        }
+        for key, bad_value in (
+            ("GITHUB_ACTIONS", "false"),
+            ("GITHUB_REF", "refs/heads/test"),
+            ("GITHUB_RUN_ATTEMPT", "2"),
+            ("GITHUB_EVENT_NAME", "pull_request"),
+        ):
+            with self.subTest(key=key), patch.dict(os.environ, {**baseline_vars, key: bad_value}):
+                with self.assertRaisesRegex(RuntimeError, "NOT_MAIN_FIRST_ATTEMPT"):
+                    check_run_trigger()
+
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
             deal(94747), deal(94745, "external"), deal(94746),
