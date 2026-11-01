@@ -3,14 +3,6 @@
   "last_scanned_id": 94769,
   "pending": [
     {
-      "id": 94766,
-      "source_post_url": "https://t.me/jirum/94766",
-      "original_purchase_url": "https://link.coupang.com/a/ijRsBRmyJ2",
-      "source_text": "☆특가 8,410원\n남양이오 유산균 음료, 190ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijRsBRmyJ2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 8,410원",
-      "sale_price_krw": 8410
-    },
-    {
       "id": 94767,
       "source_post_url": "https://t.me/jirum/94767",
       "original_purchase_url": "https://link.coupang.com/a/ijSJYOFEgm",
@@ -35,12 +27,7 @@
       "sale_price_krw": 12750
     }
   ],
-  "in_flight": {
-    "id": 94766,
-    "status": "CLAIMED",
-    "run_id": "41289051562",
-    "at": "2026-11-01T08:30:22.339081+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -171,6 +158,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%95%B4%EC%B0%AC%EB%93%A4-%EC%82%AC%EA%B3%84%EC%A0%88%EC%8C%88%EC%9E%A5-300g-3%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dpWGDBqP?from=write",
       "at": "2026-11-01T08:30:14.479031+00:00",
+      "run_id": "41289051562"
+    },
+    "94766": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%82%A8%EC%96%91%EC%9D%B4%EC%98%A4-%EC%9C%A0%EC%82%B0%EA%B7%A0-%EC%9D%8C%EB%A3%8C-190ml-24%EA%B0%9C-dagLW77A?from=write",
+      "at": "2026-11-01T08:30:38.006897+00:00",
       "run_id": "41289051562"
     }
   },
