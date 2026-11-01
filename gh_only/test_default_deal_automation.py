@@ -120,7 +120,7 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertEqual(r["caption"]["caption"].splitlines(), [
             "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개",
             "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
-            "🔥 핫딜 특가 : 12,050원 (상세페이지 참고 / 약 65% 할인)",
+            "🔥 핫딜 특가 : 12,050원 (약 65% 할인 / 상세페이지 참고)",
         ])
         self.assertNotIn("59.8%", r["caption"]["caption"])
         self.assertFalse(r["caption"]["auto_publish_ready"])
