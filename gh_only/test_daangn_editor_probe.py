@@ -99,6 +99,10 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertIn("12,050원", result["body"])
         self.assertIn("AF9668915", result["body"])
         self.assertIn(DISCLOSURE, result["body"])
+        self.assertEqual(result["body"].splitlines()[-1],
+                         "🛒 상품 링크 (수익 귀속 미검증) : " + TEST_URL)
+        self.assertEqual(result["candidate_url"], TEST_URL)
+        self.assertLess(result["body"].index(DISCLOSURE), result["body"].index(TEST_URL))
         self.assertEqual(result["image"].name, "jirum_94717_kakao_og.jpg")
         self.assertTrue(result["unissued_affsdp_candidate"])
 
