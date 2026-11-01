@@ -25,7 +25,7 @@ def fit_title_to_limit(title: str, max_length: int) -> str:
         raise ValueError("UNSAFE_DAANGN_TITLE_LIMIT")
     if len(title) <= max_length:
         return title
-    discount = re.search(r" (\\[\\d+%할인\\])$", title)
+    discount = re.search(r" (\[\d+%할인\])$", title)
     if discount:
         suffix = discount.group(0)
         keep = max_length - len(suffix)
