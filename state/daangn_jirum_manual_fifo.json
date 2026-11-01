@@ -1,7 +1,56 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94763,
-  "pending": [],
+  "last_scanned_id": 94769,
+  "pending": [
+    {
+      "id": 94764,
+      "source_post_url": "https://t.me/jirum/94764",
+      "original_purchase_url": "https://link.coupang.com/a/ijPTXV67wa",
+      "source_text": "☆특가 19,360원\n대상 종가 총각김치, 2.3kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijPTXV67wa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 19,360원",
+      "sale_price_krw": 19360
+    },
+    {
+      "id": 94765,
+      "source_post_url": "https://t.me/jirum/94765",
+      "original_purchase_url": "https://link.coupang.com/a/ijQp8Gs1ZI",
+      "source_text": "👍대박 3,270원 (34.6% 할인)\n해찬들 사계절쌈장, 300g, 3개\n📌 가격 현황\n- 정상가: 5,000원\n- 할인: 1,730원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijQp8Gs1ZI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "해찬들 사계절쌈장, 300g, 3개",
+      "sale_price_krw": 3270
+    },
+    {
+      "id": 94766,
+      "source_post_url": "https://t.me/jirum/94766",
+      "original_purchase_url": "https://link.coupang.com/a/ijRsBRmyJ2",
+      "source_text": "☆특가 8,410원\n남양이오 유산균 음료, 190ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijRsBRmyJ2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 8,410원",
+      "sale_price_krw": 8410
+    },
+    {
+      "id": 94767,
+      "source_post_url": "https://t.me/jirum/94767",
+      "original_purchase_url": "https://link.coupang.com/a/ijSJYOFEgm",
+      "source_text": "☆특가 28,900원\nHanilMedical 탄소열선 고급전기요 비숑 HL-203D(22)\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijSJYOFEgm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 28,900원",
+      "sale_price_krw": 28900
+    },
+    {
+      "id": 94768,
+      "source_post_url": "https://t.me/jirum/94768",
+      "original_purchase_url": "https://link.coupang.com/a/ijSV2evpaS",
+      "source_text": "☆특가 20,880원 (24.2% 할인)\n덴프스 정품 덴마크 유산균이야기 프로, 60정, 1개\n📌 가격 현황\n- 정상가: 27,550원\n- 할인: 6,670원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijSV2evpaS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "덴프스 정품 덴마크 유산균이야기 프로, 60정, 1개",
+      "sale_price_krw": 20880
+    },
+    {
+      "id": 94769,
+      "source_post_url": "https://t.me/jirum/94769",
+      "original_purchase_url": "https://link.coupang.com/a/ijTSupkxuS",
+      "source_text": "☆특가 12,750원\n티젠 콤부차 레몬, 5g, 50스틱\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijTSupkxuS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 12,750원",
+      "sale_price_krw": 12750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
