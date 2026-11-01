@@ -5,3 +5,5 @@ Nonce: 20261101-manual-001
 Diagnostic one-run after PR35: 20261101-0359
 
 Submit-wait fix verification one-run: 20261101-0404
+
+Editor-anchored submit verification one-run: 20261101-0407
