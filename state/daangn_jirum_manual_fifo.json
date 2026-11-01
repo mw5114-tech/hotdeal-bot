@@ -1,7 +1,24 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94773,
-  "pending": [],
+  "last_scanned_id": 94775,
+  "pending": [
+    {
+      "id": 94774,
+      "source_post_url": "https://t.me/jirum/94774",
+      "original_purchase_url": "https://link.coupang.com/a/ijYN6mdZ6a",
+      "source_text": "👍대박 14,580원 (32.0% 할인)\n잘크톤 멀티튼튼 츄어블정 딸기맛\n📌 가격 현황\n- 정상가: 21,441원\n- 할인: 6,861원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYN6mdZ6a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "잘크톤 멀티튼튼 츄어블정 딸기맛",
+      "sale_price_krw": 14580
+    },
+    {
+      "id": 94775,
+      "source_post_url": "https://t.me/jirum/94775",
+      "original_purchase_url": "https://link.coupang.com/a/ijYSjO09fw",
+      "source_text": "👍대박 6,100원 (32.0% 할인)\n홈스타 뿌리는 곰팡이 싹 세정제\n📌 가격 현황\n- 정상가: 8,971원\n- 할인: 2,871원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYSjO09fw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "홈스타 뿌리는 곰팡이 싹 세정제",
+      "sale_price_krw": 6100
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
