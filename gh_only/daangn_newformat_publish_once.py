@@ -126,6 +126,22 @@ def run_once():
                     result["first_mismatch_index"]=at
                     result["expected_around_mismatch"]=expected_compact[max(0,at-35):at+100]
                     result["actual_around_mismatch"]=actual_compact[max(0,at-35):at+100]
+                # Daangn image upload uses an inline "준비중" placeholder
+                # inside the image widget. This is not article copy. Tolerate
+                # ONLY that one exact prefix, NEVER tolerate missing URL chars.
+                image_widget_label=editor.evaluate("""(e)=>{
+                  const img=e.querySelector('img');
+                  if(!img)return '';
+                  let n=img.parentElement;
+                  for(let i=0;i<4&&n&&n!==e;i++,n=n.parentElement){
+                    if((n.innerText||'').includes('준비중'))return '준비중';
+                  }return '';
+                }""")
+                if (not result["body_normalized_match"]
+                    and norm(body)=="준비중"+norm(article["body"])
+                    and image_widget_label=="준비중"):
+                    result["image_widget_preparing_label_only"]=True
+                    result["body_normalized_match"]=True
                 if not result["title_exact_match"] or not result["body_normalized_match"]:
                     raise RuntimeError("BODY_OR_TITLE_MISMATCH")
                 if not editor.evaluate("""(e,url)=>{
