@@ -124,12 +124,10 @@ def read_one_draft(folder: Path) -> dict:
         image = folder / filename
         if not image.is_file() or image.stat().st_size > 2_500_000:
             raise ValueError("DRAFT_IMAGE_NOT_PRESENT")
-    # Keep disclosure explicit even in temporary editor content.
-    # The last line must remain the entire user's composed URL. Disclosure
-    # belongs immediately BEFORE that URL, never after it.
-    caption_lines = body.splitlines()
-    clean_body = ("\n".join(caption_lines[:-1]).rstrip()
-                  + "\n\n" + DISCLOSURE + "\n\n" + caption_lines[-1])
+    # Keep the source candidate URL intact, then 3 blank lines and disclosure
+    # at the very bottom, exactly as requested. Picture is uploaded separately
+    # before typing, so the long URL cannot be split by photo insertion.
+    clean_body = body.rstrip() + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,
@@ -256,8 +254,14 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
     normalize = lambda value: re.sub(r"\s+", "", value)
     result["body_filled"] = normalize(actual) == normalize(expected)
     url = article["candidate_url"]
-    result["url_is_last_line"] = bool(actual.splitlines() and
-                                      actual.splitlines()[-1].strip().endswith(url))
+    result["owner_url_above_disclosure"] = (
+        actual.endswith(DISCLOSURE)
+        and actual.count(url) == 1
+        and actual.index(url) < actual.rfind(DISCLOSURE)
+    )
+    result["disclosure_is_last_line"] = bool(
+        actual.splitlines() and actual.splitlines()[-1].strip() == DISCLOSURE
+    )
     result["url_intact_in_one_text_node"] = editor.evaluate("""(node,url) => {
        const walker=document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
        let text;while((text=walker.nextNode())) {
@@ -271,7 +275,8 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
         "EDITOR_INPUTS_FILLED_DRY_RUN"
         if all([result["board_selected"], result["title_filled"],
                 result["body_filled"], result["image_attached"],
-                result["url_is_last_line"], result["url_intact_in_one_text_node"],
+                result["owner_url_above_disclosure"],
+                result["disclosure_is_last_line"], result["url_intact_in_one_text_node"],
                 result["image_survived_body"]])
         else "EDITOR_FIELDS_NOT_CONFIRMED"
     )
