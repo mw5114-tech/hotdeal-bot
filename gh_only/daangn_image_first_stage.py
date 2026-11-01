@@ -132,7 +132,15 @@ def open_prepare(page, article):
         result["anchor_exact"]=href_match()
     # Check link is last content text, no orphan digits below uploaded photo.
     content=editor.inner_text(timeout=4500).strip()
-    result["owner_url_last"]=compact(content).endswith(compact(article["candidate_url"]))
+    link_line="🛒 상품 링크 (수익 귀속 미검증) : "+article["candidate_url"]
+    result["owner_url_last"]=bool(content.splitlines() and content.splitlines()[-1].strip()==link_line)
+    # Catch the original bug: the image uploader divided a URL into two
+    # separate text nodes/paragraphs, even though whitespace stripping hid it.
+    result["url_intact_in_one_text_node"]=editor.evaluate("""(e,expected) => {
+      const walk=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);
+      let n;while((n=walk.nextNode())){ if(n.textContent.includes(expected))return true; }
+      return false;
+    }""",article["candidate_url"])
     result["body_typed_after_image"]=(compact(content)==compact(article["body"]))
     result["image_survived_text"]=(img.count()==1 and img.first.evaluate("(e)=>e.naturalWidth>0"))
     result["actual_href_item_id"]=parse_qs(urlsplit(
@@ -158,7 +166,7 @@ def stage_once():
                 result["status"]="READY_TO_POST" if all([
                     checks["board_correct"],checks["image_attached_first"],
                     checks["image_loaded_first"],checks["title_filled_after_image"],
-                    checks["body_typed_after_image"],checks["anchor_exact"],
+                    checks["body_typed_after_image"],checks["url_intact_in_one_text_node"],
                     checks["owner_url_last"],checks["image_survived_text"],
                     checks["disclosure_present"]
                 ]) else "EDITOR_INCOMPLETE_NO_POST"
