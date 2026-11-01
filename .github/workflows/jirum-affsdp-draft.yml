@@ -1,0 +1,57 @@
+name: Jirum Kakao photo + Lowchart price + owner AFFSDP draft (manual)
+on:
+  pull_request:
+    paths:
+      - 'gh_only/**'
+      - '.github/workflows/jirum-affsdp-draft.yml'
+      - 'docs/JIRUM_AFFSDP_DRAFT.md'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: jirum-affsdp-draft-one-shot
+  cancel-in-progress: false
+jobs:
+  offline-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run ported pipeline and AFFSDP integration tests without network
+        run: |
+          python -m py_compile gh_only/*.py
+          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_default_deal_format gh_only.test_shortlink_probe gh_only.test_lowchart_price_reference gh_only.test_kakao_og_authenticated_probe gh_only.test_pipeline gh_only.test_daangn_draft
+  generate-one-draft:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install isolated Playwright Chromium for Kakao OG lookup
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Verify offline composition
+        run: python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation
+      - name: Build one real Telegram deal draft and candidate URL, without publishing
+        run: |
+          python -m gh_only.default_deal_automation --max-source-posts 8 --output-dir jirum-affsdp-drafts
+      - name: Upload draft caption, JSON evidence and Coupang CDN image if available
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-photos-prices-affsdp-candidate
+          path: jirum-affsdp-drafts/
+          retention-days: 3
+          if-no-files-found: warn
