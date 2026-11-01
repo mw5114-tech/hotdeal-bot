@@ -136,20 +136,27 @@ def read_one_draft(folder: Path) -> dict:
 
 
 def choose_visible_unique(locators):
-    """Don't guess which of several matching controls is the right field."""
-    visible = []
+    """Prefer first selector with exactly one visible target.
+
+    Avoid ambiguity *within* one selector. The same input may legitimately
+    match multiple alternative selectors, so deduplicating by selector order
+    rather than counting across selectors avoids false negatives.
+    """
     for locator in locators:
+        visible = []
         try:
-            n = min(locator.count(), 4)
+            n = locator.count()
+            if n > 8:
+                continue
             for i in range(n):
                 entry = locator.nth(i)
                 if entry.is_visible(timeout=1200):
                     visible.append(entry)
         except Exception:
             continue
-        if len(visible) > 1:
-            return None
-    return visible[0] if len(visible) == 1 else None
+        if len(visible) == 1:
+            return visible[0]
+    return None
 
 
 def try_open_editor(page) -> bool:
