@@ -110,6 +110,19 @@ class ManualQueueTests(unittest.TestCase):
         fetch.assert_not_called()
         self.assertFalse(result["has_deal"])
 
+    def test_aborted_before_submit_retries_same_head_only(self):
+        st, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        st["in_flight"] = {"id": 94744, "status": "CLAIMED", "run_id": "run10", "at": "now"}
+        store = FakeStore(st)
+        finish(store, 94744, "run10", {
+            "status": "ABORTED_BEFORE_SUBMIT", "submit_attempted": False,
+        })
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual([r["id"] for r in store.value["pending"]], [94744, 94745])
+        with patch("gh_only.jirum_manual_queue.collect_since", return_value=[]):
+            result = scan(store)
+        self.assertEqual(result["source_id"], 94744)
+
     def test_do_not_reprocess_already_published_id(self):
         st, n, _ = ingest(baseline(), [deal(94743), deal(94744)])
         self.assertEqual(n, 1)
