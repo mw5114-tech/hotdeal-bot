@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94769,
-  "pending": [
-    {
-      "id": 94769,
-      "source_post_url": "https://t.me/jirum/94769",
-      "original_purchase_url": "https://link.coupang.com/a/ijTSupkxuS",
-      "source_text": "☆특가 12,750원\n티젠 콤부차 레몬, 5g, 50스틱\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijTSupkxuS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 12,750원",
-      "sale_price_krw": 12750
-    }
-  ],
-  "in_flight": {
-    "id": 94769,
-    "status": "CLAIMED",
-    "run_id": "41289051562",
-    "at": "2026-11-01T08:31:32.097576+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -165,6 +151,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%8D%B4%ED%94%84%EC%8A%A4-%EC%A0%95%ED%92%88-%EB%8D%B4%EB%A7%88%ED%81%AC-%EC%9C%A0%EC%82%B0%EA%B7%A0%EC%9D%B4%EC%95%BC%EA%B8%B0-%ED%94%84%EB%A1%9C-60%EC%A0%95-1%EA%B0%9C-dym8gMgd?from=write",
       "at": "2026-11-01T08:31:24.714170+00:00",
+      "run_id": "41289051562"
+    },
+    "94769": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%8B%B0%EC%A0%A0-%EC%BD%A4%EB%B6%80%EC%B0%A8-%EB%A0%88%EB%AA%AC-ALEJzZRP?from=write",
+      "at": "2026-11-01T08:31:48.047131+00:00",
       "run_id": "41289051562"
     }
   },
