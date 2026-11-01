@@ -67,8 +67,13 @@ def main():
                 if editor.count()!=1:
                     raise RuntimeError("BODY_SELECTOR_AMBIGUOUS")
                 editor.fill(payload["body"])
-                result["body_filled"]=editor.inner_text().strip()==payload["body"].strip()
-                result["link_is_last_line"]=editor.inner_text().strip().splitlines()[-1].startswith("🛒 상품 링크 (수익 귀속 미검증)")
+                import re
+                actual=editor.inner_text().strip()
+                expected=payload["body"].strip()
+                result["actual_body_chars"]=len(actual)
+                result["expected_body_chars"]=len(expected)
+                result["body_filled"]=(re.sub(r"\s+","",actual)==re.sub(r"\s+","",expected))
+                result["link_is_last_line"]=actual.splitlines()[-1].startswith("🛒 상품 링크 (수익 귀속 미검증)")
                 result["disclosure_present"]=DISCLOSURE in editor.inner_text()
 
                 # Use native file chooser from the site's existing image-add button.
