@@ -8,9 +8,7 @@ a later retry. GitHub FIFO itself remains the publication source of truth.
 from __future__ import annotations
 
 import asyncio
-from datetime import datetime
 from json import dumps
-import os
 import time
 from urllib import error, request
 from urllib.parse import urlsplit
@@ -91,6 +89,8 @@ class GitHubEventBridge:
         if not coupang_event(post):
             return False
         mid = post["id"]
+        if mid <= (self.store.get("baseline") or 0):
+            return False
         if mid <= (self.store.get(LAST_ACK_ID_KEY) or 0):
             return False
         existing = self.store.get(PENDING_KEY) or 0
