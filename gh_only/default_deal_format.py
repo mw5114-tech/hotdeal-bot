@@ -104,11 +104,11 @@ def create_default_preview(sale: int | None, title: str | None,
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
     product = title.strip()[:150] if isinstance(title, str) and title.strip() else "상품명 확인 중"
-    lines = [f"📦 상품명 : {product}"]
+    lines = [f"📦 상품명 : {product}" + (f" [{approx}%할인]" if approx is not None else "")]
     if average is not None:
-        lines.append(f"💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 {average:,}원")
+        lines.append(f"💸 쿠팡 평소 판매가 : 약 {average:,}원")
     else:
-        lines.append("💸 쿠팡 평소 판매가(로우차트 관측 평균) : 확인 중")
+        lines.append("💸 쿠팡 평소 판매가 : 확인 중")
     if sale is not None:
         price_text = f"🔥 핫딜 특가 : {sale:,}원"
         if approx is not None:
