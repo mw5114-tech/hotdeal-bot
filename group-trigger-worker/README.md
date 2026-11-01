@@ -60,15 +60,15 @@ npx wrangler login
 npx wrangler queues create muse-telegram-github-dispatch
 ```
 
-`wrangler.toml`의 `SOURCE_SENDER_BOT_ID = "0"`을
-**기존 메시지를 보내는 봇**의 실제 숫자 ID로 변경한다.
-ID가 0이면 워커가 의도적으로 메시지를 거절하므로 실수로 실행되지 않는다.
-그룹 ID는 기존 저장소 `state/telegram_group_chat.json`의 실제 값을 넣어둠.
+`wrangler.toml`에는 기존 봇의 송신자 ID와 그룹 ID가 검증되어 입력돼 있음.
 
-송신 봇 ID 확인은 GitHub Actions → **Inspect MUSE sender bot ID (read-only)**
-수동 실행으로 확인할 수 있다. 이 작업은 기존 GitHub Secret
-`TELEGRAM_BOT_TOKEN`을 통해 Bot API `getMe`만 조회하고 ID만 출력한다.
-보낸 봇이 사진 속 `이 가격 못 참지 BOT`과 같은지 username을 대조한다.
+- 기존 송신 봇: `@mokchamji_hotdeal_bot` (숫자 ID `9233582187`)
+- 기존 그룹: `핫딜 MUSE용` (숫자 ID `-5254258160`)
+
+송신 봇 ID는 GitHub Actions의 **Inspect MUSE sender bot ID (read-only)**
+실행 #41289168369에서 기존 Secret `TELEGRAM_BOT_TOKEN`과 Bot API
+`getMe`만 사용해 실제로 확인했음. 이 검사에서는 메시지를 보내지 않았음.
+나중에 봇을 교체한다면 여기 입력된 ID를 재확인해야 한다.
 
 보호할 비밀정보는 Cloudflare Worker에만 등록한다.
 
