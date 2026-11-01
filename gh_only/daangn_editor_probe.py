@@ -112,6 +112,12 @@ def read_one_draft(folder: Path) -> dict:
     title = title_line.removeprefix("📦 상품명 : ").strip()
     if not (2 <= len(title) <= 150):
         raise ValueError("DRAFT_PRODUCT_NAME_INVALID")
+    # Include the same 5-point rounded discount in the actual post title.
+    discount = caption.get("approx_discount_vs_historical_mean_pct")
+    if type(discount) is int and discount in range(5, 100, 5):
+        suffix = f" [{discount}%할인]"
+        if not title.endswith(suffix):
+            title = title[:150-len(suffix)].rstrip() + suffix
     title = f"[오늘의 핫딜] {title}"[:150]
     photo = row.get("photo") if isinstance(row.get("photo"), dict) else {}
     filename = photo.get("saved_name")
@@ -124,10 +130,19 @@ def read_one_draft(folder: Path) -> dict:
         image = folder / filename
         if not image.is_file() or image.stat().st_size > 2_500_000:
             raise ValueError("DRAFT_IMAGE_NOT_PRESENT")
-    # Keep the source candidate URL intact, then 3 blank lines and disclosure
-    # at the very bottom, exactly as requested. Picture is uploaded separately
-    # before typing, so the long URL cannot be split by photo insertion.
-    clean_body = body.rstrip() + "\n\n\n\n" + DISCLOSURE
+    # Public discount language is validated separately. Only describe a
+    # historical-low deal when its observed low is actually >= the deal price.
+    stock_notice = ("※ 실시간 핫딜 특성상 준비된 재고가 소진되면 "
+                    "가격이 원래대로 인상되거나 품절될 수 있습니다.")
+    verified_claim = ("🔥 정가 뻥튀기 같은 가짜 할인은 거르고, 검증 마친 찐 역대가 딜만 가져옵니다. "
+                      "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
+    unverified_claim = ("🔥 핫딜 정보를 확인해 소개합니다. "
+                        "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
+    promo = (verified_claim if row.get("observed_low_verified_for_deal") is True
+             else unverified_claim)
+    # Photo first; link stays one whole text node, then stock note,
+    # promotional note and disclosure at the bottom separated by 3 blank lines.
+    clean_body = body.rstrip() + "\n" + stock_notice + "\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,

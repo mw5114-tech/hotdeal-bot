@@ -64,7 +64,7 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertEqual(enriched["affsdp"]["status"], "UNISSUED_AFFSDP_CANDIDATE")
         link = enriched["composed_affiliate_url"]
         self.assertEqual(enriched["caption"]["caption"].splitlines()[-1],
-                         "🛒 상품 링크 (수익 귀속 미검증) : " + link)
+                         "🛒 상품 링크 : " + link)
         qs = parse_qs(urlsplit(link).query)
         self.assertEqual(qs["lptag"], ["AF9668915"])
         self.assertEqual(qs["pageKey"], [PID])
@@ -118,8 +118,8 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertEqual(r["caption"]["approx_discount_vs_historical_mean_pct"], 65)
         self.assertEqual(r["caption"]["observed_average_krw"], 34575)
         self.assertEqual(r["caption"]["caption"].splitlines(), [
-            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개",
-            "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
+            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개 [65%할인]",
+            "💸 쿠팡 평소 판매가 : 약 34,575원",
             "🔥 핫딜 특가 : 12,050원 (약 65% 할인 / 상세페이지 참고)",
         ])
         self.assertNotIn("59.8%", r["caption"]["caption"])
@@ -158,7 +158,7 @@ class AutomatedDefaultTests(unittest.TestCase):
                           lambda link, state: OG, wrong,
                           lambda *args: {"status":"NO_DOWNLOAD"}, "fake")
         self.assertIsNone(out["caption"]["approx_discount_vs_historical_mean_pct"])
-        self.assertIn("관측 평균) : 확인 중", out["caption"]["caption"])
+        self.assertIn("쿠팡 평소 판매가 : 확인 중", out["caption"]["caption"])
         self.assertNotIn("% 혜택", out["caption"]["caption"])
 
 

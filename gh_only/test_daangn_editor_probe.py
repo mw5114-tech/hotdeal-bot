@@ -70,9 +70,9 @@ class DaangnEditorOfflineTests(unittest.TestCase):
     def _make_draft(self, folder):
         body = (
             "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛\n"
-            "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원\n"
+            "💸 쿠팡 평소 판매가 : 약 34,575원\n"
             "🔥 핫딜 특가 : 12,050원\n"
-            "🛒 상품 링크 (수익 귀속 미검증) : " + TEST_URL
+            "🛒 상품 링크 : " + TEST_URL
         )
         report = {"schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [{
             "source_message_id": 94717,
@@ -100,11 +100,26 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertIn("AF9668915", result["body"])
         self.assertIn(DISCLOSURE, result["body"])
         self.assertEqual(result["body"].splitlines()[-1], DISCLOSURE)
-        self.assertTrue(result["body"].endswith(TEST_URL + "\n\n\n\n" + DISCLOSURE))
+        self.assertTrue(result["body"].endswith("카페 가입 알림 설정하고 꿀템 챙겨가세요." + "\n\n\n\n" + DISCLOSURE))
         self.assertEqual(result["candidate_url"], TEST_URL)
         self.assertLess(result["body"].index(TEST_URL), result["body"].index(DISCLOSURE))
+        self.assertIn("※ 실시간 핫딜 특성상", result["body"])
+        self.assertIn("🔥 핫딜 정보를 확인해 소개합니다.", result["body"])
+        self.assertNotIn("검증 마친 찐 역대가", result["body"])
         self.assertEqual(result["image"].name, "jirum_94717_kakao_og.jpg")
         self.assertTrue(result["unissued_affsdp_candidate"])
+
+    def test_verified_historical_low_uses_requested_promo_and_discount_title(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            report["drafts"][0]["observed_low_verified_for_deal"] = True
+            report["drafts"][0]["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            (folder / "drafts.json").write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
+            result = read_one_draft(folder)
+        self.assertIn("[65%할인]", result["title"])
+        self.assertIn("검증 마친 찐 역대가 딜만 가져옵니다.", result["body"])
+        self.assertTrue(result["body"].endswith(DISCLOSURE))
 
     def test_does_not_accept_original_source_affiliate_instead_of_own_candidate(self):
         with tempfile.TemporaryDirectory() as temp:
