@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import asyncio
 from json import dumps
+import re
 import time
 from urllib import error, request
 from urllib.parse import urlsplit
@@ -30,19 +31,39 @@ RETRY_AT_KEY = "github_dispatch_retry_at"
 COUPANG_HOSTS = frozenset({
     "link.coupang.com", "coupang.com", "www.coupang.com", "m.coupang.com"
 })
+VISIBLE_URL_RE = re.compile(r"https?://[^\\s<>\"']+", re.IGNORECASE)
 
 
 def coupang_event(post: dict) -> bool:
-    """Use exact approved Coupang hostnames; avoid false substring matches."""
-    if type(post.get("id")) is not int or post["id"] <= 0:
+    """Detect exact Coupang URLs in both rich and RAW_MODE messages.
+
+    RAW_MODE's extract() exposes unmodified text and Telegram entities, not
+    the product_url / links shape used by the older jirum_live.py. Hidden
+    Telegram text_link entity URLs MUST be checked or genuine deals are missed.
+    Only this boolean is needed; the Actions scanner independently verifies
+    and fetches actual source posts.
+    """
+    if not isinstance(post, dict) or type(post.get("id")) is not int or post["id"] <= 0:
         return False
-    candidates = list(post.get("links") or [])
-    if post.get("product_url"):
-        candidates.append(post["product_url"])
+    candidates = []
+    links = post.get("links")
+    if isinstance(links, list):
+        candidates.extend(v for v in links if isinstance(v, str))
+    candidates.append(post.get("product_url"))
+    text = post.get("text")
+    if isinstance(text, str):
+        candidates.extend(match.group(0).rstrip(").,，。]") for match in
+                          VISIBLE_URL_RE.finditer(text))
+    entities = post.get("entities")
+    if isinstance(entities, list):
+        candidates.extend(entity.get("url") for entity in entities
+                          if isinstance(entity, dict) and entity.get("type") == "text_link")
     for value in candidates:
+        if not isinstance(value, str) or len(value) > 2048:
+            continue
         try:
             parsed = urlsplit(value)
-        except (TypeError, ValueError):
+        except ValueError:
             continue
         if (parsed.scheme == "https" and
                 parsed.hostname in COUPANG_HOSTS and
