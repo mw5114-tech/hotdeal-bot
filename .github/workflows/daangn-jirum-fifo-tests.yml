@@ -10,6 +10,7 @@ on:
       - fix/daangn-submit-anchor-editor-20261101
       - diagnose/daangn-published-post-readonly-20261101
       - diagnose/daangn-photo-upload-readonly-20261101
+      - fix/daangn-wait-image-upload-before-submit-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
@@ -47,6 +48,10 @@ jobs:
           assert 'get_by_role("button", name="글쓰기", exact=True)' in s
           assert 'expect(submit).to_be_enabled(timeout=18000)' in s
           assert 'submit.click(timeout=10000)' in s
+          assert 'WAIT_IMAGE_UPLOAD_FINISH' in s
+          assert 'photo_upload_completed' in s
+          assert "includes('준비중')" in s
+          assert 'PHOTO_UPLOAD_NOT_CONFIRMED_DO_NOT_SUBMIT' in s
           print("DAANGN_SUBMIT_WAIT_CONTRACT_OK")
           PY
           python -m unittest -v gh_only.test_default_deal_format gh_only.test_default_deal_automation gh_only.test_daangn_editor_probe

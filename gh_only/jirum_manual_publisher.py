@@ -69,6 +69,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
         "submit_attempted": False,
         "post_url": None,
         "photo_uploaded_first": False,
+        "photo_upload_completed": False,
         "failure_stage": "INITIALIZING",
     }
     try:
@@ -124,6 +125,19 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 }""", timeout=18000)
                 if image.count() != 1:
                     raise RuntimeError("IMAGE_AMBIGUOUS")
+                # The editor displays a local preview before the image is
+                # uploaded. Verified with a no-submit probe: submit became
+                # enabled at ~2 seconds while the '준비중' upload label remained;
+                # the upload actually finished at ~7 seconds. A click before
+                # then creates a post with no product photo.
+                result["failure_stage"] = "WAIT_IMAGE_UPLOAD_FINISH"
+                page.wait_for_function("""() => {
+                  const e=document.querySelector('div.ProseMirror[contenteditable=true]');
+                  const img=e && e.querySelector('img');
+                  return !!img && img.complete && img.naturalWidth>0 &&
+                      !(e.innerText||'').includes('준비중');
+                }""", timeout=35000)
+                result["photo_upload_completed"] = True
                 result["photo_uploaded_first"] = True
                 # The successful live test put photo FIRST then appended text.
                 result["failure_stage"] = "WRITE_EDITOR_BODY"
@@ -225,6 +239,12 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     )
                 if not submit.is_enabled():
                     raise RuntimeError("SUBMIT_STILL_DISABLED_AFTER_UPLOAD_WAIT")
+                if not result.get("photo_upload_completed") or "준비중" in editor.inner_text():
+                    raise RuntimeError("PHOTO_UPLOAD_NOT_CONFIRMED_DO_NOT_SUBMIT")
+                if image.count() != 1 or not image.first.evaluate(
+                    "(e)=>e.complete&&e.naturalWidth>0"
+                ):
+                    raise RuntimeError("PHOTO_MISSING_BEFORE_SUBMIT")
                 # No retry under ANY condition, including timeout or navigation error.
                 result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
