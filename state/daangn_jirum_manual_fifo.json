@@ -1,12 +1,59 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94743,
-  "pending": [],
+  "last_scanned_id": 94748,
+  "pending": [
+    {
+      "id": 94744,
+      "source_post_url": "https://t.me/jirum/94744",
+      "original_purchase_url": "https://link.coupang.com/a/ijxqnCViBU",
+      "source_text": "☆특가 1,163,580원 (10.9% 할인)\nApple 2024 아이패드 mini(A17 Pro 모델), 퍼플, 256GB, Wi-Fi+Cellular\n📌 가격 현황\n- 정상가: 1,305,500원\n- 할인: 141,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijxqnCViBU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "Apple 2024 아이패드 mini(A17 Pro 모델), 퍼플, 256GB, Wi-Fi+Cellular",
+      "sale_price_krw": 1163580
+    },
+    {
+      "id": 94745,
+      "source_post_url": "https://t.me/jirum/94745",
+      "original_purchase_url": "https://link.coupang.com/a/ijx6ub7G9c",
+      "source_text": "👍대박 13,320원 (39.0% 할인)\n[로켓프레시] 한우 1등급 숙성등심 구이용 (냉장)\n📌 가격 현황\n- 정상가: 21,836원\n- 할인: 8,516원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijx6ub7G9c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "[로켓프레시] 한우 1등급 숙성등심 구이용 (냉장)",
+      "sale_price_krw": 13320
+    },
+    {
+      "id": 94746,
+      "source_post_url": "https://t.me/jirum/94746",
+      "original_purchase_url": "https://link.coupang.com/a/ijy2SGlBme",
+      "source_text": "☆특가 1,990원\n엠토이 샐러드 컵 도시락 310ml + 560ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijy2SGlBme\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 1,990원",
+      "sale_price_krw": 1990
+    },
+    {
+      "id": 94747,
+      "source_post_url": "https://t.me/jirum/94747",
+      "original_purchase_url": "https://link.coupang.com/a/ijAjRVy7mC",
+      "source_text": "☆특가 14,780원\n바닐라코 클린 잇 제로 포어 클래리파잉 클렌징 밤, 180ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijAjRVy7mC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 14,780원",
+      "sale_price_krw": 14780
+    },
+    {
+      "id": 94748,
+      "source_post_url": "https://t.me/jirum/94748",
+      "original_purchase_url": "https://link.coupang.com/a/ijBIfGhfB6",
+      "source_text": "👍대박 11,280원 (33.6% 할인)\n백설 100% 통참깨 참기름, 320ml, 2개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 5,720원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijBIfGhfB6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "백설 100% 통참깨 참기름, 320ml, 2개",
+      "sale_price_krw": 11280
+    }
+  ],
   "in_flight": null,
   "published": {
-    "94737": {"status": "ALREADY_PUBLISHED_BEFORE_QUEUE"},
-    "94738": {"status": "ALREADY_PUBLISHED_BEFORE_QUEUE"},
-    "94743": {"status": "ALREADY_PUBLISHED_BEFORE_QUEUE"}
+    "94737": {
+      "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
+    },
+    "94738": {
+      "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
+    },
+    "94743": {
+      "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
+    }
   },
   "skipped_non_coupang": 0
 }
