@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94805,
+  "last_scanned_id": 94806,
   "pending": [
     {
       "id": 94789,
@@ -137,6 +137,14 @@
       "source_text": "☆특가 56,690원 (23.6% 할인)\n요쿠모쿠 일본 시가롤 쿠키 30개입 2팩, 10.5g, 60개\n📌 가격 현황\n- 정상가: 74,200원\n- 할인: 17,510원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikUD91wRDo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "요쿠모쿠 일본 시가롤 쿠키 30개입 2팩, 10.5g, 60개",
       "sale_price_krw": 56690
+    },
+    {
+      "id": 94806,
+      "source_post_url": "https://t.me/jirum/94806",
+      "original_purchase_url": "https://link.coupang.com/a/ikU0EnioLc",
+      "source_text": "👍대박 8,210원 (31.6% 할인)\n빼빼로 크런키 막대과자 쿠로미 마이멜로디, 39g, 8개\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 3,790원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikU0EnioLc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "빼빼로 크런키 막대과자 쿠로미 마이멜로디, 39g, 8개",
+      "sale_price_krw": 8210
     }
   ],
   "in_flight": null,
