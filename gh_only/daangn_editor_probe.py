@@ -125,13 +125,18 @@ def read_one_draft(folder: Path) -> dict:
         if not image.is_file() or image.stat().st_size > 2_500_000:
             raise ValueError("DRAFT_IMAGE_NOT_PRESENT")
     # Keep disclosure explicit even in temporary editor content.
-    clean_body = body + "\n\n" + DISCLOSURE
+    # The last line must remain the entire user's composed URL. Disclosure
+    # belongs immediately BEFORE that URL, never after it.
+    caption_lines = body.splitlines()
+    clean_body = ("\n".join(caption_lines[:-1]).rstrip()
+                  + "\n\n" + DISCLOSURE + "\n\n" + caption_lines[-1])
     return {
         "title": title,
         "body": clean_body,
         "image": image,
         "source_id": row.get("source_message_id"),
         "unissued_affsdp_candidate": True,
+        "candidate_url": url,
     }
 
 
@@ -186,55 +191,88 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
     except Exception:
         pass
 
-    # Board selection is optional; do not infer the board or click unrelated controls.
-    # Explicitly fail visibility if a target board control is not uniquely present.
-    try:
-        choices = page.get_by_text(board_name, exact=True)
-        board_control = choose_visible_unique([choices])
-        if board_control is not None:
-            board_control.click(timeout=2500)
-            result["board_selected"] = True
-    except Exception:
-        pass
+    # Pick the exact actual board option. The tested cafe uses the label
+    # "🔥 오늘의 핫딜"; never keep the default "자유 게시판".
+    select = page.locator("select")
+    if select.count() == 1:
+        options = select.locator("option").all_inner_texts()
+        matching = [name for name in options if name.strip() == board_name or
+                    name.strip().endswith(" " + board_name)]
+        if len(matching) == 1:
+            select.select_option(label=matching[0])
+            result["board_selected"] = select.locator("option:checked").inner_text().strip() == matching[0].strip()
+    if not result["board_selected"]:
+        result["status"] = "TARGET_HOTDEAL_BOARD_NOT_SELECTED"
+        return result
 
-    title = choose_visible_unique([
-        page.locator('input[placeholder*="제목"]'),
-        page.locator('textarea[placeholder*="제목"]'),
-        page.locator('input[name="title"]'),
-    ])
-    if title is not None:
-        title.fill(article["title"], timeout=5000)
+    editor = page.locator("div.ProseMirror[contenteditable=true]")
+    if editor.count() != 1:
+        result["status"] = "RICH_EDITOR_UNAVAILABLE"
+        return result
+
+    # PHOTO FIRST. The earlier image-after-text implementation inserted
+    # the photo into the middle of the URL, splitting a long itemId.
+    if article["image"] is None:
+        result["status"] = "PRODUCT_PHOTO_MISSING"
+        return result
+    image_button = page.get_by_role("button", name="이미지 추가")
+    if image_button.count() != 1:
+        result["status"] = "IMAGE_ADD_CONTROL_AMBIGUOUS"
+        return result
+    with page.expect_file_chooser(timeout=11000) as picker:
+        image_button.click(timeout=7000)
+    picker.value.set_files(str(article["image"]))
+    image = editor.locator("img")
+    image.first.wait_for(state="visible", timeout=18000)
+    page.wait_for_function("""() => {
+      const node=document.querySelector('div.ProseMirror[contenteditable=true] img');
+      return !!node && node.complete && node.naturalWidth > 0;
+    }""", timeout=18000)
+    result["image_attached"] = image.count() == 1 and image.first.evaluate("(el)=>el.naturalWidth>0")
+    if not result["image_attached"]:
+        result["status"] = "PHOTO_NOT_READY_BEFORE_TEXT"
+        return result
+
+    # TEXT SECOND. NEVER call editor.fill() after uploading an image; it
+    # replaces rich editor nodes. Append one paragraph at a time instead.
+    editor.click()
+    editor.press("ControlOrMeta+End")
+    editor.press("Enter")
+    lines = article["body"].split("\n")
+    for i, line in enumerate(lines):
+        if line:
+            page.keyboard.insert_text(line)
+        if i < len(lines) - 1:
+            page.keyboard.press("Enter")
+    page.keyboard.press("Enter")
+
+    title = page.locator('input[placeholder="제목을 입력해주세요."]')
+    if title.count() == 1:
+        title.fill(article["title"])
         result["title_filled"] = title.input_value() == article["title"]
-    editor = choose_visible_unique([
-        page.locator('[contenteditable="true"][role="textbox"]'),
-        page.locator('div[contenteditable="true"].ProseMirror'),
-        page.locator('textarea[placeholder*="내용"]'),
-    ])
-    if editor is None:
-        editor = choose_visible_unique([page.locator('[contenteditable="true"]')])
-    if editor is not None:
-        editor.fill(article["body"], timeout=7500)
-        try:
-            result["body_filled"] = article["body"] in editor.inner_text(timeout=1800)
-        except Exception:
-            try:
-                result["body_filled"] = editor.input_value() == article["body"]
-            except Exception:
-                result["body_filled"] = False
 
-    if article["image"] is not None:
-        photo = choose_visible_unique([page.locator('input[type="file"][accept*="image"]')])
-        if photo is None:
-            # Hidden file inputs are valid targets for set_input_files.
-            file_inputs = page.locator('input[type="file"][accept*="image"]')
-            if file_inputs.count() == 1:
-                photo = file_inputs.first
-        if photo is not None:
-            photo.set_input_files(str(article["image"]), timeout=8000)
-            result["image_attached"] = True
-
+    actual = editor.inner_text(timeout=5000).strip()
+    expected = article["body"].strip()
+    normalize = lambda value: re.sub(r"\s+", "", value)
+    result["body_filled"] = normalize(actual) == normalize(expected)
+    url = article["candidate_url"]
+    result["url_is_last_line"] = bool(actual.splitlines() and
+                                      actual.splitlines()[-1].strip().endswith(url))
+    result["url_intact_in_one_text_node"] = editor.evaluate("""(node,url) => {
+       const walker=document.createTreeWalker(node, NodeFilter.SHOW_TEXT);
+       let text;while((text=walker.nextNode())) {
+         if(text.textContent.includes(url)) return true;
+       }
+       return false;
+    }""", url)
+    result["image_survived_body"] = image.count() == 1 and image.first.evaluate(
+        "(el)=>el.complete&&el.naturalWidth>0")
     result["status"] = (
-        "EDITOR_INPUTS_FILLED_DRY_RUN" if result["title_filled"] and result["body_filled"]
+        "EDITOR_INPUTS_FILLED_DRY_RUN"
+        if all([result["board_selected"], result["title_filled"],
+                result["body_filled"], result["image_attached"],
+                result["url_is_last_line"], result["url_intact_in_one_text_node"],
+                result["image_survived_body"]])
         else "EDITOR_FIELDS_NOT_CONFIRMED"
     )
     return result
