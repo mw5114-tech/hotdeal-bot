@@ -11,6 +11,7 @@ on:
       - diagnose/daangn-published-post-readonly-20261101
       - diagnose/daangn-photo-upload-readonly-20261101
       - fix/daangn-wait-image-upload-before-submit-20261101
+      - feat/daangn-fifo-drain-backlog-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
@@ -60,6 +61,8 @@ jobs:
           yaml_text = Path(".github/workflows/daangn-jirum-manual-fifo.yml").read_text()
           assert "cron: '7,37 * * * *'" in yaml_text
           assert "workflow_dispatch:" in yaml_text
+          assert "python -m gh_only.jirum_manual_queue drain" in yaml_text
+          assert "python -m gh_only.jirum_manual_queue publish" not in yaml_text
           assert "steps.scan.outputs.has_deal == 'true'" in yaml_text
           assert "python -m unittest -v gh_only.test_jirum_manual_queue" not in yaml_text
           print("SCHEDULE_AND_LEAN_PIPELINE_CONTRACT_OK")

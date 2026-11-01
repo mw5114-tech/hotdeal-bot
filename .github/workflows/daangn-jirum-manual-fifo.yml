@@ -1,4 +1,4 @@
-name: Jirum Coupang | Daangn FIFO (30min + manual)
+name: Jirum Coupang | Daangn FIFO drain (30min + manual)
 
 on:
   # Off-peak minute avoids top-of-hour GitHub scheduler congestion.
@@ -22,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  process-one:
+  drain-backlog:
     if: github.ref == 'refs/heads/main' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
@@ -76,18 +76,19 @@ jobs:
             fi
           fi
 
-      - name: Claim, publish exactly one oldest Coupang item, verify saved post
+      - name: Drain oldest Coupang posts sequentially, checkpoint every result
         if: steps.scan.outputs.has_deal == 'true'
-        run: python -m gh_only.jirum_manual_queue publish
+        run: python -m gh_only.jirum_manual_queue drain
 
       - name: Save diagnostics only when a deal was processed
         if: always() && steps.scan.outputs.has_deal == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: jirum-fifo-one-${{ github.run_id }}
+          name: jirum-fifo-drain-${{ github.run_id }}
           path: jirum-manual-one-draft/
           retention-days: 1
           if-no-files-found: ignore
 
-# One post max/run; 30-minute cron + on-demand manual.
-# Never blindly retry a submitted or uncertain post.
+# 30-minute cron + on-demand manual. Each run posts ALL available pending
+# oldest-first, with a conservative runtime budget. Backlog that cannot finish
+# safely resumes next schedule. Never retry an uncertain post; stop on error.
