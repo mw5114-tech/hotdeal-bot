@@ -5,6 +5,7 @@ on:
       - test/daangn-onepost-20261101
     paths:
       - .github/workflows/daangn-verify-onepost.yml
+      - gh_only/daangn_verify_published.py
 permissions:
   contents: read
 jobs:
