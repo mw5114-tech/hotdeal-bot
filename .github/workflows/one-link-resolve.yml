@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - research_resolve_one_source_link.py
+      - research_affsdp_head_probe.py
       - .github/workflows/one-link-resolve.yml
 permissions:
   contents: read
@@ -17,3 +18,5 @@ jobs:
           python-version: '3.12'
       - name: Inspect HTTP redirects only, without login or conversion
         run: python research_resolve_one_source_link.py
+      - name: Check hypothetical AFFSDP HEAD response only
+        run: python research_affsdp_head_probe.py
