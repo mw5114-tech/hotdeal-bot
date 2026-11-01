@@ -14,6 +14,7 @@ on:
       - feat/daangn-fifo-drain-backlog-20261101
       - fix/daangn-title-maxlength-preserve-discount-20261101
       - fix/daangn-editor-image-label-body-20261101
+      - feat/daangn-fifo-5min-cron-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
@@ -61,7 +62,7 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           yaml_text = Path(".github/workflows/daangn-jirum-manual-fifo.yml").read_text()
-          assert "cron: '7,37 * * * *'" in yaml_text
+          assert "cron: '2-57/5 * * * *'" in yaml_text
           assert "workflow_dispatch:" in yaml_text
           assert "python -m gh_only.jirum_manual_queue drain" in yaml_text
           assert "python -m gh_only.jirum_manual_queue publish" not in yaml_text
