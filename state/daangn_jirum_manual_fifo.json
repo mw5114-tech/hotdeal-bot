@@ -3,14 +3,6 @@
   "last_scanned_id": 94748,
   "pending": [
     {
-      "id": 94744,
-      "source_post_url": "https://t.me/jirum/94744",
-      "original_purchase_url": "https://link.coupang.com/a/ijxqnCViBU",
-      "source_text": "☆특가 1,163,580원 (10.9% 할인)\nApple 2024 아이패드 mini(A17 Pro 모델), 퍼플, 256GB, Wi-Fi+Cellular\n📌 가격 현황\n- 정상가: 1,305,500원\n- 할인: 141,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijxqnCViBU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "Apple 2024 아이패드 mini(A17 Pro 모델), 퍼플, 256GB, Wi-Fi+Cellular",
-      "sale_price_krw": 1163580
-    },
-    {
       "id": 94745,
       "source_post_url": "https://t.me/jirum/94745",
       "original_purchase_url": "https://link.coupang.com/a/ijx6ub7G9c",
@@ -43,15 +35,7 @@
       "sale_price_krw": 11280
     }
   ],
-  "in_flight": {
-    "id": 94744,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "41271685261",
-    "at": "2026-11-01T04:05:57.312901+00:00",
-    "last_result": "PUBLISHED_BUT_FORMAT_UNVERIFIED_DO_NOT_RETRY",
-    "submit_attempted": true,
-    "checked_at": "2026-11-01T04:06:11.160515+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -61,6 +45,14 @@
     },
     "94743": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
+    },
+    "94744": {
+      "status": "PUBLISHED_NEEDS_IMAGE_REPAIR",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-Apple-2024-%EC%95%84%EC%9D%B4%ED%8C%A8%EB%93%9C-miniA17-Pro-%EB%AA%A8%EB%8D%B8-dZnYZrNd?from=write",
+      "run_id": "41271685261",
+      "audit_run_id": "41272059780",
+      "audit_result": "POST_EXISTS_LINK_NOTICES_VERIFIED_BUT_PRODUCT_IMAGE_MISSING",
+      "note": "Do not repost. Existing post requires image edit only."
     }
   },
   "skipped_non_coupang": 0
