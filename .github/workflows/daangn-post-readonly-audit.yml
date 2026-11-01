@@ -32,3 +32,11 @@ jobs:
           python -m playwright install --with-deps chromium
       - name: Check exact saved post (NEVER edit or submit)
         run: python -m gh_only.daangn_post_readonly_audit
+      - name: Upload screenshot for read-only visual inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daangn-94744-readonly-visual-${{ github.run_id }}
+          path: daangn-94744-post-readonly.png
+          retention-days: 1
+          if-no-files-found: ignore
