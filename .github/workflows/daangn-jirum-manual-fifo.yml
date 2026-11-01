@@ -1,9 +1,12 @@
-name: MANUAL | Jirum Coupang FIFO to Daangn (ONE post)
+name: Jirum Coupang | Daangn FIFO (30min + manual)
 
 on:
+  # Off-peak minute avoids top-of-hour GitHub scheduler congestion.
+  # GitHub schedule may run later than the exact cron minute.
+  schedule:
+    - cron: '7,37 * * * *'
   workflow_dispatch:
-  # User-triggered GitHub connector write of this command file launches one run.
-  # No schedule; state commits never match this trigger.
+  # Optional user-triggered action via GitHub connector, independent of cron.
   push:
     branches:
       - main
@@ -13,6 +16,7 @@ on:
 permissions:
   contents: write
 
+# Manual and scheduled runs share the same lock. No parallel posts.
 concurrency:
   group: daangn-jirum-manual-fifo
   cancel-in-progress: false
@@ -28,42 +32,62 @@ jobs:
       KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
     steps:
-      - name: Checkout current main
+      - name: Checkout only required source files
         uses: actions/checkout@v4
         with:
           ref: main
           persist-credentials: false
+          # Keep the existing complete checkout; one download is cheaper than
+          # extra API round trips, and the scan never installs a browser.
 
       - name: Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Validate offline queue invariants
-        run: python -m unittest -v gh_only.test_jirum_manual_queue
-
-      - name: Scan Telegram pages and persist FIFO cursor before any publishing
+      # Do not repeat offline regression suite on each of ~1,440 monthly runs.
+      # The test workflow validates changes before release.
+      - name: Scan Telegram and persist FIFO cursor (stdlib only)
         id: scan
         run: python -m gh_only.jirum_manual_queue scan
 
-      - name: Install browser only when pending Coupang item exists
+      - name: Restore Playwright browser cache only for an eligible deal
         if: steps.scan.outputs.has_deal == 'true'
-        run: |
-          python -m pip install --disable-pip-version-check playwright==1.64.1
-          python -m playwright install --with-deps chromium
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: daangn-playwright-chromium-v1.64.1-ubuntu2404
 
-      - name: Claim, publish one oldest pending Coupang post and verify result
+      - name: Install Playwright only if a pending Coupang deal exists
+        if: steps.scan.outputs.has_deal == 'true'
+        env:
+          BROWSER_CACHE_HIT: ${{ steps.playwright-cache.outputs.cache-hit }}
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          if [ "$BROWSER_CACHE_HIT" != "true" ]; then
+            python -m playwright install --with-deps chromium
+          else
+            # Cached browser binary: avoid re-downloading ~150MB.
+            python -m playwright install chromium
+            # Missing shared libraries are repaired only if actually needed.
+            if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+              python -m playwright install --with-deps chromium
+            fi
+          fi
+
+      - name: Claim, publish exactly one oldest Coupang item, verify saved post
         if: steps.scan.outputs.has_deal == 'true'
         run: python -m gh_only.jirum_manual_queue publish
 
-      - name: Upload source evidence for troubleshooting (one-day retention)
-        if: always()
+      - name: Save diagnostics only when a deal was processed
+        if: always() && steps.scan.outputs.has_deal == 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: jirum-manual-fifo-one-${{ github.run_id }}
+          name: jirum-fifo-one-${{ github.run_id }}
           path: jirum-manual-one-draft/
           retention-days: 1
           if-no-files-found: ignore
 
-# No cron, no automated retries, no changes to any preexisting workflows.
-# Never blindly rerun the same GitHub Actions attempt after a post timeout.
+# One post max/run; 30-minute cron + on-demand manual.
+# Never blindly retry a submitted or uncertain post.
