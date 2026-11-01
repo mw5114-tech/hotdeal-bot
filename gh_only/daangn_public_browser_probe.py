@@ -22,3 +22,4 @@ if __name__ == "__main__":
     except Exception as e:
         out.update({"public_browser_reachable": False, "error_type": type(e).__name__})
     print("DAANGN_PUBLIC_BROWSER " + json.dumps(out, ensure_ascii=False))
+    raise SystemExit(0 if out.get("public_browser_reachable") else 2)
