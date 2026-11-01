@@ -9,3 +9,5 @@ Submit-wait fix verification one-run: 20261101-0404
 Editor-anchored submit verification one-run: 20261101-0407
 
 Photo-upload confirmation fix: run one next FIFO 94745, 20261101-0426
+
+FIFO drain live validation: 20261101-drain-all-94746-94748
