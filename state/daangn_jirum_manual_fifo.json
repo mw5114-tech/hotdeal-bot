@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94787,
-  "pending": [
-    {
-      "id": 94787,
-      "source_post_url": "https://t.me/jirum/94787",
-      "original_purchase_url": "https://link.coupang.com/a/ikf6IlyMWy",
-      "source_text": "☆특가 7,980원 (29.0% 할인)\n[로켓프레시] 대림선 육즙팡 동그랑땡 (냉동)\n📌 가격 현황\n- 정상가: 11,239원\n- 할인: 3,259원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikf6IlyMWy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "[로켓프레시] 대림선 육즙팡 동그랑땡 (냉동)",
-      "sale_price_krw": 7980
-    }
-  ],
-  "in_flight": {
-    "id": 94787,
-    "status": "CLAIMED",
-    "run_id": "41310109895",
-    "at": "2026-11-01T13:13:01.019972+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -267,6 +253,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%96%87%EB%B0%98-%EB%B0%B1%EB%AF%B8%EB%B0%A5-210g-72%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PnNQwb4P?from=write",
       "at": "2026-11-01T13:12:53.391248+00:00",
+      "run_id": "41310109895"
+    },
+    "94787": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%8C%80%EB%A6%BC%EC%84%A0-%EC%9C%A1%EC%A6%99%ED%8C%A1-%EB%8F%99%EA%B7%B8%EB%9E%91%EB%95%A1-%EB%83%89%EB%8F%99-300g-4%EA%B0%9C-25%ED%95%A0%EC%9D%B8-Pk6Xem7A?from=write",
+      "at": "2026-11-01T13:13:18.436554+00:00",
       "run_id": "41310109895"
     }
   },
