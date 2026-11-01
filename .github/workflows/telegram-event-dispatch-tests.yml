@@ -1,0 +1,23 @@
+name: Tests | Telegram event-driven GitHub dispatcher
+
+on:
+  push:
+    branches:
+      - feat/jirum-group-webhook-to-github-20261101
+    paths:
+      - 'cloudflare/jirum-telegram-webhook/**'
+      - '.github/workflows/telegram-event-dispatch-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  offline-node-tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run local-only Telegram/D1/GitHub mocked tests (no publishing)
+        run: |
+          node --check cloudflare/jirum-telegram-webhook/src/index.mjs
+          node --test cloudflare/jirum-telegram-webhook/src/index.test.mjs
