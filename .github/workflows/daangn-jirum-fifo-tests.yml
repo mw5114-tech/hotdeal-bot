@@ -7,9 +7,11 @@ on:
       - feat/daangn-fifo-30min-lean-20261101
       - fix/daangn-fifo-publish-diagnostics-20261101
       - fix/daangn-submit-wait-20261101
+      - fix/daangn-submit-anchor-editor-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
+      - 'gh_only/test_jirum_manual_publisher.py'
       - '.github/workflows/daangn-jirum-manual-fifo.yml'
       - '.github/workflows/daangn-jirum-fifo-tests.yml'
 
@@ -31,7 +33,8 @@ jobs:
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
           python -m unittest -v gh_only.test_jirum_manual_queue
-          python -m py_compile gh_only/jirum_manual_publisher.py
+          python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py
+          python -m unittest -v gh_only.test_jirum_manual_publisher
           python - <<'PY'
           from pathlib import Path
           s = Path("gh_only/jirum_manual_publisher.py").read_text()
