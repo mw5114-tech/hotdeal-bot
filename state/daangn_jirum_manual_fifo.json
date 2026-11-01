@@ -1,7 +1,16 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94777,
-  "pending": [],
+  "last_scanned_id": 94778,
+  "pending": [
+    {
+      "id": 94778,
+      "source_post_url": "https://t.me/jirum/94778",
+      "original_purchase_url": "https://link.coupang.com/a/ij1eweAfls",
+      "source_text": "❤️초대박 7,600원 (41.5% 할인)\n청정원 쉐프의치킨스톡 2p, 465g, 2개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 5,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ij1eweAfls\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "청정원 쉐프의치킨스톡 2p, 465g, 2개",
+      "sale_price_krw": 7600
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
