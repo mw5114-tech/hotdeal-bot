@@ -1,0 +1,69 @@
+name: MANUAL | Jirum Coupang FIFO to Daangn (ONE post)
+
+on:
+  workflow_dispatch:
+  # User-triggered GitHub connector write of this command file launches one run.
+  # No schedule; state commits never match this trigger.
+  push:
+    branches:
+      - main
+    paths:
+      - 'manual/trigger-daangn-jirum.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daangn-jirum-manual-fifo
+  cancel-in-progress: false
+
+jobs:
+  process-one:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - name: Checkout current main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate offline queue invariants
+        run: python -m unittest -v gh_only.test_jirum_manual_queue
+
+      - name: Scan Telegram pages and persist FIFO cursor before any publishing
+        id: scan
+        run: python -m gh_only.jirum_manual_queue scan
+
+      - name: Install browser only when pending Coupang item exists
+        if: steps.scan.outputs.has_deal == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --with-deps chromium
+
+      - name: Claim, publish one oldest pending Coupang post and verify result
+        if: steps.scan.outputs.has_deal == 'true'
+        run: python -m gh_only.jirum_manual_queue publish
+
+      - name: Upload source evidence for troubleshooting (one-day retention)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-manual-fifo-one-${{ github.run_id }}
+          path: jirum-manual-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore
+
+# No cron, no automated retries, no changes to any preexisting workflows.
+# Never blindly rerun the same GitHub Actions attempt after a post timeout.
