@@ -44,6 +44,50 @@ OG = {
 
 
 class AutomatedDefaultTests(unittest.TestCase):
+    def test_full_draft_appends_owner_affsdp_after_price_and_preserves_photo(self):
+        from urllib.parse import parse_qs, urlsplit
+        def history(p, i, tokens, price):
+            return parse_reference(HIST_HTML, build_url(p, i), p, i, tokens, price)
+        with tempfile.TemporaryDirectory() as tmp:
+            enriched = enrich_deal(
+                DEAL, Path(tmp),
+                resolver=lambda _: IDENTITY,
+                og_lookup=lambda link, secret: OG,
+                history_fetch=history,
+                photo_downloader=lambda *a: {"status":"IMAGE_SAVED", "saved_name":"product.jpg"},
+                owner_tag="AF9668915",
+            )
+        self.assertEqual(enriched["photo"]["status"], "IMAGE_SAVED")
+        self.assertEqual(enriched["caption"]["sale_price_krw"], 12050)
+        self.assertEqual(enriched["caption"]["observed_average_krw"], 34575)
+        self.assertIn("약 65% 혜택", enriched["caption"]["caption"])
+        self.assertEqual(enriched["affsdp"]["status"], "UNISSUED_AFFSDP_CANDIDATE")
+        link = enriched["composed_affiliate_url"]
+        self.assertEqual(enriched["caption"]["caption"].splitlines()[-1],
+                         "🛒 상품 링크 (수익 귀속 미검증) : " + link)
+        qs = parse_qs(urlsplit(link).query)
+        self.assertEqual(qs["lptag"], ["AF9668915"])
+        self.assertEqual(qs["pageKey"], [PID])
+        self.assertEqual(qs["itemId"], [IID])
+        self.assertEqual(qs["vendorItemId"], [VID])
+        self.assertNotIn("link.coupang.com/a/iiPBYpVHae", enriched["caption"]["caption"])
+        self.assertFalse(enriched["personal_affiliate_link_created"])
+        self.assertFalse(enriched["affsdp"]["commission_attribution_verified"])
+        self.assertEqual(enriched["posts_published"], 0)
+
+    def test_unresolved_shortlink_does_not_compose_revenue_url(self):
+        result = enrich_deal(
+            DEAL, Path("."),
+            resolver=lambda _: {"status": "EXACT_ITEM_ID_MISSING", "product_id": None},
+            og_lookup=lambda *args: (_ for _ in ()).throw(AssertionError("OG must not run")),
+            history_fetch=lambda *args: (_ for _ in ()).throw(AssertionError("Lowchart must not run")),
+            photo_downloader=lambda *args: (_ for _ in ()).throw(AssertionError("Photo must not run")),
+            owner_tag="AF9668915",
+        )
+        self.assertIsNone(result["composed_affiliate_url"])
+        self.assertNotIn("🛒 상품 링크", result["caption"]["caption"])
+        self.assertFalse(result["affsdp"]["official_link_issued"])
+
     def test_og_identity_vendor_item_matching(self):
         self.assertTrue(og_matches_product(OG, IDENTITY))
         self.assertFalse(og_matches_product({**OG, "og_url": OG_URL.replace(VID,"00000")}, IDENTITY))
