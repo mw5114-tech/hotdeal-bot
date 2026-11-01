@@ -10,7 +10,8 @@
 - raw text에 보이는 쿠팡 링크와 Telegram `text_link`의 **숨긴 쿠팡 URL** 모두 판별
 - 다른 쇼핑몰·일반 공지는 GitHub 요청하지 않음 (텔레그램 알림은 기존처럼 전달)
 - 20초 내 몰린 이벤트는 1회 실행으로 묶고 성공 요청 사이 최소 75초 간격
-- GitHub 요청이 실패하면 원본 최대 메시지 ID 신호를 기존 SQLite에 보존하고 3분 후 재시도
+- GitHub가 명시적으로 거절한 HTTP 4xx(408 제외)는 원본 메시지 ID 신호를 SQLite에 보존하고 3분 후 재시도
+- 요청 전에 `github_dispatch_inflight_post`를 영구 저장한다. 응답 유실·시간 초과·5xx·전송 중 프로세스 종료는 접수 여부가 불확실하므로 재시작 후에도 자동 재요청하지 않는다. `GITHUB_DISPATCH_UNCERTAIN` 또는 남아 있는 inflight 기록은 GitHub 실행 이력과 FIFO 상태를 대조한 뒤 수동 검토해야 한다. 새 이벤트도 이 검토가 끝날 때까지 보류된다.
 - GitHub가 HTTP 204를 반환하면 '요청 접수'로 기록. **카페 발행 성공을 뜻하지는 않는다.**
 - 실행된 기존 FIFO workflow가 뽐질 채널을 재검사 → GitHub 저장 상태 기반 순차 발행
 - 기존 GitHub 5분 예약은 **서버 실전 작동이 확인될 때까지 유지**

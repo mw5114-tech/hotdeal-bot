@@ -11,7 +11,7 @@ from urllib import error
 from live_store import Store
 from jirum_github_dispatch import (
     GitHubEventBridge, coupang_event, workflow_dispatch, ENDPOINT,
-    PENDING_KEY, LAST_ACK_ID_KEY, LAST_SENT_KEY, RETRY_AT_KEY,
+    PENDING_KEY, LAST_ACK_ID_KEY, LAST_SENT_KEY, RETRY_AT_KEY, INFLIGHT_KEY,
 )
 
 def post(mid, url="https://link.coupang.com/a/example"):
@@ -28,6 +28,15 @@ class FakeClock:
 
 
 class DispatchHttpTests(unittest.TestCase):
+    def test_visible_urls_stop_at_real_whitespace_not_letter_s(self):
+        from jirum_github_dispatch import VISIBLE_URL_RE
+        url = "https://www.coupang.com/vp/products/123"
+        for separator in (" ", "\n", "\t", "\r\n"):
+            text = "특가 " + url + separator + "설명 https://example.com/other"
+            self.assertEqual(VISIBLE_URL_RE.findall(text), [url, "https://example.com/other"])
+            self.assertTrue(coupang_event({"id": 101, "text": text, "entities": []}))
+        self.assertFalse(coupang_event({"id": 101, "text": "https://link.coupang.coms.evil/offer", "entities": []}))
+
     def test_official_workflow_dispatch_endpoint_with_main_and_auth(self):
         seen = {}
         class Response:
@@ -191,6 +200,34 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(await bridge.process_once())
         self.assertEqual(self.store.get(LAST_ACK_ID_KEY), 102)
         self.assertEqual(len(self.calls), 2)
+
+    async def test_lost_response_blocks_retry_even_after_database_reopen(self):
+        attempts = []
+        def lost_response(token):
+            attempts.append(token)
+            raise TimeoutError('response lost after acceptance')
+        bridge = self.make_bridge(sender=lost_response)
+        bridge.observe(post(101))
+        self.clock.advance(21)
+        self.assertTrue(await bridge.process_once())
+        self.assertEqual(self.store.get(INFLIGHT_KEY), 101)
+        self.store.close()
+        self.store = Store(Path(self.tmp.name) / 'sample.sqlite3')
+        bridge = self.make_bridge(sender=lost_response)
+        bridge.observe(post(102))
+        self.clock.advance(10000)
+        self.assertFalse(await bridge.process_once())
+        self.assertEqual(len(attempts), 1)
+        self.assertEqual(self.store.get(PENDING_KEY), 102)
+
+    async def test_crash_after_intent_commit_never_resends(self):
+        bridge = self.make_bridge()
+        bridge.observe(post(101))
+        with self.store.db:
+            self.store.set(INFLIGHT_KEY, 101)
+        self.clock.advance(10000)
+        self.assertFalse(await self.make_bridge().process_once())
+        self.assertEqual(self.calls, [])
 
 
 if __name__ == "__main__":

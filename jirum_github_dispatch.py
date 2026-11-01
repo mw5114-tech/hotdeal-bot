@@ -2,8 +2,9 @@
 
 The existing Telegram watcher and bot deliveries work unchanged when this
 bridge is disabled. Only post IDs are persisted; no Telegram bodies or secret
-tokens are copied to GitHub. Failed requests retain the pending signal for
-a later retry. GitHub FIFO itself remains the publication source of truth.
+tokens are copied to GitHub. Explicitly rejected requests retain the pending
+signal for retry. Uncertain requests are held for manual review. GitHub FIFO
+itself remains the publication source of truth.
 """
 from __future__ import annotations
 
@@ -28,10 +29,11 @@ SINCE_KEY = "github_dispatch_pending_since"
 LAST_ACK_ID_KEY = "github_dispatch_ack_post"
 LAST_SENT_KEY = "github_dispatch_last_sent_at"
 RETRY_AT_KEY = "github_dispatch_retry_at"
+INFLIGHT_KEY = "github_dispatch_inflight_post"
 COUPANG_HOSTS = frozenset({
     "link.coupang.com", "coupang.com", "www.coupang.com", "m.coupang.com"
 })
-VISIBLE_URL_RE = re.compile(r"https?://[^\\s<>\"']+", re.IGNORECASE)
+VISIBLE_URL_RE = re.compile(r"https?://[^\s<>\"']+", re.IGNORECASE)
 
 
 def coupang_event(post: dict) -> bool:
@@ -132,7 +134,7 @@ class GitHubEventBridge:
     async def process_once(self) -> bool:
         """Returns whether a network dispatch was attempted."""
         pending = self.store.get(PENDING_KEY) or 0
-        if not pending:
+        if not pending or self.store.get(INFLIGHT_KEY):
             return False
         now = self.clock()
         earliest = max(
@@ -142,6 +144,10 @@ class GitHubEventBridge:
         )
         if now < earliest:
             return False
+        # Commit before sending: a crash or lost HTTP response must never
+        # cause a second dispatch. Uncertain attempts require manual review.
+        with self.store.db:
+            self.store.set(INFLIGHT_KEY, pending)
         try:
             await asyncio.to_thread(self.sender, self.token)
         except Exception as exc:
@@ -155,11 +161,17 @@ class GitHubEventBridge:
                 label = str(exc)
             with self.store.db:
                 self.store.set(RETRY_AT_KEY, self.clock() + RETRY_SECONDS)
+                if isinstance(exc, error.HTTPError) and 400 <= exc.code < 500 and exc.code != 408:
+                    # Explicit rejection: GitHub did not accept the dispatch.
+                    self.store.set(INFLIGHT_KEY, 0)
+            if self.store.get(INFLIGHT_KEY):
+                self.logger("GITHUB_DISPATCH_UNCERTAIN", source=pending)
             self.logger("GITHUB_DISPATCH_FAILED", source=pending, reason=label)
             return True
 
         # A new event may arrive while the API call is in flight. Never drop it.
         with self.store.db:
+            self.store.set(INFLIGHT_KEY, 0)
             self.store.set(LAST_ACK_ID_KEY, max(
                 self.store.get(LAST_ACK_ID_KEY) or 0, pending
             ))
