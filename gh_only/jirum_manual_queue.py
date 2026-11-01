@@ -370,6 +370,7 @@ def main():
         "http_status": outcome.get("http_status"),
         "page_path": outcome.get("page_path"),
         "editor_checks": outcome.get("editor_checks"),
+        "submit_checks": outcome.get("submit_checks"),
     }, ensure_ascii=False))
     return 0 if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" else 2
 

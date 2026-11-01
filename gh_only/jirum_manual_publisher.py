@@ -156,9 +156,40 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 if board.locator("option:checked").inner_text().strip() != BOARD:
                     raise RuntimeError("BOARD_RESET")
                 result["failure_stage"] = "LOCATE_SUBMIT_BUTTON"
-                submit = page.locator("button.w-full").filter(has_text=re.compile(r"^글쓰기$"))
-                if submit.count() != 1 or not submit.is_enabled():
-                    raise RuntimeError("SUBMIT_NOT_UNIQUE")
+                # Do not depend solely on the brittle Tailwind w-full class.
+                # Prefer the accessible label, with the previously working
+                # CSS selector as a compatibility fallback.
+                role_submit = page.get_by_role("button", name="글쓰기", exact=True)
+                legacy_submit = page.locator("button.w-full").filter(
+                    has_text=re.compile(r"^\\s*글쓰기\\s*$")
+                )
+                result["submit_checks"] = {
+                    "role_count": role_submit.count(),
+                    "legacy_count": legacy_submit.count(),
+                    "upload_pending_label": "준비중" in editor.inner_text(),
+                }
+                if role_submit.count() == 1:
+                    submit = role_submit
+                    result["submit_checks"]["strategy"] = "accessible_role_exact"
+                elif legacy_submit.count() == 1:
+                    submit = legacy_submit
+                    result["submit_checks"]["strategy"] = "legacy_css"
+                else:
+                    raise RuntimeError("SUBMIT_BUTTON_NOT_FOUND_OR_AMBIGUOUS")
+                result["failure_stage"] = "WAIT_SUBMIT_ENABLED"
+                submit.wait_for(state="visible", timeout=10000)
+                # Image has appeared locally but may still be uploading.
+                # Let the site enable the button instead of aborting instantly.
+                try:
+                    from playwright.sync_api import expect
+                    expect(submit).to_be_enabled(timeout=18000)
+                finally:
+                    result["submit_checks"]["enabled_after_wait"] = submit.is_enabled()
+                    result["submit_checks"]["upload_pending_after_wait"] = (
+                        "준비중" in editor.inner_text()
+                    )
+                if not submit.is_enabled():
+                    raise RuntimeError("SUBMIT_STILL_DISABLED_AFTER_UPLOAD_WAIT")
                 # No retry under ANY condition, including timeout or navigation error.
                 result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
