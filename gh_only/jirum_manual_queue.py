@@ -1,6 +1,6 @@
-"""Manual Jirum -> Daangn FIFO queue, persisted via main-branch GitHub Contents API.
+"""Scheduled (30min) or manual Jirum -> Daangn FIFO, persisted via GitHub Contents API.
 
-No cron. One invocation scans all visible pages since the persisted watermark,
+One invocation scans all visible pages since the persisted watermark,
 queues only clearly identified Coupang purchase URLs, and publishes at most one
 oldest pending entry. No live write is made on an empty queue. Pre-submit claim
 is persisted; uncertain attempts require a human check and are never replayed.
@@ -319,19 +319,19 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
     store.write(state, sha, f"state: finalize Jirum {source_id} without repeat")
 
 
-def check_manual_trigger() -> None:
+def check_run_trigger() -> None:
     if (os.getenv("GITHUB_ACTIONS") != "true"
         or os.getenv("GITHUB_REF") != "refs/heads/main"
         or os.getenv("GITHUB_RUN_ATTEMPT") != "1"
-        or os.getenv("GITHUB_EVENT_NAME") not in ("push", "workflow_dispatch")):
-        raise RuntimeError("NOT_MANUAL_MAIN_FIRST_ATTEMPT")
+        or os.getenv("GITHUB_EVENT_NAME") not in ("push", "workflow_dispatch", "schedule")):
+        raise RuntimeError("NOT_MAIN_FIRST_ATTEMPT_OR_WRONG_EVENT")
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("scan", "publish"))
     args = parser.parse_args()
-    check_manual_trigger()
+    check_run_trigger()
     store = GithubState()
     if args.command == "scan":
         result = scan(store)
