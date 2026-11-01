@@ -364,6 +364,12 @@ def main():
     print("JIRUM_MANUAL_PUBLISH " + json.dumps({
         "source_id": source_id, "status": outcome.get("status"),
         "post_url": outcome.get("post_url"), "submit_attempted": outcome.get("submit_attempted"),
+        "failure_stage": outcome.get("failure_stage"),
+        "error_type": outcome.get("error_type"),
+        "error_reason": outcome.get("error_reason"),
+        "http_status": outcome.get("http_status"),
+        "page_path": outcome.get("page_path"),
+        "editor_checks": outcome.get("editor_checks"),
     }, ensure_ascii=False))
     return 0 if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" else 2
 
