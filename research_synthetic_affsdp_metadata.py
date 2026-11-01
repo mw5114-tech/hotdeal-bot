@@ -41,6 +41,7 @@ def main():
         result.update({"redirect_present":True,"destination_host":parsed.hostname,
                        "destination_path":parsed.path,
                        "query_keys":sorted(params),
+                       "nonempty_parameter_keys":sorted(k for k, values in params.items() if any(values)),
                        "lptag_matches_owner":params.get("lptag")==[OWNER_TAG],
                        "sig_key_present":"sig" in params,
                        "sig_nonempty":any(params.get("sig",[])),
