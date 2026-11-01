@@ -1,0 +1,2 @@
+Read-only event-to-GitHub API dispatch smoke. NO CAFE POST.
+Started 2026-11-01; after PR #46.
