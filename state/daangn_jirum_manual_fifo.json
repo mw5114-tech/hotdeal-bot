@@ -1,7 +1,24 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94778,
-  "pending": [],
+  "last_scanned_id": 94781,
+  "pending": [
+    {
+      "id": 94780,
+      "source_post_url": "https://t.me/jirum/94780",
+      "original_purchase_url": "https://link.coupang.com/a/ij5BvuOhQy",
+      "source_text": "☆특가 14,320원\n퍼실 딥클린 초미세세탁 라벤더젤 맥스 드럼용 액체세제 리필, 1.8L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ij5BvuOhQy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 14,320원",
+      "sale_price_krw": 14320
+    },
+    {
+      "id": 94781,
+      "source_post_url": "https://t.me/jirum/94781",
+      "original_purchase_url": "https://link.coupang.com/a/ij5BF7MDts",
+      "source_text": "☆특가 11,140원\n퍼실 딥클린 엑스퍼트 베이비젤 액체세제 겸용, 2개, 1.5L\n📦 특가 바로가기\nhttps://link.coupang.com/a/ij5BF7MDts\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 11,140원",
+      "sale_price_krw": 11140
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -214,5 +231,5 @@
       "run_id": "41294426869"
     }
   },
-  "skipped_non_coupang": 2
+  "skipped_non_coupang": 3
 }
