@@ -5,6 +5,7 @@ on:
       - test/daangn-new-format-one-post-20261101
     paths:
       - .github/workflows/daangn-newformat-diagnose-94743.yml
+      - gh_only/daangn_newformat_publish_once.py
 permissions:
   contents: read
 jobs:
