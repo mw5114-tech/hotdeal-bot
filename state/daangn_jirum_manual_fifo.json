@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94808,
+  "last_scanned_id": 94809,
   "pending": [
     {
       "id": 94789,
@@ -161,6 +161,14 @@
       "source_text": "☆특가 14,050원 (21.9% 할인)\n코카콜라 제로제로, 350ml, 24개\n📌 가격 현황\n- 정상가: 18,000원\n- 할인: 3,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikVsn8TVVQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "코카콜라 제로제로, 350ml, 24개",
       "sale_price_krw": 14050
+    },
+    {
+      "id": 94809,
+      "source_post_url": "https://t.me/jirum/94809",
+      "original_purchase_url": "https://link.coupang.com/a/ikWds3E1DM",
+      "source_text": "🔥🔥🔥무지성 16,870원 (55.6% 할인)🔥🔥🔥\n스케쳐스키즈 여아용 스케치 라이트 프로 부츠\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 38,000원\n- 할인: 21,130원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikWds3E1DM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "스케쳐스키즈 여아용 스케치 라이트 프로 부츠",
+      "sale_price_krw": 16870
     }
   ],
   "in_flight": null,
