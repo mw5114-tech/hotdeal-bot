@@ -1,0 +1,1 @@
+Read-only getMe to identify exact Telegram sender bot ID for MUSE listener. No messages sent.
