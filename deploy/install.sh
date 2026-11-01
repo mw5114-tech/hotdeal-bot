@@ -18,7 +18,7 @@ if ! id hotdeal-live >/dev/null 2>&1; then
 fi
 install -d -o root -g root -m 0755 /opt/hotdeal-live
 install -d -o hotdeal-live -g hotdeal-live -m 0700 /var/lib/hotdeal-live
-for file in jirum_live.py live_store.py live_telegram.py telegram_delivery.py jirum_forward.py requirements-live.txt; do
+for file in jirum_live.py jirum_github_dispatch.py live_store.py live_telegram.py telegram_delivery.py jirum_forward.py requirements-live.txt; do
   install -o root -g root -m 0644 "$src/$file" "/opt/hotdeal-live/$file"
 done
 install -d -o root -g root -m 0755 /opt/hotdeal-live/state
