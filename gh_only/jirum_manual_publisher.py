@@ -62,14 +62,18 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
         "submit_attempted": False,
         "post_url": None,
         "photo_uploaded_first": False,
+        "failure_stage": "INITIALIZING",
     }
     try:
+        result["failure_stage"] = "LOAD_DAANGN_SESSION"
         state = parse_daangn_storage_state(
             state_secret if state_secret is not None else os.getenv("DAANGN_CAFE_STORAGE_STATE_JSON", "")
         )
         with sync_playwright() as p:
+            result["failure_stage"] = "LAUNCH_BROWSER"
             browser = p.chromium.launch(headless=True)
             try:
+                result["failure_stage"] = "OPEN_DAANGN_PAGE"
                 ctx = browser.new_context(
                     storage_state=state, locale="ko-KR",
                     viewport={"width": 1366, "height": 950},
@@ -77,22 +81,28 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 page = ctx.new_page()
                 resp = page.goto(TARGET, wait_until="domcontentloaded", timeout=30000)
                 page.wait_for_timeout(1800)
+                result["http_status"] = resp.status if resp else None
+                result["page_path"] = urlsplit(page.url).path
                 if (not resp or resp.status != 200
                     or urlsplit(page.url).hostname != "cafe.daangn.com"
                     or urlsplit(page.url).path != PREFIX + "new"):
                     raise RuntimeError("EXPECTED_EDITOR_NOT_REACHED")
+                result["failure_stage"] = "SELECT_BOARD"
                 board = page.locator("select")
                 if board.count() != 1:
                     raise RuntimeError("BOARD_NOT_UNIQUE")
                 board.select_option(label=BOARD)
                 if board.locator("option:checked").inner_text().strip() != BOARD:
                     raise RuntimeError("WRONG_BOARD")
+                result["failure_stage"] = "FIND_EDITOR"
                 editor = page.locator("div.ProseMirror[contenteditable=true]")
                 if editor.count() != 1:
                     raise RuntimeError("EDITOR_NOT_UNIQUE")
+                result["failure_stage"] = "VERIFY_IMAGE_FILE"
                 photo = article.get("image")
                 if photo is None or not photo.is_file():
                     raise RuntimeError("PRODUCT_PHOTO_NOT_AVAILABLE")
+                result["failure_stage"] = "UPLOAD_IMAGE"
                 add_image = page.get_by_role("button", name="이미지 추가")
                 if add_image.count() != 1:
                     raise RuntimeError("IMAGE_UPLOAD_BUTTON_NOT_UNIQUE")
@@ -109,6 +119,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     raise RuntimeError("IMAGE_AMBIGUOUS")
                 result["photo_uploaded_first"] = True
                 # The successful live test put photo FIRST then appended text.
+                result["failure_stage"] = "WRITE_EDITOR_BODY"
                 editor.click()
                 editor.press("ControlOrMeta+End")
                 editor.press("Enter")
@@ -119,6 +130,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     if i < len(lines) - 1:
                         page.keyboard.press("Enter")
                 page.keyboard.press("Enter")
+                result["failure_stage"] = "WRITE_TITLE"
                 title_input = page.locator('input[placeholder="제목을 입력해주세요."]')
                 if title_input.count() != 1:
                     raise RuntimeError("TITLE_NOT_UNIQUE")
@@ -126,16 +138,29 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 page.wait_for_timeout(1200)
                 if title_input.input_value() != article["title"]:
                     raise RuntimeError("TITLE_NOT_VERIFIED")
+                result["failure_stage"] = "VERIFY_EDITOR_BODY"
+                # Store booleans/counts only, never the editable page contents.
+                observed = editor.inner_text().strip()
+                result["editor_checks"] = {
+                    "normalized_body_equal": norm(observed) == norm(article["body"]),
+                    "candidate_url_count": observed.count(article["candidate_url"]),
+                    "disclosure_last": observed.rstrip().endswith(DISCLOSURE),
+                    "image_count": image.count(),
+                    "observed_length": len(observed),
+                    "expected_length": len(article["body"]),
+                }
                 if not validate_editor_copy(
                     editor, article["body"], article["candidate_url"], image
                 ):
                     raise RuntimeError("EDITOR_CONTENT_OR_FULL_URL_NOT_VERIFIED")
                 if board.locator("option:checked").inner_text().strip() != BOARD:
                     raise RuntimeError("BOARD_RESET")
+                result["failure_stage"] = "LOCATE_SUBMIT_BUTTON"
                 submit = page.locator("button.w-full").filter(has_text=re.compile(r"^글쓰기$"))
                 if submit.count() != 1 or not submit.is_enabled():
                     raise RuntimeError("SUBMIT_NOT_UNIQUE")
                 # No retry under ANY condition, including timeout or navigation error.
+                result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
                 submit.click(timeout=10000)
                 page.wait_for_timeout(7500)
@@ -149,6 +174,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 if not result["post_url"]:
                     result["status"] = "PUBLISH_UNCERTAIN_DO_NOT_RETRY"
                     return result
+                result["failure_stage"] = "VERIFY_PUBLISHED_POST"
                 content = page.locator("body").inner_text(timeout=5000)
                 hrefs = page.locator('a[href*="/re/AFFSDP"]').evaluate_all(
                     "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
@@ -187,4 +213,8 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
         result["error_type"] = type(exc).__name__
         if isinstance(exc, (RuntimeError, ValueError)):
             result["error_reason"] = str(exc)[:130]
+        else:
+            # Avoid writing raw Playwright exception text: it may include
+            # URLs, page labels or user/account information.
+            result["error_reason"] = "PLAYWRIGHT_" + type(exc).__name__.upper()
     return result
