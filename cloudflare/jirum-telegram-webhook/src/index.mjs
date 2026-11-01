@@ -130,6 +130,12 @@ export async function processQueue(env, fetcher = fetch, nowMs = Date.now()) {
   let dispatched = false;
   let event = null;
   try {
+    // A POST with a lost/failed response may have reached GitHub.
+    // Stop all follow-up automated dispatches until manually reconciled.
+    const uncertain = await env.DB.prepare(
+      "SELECT chat_id,message_id FROM telegram_events WHERE status = 'dispatch_uncertain' ORDER BY created_at_ms LIMIT 1"
+    ).first();
+    if (uncertain) return {status:"DISPATCH_UNCERTAIN_REVIEW_REQUIRED"};
     event=await env.DB.prepare(
       "SELECT chat_id,message_id,source_id FROM telegram_events WHERE status = 'pending' ORDER BY created_at_ms, message_id LIMIT 1"
     ).first();
