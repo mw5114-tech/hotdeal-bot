@@ -22,6 +22,16 @@ def log(code, **values):
     print(json.dumps({"event": code, **values}, ensure_ascii=True), flush=True)
 
 
+def signal_github(bridge, post):
+    """Do not let an optional GitHub integration interrupt Telegram relays."""
+    if bridge is None:
+        return
+    try:
+        bridge.observe(post)
+    except Exception:
+        log("GITHUB_EVENT_QUEUE_FAILED", source=post.get("id"))
+
+
 def original_url(value):
     # MTProto URLs are already decoded. HTML unescape would corrupt query
     # strings such as '&not=1'; preserve the exact original tracking URL.
@@ -161,8 +171,8 @@ async def reconcile(client, channel, store, configured, wake, github_bridge=None
         async for message in client.iter_messages(channel, min_id=store.get("cursor"), limit=100, reverse=True):
             post = extract(message)
             store.put(post["id"], post["text"], format_parts(post), configured, scanned=True)
-            if github_bridge and post["id"] > (store.get("baseline") or 0):
-                github_bridge.observe(post)
+            if post["id"] > (store.get("baseline") or 0):
+                signal_github(github_bridge, post)
             count += 1
         wake.set()
         if count < 100:
@@ -234,8 +244,8 @@ async def run_service(store, enabled):
             try:
                 post = extract(event.message)
                 store.put(post["id"], post["text"], format_parts(post), configured)
-                if github_bridge and post["id"] > (store.get("baseline") or 0):
-                    github_bridge.observe(post)
+                if post["id"] > (store.get("baseline") or 0):
+                    signal_github(github_bridge, post)
                 wake.set()
                 log("SOURCE_EVENT", post=post["id"], edited=event.message.edit_date is not None)
             except Exception:
