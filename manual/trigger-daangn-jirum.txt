@@ -13,3 +13,5 @@ Photo-upload confirmation fix: run one next FIFO 94745, 20261101-0426
 FIFO drain live validation: 20261101-drain-all-94746-94748
 
 FIFO drain retry after title-length fix: 20261101-source-94747-94748
+
+FIFO drain verification after editor image prefix fix: 20261101-0439
