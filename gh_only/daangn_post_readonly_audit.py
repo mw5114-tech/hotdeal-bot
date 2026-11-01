@@ -55,6 +55,25 @@ def main() -> None:
                    displayed: e.getBoundingClientRect().width > 0
                  }))"""
             )
+            # Read-only screenshot and generic image metadata for site markup diagnosis.
+            # Do not capture or serialize browser storage/cookies.
+            page.screenshot(
+                path="daangn-94744-post-readonly.png",
+                full_page=True,
+                timeout=12000,
+            )
+            image_metadata = page.locator("img").evaluate_all(
+                """(els)=>els.map(e=>({
+                   width:e.naturalWidth,height:e.naturalHeight,
+                   alt:(e.alt||'').slice(0,60),
+                   top:Math.round(e.getBoundingClientRect().top),
+                   host:(()=>{try{return new URL(e.currentSrc||e.src).hostname}catch{return ''}})(),
+                   srcSuffix:(()=>{try{return new URL(e.currentSrc||e.src).pathname.split('/').pop().slice(0,55)}catch{return ''}})()
+                 })).filter(x=>x.width>=150&&x.height>=150).slice(0,25)"""
+            )
+            print("DAANGN_READONLY_IMAGE_METADATA " + json.dumps(
+                image_metadata, ensure_ascii=False
+            ))
             parsed = urlsplit(page.url)
             expected_post_path = urlsplit(POST_URL).path
             checks = {
