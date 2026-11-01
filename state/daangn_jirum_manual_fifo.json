@@ -1,22 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94772,
-  "pending": [
-    {
-      "id": 94772,
-      "source_post_url": "https://t.me/jirum/94772",
-      "original_purchase_url": "https://link.coupang.com/a/ijYAhTjM60",
-      "source_text": "🔥🔥🔥무지성 9,130원 (46.0% 할인)🔥🔥🔥\n루솔 과채플랜 사과당근 20p\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 16,907원\n- 할인: 7,777원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYAhTjM60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "루솔 과채플랜 사과당근 20p",
-      "sale_price_krw": 9130
-    }
-  ],
-  "in_flight": {
-    "id": 94772,
-    "status": "CLAIMED",
-    "run_id": "41291724817",
-    "at": "2026-11-01T09:08:01.120600+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -184,6 +170,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%9E%88%EB%A7%90%EB%9D%BC%EC%95%BC-%EC%BD%9C%EB%93%9C-%EB%A7%88%EC%82%AC%EC%A7%80%EB%B0%A4-10g-1%EA%B0%9C-dagLgn8A?from=write",
       "at": "2026-11-01T09:05:38.706485+00:00",
       "run_id": "41291499444"
+    },
+    "94772": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%A3%A8%EC%86%94-%EA%B3%BC%EC%B1%84%ED%94%8C%EB%9E%9C-%EC%82%AC%EA%B3%BC%EB%8B%B9%EA%B7%BC-20p-2L-1%EB%B0%95%EC%8A%A4-40%ED%95%A0%EC%9D%B8-PV292oOP?from=write",
+      "at": "2026-11-01T09:08:18.031000+00:00",
+      "run_id": "41291724817"
     }
   },
   "skipped_non_coupang": 2
