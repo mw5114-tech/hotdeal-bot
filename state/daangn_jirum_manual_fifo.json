@@ -3,14 +3,6 @@
   "last_scanned_id": 94763,
   "pending": [
     {
-      "id": 94756,
-      "source_post_url": "https://t.me/jirum/94756",
-      "original_purchase_url": "https://link.coupang.com/a/ijKvbNtjyu",
-      "source_text": "☆특가 5,590원\n아쿠아시스 먹는샘물 무라벨, 2L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijKvbNtjyu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 5,590원",
-      "sale_price_krw": 5590
-    },
-    {
       "id": 94757,
       "source_post_url": "https://t.me/jirum/94757",
       "original_purchase_url": "https://link.coupang.com/a/ijKSB5QCJ2",
@@ -59,12 +51,7 @@
       "sale_price_krw": 8440
     }
   ],
-  "in_flight": {
-    "id": 94756,
-    "status": "CLAIMED",
-    "run_id": "41282508505",
-    "at": "2026-11-01T06:52:19.259367+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -142,6 +129,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%B0%A8%EC%98%A4%EC%B0%A8%EC%9D%B4-%EC%A7%9C%EC%9E%A5-%EB%A7%88%ED%8C%8C%EB%91%90%EB%B6%80-%EC%B2%B4%ED%97%98%ED%8C%A9-5%EC%A2%85-%EC%84%B8%ED%8A%B8-900g-1%EC%84%B8%ED%8A%B8-35%ED%95%A0%EC%9D%B8-Pk6X80GA?from=write",
       "at": "2026-11-01T05:45:13.375662+00:00",
       "run_id": "41278037412"
+    },
+    "94756": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%95%84%EC%BF%A0%EC%95%84%EC%8B%9C%EC%8A%A4-%EB%A8%B9%EB%8A%94%EC%83%98%EB%AC%BC-%EB%AC%B4%EB%9D%BC%EB%B2%A8-2L-12%EA%B0%9C-10%ED%95%A0%EC%9D%B8-PNDW9ZJj?from=write",
+      "at": "2026-11-01T06:52:34.987840+00:00",
+      "run_id": "41282508505"
     }
   },
   "skipped_non_coupang": 2
