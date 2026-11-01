@@ -1,0 +1,21 @@
+name = "jirum-coupang-minute-poller"
+main = "src/index.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = false
+
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+GITHUB_REPOSITORY = "mw5114-tech/hotdeal-bot"
+TARGET_WORKFLOW = "daangn-jirum-manual-fifo.yml"
+TARGET_BRANCH = "main"
+# Deliberately disabled until the owner links Cloudflare account, provisions
+# fine-grained GitHub token, and explicitly arms the Worker with true.
+ENABLE_DISPATCH = "false"
+# Hard free-tier safeguard. 12 maximum dispatched jobs per rolling 24h;
+# pending Coupang deals remain queued, not skipped. Tune after checking bills.
+MAX_DAILY_DISPATCHES = "12"
+
+# DO NOT commit GITHUB_TOKEN. Set it as a Cloudflare Worker secret:
+# npx wrangler secret put GITHUB_TOKEN
