@@ -1,0 +1,29 @@
+name: Diagnose broken own Coupang link in Daangn post (read-only)
+on:
+  push:
+    branches:
+      - test/daangn-onepost-20261101
+    paths:
+      - .github/workflows/daangn-link-diagnose-once.yml
+      - gh_only/daangn_link_diagnose.py
+permissions:
+  contents: read
+jobs:
+  inspect-link:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Read posted affiliate link DOM without posting or editing
+        run: python -m gh_only.daangn_link_diagnose
