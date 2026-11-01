@@ -50,7 +50,7 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertEqual(caption["caption"].splitlines(), [
             "📦 상품명 : 휘카레 소스",
             "💸 쿠팡 평소 판매가(로우차트 관측 평균) : 약 34,575원",
-            "🔥 핫딜 특가 : 12,050원 (상세페이지 참고 / 약 65% 혜택)",
+            "🔥 핫딜 특가 : 12,050원 (약 65% 할인 / 상세페이지 참고)",
         ])
         self.assertEqual(caption["rounded_discount_step"], 5)
         self.assertFalse(caption["official_normal_price_quoted"])
@@ -92,7 +92,7 @@ class DefaultFormatTests(unittest.TestCase):
         price = price_info(raw)
         self.assertEqual(price["sale_price_krw"], 12050)
         preview = create_default_preview(price["sale_price_krw"], "휘카레", 34575)
-        self.assertIn("약 65% 혜택", preview["caption"])
+        self.assertIn("약 65% 할인", preview["caption"])
         self.assertNotIn("59.8%", preview["caption"])
         self.assertNotIn("30,000원", preview["caption"])
 
