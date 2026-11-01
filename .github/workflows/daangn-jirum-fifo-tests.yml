@@ -9,11 +9,14 @@ on:
       - fix/daangn-submit-wait-20261101
       - fix/daangn-submit-anchor-editor-20261101
       - diagnose/daangn-published-post-readonly-20261101
+      - diagnose/daangn-photo-upload-readonly-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/test_jirum_manual_queue.py'
       - 'gh_only/test_jirum_manual_publisher.py'
       - 'gh_only/daangn_post_readonly_audit.py'
+      - 'gh_only/daangn_photo_upload_probe.py'
+      - '.github/workflows/daangn-photo-upload-probe.yml'
       - '.github/workflows/daangn-post-readonly-audit.yml'
       - '.github/workflows/daangn-jirum-manual-fifo.yml'
       - '.github/workflows/daangn-jirum-fifo-tests.yml'
@@ -36,7 +39,7 @@ jobs:
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
           python -m unittest -v gh_only.test_jirum_manual_queue
-          python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py
+          python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py gh_only/daangn_photo_upload_probe.py
           python -m unittest -v gh_only.test_jirum_manual_publisher
           python - <<'PY'
           from pathlib import Path
