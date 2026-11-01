@@ -1,0 +1,40 @@
+name: Inspect MUSE sender bot ID (read-only)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manual/trigger-muse-sender-bot-id.txt'
+
+permissions:
+  contents: read
+
+jobs:
+  identify-sender:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      SENDER_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+    steps:
+      - name: Identify existing sender bot without disclosing its token
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from urllib.request import urlopen
+
+          token = os.environ.get("SENDER_TOKEN", "")
+          if not token or ":" not in token:
+              raise SystemExit("MISSING_EXISTING_SENDER_TOKEN")
+          # Do not print URL or token, and never send any Telegram message.
+          with urlopen("https://api.telegram.org/bot" + token + "/getMe", timeout=15) as r:
+              data = json.loads(r.read(20000))
+          bot = data.get("result", {})
+          if data.get("ok") is not True or not bot.get("is_bot") or not isinstance(bot.get("id"), int):
+              raise SystemExit("TELEGRAM_GETME_FAILED")
+          print("MUSE_SENDER_BOT_ID=" + str(bot["id"]))
+          print("MUSE_SENDER_USERNAME=" + str(bot.get("username") or ""))
+          print("READ_ONLY_GETME_COMPLETE_NO_MESSAGE_SENT")
+          PY

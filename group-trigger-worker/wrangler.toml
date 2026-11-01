@@ -1,0 +1,25 @@
+# This Worker is inert until deployed and connected to a receiving Telegram bot.
+# It does not modify the existing Oracle VM or any GitHub schedule.
+name = "muse-telegram-group-trigger"
+main = "index.mjs"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+[vars]
+# Exact group ID already verified in state/telegram_group_chat.json.
+MUSE_GROUP_CHAT_ID = "-5254258160"
+# REPLACE with the numeric getMe ID of '이 가격 못 참지 BOT'.
+# 0 intentionally disables accepting Telegram events.
+SOURCE_SENDER_BOT_ID = "0"
+
+[[queues.producers]]
+binding = "EVENT_QUEUE"
+queue = "muse-telegram-github-dispatch"
+
+[[queues.consumers]]
+queue = "muse-telegram-github-dispatch"
+max_batch_size = 20
+max_batch_timeout = 20
+max_retries = 20
+max_concurrency = 1
+retry_delay = 180
