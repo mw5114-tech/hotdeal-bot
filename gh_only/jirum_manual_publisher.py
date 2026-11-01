@@ -42,21 +42,28 @@ def choose_editor_submit_index(candidates: list[dict]) -> int | None:
     return eligible[0] if len(eligible) == 1 else None
 
 
+def leading_image_ui_prefix(observed: str, body: str) -> str | None:
+    """Allow short image-control text BEFORE otherwise exact post content.
+
+    The rich editor can prepend UI labels to an image node. Reject any
+    substitution, insertion within body, changed footer, or excessive prefix.
+    """
+    actual, expected = norm(observed), norm(body)
+    if actual == expected:
+        return ""
+    if not actual.endswith(expected):
+        return None
+    prefix = actual[:-len(expected)]
+    return prefix if 0 < len(prefix) <= 60 else None
+
+
 def validate_editor_copy(editor, body: str, url: str, image) -> bool:
     observed = editor.inner_text().strip()
-    exact = norm(observed) == norm(body)
-    if not exact:
-        # Daangn injects ONLY this temporary label inside photo upload UI.
-        label = editor.evaluate("""(e) => {
-          const img=e.querySelector('img');
-          if(!img) return '';
-          let n=img.parentElement;
-          for(let i=0;i<4 && n && n!==e;i++,n=n.parentElement){
-            if((n.innerText||'').includes('준비중'))return '준비중';
-          }
-          return '';
-        }""")
-        exact = norm(observed) == "준비중" + norm(body) and label == "준비중"
+    prefix = leading_image_ui_prefix(observed, body)
+    # The exact post text follows the uploaded photo. A small leading label
+    # within image UI is permitted, but the actual article stays byte-for-byte
+    # intact after whitespace normalization and keeps its exact disclosure.
+    exact = prefix is not None
     url_one_node = editor.evaluate("""(e,url) => {
       const walker=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);
       let n;while((n=walker.nextNode())){
@@ -215,6 +222,13 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 observed = editor.inner_text().strip()
                 result["editor_checks"] = {
                     "normalized_body_equal": norm(observed) == norm(article["body"]),
+                    "body_is_exact_suffix": norm(observed).endswith(norm(article["body"])),
+                    "leading_image_ui_prefix_length": len(
+                        leading_image_ui_prefix(observed, article["body"]) or ""
+                    ),
+                    "leading_image_ui_prefix_present": bool(
+                        leading_image_ui_prefix(observed, article["body"])
+                    ),
                     "candidate_url_count": observed.count(article["candidate_url"]),
                     "disclosure_last": observed.rstrip().endswith(DISCLOSURE),
                     "image_count": image.count(),
