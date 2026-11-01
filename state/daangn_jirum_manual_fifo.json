@@ -1,7 +1,24 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94785,
-  "pending": [],
+  "last_scanned_id": 94787,
+  "pending": [
+    {
+      "id": 94786,
+      "source_post_url": "https://t.me/jirum/94786",
+      "original_purchase_url": "https://link.coupang.com/a/ikfDdXPBVl",
+      "source_text": "☆특가 55,800원\n햇반 백미밥, 210g, 72개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikfDdXPBVl\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 55,800원",
+      "sale_price_krw": 55800
+    },
+    {
+      "id": 94787,
+      "source_post_url": "https://t.me/jirum/94787",
+      "original_purchase_url": "https://link.coupang.com/a/ikf6IlyMWy",
+      "source_text": "☆특가 7,980원 (29.0% 할인)\n[로켓프레시] 대림선 육즙팡 동그랑땡 (냉동)\n📌 가격 현황\n- 정상가: 11,239원\n- 할인: 3,259원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikf6IlyMWy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "[로켓프레시] 대림선 육즙팡 동그랑땡 (냉동)",
+      "sale_price_krw": 7980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
