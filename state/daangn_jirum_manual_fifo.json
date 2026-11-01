@@ -3,14 +3,6 @@
   "last_scanned_id": 94749,
   "pending": [
     {
-      "id": 94746,
-      "source_post_url": "https://t.me/jirum/94746",
-      "original_purchase_url": "https://link.coupang.com/a/ijy2SGlBme",
-      "source_text": "☆특가 1,990원\n엠토이 샐러드 컵 도시락 310ml + 560ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijy2SGlBme\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 1,990원",
-      "sale_price_krw": 1990
-    },
-    {
       "id": 94747,
       "source_post_url": "https://t.me/jirum/94747",
       "original_purchase_url": "https://link.coupang.com/a/ijAjRVy7mC",
@@ -27,12 +19,7 @@
       "sale_price_krw": 11280
     }
   ],
-  "in_flight": {
-    "id": 94746,
-    "status": "CLAIMED",
-    "run_id": "41273237584",
-    "at": "2026-11-01T04:28:59.643857+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -56,6 +43,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%95%9C%EC%9A%B0-1%EB%93%B1%EA%B8%89-%EC%88%99%EC%84%B1%EB%93%B1%EC%8B%AC-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-200g-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PNDEG3rj?from=write",
       "at": "2026-11-01T04:18:56.037546+00:00",
       "run_id": "41272538040"
+    },
+    "94746": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%97%A0%ED%86%A0%EC%9D%B4-%EC%83%90%EB%9F%AC%EB%93%9C-%EC%BB%B5-%EB%8F%84%EC%8B%9C%EB%9D%BD-310ml-560ml-%EA%B7%B8%EB%A6%B0-1%EA%B0%9C-PBXxgrRj?from=write",
+      "at": "2026-11-01T04:29:16.246451+00:00",
+      "run_id": "41273237584"
     }
   },
   "skipped_non_coupang": 1
