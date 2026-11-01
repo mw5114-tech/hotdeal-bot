@@ -3,14 +3,6 @@
   "last_scanned_id": 94781,
   "pending": [
     {
-      "id": 94780,
-      "source_post_url": "https://t.me/jirum/94780",
-      "original_purchase_url": "https://link.coupang.com/a/ij5BvuOhQy",
-      "source_text": "☆특가 14,320원\n퍼실 딥클린 초미세세탁 라벤더젤 맥스 드럼용 액체세제 리필, 1.8L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ij5BvuOhQy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 14,320원",
-      "sale_price_krw": 14320
-    },
-    {
       "id": 94781,
       "source_post_url": "https://t.me/jirum/94781",
       "original_purchase_url": "https://link.coupang.com/a/ij5BF7MDts",
@@ -19,12 +11,7 @@
       "sale_price_krw": 11140
     }
   ],
-  "in_flight": {
-    "id": 94780,
-    "status": "CLAIMED",
-    "run_id": "41298897619",
-    "at": "2026-11-01T10:46:18.192557+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -234,6 +221,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%B2%AD%EC%A0%95%EC%9B%90-%EC%89%90%ED%94%84%EC%9D%98%EC%B9%98%ED%82%A8%EC%8A%A4%ED%86%A1-2p-465g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-jvxZOZ6P?from=write",
       "at": "2026-11-01T09:45:18.908866+00:00",
       "run_id": "41294426869"
+    },
+    "94780": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%8D%BC%EC%8B%A4-%EB%94%A5%ED%81%B4%EB%A6%B0-%EC%B4%88%EB%AF%B8%EC%84%B8%EC%84%B8%ED%83%81-%EB%9D%BC%EB%B2%A4%EB%8D%94%EC%A0%A4-%EB%A7%A5%EC%8A%A4-%EB%93%9C%EB%9F%BC%EC%9A%A9-%EC%95%A1%EC%B2%B4%EC%84%B8%EC%A0%9C-%EB%A6%AC%ED%95%84-25%ED%95%A0%EC%9D%B8-dZnOv99d?from=write",
+      "at": "2026-11-01T10:46:34.900285+00:00",
+      "run_id": "41298897619"
     }
   },
   "skipped_non_coupang": 3
