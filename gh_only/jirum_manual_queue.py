@@ -303,6 +303,10 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
             "at": now_utc(), "run_id": run_id,
         }
         state["in_flight"] = None
+    elif outcome.get("status") == "ABORTED_BEFORE_SUBMIT" and outcome.get("submit_attempted") is False:
+        # Nothing was submitted; the SAME oldest item may be tried at the
+        # next manual click. Do not advance the queue or take the next item.
+        state["in_flight"] = None
     else:
         # A crash between claim, click, and confirmation can be ambiguous.
         # Never re-post automatically; require a human to inspect the cafe.
