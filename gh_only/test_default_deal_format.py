@@ -67,12 +67,12 @@ class DefaultFormatTests(unittest.TestCase):
     def test_mean_below_sale_doesnt_claim_discount(self):
         preview = create_default_preview(12050, "휘카레 소스", 10000)
         self.assertNotIn("% 혜택", preview["caption"])
-        self.assertIn("관측 평균) : 약 10,000원", preview["caption"])
+        self.assertIn("쿠팡 평소 판매가 : 약 10,000원", preview["caption"])
 
     def test_missing_sale_is_not_invented(self):
         preview = create_default_preview(None, "휘카레 소스", 34575)
         self.assertEqual(preview["caption"].splitlines(), [
-            "📦 상품명 : 휘카레 소스 [65%할인]",
+            "📦 상품명 : 휘카레 소스",
             "💸 쿠팡 평소 판매가 : 약 34,575원",
             "🔥 핫딜 특가 : 확인 중",
         ])
@@ -80,7 +80,7 @@ class DefaultFormatTests(unittest.TestCase):
 
     def test_reference_not_renamed_official_coupang_price(self):
         preview = create_default_preview(12050, "휘카레 소스", 34575)
-        self.assertIn("로우차트 관측 평균", preview["caption"])
+        self.assertIn("lowchart_public_history", preview["observed_average_source"])
         self.assertNotIn("쿠팡 공식 정상가", preview["caption"])
         self.assertFalse(preview["official_normal_price_quoted"])
 
