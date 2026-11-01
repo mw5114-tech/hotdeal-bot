@@ -126,8 +126,8 @@ class ManualQueueTests(unittest.TestCase):
     def test_collect_since_reads_older_pages_without_skipping_backlog(self):
         lookup = {
             "latest": [deal(94749), deal(94750)],
-            "older49": [deal(94746), deal(94747), deal(94748)],
-            "older46": [deal(94742), deal(94743), deal(94744), deal(94745)],
+            "older94749": [deal(94746), deal(94747), deal(94748)],
+            "older94746": [deal(94742), deal(94743), deal(94744), deal(94745)],
         }
         with patch("gh_only.jirum_manual_queue.enrich_posts",
                    side_effect=lambda html, max_posts: lookup[html]):
