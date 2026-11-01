@@ -43,10 +43,39 @@ def normalized_product_name(title: str | None) -> str:
     return re.sub(r"[\W_]+", "", unicodedata.normalize("NFKC", raw).casefold())
 
 
+SPEC_TOKEN = re.compile(
+    r"(?<![0-9a-z])\\d+(?:\\.\\d+)?\\s*"
+    r"(?:kg|g|ml|l|개|팩|입|봉|병|정|gb|tb|코어)(?![a-z])",
+    re.I,
+)
+
+
+def _option_specs(title: str) -> tuple[str, ...]:
+    """Extract sizes/counts from the original product-name portion only."""
+    product = re.split(r"\\s+[-–]\\s+", title, maxsplit=1)[0]
+    return tuple(re.sub(r"\\s+", "", token).lower()
+                 for token in SPEC_TOKEN.findall(product))
+
+
 def same_named_option(og_title: str | None, history_title: str | None) -> bool:
-    """Strict title/option match. Reject similar product in different package sizes."""
+    """Accept exact SKU with generic OG title vs detailed Lowchart option.
+
+    Identities must ALSO match the exact productId/itemId separately in
+    validated_history(). Do not accept conflicting sizes/capacities.
+    """
     left, right = normalized_product_name(og_title), normalized_product_name(history_title)
-    return len(left) >= 9 and left == right
+    if len(left) < 9 or len(right) < 9:
+        return False
+    if left == right:
+        return True
+    if not right.startswith(left):
+        return False
+    # Kakao OG often only knows the product family, e.g.
+    # "Apple 아이맥 24 M4칩"; Lowchart carries actual color/RAM/storage.
+    # Permit prefix matches ONLY on exact product/item IDs verified elsewhere.
+    left_specs = _option_specs(og_title or "")
+    right_specs = _option_specs(history_title or "")
+    return not left_specs or all(spec in right_specs for spec in left_specs)
 
 
 def validated_history(history: dict | None, product_id: str, item_id: str,
