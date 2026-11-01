@@ -44,7 +44,7 @@ def normalized_product_name(title: str | None) -> str:
 
 
 SPEC_TOKEN = re.compile(
-    r"(?<![0-9a-z])\${pattern}+(?:\${pattern}\${pattern}+)?\${pattern}*"
+    r"(?<![0-9a-z])\d+(?:\.\d+)?\s*"
     r"(?:kg|g|ml|l|개|팩|입|봉|병|정|gb|tb|코어)(?![a-z])",
     re.I,
 )
@@ -52,8 +52,8 @@ SPEC_TOKEN = re.compile(
 
 def _option_specs(title: str) -> tuple[str, ...]:
     """Extract sizes/counts from the original product-name portion only."""
-    product = re.split(r"\${pattern}+[-–]\${pattern}+", title, maxsplit=1)[0]
-    return tuple(re.sub(r"\${pattern}+", "", token).lower()
+    product = re.split(r"\s+[-–]\s+", title, maxsplit=1)[0]
+    return tuple(re.sub(r"\s+", "", token).lower()
                  for token in SPEC_TOKEN.findall(product))
 
 
