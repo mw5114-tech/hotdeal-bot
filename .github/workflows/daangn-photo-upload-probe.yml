@@ -1,0 +1,50 @@
+name: DIAGNOSTIC | Unsubmitted Daangn photo upload (NO POST)
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'manual/trigger-daangn-photo-probe.txt'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  dry-run-upload-only:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    env:
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - name: Load existing exact photo (no new scraping)
+        uses: actions/download-artifact@v4
+        with:
+          run-id: 41271685261
+          name: jirum-fifo-one-41271685261
+          github-token: ${{ github.token }}
+          path: photo-probe
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright for photo probe only
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Visit UNSUBMITTED editor, upload photo, collect progress (NO CLICK POST)
+        run: python -m gh_only.daangn_photo_upload_probe
+      - name: Attach editor screenshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daangn-photo-probe-${{ github.run_id }}
+          path: daangn-photo-upload-probe.png
+          retention-days: 1
+          if-no-files-found: ignore
