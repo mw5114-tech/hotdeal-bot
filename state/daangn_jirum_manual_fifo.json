@@ -3,14 +3,6 @@
   "last_scanned_id": 94775,
   "pending": [
     {
-      "id": 94774,
-      "source_post_url": "https://t.me/jirum/94774",
-      "original_purchase_url": "https://link.coupang.com/a/ijYN6mdZ6a",
-      "source_text": "👍대박 14,580원 (32.0% 할인)\n잘크톤 멀티튼튼 츄어블정 딸기맛\n📌 가격 현황\n- 정상가: 21,441원\n- 할인: 6,861원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYN6mdZ6a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "잘크톤 멀티튼튼 츄어블정 딸기맛",
-      "sale_price_krw": 14580
-    },
-    {
       "id": 94775,
       "source_post_url": "https://t.me/jirum/94775",
       "original_purchase_url": "https://link.coupang.com/a/ijYSjO09fw",
@@ -19,12 +11,7 @@
       "sale_price_krw": 6100
     }
   ],
-  "in_flight": {
-    "id": 94774,
-    "status": "CLAIMED",
-    "run_id": "41291974564",
-    "at": "2026-11-01T09:11:19.394846+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -204,6 +191,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%ED%95%98%EA%B2%90%EB%8B%A4%EC%A6%88-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%EC%83%8C%EB%93%9C%EC%9C%84%EC%B9%98-%EB%A6%AC%EC%B9%98-%EC%B9%B4%EB%9D%BC%EB%A9%9C-%EC%95%84%EC%9D%B4%EC%8A%A4%ED%81%AC%EB%A6%BC-%EB%83%89%EB%8F%99-35%ED%95%A0%EC%9D%B8-j8rMr0zP?from=write",
       "at": "2026-11-01T09:10:14.820797+00:00",
       "run_id": "41291873212"
+    },
+    "94774": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%9E%98%ED%81%AC%ED%86%A4-%EB%A9%80%ED%8B%B0%ED%8A%BC%ED%8A%BC-%EC%B8%84%EC%96%B4%EB%B8%94%EC%A0%95-%EB%94%B8%EA%B8%B0%EB%A7%9B-90%EC%A0%95-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dZnOnR5d?from=write",
+      "at": "2026-11-01T09:11:36.398246+00:00",
+      "run_id": "41291974564"
     }
   },
   "skipped_non_coupang": 2
