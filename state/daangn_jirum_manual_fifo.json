@@ -1,7 +1,24 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94769,
-  "pending": [],
+  "last_scanned_id": 94771,
+  "pending": [
+    {
+      "id": 94770,
+      "source_post_url": "https://t.me/jirum/94770",
+      "original_purchase_url": "https://link.coupang.com/a/ijXGi5F1u8",
+      "source_text": "☆특가 6,560원\n풀무원 다논 요거톡 스타볼 요거트, 132.25g, 8개, 132.25g × 8개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijXGi5F1u8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 6,560원",
+      "sale_price_krw": 6560
+    },
+    {
+      "id": 94771,
+      "source_post_url": "https://t.me/jirum/94771",
+      "original_purchase_url": "https://link.coupang.com/a/ijYndMWU32",
+      "source_text": "🔥🔥🔥무지성 4,700원 (46.0% 할인)🔥🔥🔥\n히말라야 콜드 마사지밤\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,704원\n- 할인: 4,004원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijYndMWU32\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "히말라야 콜드 마사지밤",
+      "sale_price_krw": 4700
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
