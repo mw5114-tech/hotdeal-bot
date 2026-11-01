@@ -3,14 +3,6 @@
   "last_scanned_id": 94769,
   "pending": [
     {
-      "id": 94764,
-      "source_post_url": "https://t.me/jirum/94764",
-      "original_purchase_url": "https://link.coupang.com/a/ijPTXV67wa",
-      "source_text": "☆특가 19,360원\n대상 종가 총각김치, 2.3kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijPTXV67wa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 19,360원",
-      "sale_price_krw": 19360
-    },
-    {
       "id": 94765,
       "source_post_url": "https://t.me/jirum/94765",
       "original_purchase_url": "https://link.coupang.com/a/ijQp8Gs1ZI",
@@ -51,12 +43,7 @@
       "sale_price_krw": 12750
     }
   ],
-  "in_flight": {
-    "id": 94764,
-    "status": "CLAIMED",
-    "run_id": "41289051562",
-    "at": "2026-11-01T08:29:33.363012+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -176,6 +163,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%AA%A8%EB%AA%A8%EC%95%BC-%EB%A7%A4%EC%9A%B8-%EA%B2%83-%EA%B0%99%EC%9D%80%EB%8D%B0-%EB%A7%B5%EC%A7%80-%EC%95%8A%EC%9D%80-%EC%95%BD%EA%B0%84-%EB%A7%A4%EC%9A%B4-%EB%9D%BC%EC%9C%A0-110g-2%EA%B0%9C-P129axBd?from=write",
       "at": "2026-11-01T06:54:51.474561+00:00",
       "run_id": "41282508505"
+    },
+    "94764": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%8C%80%EC%83%81-%EC%A2%85%EA%B0%80-%EC%B4%9D%EA%B0%81%EA%B9%80%EC%B9%98-23kg-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dXEVqz5j?from=write",
+      "at": "2026-11-01T08:29:50.250668+00:00",
+      "run_id": "41289051562"
     }
   },
   "skipped_non_coupang": 2
