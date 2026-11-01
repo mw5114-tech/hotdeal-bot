@@ -392,6 +392,7 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             "http_status": outcome.get("http_status"),
             "page_path": outcome.get("page_path"),
             "editor_checks": outcome.get("editor_checks"),
+            "title_checks": outcome.get("title_checks"),
             "submit_checks": outcome.get("submit_checks"),
             "photo_upload_completed": outcome.get("photo_upload_completed"),
         }, ensure_ascii=False))
