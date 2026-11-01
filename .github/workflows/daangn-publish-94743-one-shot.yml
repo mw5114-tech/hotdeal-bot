@@ -1,10 +1,5 @@
 name: One-time Daangn post of Jirum 94743 (new caption format)
-on:
-  push:
-    branches:
-      - test/daangn-publish-next-94743-20261101
-    paths:
-      - .github/workflows/daangn-publish-94743-one-shot.yml
+on: workflow_dispatch
 permissions:
   contents: read
 concurrency:
@@ -19,7 +14,7 @@ jobs:
       KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
       COUPANG_PARTNER_LPTAG: AF9668915
-      ALLOW_ONE_TEST_POST: 'true'
+      ALLOW_ONE_TEST_POST: 'false'
     steps:
       - uses: actions/checkout@v4
         with:
