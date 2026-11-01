@@ -4,7 +4,9 @@ No network calls and no click happens in these tests.
 """
 import unittest
 
-from gh_only.jirum_manual_publisher import choose_editor_submit_index, fit_title_to_limit
+from gh_only.jirum_manual_publisher import (
+    choose_editor_submit_index, fit_title_to_limit, leading_image_ui_prefix,
+)
 
 
 class SubmitAnchorTests(unittest.TestCase):
@@ -54,6 +56,31 @@ class DaangnTitleLengthTests(unittest.TestCase):
     def test_implausible_title_length_rejected(self):
         with self.assertRaises(ValueError):
             fit_title_to_limit("긴 제목", 4)
+
+
+class EditorPhotoPrefixTests(unittest.TestCase):
+    def test_short_image_ui_prefix_before_exact_body(self):
+        body = "상품명 테스트\n🛒 상품 링크 : https://link.coupang.com/re/AFFSDP?key=1\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+        observed = "이미지 업로드 상태표시와 관리메뉴\n" + body
+        self.assertEqual(
+            leading_image_ui_prefix(observed, body),
+            "이미지업로드상태표시와관리메뉴",
+        )
+
+    def test_changed_body_is_rejected(self):
+        body = "상품 링크 https://link.coupang.com/re/AFFSDP?key=1"
+        self.assertIsNone(leading_image_ui_prefix("사진 " + body.replace("key=1", "key=2"), body))
+
+    def test_extra_text_after_footer_is_rejected(self):
+        body = "상품 링크 https://link.coupang.com/re/AFFSDP?key=1"
+        self.assertIsNone(leading_image_ui_prefix("이미지 " + body + " 추가 문구", body))
+
+    def test_excessive_prefix_is_rejected(self):
+        body = "본문 그대로"
+        self.assertIsNone(leading_image_ui_prefix("허용안됨" * 40 + body, body))
+
+    def test_normalized_whitespace_is_accepted(self):
+        self.assertEqual(leading_image_ui_prefix("A  B\n C", "A B C"), "")
 
 
 if __name__ == "__main__":
