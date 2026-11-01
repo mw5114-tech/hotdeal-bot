@@ -3,14 +3,6 @@
   "last_scanned_id": 94763,
   "pending": [
     {
-      "id": 94759,
-      "source_post_url": "https://t.me/jirum/94759",
-      "original_purchase_url": "https://link.coupang.com/a/ijLsjOEvUy",
-      "source_text": "👍대박 7,650원 (36.0% 할인)\n[로켓프레시] 바리스타룰스 에스프레소 라떼\n📌 가격 현황\n- 정상가: 11,953원\n- 할인: 4,303원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijLsjOEvUy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "[로켓프레시] 바리스타룰스 에스프레소 라떼",
-      "sale_price_krw": 7650
-    },
-    {
       "id": 94760,
       "source_post_url": "https://t.me/jirum/94760",
       "original_purchase_url": "https://link.coupang.com/a/ijLBo8qu1A",
@@ -35,12 +27,7 @@
       "sale_price_krw": 8440
     }
   ],
-  "in_flight": {
-    "id": 94759,
-    "status": "CLAIMED",
-    "run_id": "41282508505",
-    "at": "2026-11-01T06:53:28.212327+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -135,6 +122,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8-%EC%95%A4-%EC%A1%B0%EC%9D%B4-%EB%8B%B9%EC%9D%84%EC%A4%84%EC%9D%B8-%EB%85%BC%EC%82%B0%EB%94%B8%EA%B8%B0%EC%A8%88-290g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-AO62k4Oj?from=write",
       "at": "2026-11-01T06:53:20.343906+00:00",
+      "run_id": "41282508505"
+    },
+    "94759": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B0%94%EB%A6%AC%EC%8A%A4%ED%83%80%EB%A3%B0%EC%8A%A4-%EC%97%90%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C-%EB%9D%BC%EB%96%BC-250ml-6%EA%B0%9C-jvxZnrqP?from=write",
+      "at": "2026-11-01T06:53:43.598621+00:00",
       "run_id": "41282508505"
     }
   },
