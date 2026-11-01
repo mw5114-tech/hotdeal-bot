@@ -1,7 +1,64 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94755,
-  "pending": [],
+  "last_scanned_id": 94763,
+  "pending": [
+    {
+      "id": 94756,
+      "source_post_url": "https://t.me/jirum/94756",
+      "original_purchase_url": "https://link.coupang.com/a/ijKvbNtjyu",
+      "source_text": "☆특가 5,590원\n아쿠아시스 먹는샘물 무라벨, 2L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijKvbNtjyu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 5,590원",
+      "sale_price_krw": 5590
+    },
+    {
+      "id": 94757,
+      "source_post_url": "https://t.me/jirum/94757",
+      "original_purchase_url": "https://link.coupang.com/a/ijKSB5QCJ2",
+      "source_text": "❤️초대박 2,980원 (44.0% 할인)\n청정원 토마토 스파게티소스 싱글파우치\n📌 가격 현황\n- 정상가: 5,321원\n- 할인: 2,341원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijKSB5QCJ2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "청정원 토마토 스파게티소스 싱글파우치",
+      "sale_price_krw": 2980
+    },
+    {
+      "id": 94758,
+      "source_post_url": "https://t.me/jirum/94758",
+      "original_purchase_url": "https://link.coupang.com/a/ijLp9PuC96",
+      "source_text": "🔥🔥🔥무지성 4,200원 (46.8% 할인)🔥🔥🔥\n오뚜기 라이트 앤 조이 당을줄인 논산딸기쨈, 290g, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,900원\n- 할인: 3,700원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijLp9PuC96\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "오뚜기 라이트 앤 조이 당을줄인 논산딸기쨈, 290g, 2개",
+      "sale_price_krw": 4200
+    },
+    {
+      "id": 94759,
+      "source_post_url": "https://t.me/jirum/94759",
+      "original_purchase_url": "https://link.coupang.com/a/ijLsjOEvUy",
+      "source_text": "👍대박 7,650원 (36.0% 할인)\n[로켓프레시] 바리스타룰스 에스프레소 라떼\n📌 가격 현황\n- 정상가: 11,953원\n- 할인: 4,303원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijLsjOEvUy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "[로켓프레시] 바리스타룰스 에스프레소 라떼",
+      "sale_price_krw": 7650
+    },
+    {
+      "id": 94760,
+      "source_post_url": "https://t.me/jirum/94760",
+      "original_purchase_url": "https://link.coupang.com/a/ijLBo8qu1A",
+      "source_text": "☆특가 10,170원\n사무실 인기과자 11p 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijLBo8qu1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 10,170원",
+      "sale_price_krw": 10170
+    },
+    {
+      "id": 94762,
+      "source_post_url": "https://t.me/jirum/94762",
+      "original_purchase_url": "https://link.coupang.com/a/ijOg14in4C",
+      "source_text": "☆특가 557,670원 (24.0% 할인)\n샤크 에보파워시스템 부스트+  무선 스틱 청소기\n📌 가격 현황\n- 정상가: 733,776원\n- 할인: 176,106원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijOg14in4C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "샤크 에보파워시스템 부스트+ 무선 스틱 청소기",
+      "sale_price_krw": 557670
+    },
+    {
+      "id": 94763,
+      "source_post_url": "https://t.me/jirum/94763",
+      "original_purchase_url": "https://link.coupang.com/a/ijOKOATsgm",
+      "source_text": "☆특가 8,440원\n가격\n📦 특가 바로가기\nhttps://link.coupang.com/a/ijOKOATsgm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 8,440원",
+      "sale_price_krw": 8440
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -82,5 +139,5 @@
       "run_id": "41278037412"
     }
   },
-  "skipped_non_coupang": 1
+  "skipped_non_coupang": 2
 }
