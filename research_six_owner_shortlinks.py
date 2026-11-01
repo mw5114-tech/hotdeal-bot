@@ -82,13 +82,14 @@ def head_metadata(url: str) -> dict:
 
 
 def same_product_candidate(identity: dict) -> str | None:
-    if not identity or any(k not in identity for k in ("productId", "itemId", "vendorItemId")):
+    # Official issued redirects in the six examples include productId and
+    # itemId but no vendorItemId; don't invent missing vendor identifiers.
+    if not identity or any(k not in identity for k in ("productId", "itemId")):
         return None
     return "https://link.coupang.com/re/AFFSDP?" + urlencode({
         "lptag": OWNER_TAG,
         "pageKey": identity["productId"],
         "itemId": identity["itemId"],
-        "vendorItemId": identity["vendorItemId"],
     })
 
 
@@ -112,7 +113,12 @@ def main():
             for k in KNOWN_TRACK
             if original_fields.get(k, {}).get("nonempty") != test_fields.get(k, {}).get("nonempty")
         ]
-        candidate["exact_product_match"] = candidate.get("identity") == paired.get("identity")
+        candidate["observed_product_item_match"] = (
+            isinstance(candidate.get("identity"), dict)
+            and candidate["identity"].get("productId") == paired["identity"].get("productId")
+            and candidate["identity"].get("itemId") == paired["identity"].get("itemId")
+        )
+        candidate["same_seller_confirmed"] = False
 
     summary = {
         "count_official_supplied": len(CODES),
@@ -136,6 +142,7 @@ def main():
         "automatic_affiliate_publication_enabled": False,
         "http_methods": "HEAD only",
         "maximum_network_requests": MAX_REQUESTS,
+        "same_seller_option_guaranteed": False,
     }
     print(json.dumps(summary, ensure_ascii=False, indent=2))
 
