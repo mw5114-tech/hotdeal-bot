@@ -36,11 +36,12 @@
 - 모든 제목의 줄바꿈은 한 줄로 정리하고, 링크 미리보기는 꺼둡니다.
 - 현재 구현된 기능은 **Telegram 알림 발송까지**이며, Telegram 메시지를 읽어 카페에 자동 게시하는 별도의 AI 연동은 아직 구현하지 않았습니다.
 
-## 자동 실행
+## DealSpot + Naver Cafe 감시 (자동 실행 중단)
 
-- 단일 워크플로: `.github/workflows/hotdeal.yml` (**DealSpot + Naver Cafe new-item alerts**)
-- GitHub Actions 예약: `17,47 * * * *` (UTC 기준, 30분 간격). 실제 시작은 GitHub 사정으로 지연될 수 있습니다.
-- Repository Variable: `BOT_ENABLED=true`일 때 예약 실행 활성화.
+- 단일 워크플로: `.github/workflows/hotdeal.yml` (**DealSpot + Naver Cafe new-item alerts**).
+- **2026-11-01부터 GitHub Actions의 30분 예약 실행을 제거했습니다.** 이 두 사이트를 정기적으로 확인하거나 알림을 보내지 않습니다.
+- 수동 점검용 `workflow_dispatch`만 남겨두었으며, 기존 저장된 감시 기록은 그대로 유지합니다.
+- 뽐질(@jirum) 및 다른 별도 워크플로의 동작은 이번 변경에서 건드리지 않았습니다.
 - Repository Secrets: `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`. 네이버 카페 감시에는 `NAVER_COOKIE`가 필요 없습니다.
 - 한 번 실행할 때 두 스캐너를 별도의 단계로 실행합니다. 한쪽이 실패해도 나머지 스캔은 진행하며, 이미 보낸 메시지의 기록을 GitHub에 커밋합니다. 실패 사실은 작업 결과에 표시합니다.
 - 읽기 전용 `preview=true` 실행은 `hotdeal-preview` 그룹으로 분리되어 정기 실행의 `hotdeal-state` 대기열을 막지 않습니다. 실제 전송 실행은 기존 기록 충돌 방지를 위해 `hotdeal-state`에서 순차 진행합니다.

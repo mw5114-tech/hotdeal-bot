@@ -1,8 +1,8 @@
 name: DealSpot + Naver Cafe new-item alerts
 
 on:
-  schedule:
-    - cron: '17,47 * * * *'
+  # DealSpot and Naver Cafe's automatic 30-minute scans are disabled.
+  # Keep an optional manual workflow run for diagnostics only.
   workflow_dispatch:
     inputs:
       preview:
