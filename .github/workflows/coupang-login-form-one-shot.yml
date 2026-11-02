@@ -1,0 +1,70 @@
+name: Diagnostics | Coupang Partners login form (one-shot)
+
+on:
+  # One-time development-run trigger; does not affect production posting.
+  push:
+    branches:
+      - test/coupang-partners-login-form-20261103
+    paths:
+      - '.github/workflows/coupang-login-form-one-shot.yml'
+      - 'gh_only/coupang_login_form_probe.py'
+      - 'gh_only/test_coupang_login_form_probe.py'
+  # After merging, can be started manually. No schedule or secrets.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coupang-login-form-one-shot
+  cancel-in-progress: false
+
+jobs:
+  public-login-form:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify one-shot classifier offline
+        run: python -m unittest -v gh_only.test_coupang_login_form_probe
+      - name: Install clean Chromium
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install chromium
+          python -m playwright install-deps chromium
+      - name: Open homepage and click visible login control once (no sign-in)
+        run: python -m gh_only.coupang_login_form_probe --out-dir coupang-login-form-diagnostic
+      - name: Show classified result (not a session-validity check)
+        if: always()
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          file = Path("coupang-login-form-diagnostic/result.json")
+          if not file.is_file():
+              print("DIAGNOSTIC_REPORT_MISSING")
+              raise SystemExit(0)
+          data = json.loads(file.read_text(encoding="utf-8"))
+          print("LOGIN_PAGE_CLASSIFICATION=" + data["classification"])
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("# Coupang login-form access (one GitHub-hosted Chromium run)\n\n")
+              f.write(f"- Result: **{data['classification']}**\n")
+              f.write(f"- Main HTTP status: {data['homepage_status']}\n")
+              f.write(f"- Final document status: {data['last_navigation_status']}\n")
+              f.write(f"- Login control clicked: {data['login_clicked']}\n")
+              f.write(f"- Blank password field visible: {data['password_field_visible']}\n")
+              f.write("- Does **not** sign in, bypass challenges, establish persistence or rotate environments.\n")
+          PY
+      - name: Upload empty-form screenshot and sanitized JSON
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coupang-login-form-one-shot
+          path: coupang-login-form-diagnostic/
+          if-no-files-found: warn
+          retention-days: 3
