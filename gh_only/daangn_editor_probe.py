@@ -96,13 +96,29 @@ def read_one_draft(folder: Path) -> dict:
             or not body.rstrip().endswith(url)):
         raise ValueError("DRAFT_AFFSDP_LINK_MISSING_OR_AMBIGUOUS")
     parsed = urlsplit(url)
-    if parsed.scheme != "https" or parsed.hostname != "link.coupang.com" or parsed.path != "/re/AFFSDP":
-        raise ValueError("DRAFT_AFFSDP_HOST_INVALID")
     aff = row.get("affsdp")
-    if not isinstance(aff, dict) or aff.get("status") != "UNISSUED_AFFSDP_CANDIDATE":
-        raise ValueError("DRAFT_LINK_NOT_CANDIDATE")
-    if aff.get("commission_attribution_verified") is not False or aff.get("official_link_issued") is not False:
-        raise ValueError("DRAFT_UNVERIFIED_STATUS_REQUIRED")
+    receipt = row.get("official_link_receipt")
+    if receipt is not None:
+        from gh_only.official_link_receipts import official_url
+        if (not isinstance(receipt, dict)
+                or not official_url(url)
+                or receipt.get("partners_link") != url):
+            raise ValueError("DRAFT_OFFICIAL_LINK_INVALID")
+        if (not isinstance(aff, dict)
+                or aff.get("status") != "OFFICIAL_PARTNERS_LINK_RECEIPT"
+                or aff.get("official_link_issued") is not True
+                or aff.get("commission_attribution_verified") is not False):
+            raise ValueError("DRAFT_OFFICIAL_RECEIPT_METADATA_INVALID")
+    else:
+        # Legacy formatter remains available for offline regression tests,
+        # but production always requires a validated official receipt.
+        if (parsed.scheme != "https" or parsed.hostname != "link.coupang.com"
+                or parsed.path != "/re/AFFSDP"):
+            raise ValueError("DRAFT_AFFSDP_HOST_INVALID")
+        if not isinstance(aff, dict) or aff.get("status") != "UNISSUED_AFFSDP_CANDIDATE":
+            raise ValueError("DRAFT_LINK_NOT_CANDIDATE")
+        if aff.get("commission_attribution_verified") is not False or aff.get("official_link_issued") is not False:
+            raise ValueError("DRAFT_UNVERIFIED_STATUS_REQUIRED")
     original = row.get("source_post_url")  # Telegram post, NOT the source affiliate link
     if not isinstance(original, str) or not original.startswith("https://t.me/jirum/"):
         raise ValueError("DRAFT_SOURCE_UNEXPECTED")
@@ -167,7 +183,8 @@ def read_one_draft(folder: Path) -> dict:
         "body": clean_body,
         "image": image,
         "source_id": row.get("source_message_id"),
-        "unissued_affsdp_candidate": True,
+        "unissued_affsdp_candidate": receipt is None,
+        "official_link_receipt": receipt,
         "candidate_url": url,
     }
 

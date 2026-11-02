@@ -18,6 +18,8 @@ on:
       - main
     paths:
       - 'manual/trigger-daangn-jirum.txt'
+      # Muse writes one official link receipt; trigger this existing FIFO.
+      - 'links/*.json'
 
 permissions:
   contents: write
@@ -50,6 +52,8 @@ jobs:
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
       JIRUM_REQUIRE_FRESH_POST: 'true'
+      # Fail closed while Muse's official link receipt is absent.
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'true'
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
     steps:
       - name: Checkout only required source files

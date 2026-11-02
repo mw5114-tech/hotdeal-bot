@@ -21,6 +21,7 @@ from urllib.parse import urlsplit
 
 from gh_only.pipeline import enrich_posts, fetch_public_html
 from gh_only.daangn_editor_probe import read_one_draft
+from gh_only.official_link_receipts import load_receipt
 
 STATE_PATH = "state/daangn_jirum_manual_fifo.json"
 SCHEMA = "daangn-jirum-manual-fifo-v1"
@@ -43,6 +44,10 @@ def now_utc() -> str:
 
 def enforcing_freshness() -> bool:
     return os.getenv("JIRUM_REQUIRE_FRESH_POST") == "true"
+
+
+def official_link_mode() -> bool:
+    return os.getenv("JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK") == "true"
 
 
 def lowchart_mode() -> bool:
@@ -68,7 +73,7 @@ def freshness_status(row: dict, *, reference: datetime | None = None) -> str:
     elapsed = (at - posted).total_seconds()
     if elapsed < -MAX_FUTURE_SKEW_SECONDS:
         return "POSTED_AT_IN_FUTURE"
-    if elapsed > MAX_DEAL_AGE_SECONDS:
+    if elapsed >= MAX_DEAL_AGE_SECONDS:
         return "DEAL_OVER_60_MINUTES_OLD"
     return "FRESH"
 
@@ -487,10 +492,18 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
         print("JIRUM_KAKAO_AUTH_REFRESHED_TRY_AGAIN")
     nxt = new["pending"][0]["id"] if new["pending"] else None
     paused = bool(block and kakao_block_for_current_secret(new) and nxt is not None)
+    official_ready = True
+    if official_link_mode() and nxt is not None:
+        try:
+            official_ready = load_receipt(new["pending"][0]) is not None
+        except ValueError as exc:
+            print("JIRUM_OFFICIAL_LINK_RECEIPT_REJECTED " + str(exc))
+            official_ready = False
     result = {
         "status": ("KAKAO_REAUTH_REQUIRED" if paused
                    else "READY_ONE" if nxt is not None else "NO_NEW_COUPANG_DEAL"),
-        "has_deal": nxt is not None and not paused,
+        "has_deal": nxt is not None and not paused and official_ready,
+        "official_link_ready": official_ready if nxt is not None else False,
         "source_id": nxt,
         "pending": len(new["pending"]),
         "new_coupang": added, "ignored_other_sites": skipped,
@@ -539,9 +552,20 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     link = urlsplit(article["candidate_url"])
     qs = parse_qs(link.query)
     ids = row["product_identity"]
-    if (qs.get("lptag") != [os.getenv("COUPANG_PARTNER_LPTAG")]
-        or qs.get("pageKey") != [ids.get("product_id")]
-        or qs.get("itemId") != [ids.get("item_id")]):
+    receipt = row.get("official_link_receipt")
+    if receipt is not None:
+        if (str(receipt.get("telegram_message_id")) != str(expected_id)
+                or receipt.get("partners_link") != article["candidate_url"]
+                or receipt.get("product_id") != ids.get("product_id")
+                or receipt.get("item_id") != ids.get("item_id")
+                or (receipt.get("vendor_item_id") is not None
+                    and receipt.get("vendor_item_id") != ids.get("vendor_item_id"))):
+            raise RuntimeError("OFFICIAL_LINK_RECEIPT_PRODUCT_MISMATCH")
+    elif official_link_mode():
+        raise RuntimeError("OFFICIAL_LINK_RECEIPT_REQUIRED")
+    elif (qs.get("lptag") != [os.getenv("COUPANG_PARTNER_LPTAG")]
+            or qs.get("pageKey") != [ids.get("product_id")]
+            or qs.get("itemId") != [ids.get("item_id")]):
         raise RuntimeError("OWNER_LINK_ITEM_OR_TAG_MISMATCH")
     return {**article, "product_id": ids["product_id"], "item_id": ids["item_id"]}
 
@@ -552,6 +576,11 @@ def build_next(s: dict) -> dict:
     if s["in_flight"] is not None or not s["pending"]:
         raise RuntimeError("PENDING_ITEM_NOT_AVAILABLE")
     row = s["pending"][0]
+    receipt = None
+    if official_link_mode():
+        receipt = load_receipt(row)
+        if receipt is None:
+            raise RuntimeError("OFFICIAL_LINK_RECEIPT_REQUIRED")
     DRAFT_DIR.mkdir(exist_ok=True)
     candidate = enrich_deal({
         "source_message_id": row["id"],
@@ -565,11 +594,32 @@ def build_next(s: dict) -> dict:
     }, DRAFT_DIR,
         session_secret=os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", ""),
         owner_tag=os.getenv("COUPANG_PARTNER_LPTAG", ""))
+    if receipt is not None:
+        identity = candidate.get("product_identity", {})
+        if (identity.get("status") != "EXACT_ITEM_IDENTIFIED"
+                or identity.get("product_id") != receipt["product_id"]
+                or identity.get("item_id") != receipt["item_id"]
+                or (receipt.get("vendor_item_id") is not None
+                    and identity.get("vendor_item_id") != receipt["vendor_item_id"])):
+            raise RuntimeError("OFFICIAL_LINK_RECEIPT_PRODUCT_MISMATCH")
+        prior = candidate.get("composed_affiliate_url")
+        caption = candidate.get("caption", {}).get("caption", "")
+        if not isinstance(prior, str) or caption.count(prior) != 1:
+            raise RuntimeError("OFFICIAL_LINK_REPLACEMENT_FAILED")
+        candidate["caption"]["caption"] = caption.replace(prior, receipt["partners_link"], 1)
+        candidate["composed_affiliate_url"] = receipt["partners_link"]
+        candidate["official_link_receipt"] = receipt
+        candidate["affsdp"] = {
+            "status": "OFFICIAL_PARTNERS_LINK_RECEIPT",
+            "official_link_issued": True,
+            "commission_attribution_verified": False,
+        }
     (DRAFT_DIR / "drafts.json").write_text(json.dumps({
         "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
         "drafts": [candidate],
     }, ensure_ascii=False, indent=2) + "\n", "utf-8")
-    return validate_draft(DRAFT_DIR, row["id"])
+    article = validate_draft(DRAFT_DIR, row["id"])
+    return {**article, "posted_at_utc": row.get("posted_at_utc")}
 
 
 def claim(store: GithubState, source_id: int, run_id: str) -> None:
@@ -690,6 +740,12 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 kakao_operator_notice(reason, len(state["pending"]))
                 return 2
             raise
+        if enforcing_freshness() and freshness_status(state["pending"][0]) != "FRESH":
+            latest, sha = store.read()
+            pruned, skipped = expire_pending(latest)
+            if skipped:
+                store.write(pruned, sha, "state: skip deal expired during draft preparation")
+            continue
         source_id = article["source_id"]
         claim(store, source_id, run_id)  # Durable pre-click checkpoint.
         outcome = {"status": "PUBLISH_NOT_STARTED", "submit_attempted": False}
