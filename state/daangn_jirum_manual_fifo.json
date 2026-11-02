@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94889,
-  "pending": [],
+  "last_scanned_id": 94890,
+  "pending": [
+    {
+      "id": 94890,
+      "source_post_url": "https://t.me/jirum/94890",
+      "original_purchase_url": "https://link.coupang.com/a/imxC9e4Ce4",
+      "source_text": "🔥🔥🔥무지성 10,960원 (56.2% 할인)🔥🔥🔥\n파스퇴르 유기농 주스 배도라지, 125ml, 48개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 14,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxC9e4Ce4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:12:03+00:00",
+      "title": "파스퇴르 유기농 주스 배도라지, 125ml, 48개",
+      "sale_price_krw": 10960
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
