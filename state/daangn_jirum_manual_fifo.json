@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94895,
-  "pending": [
-    {
-      "id": 94895,
-      "source_post_url": "https://t.me/jirum/94895",
-      "original_purchase_url": "https://link.coupang.com/a/imzdbAVMrc",
-      "source_text": "❤️초대박 6,130원 (44.0% 할인)\n빼빼로 샘플러 6종 258g\n📌 가격 현황\n- 정상가: 10,946원\n- 할인: 4,816원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imzdbAVMrc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:34:11+00:00",
-      "title": "빼빼로 샘플러 6종 258g",
-      "sale_price_krw": 6130
-    }
-  ],
-  "in_flight": {
-    "id": 94895,
-    "status": "CLAIMED",
-    "run_id": "41538523013",
-    "at": "2026-11-02T22:35:35.307543+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -621,6 +606,16 @@
       "vendor_item_id": "90798554585",
       "at": "2026-11-02T22:26:51.433141+00:00",
       "run_id": "41537209375"
+    },
+    "94895": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%BC%EB%B9%BC%EB%A1%9C-%EC%83%98%ED%94%8C%EB%9F%AC-6%EC%A2%85-258g-1%EC%84%B8%ED%8A%B8-45%ED%95%A0%EC%9D%B8-AqrgWXRP?from=write",
+      "posted_at_utc": "2026-11-02T22:34:11+00:00",
+      "product_id": "9740255449",
+      "item_id": "29152900945",
+      "vendor_item_id": null,
+      "at": "2026-11-02T22:35:51.079873+00:00",
+      "run_id": "41538523013"
     }
   },
   "skipped_non_coupang": 8,
