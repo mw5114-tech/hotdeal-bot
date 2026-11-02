@@ -554,7 +554,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     ids = row["product_identity"]
     receipt = row.get("official_link_receipt")
     if receipt is not None:
-        if (receipt.get("telegram_message_id") != expected_id
+        if (str(receipt.get("telegram_message_id")) != str(expected_id)
                 or receipt.get("partners_link") != article["candidate_url"]
                 or receipt.get("product_id") != ids.get("product_id")
                 or receipt.get("item_id") != ids.get("item_id")
