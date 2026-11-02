@@ -18,7 +18,7 @@ on:
       - main
     paths:
       - 'manual/trigger-daangn-jirum.txt'
-      # Muse post-edit flow does not require a GitHub receipt write.
+      # Legacy AFFSDP-style auto-post does not depend on Muse or receipt pushes.
 
 permissions:
   contents: write
@@ -51,10 +51,10 @@ jobs:
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
       JIRUM_REQUIRE_FRESH_POST: 'true'
-      # Publish a clean product URL first, then Muse edits the post to a
-      # genuine official Coupang Partners /a/ URL in Daangn.
+      # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
+      # This is a locally composed candidate, not an officially issued shortlink.
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
-      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'true'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
     steps:
       - name: Checkout only required source files
