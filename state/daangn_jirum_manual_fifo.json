@@ -637,5 +637,11 @@
       "run_id": "41321898372"
     }
   },
-  "skipped_non_coupang": 3
+  "skipped_non_coupang": 3,
+  "kakao_auth_block": {
+    "reason": "KAKAO_LOGIN_EXPIRED",
+    "source_id": 94789,
+    "detected_at": "2026-11-02T03:35:54.543559+00:00",
+    "secret_fingerprint": "1c3dcebfc4e041578ae138308c6e37dd0c6aab6e1e05466e1048205095b3c8d0"
+  }
 }
