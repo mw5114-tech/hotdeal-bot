@@ -51,6 +51,19 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertEqual(parse_item_photo(BASE_HTML.replace(IID, "99999999999"), ITEM, NAME)
                          ["status"], "LOWCHART_ITEM_IDS_MISSING")
 
+    def test_lowchart_can_add_model_or_color_to_generic_exact_item_title(self):
+        html = BASE_HTML.replace(
+            NAME, NAME + ", HD9137/90"
+        )
+        result = parse_item_photo(html, ITEM, NAME)
+        self.assertEqual(result["status"], "LOWCHART_EXACT_ITEM_IMAGE")
+
+    def test_reject_conflicting_required_package_count_even_with_same_base(self):
+        html = BASE_HTML.replace(NAME, NAME + ", 12p")
+        source = NAME.replace(", 1개", ", 2개")
+        self.assertEqual(parse_item_photo(html, ITEM, source)["status"],
+                         "LOWCHART_TELEGRAM_TITLE_MISMATCH")
+
     def test_reject_wrong_color_or_option_in_telegram(self):
         actual = parse_item_photo(BASE_HTML, ITEM, NAME.replace("블랙 + 실버", "화이트"))
         self.assertEqual(actual["status"], "LOWCHART_TELEGRAM_TITLE_MISMATCH")
