@@ -103,8 +103,13 @@ def create_default_preview(sale: int | None, title: str | None,
     approx = nearest_five_discount(sale, average)
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
-    product = title.strip()[:150] if isinstance(title, str) and title.strip() else "상품명 확인 중"
-    lines = [f"📦 상품명 : {product}" + (f" [{approx}%할인]" if approx is not None else "")]
+    # Use the SAME name portion in the 150-character Daangn headline and body.
+    suffix = f" [{approx}%할인]" if approx is not None else ""
+    max_product_chars = 150 - len("[쿠팡🔥핫딜] ") - len(suffix)
+    product = (re.sub(r"\s+", " ", title).strip()[:max_product_chars].rstrip()
+               if isinstance(title, str) and title.strip()
+               else "상품명 확인 중")
+    lines = [f"📦 상품명 : {product}" + suffix]
     if average is not None:
         lines.append(f"💸 쿠팡 평소 판매가 : 약 {average:,}원")
     else:
@@ -120,6 +125,7 @@ def create_default_preview(sale: int | None, title: str | None,
     lines.append(price_text)
     return {
         "source_message_id": source_id,
+        "product_name": product,
         "sale_price_krw": sale,
         "sale_price_source": "telegram_jirum_message",
         "observed_average_krw": average,
