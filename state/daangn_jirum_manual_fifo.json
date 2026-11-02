@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94883,
-  "pending": [],
+  "last_scanned_id": 94884,
+  "pending": [
+    {
+      "id": 94884,
+      "source_post_url": "https://t.me/jirum/94884",
+      "original_purchase_url": "https://link.coupang.com/a/imunGBAEwu",
+      "source_text": "☆특가 12,720원 (27.3% 할인)\n헬리오스 내츄럴 무화과잼, 330g, 3개\n📌 가격 현황\n- 정상가: 17,490원\n- 할인: 4,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imunGBAEwu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T21:26:35+00:00",
+      "title": "헬리오스 내츄럴 무화과잼, 330g, 3개",
+      "sale_price_krw": 12720
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
