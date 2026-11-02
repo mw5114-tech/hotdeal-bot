@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94872,
+  "last_scanned_id": 94873,
   "pending": [
     {
       "id": 94869,
@@ -37,6 +37,15 @@
       "posted_at_utc": "2026-11-02T12:13:16+00:00",
       "title": "풀무원아미오 강아지 자연담은 간식 과자",
       "sale_price_krw": 4200
+    },
+    {
+      "id": 94873,
+      "source_post_url": "https://t.me/jirum/94873",
+      "original_purchase_url": "https://link.coupang.com/a/ilR0FFSUzk",
+      "source_text": "☆특가 13,390원\n팔도 뽀로로 보리차 220ml 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilR0FFSUzk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T12:29:38+00:00",
+      "title": "☆특가 13,390원",
+      "sale_price_krw": 13390
     }
   ],
   "in_flight": null,
