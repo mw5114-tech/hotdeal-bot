@@ -3,15 +3,6 @@
   "last_scanned_id": 94873,
   "pending": [
     {
-      "id": 94872,
-      "source_post_url": "https://t.me/jirum/94872",
-      "original_purchase_url": "https://link.coupang.com/a/ilQP9tayhE",
-      "source_text": "🔥🔥🔥무지성 4,200원 (46.0% 할인)🔥🔥🔥\n풀무원아미오 강아지 자연담은 간식 과자\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,778원\n- 할인: 3,578원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilQP9tayhE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T12:13:16+00:00",
-      "title": "풀무원아미오 강아지 자연담은 간식 과자",
-      "sale_price_krw": 4200
-    },
-    {
       "id": 94873,
       "source_post_url": "https://t.me/jirum/94873",
       "original_purchase_url": "https://link.coupang.com/a/ilR0FFSUzk",
@@ -21,12 +12,7 @@
       "sale_price_krw": 13390
     }
   ],
-  "in_flight": {
-    "id": 94872,
-    "status": "CLAIMED",
-    "run_id": "41446344409",
-    "at": "2026-11-02T12:39:39.663979+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -475,6 +461,12 @@
       "status": "PUBLISHED_VERIFIED",
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%ED%80%9C%EC%B2%98-H20-%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%8A%B8-%ED%85%80%EB%B8%94%EB%9F%AC-%EB%A1%9C%EC%A6%88%ED%8E%98%ED%83%88%EC%89%AC%EB%A8%B8-55%ED%95%A0%EC%9D%B8-P5n2ZMKd?from=write",
       "at": "2026-11-02T12:39:35.972608+00:00",
+      "run_id": "41446344409"
+    },
+    "94872": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90%EC%95%84%EB%AF%B8%EC%98%A4-%EA%B0%95%EC%95%84%EC%A7%80-%EC%9E%90%EC%97%B0%EB%8B%B4%EC%9D%80-%EA%B0%84%EC%8B%9D-%EA%B3%BC%EC%9E%90-45%ED%95%A0%EC%9D%B8-P21JMzWA?from=write",
+      "at": "2026-11-02T12:39:55.942319+00:00",
       "run_id": "41446344409"
     }
   },
