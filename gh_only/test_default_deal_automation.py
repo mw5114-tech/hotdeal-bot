@@ -64,7 +64,7 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertEqual(enriched["affsdp"]["status"], "UNISSUED_AFFSDP_CANDIDATE")
         link = enriched["composed_affiliate_url"]
         self.assertEqual(enriched["caption"]["caption"].splitlines()[-1],
-                         "🛒 상품 링크 : " + link)
+                         "🛒 쿠팡에서 상품정보 더보기 : " + link)
         qs = parse_qs(urlsplit(link).query)
         self.assertEqual(qs["lptag"], ["AF9668915"])
         self.assertEqual(qs["pageKey"], [PID])
@@ -85,7 +85,7 @@ class AutomatedDefaultTests(unittest.TestCase):
             owner_tag="AF9668915",
         )
         self.assertIsNone(result["composed_affiliate_url"])
-        self.assertNotIn("🛒 상품 링크", result["caption"]["caption"])
+        self.assertNotIn("🛒 쿠팡에서 상품정보 더보기 :", result["caption"]["caption"])
         self.assertFalse(result["affsdp"]["official_link_issued"])
 
     def test_og_identity_vendor_item_matching(self):

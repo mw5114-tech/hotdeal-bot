@@ -118,7 +118,20 @@ def read_one_draft(folder: Path) -> dict:
         suffix = f" [{discount}%할인]"
         if not title.endswith(suffix):
             title = title[:150-len(suffix)].rstrip() + suffix
-    title = f"[오늘의 핫딜] {title}"[:150]
+    # Keep the requested "[쿠팡 핫딜] 제품명 [NN%할인]" format.
+    # If a long product title exceeds the document cap, preserve the final
+    # discount token rather than slicing it off.
+    prefix = "[쿠팡 핫딜] "
+    complete_title = prefix + title
+    if len(complete_title) > 150:
+        match = re.search(r" (\[\d+%할인\])$", title)
+        if match:
+            end = match.group(0)
+            name = title[:-len(end)]
+            complete_title = prefix + name[:150-len(prefix)-len(end)].rstrip() + end
+        else:
+            complete_title = complete_title[:150].rstrip()
+    title = complete_title
     photo = row.get("photo") if isinstance(row.get("photo"), dict) else {}
     filename = photo.get("saved_name")
     image = None

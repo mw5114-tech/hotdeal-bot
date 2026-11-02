@@ -38,19 +38,19 @@ class SubmitAnchorTests(unittest.TestCase):
 
 class DaangnTitleLengthTests(unittest.TestCase):
     def test_long_title_retains_discount_suffix_with_fifty_char_limit(self):
-        title = "[오늘의 핫딜] 바닐라코 클린 잇 제로 포어 클래리파잉 클렌징 밤, 180ml, 1개 [25%할인]"
+        title = "[쿠팡 핫딜] 바닐라코 클린 잇 제로 포어 클래리파잉 클렌징 밤, 180ml, 1개 [25%할인]"
         self.assertGreater(len(title), 50)
         fitted = fit_title_to_limit(title, 50)
         self.assertLessEqual(len(fitted), 50)
-        self.assertTrue(fitted.startswith("[오늘의 핫딜] 바닐라코"))
+        self.assertTrue(fitted.startswith("[쿠팡 핫딜] 바닐라코"))
         self.assertTrue(fitted.endswith("[25%할인]"))
 
     def test_short_title_stays_unchanged(self):
-        title = "[오늘의 핫딜] 샐러드 컵 [15%할인]"
+        title = "[쿠팡 핫딜] 샐러드 컵 [15%할인]"
         self.assertEqual(fit_title_to_limit(title, 50), title)
 
     def test_without_discount_truncates_safely(self):
-        title = "[오늘의 핫딜] " + "상품" * 35
+        title = "[쿠팡 핫딜] " + "상품" * 35
         self.assertLessEqual(len(fit_title_to_limit(title, 45)), 45)
 
     def test_implausible_title_length_rejected(self):
@@ -60,7 +60,7 @@ class DaangnTitleLengthTests(unittest.TestCase):
 
 class EditorPhotoPrefixTests(unittest.TestCase):
     def test_short_image_ui_prefix_before_exact_body(self):
-        body = "상품명 테스트\n🛒 상품 링크 : https://link.coupang.com/re/AFFSDP?key=1\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+        body = "상품명 테스트\n🛒 쿠팡에서 상품정보 더보기 : https://link.coupang.com/re/AFFSDP?key=1\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
         observed = "이미지 업로드 상태표시와 관리메뉴\n" + body
         self.assertEqual(
             leading_image_ui_prefix(observed, body),
