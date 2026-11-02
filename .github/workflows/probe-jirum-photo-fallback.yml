@@ -51,3 +51,72 @@ jobs:
               'state_changed':False,
           },ensure_ascii=False))
           PY
+      - name: Probe exact item Lowchart public page image metadata (NO CAFE POST)
+        run: |
+          python - <<'PY'
+          import collections
+          import json
+          import re
+          from html.parser import HTMLParser
+          from urllib import request
+          from urllib.parse import urlsplit, urljoin
+          from gh_only.shortlink_probe import one_hop
+          from gh_only.lowchart_price_reference import build_url
+          from pathlib import Path
+
+          source = json.loads(Path("state/daangn_jirum_manual_fifo.json").read_text("utf-8"))["pending"][0]
+          identity = one_hop(source["original_purchase_url"])
+          id_summary = {k:identity.get(k) for k in ["result","product_id","item_id"]}
+          if identity.get("result") != "DIRECT_PRODUCT_ID_CANDIDATE":
+              print("LOWCHART_PHOTO_PROBE "+json.dumps({"source_id":source["id"],"identity":id_summary,"lowchart_checked":False}))
+              raise SystemExit(0)
+          url = build_url(identity["product_id"],identity["item_id"])
+          class Extract(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.meta=[]
+                  self.imgs=[]
+                  self.title=False
+                  self.titletext=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=="meta" and "image" in (d.get("property","")+" "+d.get("name","")).lower():
+                      if d.get("content"): self.meta.append((d.get("property") or d.get("name"),d["content"]))
+                  if tag=="img": self.imgs.append({k:d.get(k) for k in ["src","alt","data-src"]})
+                  if tag=="title":self.title=True
+              def handle_endtag(self,tag):
+                  if tag=="title":self.title=False
+              def handle_data(self,data):
+                  if self.title:self.titletext.append(data)
+          try:
+              req=request.Request(url,headers={"Accept":"text/html","User-Agent":"Mozilla/5.0"})
+              with request.urlopen(req, timeout=20) as response:
+                  body=response.read(1_800_001).decode("utf8","replace")
+                  http=response.status
+              parser=Extract();parser.feed(body)
+              candidates=[]
+              for key,val in parser.meta:
+                  u=urlsplit(val)
+                  candidates.append({"source":"meta","key":key,"host":u.hostname,"url_has_product_id":identity["product_id"] in val,"url_has_item_id":identity["item_id"] in val})
+              for img in parser.imgs[:15]:
+                  src=img.get("src") or img.get("data-src") or ""
+                  full=urljoin(url,src)
+                  candidates.append({"source":"img","host":urlsplit(full).hostname,
+                                     "alt_prefix":(img.get("alt") or "")[:90],
+                                     "url_has_product_id":identity["product_id"] in full,
+                                     "url_has_item_id":identity["item_id"] in full})
+              print("LOWCHART_PHOTO_PROBE "+json.dumps({
+                  "source_id":source["id"],
+                  "identity":id_summary,
+                  "http":http,
+                  "page_title":"".join(parser.titletext)[:160],
+                  "page_has_ids":all(v in body for v in [identity["product_id"],identity["item_id"]]),
+                  "image_meta_count":len(parser.meta),
+                  "image_tags":len(parser.imgs),
+                  "candidates":candidates[:18],
+                  "published":0,"state_changed":False,
+              },ensure_ascii=False))
+          except Exception as exc:
+              print("LOWCHART_PHOTO_PROBE "+json.dumps({"source_id":source["id"],"error_type":type(exc).__name__,
+                                                      "identity":id_summary,"published":0}))
+          PY
