@@ -391,6 +391,40 @@ class ManualQueueTests(unittest.TestCase):
         self.assertEqual(store.value["pending"],[])
         publisher.assert_called_once()
 
+    def test_lowchart_photo_passes_real_pre_submit_draft_verifier(self):
+        from gh_only.daangn_editor_probe import read_one_draft
+        from gh_only.jirum_manual_queue import validate_draft
+        from gh_only.test_daangn_editor_probe import DaangnEditorOfflineTests
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            report = DaangnEditorOfflineTests()._make_draft(folder)
+            row = report["drafts"][0]
+            old = folder / row["photo"]["saved_name"]
+            row["photo"]["saved_name"] = "jirum_94717_lowchart_photo.jpg"
+            old.rename(folder / row["photo"]["saved_name"])
+            row.update({
+                "image_product_match":True,
+                "image_source":"lowchart_exact_item_public_page",
+                "image_exact_item_page_verified":True,
+                "kakao_product_match":False,
+                "product_identity":{
+                    "status":"EXACT_ITEM_IDENTIFIED",
+                    "product_id":"9217210892","item_id":"27232840915",
+                },
+            })
+            row["caption"]["sale_price_krw"] = 12050
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE":"lowchart",
+                "COUPANG_PARTNER_LPTAG":"AF9668915"
+            }):
+                out = validate_draft(folder, 94717)
+            self.assertEqual(out["source_id"],94717)
+            self.assertEqual(out["image"].name,"jirum_94717_lowchart_photo.jpg")
+            self.assertEqual(out["product_id"],"9217210892")
+
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
             deal(94747), deal(94745, "external"), deal(94746),
