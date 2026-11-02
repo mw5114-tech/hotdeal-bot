@@ -118,7 +118,7 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertEqual(r["caption"]["approx_discount_vs_historical_mean_pct"], 65)
         self.assertEqual(r["caption"]["observed_average_krw"], 34575)
         self.assertEqual(r["caption"]["caption"].split("\n\n"), [
-            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개 [65%할인]",
+            "[65%할인] 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개",
             "💸 쿠팡 평소 판매가 : 약 34,575원",
             "🔥 핫딜 특가 : 12,050원 (약 65% 할인 / 상세페이지 참고)",
         ])
@@ -136,7 +136,7 @@ class AutomatedDefaultTests(unittest.TestCase):
                              lambda link, state: bad, never, never, "fake")
         self.assertFalse(result["kakao_product_match"])
         self.assertEqual(result["caption"]["caption"].splitlines()[0],
-                         "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개")
+                         "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛, 230g, 20개")
         self.assertNotIn("% 혜택", result["caption"]["caption"])
         self.assertEqual(calls, [])
 
