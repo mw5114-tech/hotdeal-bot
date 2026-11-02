@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94901,
-  "pending": [],
+  "last_scanned_id": 94902,
+  "pending": [
+    {
+      "id": 94902,
+      "source_post_url": "https://t.me/jirum/94902",
+      "original_purchase_url": "https://link.coupang.com/a/imDG7QETAW",
+      "source_text": "☆특가 7,980원 (22.5% 할인)\n르샤트라1802 섬유유연제 쁘띠피치향 리필, 2.6L, 1개\n📌 가격 현황\n- 정상가: 10,300원\n- 할인: 2,320원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imDG7QETAW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T23:36:55+00:00",
+      "title": "르샤트라1802 섬유유연제 쁘띠피치향 리필, 2.6L, 1개",
+      "sale_price_krw": 7980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
