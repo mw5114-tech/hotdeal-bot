@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94867,
-  "pending": [
-    {
-      "id": 94867,
-      "source_post_url": "https://t.me/jirum/94867",
-      "original_purchase_url": "https://link.coupang.com/a/ilKbrr1Ll6",
-      "source_text": "☆특가 19,930원\n(와멤데 쿠폰)코카콜라 제로제로, 350ml, 24개* 2세트구매시, (총48개)\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilKbrr1Ll6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T10:40:07+00:00",
-      "title": "☆특가 19,930원",
-      "sale_price_krw": 19930
-    }
-  ],
-  "in_flight": {
-    "id": 94867,
-    "status": "CLAIMED",
-    "run_id": "41430725322",
-    "at": "2026-11-02T10:41:16.629741+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -443,6 +428,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EC%BC%93%ED%94%84%EB%A0%88%EC%8B%9C-%EB%8B%A4%EB%8B%B4-%EA%B5%AD%EB%AC%BC%EB%96%A1%EB%B3%B6%EC%9D%B4-%EC%96%91%EB%85%90-65%ED%95%A0%EC%9D%B8-dZnW303d?from=write",
       "at": "2026-11-02T10:39:24.148148+00:00",
       "run_id": "41430466046"
+    },
+    "94867": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8A%B9%EA%B0%80-19930%EC%9B%90-5%ED%95%A0%EC%9D%B8-dQMYna2d?from=write",
+      "at": "2026-11-02T10:41:32.959079+00:00",
+      "run_id": "41430725322"
     }
   },
   "skipped_non_coupang": 5,
