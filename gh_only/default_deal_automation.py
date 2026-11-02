@@ -1,8 +1,8 @@
-"""Read-only default @jirum deal enrichment: Telegram price + Kakao OG photo + Lowchart average.
+"""Read-only @jirum deal enrichment: Telegram price + Lowchart exact-item photo and history.
 
 CLI intentionally processes at most one recent Coupang post per execution (no cron,
-no retries, no publishing, no affiliate rewriting). Uses user-authorized Kakao
-Developers session only for the user-facing metadata debugger, never logs cookies.
+no retries, no publishing, no affiliate rewriting). Default production photo
+source is public Lowchart, never a Kakao login; legacy Kakao code is diagnostic only.
 Product/option mismatches suppress historical discount claims.
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ from gh_only.default_deal_format import (
     create_default_preview, validated_history, normalized_product_name,
 )
 from gh_only.affsdp_candidate import compose_affsdp_candidate
-
+from gh_only.lowchart_product_photo import (\n    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url,\n)\n
 ALLOWED_CDN = ("thumbnail.coupangcdn.com", "image.coupangcdn.com")
 MAX_IMAGE_BYTES = 2_500_000
 
@@ -128,7 +128,14 @@ def og_matches_product(og: dict, identity: dict) -> bool:
         u = urlsplit(page_url)
     except ValueError:
         return False
-    if (u.scheme != "https" or u.hostname not in ("coupang.com", "www.coupang.com")
+    if u.scheme != "https" or u.username or u.password:
+        return False
+    if u.hostname in ("lowchart.com", "www.lowchart.com"):
+        return (og.get("status") == "LOWCHART_EXACT_ITEM_IMAGE"
+                and u.path.rstrip("/") ==
+                f"/{identity.get('product_id')}-{identity.get('item_id')}"
+                and not u.query)
+    if (u.hostname not in ("coupang.com", "www.coupang.com")
             or u.path.rstrip("/") != f"/vp/products/{identity.get('product_id')}"):
         return False
     vendor = identity.get("vendor_item_id")
@@ -185,8 +192,8 @@ def download_og_photo(url: str | None, output: Path, source_message_id: int) -> 
 
 
 def enrich_deal(deal: dict, output_dir: Path,
-                resolver=resolve_identity, og_lookup=get_kakao_og,
-                history_fetch=fetch_one, photo_downloader=download_og_photo,
+                resolver=resolve_identity, og_lookup=None,
+                history_fetch=fetch_one, photo_downloader=None,
                 session_secret: str = "", owner_tag: str = "") -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
@@ -195,7 +202,13 @@ def enrich_deal(deal: dict, output_dir: Path,
     fallback_title = normalized_title(deal.get("source_text") or "") or deal.get("title")
     identity = resolver(link)
     p, i = identity.get("product_id"), identity.get("item_id")
-    # Do not submit arbitrary or unresolved URLs to the signed-in Kakao tool.
+    # Explicit injectable overrides retain existing read-only regression
+    # contracts; production never calls the login-based Kakao debugger.
+    if og_lookup is None:
+        og_lookup = lambda _link, _session: lookup_exact_item_photo(identity, fallback_title)
+        photo_downloader = photo_downloader or download_exact_photo
+    else:
+        photo_downloader = photo_downloader or download_og_photo
     og = (og_lookup(link, session_secret)
           if identity.get("status") == "EXACT_ITEM_IDENTIFIED"
           else {"status": "UNRESOLVED_COUPANG_ITEM", "og_title": None,
@@ -216,8 +229,12 @@ def enrich_deal(deal: dict, output_dir: Path,
         except Exception as exc:
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
-    photo = {"status": "NO_MATCHING_KAKAO_IMAGE", "saved_name": None}
-    if matching and image_is_cdn(og.get("og_image") or ""):
+    image_source = og.get("image_source", "legacy_kakao_og")
+    photo = {"status": "NO_MATCHING_PRODUCT_IMAGE", "saved_name": None}
+    eligible_cdn = (is_coupang_cdn_url(og.get("og_image"))
+                    if image_source == "lowchart_exact_item_public_page"
+                    else image_is_cdn(og.get("og_image") or ""))
+    if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
     caption = create_default_preview(sale, title, average, source_id)
     # The candidate is composed ONLY from the already-resolved product/item.
@@ -241,7 +258,10 @@ def enrich_deal(deal: dict, output_dir: Path,
         "og_title": og_title,
         "og_url": og.get("og_url"),
         "kakao_status": og.get("status"),
-        "kakao_product_match": matching,
+        "kakao_product_match": matching and image_source == "legacy_kakao_og",
+        "image_product_match": matching,
+        "image_source": image_source,
+        "image_metadata_status": og.get("status"),
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
@@ -252,6 +272,8 @@ def enrich_deal(deal: dict, output_dir: Path,
             and sale <= history["observed_low_krw"]
         ),
         "image_exact_option_verified": False,
+        "image_exact_item_page_verified": bool(
+            matching and image_source == "lowchart_exact_item_public_page"),
         "price_is_live_coupang_verified": False,
         "posts_published": 0,
         "personal_affiliate_link_created": False,
