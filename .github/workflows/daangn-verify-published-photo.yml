@@ -1,0 +1,92 @@
+name: DIAGNOSTIC | Verify published Daangn product photo (READ ONLY)
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_id:
+        description: 'Telegram source message ID already published'
+        required: true
+        default: '94837'
+        type: string
+  push:
+    branches: [main]
+    paths: ['manual/trigger-daangn-post-photo-verify.txt']
+
+permissions:
+  contents: read
+
+jobs:
+  verify-saved-post:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+      SOURCE_ID: ${{ inputs.source_id || '94837' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only browser
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Inspect existing post image and notices without modification
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from playwright.sync_api import sync_playwright
+          from gh_only.daangn_editor_probe import parse_daangn_storage_state, DISCLOSURE
+
+          source_id=os.environ["SOURCE_ID"]
+          assert source_id.isdigit()
+          state=json.loads(Path("state/daangn_jirum_manual_fifo.json").read_text("utf-8"))
+          published=state["published"].get(source_id)
+          assert published and published["status"] == "PUBLISHED_VERIFIED", "NOT_VERIFIED_PUBLISHED"
+          target=published["post_url"]
+          u=urlsplit(target)
+          assert u.scheme=="https" and u.hostname=="cafe.daangn.com"
+          assert u.path.startswith("/i-gagyeog-mos-c/posts/")
+          session=parse_daangn_storage_state(os.environ["DAANGN_CAFE_STORAGE_STATE_JSON"])
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              try:
+                  page=browser.new_page()
+                  ctx=browser.new_context(storage_state=session,locale="ko-KR",
+                                          viewport={"width":1366,"height":950})
+                  page=ctx.new_page()
+                  response=page.goto(target,wait_until="domcontentloaded",timeout=30000)
+                  page.wait_for_timeout(3500)
+                  body=page.locator("body").inner_text()
+                  anchors=page.locator("a").evaluate_all("(els)=>els.map(e=>e.href)")
+                  images=page.locator("img").evaluate_all("""(els)=>els.map(e=>({
+                    alt:e.alt||'', loaded:e.complete,
+                    width:e.naturalWidth,height:e.naturalHeight,
+                    visible:e.getBoundingClientRect().width>0
+                  }))""")
+                  photos=[i for i in images if i["alt"].startswith("Post image")]
+                  checks={
+                      "source_id":source_id,
+                      "http_status":response.status if response else None,
+                      "correct_saved_post":urlsplit(page.url).path==u.path,
+                      "loaded_product_photo_count":sum(i["loaded"] and i["width"]>100
+                          and i["height"]>100 for i in photos),
+                      "post_image_tags":len(photos),
+                      "affiliate_links":sum("/re/AFFSDP" in x for x in anchors),
+                      "disclosure_visible":DISCLOSURE in body,
+                      "board_visible":"오늘의 핫딜" in body,
+                      "read_only":True,
+                  }
+                  print("DAANGN_RECENT_POST_READONLY_AUDIT "+json.dumps(checks,ensure_ascii=False))
+                  assert checks["http_status"]==200 and checks["correct_saved_post"]
+                  assert checks["loaded_product_photo_count"]>=1, "POST_PRODUCT_PHOTO_MISSING"
+                  assert checks["affiliate_links"]>=1 and checks["disclosure_visible"]
+              finally:
+                  browser.close()
+          PY
