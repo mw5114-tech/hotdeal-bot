@@ -3,6 +3,7 @@ name: Tests | Jirum manual FIFO (offline only)
 on:
   push:
     branches:
+      - fix/lowchart-source-photo-fifo-20261102
       - feat/manual-jirum-fifo-daangn-20261101
       - feat/daangn-fifo-30min-lean-20261101
       - fix/daangn-fifo-publish-diagnostics-20261101
@@ -79,7 +80,7 @@ jobs:
           print("DAANGN_SUBMIT_WAIT_CONTRACT_OK")
           PY
           python -m unittest -v gh_only.test_default_deal_format gh_only.test_default_deal_automation gh_only.test_daangn_editor_probe
-          python -m unittest -v gh_only.test_lowchart_product_photo
+          python -m unittest -v gh_only.test_lowchart_product_photo gh_only.test_pipeline
           python -m py_compile gh_only/lowchart_product_photo.py gh_only/default_deal_automation.py gh_only/pipeline.py jirum_forward.py
           python - <<'PY'
           from pathlib import Path

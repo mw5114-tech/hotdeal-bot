@@ -150,6 +150,8 @@ PERMANENT_LOWCHART_ISSUES = frozenset((
     "LOWCHART_ITEM_IDS_MISSING",
     "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
     "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+    "LOWCHART_ITEM_PAGE_NOT_FOUND",
+    "PHOTO_EVIDENCE_UNAVAILABLE",
 ))
 
 
@@ -160,8 +162,16 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
         return None
     if len(rows) != 1 or not isinstance(rows[0], dict):
         return None
-    reason = rows[0].get("image_metadata_status")
-    return reason if reason in PERMANENT_LOWCHART_ISSUES else None
+    row = rows[0]
+    reason = row.get("image_metadata_status")
+    if reason in PERMANENT_LOWCHART_ISSUES:
+        return reason
+    # A source failure before any submit must not stall every newer item.
+    # Keep an auditable skip rather than marking anything as published.
+    if (row.get("product_identity", {}).get("status") == "EXACT_ITEM_IDENTIFIED"
+            and row.get("photo", {}).get("status") != "IMAGE_SAVED"):
+        return "PHOTO_EVIDENCE_UNAVAILABLE"
+    return None
 
 
 def archive_unverifiable(store, source_id: int, reason: str) -> None:
@@ -255,7 +265,9 @@ def validate_state(s: dict) -> None:
                      "LOWCHART_TELEGRAM_TITLE_MISMATCH",
                      "LOWCHART_ITEM_IDS_MISSING",
                      "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
-                     "LOWCHART_PRODUCT_IMAGE_NOT_FOUND")
+                     "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+                     "LOWCHART_ITEM_PAGE_NOT_FOUND",
+                     "PHOTO_EVIDENCE_UNAVAILABLE")
                    for k, v in skipped_unverifiable.items())
             or any(str(i) in skipped_unverifiable for i in ids)
             or any(k in published or k in skipped_expired for k in skipped_unverifiable)):
@@ -308,6 +320,10 @@ def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
         }
         if not isinstance(row["original_purchase_url"], str) or not row["original_purchase_url"].startswith("https://"):
             raise ValueError("COUPANG_URL_INVALID")
+        if (d.get("image_provenance") == "telegram_attached_photo"
+                and isinstance(d.get("image_url_candidate"), str)):
+            row["image_provenance"] = "telegram_attached_photo"
+            row["image_url_candidate"] = d["image_url_candidate"]
         out["pending"].append(row)
         existing.add(mid)
         added += 1
@@ -430,16 +446,23 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
         # for hotdeal publication, but each skipped entry stays audited.
         legacy = {x["id"] for x in new["pending"]
                   if _parse_utc(x.get("posted_at_utc")) is None}
-        if legacy:
+        missing_photo = lowchart_mode() and any(
+            not item.get("image_url_candidate") for item in new["pending"])
+        if legacy or missing_photo:
             try:
                 recent = enrich_posts(latest_fetch(), max_posts=200)
-                stamps = {x["source_message_id"]: x.get("posted_at_utc")
-                          for x in recent if _parse_utc(x.get("posted_at_utc"))}
+                by_id = {x["source_message_id"]: x for x in recent}
                 for item in new["pending"]:
-                    if item["id"] in legacy and item["id"] in stamps:
-                        item["posted_at_utc"] = stamps[item["id"]]
+                    source = by_id.get(item["id"], {})
+                    if item["id"] in legacy and _parse_utc(source.get("posted_at_utc")):
+                        item["posted_at_utc"] = source["posted_at_utc"]
+                    if (not item.get("image_url_candidate")
+                            and source.get("image_provenance") == "telegram_attached_photo"
+                            and isinstance(source.get("image_url_candidate"), str)):
+                        item["image_provenance"] = "telegram_attached_photo"
+                        item["image_url_candidate"] = source["image_url_candidate"]
             except Exception as exc:
-                print("JIRUM_DATE_BACKFILL_UNAVAILABLE " + type(exc).__name__)
+                print("JIRUM_SOURCE_MEDIA_BACKFILL_UNAVAILABLE " + type(exc).__name__)
         new, expired = expire_pending(new)
     if new != s:
         store.write(new, sha, "state: checkpoint new Jirum messages, freshness and FIFO")
@@ -485,11 +508,14 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     if (article["source_id"] != expected_id or article["image"] is None
         or not article["image"].is_file() or row.get("photo", {}).get("status") != "IMAGE_SAVED"
         or row.get("product_identity", {}).get("status") != "EXACT_ITEM_IDENTIFIED"
-        or not (row.get("image_product_match") is True
-                 and (row.get("image_source") ==
-                          "lowchart_exact_item_public_page"
-                      and row.get("image_exact_item_page_verified") is True)
-                 if lowchart_mode() else row.get("kakao_product_match"))
+        or not ((
+            (row.get("image_product_match") is True
+             and row.get("image_source") == "lowchart_exact_item_public_page"
+             and row.get("image_exact_item_page_verified") is True)
+            or (row.get("image_source") == "telegram_attached_photo"
+                and row.get("source_photo_verified") is True
+                and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
+        ) if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
         or "📦 상품명 :" not in article["body"]
         or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
@@ -520,6 +546,8 @@ def build_next(s: dict) -> dict:
         "source_text": row["source_text"],
         "title": row["title"],
         "sale_price_krw": row["sale_price_krw"],
+        "image_provenance": row.get("image_provenance"),
+        "image_url_candidate": row.get("image_url_candidate"),
     }, DRAFT_DIR,
         session_secret=os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", ""),
         owner_tag=os.getenv("COUPANG_PARTNER_LPTAG", ""))
