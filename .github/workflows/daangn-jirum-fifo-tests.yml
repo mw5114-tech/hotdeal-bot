@@ -78,7 +78,7 @@ jobs:
           assert "workflow_dispatch:" in yaml_text
           assert "JIRUM_IMAGE_SOURCE: lowchart" in yaml_text
           assert "JIRUM_REQUIRE_FRESH_POST: 'true'" in yaml_text
-          assert "KAKAO_DEV_STORAGE_STATE_JSON: ${{" not in yaml_text
+          assert "KAKAO_DEV_STORAGE_STATE_JSON:" not in yaml_text
           assert "smoke_test:" in yaml_text
           assert "github.event_name != 'workflow_dispatch' || inputs.smoke_test != true" in yaml_text
           assert "NO_SCAN_NO_POST" in yaml_text
