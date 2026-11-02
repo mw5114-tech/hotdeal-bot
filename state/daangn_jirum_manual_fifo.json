@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94832,
+  "last_scanned_id": 94833,
   "pending": [
     {
       "id": 94789,
@@ -353,6 +353,14 @@
       "source_text": "☆특가 7,990원\n곰곰, 무항생제 신선한 특란 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilakJ700Hc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "☆특가 7,990원",
       "sale_price_krw": 7990
+    },
+    {
+      "id": 94833,
+      "source_post_url": "https://t.me/jirum/94833",
+      "original_purchase_url": "https://link.coupang.com/a/ilbh7t5lFk",
+      "source_text": "👍대박 17,360원 (30.6% 할인)\n필립스 3000시리즈 에그 쿠커 계란찜기\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 7,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilbh7t5lFk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "필립스 3000시리즈 에그 쿠커 계란찜기",
+      "sale_price_krw": 17360
     }
   ],
   "in_flight": null,
