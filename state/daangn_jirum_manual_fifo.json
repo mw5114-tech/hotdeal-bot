@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94871,
+  "last_scanned_id": 94872,
   "pending": [
     {
       "id": 94869,
@@ -28,6 +28,15 @@
       "posted_at_utc": "2026-11-02T12:08:04+00:00",
       "title": "☆특가 18,460원",
       "sale_price_krw": 18460
+    },
+    {
+      "id": 94872,
+      "source_post_url": "https://t.me/jirum/94872",
+      "original_purchase_url": "https://link.coupang.com/a/ilQP9tayhE",
+      "source_text": "🔥🔥🔥무지성 4,200원 (46.0% 할인)🔥🔥🔥\n풀무원아미오 강아지 자연담은 간식 과자\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,778원\n- 할인: 3,578원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilQP9tayhE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T12:13:16+00:00",
+      "title": "풀무원아미오 강아지 자연담은 간식 과자",
+      "sale_price_krw": 4200
     }
   ],
   "in_flight": null,
