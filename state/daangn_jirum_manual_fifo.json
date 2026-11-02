@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94846,
-  "pending": [],
+  "last_scanned_id": 94847,
+  "pending": [
+    {
+      "id": 94847,
+      "source_post_url": "https://t.me/jirum/94847",
+      "original_purchase_url": "https://link.coupang.com/a/ilrKylZx6a",
+      "source_text": "☆특가 31,900원 (25.0% 할인)\n베베숲 홈 섬유유연제 브리즈가든향 리필, 1L, 3개\n📌 가격 현황\n- 정상가: 42,540원\n- 할인: 10,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilrKylZx6a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T06:22:09+00:00",
+      "title": "베베숲 홈 섬유유연제 브리즈가든향 리필, 1L, 3개",
+      "sale_price_krw": 31900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
