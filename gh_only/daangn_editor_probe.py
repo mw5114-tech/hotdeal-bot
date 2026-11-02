@@ -208,6 +208,22 @@ def read_one_draft(folder: Path) -> dict:
     }
 
 
+def verify_link_in_one_paragraph(editor, url: str) -> bool:
+    """A soft-wrapped URL is fine; an actual inserted paragraph break is not.
+
+    ProseMirror may auto-linkify the text. If it does, its clickable href must
+    also match the full intended URL. No live edit is performed by this check.
+    """
+    return bool(editor.evaluate("""(root, url) => {
+      const line = '🛒 쿠팡에서 상품정보 더보기 : ' + url;
+      const nodes = [...root.querySelectorAll('p')];
+      const matches = nodes.filter(p => p.textContent.trim() === line);
+      if (matches.length !== 1) return false;
+      const anchors = [...matches[0].querySelectorAll('a')];
+      return anchors.every(a => a.getAttribute('href') === url);
+    }""", url))
+
+
 def choose_visible_unique(locators):
     """Prefer first selector with exactly one visible target.
 
@@ -339,6 +355,7 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
        }
        return false;
     }""", url)
+    result["link_row_contiguous"] = verify_link_in_one_paragraph(editor, url)
     result["image_survived_body"] = image.count() == 1 and image.first.evaluate(
         "(el)=>el.complete&&el.naturalWidth>0")
     result["status"] = (
@@ -347,7 +364,7 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
                 result["body_filled"], result["image_attached"],
                 result["owner_url_above_disclosure"],
                 result["disclosure_is_last_line"], result["url_intact_in_one_text_node"],
-                result["image_survived_body"]])
+                result["image_survived_body"], result["link_row_contiguous"]])
         else "EDITOR_FIELDS_NOT_CONFIRMED"
     )
     return result
