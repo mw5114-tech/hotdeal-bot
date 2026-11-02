@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94839,
-  "pending": [],
+  "last_scanned_id": 94840,
+  "pending": [
+    {
+      "id": 94840,
+      "source_post_url": "https://t.me/jirum/94840",
+      "original_purchase_url": "https://link.coupang.com/a/ilkdgF1t3A",
+      "source_text": "❤️초대박 5,610원 (43.9% 할인)\n가쯔 라운드 어깨뿔 방지 논슬립 니트 옷걸이, 블랙, 50개\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 4,390원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilkdgF1t3A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T04:36:41+00:00",
+      "title": "가쯔 라운드 어깨뿔 방지 논슬립 니트 옷걸이, 블랙, 50개",
+      "sale_price_krw": 5610
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
