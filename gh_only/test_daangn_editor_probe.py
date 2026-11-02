@@ -142,6 +142,48 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertIn("검증 마친 찐 역대가 딜만 가져옵니다.", result["body"])
         self.assertTrue(result["body"].endswith(DISCLOSURE))
 
+    def test_exact_requested_coupang_hotdeal_title_and_link_label(self):
+        product = "백설 돼지 불고기 양념, 840g, 1개"
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            draft = report["drafts"][0]
+            draft["caption"]["caption"] = draft["caption"]["caption"].replace(
+                "휘카레 셰프 오리지널 소스 순한맛",
+                product + " [65%할인]",
+            )
+            draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            article = read_one_draft(folder)
+        self.assertEqual(article["title"], "[쿠팡 핫딜] " + product + " [65%할인]")
+        self.assertIn("🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
+        self.assertNotIn("🛒 상품 링크", article["body"])
+        self.assertEqual(article["body"].count(TEST_URL), 1)
+        self.assertIn("\n\n🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
+        self.assertTrue(article["body"].endswith(DISCLOSURE))
+
+    def test_long_coupang_title_still_keeps_discount_suffix(self):
+        long_name = "고급 상품 " + "초특가세트" * 23
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            draft = report["drafts"][0]
+            draft["caption"]["caption"] = draft["caption"]["caption"].replace(
+                "휘카레 셰프 오리지널 소스 순한맛",
+                long_name + " [65%할인]",
+            )
+            draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            article = read_one_draft(folder)
+        self.assertTrue(article["title"].startswith("[쿠팡 핫딜] 고급 상품 "))
+        self.assertTrue(article["title"].endswith(" [65%할인]"))
+        self.assertLessEqual(len(article["title"]), 150)
+        self.assertEqual(article["title"].count("[65%할인]"), 1)
+
     def test_does_not_accept_original_source_affiliate_instead_of_own_candidate(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
