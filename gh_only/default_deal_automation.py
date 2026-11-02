@@ -19,7 +19,7 @@ from urllib.parse import parse_qs, urlsplit
 from gh_only.pipeline import enrich_posts, fetch_public_html, identify_url
 from gh_only.daangn_draft import normalized_title
 from gh_only.shortlink_probe import one_hop, StopRedirect
-from gh_only.lowchart_price_reference import fetch_one
+from gh_only.lowchart_price_reference import fetch_one, build_url
 from gh_only.default_deal_format import (
     create_default_preview, validated_history, normalized_product_name,
 )
@@ -221,11 +221,19 @@ def enrich_deal(deal: dict, output_dir: Path,
     # image or price-title identity. Still keep the source sale.
     matching = (identity.get("status") == "EXACT_ITEM_IDENTIFIED"
                 and og_matches_product(og, identity))
-    # Lowchart can show a different color, bundle count or other option text
-    # for the SAME productId/itemId. Use its verified photo, but never replace
-    # Telegram's own advertised title/options with Lowchart's different text.
+    # The name displayed in BOTH Daangn headline and body comes from the
+    # verified exact-item Lowchart page. Telegram is retained for diagnostics
+    # only when the page is unavailable; the draft then cannot be published.
+    lowchart_title_verified = bool(
+        using_public_lowchart
+        and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+        and og.get("lowchart_title_verified") is True
+        and isinstance(og_title, str) and bool(og_title.strip())
+        and og.get("og_url") == build_url(p, i)
+    )
     title = (
-        fallback_title if using_public_lowchart
+        og_title.strip() if lowchart_title_verified
+        else fallback_title if using_public_lowchart
         else (re.split(r"\s+[-–]\s+", og_title, maxsplit=1)[0]
               if matching and og_title else fallback_title)
     )
@@ -283,6 +291,12 @@ def enrich_deal(deal: dict, output_dir: Path,
         "product_identity": identity,
         "og_title": og_title,
         "og_url": og.get("og_url"),
+        "lowchart_title_verified": lowchart_title_verified,
+        "lowchart_product_title": og_title.strip() if lowchart_title_verified else None,
+        "product_name_source": (
+            "lowchart_exact_item_page" if lowchart_title_verified
+            else "unverified_fallback"
+        ) if using_public_lowchart else "legacy_kakao",
         "kakao_status": og.get("status"),
         "kakao_product_match": matching and image_source == "legacy_kakao_og",
         "image_product_match": matching,

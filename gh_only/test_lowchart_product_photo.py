@@ -46,6 +46,7 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertEqual(actual["og_url"], f"https://www.lowchart.com/{PID}-{IID}")
         self.assertEqual(actual["og_image"], URL)
         self.assertEqual(actual["og_title"], NAME)
+        self.assertTrue(actual["lowchart_title_verified"])
 
     def test_reject_mismatched_item_id_even_with_matching_photo(self):
         self.assertEqual(parse_item_photo(BASE_HTML.replace(IID, "99999999999"), ITEM, NAME)
@@ -97,6 +98,14 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertEqual(parse_item_photo(page, ITEM, NAME)["status"],
                          "LOWCHART_PRODUCT_IMAGE_NOT_FOUND")
 
+    def test_exact_lowchart_title_is_verified_even_if_photo_missing(self):
+        html = BASE_HTML.replace('alt="' + NAME + '"', 'alt="다른 추천 상품"')
+        result = parse_item_photo(html, ITEM, "텔레그램의 전혀 다른 상품명")
+        self.assertEqual(result["status"], "LOWCHART_PRODUCT_IMAGE_NOT_FOUND")
+        self.assertTrue(result["lowchart_title_verified"])
+        self.assertEqual(result["og_title"], NAME)
+        self.assertEqual(result["og_url"], f"https://www.lowchart.com/{PID}-{IID}")
+
     def test_reject_ads_images_chart_and_duplicate_matching_imgs(self):
         only_chart = BASE_HTML.replace('<img src="' + URL + '" alt="' + NAME + '">', "")
         self.assertEqual(parse_item_photo(only_chart, ITEM, NAME)["status"],
@@ -144,7 +153,7 @@ class LowchartProductPhotoTests(unittest.TestCase):
             self.assertEqual(saved["status"], "LOWCHART_IMAGE_CONTENT_INVALID")
             self.assertEqual(list(Path(tmp).iterdir()), [])
 
-    def test_default_enrichment_uses_telegram_name_when_lowchart_option_differs(self):
+    def test_default_enrichment_uses_lowchart_name_when_telegram_option_differs(self):
         from gh_only.default_deal_automation import enrich_deal
         telegram_name = NAME.replace("블랙 + 실버, 1개", "화이트, 2개")
         deal = {
@@ -176,8 +185,12 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertTrue(result["image_exact_item_page_verified"])
         self.assertFalse(result["image_same_named_option"])
         caption = result["caption"]["caption"]
-        self.assertIn("상품명 : " + telegram_name, caption)
-        self.assertNotIn("상품명 : " + NAME, caption)
+        self.assertIn("상품명 : " + NAME, caption)
+        self.assertNotIn("상품명 : " + telegram_name, caption)
+        self.assertTrue(result["lowchart_title_verified"])
+        self.assertEqual(result["product_name_source"], "lowchart_exact_item_page")
+        self.assertEqual(result["lowchart_product_title"], NAME)
+        self.assertEqual(result["caption"]["product_name"], NAME)
         self.assertIn("핫딜 특가 : 11,000원", caption)
         kakao.assert_not_called()
 
@@ -207,6 +220,8 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertTrue(result["source_photo_verified"])
         self.assertEqual(result["image_source"], "telegram_attached_photo")
         self.assertFalse(result["image_product_match"])
+        self.assertFalse(result["lowchart_title_verified"])
+        self.assertEqual(result["product_name_source"], "unverified_fallback")
         self.assertEqual(result["image_http_status"], 503)
         fallback.assert_called_once()
 

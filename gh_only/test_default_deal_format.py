@@ -56,6 +56,15 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertFalse(caption["official_normal_price_quoted"])
         self.assertFalse(caption["auto_publish_ready"])
 
+    def test_long_verified_name_is_identical_in_body_and_150_char_title(self):
+        name = "로우차트 제품 " + "제품상세" * 35
+        caption = create_default_preview(12050, name, 34575)
+        displayed = caption["product_name"]
+        self.assertTrue(displayed.startswith("로우차트 제품 "))
+        self.assertLessEqual(len("[쿠팡🔥핫딜] " + displayed + " [65%할인]"), 150)
+        self.assertEqual(caption["caption"].split("\n\n")[0],
+                         "📦 상품명 : " + displayed + " [65%할인]")
+
     def test_missing_mean_leaves_price_not_fake_discount(self):
         preview = create_default_preview(12050, "휘카레 소스", None)
         self.assertEqual(preview["caption"],

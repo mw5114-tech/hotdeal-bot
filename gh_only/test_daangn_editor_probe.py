@@ -164,6 +164,22 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertIn("\n\n🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
         self.assertTrue(article["body"].endswith(DISCLOSURE))
 
+    def test_lowchart_name_is_same_in_headline_and_body(self):
+        from gh_only.default_deal_format import create_default_preview
+        source_name = "로우차트 상품명, 500ml, 블랙, 3개"
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            row = report["drafts"][0]
+            preview = create_default_preview(12050, source_name, 34575, 94717)
+            row["caption"] = {**preview, "caption": preview["caption"] +
+                "\n\n🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL}
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8")
+            article = read_one_draft(folder)
+        self.assertEqual(article["title"], "[쿠팡🔥핫딜] " + source_name + " [65%할인]")
+        self.assertIn("📦 상품명 : " + source_name + " [65%할인]", article["body"])
+
     def test_long_coupang_title_still_keeps_discount_suffix(self):
         long_name = "고급 상품 " + "초특가세트" * 22
         with tempfile.TemporaryDirectory() as temp:

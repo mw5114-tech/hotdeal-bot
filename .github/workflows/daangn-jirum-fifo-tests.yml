@@ -3,6 +3,7 @@ name: Tests | Jirum manual FIFO (offline only)
 on:
   push:
     branches:
+      - feat/daangn-lowchart-title-20261102
       - fix/lowchart-source-photo-fifo-20261102
       - feat/manual-jirum-fifo-daangn-20261101
       - feat/daangn-fifo-30min-lean-20261101

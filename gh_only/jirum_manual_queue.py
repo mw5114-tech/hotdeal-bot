@@ -151,6 +151,7 @@ PERMANENT_LOWCHART_ISSUES = frozenset((
     "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
     "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
     "LOWCHART_ITEM_PAGE_NOT_FOUND",
+    "LOWCHART_TITLE_UNVERIFIED",
     "PHOTO_EVIDENCE_UNAVAILABLE",
 ))
 
@@ -171,6 +172,9 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     if (row.get("product_identity", {}).get("status") == "EXACT_ITEM_IDENTIFIED"
             and row.get("photo", {}).get("status") != "IMAGE_SAVED"):
         return "PHOTO_EVIDENCE_UNAVAILABLE"
+    if (row.get("product_identity", {}).get("status") == "EXACT_ITEM_IDENTIFIED"
+            and row.get("lowchart_title_verified") is not True):
+        return "LOWCHART_TITLE_UNVERIFIED"
     return None
 
 
@@ -267,6 +271,7 @@ def validate_state(s: dict) -> None:
                      "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
                      "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
                      "LOWCHART_ITEM_PAGE_NOT_FOUND",
+                     "LOWCHART_TITLE_UNVERIFIED",
                      "PHOTO_EVIDENCE_UNAVAILABLE")
                    for k, v in skipped_unverifiable.items())
             or any(str(i) in skipped_unverifiable for i in ids)
@@ -517,6 +522,14 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
         ) if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
+        or (lowchart_mode() and (
+            row.get("lowchart_title_verified") is not True
+            or row.get("product_name_source") != "lowchart_exact_item_page"
+            or not isinstance(row.get("lowchart_product_title"), str)
+            or not isinstance(row.get("caption", {}).get("product_name"), str)
+            or "📦 상품명 : " + row["caption"]["product_name"] not in article["body"]
+            or "[쿠팡🔥핫딜] " + row["caption"]["product_name"] not in article["title"]
+        ))
         or "📦 상품명 :" not in article["body"]
         or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
         or article["body"].count(article["candidate_url"]) != 1):
