@@ -450,6 +450,9 @@ class ManualQueueTests(unittest.TestCase):
                 "image_product_match":True,
                 "image_source":"lowchart_exact_item_public_page",
                 "image_exact_item_page_verified":True,
+                "lowchart_title_verified":True,
+                "lowchart_product_title":"휘카레 셰프 오리지널 소스 순한맛",
+                "product_name_source":"lowchart_exact_item_page",
                 "kakao_product_match":False,
                 "product_identity":{
                     "status":"EXACT_ITEM_IDENTIFIED",
@@ -457,6 +460,7 @@ class ManualQueueTests(unittest.TestCase):
                 },
             })
             row["caption"]["sale_price_krw"] = 12050
+            row["caption"]["product_name"] = "휘카레 셰프 오리지널 소스 순한맛"
             (folder / "drafts.json").write_text(
                 json.dumps(report, ensure_ascii=False), encoding="utf-8"
             )
@@ -468,6 +472,38 @@ class ManualQueueTests(unittest.TestCase):
             self.assertEqual(out["source_id"],94717)
             self.assertEqual(out["image"].name,"jirum_94717_lowchart_photo.jpg")
             self.assertEqual(out["product_id"],"9217210892")
+
+    def test_unverified_lowchart_name_blocks_even_with_source_photo(self):
+        from gh_only.jirum_manual_queue import validate_draft, permanent_lowchart_failure
+        from gh_only.test_daangn_editor_probe import DaangnEditorOfflineTests
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            report = DaangnEditorOfflineTests()._make_draft(folder)
+            row = report["drafts"][0]
+            row.update({
+                "product_identity": {"status": "EXACT_ITEM_IDENTIFIED",
+                                     "product_id": "9217210892", "item_id": "27232840915"},
+                "image_source": "telegram_attached_photo",
+                "source_photo_verified": True,
+                "image_product_match": False,
+                "lowchart_title_verified": False,
+                "product_name_source": "unverified_fallback",
+                "photo": {"status": "IMAGE_SAVED",
+                          "saved_name": "jirum_94717_telegram_source_photo.jpg",
+                          "image_source": "telegram_attached_photo"},
+            })
+            (folder / "jirum_94717_kakao_og.jpg").rename(
+                folder / "jirum_94717_telegram_source_photo.jpg")
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8")
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE": "lowchart",
+                "COUPANG_PARTNER_LPTAG": "AF9668915",
+            }):
+                with self.assertRaisesRegex(RuntimeError, "POST_EVIDENCE_NOT_READY"):
+                    validate_draft(folder, 94717)
+                self.assertEqual(permanent_lowchart_failure(folder),
+                                 "LOWCHART_TITLE_UNVERIFIED")
 
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
