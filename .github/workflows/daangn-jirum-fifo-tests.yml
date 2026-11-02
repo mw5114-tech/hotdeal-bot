@@ -17,6 +17,7 @@ on:
       - feat/daangn-fifo-5min-cron-20261101
       - fix/daangn-kakao-session-expired-circuit-breaker-20261102
       - feat/lowchart-photo-fresh-deals-20261102
+      - feat/lowchart-image-id-only-options-20261102
       - fix/raw-watcher-event-dispatch-production-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
