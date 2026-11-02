@@ -6,6 +6,7 @@ on:
       - feat/daangn-body-discount-first-20261102
       - feat/muse-official-link-receipts-20261103
       - feat/daangn-post-then-muse-rewrite-20261103
+      - fix/daangn-coupang-link-line-spacing-20261103
       - feat/daangn-lowchart-title-20261102
       - fix/lowchart-source-photo-fifo-20261102
       - feat/manual-jirum-fifo-daangn-20261101
