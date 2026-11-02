@@ -21,3 +21,5 @@ Confirm expired Kakao session circuit breaker without posting: 20261102-1231KST-
 Verify same expired Kakao Secret skips browser and preserves FIFO: 20261102-1237KST
 
 Production cutover: Kakao-free Lowchart photos + 60m freshness test 20261102-1319KST
+
+User requested resume/check real automation; trigger one immediate FIFO scan 2026-11-02 13:35 KST. No duplicate repost.
