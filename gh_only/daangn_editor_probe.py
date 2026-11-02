@@ -109,6 +109,15 @@ def read_one_draft(folder: Path) -> dict:
                 or aff.get("official_link_issued") is not True
                 or aff.get("commission_attribution_verified") is not False):
             raise ValueError("DRAFT_OFFICIAL_RECEIPT_METADATA_INVALID")
+    elif row.get("muse_rewrite_pending") is True:
+        from gh_only.direct_product_links import verify_regular_product_url
+        if not verify_regular_product_url(url, row.get("product_identity", {})):
+            raise ValueError("DRAFT_DIRECT_PRODUCT_LINK_INVALID")
+        if (not isinstance(aff, dict)
+                or aff.get("status") != "REGULAR_PRODUCT_AWAITING_MUSE"
+                or aff.get("official_link_issued") is not False
+                or aff.get("commission_attribution_verified") is not False):
+            raise ValueError("DRAFT_MUSE_REWRITE_STATE_INVALID")
     else:
         # Legacy formatter remains available for offline regression tests,
         # but production always requires a validated official receipt.
@@ -183,7 +192,8 @@ def read_one_draft(folder: Path) -> dict:
         "body": clean_body,
         "image": image,
         "source_id": row.get("source_message_id"),
-        "unissued_affsdp_candidate": receipt is None,
+        "unissued_affsdp_candidate": receipt is None and row.get("muse_rewrite_pending") is not True,
+        "muse_rewrite_pending": row.get("muse_rewrite_pending") is True,
         "official_link_receipt": receipt,
         "candidate_url": url,
     }
