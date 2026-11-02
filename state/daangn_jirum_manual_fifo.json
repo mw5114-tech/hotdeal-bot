@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94880,
-  "pending": [
-    {
-      "id": 94880,
-      "source_post_url": "https://t.me/jirum/94880",
-      "original_purchase_url": "https://link.coupang.com/a/ilVPqbUYua",
-      "source_text": "🔥🔥🔥무지성 1,800원 (70.0% 할인)🔥🔥🔥\n(추가할인)에뛰드 왓츠인 마이 아이즈, 아임파인땡큐, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 4,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilVPqbUYua\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T13:23:04+00:00",
-      "title": "(추가할인)에뛰드 왓츠인 마이 아이즈, 아임파인땡큐, 1개",
-      "sale_price_krw": 1800
-    }
-  ],
-  "in_flight": {
-    "id": 94880,
-    "status": "CLAIMED",
-    "run_id": "41452601623",
-    "at": "2026-11-02T13:24:14.122780+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -497,6 +482,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EB%8F%99%EC%B9%98%EB%AF%B8-%EB%AC%BC%EB%83%89%EB%A9%B4-2%EC%9D%B8-%ED%95%A8%ED%9D%A5-%EB%B9%84%EB%B9%94%EB%83%89%EB%A9%B4-2%EC%9D%B8-1306-40%ED%95%A0%EC%9D%B8-dlYlvKbj?from=write",
       "at": "2026-11-02T13:11:31.550402+00:00",
       "run_id": "41450725381"
+    },
+    "94880": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%9B%B0%EB%93%9C-%EC%99%93%EC%B8%A0%EC%9D%B8-%EB%A7%88%EC%9D%B4-%EC%95%84%EC%9D%B4%EC%A6%88-%EC%95%84%EC%9E%84%ED%8C%8C%EC%9D%B8%EB%95%A1%ED%81%90-1%EA%B0%9C-dag8kvWA?from=write",
+      "at": "2026-11-02T13:24:30.214091+00:00",
+      "run_id": "41452601623"
     }
   },
   "skipped_non_coupang": 8,
