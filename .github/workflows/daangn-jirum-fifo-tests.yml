@@ -30,6 +30,7 @@ on:
       - 'gh_only/jirum_manual_*.py'
       - 'gh_only/official_link_receipts.py'
       - 'gh_only/test_official_link_receipts.py'
+      - 'gh_only/test_official_link_integration.py'
       - 'gh_only/test_jirum_manual_queue.py'
       - 'gh_only/default_deal_automation.py'
       - 'gh_only/default_deal_format.py'
@@ -67,7 +68,7 @@ jobs:
       - name: Compile queue, publisher, tests
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
-          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_official_link_receipts
+          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_official_link_receipts gh_only.test_official_link_integration
           python -m py_compile tools/refresh_kakao_storage_secret.py tools/test_refresh_kakao_storage_secret.py
           python -m unittest -v tools.test_refresh_kakao_storage_secret
           python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py gh_only/daangn_photo_upload_probe.py
