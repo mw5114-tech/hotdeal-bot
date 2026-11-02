@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94861,
-  "pending": [
-    {
-      "id": 94861,
-      "source_post_url": "https://t.me/jirum/94861",
-      "original_purchase_url": "https://link.coupang.com/a/ilGNzmXN8e",
-      "source_text": "☆특가 33,460원 (27.9% 할인)\n오스카마이어 로우 소디움 베이컨, 453g, 4개\n📌 가격 현황\n- 정상가: 46,390원\n- 할인: 12,930원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilGNzmXN8e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T09:52:45+00:00",
-      "title": "오스카마이어 로우 소디움 베이컨, 453g, 4개",
-      "sale_price_krw": 33460
-    }
-  ],
-  "in_flight": {
-    "id": 94861,
-    "status": "CLAIMED",
-    "run_id": "41424338303",
-    "at": "2026-11-02T09:54:02.114464+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -407,6 +392,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%EC%98%AC%EB%8D%B0%EC%9D%B4-%EC%BA%90%EB%A6%AC%EC%98%AC-%ED%80%9C%EC%B2%98-H20-%ED%85%80%EB%B8%94%EB%9F%AC-%EC%8A%A4%ED%8A%B8%EB%9E%A9%EB%B0%B1-118L-%EB%9D%BC%EC%9D%BC%EB%9D%BD-1-A4QWNOoP?from=write",
       "at": "2026-11-02T09:07:12.796204+00:00",
       "run_id": "41417984994"
+    },
+    "94861": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%8A%A4%EC%B9%B4%EB%A7%88%EC%9D%B4%EC%96%B4-%EB%A1%9C%EC%9A%B0-%EC%86%8C%EB%94%94%EC%9B%80-%EB%B2%A0%EC%9D%B4%EC%BB%A8-453g-4%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PM03le5A?from=write",
+      "at": "2026-11-02T09:54:20.384915+00:00",
+      "run_id": "41424338303"
     }
   },
   "skipped_non_coupang": 5,
