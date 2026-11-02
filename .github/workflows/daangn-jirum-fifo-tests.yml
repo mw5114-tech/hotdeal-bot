@@ -19,6 +19,7 @@ on:
       - feat/lowchart-photo-fresh-deals-20261102
       - feat/lowchart-image-id-only-options-20261102
       - fix/daangn-mobile-double-enter-spacing-20261102
+      - feat/daangn-coupang-link-text-title-20261102
       - fix/raw-watcher-event-dispatch-production-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
@@ -29,6 +30,7 @@ on:
       - 'gh_only/test_default_deal_format.py'
       - 'gh_only/test_default_deal_automation.py'
       - 'gh_only/test_daangn_editor_probe.py'
+      - 'gh_only/test_default_deal_automation.py'
       - 'gh_only/lowchart_product_photo.py'
       - 'gh_only/test_lowchart_product_photo.py'
       - 'gh_only/pipeline.py'
