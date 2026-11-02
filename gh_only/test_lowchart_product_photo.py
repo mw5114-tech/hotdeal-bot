@@ -150,20 +150,20 @@ class LowchartProductPhotoTests(unittest.TestCase):
         deal = {
             "source_message_id": 94888,
             "source_post_url": "https://t.me/jirum/94888",
-            "source_text": "☆특가 11,000원\\n" + telegram_name +
-                           "\\nhttps://link.coupang.com/a/test",
+            "source_text": "☆특가 11,000원\n" + telegram_name +
+                           "\nhttps://link.coupang.com/a/test",
             "title": telegram_name,
             "sale_price_krw": 11000,
             "original_purchase_url": "https://link.coupang.com/a/test",
         }
         photo = parse_item_photo(BASE_HTML, ITEM, telegram_name)
         self.assertEqual(photo["status"], "LOWCHART_EXACT_ITEM_IMAGE")
-        with tempfile.TemporaryDirectory() as tmp, \\
+        with tempfile.TemporaryDirectory() as tmp, \
              patch("gh_only.default_deal_automation.lookup_exact_item_photo",
-                   return_value=photo), \\
+                   return_value=photo), \
              patch("gh_only.default_deal_automation.download_exact_photo",
                    return_value={"status": "IMAGE_SAVED",
-                                 "saved_name": "jirum_94888_lowchart_photo.jpg"}), \\
+                                 "saved_name": "jirum_94888_lowchart_photo.jpg"}), \
              patch("gh_only.default_deal_automation.get_kakao_og",
                    side_effect=AssertionError("No Kakao login")) as kakao:
             result = enrich_deal(
