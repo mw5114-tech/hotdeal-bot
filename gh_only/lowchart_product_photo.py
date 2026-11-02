@@ -78,6 +78,7 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     page_title = "".join(parser.title_parts).strip()
     # Lowchart's title is '<exact item title> - <price> - 로우차트 ...'.
     item_title = re.split(r"\s+-\s+", page_title, maxsplit=1)[0].strip()
+    out["og_title"] = item_title
     source = normalized_product_name(telegram_title)
     observed = normalized_product_name(item_title)
     if not source or len(source) < 8 or source != observed:
