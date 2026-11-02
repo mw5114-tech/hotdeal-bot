@@ -95,7 +95,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             folder = Path(temp)
             self._make_draft(folder)
             result = read_one_draft(folder)
-        self.assertIn("[쿠팡 핫딜]", result["title"])
+        self.assertIn("[쿠팡🔥핫딜]", result["title"])
         self.assertIn("12,050원", result["body"])
         self.assertIn("AF9668915", result["body"])
         self.assertIn(DISCLOSURE, result["body"])
@@ -157,7 +157,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
                 json.dumps(report, ensure_ascii=False), encoding="utf-8"
             )
             article = read_one_draft(folder)
-        self.assertEqual(article["title"], "[쿠팡 핫딜] " + product + " [65%할인]")
+        self.assertEqual(article["title"], "[쿠팡🔥핫딜] " + product + " [65%할인]")
         self.assertIn("🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
         self.assertNotIn("🛒 상품 링크", article["body"])
         self.assertEqual(article["body"].count(TEST_URL), 1)
@@ -179,7 +179,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
                 json.dumps(report, ensure_ascii=False), encoding="utf-8"
             )
             article = read_one_draft(folder)
-        self.assertTrue(article["title"].startswith("[쿠팡 핫딜] 고급 상품 "))
+        self.assertTrue(article["title"].startswith("[쿠팡🔥핫딜] 고급 상품 "))
         self.assertTrue(article["title"].endswith(" [65%할인]"))
         self.assertLessEqual(len(article["title"]), 150)
         self.assertEqual(article["title"].count("[65%할인]"), 1)
