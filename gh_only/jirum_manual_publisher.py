@@ -8,7 +8,9 @@ from __future__ import annotations
 import re
 from urllib.parse import parse_qs, urlsplit
 
-from gh_only.daangn_editor_probe import parse_daangn_storage_state, DISCLOSURE
+from gh_only.daangn_editor_probe import (
+    parse_daangn_storage_state, DISCLOSURE, verify_link_in_one_paragraph,
+)
 
 TARGET = "https://cafe.daangn.com/i-gagyeog-mos-c/posts/new"
 PREFIX = "/i-gagyeog-mos-c/posts/"
@@ -76,6 +78,7 @@ def validate_editor_copy(editor, body: str, url: str, image) -> bool:
         and observed.count(url) == 1
         and observed.rstrip().endswith(DISCLOSURE)
         and url_one_node
+        and verify_link_in_one_paragraph(editor, url)
         and image.count() == 1
         and image.first.evaluate("(e)=>e.complete&&e.naturalWidth>0")
     )
@@ -230,6 +233,9 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                         leading_image_ui_prefix(observed, article["body"])
                     ),
                     "candidate_url_count": observed.count(article["candidate_url"]),
+                    "link_row_contiguous": verify_link_in_one_paragraph(
+                        editor, article["candidate_url"]
+                    ),
                     "disclosure_last": observed.rstrip().endswith(DISCLOSURE),
                     "image_count": image.count(),
                     "observed_length": len(observed),
@@ -310,6 +316,10 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     "(e)=>e.complete&&e.naturalWidth>0"
                 ):
                     raise RuntimeError("PHOTO_MISSING_BEFORE_SUBMIT")
+                # A React/editor rerender may split a URL after initial typing.
+                # Refuse a submit unless the full link remains one paragraph.
+                if not verify_link_in_one_paragraph(editor, article["candidate_url"]):
+                    raise RuntimeError("PRODUCT_LINK_PARAGRAPH_SPLIT_DO_NOT_SUBMIT")
                 # The deal may have aged past 60 minutes while the image
                 # uploaded. Do not submit such a post, even if already claimed.
                 if article.get("posted_at_utc"):
