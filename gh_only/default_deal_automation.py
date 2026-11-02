@@ -27,7 +27,9 @@ from gh_only.default_deal_format import (
     create_default_preview, validated_history, normalized_product_name,
 )
 from gh_only.affsdp_candidate import compose_affsdp_candidate
-from gh_only.lowchart_product_photo import (\n    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url,\n)\n
+from gh_only.lowchart_product_photo import (
+    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url, 
+)
 ALLOWED_CDN = ("thumbnail.coupangcdn.com", "image.coupangcdn.com")
 MAX_IMAGE_BYTES = 2_500_000
 
