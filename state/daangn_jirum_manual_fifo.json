@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94890,
-  "pending": [],
+  "last_scanned_id": 94892,
+  "pending": [
+    {
+      "id": 94891,
+      "source_post_url": "https://t.me/jirum/94891",
+      "original_purchase_url": "https://link.coupang.com/a/imxZa22jGS",
+      "source_text": "🔥🔥🔥무지성 9,400원 (50.5% 할인)🔥🔥🔥\n얼라이브 속편한 지속성 비타민C 24.3g, 30정, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 19,000원\n- 할인: 9,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxZa22jGS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:17:01+00:00",
+      "title": "얼라이브 속편한 지속성 비타민C 24.3g, 30정, 2개",
+      "sale_price_krw": 9400
+    },
+    {
+      "id": 94892,
+      "source_post_url": "https://t.me/jirum/94892",
+      "original_purchase_url": "https://link.coupang.com/a/imygaT6w2u",
+      "source_text": "🔥🔥🔥무지성 6,490원 (48.8% 할인)🔥🔥🔥\n오뚜기 실쏙 교자만두 고기 (냉동), 1.5kg, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,669원\n- 할인: 6,179원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imygaT6w2u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:20:52+00:00",
+      "title": "오뚜기 실쏙 교자만두 고기 (냉동), 1.5kg, 1개",
+      "sale_price_krw": 6490
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
