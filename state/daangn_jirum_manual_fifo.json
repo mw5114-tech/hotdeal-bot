@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94860,
-  "pending": [
-    {
-      "id": 94860,
-      "source_post_url": "https://t.me/jirum/94860",
-      "original_purchase_url": "https://link.coupang.com/a/ilDqXqZ5fE",
-      "source_text": "☆특가 11,600원\n스탠리 올데이 캐리올 퀜처 H2.0 텀블러 스트랩백 1.18L, 라일락, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilDqXqZ5fE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T09:05:39+00:00",
-      "title": "☆특가 11,600원",
-      "sale_price_krw": 11600
-    }
-  ],
-  "in_flight": {
-    "id": 94860,
-    "status": "CLAIMED",
-    "run_id": "41417984994",
-    "at": "2026-11-02T09:06:55.969585+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -401,6 +386,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%99%80%EB%A9%A4%EB%8D%B0%EC%BF%A0%ED%8F%B0BRAUN-%EC%8B%9C%EB%A6%AC%EC%A6%88-5-%EC%A0%84%EA%B8%B0%EB%A9%B4%EB%8F%84%EA%B8%B0-45%ED%95%A0%EC%9D%B8-PmVn6xed?from=write",
       "at": "2026-11-02T08:59:20.621662+00:00",
       "run_id": "41416960681"
+    },
+    "94860": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%EC%98%AC%EB%8D%B0%EC%9D%B4-%EC%BA%90%EB%A6%AC%EC%98%AC-%ED%80%9C%EC%B2%98-H20-%ED%85%80%EB%B8%94%EB%9F%AC-%EC%8A%A4%ED%8A%B8%EB%9E%A9%EB%B0%B1-118L-%EB%9D%BC%EC%9D%BC%EB%9D%BD-1-A4QWNOoP?from=write",
+      "at": "2026-11-02T09:07:12.796204+00:00",
+      "run_id": "41417984994"
     }
   },
   "skipped_non_coupang": 5,
