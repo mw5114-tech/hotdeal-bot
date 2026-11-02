@@ -3,15 +3,6 @@
   "last_scanned_id": 94836,
   "pending": [
     {
-      "id": 94835,
-      "source_post_url": "https://t.me/jirum/94835",
-      "original_purchase_url": "https://link.coupang.com/a/ilfQ6ZwYea",
-      "source_text": "☆특가 28,610원\n(와멤데 쿠폰)사무실 과자세트 스낵 비스킷쿠키 12입 세트 * 2개선택필수\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilfQ6ZwYea\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "☆특가 28,610원",
-      "sale_price_krw": 28610,
-      "posted_at_utc": "2026-11-02T03:35:43+00:00"
-    },
-    {
       "id": 94836,
       "source_post_url": "https://t.me/jirum/94836",
       "original_purchase_url": "https://link.coupang.com/a/ilh24VHuKq",
@@ -610,6 +601,14 @@
       "source_title": "풀무원 동치미냉면 4인분, 1.692kg, 5개",
       "posted_at_utc": "2026-11-02T02:38:23+00:00",
       "at": "2026-11-02T04:17:08.645468+00:00"
+    }
+  },
+  "skipped_unverifiable": {
+    "94835": {
+      "status": "LOWCHART_TELEGRAM_TITLE_MISMATCH",
+      "source_post_url": "https://t.me/jirum/94835",
+      "source_title": "☆특가 28,610원",
+      "at": "2026-11-02T04:17:22.142228+00:00"
     }
   }
 }
