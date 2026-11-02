@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94869,
+  "last_scanned_id": 94870,
   "pending": [
     {
       "id": 94869,
@@ -10,6 +10,15 @@
       "posted_at_utc": "2026-11-02T11:49:29+00:00",
       "title": "☆특가 4,990원",
       "sale_price_krw": 4990
+    },
+    {
+      "id": 94870,
+      "source_post_url": "https://t.me/jirum/94870",
+      "original_purchase_url": "https://link.coupang.com/a/ilQaTHPN6W",
+      "source_text": "☆특가 9,640원 (28.7% 할인)\n풀무원 우렁 강된장, 150g, 8입\n📌 가격 현황\n- 정상가: 13,520원\n- 할인: 3,880원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilQaTHPN6W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T12:03:57+00:00",
+      "title": "풀무원 우렁 강된장, 150g, 8입",
+      "sale_price_krw": 9640
     }
   ],
   "in_flight": null,
