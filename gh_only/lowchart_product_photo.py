@@ -13,7 +13,7 @@ import re
 from urllib import request, error
 from urllib.parse import urlsplit
 
-from gh_only.default_deal_format import normalized_product_name
+from gh_only.default_deal_format import normalized_product_name, same_named_option
 from gh_only.lowchart_price_reference import build_url
 from gh_only.shortlink_probe import StopRedirect
 
@@ -81,7 +81,7 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     out["og_title"] = item_title
     source = normalized_product_name(telegram_title)
     observed = normalized_product_name(item_title)
-    if not source or len(source) < 8 or source != observed:
+    if not source or len(source) < 8 or not (source == observed or same_named_option(telegram_title, item_title)):
         out["status"] = "LOWCHART_TELEGRAM_TITLE_MISMATCH"
         return out
     selected = [
