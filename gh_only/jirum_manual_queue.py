@@ -671,13 +671,13 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
     if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" and outcome.get("post_url"):
         if state["pending"][0]["id"] != source_id:
             raise RuntimeError("FIFO_HEAD_CHANGED")
-        state["pending"].pop(0)
+        submitted_row = state["pending"].pop(0)
         state["published"][str(source_id)] = {
             "status": ("PUBLISHED_AWAITING_MUSE"
                        if outcome.get("muse_rewrite_pending") is True
                        else "PUBLISHED_VERIFIED"),
             "post_url": outcome["post_url"],
-            "posted_at_utc": state["pending"][0].get("posted_at_utc"),
+            "posted_at_utc": submitted_row.get("posted_at_utc"),
             "product_id": outcome.get("product_id"),
             "item_id": outcome.get("item_id"),
             "vendor_item_id": outcome.get("vendor_item_id"),
