@@ -391,6 +391,50 @@ class ManualQueueTests(unittest.TestCase):
         self.assertEqual(store.value["pending"],[])
         publisher.assert_called_once()
 
+    def test_lowchart_transport_error_is_audited_and_next_item_publishes(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{
+                    "product_identity": {"status": "EXACT_ITEM_IDENTIFIED"},
+                    "image_metadata_status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                    "photo": {"status": "NO_MATCHING_PRODUCT_IMAGE"},
+                }]
+            }), encoding="utf-8")
+            def build(current):
+                if current["pending"][0]["id"] == 94744:
+                    raise RuntimeError("POST_EVIDENCE_NOT_READY")
+                return {"source_id": current["pending"][0]["id"]}
+            with (patch.dict(os.environ, {
+                    "GITHUB_RUN_ID": "skip-image-error",
+                    "JIRUM_IMAGE_SOURCE": "lowchart"}),
+                  patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder),
+                  patch("gh_only.jirum_manual_queue.build_next", side_effect=build),
+                  patch("gh_only.jirum_manual_publisher.publish_one", return_value={
+                      "status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                      "submit_attempted": True,
+                      "post_url": "https://cafe.daangn.com/posts/94745",
+                  }) as publisher):
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(store.value["skipped_unverifiable"]["94744"]["status"],
+                         "PHOTO_EVIDENCE_UNAVAILABLE")
+        self.assertEqual(store.value["published"]["94745"]["status"],
+                         "PUBLISHED_VERIFIED")
+        self.assertEqual(store.value["pending"], [])
+        publisher.assert_called_once()
+
+    def test_original_photo_candidate_is_saved_with_queued_item(self):
+        source = deal(94744)
+        source["image_provenance"] = "telegram_attached_photo"
+        source["image_url_candidate"] = "https://cdn4.telesco.pe/file/source.jpg"
+        state, _, _ = ingest(baseline(), [source])
+        self.assertEqual(state["pending"][0]["image_provenance"],
+                         "telegram_attached_photo")
+        self.assertEqual(state["pending"][0]["image_url_candidate"],
+                         "https://cdn4.telesco.pe/file/source.jpg")
+
     def test_lowchart_photo_passes_real_pre_submit_draft_verifier(self):
         from gh_only.daangn_editor_probe import read_one_draft
         from gh_only.jirum_manual_queue import validate_draft
