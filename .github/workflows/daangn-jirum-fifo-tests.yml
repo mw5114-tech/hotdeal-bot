@@ -8,6 +8,7 @@ on:
       - feat/daangn-post-then-muse-rewrite-20261103
       - fix/daangn-coupang-link-line-spacing-20261103
       - fix/restore-original-affsdp-auto-post-20261103
+      - test/one-shot-repost-latest-daangn-20261103
       - feat/daangn-lowchart-title-20261102
       - fix/lowchart-source-photo-fifo-20261102
       - feat/manual-jirum-fifo-daangn-20261101
@@ -38,6 +39,9 @@ on:
       - 'gh_only/test_direct_product_links.py'
       - 'gh_only/test_muse_postedit_flow.py'
       - 'gh_only/test_affsdp_restore.py'
+      - 'gh_only/one_shot_test_repost.py'
+      - 'gh_only/test_one_shot_repost.py'
+      - '.github/workflows/one-shot-jirum-repost-20261103.yml'
       - 'gh_only/test_jirum_manual_queue.py'
       - 'gh_only/default_deal_automation.py'
       - 'gh_only/default_deal_format.py'
@@ -75,7 +79,7 @@ jobs:
       - name: Compile queue, publisher, tests
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
-          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_official_link_receipts gh_only.test_official_link_integration gh_only.test_direct_product_links gh_only.test_muse_postedit_flow gh_only.test_affsdp_candidate gh_only.test_affsdp_restore
+          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_official_link_receipts gh_only.test_official_link_integration gh_only.test_direct_product_links gh_only.test_muse_postedit_flow gh_only.test_affsdp_candidate gh_only.test_affsdp_restore gh_only.test_one_shot_repost
           python -m py_compile tools/refresh_kakao_storage_secret.py tools/test_refresh_kakao_storage_secret.py
           python -m unittest -v tools.test_refresh_kakao_storage_secret
           python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py gh_only/daangn_photo_upload_probe.py
