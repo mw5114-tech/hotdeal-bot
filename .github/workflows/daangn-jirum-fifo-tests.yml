@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/daangn-body-discount-first-20261102
+      - feat/muse-official-link-receipts-20261103
       - feat/daangn-lowchart-title-20261102
       - fix/lowchart-source-photo-fifo-20261102
       - feat/manual-jirum-fifo-daangn-20261101
@@ -27,6 +28,8 @@ on:
       - fix/raw-watcher-event-dispatch-production-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
+      - 'gh_only/official_link_receipts.py'
+      - 'gh_only/test_official_link_receipts.py'
       - 'gh_only/test_jirum_manual_queue.py'
       - 'gh_only/default_deal_automation.py'
       - 'gh_only/default_deal_format.py'
@@ -64,7 +67,7 @@ jobs:
       - name: Compile queue, publisher, tests
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
-          python -m unittest -v gh_only.test_jirum_manual_queue
+          python -m unittest -v gh_only.test_jirum_manual_queue gh_only.test_official_link_receipts
           python -m py_compile tools/refresh_kakao_storage_secret.py tools/test_refresh_kakao_storage_secret.py
           python -m unittest -v tools.test_refresh_kakao_storage_secret
           python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py gh_only/daangn_photo_upload_probe.py
@@ -91,6 +94,8 @@ jobs:
           assert "workflow_dispatch:" in yaml_text
           assert "JIRUM_IMAGE_SOURCE: lowchart" in yaml_text
           assert "JIRUM_REQUIRE_FRESH_POST: 'true'" in yaml_text
+          assert "JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'true'" in yaml_text
+          assert "'links/*.json'" in yaml_text
           assert "KAKAO_DEV_STORAGE_STATE_JSON:" not in yaml_text
           assert "smoke_test:" in yaml_text
           assert "github.event_name != 'workflow_dispatch' || inputs.smoke_test != true" in yaml_text
