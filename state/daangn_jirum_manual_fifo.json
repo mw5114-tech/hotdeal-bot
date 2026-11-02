@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94822,
+  "last_scanned_id": 94823,
   "pending": [
     {
       "id": 94789,
@@ -273,6 +273,14 @@
       "source_text": "☆특가 13,590원 (28.5% 할인)\n삼양 볶음간짬뽕, 20개\n📌 가격 현황\n- 정상가: 19,000원\n- 할인: 5,410원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ik3Ce6bma4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "삼양 볶음간짬뽕, 20개",
       "sale_price_krw": 13590
+    },
+    {
+      "id": 94823,
+      "source_post_url": "https://t.me/jirum/94823",
+      "original_purchase_url": "https://link.coupang.com/a/ik4GnSw74u",
+      "source_text": "☆특가 17,900원\n아카페라 심플리 아메리카노 무라벨, 400ml, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ik4GnSw74u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 17,900원",
+      "sale_price_krw": 17900
     }
   ],
   "in_flight": null,
