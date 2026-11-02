@@ -185,8 +185,9 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertTrue(result["image_exact_item_page_verified"])
         self.assertFalse(result["image_same_named_option"])
         caption = result["caption"]["caption"]
-        self.assertIn("상품명 : " + NAME, caption)
+        self.assertIn("[할인율 확인 중] " + NAME, caption)
         self.assertNotIn("상품명 : " + telegram_name, caption)
+        self.assertNotIn("📦", caption)
         self.assertTrue(result["lowchart_title_verified"])
         self.assertEqual(result["product_name_source"], "lowchart_exact_item_page")
         self.assertEqual(result["lowchart_product_title"], NAME)
