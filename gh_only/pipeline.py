@@ -246,6 +246,7 @@ def enrich_posts(html: str, max_posts: int = 8) -> list[dict]:
             "source_post_url": f"https://t.me/jirum/{post['id']}",
             "title": post["title"], "original_purchase_url": post["product_url"],
             "source_text": post["text"],
+            "posted_at_utc": post.get("posted_at_utc"),
             "image_url_candidate": chosen_image,
             "image_provenance": image_source,
             "image_verified_for_exact_option": False,
