@@ -27,3 +27,5 @@ User requested resume/check real automation; trigger one immediate FIFO scan 202
 Validate id-only option mismatch acceptance in live fresh FIFO after PR #52 (2026-11-02).
 
 Recovery validation after PR #56 — 2026-11-02 21:40 KST (single trigger)
+
+Lowchart-title source validation after PR #57 — 2026-11-02 21:55 KST (one normal live FIFO run)
