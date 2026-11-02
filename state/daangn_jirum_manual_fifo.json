@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94854,
-  "pending": [
-    {
-      "id": 94854,
-      "source_post_url": "https://t.me/jirum/94854",
-      "original_purchase_url": "https://link.coupang.com/a/ilyp3iBXFY",
-      "source_text": "☆특가 9,200원\n센소다인 멀티케어 치약, 100g, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilyp3iBXFY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T07:55:29+00:00",
-      "title": "☆특가 9,200원",
-      "sale_price_krw": 9200
-    }
-  ],
-  "in_flight": {
-    "id": 94854,
-    "status": "CLAIMED",
-    "run_id": "41409512462",
-    "at": "2026-11-02T07:56:41.655807+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -365,6 +350,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%91%9C-%EC%88%9C%EC%95%8C%EC%BD%A9-%EA%B5%AD%EA%B0%84%EC%9E%A5-1%EA%B0%9C-840ml-840ml1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PwwYJ4vP?from=write",
       "at": "2026-11-02T07:31:01.066557+00:00",
       "run_id": "41406718899"
+    },
+    "94854": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%BC%EC%86%8C%EB%8B%A4%EC%9D%B8-%EB%A9%80%ED%8B%B0%EC%BC%80%EC%96%B4-%EC%B9%98%EC%95%BD-100g-3%EA%B0%9C-25%ED%95%A0%EC%9D%B8-jK2gy7Gd?from=write",
+      "at": "2026-11-02T07:56:57.863300+00:00",
+      "run_id": "41409512462"
     }
   },
   "skipped_non_coupang": 5,
