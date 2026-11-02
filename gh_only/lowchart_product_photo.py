@@ -66,7 +66,7 @@ class _ProductPictureHTML(HTMLParser):
 def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     """Trust exact product/item IDs, not Telegram-versus-Lowchart option text."""
     out = {"status": "LOWCHART_ITEM_NOT_VERIFIED", "og_title": None,
-           "og_url": None, "og_image": None}
+           "og_url": None, "og_image": None, "lowchart_title_verified": False}
     pid, iid = identity.get("product_id"), identity.get("item_id")
     if (identity.get("status") != "EXACT_ITEM_IDENTIFIED"
             or not isinstance(pid, str) or not isinstance(iid, str)):
@@ -91,6 +91,10 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     if (not observed or re.fullmatch(r"[-–]?\s*[\d,]+\s*원", item_title)):
         out["status"] = "LOWCHART_PAGE_PRODUCT_TITLE_MISSING"
         return out
+    # The page is bound to the exact resolved product/item IDs. The
+    # product name is independently verified even if its image is missing.
+    out["og_url"] = url
+    out["lowchart_title_verified"] = True
     source_title_matches = bool(
         source and (source == observed or same_named_option(telegram_title, item_title))
     )
@@ -105,6 +109,7 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
         return out
     return {"status": "LOWCHART_EXACT_ITEM_IMAGE", "og_title": item_title,
             "og_url": url, "og_image": selected[0],
+            "lowchart_title_verified": True,
             "image_source": "lowchart_exact_item_public_page",
             "image_same_named_option": source_title_matches,
             "image_match_basis": "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID"}
