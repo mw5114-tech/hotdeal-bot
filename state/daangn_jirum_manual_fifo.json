@@ -3,15 +3,6 @@
   "last_scanned_id": 94892,
   "pending": [
     {
-      "id": 94891,
-      "source_post_url": "https://t.me/jirum/94891",
-      "original_purchase_url": "https://link.coupang.com/a/imxZa22jGS",
-      "source_text": "🔥🔥🔥무지성 9,400원 (50.5% 할인)🔥🔥🔥\n얼라이브 속편한 지속성 비타민C 24.3g, 30정, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 19,000원\n- 할인: 9,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxZa22jGS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:17:01+00:00",
-      "title": "얼라이브 속편한 지속성 비타민C 24.3g, 30정, 2개",
-      "sale_price_krw": 9400
-    },
-    {
       "id": 94892,
       "source_post_url": "https://t.me/jirum/94892",
       "original_purchase_url": "https://link.coupang.com/a/imygaT6w2u",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6490
     }
   ],
-  "in_flight": {
-    "id": 94891,
-    "status": "CLAIMED",
-    "run_id": "41536618671",
-    "at": "2026-11-02T22:22:15.252499+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -600,6 +586,16 @@
       "vendor_item_id": "86533234393",
       "at": "2026-11-02T22:13:29.788819+00:00",
       "run_id": "41535288062"
+    },
+    "94891": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%96%BC%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EC%86%8D%ED%8E%B8%ED%95%9C-%EC%A7%80%EC%86%8D%EC%84%B1-%EB%B9%84%ED%83%80%EB%AF%BCC-243g-30%EC%A0%95-2%EA%B0%9C-50%ED%95%A0%EC%9D%B8-j8rZxWRP?from=write",
+      "posted_at_utc": "2026-11-02T22:17:01+00:00",
+      "product_id": "8634842837",
+      "item_id": "25755923604",
+      "vendor_item_id": "94167001267",
+      "at": "2026-11-02T22:22:33.238868+00:00",
+      "run_id": "41536618671"
     }
   },
   "skipped_non_coupang": 8,
