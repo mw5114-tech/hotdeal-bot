@@ -46,6 +46,8 @@ jobs:
         run: |
           python -m py_compile gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_queue.py
           python -m unittest -v gh_only.test_jirum_manual_queue
+          python -m py_compile tools/refresh_kakao_storage_secret.py tools/test_refresh_kakao_storage_secret.py
+          python -m unittest -v tools.test_refresh_kakao_storage_secret
           python -m py_compile gh_only/jirum_manual_publisher.py gh_only/test_jirum_manual_publisher.py gh_only/daangn_post_readonly_audit.py gh_only/daangn_photo_upload_probe.py
           python -m unittest -v gh_only.test_jirum_manual_publisher
           python - <<'PY'
