@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94845,
-  "pending": [
-    {
-      "id": 94845,
-      "source_post_url": "https://t.me/jirum/94845",
-      "original_purchase_url": "https://link.coupang.com/a/ilnhNr67EW",
-      "source_text": "👍대박 15,960원 (30.6% 할인)\n곰곰 돌돌이 무연골 대패 삼겹살 (냉동), 1kg, 2개\n📌 가격 현황\n- 정상가: 23,000원\n- 할인: 7,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilnhNr67EW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T05:19:41+00:00",
-      "title": "곰곰 돌돌이 무연골 대패 삼겹살 (냉동), 1kg, 2개",
-      "sale_price_krw": 15960
-    }
-  ],
-  "in_flight": {
-    "id": 94845,
-    "status": "CLAIMED",
-    "run_id": "41393407529",
-    "at": "2026-11-02T05:20:31.864865+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -317,6 +302,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B0%B1%EC%84%A4-%EB%8F%BC%EC%A7%80%EA%B0%88%EB%B9%84-%EC%96%91%EB%85%90-840g-1%EA%B0%9C-55%ED%95%A0%EC%9D%B8-PnNQlWyP?from=write",
       "at": "2026-11-02T04:58:44.615299+00:00",
       "run_id": "41391311587"
+    },
+    "94845": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%8F%8C%EB%8F%8C%EC%9D%B4-%EB%AC%B4%EC%97%B0%EA%B3%A8-%EB%8C%80%ED%8C%A8-%EC%82%BC%EA%B2%B9%EC%82%B4-%EB%83%89%EB%8F%99-1kg-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pk6XNkxA?from=write",
+      "at": "2026-11-02T05:20:48.188741+00:00",
+      "run_id": "41393407529"
     }
   },
   "skipped_non_coupang": 4,
