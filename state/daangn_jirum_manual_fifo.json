@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94894,
-  "pending": [
-    {
-      "id": 94894,
-      "source_post_url": "https://t.me/jirum/94894",
-      "original_purchase_url": "https://link.coupang.com/a/imyAIgNpbE",
-      "source_text": "🔥🔥🔥무지성 5,560원 (60.1% 할인)🔥🔥🔥\n케라시스 두피 비듬케어 딥클린 쿨링 단백질 샴푸, 600ml, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,946원\n- 할인: 8,386원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imyAIgNpbE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:25:30+00:00",
-      "title": "케라시스 두피 비듬케어 딥클린 쿨링 단백질 샴푸, 600ml, 2개",
-      "sale_price_krw": 5560
-    }
-  ],
-  "in_flight": {
-    "id": 94894,
-    "status": "CLAIMED",
-    "run_id": "41537209375",
-    "at": "2026-11-02T22:26:33.358363+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -611,6 +596,16 @@
       "vendor_item_id": "77431246653",
       "at": "2026-11-02T22:23:48.991223+00:00",
       "run_id": "41536804616"
+    },
+    "94894": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BC%80%EB%9D%BC%EC%8B%9C%EC%8A%A4-%EB%91%90%ED%94%BC-%EB%B9%84%EB%93%AC%EC%BC%80%EC%96%B4-%EB%94%A5%ED%81%B4%EB%A6%B0-%EC%BF%A8%EB%A7%81-%EB%8B%A8%EB%B0%B1%EC%A7%88-%EC%83%B4%ED%91%B8-600ml-2%EA%B0%9C-dz9o7YpP?from=write",
+      "posted_at_utc": "2026-11-02T22:25:30+00:00",
+      "product_id": "8463498658",
+      "item_id": "23774319826",
+      "vendor_item_id": "90798554585",
+      "at": "2026-11-02T22:26:51.433141+00:00",
+      "run_id": "41537209375"
     }
   },
   "skipped_non_coupang": 8,
