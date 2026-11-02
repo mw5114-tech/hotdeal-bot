@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94838,
-  "pending": [],
+  "last_scanned_id": 94839,
+  "pending": [
+    {
+      "id": 94839,
+      "source_post_url": "https://t.me/jirum/94839",
+      "original_purchase_url": "https://link.coupang.com/a/iljNv5aVeC",
+      "source_text": "☆특가 15,650원\n미샤 크리미 라떼 클렌징 폼 카카오, 172ml, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iljNv5aVeC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T04:30:53+00:00",
+      "title": "☆특가 15,650원",
+      "sale_price_krw": 15650
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
