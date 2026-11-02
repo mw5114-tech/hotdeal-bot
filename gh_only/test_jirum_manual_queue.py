@@ -2,6 +2,7 @@
 import copy
 import json
 import os
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 import tempfile
 import unittest
@@ -10,6 +11,7 @@ from unittest.mock import patch
 from gh_only.jirum_manual_queue import (
     START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest,
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
+    freshness_status, expire_pending,
 )
 
 
@@ -284,6 +286,144 @@ class ManualQueueTests(unittest.TestCase):
         }
         with self.assertRaisesRegex(ValueError, "INVALID_KAKAO_AUTH_BLOCK"):
             validate_state(s)
+
+    def test_expire_archive_preserves_old_and_unknown_posts(self):
+        reference = datetime(2026, 11, 2, 4, 0, tzinfo=timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744),deal(94745),deal(94746),deal(94747)])
+        s["pending"][0]["posted_at_utc"] = (reference - timedelta(hours=4)).isoformat()
+        s["pending"][1]["posted_at_utc"] = None
+        s["pending"][2]["posted_at_utc"] = (reference + timedelta(hours=2)).isoformat()
+        s["pending"][3]["posted_at_utc"] = (reference - timedelta(minutes=5)).isoformat()
+        out, expired = expire_pending(s, reference=reference)
+        self.assertEqual(expired, 3)
+        self.assertEqual([x["id"] for x in out["pending"]], [94747])
+        self.assertEqual(out["skipped_expired"]["94744"]["status"],
+                         "DEAL_OVER_60_MINUTES_OLD")
+        self.assertEqual(out["skipped_expired"]["94745"]["status"], "POSTED_AT_UNKNOWN")
+        self.assertEqual(out["skipped_expired"]["94746"]["status"], "POSTED_AT_IN_FUTURE")
+        self.assertNotIn("skipped_expired", s)
+        self.assertEqual(len(s["pending"]), 4)
+        validate_state(out)
+
+    def test_lowchart_scan_backfills_latest_and_removes_old_kakao_lock(self):
+        now = datetime.now(timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        with patch.dict(os.environ, {"KAKAO_DEV_STORAGE_STATE_JSON": "old-value"}):
+            s["kakao_auth_block"] = {
+                "reason":"KAKAO_LOGIN_EXPIRED", "source_id":94744,
+                "detected_at":now.isoformat(),
+                "secret_fingerprint":kakao_secret_fingerprint(),
+            }
+        store = FakeStore(s)
+        recent = {"source_message_id":94745, "posted_at_utc":now.isoformat()}
+        with patch.dict(os.environ, {
+            "JIRUM_IMAGE_SOURCE":"lowchart", "JIRUM_REQUIRE_FRESH_POST":"true"
+        }), patch("gh_only.jirum_manual_queue.collect_since", return_value=[]), \
+                patch("gh_only.jirum_manual_queue.enrich_posts", return_value=[recent]):
+            res = scan(store, latest_fetch=lambda: "<div>public</div>")
+        self.assertTrue(res["has_deal"])
+        self.assertEqual(res["source_id"], 94745)
+        self.assertEqual(res["expired_without_post"], 1)
+        self.assertNotIn("kakao_auth_block", store.value)
+        self.assertEqual(store.value["skipped_expired"]["94744"]["status"],
+                         "POSTED_AT_UNKNOWN")
+        self.assertEqual(store.value["pending"][0]["posted_at_utc"], now.isoformat())
+        self.assertEqual(len(store.writes), 1)
+
+    def test_freshness_enforcement_does_not_post_untimed_legacy(self):
+        now = datetime.now(timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744),deal(94745)])
+        s["pending"][1]["posted_at_utc"] = now.isoformat()
+        store = FakeStore(s)
+        with patch.dict(os.environ, {
+            "GITHUB_RUN_ID":"fresh-test",
+            "JIRUM_REQUIRE_FRESH_POST":"true",
+        }), patch("gh_only.jirum_manual_queue.build_next",
+                  side_effect=lambda state: {"source_id":state["pending"][0]["id"]}), \
+                patch("gh_only.jirum_manual_publisher.publish_one",
+                      return_value={"status":"POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                    "post_url":"https://cafe.daangn.com/posts/94745",
+                                    "submit_attempted":True}) as pub:
+            self.assertEqual(publish_pending(store, drain=True, clock=lambda:0),0)
+        self.assertEqual(pub.call_count,1)
+        self.assertIn("94744",store.value["skipped_expired"])
+        self.assertEqual(store.value["published"]["94745"]["status"],"PUBLISHED_VERIFIED")
+        self.assertIsNone(store.value["in_flight"])
+
+    def test_freshness_boundaries_and_missing_timezone_are_rejected(self):
+        now = datetime(2026,11,2,4,0,tzinfo=timezone.utc)
+        self.assertEqual(freshness_status({
+            "posted_at_utc":(now-timedelta(minutes=59)).isoformat()
+        },reference=now),"FRESH")
+        self.assertEqual(freshness_status({
+            "posted_at_utc":(now-timedelta(minutes=61)).isoformat()
+        },reference=now),"DEAL_OVER_60_MINUTES_OLD")
+        self.assertEqual(freshness_status({
+            "posted_at_utc":"2026-11-02T04:00:00"
+        },reference=now),"POSTED_AT_UNKNOWN")
+
+    def test_unverifiable_lowchart_photo_skips_only_bad_deal(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{"image_metadata_status":
+                            "LOWCHART_TELEGRAM_TITLE_MISMATCH"}]
+            }), encoding="utf-8")
+            def build(current):
+                if current["pending"][0]["id"] == 94744:
+                    raise RuntimeError("POST_EVIDENCE_NOT_READY")
+                return {"source_id": current["pending"][0]["id"]}
+            with patch.dict(os.environ, {
+                "GITHUB_RUN_ID":"skip-unverifiable",
+                "JIRUM_IMAGE_SOURCE":"lowchart",
+            }), patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder), \
+                    patch("gh_only.jirum_manual_queue.build_next", side_effect=build), \
+                    patch("gh_only.jirum_manual_publisher.publish_one",
+                          return_value={"status":"POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                        "submit_attempted":True,
+                                        "post_url":"https://cafe.daangn.com/posts/94745"}) as publisher:
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda:0),0)
+        self.assertIn("94744", store.value["skipped_unverifiable"])
+        self.assertEqual(store.value["published"]["94745"]["status"],"PUBLISHED_VERIFIED")
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual(store.value["pending"],[])
+        publisher.assert_called_once()
+
+    def test_lowchart_photo_passes_real_pre_submit_draft_verifier(self):
+        from gh_only.daangn_editor_probe import read_one_draft
+        from gh_only.jirum_manual_queue import validate_draft
+        from gh_only.test_daangn_editor_probe import DaangnEditorOfflineTests
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            report = DaangnEditorOfflineTests()._make_draft(folder)
+            row = report["drafts"][0]
+            old = folder / row["photo"]["saved_name"]
+            row["photo"]["saved_name"] = "jirum_94717_lowchart_photo.jpg"
+            old.rename(folder / row["photo"]["saved_name"])
+            row.update({
+                "image_product_match":True,
+                "image_source":"lowchart_exact_item_public_page",
+                "image_exact_item_page_verified":True,
+                "kakao_product_match":False,
+                "product_identity":{
+                    "status":"EXACT_ITEM_IDENTIFIED",
+                    "product_id":"9217210892","item_id":"27232840915",
+                },
+            })
+            row["caption"]["sale_price_krw"] = 12050
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE":"lowchart",
+                "COUPANG_PARTNER_LPTAG":"AF9668915"
+            }):
+                out = validate_draft(folder, 94717)
+            self.assertEqual(out["source_id"],94717)
+            self.assertEqual(out["image"].name,"jirum_94717_lowchart_photo.jpg")
+            self.assertEqual(out["product_id"],"9217210892")
 
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [

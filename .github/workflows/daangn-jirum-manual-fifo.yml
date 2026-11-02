@@ -47,7 +47,9 @@ jobs:
     env:
       GH_STATE_TOKEN: ${{ github.token }}
       COUPANG_PARTNER_LPTAG: AF9668915
-      KAKAO_DEV_STORAGE_STATE_JSON: ${{ secrets.KAKAO_DEV_STORAGE_STATE_JSON }}
+      # No Kakao credentials: public exact-item Lowchart photos only.
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_REQUIRE_FRESH_POST: 'true'
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
     steps:
       - name: Checkout only required source files
