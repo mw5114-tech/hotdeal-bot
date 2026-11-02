@@ -1,0 +1,53 @@
+name: Probe | Jirum public images (READ ONLY)
+on:
+  push:
+    branches: [research/jirum-photo-fallback-20261102]
+    paths: ['.github/workflows/probe-jirum-photo-fallback.yml']
+permissions:
+  contents: read
+jobs:
+  inspect-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read public Telegram photo/link preview metadata only
+        run: |
+          python - <<'PY'
+          import collections
+          import json
+          from urllib.parse import urlsplit
+          from gh_only.jirum_manual_queue import older_html
+          from gh_only.pipeline import enrich_posts
+          samples = []
+          for before in (94790, 94815, 94835):
+              try:
+                  rows = enrich_posts(older_html(before), max_posts=200)
+              except Exception as exc:
+                  print("PUBLIC_TELEGRAM_ERROR " + type(exc).__name__)
+                  continue
+              matches = [r for r in rows if 94789 <= r['source_message_id'] <= 94834]
+              for r in matches:
+                  img = r.get('image_url_candidate')
+                  samples.append({
+                      'id': r['source_message_id'],
+                      'image_provenance':r['image_provenance'],
+                      'image_host': urlsplit(img).hostname if img else None,
+                      'has_image':bool(img),
+                      'product_url_kind':r.get('url_kind'),
+                  })
+          byid = {r['id']:r for r in samples}
+          print("PHOTO_FALLBACK_PUBLIC_PROBE " + json.dumps({
+              'inspected_posts':len(byid),
+              'image_sources': dict(collections.Counter(r['image_provenance'] for r in byid.values())),
+              'first_stalled_post': byid.get(94789),
+              'recent_samples':[byid.get(mid) for mid in [94790,94791,94800,94810,94820,94830,94834]],
+              'posts_published':0,
+              'state_changed':False,
+          },ensure_ascii=False))
+          PY
