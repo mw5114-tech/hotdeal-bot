@@ -58,15 +58,44 @@ class LowchartProductPhotoTests(unittest.TestCase):
         result = parse_item_photo(html, ITEM, NAME)
         self.assertEqual(result["status"], "LOWCHART_EXACT_ITEM_IMAGE")
 
-    def test_reject_conflicting_required_package_count_even_with_same_base(self):
-        html = BASE_HTML.replace(NAME, NAME + ", 12p")
+    def test_allow_different_package_count_when_exact_product_item_ids_match(self):
+        # An option mismatch must not block the image or the article:
+        # the source link productId/itemId, not its displayed text, is key.
         source = NAME.replace(", 1개", ", 2개")
-        self.assertEqual(parse_item_photo(html, ITEM, source)["status"],
-                         "LOWCHART_TELEGRAM_TITLE_MISMATCH")
+        result = parse_item_photo(BASE_HTML, ITEM, source)
+        self.assertEqual(result["status"], "LOWCHART_EXACT_ITEM_IMAGE")
+        self.assertFalse(result["image_same_named_option"])
+        self.assertEqual(result["image_match_basis"], "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID")
+        self.assertEqual(result["og_image"], URL)
 
-    def test_reject_wrong_color_or_option_in_telegram(self):
-        actual = parse_item_photo(BASE_HTML, ITEM, NAME.replace("블랙 + 실버", "화이트"))
-        self.assertEqual(actual["status"], "LOWCHART_TELEGRAM_TITLE_MISMATCH")
+    def test_allow_different_color_or_completely_different_name(self):
+        for source in (
+            NAME.replace("블랙 + 실버", "화이트"),
+            "다른 색상과 상품명, 500ml, 3개",
+        ):
+            with self.subTest(source=source):
+                actual = parse_item_photo(BASE_HTML, ITEM, source)
+                self.assertEqual(actual["status"], "LOWCHART_EXACT_ITEM_IMAGE")
+                self.assertFalse(actual["image_same_named_option"])
+
+    def test_reject_different_product_id_even_if_image_looks_valid(self):
+        changed = BASE_HTML.replace(PID, "9999999999")
+        self.assertEqual(
+            parse_item_photo(changed, ITEM, NAME)["status"],
+            "LOWCHART_ITEM_IDS_MISSING",
+        )
+
+    def test_reject_missing_page_title_even_if_photo_matches_source(self):
+        page = BASE_HTML.replace(
+            NAME + " - 39,150원 - 로우차트", " - 39,150원 - 로우차트"
+        )
+        self.assertEqual(parse_item_photo(page, ITEM, NAME)["status"],
+                         "LOWCHART_PAGE_PRODUCT_TITLE_MISSING")
+
+    def test_reject_image_alt_not_matching_own_lowchart_page_title(self):
+        page = BASE_HTML.replace('alt="' + NAME + '"', 'alt="다른 추천 상품"')
+        self.assertEqual(parse_item_photo(page, ITEM, NAME)["status"],
+                         "LOWCHART_PRODUCT_IMAGE_NOT_FOUND")
 
     def test_reject_ads_images_chart_and_duplicate_matching_imgs(self):
         only_chart = BASE_HTML.replace('<img src="' + URL + '" alt="' + NAME + '">', "")
@@ -114,6 +143,43 @@ class LowchartProductPhotoTests(unittest.TestCase):
             saved = download_exact_photo(URL, Path(tmp), 94789, opener=bad)
             self.assertEqual(saved["status"], "LOWCHART_IMAGE_CONTENT_INVALID")
             self.assertEqual(list(Path(tmp).iterdir()), [])
+
+    def test_default_enrichment_uses_telegram_name_when_lowchart_option_differs(self):
+        from gh_only.default_deal_automation import enrich_deal
+        telegram_name = NAME.replace("블랙 + 실버, 1개", "화이트, 2개")
+        deal = {
+            "source_message_id": 94888,
+            "source_post_url": "https://t.me/jirum/94888",
+            "source_text": "☆특가 11,000원\n" + telegram_name +
+                           "\nhttps://link.coupang.com/a/test",
+            "title": telegram_name,
+            "sale_price_krw": 11000,
+            "original_purchase_url": "https://link.coupang.com/a/test",
+        }
+        photo = parse_item_photo(BASE_HTML, ITEM, telegram_name)
+        self.assertEqual(photo["status"], "LOWCHART_EXACT_ITEM_IMAGE")
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                   return_value=photo), \
+             patch("gh_only.default_deal_automation.download_exact_photo",
+                   return_value={"status": "IMAGE_SAVED",
+                                 "saved_name": "jirum_94888_lowchart_photo.jpg"}), \
+             patch("gh_only.default_deal_automation.get_kakao_og",
+                   side_effect=AssertionError("No Kakao login")) as kakao:
+            result = enrich_deal(
+                deal, Path(tmp), resolver=lambda _: ITEM,
+                history_fetch=lambda *args: {"usable_historical_reference": False},
+                owner_tag="AF9668915",
+            )
+        self.assertEqual(result["photo"]["status"], "IMAGE_SAVED")
+        self.assertTrue(result["image_product_match"])
+        self.assertTrue(result["image_exact_item_page_verified"])
+        self.assertFalse(result["image_same_named_option"])
+        caption = result["caption"]["caption"]
+        self.assertIn("상품명 : " + telegram_name, caption)
+        self.assertNotIn("상품명 : " + NAME, caption)
+        self.assertIn("핫딜 특가 : 11,000원", caption)
+        kakao.assert_not_called()
 
     def test_default_enrichment_does_not_call_kakao(self):
         from gh_only.default_deal_automation import enrich_deal

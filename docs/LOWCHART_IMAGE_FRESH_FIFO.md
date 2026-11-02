@@ -18,14 +18,22 @@ Telegram forwarding is untouched.
 
 1. Follow one known Coupang short-link hop to get `productId` and `itemId`.
 2. Request only `https://www.lowchart.com/<productId>-<itemId>` (no login).
-3. Require exact ID presence in the public page and a product title matching
-   the source name. Additional color/model details can follow an unambiguous
-   source-name prefix, but contradictory sizes or counts are rejected.
-4. Select exactly one actual HTML `<img>` with matching product-title `alt`;
-   **never select Lowchart's price-chart OG graphic or other recommendations**.
-5. Require an HTTPS Coupang CDN image host, real image MIME/magic, no redirects,
+3. Require both exact IDs in the Lowchart exact-item page. **Do not require
+   its product title, color, package count or option description to agree with
+   the original Telegram source**. This is explicitly the user's requested
+   productId+itemId-only eligibility rule.
+4. Select exactly one real HTML `<img>` from that exact item page whose
+   `alt` matches **Lowchart's own page product title**. Do not choose the
+   price-history chart, advertisements or other product recommendations.
+   If the page has no identifiable product image or multiple candidates,
+   archive the item instead of posting arbitrary imagery.
+5. Keep the **original Telegram product title/options in the published copy**
+   even if Lowchart uses different words for its photo. The actual image
+   may visually show a different pack/color; exact IDs, not option-text
+   equivalence, decide eligibility.
+6. Require an HTTPS Coupang CDN image host, real image MIME/magic, no redirects,
    a bounded file size and exact source-ID filename.
-6. The publisher checks exactly one local picture and link, and waits for the
+7. The publisher checks exactly one local picture and link, and waits for the
    upload to finish before submitting; if any verification fails, **no post**.
 
 The existing Lowchart observed average still needs strict product/item/title
@@ -45,9 +53,11 @@ the remainder are **archived, not posted**. Evidence is saved under
 This avoids publishing dozens of expired prices or resetting previously
 published IDs.
 
-Unambiguous, permanent photo/title/option mismatches are independently
-archived as `skipped_unverifiable` with the source ID and reason, and the
-next queued deal is considered. Transient network errors are **not** silently
+Permanent image failures (no exact-ID product page, missing unique CDN
+product image, etc.) are independently archived as `skipped_unverifiable`
+with the source ID and reason. Option-text differences by themselves
+**no longer cause skips**. Already-archived old IDs are not requeued
+automatically; this policy applies to new eligible posts. Transient network errors are **not** silently
 archived; they stop for a future retry.
 
 The old `kakao_auth_block` is cleared during scan when Lowchart mode is
