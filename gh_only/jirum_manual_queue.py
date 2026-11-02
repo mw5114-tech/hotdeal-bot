@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import argparse
 import base64
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 import hashlib
 import os
@@ -33,10 +33,77 @@ DRAFT_DIR = Path("jirum-manual-one-draft")
 # Avoid GitHub 15-minute job cancellation during a live post. A subsequent
 # scheduled run resumes any remaining backlog without ever replaying a post.
 DRAIN_TIME_BUDGET_SECONDS = 11 * 60
+MAX_DEAL_AGE_SECONDS = 60 * 60
+MAX_FUTURE_SKEW_SECONDS = 5 * 60
+
 
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+def enforcing_freshness() -> bool:
+    return os.getenv("JIRUM_REQUIRE_FRESH_POST") == "true"
+
+
+def lowchart_mode() -> bool:
+    return os.getenv("JIRUM_IMAGE_SOURCE") == "lowchart"
+
+
+def _parse_utc(raw) -> datetime | None:
+    if not isinstance(raw, str) or len(raw) > 45:
+        return None
+    try:
+        val = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        return val.astimezone(timezone.utc) if val.tzinfo else None
+    except ValueError:
+        return None
+
+
+def freshness_status(row: dict, *, reference: datetime | None = None) -> str:
+    """Never publish an unknown, future-dated or stale Telegram deal."""
+    posted = _parse_utc(row.get("posted_at_utc"))
+    if posted is None:
+        return "POSTED_AT_UNKNOWN"
+    at = reference or datetime.now(timezone.utc)
+    elapsed = (at - posted).total_seconds()
+    if elapsed < -MAX_FUTURE_SKEW_SECONDS:
+        return "POSTED_AT_IN_FUTURE"
+    if elapsed > MAX_DEAL_AGE_SECONDS:
+        return "DEAL_OVER_60_MINUTES_OLD"
+    return "FRESH"
+
+
+def expire_pending(s: dict, *, reference: datetime | None = None) -> tuple[dict, int]:
+    """Archive, never erase, already queued stale deals before any browser work.
+
+    Works on a copy so the caller can make ONE guarded GitHub state commit.
+    Each historical record stays queryable and will never be reposted.
+    """
+    out = json.loads(json.dumps(s, ensure_ascii=False))
+    keep = []
+    skipped = out.setdefault("skipped_expired", {})
+    count = 0
+    for row in out["pending"]:
+        status = freshness_status(row, reference=reference)
+        if status == "FRESH":
+            keep.append(row)
+            continue
+        mid = str(row["id"])
+        if mid in out["published"] or mid in skipped:
+            raise RuntimeError("STALENESS_AUDIT_CONFLICT")
+        skipped[mid] = {
+            "status": status,
+            "source_post_url": row["source_post_url"],
+            "source_title": row.get("title", "")[:180],
+            "posted_at_utc": row.get("posted_at_utc"),
+            "at": (reference or datetime.now(timezone.utc)).isoformat(),
+        }
+        count += 1
+    out["pending"] = keep
+    validate_state(out)
+    return out, count
+
+
 
 def kakao_secret_fingerprint() -> str:
     """Opaque marker only; never persist or display Kakao authentication data."""
@@ -133,6 +200,18 @@ def validate_state(s: dict) -> None:
         raise ValueError("INVALID_IN_FLIGHT")
     if type(s.get("skipped_non_coupang")) is not int:
         raise ValueError("INVALID_SKIPPED_COUNTER")
+    skipped_expired = s.get("skipped_expired", {})
+    if (not isinstance(skipped_expired, dict)
+            or len(skipped_expired) > 10_000
+            or any(not isinstance(k, str) or not k.isdigit()
+                   or not isinstance(v, dict) or
+                   v.get("status") not in (
+                       "POSTED_AT_UNKNOWN", "POSTED_AT_IN_FUTURE",
+                       "DEAL_OVER_60_MINUTES_OLD")
+                   for k, v in skipped_expired.items())
+            or any(str(i) in skipped_expired for i in ids)
+            or any(k in published for k in skipped_expired)):
+        raise ValueError("INVALID_EXPIRED_AUDIT")
     block = s.get("kakao_auth_block")
     if block is not None and (
         not isinstance(block, dict)
@@ -175,6 +254,7 @@ def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
             "source_post_url": d["source_post_url"],
             "original_purchase_url": d.get("original_purchase_url"),
             "source_text": d.get("source_text", ""),
+            "posted_at_utc": d.get("posted_at_utc"),
             "title": d.get("title", ""),
             "sale_price_krw": d.get("sale_price_krw"),
         }
@@ -292,8 +372,29 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
         return {"status": "REVIEW_REQUIRED", "has_deal": False, "pending": len(s["pending"])}
     discovered = collect_since(s["last_scanned_id"], latest_fetch, before_fetch)
     new, added, skipped = ingest(s, discovered)
+    if lowchart_mode():
+        # The new public photo path never needs the old Kakao auth blocker.
+        new.pop("kakao_auth_block", None)
+    expired = 0
+    if enforcing_freshness():
+        # Legacy queue entries lacked date metadata. Backfill only from
+        # Telegram's current public, timestamped window. Unknown = not safe
+        # for hotdeal publication, but each skipped entry stays audited.
+        legacy = {x["id"] for x in new["pending"]
+                  if _parse_utc(x.get("posted_at_utc")) is None}
+        if legacy:
+            try:
+                recent = enrich_posts(latest_fetch(), max_posts=200)
+                stamps = {x["source_message_id"]: x.get("posted_at_utc")
+                          for x in recent if _parse_utc(x.get("posted_at_utc"))}
+                for item in new["pending"]:
+                    if item["id"] in legacy and item["id"] in stamps:
+                        item["posted_at_utc"] = stamps[item["id"]]
+            except Exception as exc:
+                print("JIRUM_DATE_BACKFILL_UNAVAILABLE " + type(exc).__name__)
+        new, expired = expire_pending(new)
     if new != s:
-        store.write(new, sha, "state: checkpoint new Jirum messages and Coupang FIFO")
+        store.write(new, sha, "state: checkpoint new Jirum messages, freshness and FIFO")
     block = new.get("kakao_auth_block")
     # A newly saved GitHub Secret is automatically eligible for one fresh
     # attempt. The old invalid authentication material can never trigger the
@@ -317,6 +418,7 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
         "source_id": nxt,
         "pending": len(new["pending"]),
         "new_coupang": added, "ignored_other_sites": skipped,
+        "expired_without_post": expired,
         "last_scanned_id": new["last_scanned_id"],
     }
     print("JIRUM_MANUAL_SCAN " + json.dumps(result, ensure_ascii=False))
@@ -335,7 +437,11 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     if (article["source_id"] != expected_id or article["image"] is None
         or not article["image"].is_file() or row.get("photo", {}).get("status") != "IMAGE_SAVED"
         or row.get("product_identity", {}).get("status") != "EXACT_ITEM_IDENTIFIED"
-        or not row.get("kakao_product_match")
+        or not (row.get("image_product_match") is True
+                 and (row.get("image_source") ==
+                          "lowchart_exact_item_public_page"
+                      and row.get("image_exact_item_page_verified") is True)
+                 if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
         or "📦 상품명 :" not in article["body"]
         or "🛒 상품 링크 : " + article["candidate_url"] not in article["body"]
@@ -444,6 +550,15 @@ def publish_pending(store: GithubState, *, drain: bool = False,
         state, _ = store.read()
         if state["in_flight"] is not None:
             raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
+        if enforcing_freshness() and state["pending"]:
+            updated, n_expired = expire_pending(state)
+            if n_expired:
+                _, sha = store.read()
+                store.write(updated, sha, "state: archive timed-out deals before browser/publish")
+                print("JIRUM_STALE_BACKLOG_ARCHIVED " + json.dumps({
+                    "count": n_expired, "remaining": len(updated["pending"]),
+                }))
+                state = updated
         if not state["pending"]:
             print("JIRUM_FIFO_DRAIN_COMPLETE " + json.dumps({
                 "published_this_run": completed,
