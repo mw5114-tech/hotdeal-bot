@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94896,
-  "pending": [
-    {
-      "id": 94896,
-      "source_post_url": "https://t.me/jirum/94896",
-      "original_purchase_url": "https://link.coupang.com/a/imzFLoN508",
-      "source_text": "❤️초대박 11,880원 (40.6% 할인)\n하림 크런치킹 치킨너겟 (냉동), 1kg, 2개\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 8,120원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imzFLoN508\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:40:38+00:00",
-      "title": "하림 크런치킹 치킨너겟 (냉동), 1kg, 2개",
-      "sale_price_krw": 11880
-    }
-  ],
-  "in_flight": {
-    "id": 94896,
-    "status": "CLAIMED",
-    "run_id": "41539423986",
-    "at": "2026-11-02T22:42:15.985592+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -631,6 +616,16 @@
       "vendor_item_id": null,
       "at": "2026-11-02T22:35:51.079873+00:00",
       "run_id": "41538523013"
+    },
+    "94896": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EB%A6%BC-%ED%81%AC%EB%9F%B0%EC%B9%98%ED%82%B9-%EC%B9%98%ED%82%A8%EB%84%88%EA%B2%9F-%EB%83%89%EB%8F%99-1kg-2%EA%B0%9C-55%ED%95%A0%EC%9D%B8-d9XxwKnP?from=write",
+      "posted_at_utc": "2026-11-02T22:40:38+00:00",
+      "product_id": "9708724992",
+      "item_id": "29110414457",
+      "vendor_item_id": "96035159110",
+      "at": "2026-11-02T22:42:33.067922+00:00",
+      "run_id": "41539423986"
     }
   },
   "skipped_non_coupang": 8,
