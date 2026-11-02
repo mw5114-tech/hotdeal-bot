@@ -118,7 +118,7 @@ def read_one_draft(folder: Path) -> dict:
         suffix = f" [{discount}%할인]"
         if not title.endswith(suffix):
             title = title[:150-len(suffix)].rstrip() + suffix
-    title = f"[오늘의 핫딜] {title}"[:150]
+    title = f"[쿠팡 핫딜] {title}"[:150]
     photo = row.get("photo") if isinstance(row.get("photo"), dict) else {}
     filename = photo.get("saved_name")
     image = None
