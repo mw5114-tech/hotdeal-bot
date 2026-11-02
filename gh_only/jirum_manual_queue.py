@@ -50,6 +50,11 @@ def official_link_mode() -> bool:
     return os.getenv("JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK") == "true"
 
 
+def muse_postedit_mode() -> bool:
+    # Publish a plain product URL first; Muse replaces it in Daangn afterward.
+    return os.getenv("JIRUM_PUBLISH_BEFORE_MUSE_REWRITE") == "true"
+
+
 def lowchart_mode() -> bool:
     return os.getenv("JIRUM_IMAGE_SOURCE") == "lowchart"
 
@@ -561,13 +566,20 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 or (receipt.get("vendor_item_id") is not None
                     and receipt.get("vendor_item_id") != ids.get("vendor_item_id"))):
             raise RuntimeError("OFFICIAL_LINK_RECEIPT_PRODUCT_MISMATCH")
+    elif muse_postedit_mode():
+        from gh_only.direct_product_links import verify_regular_product_url
+        if (not row.get("muse_rewrite_pending") is True
+                or not verify_regular_product_url(article["candidate_url"], ids)):
+            raise RuntimeError("DIRECT_PRODUCT_AWAITING_MUSE_URL_MISMATCH")
     elif official_link_mode():
         raise RuntimeError("OFFICIAL_LINK_RECEIPT_REQUIRED")
     elif (qs.get("lptag") != [os.getenv("COUPANG_PARTNER_LPTAG")]
             or qs.get("pageKey") != [ids.get("product_id")]
             or qs.get("itemId") != [ids.get("item_id")]):
         raise RuntimeError("OWNER_LINK_ITEM_OR_TAG_MISMATCH")
-    return {**article, "product_id": ids["product_id"], "item_id": ids["item_id"]}
+    return {**article, "product_id": ids["product_id"],
+            "item_id": ids["item_id"],
+            "vendor_item_id": ids.get("vendor_item_id")}
 
 
 def build_next(s: dict) -> dict:
@@ -576,6 +588,8 @@ def build_next(s: dict) -> dict:
     if s["in_flight"] is not None or not s["pending"]:
         raise RuntimeError("PENDING_ITEM_NOT_AVAILABLE")
     row = s["pending"][0]
+    if muse_postedit_mode() and official_link_mode():
+        raise RuntimeError("MUSE_POSTEDIT_AND_OFFICIAL_GATE_MUTUALLY_EXCLUSIVE")
     receipt = None
     if official_link_mode():
         receipt = load_receipt(row)
@@ -594,6 +608,21 @@ def build_next(s: dict) -> dict:
     }, DRAFT_DIR,
         session_secret=os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", ""),
         owner_tag=os.getenv("COUPANG_PARTNER_LPTAG", ""))
+    if muse_postedit_mode():
+        from gh_only.direct_product_links import regular_product_url
+        direct = regular_product_url(candidate.get("product_identity", {}))
+        prior = candidate.get("composed_affiliate_url")
+        caption = candidate.get("caption", {}).get("caption", "")
+        if not isinstance(prior, str) or caption.count(prior) != 1:
+            raise RuntimeError("MUSE_POSTEDIT_PRODUCT_LINK_REPLACEMENT_FAILED")
+        candidate["caption"]["caption"] = caption.replace(prior, direct, 1)
+        candidate["composed_affiliate_url"] = direct
+        candidate["muse_rewrite_pending"] = True
+        candidate["affsdp"] = {
+            "status": "REGULAR_PRODUCT_AWAITING_MUSE",
+            "official_link_issued": False,
+            "commission_attribution_verified": False,
+        }
     if receipt is not None:
         identity = candidate.get("product_identity", {})
         if (identity.get("status") != "EXACT_ITEM_IDENTIFIED"
@@ -642,10 +671,16 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
     if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED" and outcome.get("post_url"):
         if state["pending"][0]["id"] != source_id:
             raise RuntimeError("FIFO_HEAD_CHANGED")
-        state["pending"].pop(0)
+        submitted_row = state["pending"].pop(0)
         state["published"][str(source_id)] = {
-            "status": "PUBLISHED_VERIFIED",
+            "status": ("PUBLISHED_AWAITING_MUSE"
+                       if outcome.get("muse_rewrite_pending") is True
+                       else "PUBLISHED_VERIFIED"),
             "post_url": outcome["post_url"],
+            "posted_at_utc": submitted_row.get("posted_at_utc"),
+            "product_id": outcome.get("product_id"),
+            "item_id": outcome.get("item_id"),
+            "vendor_item_id": outcome.get("vendor_item_id"),
             "at": now_utc(), "run_id": run_id,
         }
         state["in_flight"] = None
@@ -760,6 +795,11 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 "error_type": type(exc).__name__,
                 "submit_attempted": False,
             }
+        if outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED":
+            outcome["muse_rewrite_pending"] = bool(article.get("muse_rewrite_pending"))
+            outcome["product_id"] = article.get("product_id")
+            outcome["item_id"] = article.get("item_id")
+            outcome["vendor_item_id"] = article.get("vendor_item_id")
         # If the write fails after clicking, CLAIMED remains, blocking replay.
         finish(store, source_id, run_id, outcome)
         print("JIRUM_MANUAL_PUBLISH " + json.dumps({

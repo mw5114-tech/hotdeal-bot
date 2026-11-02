@@ -18,8 +18,7 @@ on:
       - main
     paths:
       - 'manual/trigger-daangn-jirum.txt'
-      # Muse writes one official link receipt; trigger this existing FIFO.
-      - 'links/*.json'
+      # Muse post-edit flow does not require a GitHub receipt write.
 
 permissions:
   contents: write
@@ -52,8 +51,10 @@ jobs:
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
       JIRUM_REQUIRE_FRESH_POST: 'true'
-      # Fail closed while Muse's official link receipt is absent.
-      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'true'
+      # Publish a clean product URL first, then Muse edits the post to a
+      # genuine official Coupang Partners /a/ URL in Daangn.
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'true'
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
     steps:
       - name: Checkout only required source files

@@ -336,7 +336,12 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     return result
                 result["failure_stage"] = "VERIFY_PUBLISHED_POST"
                 content = page.locator("body").inner_text(timeout=5000)
-                if article.get("official_link_receipt") is not None:
+                if article.get("muse_rewrite_pending") is True:
+                    hrefs = page.locator('a[href*="www.coupang.com/vp/products/"]').evaluate_all(
+                        "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
+                    )
+                    same_link = len(hrefs) == 1 and hrefs[0] == article["candidate_url"]
+                elif article.get("official_link_receipt") is not None:
                     hrefs = page.locator('a[href*="link.coupang.com/a/"]').evaluate_all(
                         "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
                     )
