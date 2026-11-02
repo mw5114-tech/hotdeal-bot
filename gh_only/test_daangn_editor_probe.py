@@ -72,7 +72,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛\n\n"
             "💸 쿠팡 평소 판매가 : 약 34,575원\n\n"
             "🔥 핫딜 특가 : 12,050원\n\n"
-            "🛒 상품 링크 : " + TEST_URL
+            "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL
         )
         report = {"schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [{
             "source_message_id": 94717,
@@ -95,7 +95,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             folder = Path(temp)
             self._make_draft(folder)
             result = read_one_draft(folder)
-        self.assertIn("[오늘의 핫딜]", result["title"])
+        self.assertIn("[쿠팡 핫딜]", result["title"])
         self.assertIn("12,050원", result["body"])
         self.assertIn("AF9668915", result["body"])
         self.assertIn(DISCLOSURE, result["body"])
@@ -121,7 +121,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertTrue(fields[0].startswith("📦 상품명 : "))
         self.assertTrue(fields[1].startswith("💸 쿠팡 평소 판매가 : "))
         self.assertTrue(fields[2].startswith("🔥 핫딜 특가 : "))
-        self.assertEqual(fields[3], "🛒 상품 링크 : " + TEST_URL)
+        self.assertEqual(fields[3], "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL)
         self.assertTrue(fields[4].startswith("※ 실시간 핫딜 특성상"))
         self.assertTrue(fields[5].startswith("🔥 핫딜 정보를 확인해"))
         self.assertEqual(fields[6], "")  # 4 Newlines before disclosure
