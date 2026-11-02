@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94899,
-  "pending": [
-    {
-      "id": 94899,
-      "source_post_url": "https://t.me/jirum/94899",
-      "original_purchase_url": "https://link.coupang.com/a/imACYfavtc",
-      "source_text": "☆특가 12,980원 (26.8% 할인)\n(재할인)덴마크 소화가 잘되는 우유 락토프리, 190ml, 24개\n📌 가격 현황\n- 정상가: 17,730원\n- 할인: 4,750원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imACYfavtc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:53:59+00:00",
-      "title": "(재할인)덴마크 소화가 잘되는 우유 락토프리, 190ml, 24개",
-      "sale_price_krw": 12980
-    }
-  ],
-  "in_flight": {
-    "id": 94899,
-    "status": "CLAIMED",
-    "run_id": "41541195180",
-    "at": "2026-11-02T22:55:36.258786+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -660,6 +645,16 @@
       "item_id": "28457812051",
       "vendor_item_id": "95408306903",
       "at": "2026-11-02T22:55:32.296564+00:00",
+      "run_id": "41541195180"
+    },
+    "94899": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B4%EB%A7%88%ED%81%AC-%EC%86%8C%ED%99%94%EA%B0%80-%EC%9E%98%EB%90%98%EB%8A%94-%EC%9A%B0%EC%9C%A0-%EB%9D%BD%ED%86%A0%ED%94%84%EB%A6%AC-190ml-24%EA%B0%9C-20%ED%95%A0%EC%9D%B8-Ara47EQj?from=write",
+      "posted_at_utc": "2026-11-02T22:53:59+00:00",
+      "product_id": "6622970253",
+      "item_id": "20573592425",
+      "vendor_item_id": "85728949851",
+      "at": "2026-11-02T22:55:52.330318+00:00",
       "run_id": "41541195180"
     }
   },
