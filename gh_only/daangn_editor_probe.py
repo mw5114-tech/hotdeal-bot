@@ -140,9 +140,10 @@ def read_one_draft(folder: Path) -> dict:
                         "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
     promo = (verified_claim if row.get("observed_low_verified_for_deal") is True
              else unverified_claim)
-    # Photo first; link stays one whole text node, then stock note,
-    # promotional note and disclosure at the bottom separated by 3 blank lines.
-    clean_body = body.rstrip() + "\n" + stock_notice + "\n" + promo + "\n\n\n\n" + DISCLOSURE
+    # Two Enter presses between every visible section for mobile readability.
+    # Keep the larger separation before the last-line affiliate disclosure.
+    # Link stays exactly one whole text node; photo is inserted first by editor.
+    clean_body = body.rstrip() + "\n\n" + stock_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,
