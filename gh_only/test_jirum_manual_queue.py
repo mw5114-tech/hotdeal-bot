@@ -362,6 +362,35 @@ class ManualQueueTests(unittest.TestCase):
             "posted_at_utc":"2026-11-02T04:00:00"
         },reference=now),"POSTED_AT_UNKNOWN")
 
+    def test_unverifiable_lowchart_photo_skips_only_bad_deal(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{"image_metadata_status":
+                            "LOWCHART_TELEGRAM_TITLE_MISMATCH"}]
+            }), encoding="utf-8")
+            def build(current):
+                if current["pending"][0]["id"] == 94744:
+                    raise RuntimeError("POST_EVIDENCE_NOT_READY")
+                return {"source_id": current["pending"][0]["id"]}
+            with patch.dict(os.environ, {
+                "GITHUB_RUN_ID":"skip-unverifiable",
+                "JIRUM_IMAGE_SOURCE":"lowchart",
+            }), patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder), \
+                    patch("gh_only.jirum_manual_queue.build_next", side_effect=build), \
+                    patch("gh_only.jirum_manual_publisher.publish_one",
+                          return_value={"status":"POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                        "submit_attempted":True,
+                                        "post_url":"https://cafe.daangn.com/posts/94745"}) as publisher:
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda:0),0)
+        self.assertIn("94744", store.value["skipped_unverifiable"])
+        self.assertEqual(store.value["published"]["94745"]["status"],"PUBLISHED_VERIFIED")
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual(store.value["pending"],[])
+        publisher.assert_called_once()
+
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
             deal(94747), deal(94745, "external"), deal(94746),
