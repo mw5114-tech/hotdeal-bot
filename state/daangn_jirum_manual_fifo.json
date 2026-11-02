@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94882,
-  "pending": [
-    {
-      "id": 94882,
-      "source_post_url": "https://t.me/jirum/94882",
-      "original_purchase_url": "https://link.coupang.com/a/ilV8US5V36",
-      "source_text": "☆특가 13,900원 (24.0% 할인)\n[로켓프레시] CJ제일제당 소바바 바삭 황금홀릭 후라이드 순살치킨 (냉동)\n📌 가격 현황\n- 정상가: 18,289원\n- 할인: 4,389원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilV8US5V36\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T13:27:28+00:00",
-      "title": "[로켓프레시] CJ제일제당 소바바 바삭 황금홀릭 후라이드 순살치킨 (냉동)",
-      "sale_price_krw": 13900
-    }
-  ],
-  "in_flight": {
-    "id": 94882,
-    "status": "CLAIMED",
-    "run_id": "41453199832",
-    "at": "2026-11-02T13:28:16.205560+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -509,6 +494,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%EC%9D%B4%EC%8A%A8-%EC%97%90%EC%96%B4%EB%9E%A9-id-%EB%A9%80%ED%8B%B0-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%9F%AC-%EC%95%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EC%96%B4-161845-20%ED%95%A0%EC%9D%B8-dag8kQxA?from=write",
       "at": "2026-11-02T13:27:39.469219+00:00",
       "run_id": "41453021183"
+    },
+    "94882": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-CJ%EC%A0%9C%EC%9D%BC%EC%A0%9C%EB%8B%B9-%EC%86%8C%EB%B0%94%EB%B0%94-%EB%B0%94%EC%82%AD-%ED%99%A9%EA%B8%88%ED%99%80%EB%A6%AD-%ED%9B%84%EB%9D%BC%EC%9D%B4%EB%93%9C-%EC%88%9C%EC%82%B4%EC%B9%98%ED%82%A8-%EB%83%89%EB%8F%99-20%ED%95%A0%EC%9D%B8-dEbEMqDj?from=write",
+      "at": "2026-11-02T13:28:33.375576+00:00",
+      "run_id": "41453199832"
     }
   },
   "skipped_non_coupang": 8,
