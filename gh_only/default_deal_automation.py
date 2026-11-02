@@ -20,9 +20,6 @@ from gh_only.pipeline import enrich_posts, fetch_public_html, identify_url
 from gh_only.daangn_draft import normalized_title
 from gh_only.shortlink_probe import one_hop, StopRedirect
 from gh_only.lowchart_price_reference import fetch_one
-from gh_only.kakao_og_authenticated_probe import (
-    TOOL_URL, extract_og_table, image_is_cdn, safe_session_state
-)
 from gh_only.default_deal_format import (
     create_default_preview, validated_history, normalized_product_name,
 )
@@ -66,6 +63,7 @@ def get_kakao_og(link: str, secret: str) -> dict:
     if not secret:
         out["status"] = "KAKAO_SESSION_SECRET_MISSING"
         return out
+    from gh_only.kakao_og_authenticated_probe import (TOOL_URL, extract_og_table, safe_session_state)
     try:
         from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout
         state = safe_session_state(secret)
@@ -161,6 +159,7 @@ def get_title_tokens(title: str | None) -> tuple[str, ...]:
 def download_og_photo(url: str | None, output: Path, source_message_id: int) -> dict:
     out = {"status": "NOT_DOWNLOADED", "saved_name": None,
            "bytes": 0, "width_height_verified": False}
+    from gh_only.kakao_og_authenticated_probe import image_is_cdn
     if not isinstance(url, str) or not image_is_cdn(url):
         out["status"] = "NO_TRUSTED_CDN_URL"
         return out
@@ -233,9 +232,11 @@ def enrich_deal(deal: dict, output_dir: Path,
                        "error_type": type(exc).__name__}
     image_source = og.get("image_source", "legacy_kakao_og")
     photo = {"status": "NO_MATCHING_PRODUCT_IMAGE", "saved_name": None}
-    eligible_cdn = (is_coupang_cdn_url(og.get("og_image"))
-                    if image_source == "lowchart_exact_item_public_page"
-                    else image_is_cdn(og.get("og_image") or ""))
+    if image_source == "lowchart_exact_item_public_page":
+        eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
+    else:
+        from gh_only.kakao_og_authenticated_probe import image_is_cdn
+        eligible_cdn = image_is_cdn(og.get("og_image") or "")
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
     caption = create_default_preview(sale, title, average, source_id)
