@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94858,
-  "pending": [],
+  "last_scanned_id": 94859,
+  "pending": [
+    {
+      "id": 94859,
+      "source_post_url": "https://t.me/jirum/94859",
+      "original_purchase_url": "https://link.coupang.com/a/ilCRCkKE44",
+      "source_text": "❤️초대박 76,100원 (41.5% 할인)\n(와멤데쿠폰)BRAUN 시리즈 5+ 전기면도기\n📌 가격 현황\n- 정상가: 130,000원\n- 할인: 53,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilCRCkKE44\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T08:57:41+00:00",
+      "title": "(와멤데쿠폰)BRAUN 시리즈 5+ 전기면도기",
+      "sale_price_krw": 76100
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
