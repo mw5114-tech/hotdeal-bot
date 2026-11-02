@@ -42,7 +42,7 @@ GitHub Secret을 새 값으로 갱신하면 지문이 달라지고, 다음 예�
 # 본인 PC의 저장소 체크아웃에서
 gh auth status
 python -m pip install playwright
-python tools/refresh_kakao_storage_secret.py
+python -m tools.refresh_kakao_storage_secret
 ```
 
 크롬이 열리면 Kakao Developers에 직접 로그인한 뒤
