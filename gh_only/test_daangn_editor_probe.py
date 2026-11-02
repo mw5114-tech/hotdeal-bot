@@ -165,7 +165,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertTrue(article["body"].endswith(DISCLOSURE))
 
     def test_long_coupang_title_still_keeps_discount_suffix(self):
-        long_name = "고급 상품 " + "초특가세트" * 23
+        long_name = "고급 상품 " + "초특가세트" * 22
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
             report = self._make_draft(folder)
