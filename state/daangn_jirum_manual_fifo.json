@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94900,
-  "pending": [],
+  "last_scanned_id": 94901,
+  "pending": [
+    {
+      "id": 94901,
+      "source_post_url": "https://t.me/jirum/94901",
+      "original_purchase_url": "https://link.coupang.com/a/imDpgU3C1s",
+      "source_text": "🔥🔥🔥무지성 3,990원 (46.8% 할인)🔥🔥🔥\nLEPOID 다기능 스마트폰 태블릿 집게형 거치대\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,500원\n- 할인: 3,510원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imDpgU3C1s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T23:32:53+00:00",
+      "title": "LEPOID 다기능 스마트폰 태블릿 집게형 거치대",
+      "sale_price_krw": 3990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
