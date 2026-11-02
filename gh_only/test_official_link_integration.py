@@ -56,7 +56,7 @@ class OfficialIntegrationTests(unittest.TestCase):
                 "commission_attribution_verified": False,
             }
             (folder / "drafts.json").write_text(
-                json.dumps({"drafts": [row]}, ensure_ascii=False), encoding="utf-8"
+                json.dumps({"schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [row]}, ensure_ascii=False), encoding="utf-8"
             )
             article = read_one_draft(folder)
             self.assertEqual(article["candidate_url"], OFFICIAL)
