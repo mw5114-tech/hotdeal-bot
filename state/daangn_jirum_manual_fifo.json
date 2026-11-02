@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94874,
-  "pending": [
-    {
-      "id": 94874,
-      "source_post_url": "https://t.me/jirum/94874",
-      "original_purchase_url": "https://link.coupang.com/a/ilS3brjaxg",
-      "source_text": "🔥🔥🔥무지성 5,120원 (53.0% 할인)🔥🔥🔥\n키스미 헤비로테이션 컬러링 아이브로우 마스카라 8g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,894원\n- 할인: 5,774원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilS3brjaxg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T12:44:11+00:00",
-      "title": "키스미 헤비로테이션 컬러링 아이브로우 마스카라 8g",
-      "sale_price_krw": 5120
-    }
-  ],
-  "in_flight": {
-    "id": 94874,
-    "status": "CLAIMED",
-    "run_id": "41447176874",
-    "at": "2026-11-02T12:45:33.392064+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -479,6 +464,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%94%EB%8F%84-%EB%BD%80%EB%A1%9C%EB%A1%9C-%EB%B3%B4%EB%A6%AC%EC%B0%A8-220ml-24%EA%B0%9C-15%ED%95%A0%EC%9D%B8-PND6gOEj?from=write",
       "at": "2026-11-02T12:40:16.450527+00:00",
       "run_id": "41446344409"
+    },
+    "94874": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%82%A4%EC%8A%A4%EB%AF%B8-%ED%97%A4%EB%B9%84%EB%A1%9C%ED%85%8C%EC%9D%B4%EC%85%98-%EC%BB%AC%EB%9F%AC%EB%A7%81-%EC%95%84%EC%9D%B4%EB%B8%8C%EB%A1%9C%EC%9A%B0-%EB%A7%88%EC%8A%A4%EC%B9%B4%EB%9D%BC-8g-50%ED%95%A0%EC%9D%B8-PM03r6YA?from=write",
+      "at": "2026-11-02T12:45:49.604258+00:00",
+      "run_id": "41447176874"
     }
   },
   "skipped_non_coupang": 5,
