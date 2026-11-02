@@ -527,10 +527,11 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
             or row.get("product_name_source") != "lowchart_exact_item_page"
             or not isinstance(row.get("lowchart_product_title"), str)
             or not isinstance(row.get("caption", {}).get("product_name"), str)
-            or "📦 상품명 : " + row["caption"]["product_name"] not in article["body"]
+            or article["body"].splitlines()[0] != row["caption"]["caption"].splitlines()[0]
+            or not article["body"].splitlines()[0].endswith(row["caption"]["product_name"])
             or "[쿠팡🔥핫딜] " + row["caption"]["product_name"] not in article["title"]
         ))
-        or "📦 상품명 :" not in article["body"]
+        or "📦 상품명 :" in article["body"]
         or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
         or article["body"].count(article["candidate_url"]) != 1):
         raise RuntimeError("POST_EVIDENCE_NOT_READY")

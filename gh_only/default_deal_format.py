@@ -109,7 +109,10 @@ def create_default_preview(sale: int | None, title: str | None,
     product = (re.sub(r"\s+", " ", title).strip()[:max_product_chars].rstrip()
                if isinstance(title, str) and title.strip()
                else "상품명 확인 중")
-    lines = [f"📦 상품명 : {product}" + suffix]
+    # First body line: discount FIRST, followed by Lowchart product name.
+    # If Lowchart history cannot establish a discount, never invent a rate.
+    body_discount = f"[{approx}%할인]" if approx is not None else "[할인율 확인 중]"
+    lines = [f"{body_discount} {product}"]
     if average is not None:
         lines.append(f"💸 쿠팡 평소 판매가 : 약 {average:,}원")
     else:

@@ -107,14 +107,19 @@ def read_one_draft(folder: Path) -> dict:
     if not isinstance(original, str) or not original.startswith("https://t.me/jirum/"):
         raise ValueError("DRAFT_SOURCE_UNEXPECTED")
     title_line = body.splitlines()[0].strip()
-    if not title_line.startswith("📦 상품명 : "):
-        raise ValueError("DRAFT_PRODUCT_NAME_MISSING")
-    title = title_line.removeprefix("📦 상품명 : ").strip()
+    discount = caption.get("approx_discount_vs_historical_mean_pct")
+    # A verified discount is a 5-point rounded percentage; unavailable
+    # historical data is explicitly labelled, not estimated from Telegram.
+    known_discount = type(discount) is int and discount in range(5, 100, 5)
+    body_prefix = (f"[{discount}%할인] " if known_discount
+                   else "[할인율 확인 중] ")
+    if not title_line.startswith(body_prefix):
+        raise ValueError("DRAFT_DISCOUNT_PREFIX_MISSING_OR_MISMATCHED")
+    title = title_line[len(body_prefix):].strip()
     if not (2 <= len(title) <= 150):
         raise ValueError("DRAFT_PRODUCT_NAME_INVALID")
-    # Include the same 5-point rounded discount in the actual post title.
-    discount = caption.get("approx_discount_vs_historical_mean_pct")
-    if type(discount) is int and discount in range(5, 100, 5):
+    # Retain existing Daangn POST title format: name THEN discount.
+    if known_discount:
         suffix = f" [{discount}%할인]"
         if not title.endswith(suffix):
             title = title[:150-len(suffix)].rstrip() + suffix

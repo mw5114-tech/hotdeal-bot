@@ -48,7 +48,7 @@ class DefaultFormatTests(unittest.TestCase):
     def test_product_then_usual_price_then_hot_deal(self):
         caption = create_default_preview(12050, "휘카레 소스", 34575, 123)
         self.assertEqual(caption["caption"].split("\n\n"), [
-            "📦 상품명 : 휘카레 소스 [65%할인]",
+            "[65%할인] 휘카레 소스",
             "💸 쿠팡 평소 판매가 : 약 34,575원",
             "🔥 핫딜 특가 : 12,050원 (약 65% 할인 / 상세페이지 참고)",
         ])
@@ -63,12 +63,12 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertTrue(displayed.startswith("로우차트 제품 "))
         self.assertLessEqual(len("[쿠팡🔥핫딜] " + displayed + " [65%할인]"), 150)
         self.assertEqual(caption["caption"].split("\n\n")[0],
-                         "📦 상품명 : " + displayed + " [65%할인]")
+                         "[65%할인] " + displayed)
 
     def test_missing_mean_leaves_price_not_fake_discount(self):
         preview = create_default_preview(12050, "휘카레 소스", None)
         self.assertEqual(preview["caption"],
-                         "📦 상품명 : 휘카레 소스\n\n"
+                         "[할인율 확인 중] 휘카레 소스\n\n"
                          "💸 쿠팡 평소 판매가 : 확인 중\n\n"
                          "🔥 핫딜 특가 : 12,050원 (상세페이지 참고)")
         self.assertIsNone(preview["approx_discount_vs_historical_mean_pct"])
@@ -81,7 +81,7 @@ class DefaultFormatTests(unittest.TestCase):
     def test_missing_sale_is_not_invented(self):
         preview = create_default_preview(None, "휘카레 소스", 34575)
         self.assertEqual(preview["caption"].split("\n\n"), [
-            "📦 상품명 : 휘카레 소스",
+            "[할인율 확인 중] 휘카레 소스",
             "💸 쿠팡 평소 판매가 : 약 34,575원",
             "🔥 핫딜 특가 : 확인 중",
         ])
