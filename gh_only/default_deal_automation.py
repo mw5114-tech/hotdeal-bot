@@ -220,8 +220,14 @@ def enrich_deal(deal: dict, output_dir: Path,
     # image or price-title identity. Still keep the source sale.
     matching = (identity.get("status") == "EXACT_ITEM_IDENTIFIED"
                 and og_matches_product(og, identity))
-    title = (re.split(r"\s+[-–]\s+", og_title, maxsplit=1)[0] if matching and og_title
-             else fallback_title)
+    # Lowchart can show a different color, bundle count or other option text
+    # for the SAME productId/itemId. Use its verified photo, but never replace
+    # Telegram's own advertised title/options with Lowchart's different text.
+    title = (
+        fallback_title if using_public_lowchart
+        else (re.split(r"\s+[-–]\s+", og_title, maxsplit=1)[0]
+              if matching and og_title else fallback_title)
+    )
     history = {"reason": "LINK_OR_OG_NOT_VERIFIED", "usable_historical_reference": False}
     average = None
     if matching and isinstance(sale, int) and sale > 0:
@@ -272,6 +278,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "image_product_match": matching,
         "image_source": image_source,
         "image_metadata_status": og.get("status"),
+        "image_match_basis": og.get("image_match_basis"),
+        "image_same_named_option": og.get("image_same_named_option"),
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
