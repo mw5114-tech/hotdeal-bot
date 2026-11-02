@@ -25,3 +25,5 @@ Production cutover: Kakao-free Lowchart photos + 60m freshness test 20261102-131
 User requested resume/check real automation; trigger one immediate FIFO scan 2026-11-02 13:35 KST. No duplicate repost.
 
 Validate id-only option mismatch acceptance in live fresh FIFO after PR #52 (2026-11-02).
+
+Recovery validation after PR #56 — 2026-11-02 21:40 KST (single trigger)
