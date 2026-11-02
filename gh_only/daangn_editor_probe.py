@@ -118,10 +118,10 @@ def read_one_draft(folder: Path) -> dict:
         suffix = f" [{discount}%할인]"
         if not title.endswith(suffix):
             title = title[:150-len(suffix)].rstrip() + suffix
-    # Keep the requested "[쿠팡 핫딜] 제품명 [NN%할인]" format.
+    # Keep the requested "[쿠팡🔥핫딜] 제품명 [NN%할인]" format.
     # If a long product title exceeds the document cap, preserve the final
     # discount token rather than slicing it off.
-    prefix = "[쿠팡 핫딜] "
+    prefix = "[쿠팡🔥핫딜] "
     complete_title = prefix + title
     if len(complete_title) > 150:
         match = re.search(r" (\[\d+%할인\])$", title)
