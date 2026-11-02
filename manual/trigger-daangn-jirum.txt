@@ -23,3 +23,5 @@ Verify same expired Kakao Secret skips browser and preserves FIFO: 20261102-1237
 Production cutover: Kakao-free Lowchart photos + 60m freshness test 20261102-1319KST
 
 User requested resume/check real automation; trigger one immediate FIFO scan 2026-11-02 13:35 KST. No duplicate repost.
+
+Validate id-only option mismatch acceptance in live fresh FIFO after PR #52 (2026-11-02).
