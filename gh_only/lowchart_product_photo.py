@@ -88,7 +88,7 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     # package count or color; the user explicitly permits those differences.
     # Do require a real page product title to choose its own main product photo,
     # rather than a recommendation, banner or price-history chart image.
-    if not observed:
+    if (not observed or re.fullmatch(r"[-–]?\s*[\d,]+\s*원", item_title)):
         out["status"] = "LOWCHART_PAGE_PRODUCT_TITLE_MISSING"
         return out
     source_title_matches = bool(
