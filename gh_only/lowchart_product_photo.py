@@ -3,7 +3,9 @@
 Lowchart's own chart OG image is NOT a product photo. Accept exactly one
 product <img> whose alt equals its exact-item page title, with a real
 Coupang CDN image URL. Product and item IDs must match the known resolved
-shortlink, and the title must match the original Telegram product name.
+shortlink. Telegram title/option may differ from Lowchart's item naming:
+it is NOT an image eligibility gate. The photo still must be the unique
+Coupang CDN product image whose alt agrees with the exact-item page title.
 No direct Coupang product-page requests are performed.
 """
 from __future__ import annotations
@@ -62,7 +64,7 @@ class _ProductPictureHTML(HTMLParser):
 
 
 def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
-    """Fail closed on any product/option/title/image ambiguity."""
+    """Trust exact product/item IDs, not Telegram-versus-Lowchart option text."""
     out = {"status": "LOWCHART_ITEM_NOT_VERIFIED", "og_title": None,
            "og_url": None, "og_image": None}
     pid, iid = identity.get("product_id"), identity.get("item_id")
@@ -81,9 +83,17 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     out["og_title"] = item_title
     source = normalized_product_name(telegram_title)
     observed = normalized_product_name(item_title)
-    if not source or len(source) < 8 or not (source == observed or same_named_option(telegram_title, item_title)):
-        out["status"] = "LOWCHART_TELEGRAM_TITLE_MISMATCH"
+    # The resolved shortlink and exact Lowchart item path supply productId and
+    # itemId identity. Do NOT reject because Telegram has another option name,
+    # package count or color; the user explicitly permits those differences.
+    # Do require a real page product title to choose its own main product photo,
+    # rather than a recommendation, banner or price-history chart image.
+    if not observed:
+        out["status"] = "LOWCHART_PAGE_PRODUCT_TITLE_MISSING"
         return out
+    source_title_matches = bool(
+        source and (source == observed or same_named_option(telegram_title, item_title))
+    )
     selected = [
         im["src"] for im in parser.images
         if normalized_product_name(im["alt"]) == observed
@@ -96,7 +106,8 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
     return {"status": "LOWCHART_EXACT_ITEM_IMAGE", "og_title": item_title,
             "og_url": url, "og_image": selected[0],
             "image_source": "lowchart_exact_item_public_page",
-            "image_same_named_option": True}
+            "image_same_named_option": source_title_matches,
+            "image_match_basis": "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID"}
 
 
 def lookup_exact_item_photo(identity: dict, telegram_title: str, opener=None) -> dict:
