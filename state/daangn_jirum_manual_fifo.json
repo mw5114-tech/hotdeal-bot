@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94856,
-  "pending": [],
+  "last_scanned_id": 94858,
+  "pending": [
+    {
+      "id": 94857,
+      "source_post_url": "https://t.me/jirum/94857",
+      "original_purchase_url": "https://link.coupang.com/a/ilBbUWmPhk",
+      "source_text": "❤️초대박 20,420원 (41.7% 할인)\n(와멤데 쿠폰)센카 퍼펙트 휩 프레시 클렌징 폼, 100g, 3개, 2세트선택\n📌 가격 현황\n- 정상가: 35,000원\n- 할인: 14,580원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilBbUWmPhk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T08:34:16+00:00",
+      "title": "(와멤데 쿠폰)센카 퍼펙트 휩 프레시 클렌징 폼, 100g, 3개, 2세트선택",
+      "sale_price_krw": 20420
+    },
+    {
+      "id": 94858,
+      "source_post_url": "https://t.me/jirum/94858",
+      "original_purchase_url": "https://link.coupang.com/a/ilCzroFSMu",
+      "source_text": "🔥🔥🔥무지성 28,740원 (48.7% 할인)🔥🔥🔥\n(와멤데쿠폰) 사무실 과자세트 스낵 비스킷쿠키 12입 세트 *2 개 구매시\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 56,000원\n- 할인: 27,260원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilCzroFSMu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T08:53:35+00:00",
+      "title": "(와멤데쿠폰) 사무실 과자세트 스낵 비스킷쿠키 12입 세트 *2 개 구매시",
+      "sale_price_krw": 28740
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
