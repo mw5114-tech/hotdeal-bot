@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94849,
-  "pending": [
-    {
-      "id": 94849,
-      "source_post_url": "https://t.me/jirum/94849",
-      "original_purchase_url": "https://link.coupang.com/a/iltgZhK5Yq",
-      "source_text": "☆특가 13,520원\n어부심 산지직송 산채로 포장한 생물새우 1kg30~40미*1박스\n📦 특가 바로가기\nhttps://link.coupang.com/a/iltgZhK5Yq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T06:43:28+00:00",
-      "title": "☆특가 13,520원",
-      "sale_price_krw": 13520
-    }
-  ],
-  "in_flight": {
-    "id": 94849,
-    "status": "CLAIMED",
-    "run_id": "41401797774",
-    "at": "2026-11-02T06:44:40.529217+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -341,6 +326,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EB%8F%84%EB%8F%84%ED%95%9C-%EB%82%98%EC%B5%B8-%EC%B9%98%EC%A6%88%EB%A7%9B-20%ED%95%A0%EC%9D%B8-dag8ov8A?from=write",
       "at": "2026-11-02T06:33:37.935352+00:00",
       "run_id": "41400560413"
+    },
+    "94849": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%96%B4%EB%B6%80%EC%8B%AC-%EC%82%B0%EC%A7%80%EC%A7%81%EC%86%A1-%EC%82%B0%EC%B1%84%EB%A1%9C-%ED%8F%AC%EC%9E%A5%ED%95%9C-%EC%83%9D%EB%AC%BC%EC%83%88%EC%9A%B0-1kg3040%EB%AF%B81%EB%B0%95-45%ED%95%A0%EC%9D%B8-PV2Rz6aP?from=write",
+      "at": "2026-11-02T06:44:57.302325+00:00",
+      "run_id": "41401797774"
     }
   },
   "skipped_non_coupang": 4,
