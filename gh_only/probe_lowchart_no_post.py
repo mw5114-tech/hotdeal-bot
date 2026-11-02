@@ -25,6 +25,8 @@ def main():
                 "id": row["id"],
                 "identity_status": draft["product_identity"]["status"],
                 "metadata_status": draft["image_metadata_status"],
+                "original_title": row["source_text"].splitlines()[1][:110] if len(row["source_text"].splitlines())>1 else row["title"][:110],
+                "lowchart_title": draft.get("og_title"),
                 "image_source": draft["image_source"],
                 "image_match": draft["image_product_match"],
                 "photo_status": draft["photo"]["status"],
