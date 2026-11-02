@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94841,
-  "pending": [
-    {
-      "id": 94841,
-      "source_post_url": "https://t.me/jirum/94841",
-      "original_purchase_url": "https://link.coupang.com/a/ilkHFbTY2C",
-      "source_text": "🔥🔥🔥무지성 1,980원 (65.9% 할인)🔥🔥🔥\n백설 돼지 불고기 양념, 840g, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 5,811원\n- 할인: 3,831원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilkHFbTY2C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T04:43:33+00:00",
-      "title": "백설 돼지 불고기 양념, 840g, 1개",
-      "sale_price_krw": 1980
-    }
-  ],
-  "in_flight": {
-    "id": 94841,
-    "status": "CLAIMED",
-    "run_id": "41390146629",
-    "at": "2026-11-02T04:45:03.936485+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -299,6 +284,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EA%B0%80%EC%AF%94-%EB%9D%BC%EC%9A%B4%EB%93%9C-%EC%96%B4%EA%B9%A8%EB%BF%94-%EB%B0%A9%EC%A7%80-%EB%85%BC%EC%8A%AC%EB%A6%BD-%EB%8B%88%ED%8A%B8-%EC%98%B7%EA%B1%B8%EC%9D%B4-%EB%B8%94%EB%9E%99-50%EA%B0%9C-45%ED%95%A0%EC%9D%B8-A4Q59L5P?from=write",
       "at": "2026-11-02T04:38:06.565278+00:00",
       "run_id": "41389483655"
+    },
+    "94841": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%98%A4%EB%8A%98%EC%9D%98-%ED%95%AB%EB%94%9C-%EB%B0%B1%EC%84%A4-%EB%8F%BC%EC%A7%80-%EB%B6%88%EA%B3%A0%EA%B8%B0-%EC%96%91%EB%85%90-840g-1%EA%B0%9C-65%ED%95%A0%EC%9D%B8-j8rMO07P?from=write",
+      "at": "2026-11-02T04:45:19.634753+00:00",
+      "run_id": "41390146629"
     }
   },
   "skipped_non_coupang": 3,
