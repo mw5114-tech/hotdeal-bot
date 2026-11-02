@@ -131,6 +131,7 @@ def create_default_preview(sale: int | None, title: str | None,
             if approx is not None else None
         ),
         "official_normal_price_quoted": False,
-        "caption": "\n".join(lines),
+        # Two Enter presses between fields: one blank paragraph on mobile.
+        "caption": "\n\n".join(lines),
         "auto_publish_ready": False,
     }
