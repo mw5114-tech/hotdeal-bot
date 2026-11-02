@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94853,
-  "pending": [
-    {
-      "id": 94853,
-      "source_post_url": "https://t.me/jirum/94853",
-      "original_purchase_url": "https://link.coupang.com/a/ilwyBxlUs0",
-      "source_text": "🔥🔥🔥무지성 1,790원 (47.8% 할인)🔥🔥🔥\n해표 순알콩 국간장, 1개, 840ml 840ml*1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 3,427원\n- 할인: 1,637원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilwyBxlUs0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T07:29:26+00:00",
-      "title": "해표 순알콩 국간장, 1개, 840ml 840ml*1개",
-      "sale_price_krw": 1790
-    }
-  ],
-  "in_flight": {
-    "id": 94853,
-    "status": "CLAIMED",
-    "run_id": "41406718899",
-    "at": "2026-11-02T07:30:44.862024+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -359,6 +344,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B7%B0%EC%A0%A4-%EB%A6%AC%ED%8E%98%EC%96%B4-%EC%8A%A4%ED%83%80%ED%8A%B83-%ED%83%84-%EB%B2%A0%EC%9D%B4%EC%8A%A4-%EC%A0%A4-10ml-2%EA%B0%9C-dJyoxJ7P?from=write",
       "at": "2026-11-02T07:24:31.399360+00:00",
       "run_id": "41406027494"
+    },
+    "94853": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%91%9C-%EC%88%9C%EC%95%8C%EC%BD%A9-%EA%B5%AD%EA%B0%84%EC%9E%A5-1%EA%B0%9C-840ml-840ml1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PwwYJ4vP?from=write",
+      "at": "2026-11-02T07:31:01.066557+00:00",
+      "run_id": "41406718899"
     }
   },
   "skipped_non_coupang": 5,
