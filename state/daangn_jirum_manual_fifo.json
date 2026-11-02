@@ -3,15 +3,6 @@
   "last_scanned_id": 94873,
   "pending": [
     {
-      "id": 94870,
-      "source_post_url": "https://t.me/jirum/94870",
-      "original_purchase_url": "https://link.coupang.com/a/ilQaTHPN6W",
-      "source_text": "☆특가 9,640원 (28.7% 할인)\n풀무원 우렁 강된장, 150g, 8입\n📌 가격 현황\n- 정상가: 13,520원\n- 할인: 3,880원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilQaTHPN6W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T12:03:57+00:00",
-      "title": "풀무원 우렁 강된장, 150g, 8입",
-      "sale_price_krw": 9640
-    },
-    {
       "id": 94871,
       "source_post_url": "https://t.me/jirum/94871",
       "original_purchase_url": "https://link.coupang.com/a/ilQs8wMSzs",
@@ -39,12 +30,7 @@
       "sale_price_krw": 13390
     }
   ],
-  "in_flight": {
-    "id": 94870,
-    "status": "CLAIMED",
-    "run_id": "41446344409",
-    "at": "2026-11-02T12:38:57.919625+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -482,6 +468,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B0%80%EA%B2%A9-20%ED%95%A0%EC%9D%B8-dZnWBwad?from=write",
       "at": "2026-11-02T11:48:59.466093+00:00",
       "run_id": "41439668316"
+    },
+    "94870": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%9A%B0%EB%A0%81-%EA%B0%95%EB%90%9C%EC%9E%A5-150g-8%EC%9E%85-30%ED%95%A0%EC%9D%B8-jb0moYkP?from=write",
+      "at": "2026-11-02T12:39:15.074136+00:00",
+      "run_id": "41446344409"
     }
   },
   "skipped_non_coupang": 5,
