@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94887,
-  "pending": [
-    {
-      "id": 94887,
-      "source_post_url": "https://t.me/jirum/94887",
-      "original_purchase_url": "https://link.coupang.com/a/imxmGBWuXI",
-      "source_text": "👍대박 4,400원 (37.1% 할인)\n애경바세린 프레시 모이스처라이징 바디워시 라벤더 카밍, 900ml, 1개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 2,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxmGBWuXI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:08:20+00:00",
-      "title": "애경바세린 프레시 모이스처라이징 바디워시 라벤더 카밍, 900ml, 1개",
-      "sale_price_krw": 4400
-    }
-  ],
-  "in_flight": {
-    "id": 94887,
-    "status": "CLAIMED",
-    "run_id": "41534742314",
-    "at": "2026-11-02T22:09:34.488234+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -551,6 +536,16 @@
       "vendor_item_id": "87980933291",
       "at": "2026-11-02T22:08:34.802273+00:00",
       "run_id": "41534546992"
+    },
+    "94887": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%A0%EA%B2%BD%EB%B0%94%EC%84%B8%EB%A6%B0-%ED%94%84%EB%A0%88%EC%8B%9C-%EB%AA%A8%EC%9D%B4%EC%8A%A4%EC%B2%98%EB%9D%BC%EC%9D%B4%EC%A7%95-%EB%B0%94%EB%94%94%EC%9B%8C%EC%8B%9C-%EB%9D%BC%EB%B2%A4%EB%8D%94-%EC%B9%B4%EB%B0%8D-900-40%ED%95%A0%EC%9D%B8-P5n2qQXd?from=write",
+      "posted_at_utc": "2026-11-02T22:08:20+00:00",
+      "product_id": "8249755567",
+      "item_id": "23748744788",
+      "vendor_item_id": "90773287122",
+      "at": "2026-11-02T22:09:50.864300+00:00",
+      "run_id": "41534742314"
     }
   },
   "skipped_non_coupang": 8,
