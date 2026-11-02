@@ -25,8 +25,9 @@ from gh_only.default_deal_format import (
 )
 from gh_only.affsdp_candidate import compose_affsdp_candidate
 from gh_only.lowchart_product_photo import (
-    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url, 
+    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url,
 )
+from gh_only.telegram_source_photo import download_source_photo
 ALLOWED_CDN = ("thumbnail.coupangcdn.com", "image.coupangcdn.com")
 MAX_IMAGE_BYTES = 2_500_000
 
@@ -252,6 +253,15 @@ def enrich_deal(deal: dict, output_dir: Path,
         eligible_cdn = image_is_cdn(og.get("og_image") or "")
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
+    source_photo_verified = False
+    if (using_public_lowchart and photo.get("status") != "IMAGE_SAVED"
+            and deal.get("image_provenance") == "telegram_attached_photo"):
+        fallback_photo = download_source_photo(
+            deal.get("image_url_candidate"), output_dir, source_id)
+        photo = fallback_photo
+        if fallback_photo.get("status") == "IMAGE_SAVED":
+            image_source = "telegram_attached_photo"
+            source_photo_verified = True
     caption = create_default_preview(sale, title, average, source_id)
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
@@ -278,6 +288,9 @@ def enrich_deal(deal: dict, output_dir: Path,
         "image_product_match": matching,
         "image_source": image_source,
         "image_metadata_status": og.get("status"),
+        "image_http_status": og.get("http_status"),
+        "image_error_type": og.get("error_type"),
+        "source_photo_verified": source_photo_verified,
         "image_match_basis": og.get("image_match_basis"),
         "image_same_named_option": og.get("image_same_named_option"),
         "photo": photo,
