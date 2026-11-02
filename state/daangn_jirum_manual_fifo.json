@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94887,
-  "pending": [],
+  "last_scanned_id": 94889,
+  "pending": [
+    {
+      "id": 94888,
+      "source_post_url": "https://t.me/jirum/94888",
+      "original_purchase_url": "https://link.coupang.com/a/imxswfefAW",
+      "source_text": "👍대박 5,430원 (39.7% 할인)\n연두 요리에센스 순, 830ml, 1개\n📌 가격 현황\n- 정상가: 9,000원\n- 할인: 3,570원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxswfefAW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:09:39+00:00",
+      "title": "연두 요리에센스 순, 830ml, 1개",
+      "sale_price_krw": 5430
+    },
+    {
+      "id": 94889,
+      "source_post_url": "https://t.me/jirum/94889",
+      "original_purchase_url": "https://link.coupang.com/a/imxvTs06Ng",
+      "source_text": "☆특가 350,270원\n다이슨 에어랩 id 멀티 스타일러 앤 드라이어\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxvTs06Ng\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:10:25+00:00",
+      "title": "☆특가 350,270원",
+      "sale_price_krw": 350270
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
