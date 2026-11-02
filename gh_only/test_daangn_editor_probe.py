@@ -109,6 +109,27 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertEqual(result["image"].name, "jirum_94717_kakao_og.jpg")
         self.assertTrue(result["unissued_affsdp_candidate"])
 
+    def test_mobile_two_enter_paragraph_spacing_preserves_full_affiliate_url(self):
+        # Each field and notice is separated by two Enter presses. The long
+        # affiliate URL is intact and disclosure is still the final paragraph.
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            self._make_draft(folder)
+            body = read_one_draft(folder)["body"]
+        fields = body.split("\\n\\n")
+        self.assertEqual(len(fields), 8)  # 6 fields + extra disclosure gap
+        self.assertTrue(fields[0].startswith("📦 상품명 : "))
+        self.assertTrue(fields[1].startswith("💸 쿠팡 평소 판매가 : "))
+        self.assertTrue(fields[2].startswith("🔥 핫딜 특가 : "))
+        self.assertEqual(fields[3], "🛒 상품 링크 : " + TEST_URL)
+        self.assertTrue(fields[4].startswith("※ 실시간 핫딜 특성상"))
+        self.assertTrue(fields[5].startswith("🔥 핫딜 정보를 확인해"))
+        self.assertEqual(fields[6], "")  # 4 Newlines before disclosure
+        self.assertEqual(fields[7], DISCLOSURE)
+        self.assertEqual(body.count(TEST_URL), 1)
+        self.assertEqual(body.count(DISCLOSURE), 1)
+        self.assertNotIn("\\n\\n\\n", body.split("\\n\\n\\n\\n")[0])
+
     def test_verified_historical_low_uses_requested_promo_and_discount_title(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
