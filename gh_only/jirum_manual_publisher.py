@@ -310,6 +310,15 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     "(e)=>e.complete&&e.naturalWidth>0"
                 ):
                     raise RuntimeError("PHOTO_MISSING_BEFORE_SUBMIT")
+                # The deal may have aged past 60 minutes while the image
+                # uploaded. Do not submit such a post, even if already claimed.
+                if article.get("posted_at_utc"):
+                    from datetime import datetime, timezone
+                    from gh_only.official_link_receipts import parse_timestamp
+                    posted = parse_timestamp(article["posted_at_utc"])
+                    if (posted is None
+                            or (datetime.now(timezone.utc) - posted).total_seconds() >= 3600):
+                        raise RuntimeError("DEAL_EXPIRED_BEFORE_SUBMIT")
                 # No retry under ANY condition, including timeout or navigation error.
                 result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
@@ -327,13 +336,19 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     return result
                 result["failure_stage"] = "VERIFY_PUBLISHED_POST"
                 content = page.locator("body").inner_text(timeout=5000)
-                hrefs = page.locator('a[href*="/re/AFFSDP"]').evaluate_all(
-                    "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
-                )
-                same_link = (len(hrefs) == 1
-                             and hrefs[0] == article["candidate_url"]
-                             and parse_qs(urlsplit(hrefs[0]).query).get("itemId")
-                             == [article["item_id"]])
+                if article.get("official_link_receipt") is not None:
+                    hrefs = page.locator('a[href*="link.coupang.com/a/"]').evaluate_all(
+                        "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
+                    )
+                    same_link = len(hrefs) == 1 and hrefs[0] == article["candidate_url"]
+                else:
+                    hrefs = page.locator('a[href*="/re/AFFSDP"]').evaluate_all(
+                        "(nodes)=>nodes.map(n=>n.getAttribute('href'))"
+                    )
+                    same_link = (len(hrefs) == 1
+                                 and hrefs[0] == article["candidate_url"]
+                                 and parse_qs(urlsplit(hrefs[0]).query).get("itemId")
+                                 == [article["item_id"]])
                 photo_visible = page.locator('img[alt^="Post image"]').evaluate_all(
                     "(nodes)=>nodes.some(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0)"
                 )
