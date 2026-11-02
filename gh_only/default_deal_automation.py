@@ -205,7 +205,8 @@ def enrich_deal(deal: dict, output_dir: Path,
     p, i = identity.get("product_id"), identity.get("item_id")
     # Explicit injectable overrides retain existing read-only regression
     # contracts; production never calls the login-based Kakao debugger.
-    if og_lookup is None:
+    using_public_lowchart = og_lookup is None
+    if using_public_lowchart:
         og_lookup = lambda _link, _session: lookup_exact_item_photo(identity, fallback_title)
         photo_downloader = photo_downloader or download_exact_photo
     else:
@@ -230,9 +231,15 @@ def enrich_deal(deal: dict, output_dir: Path,
         except Exception as exc:
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
-    image_source = og.get("image_source", "legacy_kakao_og")
+    image_source = og.get(
+        "image_source",
+        "lowchart_exact_item_public_page" if using_public_lowchart
+        else "legacy_kakao_og",
+    )
     photo = {"status": "NO_MATCHING_PRODUCT_IMAGE", "saved_name": None}
-    if image_source == "lowchart_exact_item_public_page":
+    if not matching:
+        eligible_cdn = False
+    elif image_source == "lowchart_exact_item_public_page":
         eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
     else:
         from gh_only.kakao_og_authenticated_probe import image_is_cdn
