@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94816,
+  "last_scanned_id": 94818,
   "pending": [
     {
       "id": 94789,
@@ -225,6 +225,22 @@
       "source_text": "❤️초대박 5,990원 (41.0% 할인)\n풀무원 얄피꽉찬 쌀 물만두 (냉동)\n📌 가격 현황\n- 정상가: 10,153원\n- 할인: 4,163원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ikY5WqzNh6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "풀무원 얄피꽉찬 쌀 물만두 (냉동)",
       "sale_price_krw": 5990
+    },
+    {
+      "id": 94817,
+      "source_post_url": "https://t.me/jirum/94817",
+      "original_purchase_url": "https://link.coupang.com/a/ik1qjqg7dQ",
+      "source_text": "☆특가 5,600원\n퍼기 유아용 순한 안심 코인육수 20p, 야채맛, 60g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ik1qjqg7dQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 5,600원",
+      "sale_price_krw": 5600
+    },
+    {
+      "id": 94818,
+      "source_post_url": "https://t.me/jirum/94818",
+      "original_purchase_url": "https://link.coupang.com/a/ik1V6GtTyu",
+      "source_text": "☆특가 8,790원\n오늘 차림 한돈 고추장 제육볶음, 600g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ik1V6GtTyu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 8,790원",
+      "sale_price_krw": 8790
     }
   ],
   "in_flight": null,
