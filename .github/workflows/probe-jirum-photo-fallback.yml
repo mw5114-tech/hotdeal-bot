@@ -120,3 +120,63 @@ jobs:
               print("LOWCHART_PHOTO_PROBE "+json.dumps({"source_id":source["id"],"error_type":type(exc).__name__,
                                                       "identity":id_summary,"published":0}))
           PY
+      - name: Validate downloadable exact-item product photos from Lowchart pages
+        run: |
+          python - <<'PY'
+          import json
+          import re
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib import request
+          from urllib.parse import urlsplit
+          from gh_only.shortlink_probe import one_hop
+          from gh_only.lowchart_price_reference import build_url
+
+          pending=json.loads(Path("state/daangn_jirum_manual_fifo.json").read_text("utf8"))["pending"]
+          selected=[x for x in pending if x["id"] in {94789,94791,94800,94820,94834}]
+          class FindImages(HTMLParser):
+              def __init__(self):
+                  super().__init__();self.items=[];self.title=False;self.title_data=[]
+              def handle_starttag(self,tag,attrs):
+                  d=dict(attrs)
+                  if tag=="img" and d.get("alt") and (d.get("src") or d.get("data-src")):
+                      self.items.append(d)
+                  if tag=="title":self.title=True
+              def handle_endtag(self,tag):
+                  if tag=="title":self.title=False
+              def handle_data(self,data):
+                  if self.title:self.title_data.append(data)
+          for source in selected:
+              try:
+                  identity=one_hop(source["original_purchase_url"])
+                  if identity.get("result")!="DIRECT_PRODUCT_ID_CANDIDATE":
+                      print("LOWCHART_ITEM_PHOTO "+json.dumps({"id":source["id"],"identity":identity.get("result")}))
+                      continue
+                  pid,iid=identity["product_id"],identity["item_id"]
+                  req=request.Request(build_url(pid,iid),headers={"User-Agent":"Mozilla/5.0","Accept":"text/html"})
+                  with request.urlopen(req,timeout=20) as resp: html=resp.read(1_800_000).decode("utf8","replace")
+                  p=FindImages();p.feed(html)
+                  page_title="".join(p.title_data).split(" - ")[0]
+                  product_imgs=[d for d in p.items if d.get("alt","").strip()==page_title.strip()
+                              and urlsplit(d.get("src") or d.get("data-src") or "").hostname in {
+                                  "thumbnail.coupangcdn.com","thumbnail7.coupangcdn.com",
+                                  "thumbnail8.coupangcdn.com","thumbnail6.coupangcdn.com"
+                              }]
+                  entry={"id":source["id"],"exact_ids_present":pid in html and iid in html,
+                         "title_matches_source":any(token in page_title for token in source["title"].split()[:2]),
+                         "matching_product_img_tags":len(product_imgs),
+                         "image_hosts":list({urlsplit(d.get("src") or "").hostname for d in product_imgs})}
+                  if source["id"]==94789 and len(product_imgs)==1:
+                      url=product_imgs[0].get("src") or product_imgs[0].get("data-src")
+                      u=urlsplit(url)
+                      entry["candidate_ext"]=u.path[-8:]
+                      req=request.Request(url,headers={"User-Agent":"Mozilla/5.0","Accept":"image/*"})
+                      with request.urlopen(req,timeout=20) as resp:
+                          data=resp.read(2_500_001)
+                          entry.update({"download_status":resp.status,"mime":resp.headers.get_content_type(),
+                                        "bytes":len(data),"jpeg_magic":data.startswith(b"\\xff\\xd8\\xff"),
+                                        "png_magic":data.startswith(b"\\x89PNG")})
+                  print("LOWCHART_ITEM_PHOTO "+json.dumps(entry,ensure_ascii=False))
+              except Exception as exc:
+                  print("LOWCHART_ITEM_PHOTO "+json.dumps({"id":source["id"],"error_type":type(exc).__name__}))
+          PY
