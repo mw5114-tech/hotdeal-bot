@@ -15,3 +15,5 @@ FIFO drain live validation: 20261101-drain-all-94746-94748
 FIFO drain retry after title-length fix: 20261101-source-94747-94748
 
 FIFO drain verification after editor image prefix fix: 20261101-0439
+
+Confirm expired Kakao session circuit breaker without posting: 20261102-1231KST-94789
