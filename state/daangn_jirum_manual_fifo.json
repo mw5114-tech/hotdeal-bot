@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94897,
-  "pending": [],
+  "last_scanned_id": 94899,
+  "pending": [
+    {
+      "id": 94898,
+      "source_post_url": "https://t.me/jirum/94898",
+      "original_purchase_url": "https://link.coupang.com/a/imACTSTWkC",
+      "source_text": "☆특가 15,240원 (23.8% 할인)\n연세두유 고단백 Pro 플레인, 240ml*16개\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 4,760원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imACTSTWkC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:53:59+00:00",
+      "title": "연세두유 고단백 Pro 플레인, 240ml*16개",
+      "sale_price_krw": 15240
+    },
+    {
+      "id": 94899,
+      "source_post_url": "https://t.me/jirum/94899",
+      "original_purchase_url": "https://link.coupang.com/a/imACYfavtc",
+      "source_text": "☆특가 12,980원 (26.8% 할인)\n(재할인)덴마크 소화가 잘되는 우유 락토프리, 190ml, 24개\n📌 가격 현황\n- 정상가: 17,730원\n- 할인: 4,750원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imACYfavtc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:53:59+00:00",
+      "title": "(재할인)덴마크 소화가 잘되는 우유 락토프리, 190ml, 24개",
+      "sale_price_krw": 12980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
