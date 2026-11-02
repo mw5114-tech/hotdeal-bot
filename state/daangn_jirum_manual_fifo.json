@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94847,
-  "pending": [
-    {
-      "id": 94847,
-      "source_post_url": "https://t.me/jirum/94847",
-      "original_purchase_url": "https://link.coupang.com/a/ilrKylZx6a",
-      "source_text": "☆특가 31,900원 (25.0% 할인)\n베베숲 홈 섬유유연제 브리즈가든향 리필, 1L, 3개\n📌 가격 현황\n- 정상가: 42,540원\n- 할인: 10,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilrKylZx6a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T06:22:09+00:00",
-      "title": "베베숲 홈 섬유유연제 브리즈가든향 리필, 1L, 3개",
-      "sale_price_krw": 31900
-    }
-  ],
-  "in_flight": {
-    "id": 94847,
-    "status": "CLAIMED",
-    "run_id": "41400525988",
-    "at": "2026-11-02T06:32:36.200045+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -329,6 +314,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%99%98%ED%83%80-%ED%8C%8C%EC%9D%B8%EC%95%A0%ED%94%8C-350ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PmVnr73d?from=write",
       "at": "2026-11-02T06:11:41.366856+00:00",
       "run_id": "41398321064"
+    },
+    "94847": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B2%A0%EB%B2%A0%EC%88%B2-%ED%99%88-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%B8%8C%EB%A6%AC%EC%A6%88%EA%B0%80%EB%93%A0%ED%96%A5-%EB%A6%AC%ED%95%84-1L-3%EA%B0%9C-40%ED%95%A0%EC%9D%B8-A04RVpKA?from=write",
+      "at": "2026-11-02T06:32:52.637896+00:00",
+      "run_id": "41400525988"
     }
   },
   "skipped_non_coupang": 4,
