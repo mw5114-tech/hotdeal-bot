@@ -122,7 +122,9 @@ class LowchartProductPhotoTests(unittest.TestCase):
                                  "saved_name":"jirum_94789_lowchart_photo.jpg"}), \
              patch("gh_only.default_deal_automation.fetch_one",
                    return_value={"usable_historical_reference":False}):
-            r = enrich_deal(deal, Path(tmp), owner_tag="AF9668915")
+            r = enrich_deal(deal, Path(tmp), resolver=lambda _: ITEM,
+                            history_fetch=lambda *a: {"usable_historical_reference": False},
+                            owner_tag="AF9668915")
         lookup.assert_called_once()
         kakao.assert_not_called()
         self.assertTrue(r["image_product_match"])
