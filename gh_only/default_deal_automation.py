@@ -263,7 +263,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     )
     if candidate.get("candidate_url"):
         caption["caption"] += (
-            "\n🛒 상품 링크 : " + candidate["candidate_url"]
+            "\n\n🛒 상품 링크 : " + candidate["candidate_url"]
         )
     return {
         "source_post_url": deal.get("source_post_url"),
