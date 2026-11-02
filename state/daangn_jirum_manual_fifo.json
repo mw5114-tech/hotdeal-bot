@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94835,
+  "last_scanned_id": 94836,
   "pending": [
     {
       "id": 94789,
@@ -377,6 +377,14 @@
       "source_text": "☆특가 28,610원\n(와멤데 쿠폰)사무실 과자세트 스낵 비스킷쿠키 12입 세트 * 2개선택필수\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilfQ6ZwYea\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "title": "☆특가 28,610원",
       "sale_price_krw": 28610
+    },
+    {
+      "id": 94836,
+      "source_post_url": "https://t.me/jirum/94836",
+      "original_purchase_url": "https://link.coupang.com/a/ilh24VHuKq",
+      "source_text": "☆특가 14,320원\n그린핑거 엠보싱 소독티슈 캡형 60매 10팩\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilh24VHuKq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "title": "☆특가 14,320원",
+      "sale_price_krw": 14320
     }
   ],
   "in_flight": null,
