@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94846,
-  "pending": [
-    {
-      "id": 94846,
-      "source_post_url": "https://t.me/jirum/94846",
-      "original_purchase_url": "https://link.coupang.com/a/ilqVera0Xc",
-      "source_text": "☆특가 13,790원\n환타 파인애플, 350ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilqVera0Xc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T06:10:34+00:00",
-      "title": "☆특가 13,790원",
-      "sale_price_krw": 13790
-    }
-  ],
-  "in_flight": {
-    "id": 94846,
-    "status": "CLAIMED",
-    "run_id": "41398321064",
-    "at": "2026-11-02T06:11:25.305068+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -323,6 +308,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%8F%8C%EB%8F%8C%EC%9D%B4-%EB%AC%B4%EC%97%B0%EA%B3%A8-%EB%8C%80%ED%8C%A8-%EC%82%BC%EA%B2%B9%EC%82%B4-%EB%83%89%EB%8F%99-1kg-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pk6XNkxA?from=write",
       "at": "2026-11-02T05:20:48.188741+00:00",
       "run_id": "41393407529"
+    },
+    "94846": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%99%98%ED%83%80-%ED%8C%8C%EC%9D%B8%EC%95%A0%ED%94%8C-350ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PmVnr73d?from=write",
+      "at": "2026-11-02T06:11:41.366856+00:00",
+      "run_id": "41398321064"
     }
   },
   "skipped_non_coupang": 4,
