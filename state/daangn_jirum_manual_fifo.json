@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94866,
-  "pending": [
-    {
-      "id": 94866,
-      "source_post_url": "https://t.me/jirum/94866",
-      "original_purchase_url": "https://link.coupang.com/a/ilJZvZRX40",
-      "source_text": "🔥🔥🔥무지성 1,980원 (67.0% 할인)🔥🔥🔥\n[로켓프레시] 다담 국물떡볶이 양념\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 4,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilJZvZRX40\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T10:37:25+00:00",
-      "title": "[로켓프레시] 다담 국물떡볶이 양념",
-      "sale_price_krw": 1980
-    }
-  ],
-  "in_flight": {
-    "id": 94866,
-    "status": "CLAIMED",
-    "run_id": "41430466046",
-    "at": "2026-11-02T10:39:06.694010+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -437,6 +422,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%B0%EC%84%B8%EB%91%90%EC%9C%A0-%EB%BC%88%EB%A5%BC-%EC%83%9D%EA%B0%81%ED%95%9C-%EA%B3%A0%EC%B9%BC%EC%8A%98-%EB%91%90%EC%9C%A0-%EA%B2%80%EC%9D%80%EC%BD%A9-190ml-24%EA%B0%9C-20%ED%95%A0%EC%9D%B8-P12G6mKd?from=write",
       "at": "2026-11-02T10:37:22.369572+00:00",
       "run_id": "41430202828"
+    },
+    "94866": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EC%BC%93%ED%94%84%EB%A0%88%EC%8B%9C-%EB%8B%A4%EB%8B%B4-%EA%B5%AD%EB%AC%BC%EB%96%A1%EB%B3%B6%EC%9D%B4-%EC%96%91%EB%85%90-65%ED%95%A0%EC%9D%B8-dZnW303d?from=write",
+      "at": "2026-11-02T10:39:24.148148+00:00",
+      "run_id": "41430466046"
     }
   },
   "skipped_non_coupang": 5,
