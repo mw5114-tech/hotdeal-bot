@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94873,
-  "pending": [],
+  "last_scanned_id": 94874,
+  "pending": [
+    {
+      "id": 94874,
+      "source_post_url": "https://t.me/jirum/94874",
+      "original_purchase_url": "https://link.coupang.com/a/ilS3brjaxg",
+      "source_text": "🔥🔥🔥무지성 5,120원 (53.0% 할인)🔥🔥🔥\n키스미 헤비로테이션 컬러링 아이브로우 마스카라 8g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,894원\n- 할인: 5,774원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilS3brjaxg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T12:44:11+00:00",
+      "title": "키스미 헤비로테이션 컬러링 아이브로우 마스카라 8g",
+      "sale_price_krw": 5120
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
