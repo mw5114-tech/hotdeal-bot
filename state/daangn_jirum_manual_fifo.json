@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94889,
-  "pending": [
-    {
-      "id": 94889,
-      "source_post_url": "https://t.me/jirum/94889",
-      "original_purchase_url": "https://link.coupang.com/a/imxvTs06Ng",
-      "source_text": "☆특가 350,270원\n다이슨 에어랩 id 멀티 스타일러 앤 드라이어\n📦 특가 바로가기\nhttps://link.coupang.com/a/imxvTs06Ng\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:10:25+00:00",
-      "title": "☆특가 350,270원",
-      "sale_price_krw": 350270
-    }
-  ],
-  "in_flight": {
-    "id": 94889,
-    "status": "CLAIMED",
-    "run_id": "41534997903",
-    "at": "2026-11-02T22:11:32.934310+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -570,6 +555,16 @@
       "item_id": "19390694529",
       "vendor_item_id": "86503004848",
       "at": "2026-11-02T22:11:29.712424+00:00",
+      "run_id": "41534997903"
+    },
+    "94889": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%EC%9D%B4%EC%8A%A8-%EC%97%90%EC%96%B4%EB%9E%A9-i-d-%EB%A9%80%ED%8B%B0-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%9F%AC-%EC%95%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EC%96%B4-257511-30%ED%95%A0%EC%9D%B8-jK2gxNBd?from=write",
+      "posted_at_utc": "2026-11-02T22:10:25+00:00",
+      "product_id": "8882805356",
+      "item_id": "27966258665",
+      "vendor_item_id": null,
+      "at": "2026-11-02T22:11:49.912375+00:00",
       "run_id": "41534997903"
     }
   },
