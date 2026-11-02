@@ -69,7 +69,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
 
     def _make_draft(self, folder):
         body = (
-            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛\n\n"
+            "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛\n\n"
             "💸 쿠팡 평소 판매가 : 약 34,575원\n\n"
             "🔥 핫딜 특가 : 12,050원\n\n"
             "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL
@@ -118,7 +118,8 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             body = read_one_draft(folder)["body"]
         fields = body.split("\n\n")
         self.assertEqual(len(fields), 8)  # 6 fields + extra disclosure gap
-        self.assertTrue(fields[0].startswith("📦 상품명 : "))
+        self.assertTrue(fields[0].startswith("[할인율 확인 중] "))
+        self.assertNotIn("📦 상품명 :", body)
         self.assertTrue(fields[1].startswith("💸 쿠팡 평소 판매가 : "))
         self.assertTrue(fields[2].startswith("🔥 핫딜 특가 : "))
         self.assertEqual(fields[3], "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL)
@@ -136,6 +137,8 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             report = self._make_draft(folder)
             report["drafts"][0]["observed_low_verified_for_deal"] = True
             report["drafts"][0]["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            report["drafts"][0]["caption"]["caption"] = report["drafts"][0]["caption"]["caption"].replace(
+                "[할인율 확인 중] ", "[65%할인] ", 1)
             (folder / "drafts.json").write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
             result = read_one_draft(folder)
         self.assertIn("[65%할인]", result["title"])
@@ -149,8 +152,8 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             report = self._make_draft(folder)
             draft = report["drafts"][0]
             draft["caption"]["caption"] = draft["caption"]["caption"].replace(
-                "휘카레 셰프 오리지널 소스 순한맛",
-                product + " [65%할인]",
+                "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛",
+                "[65%할인] " + product,
             )
             draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
             (folder / "drafts.json").write_text(
@@ -178,7 +181,8 @@ class DaangnEditorOfflineTests(unittest.TestCase):
                 json.dumps(report, ensure_ascii=False), encoding="utf-8")
             article = read_one_draft(folder)
         self.assertEqual(article["title"], "[쿠팡🔥핫딜] " + source_name + " [65%할인]")
-        self.assertIn("📦 상품명 : " + source_name + " [65%할인]", article["body"])
+        self.assertIn("[65%할인] " + source_name, article["body"])
+        self.assertNotIn("📦 상품명 :", article["body"])
 
     def test_long_coupang_title_still_keeps_discount_suffix(self):
         long_name = "고급 상품 " + "초특가세트" * 22
@@ -187,8 +191,8 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             report = self._make_draft(folder)
             draft = report["drafts"][0]
             draft["caption"]["caption"] = draft["caption"]["caption"].replace(
-                "휘카레 셰프 오리지널 소스 순한맛",
-                long_name + " [65%할인]",
+                "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛",
+                "[65%할인] " + long_name,
             )
             draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
             (folder / "drafts.json").write_text(
@@ -199,6 +203,25 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertTrue(article["title"].endswith(" [65%할인]"))
         self.assertLessEqual(len(article["title"]), 150)
         self.assertEqual(article["title"].count("[65%할인]"), 1)
+
+    def test_draft_rejects_old_product_label_and_unverified_percent(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            draft = report["drafts"][0]
+            draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            original = draft["caption"]["caption"]
+            for first in (
+                "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛",
+                "[45%할인] 휘카레 셰프 오리지널 소스 순한맛",
+            ):
+                with self.subTest(first=first):
+                    draft["caption"]["caption"] = original.replace(
+                        "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛", first, 1)
+                    (folder / "drafts.json").write_text(
+                        json.dumps(report, ensure_ascii=False), encoding="utf-8")
+                    with self.assertRaisesRegex(ValueError, "DRAFT_DISCOUNT_PREFIX"):
+                        read_one_draft(folder)
 
     def test_does_not_accept_original_source_affiliate_instead_of_own_candidate(self):
         with tempfile.TemporaryDirectory() as temp:
