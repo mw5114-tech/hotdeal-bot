@@ -492,7 +492,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                  if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
         or "📦 상품명 :" not in article["body"]
-        or "🛒 상품 링크 : " + article["candidate_url"] not in article["body"]
+        or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
         or article["body"].count(article["candidate_url"]) != 1):
         raise RuntimeError("POST_EVIDENCE_NOT_READY")
     from urllib.parse import parse_qs
