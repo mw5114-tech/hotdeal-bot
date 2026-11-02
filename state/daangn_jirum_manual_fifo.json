@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94892,
-  "pending": [
-    {
-      "id": 94892,
-      "source_post_url": "https://t.me/jirum/94892",
-      "original_purchase_url": "https://link.coupang.com/a/imygaT6w2u",
-      "source_text": "🔥🔥🔥무지성 6,490원 (48.8% 할인)🔥🔥🔥\n오뚜기 실쏙 교자만두 고기 (냉동), 1.5kg, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,669원\n- 할인: 6,179원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imygaT6w2u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:20:52+00:00",
-      "title": "오뚜기 실쏙 교자만두 고기 (냉동), 1.5kg, 1개",
-      "sale_price_krw": 6490
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -947,6 +937,12 @@
       "source_post_url": "https://t.me/jirum/94869",
       "source_title": "☆특가 4,990원",
       "at": "2026-11-02T12:38:52.846356+00:00"
+    },
+    "94892": {
+      "status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
+      "source_post_url": "https://t.me/jirum/94892",
+      "source_title": "오뚜기 실쏙 교자만두 고기 (냉동), 1.5kg, 1개",
+      "at": "2026-11-02T22:22:35.769041+00:00"
     }
   },
   "single_test_repost_20261103": {
