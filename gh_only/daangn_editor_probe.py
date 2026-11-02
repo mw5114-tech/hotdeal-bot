@@ -183,10 +183,19 @@ def read_one_draft(folder: Path) -> dict:
                         "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
     promo = (verified_claim if row.get("observed_low_verified_for_deal") is True
              else unverified_claim)
-    # Two Enter presses between every visible section for mobile readability.
-    # Keep the larger separation before the last-line affiliate disclosure.
-    # Link stays exactly one whole text node; photo is inserted first by editor.
-    clean_body = body.rstrip() + "\n\n" + stock_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
+    # The link is ONE exact text paragraph, with no intervening blank line
+    # between its label and URL, or immediately before/after the link row.
+    # This also prevents an extra empty ProseMirror paragraph around the URL
+    # from confusing Muse's later link-only edit.
+    link_line = "🛒 쿠팡에서 상품정보 더보기 : " + url
+    if body.count(link_line) != 1:
+        raise ValueError("DRAFT_LINK_ROW_NOT_SINGLE_LINE")
+    before, after = body.split(link_line, 1)
+    if after.strip() or not before.endswith("\n\n"):
+        raise ValueError("DRAFT_LINK_ROW_LAYOUT_INVALID")
+    compact_body = before.rstrip("\n") + "\n" + link_line
+    # One Enter around the link block, while retaining the wider disclosure gap.
+    clean_body = compact_body + "\n" + stock_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,
