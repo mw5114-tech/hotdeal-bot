@@ -119,8 +119,8 @@ def read_one_draft(folder: Path) -> dict:
                 or aff.get("commission_attribution_verified") is not False):
             raise ValueError("DRAFT_MUSE_REWRITE_STATE_INVALID")
     else:
-        # Legacy formatter remains available for offline regression tests,
-        # but production always requires a validated official receipt.
+        # Original AFFSDP composition is active when both optional Muse and
+        # official-receipt production modes are explicitly disabled.
         if (parsed.scheme != "https" or parsed.hostname != "link.coupang.com"
                 or parsed.path != "/re/AFFSDP"):
             raise ValueError("DRAFT_AFFSDP_HOST_INVALID")
