@@ -1,4 +1,8 @@
-# Muse post-edit handoff (GitHub read-only)
+# Historical Muse post-edit handoff — INACTIVE (2026-11-03)
+
+Production now uses the restored /re/AFFSDP candidate link pattern and
+does not create new PUBLISHED_AWAITING_MUSE posts. This archived plan is
+retained for reference only. No Muse link replacement is required.
 
 GitHub posts a Telegram Jirum deal to Daangn with a plain, clean Coupang product link first. Muse later replaces only that link in the already-published post with the genuine official Coupang Partners /a/ link using the logged-in Partners browser.
 

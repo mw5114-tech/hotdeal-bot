@@ -1,7 +1,9 @@
 """Build an experimental Coupang AFFSDP URL from a verified source redirect.
 
 This is NOT an officially issued Coupang Partners link. Its ability to
-attribute commissions is UNVERIFIED. Never mark as issued or auto-publish.
+attribute commissions is UNVERIFIED. The operator explicitly chose to
+publish this historical candidate format without Muse conversion; never
+claim an officially issued link or verified commission attribution.
 No HTTP, login, cookie, API or network call occurs in this module.
 """
 from __future__ import annotations
