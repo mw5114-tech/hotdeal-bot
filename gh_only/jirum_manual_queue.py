@@ -145,6 +145,40 @@ def remember_kakao_login_block(store, source_id: int, reason: str) -> None:
     store.write(state, sha, "state: pause FIFO until Kakao secret renewed")
 
 
+PERMANENT_LOWCHART_ISSUES = frozenset((
+    "LOWCHART_TELEGRAM_TITLE_MISMATCH",
+    "LOWCHART_ITEM_IDS_MISSING",
+    "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
+    "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+))
+
+
+def permanent_lowchart_failure(folder: Path) -> str | None:
+    try:
+        rows = json.loads((folder / "drafts.json").read_text("utf-8"))["drafts"]
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
+        return None
+    if len(rows) != 1 or not isinstance(rows[0], dict):
+        return None
+    reason = rows[0].get("image_metadata_status")
+    return reason if reason in PERMANENT_LOWCHART_ISSUES else None
+
+
+def archive_unverifiable(store, source_id: int, reason: str) -> None:
+    if reason not in PERMANENT_LOWCHART_ISSUES:
+        raise ValueError("NOT_PERMANENT_IMAGE_MISMATCH")
+    state, sha = store.read()
+    if (state["in_flight"] is not None or not state["pending"]
+            or state["pending"][0]["id"] != source_id):
+        raise RuntimeError("QUEUE_CHANGED_BEFORE_IMAGE_SKIP")
+    row = state["pending"].pop(0)
+    state.setdefault("skipped_unverifiable", {})[str(source_id)] = {
+        "status": reason, "source_post_url": row["source_post_url"],
+        "source_title": row.get("title", "")[:180], "at": now_utc()
+    }
+    store.write(state, sha, "state: archive unverifiable Lowchart photo without posting")
+
+
 def kakao_operator_notice(reason: str, pending: int) -> None:
     message = (
         "Kakao Developers login expired: update GitHub Actions secret "
@@ -212,6 +246,20 @@ def validate_state(s: dict) -> None:
             or any(str(i) in skipped_expired for i in ids)
             or any(k in published for k in skipped_expired)):
         raise ValueError("INVALID_EXPIRED_AUDIT")
+    skipped_unverifiable = s.get("skipped_unverifiable", {})
+    if (not isinstance(skipped_unverifiable, dict)
+            or len(skipped_unverifiable) > 10_000
+            or any(not isinstance(k, str) or not k.isdigit()
+                   or not isinstance(v, dict) or
+                   v.get("status") not in (
+                     "LOWCHART_TELEGRAM_TITLE_MISMATCH",
+                     "LOWCHART_ITEM_IDS_MISSING",
+                     "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
+                     "LOWCHART_PRODUCT_IMAGE_NOT_FOUND")
+                   for k, v in skipped_unverifiable.items())
+            or any(str(i) in skipped_unverifiable for i in ids)
+            or any(k in published or k in skipped_expired for k in skipped_unverifiable)):
+        raise ValueError("INVALID_UNVERIFIABLE_AUDIT")
     block = s.get("kakao_auth_block")
     if block is not None and (
         not isinstance(block, dict)
@@ -581,8 +629,19 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             # A login-expired Kakao session cannot supply a verified product
             # image. Publishing must not claim/post anything; checkpoint once,
             # then skip future Playwright work until the Secret changes.
+            if str(exc) == "POST_EVIDENCE_NOT_READY" and lowchart_mode():
+                permanent = permanent_lowchart_failure(DRAFT_DIR)
+                if permanent:
+                    source_id = state["pending"][0]["id"]
+                    archive_unverifiable(store, source_id, permanent)
+                    print("JIRUM_LOWCHART_UNVERIFIABLE_ARCHIVED " + json.dumps({
+                        "source_id": source_id, "reason": permanent,
+                        "no_post_submitted": True,
+                    }))
+                    continue
             reason = (kakao_login_failure(DRAFT_DIR)
-                      if str(exc) == "POST_EVIDENCE_NOT_READY" else None)
+                      if str(exc) == "POST_EVIDENCE_NOT_READY" and not lowchart_mode()
+                      else None)
             if reason:
                 source_id = state["pending"][0]["id"]
                 remember_kakao_login_block(store, source_id, reason)
