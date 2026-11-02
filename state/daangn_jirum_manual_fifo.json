@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94865,
-  "pending": [
-    {
-      "id": 94865,
-      "source_post_url": "https://t.me/jirum/94865",
-      "original_purchase_url": "https://link.coupang.com/a/ilJQPZqboi",
-      "source_text": "☆특가 8,650원\n연세두유 뼈를 생각한 고칼슘 두유 검은콩, 190ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ilJQPZqboi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T10:35:28+00:00",
-      "title": "☆특가 8,650원",
-      "sale_price_krw": 8650
-    }
-  ],
-  "in_flight": {
-    "id": 94865,
-    "status": "CLAIMED",
-    "run_id": "41430202828",
-    "at": "2026-11-02T10:37:05.522369+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -431,6 +416,12 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EC%83%A4-%ED%8A%B8%EB%A6%AC%ED%94%8C-%EC%95%84%EC%9D%B4%EC%84%80%EB%8F%84%EC%9A%B0-2g-50%ED%95%A0%EC%9D%B8-PmVnoMxd?from=write",
       "at": "2026-11-02T10:28:23.423612+00:00",
       "run_id": "41428990185"
+    },
+    "94865": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%B0%EC%84%B8%EB%91%90%EC%9C%A0-%EB%BC%88%EB%A5%BC-%EC%83%9D%EA%B0%81%ED%95%9C-%EA%B3%A0%EC%B9%BC%EC%8A%98-%EB%91%90%EC%9C%A0-%EA%B2%80%EC%9D%80%EC%BD%A9-190ml-24%EA%B0%9C-20%ED%95%A0%EC%9D%B8-P12G6mKd?from=write",
+      "at": "2026-11-02T10:37:22.369572+00:00",
+      "run_id": "41430202828"
     }
   },
   "skipped_non_coupang": 5,
