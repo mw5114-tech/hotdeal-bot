@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94885,
-  "pending": [
-    {
-      "id": 94885,
-      "source_post_url": "https://t.me/jirum/94885",
-      "original_purchase_url": "https://link.coupang.com/a/imw9photAj",
-      "source_text": "☆특가 10,090원 (22.4% 할인)\n포트메리온 보타닉가든 테라스 캔디 볼 그릇\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 2,910원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imw9photAj\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T22:05:20+00:00",
-      "title": "포트메리온 보타닉가든 테라스 캔디 볼 그릇",
-      "sale_price_krw": 10090
-    }
-  ],
-  "in_flight": {
-    "id": 94885,
-    "status": "CLAIMED",
-    "run_id": "41534245505",
-    "at": "2026-11-02T22:06:16.301592+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -531,6 +516,16 @@
       "vendor_item_id": "86554190529",
       "at": "2026-11-02T21:27:50.120746+00:00",
       "run_id": "41528454452"
+    },
+    "94885": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%AC%ED%8A%B8%EB%A9%94%EB%A6%AC%EC%98%A8-%EB%B3%B4%ED%83%80%EB%8B%89%EA%B0%80%EB%93%A0-%ED%85%8C%EB%9D%BC%EC%8A%A4-%EC%BA%94%EB%94%94-%EB%B3%BC-%EA%B7%B8%EB%A6%87-%EB%9E%9C%EB%8D%A4-%EB%B0%9C%EC%86%A1-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-Ara402Qj?from=write",
+      "posted_at_utc": "2026-11-02T22:05:20+00:00",
+      "product_id": "182185901",
+      "item_id": "521956397",
+      "vendor_item_id": "4349971859",
+      "at": "2026-11-02T22:06:33.180242+00:00",
+      "run_id": "41534245505"
     }
   },
   "skipped_non_coupang": 8,
