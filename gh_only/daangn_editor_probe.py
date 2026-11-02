@@ -183,10 +183,19 @@ def read_one_draft(folder: Path) -> dict:
                         "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
     promo = (verified_claim if row.get("observed_low_verified_for_deal") is True
              else unverified_claim)
-    # Two Enter presses between every visible section for mobile readability.
-    # Keep the larger separation before the last-line affiliate disclosure.
-    # Link stays exactly one whole text node; photo is inserted first by editor.
-    clean_body = body.rstrip() + "\n\n" + stock_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
+    # The link is ONE exact text paragraph, with no intervening blank line
+    # between its label and URL, or immediately before/after the link row.
+    # This also prevents an extra empty ProseMirror paragraph around the URL
+    # from confusing Muse's later link-only edit.
+    link_line = "🛒 쿠팡에서 상품정보 더보기 : " + url
+    if body.count(link_line) != 1:
+        raise ValueError("DRAFT_LINK_ROW_NOT_SINGLE_LINE")
+    before, after = body.split(link_line, 1)
+    if after.strip() or not before.endswith("\n\n"):
+        raise ValueError("DRAFT_LINK_ROW_LAYOUT_INVALID")
+    compact_body = before.rstrip("\n") + "\n" + link_line
+    # One Enter around the link block, while retaining the wider disclosure gap.
+    clean_body = compact_body + "\n" + stock_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,
@@ -197,6 +206,22 @@ def read_one_draft(folder: Path) -> dict:
         "official_link_receipt": receipt,
         "candidate_url": url,
     }
+
+
+def verify_link_in_one_paragraph(editor, url: str) -> bool:
+    """A soft-wrapped URL is fine; an actual inserted paragraph break is not.
+
+    ProseMirror may auto-linkify the text. If it does, its clickable href must
+    also match the full intended URL. No live edit is performed by this check.
+    """
+    return bool(editor.evaluate("""(root, url) => {
+      const line = '🛒 쿠팡에서 상품정보 더보기 : ' + url;
+      const nodes = [...root.querySelectorAll('p')];
+      const matches = nodes.filter(p => p.textContent.trim() === line);
+      if (matches.length !== 1) return false;
+      const anchors = [...matches[0].querySelectorAll('a')];
+      return anchors.every(a => a.getAttribute('href') === url);
+    }""", url))
 
 
 def choose_visible_unique(locators):
@@ -330,6 +355,7 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
        }
        return false;
     }""", url)
+    result["link_row_contiguous"] = verify_link_in_one_paragraph(editor, url)
     result["image_survived_body"] = image.count() == 1 and image.first.evaluate(
         "(el)=>el.complete&&el.naturalWidth>0")
     result["status"] = (
@@ -338,7 +364,7 @@ def prepare_browser_editor(page, article: dict, board_name: str = "오늘의 핫
                 result["body_filled"], result["image_attached"],
                 result["owner_url_above_disclosure"],
                 result["disclosure_is_last_line"], result["url_intact_in_one_text_node"],
-                result["image_survived_body"]])
+                result["image_survived_body"], result["link_row_contiguous"]])
         else "EDITOR_FIELDS_NOT_CONFIRMED"
     )
     return result

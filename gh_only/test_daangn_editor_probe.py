@@ -109,27 +109,36 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertEqual(result["image"].name, "jirum_94717_kakao_og.jpg")
         self.assertTrue(result["unissued_affsdp_candidate"])
 
-    def test_mobile_two_enter_paragraph_spacing_preserves_full_affiliate_url(self):
-        # Each field and notice is separated by two Enter presses. The long
-        # affiliate URL is intact and disclosure is still the final paragraph.
+    def test_compact_link_spacing_preserves_full_affiliate_url(self):
+        # Price -> link -> stock notice are adjacent lines (no empty p nodes).
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
             self._make_draft(folder)
             body = read_one_draft(folder)["body"]
-        fields = body.split("\n\n")
-        self.assertEqual(len(fields), 8)  # 6 fields + extra disclosure gap
-        self.assertTrue(fields[0].startswith("[할인율 확인 중] "))
-        self.assertNotIn("📦 상품명 :", body)
-        self.assertTrue(fields[1].startswith("💸 쿠팡 평소 판매가 : "))
-        self.assertTrue(fields[2].startswith("🔥 핫딜 특가 : "))
-        self.assertEqual(fields[3], "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL)
-        self.assertTrue(fields[4].startswith("※ 실시간 핫딜 특성상"))
-        self.assertTrue(fields[5].startswith("🔥 핫딜 정보를 확인해"))
-        self.assertEqual(fields[6], "")  # 4 Newlines before disclosure
-        self.assertEqual(fields[7], DISCLOSURE)
+        link_line = "🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL
+        self.assertEqual(body.splitlines().count(link_line), 1)
+        self.assertIn("🔥 핫딜 특가 : 12,050원\n" + link_line + "\n※ 실시간 핫딜", body)
+        self.assertNotIn("\n\n" + link_line, body)
+        self.assertNotIn(link_line + "\n\n", body)
         self.assertEqual(body.count(TEST_URL), 1)
         self.assertEqual(body.count(DISCLOSURE), 1)
-        self.assertNotIn("\n\n\n", body.split("\n\n\n\n")[0])
+        self.assertTrue(body.endswith("카페 가입 알림 설정하고 꿀템 챙겨가세요." + "\n\n\n\n" + DISCLOSURE))
+        self.assertEqual(body.splitlines()[-1], DISCLOSURE)
+
+    def test_link_row_cannot_be_split_across_lines(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            row = report["drafts"][0]
+            label = "🛒 쿠팡에서 상품정보 더보기 : "
+            row["caption"]["caption"] = row["caption"]["caption"].replace(
+                label + TEST_URL, label + "\n\n" + TEST_URL
+            )
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "DRAFT_LINK_ROW_NOT_SINGLE_LINE"):
+                read_one_draft(folder)
 
     def test_verified_historical_low_uses_requested_promo_and_discount_title(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -164,7 +173,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertIn("🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
         self.assertNotIn("🛒 상품 링크", article["body"])
         self.assertEqual(article["body"].count(TEST_URL), 1)
-        self.assertIn("\n\n🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
+        self.assertIn("\n🛒 쿠팡에서 상품정보 더보기 : " + TEST_URL, article["body"])
         self.assertTrue(article["body"].endswith(DISCLOSURE))
 
     def test_lowchart_name_is_same_in_headline_and_body(self):
