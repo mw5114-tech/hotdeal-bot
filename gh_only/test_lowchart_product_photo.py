@@ -181,6 +181,44 @@ class LowchartProductPhotoTests(unittest.TestCase):
         self.assertIn("핫딜 특가 : 11,000원", caption)
         kakao.assert_not_called()
 
+    def test_fallback_uses_only_directly_attached_telegram_photo(self):
+        from gh_only.default_deal_automation import enrich_deal
+        from gh_only.telegram_source_photo import allowed_source_photo
+        self.assertTrue(allowed_source_photo("https://cdn4.telesco.pe/file/example.jpg"))
+        self.assertFalse(allowed_source_photo("https://untrusted.example/file/x.jpg"))
+        d = {"source_message_id": 94899,
+             "source_post_url": "https://t.me/jirum/94899",
+             "source_text": NAME + "\n특가 11,000원",
+             "title": NAME, "sale_price_krw": 11000,
+             "original_purchase_url": "https://link.coupang.com/a/example",
+             "image_provenance": "telegram_attached_photo",
+             "image_url_candidate": "https://cdn4.telesco.pe/file/valid.jpg"}
+        with tempfile.TemporaryDirectory() as tmp:
+            with (patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                        return_value={"status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                                      "error_type": "HTTPError", "http_status": 503}),
+                  patch("gh_only.default_deal_automation.download_source_photo",
+                        return_value={"status": "IMAGE_SAVED",
+                                      "saved_name": "jirum_94899_telegram_source_photo.jpg",
+                                      "image_source": "telegram_attached_photo"}) as fallback):
+                result = enrich_deal(d, Path(tmp), resolver=lambda _: ITEM,
+                                     history_fetch=lambda *args: {},
+                                     owner_tag="AF9668915")
+        self.assertTrue(result["source_photo_verified"])
+        self.assertEqual(result["image_source"], "telegram_attached_photo")
+        self.assertFalse(result["image_product_match"])
+        self.assertEqual(result["image_http_status"], 503)
+        fallback.assert_called_once()
+
+    def test_lowchart_404_is_classified_as_not_listed(self):
+        from urllib.error import HTTPError
+        url = f"https://www.lowchart.com/{PID}-{IID}"
+        def absent(_req, timeout):
+            raise HTTPError(url, 404, "Not Found", {}, None)
+        result = lookup_exact_item_photo(ITEM, NAME, opener=absent)
+        self.assertEqual(result["status"], "LOWCHART_ITEM_PAGE_NOT_FOUND")
+        self.assertEqual(result["http_status"], 404)
+
     def test_default_enrichment_does_not_call_kakao(self):
         from gh_only.default_deal_automation import enrich_deal
         deal = {
