@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94884,
-  "pending": [
-    {
-      "id": 94884,
-      "source_post_url": "https://t.me/jirum/94884",
-      "original_purchase_url": "https://link.coupang.com/a/imunGBAEwu",
-      "source_text": "☆특가 12,720원 (27.3% 할인)\n헬리오스 내츄럴 무화과잼, 330g, 3개\n📌 가격 현황\n- 정상가: 17,490원\n- 할인: 4,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imunGBAEwu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-02T21:26:35+00:00",
-      "title": "헬리오스 내츄럴 무화과잼, 330g, 3개",
-      "sale_price_krw": 12720
-    }
-  ],
-  "in_flight": {
-    "id": 94884,
-    "status": "CLAIMED",
-    "run_id": "41528454452",
-    "at": "2026-11-02T21:27:33.974991+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -521,6 +506,16 @@
       "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%8A%A4%EC%B9%B4%EB%A7%88%EC%9D%B4%EC%96%B4-%EB%B2%A0%EC%9D%B4%EC%BB%A8-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-453g-4%EA%B0%9C-40%ED%95%A0%EC%9D%B8-P5n2Kgkd?from=write",
       "at": "2026-11-02T15:50:07.908732+00:00",
       "run_id": "41475346809"
+    },
+    "94884": {
+      "status": "PUBLISHED_AWAITING_MUSE",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%97%AC%EB%A6%AC%EC%98%A4%EC%8A%A4-%EB%82%B4%EC%B8%84%EB%9F%B4-%EB%AC%B4%ED%99%94%EA%B3%BC%EC%9E%BC-330g-3%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A04R6YwA?from=write",
+      "posted_at_utc": "2026-11-02T21:26:35+00:00",
+      "product_id": "273848352",
+      "item_id": "19443214873",
+      "vendor_item_id": "86554190529",
+      "at": "2026-11-02T21:27:50.120746+00:00",
+      "run_id": "41528454452"
     }
   },
   "skipped_non_coupang": 8,
