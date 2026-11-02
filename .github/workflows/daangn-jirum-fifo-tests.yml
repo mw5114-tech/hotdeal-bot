@@ -20,6 +20,7 @@ on:
       - feat/lowchart-image-id-only-options-20261102
       - fix/daangn-mobile-double-enter-spacing-20261102
       - feat/daangn-coupang-link-text-title-20261102
+      - fix/daangn-title-coupang-fire-hotdeal-20261102
       - fix/raw-watcher-event-dispatch-production-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
