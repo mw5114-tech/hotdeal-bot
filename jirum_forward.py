@@ -111,6 +111,15 @@ class PublicPosts(HTMLParser):
             if (self.current is not None and self.text_depth is None
                     and "tgme_widget_message_text" in props.get("class", "").split()):
                 self.text_depth = self.depth
+        if self.current is not None and tag == "time" and self.current.get("posted_at_utc") is None:
+            when = props.get("datetime")
+            if isinstance(when, str) and len(when) <= 45:
+                try:
+                    instant = datetime.fromisoformat(when.replace("Z", "+00:00"))
+                    if instant.tzinfo is not None:
+                        self.current["posted_at_utc"] = instant.astimezone(timezone.utc).isoformat()
+                except ValueError:
+                    pass
         if self.text_depth is not None and tag == "a":
             self.active_anchor = {"href": props.get("href", ""), "label": []}
 
@@ -140,6 +149,7 @@ class PublicPosts(HTMLParser):
                 "text": text,
                 "title": product_title(text),
                 "product_url": url,
+                "posted_at_utc": self.current.get("posted_at_utc"),
             })
             self.current = None
             self.post_depth = None
