@@ -69,9 +69,9 @@ class DaangnEditorOfflineTests(unittest.TestCase):
 
     def _make_draft(self, folder):
         body = (
-            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛\n"
-            "💸 쿠팡 평소 판매가 : 약 34,575원\n"
-            "🔥 핫딜 특가 : 12,050원\n"
+            "📦 상품명 : 휘카레 셰프 오리지널 소스 순한맛\n\n"
+            "💸 쿠팡 평소 판매가 : 약 34,575원\n\n"
+            "🔥 핫딜 특가 : 12,050원\n\n"
             "🛒 상품 링크 : " + TEST_URL
         )
         report = {"schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [{
