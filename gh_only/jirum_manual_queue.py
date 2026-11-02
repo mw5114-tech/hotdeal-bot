@@ -12,6 +12,7 @@ import argparse
 import base64
 from datetime import datetime, timezone
 import json
+import hashlib
 import os
 import time
 from pathlib import Path
@@ -36,6 +37,71 @@ DRAIN_TIME_BUDGET_SECONDS = 11 * 60
 
 def now_utc() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+def kakao_secret_fingerprint() -> str:
+    """Opaque marker only; never persist or display Kakao authentication data."""
+    secret = os.getenv("KAKAO_DEV_STORAGE_STATE_JSON", "")
+    return hashlib.sha256(("kakao-session-v1:" + secret).encode("utf-8")).hexdigest()
+
+
+def kakao_block_for_current_secret(state: dict) -> dict | None:
+    block = state.get("kakao_auth_block")
+    if block and block["secret_fingerprint"] == kakao_secret_fingerprint():
+        return block
+    return None
+
+
+def kakao_login_failure(folder: Path) -> str | None:
+    """Read a safe diagnostic status from the prepared draft, no private data."""
+    try:
+        rows = json.loads((folder / "drafts.json").read_text("utf-8"))["drafts"]
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
+        return None
+    if len(rows) == 1 and isinstance(rows[0], dict):
+        status = rows[0].get("kakao_status")
+        if status in ("KAKAO_LOGIN_EXPIRED", "KAKAO_SESSION_SECRET_MISSING"):
+            return status
+    return None
+
+
+def remember_kakao_login_block(store, source_id: int, reason: str) -> None:
+    state, sha = store.read()
+    if (state["in_flight"] is not None or not state["pending"]
+        or state["pending"][0]["id"] != source_id):
+        raise RuntimeError("QUEUE_CHANGED_BEFORE_KAKAO_BLOCK")
+    state["kakao_auth_block"] = {
+        "reason": reason,
+        "source_id": source_id,
+        "detected_at": now_utc(),
+        "secret_fingerprint": kakao_secret_fingerprint(),
+    }
+    store.write(state, sha, "state: pause FIFO until Kakao secret renewed")
+
+
+def kakao_operator_notice(reason: str, pending: int) -> None:
+    message = (
+        "Kakao Developers login expired: update GitHub Actions secret "
+        "KAKAO_DEV_STORAGE_STATE_JSON with a fresh logged-in storage_state. "
+        "Existing pending posts are preserved; publication is paused."
+    )
+    print("::warning title=Kakao login renewal required::" + message)
+    print("JIRUM_KAKAO_AUTH_PAUSED " + json.dumps({
+        "reason": reason, "pending": pending, "publishing_enabled": False,
+        "next_step": "RENEW_KAKAO_DEV_STORAGE_STATE_JSON",
+    }, ensure_ascii=False))
+    summary = os.getenv("GITHUB_STEP_SUMMARY")
+    if summary:
+        with open(summary, "a", encoding="utf-8") as file:
+            file.write(
+                "### ⏸️ Daangn posting paused: Kakao login expired\n\n"
+                f"- Pending deals: **{pending}** (kept; none discarded)\n"
+                "- No post was submitted during this failed preparation.\n"
+                "- Update repository Actions secret `KAKAO_DEV_STORAGE_STATE_JSON` "
+                "with a fresh Kakao Developers login session.\n"
+                "- The next scan automatically resumes when the secret changes.\n\n"
+            )
+
+
 
 
 def validate_state(s: dict) -> None:
@@ -67,6 +133,17 @@ def validate_state(s: dict) -> None:
         raise ValueError("INVALID_IN_FLIGHT")
     if type(s.get("skipped_non_coupang")) is not int:
         raise ValueError("INVALID_SKIPPED_COUNTER")
+    block = s.get("kakao_auth_block")
+    if block is not None and (
+        not isinstance(block, dict)
+        or block.get("reason") not in ("KAKAO_LOGIN_EXPIRED", "KAKAO_SESSION_SECRET_MISSING")
+        or type(block.get("source_id")) is not int
+        or not isinstance(block.get("detected_at"), str)
+        or not isinstance(block.get("secret_fingerprint"), str)
+        or len(block["secret_fingerprint"]) != 64
+        or any(ch not in "0123456789abcdef" for ch in block["secret_fingerprint"])
+    ):
+        raise ValueError("INVALID_KAKAO_AUTH_BLOCK")
 
 
 def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
@@ -217,16 +294,34 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
     new, added, skipped = ingest(s, discovered)
     if new != s:
         store.write(new, sha, "state: checkpoint new Jirum messages and Coupang FIFO")
+    block = new.get("kakao_auth_block")
+    # A newly saved GitHub Secret is automatically eligible for one fresh
+    # attempt. The old invalid authentication material can never trigger the
+    # expensive Playwright step again until the fingerprint changes.
+    if block and not kakao_block_for_current_secret(new):
+        new.pop("kakao_auth_block")
+        if new != s:
+            # Ingest may have already persisted the new Telegram cursor; re-read
+            # to preserve the new blob SHA and avoid overriding concurrent work.
+            latest, latest_sha = store.read()
+            latest.pop("kakao_auth_block", None)
+            store.write(latest, latest_sha, "state: fresh Kakao secret unblocks FIFO")
+        block = None
+        print("JIRUM_KAKAO_AUTH_REFRESHED_TRY_AGAIN")
     nxt = new["pending"][0]["id"] if new["pending"] else None
+    paused = bool(block and kakao_block_for_current_secret(new) and nxt is not None)
     result = {
-        "status": "READY_ONE" if nxt is not None else "NO_NEW_COUPANG_DEAL",
-        "has_deal": nxt is not None,
+        "status": ("KAKAO_REAUTH_REQUIRED" if paused
+                   else "READY_ONE" if nxt is not None else "NO_NEW_COUPANG_DEAL"),
+        "has_deal": nxt is not None and not paused,
         "source_id": nxt,
         "pending": len(new["pending"]),
         "new_coupang": added, "ignored_other_sites": skipped,
         "last_scanned_id": new["last_scanned_id"],
     }
     print("JIRUM_MANUAL_SCAN " + json.dumps(result, ensure_ascii=False))
+    if paused:
+        kakao_operator_notice(block["reason"], len(new["pending"]))
     return result
 
 
@@ -365,7 +460,20 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             }))
             return 0
 
-        article = build_next(state)  # Full evidence validation before claim.
+        try:
+            article = build_next(state)  # Full evidence validation before claim.
+        except RuntimeError as exc:
+            # A login-expired Kakao session cannot supply a verified product
+            # image. Publishing must not claim/post anything; checkpoint once,
+            # then skip future Playwright work until the Secret changes.
+            reason = (kakao_login_failure(DRAFT_DIR)
+                      if str(exc) == "POST_EVIDENCE_NOT_READY" else None)
+            if reason:
+                source_id = state["pending"][0]["id"]
+                remember_kakao_login_block(store, source_id, reason)
+                kakao_operator_notice(reason, len(state["pending"]))
+                return 2
+            raise
         source_id = article["source_id"]
         claim(store, source_id, run_id)  # Durable pre-click checkpoint.
         outcome = {"status": "PUBLISH_NOT_STARTED", "submit_attempted": False}

@@ -1,12 +1,15 @@
 """Offline FIFO regression tests. Never contact Telegram, GitHub or Daangn."""
 import copy
+import json
 import os
+from pathlib import Path
+import tempfile
 import unittest
 from unittest.mock import patch
 
 from gh_only.jirum_manual_queue import (
     START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest,
-    publish_pending, scan, validate_state,
+    publish_pending, scan, validate_state, kakao_secret_fingerprint,
 )
 
 
@@ -182,6 +185,105 @@ class ManualQueueTests(unittest.TestCase):
             code = publish_pending(FakeStore(baseline()), drain=True, clock=lambda: 0)
         self.assertEqual(code, 0)
         build.assert_not_called()
+
+    def test_expired_kakao_secret_blocks_reruns_without_browsers(self):
+        state, _, _ = ingest(baseline(), [deal(94744)])
+        with patch.dict(os.environ, {
+            "KAKAO_DEV_STORAGE_STATE_JSON": "expired-session-test-value"
+        }):
+            state["kakao_auth_block"] = {
+                "reason": "KAKAO_LOGIN_EXPIRED", "source_id": 94744,
+                "detected_at": "2026-11-02T03:00:00Z",
+                "secret_fingerprint": kakao_secret_fingerprint(),
+            }
+            store = FakeStore(state)
+            with patch("gh_only.jirum_manual_queue.collect_since",
+                       return_value=[deal(94745)]):
+                status = scan(store)
+        self.assertEqual(status["status"], "KAKAO_REAUTH_REQUIRED")
+        self.assertFalse(status["has_deal"])
+        self.assertEqual(status["pending"], 2)
+        self.assertEqual(store.value["last_scanned_id"], 94745)
+        self.assertEqual(len(store.writes), 1)
+        self.assertIsNone(store.value["in_flight"])
+        self.assertNotIn("expired-session-test-value", json.dumps(store.value))
+
+    def test_new_secret_unblocks_fifo_and_preserves_queued_posts(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        with patch.dict(os.environ, {
+            "KAKAO_DEV_STORAGE_STATE_JSON": "old-kakao-secret"
+        }):
+            state["kakao_auth_block"] = {
+                "reason": "KAKAO_LOGIN_EXPIRED", "source_id": 94744,
+                "detected_at": "2026-11-02T03:00:00Z",
+                "secret_fingerprint": kakao_secret_fingerprint(),
+            }
+        store = FakeStore(state)
+        with patch.dict(os.environ, {
+            "KAKAO_DEV_STORAGE_STATE_JSON": "new-kakao-secret"
+        }), patch("gh_only.jirum_manual_queue.collect_since", return_value=[]):
+            status = scan(store)
+        self.assertEqual(status["status"], "READY_ONE")
+        self.assertTrue(status["has_deal"])
+        self.assertNotIn("kakao_auth_block", store.value)
+        self.assertEqual([r["id"] for r in store.value["pending"]], [94744, 94745])
+        self.assertEqual(len(store.writes), 1)
+
+    def test_kakao_login_expiry_failure_is_checkpointed_without_claim(self):
+        state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{"kakao_status": "KAKAO_LOGIN_EXPIRED"}]
+            }), encoding="utf-8")
+            with patch.dict(os.environ, {
+                "GITHUB_RUN_ID": "run-expired",
+                "KAKAO_DEV_STORAGE_STATE_JSON": "expired-secret",
+            }), patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder), \
+                    patch("gh_only.jirum_manual_queue.build_next",
+                          side_effect=RuntimeError("POST_EVIDENCE_NOT_READY")), \
+                    patch("gh_only.jirum_manual_publisher.publish_one") as publish:
+                result = publish_pending(store, drain=True, clock=lambda: 0)
+                self.assertEqual(
+                    store.value["kakao_auth_block"]["secret_fingerprint"],
+                    kakao_secret_fingerprint(),
+                )
+            self.assertEqual(result, 2)
+            publish.assert_not_called()
+        self.assertEqual([r["id"] for r in store.value["pending"]], [94744, 94745])
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual(len(store.writes), 1)
+        self.assertEqual(store.value["kakao_auth_block"]["reason"], "KAKAO_LOGIN_EXPIRED")
+
+    def test_nonlogin_evidence_failure_never_disables_future_runs(self):
+        state, _, _ = ingest(baseline(), [deal(94744)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{"kakao_status": "KAKAO_METADATA_READ",
+                            "photo": {"status": "IMAGE_INVALID"}}]
+            }), encoding="utf-8")
+            with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-bad-photo"}), \
+                    patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder), \
+                    patch("gh_only.jirum_manual_queue.build_next",
+                          side_effect=RuntimeError("POST_EVIDENCE_NOT_READY")):
+                with self.assertRaisesRegex(RuntimeError, "POST_EVIDENCE_NOT_READY"):
+                    publish_pending(store, drain=True, clock=lambda: 0)
+        self.assertNotIn("kakao_auth_block", store.value)
+        self.assertEqual(store.writes, [])
+
+    def test_corrupt_kakao_block_rejected(self):
+        s = baseline()
+        s["kakao_auth_block"] = {
+            "reason": "KAKAO_LOGIN_EXPIRED",
+            "source_id": 94744,
+            "detected_at": "now",
+            "secret_fingerprint": "fake",
+        }
+        with self.assertRaisesRegex(ValueError, "INVALID_KAKAO_AUTH_BLOCK"):
+            validate_state(s)
 
     def test_fifo_and_non_coupang_filter(self):
         state, n, ignored = ingest(baseline(), [
