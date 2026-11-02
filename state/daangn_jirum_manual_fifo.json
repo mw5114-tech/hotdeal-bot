@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94892,
-  "pending": [],
+  "last_scanned_id": 94893,
+  "pending": [
+    {
+      "id": 94893,
+      "source_post_url": "https://t.me/jirum/94893",
+      "original_purchase_url": "https://link.coupang.com/a/imymAssAUK",
+      "source_text": "👍대박 13,990원 (33.4% 할인)\n바겐슈타이거 버큄 스텐 믹싱볼 3종 세트 *20cm + 24cm + 28cm*1세트\n📌 가격 현황\n- 정상가: 21,000원\n- 할인: 7,010원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imymAssAUK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-02T22:22:18+00:00",
+      "title": "바겐슈타이거 버큄 스텐 믹싱볼 3종 세트 *20cm + 24cm + 28cm*1세트",
+      "sale_price_krw": 13990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
