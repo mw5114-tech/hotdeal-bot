@@ -15,6 +15,7 @@ on:
       - fix/daangn-title-maxlength-preserve-discount-20261101
       - fix/daangn-editor-image-label-body-20261101
       - feat/daangn-fifo-5min-cron-20261101
+      - fix/daangn-kakao-session-expired-circuit-breaker-20261102
       - fix/raw-watcher-event-dispatch-production-20261101
     paths:
       - 'gh_only/jirum_manual_*.py'
