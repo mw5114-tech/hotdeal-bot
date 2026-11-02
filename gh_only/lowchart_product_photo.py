@@ -130,6 +130,11 @@ def lookup_exact_item_photo(identity: dict, telegram_title: str, opener=None) ->
                 or landed.hostname not in ("lowchart.com", "www.lowchart.com")):
                 return {"status": "LOWCHART_UNEXPECTED_RESPONSE", "og_image": None}
             content = resp.read(MAX_HTML_BYTES + 1)
+    except error.HTTPError as exc:
+        return {"status": ("LOWCHART_ITEM_PAGE_NOT_FOUND" if exc.code in (404, 410)
+                           else "LOWCHART_IMAGE_PAGE_REQUEST_ERROR"),
+                "http_status": exc.code, "error_type": "HTTPError",
+                "og_image": None}
     except Exception as exc:
         return {"status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
                 "error_type": type(exc).__name__, "og_image": None}
