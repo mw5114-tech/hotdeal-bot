@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94949,
-  "pending": [
-    {
-      "id": 94949,
-      "source_post_url": "https://t.me/jirum/94949",
-      "original_purchase_url": "https://link.coupang.com/a/invQi3DQWW",
-      "source_text": "☆특가 5,590원\n에너자이저 맥스 AA 건전지, 8개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/invQi3DQWW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T12:14:38+00:00",
-      "title": "☆특가 5,590원",
-      "sale_price_krw": 5590
-    }
-  ],
-  "in_flight": {
-    "id": 94949,
-    "status": "CLAIMED",
-    "run_id": "41634125330",
-    "at": "2026-11-03T12:15:35.022666+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1111,6 +1096,16 @@
       "vendor_item_id": "70327015811",
       "at": "2026-11-03T11:35:10.349083+00:00",
       "run_id": "41628623444"
+    },
+    "94949": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%84%88%EC%9E%90%EC%9D%B4%EC%A0%80-%EB%A7%A5%EC%8A%A4-AA-%EA%B1%B4%EC%A0%84%EC%A7%80-8%EA%B0%9C%EC%9E%85-1%EA%B0%9C-jK2RaWkd?from=write",
+      "posted_at_utc": "2026-11-03T12:14:38+00:00",
+      "product_id": "6408714556",
+      "item_id": "21554382917",
+      "vendor_item_id": null,
+      "at": "2026-11-03T12:15:51.396980+00:00",
+      "run_id": "41634125330"
     }
   },
   "skipped_non_coupang": 10,
