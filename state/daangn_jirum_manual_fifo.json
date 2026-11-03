@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94909,
-  "pending": [],
+  "last_scanned_id": 94910,
+  "pending": [
+    {
+      "id": 94910,
+      "source_post_url": "https://t.me/jirum/94910",
+      "original_purchase_url": "https://link.coupang.com/a/imPFzAih3s",
+      "source_text": "☆특가 4,930원\n깨끗한나라 포차코 겨울에디션 딥무드 에센셜케어 로션 미용티슈 미니 3겹, 140개입, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/imPFzAih3s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T02:24:29+00:00",
+      "title": "☆특가 4,930원",
+      "sale_price_krw": 4930
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
