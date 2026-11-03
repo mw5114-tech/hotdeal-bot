@@ -14,11 +14,25 @@ from urllib import request, error
 from urllib.parse import urlsplit
 from gh_only.price_history_probe import HTMLInfo
 
+# Legacy public summary format. Keep it for archived/product pages that still
+# display the older full-history observation sequence.
 PRICE_SUMMARY = re.compile(
     r"현재가\s*([\d,]+)원\s+관측\s*최저가\s*([\d,]+)원\s+"
     r"관측\s*최고가\s*([\d,]+)원\s+관측\s*평균가\s*([\d,]+)원\s+"
     r"최근\s*변동일\s*(\d{4}-\d{2}-\d{2})"
 )
+# Current Lowchart pages show a natural-language per-item summary such as:
+# "<item>의 쿠팡 현재가는 15,300원이며, 로우차트가 관측한 역대
+# 최저가는 12,600원, 최고가는 15,840원입니다.
+# 최근 3주 평균 15,460원보다 1% 저렴합니다."
+# The *recent 3-week average* is distinct from any lifetime/graph mean.
+CURRENT_VISIBLE_SUMMARY = re.compile(
+    r"의\s+쿠팡\s+현재가는\s*([\d,]+)\s*원이며,?\s*"
+    r"로우차트가\s+관측한\s+역대\s+최저가는\s*([\d,]+)\s*원,?\s*"
+    r"최고가는\s*([\d,]+)\s*원입니다\.?\s*"
+    r"최근\s*(\d{1,2})\s*주\s*평균\s*([\d,]+)\s*원"
+)
+TITLE_PRICE_SUFFIX = re.compile(r"\s+[-–]\s+[\d,]+\s*원\s+[-–]\s+로우차트\b")
 MAX_BODY = 1_800_000
 TARGET = ("6221369038", "12453073752", "오뚜기", "핫케이크", "1kg", "1개", 3180)
 
@@ -63,22 +77,52 @@ def parse_reference(html: str, source_url: str, product_id: str, item_id: str,
     if not result["title_option_matches"]:
         result["reason"] = "OPTION_TITLE_MISMATCH"
         return result
-    m = PRICE_SUMMARY.search(text)
-    if not m:
-        result["reason"] = "VISIBLE_HISTORY_SUMMARY_NOT_FOUND"
-        return result
-    current, low, high, avg = (int(value.replace(",", "")) for value in m.groups()[:4])
-    date = m.group(5)
+    # Prefer the currently displayed, explicitly scoped *recent-week* mean.
+    # Pin the narrative to the actual product name from this exact-item page,
+    # so a recommendation or a different SKU cannot supply another mean.
+    product_name = TITLE_PRICE_SUFFIX.split(title, maxsplit=1)[0].strip()
+    current_summary = None
+    if product_name and product_name != title:
+        current_summary = re.search(
+            re.escape(product_name) + CURRENT_VISIBLE_SUMMARY.pattern, text
+        )
+    if current_summary:
+        current, low, high, weeks, avg = (
+            int(value.replace(",", "")) for value in current_summary.groups()
+        )
+        if not 1 <= weeks <= 52:
+            result["reason"] = "INVALID_RECENT_AVERAGE_WINDOW"
+            return result
+        window = f"recent_{weeks}_weeks"
+        observation = "price_history_recent_week_summary"
+        reason = "EXACT_ITEM_VISIBLE_RECENT_AVERAGE_MATCH"
+        date = None  # The new summary does not expose a YYYY-MM-DD change date.
+    else:
+        # Support old pages without conflating their all-history mean with
+        # Lowchart's new 3-week mean.
+        legacy = PRICE_SUMMARY.search(text)
+        if not legacy:
+            result["reason"] = "VISIBLE_HISTORY_SUMMARY_NOT_FOUND"
+            return result
+        current, low, high, avg = (
+            int(value.replace(",", "")) for value in legacy.groups()[:4]
+        )
+        window = "entire_tracked_history_unspecified_days"
+        observation = "price_history_summary"
+        reason = "EXACT_ITEM_ROUTE_VISIBLE_STATS_MATCH"
+        date = legacy.group(5)
     if not (0 < low <= avg <= high < 100_000_000 and low <= current <= high):
         result["reason"] = "INVALID_OBSERVED_PRICE_ORDER"
         return result
     result.update({
         "observed_current_krw": current, "observed_low_krw": low,
         "observed_high_krw": high, "observed_average_krw": avg,
+        "history_window": window,
+        "source_observation_type": observation,
         "source_last_change_date": date,
         "reference_discount_vs_average_pct": round((avg-deal_price)*100/avg,1),
         "usable_historical_reference": True,
-        "reason": "EXACT_ITEM_ROUTE_VISIBLE_STATS_MATCH",
+        "reason": reason,
     })
     return result
 
