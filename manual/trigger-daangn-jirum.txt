@@ -33,3 +33,4 @@ Lowchart-title source validation after PR #57 — 2026-11-02 21:55 KST (one norm
 Body discount-first format validation after PR #58 — 2026-11-02 22:38 KST
 
 One-time no-repost recovery scan after PR #66: 20261103-2340-locked-94954
+User-requested latest natural Coupang deal test (no repost): 20261104-0633-KST; source cursor=94961; verify Lowchart average and discount.
