@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94908,
-  "pending": [
-    {
-      "id": 94908,
-      "source_post_url": "https://t.me/jirum/94908",
-      "original_purchase_url": "https://link.coupang.com/a/imOg4EkzBc",
-      "source_text": "❤️초대박 25,970원 (41.0% 할인)\n깨끗한나라 벚꽃 로맨틱 천연펄프 3겹 고급롤화장지 27m*30개입*1개, 3개선택\n📌 가격 현황\n- 정상가: 44,000원\n- 할인: 18,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imOg4EkzBc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T02:04:58+00:00",
-      "title": "깨끗한나라 벚꽃 로맨틱 천연펄프 3겹 고급롤화장지 27m*30개입*1개, 3개선택",
-      "sale_price_krw": 25970
-    }
-  ],
-  "in_flight": {
-    "id": 94908,
-    "status": "CLAIMED",
-    "run_id": "41563970154",
-    "at": "2026-11-03T02:06:39.070461+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -731,6 +716,16 @@
       "vendor_item_id": "83542711457",
       "at": "2026-11-03T01:49:37.568675+00:00",
       "run_id": "41562177679"
+    },
+    "94908": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B9%A8%EB%81%97%ED%95%9C%EB%82%98%EB%9D%BC-%EB%B2%9A%EA%BD%83-%EB%A1%9C%EB%A7%A8%ED%8B%B1-%EC%B2%9C%EC%97%B0%ED%8E%84%ED%94%84-3%EA%B2%B9-%EA%B3%A0%EA%B8%89%EB%A1%A4%ED%99%94%EC%9E%A5%EC%A7%80-27m-30%EA%B0%9C%EC%9E%85-1%EA%B0%9C-dz9oNblP?from=write",
+      "posted_at_utc": "2026-11-03T02:04:58+00:00",
+      "product_id": "1207037903",
+      "item_id": "21947678535",
+      "vendor_item_id": "3008436224",
+      "at": "2026-11-03T02:06:56.057776+00:00",
+      "run_id": "41563970154"
     }
   },
   "skipped_non_coupang": 8,
