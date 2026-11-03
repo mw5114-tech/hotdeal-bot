@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94918,
-  "pending": [
-    {
-      "id": 94918,
-      "source_post_url": "https://t.me/jirum/94918",
-      "original_purchase_url": "https://link.coupang.com/a/im0lz7dh0u",
-      "source_text": "☆특가 10,980원 (21.6% 할인)\n오뚜기 가뿐한끼 저당 매콤닭가슴살 카레, 130g, 10개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 3,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im0lz7dh0u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T04:53:54+00:00",
-      "title": "오뚜기 가뿐한끼 저당 매콤닭가슴살 카레, 130g, 10개",
-      "sale_price_krw": 10980
-    }
-  ],
-  "in_flight": {
-    "id": 94918,
-    "status": "CLAIMED",
-    "run_id": "41580793632",
-    "at": "2026-11-03T04:54:51.579142+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -831,6 +816,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T04:53:42.121972+00:00",
       "run_id": "41580662841"
+    },
+    "94918": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EA%B0%80%EB%BF%90%ED%95%9C%EB%81%BC-%EC%A0%80%EB%8B%B9-%EB%A7%A4%EC%BD%A4%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4-%EC%B9%B4%EB%A0%88-130g-10%EA%B0%9C-dg3OwVZd?from=write",
+      "posted_at_utc": "2026-11-03T04:53:54+00:00",
+      "product_id": "8158979833",
+      "item_id": "28274042262",
+      "vendor_item_id": "94207368501",
+      "at": "2026-11-03T04:55:07.342227+00:00",
+      "run_id": "41580793632"
     }
   },
   "skipped_non_coupang": 8,
