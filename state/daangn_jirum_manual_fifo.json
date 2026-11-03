@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94931,
-  "pending": [],
+  "last_scanned_id": 94932,
+  "pending": [
+    {
+      "id": 94932,
+      "source_post_url": "https://t.me/jirum/94932",
+      "original_purchase_url": "https://link.coupang.com/a/inbYU06UkS",
+      "source_text": "🔥🔥🔥무지성 7,090원 (45.5% 할인)🔥🔥🔥\n비락 유아용 올바른 크림초코 라떼 110ml*초코맛*18개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 5,910원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inbYU06UkS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T07:36:43+00:00",
+      "title": "비락 유아용 올바른 크림초코 라떼 110ml*초코맛*18개",
+      "sale_price_krw": 7090
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
