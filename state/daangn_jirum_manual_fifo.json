@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94961,
-  "pending": [
-    {
-      "id": 94961,
-      "source_post_url": "https://t.me/jirum/94961",
-      "original_purchase_url": "https://link.coupang.com/a/in8LtkFyLI",
-      "source_text": "👍대박 9,960원 (35.7% 할인)\n풀무원 동치미냉면 4인분, 1.692kg, 2개\n📌 가격 현황\n- 정상가: 15,480원\n- 할인: 5,520원\n📦 특가 바로가기\nhttps://link.coupang.com/a/in8LtkFyLI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T21:19:18+00:00",
-      "title": "풀무원 동치미냉면 4인분, 1.692kg, 2개",
-      "sale_price_krw": 9960
-    }
-  ],
-  "in_flight": {
-    "id": 94961,
-    "status": "CLAIMED",
-    "run_id": "41720852656",
-    "at": "2026-11-03T21:20:49.150585+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1181,6 +1166,16 @@
       "vendor_item_id": "3008386136",
       "at": "2026-11-03T16:10:45.043329+00:00",
       "run_id": "41671373152"
+    },
+    "94961": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EB%8F%99%EC%B9%98%EB%AF%B8%EB%83%89%EB%A9%B4-4%EC%9D%B8%EB%B6%84-1692kg-2%EA%B0%9C-PM0JekaA?from=write",
+      "posted_at_utc": "2026-11-03T21:19:18+00:00",
+      "product_id": "276993573",
+      "item_id": "19233172478",
+      "vendor_item_id": "86349640420",
+      "at": "2026-11-03T21:21:05.445844+00:00",
+      "run_id": "41720852656"
     }
   },
   "skipped_non_coupang": 11,
