@@ -16,6 +16,8 @@ from gh_only.jirum_manual_queue import (
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
     freshness_status, expire_pending, scan_with_source_wait,
     archive_abandoned_claim, GithubState, STALE_CLAIM_SECONDS,
+    TIMESTAMP_RETRY_GRACE_SECONDS, awaiting_source_timestamp,
+    matching_source_timestamp, fetch_exact_source_post,
 )
 
 
@@ -63,6 +65,119 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_exact_source_timestamp_recovers_new_untimed_coupang_deal(self):
+        now = datetime.now(timezone.utc)
+        source = deal(94744)
+        source["posted_at_utc"] = None
+        store = FakeStore(baseline())
+        exact = {**source, "posted_at_utc": now.isoformat()}
+        with patch.dict(os.environ, {"JIRUM_REQUIRE_FRESH_POST": "true"}):
+            with patch("gh_only.jirum_manual_queue.collect_since",
+                       return_value=[source]):
+                with patch("gh_only.jirum_manual_queue.enrich_posts", return_value=[]):
+                    result = scan(
+                        store, latest_fetch=lambda: "<div>test</div>",
+                        timestamp_fetcher=lambda source_id: exact,
+                    )
+        self.assertEqual(result["status"], "READY_ONE")
+        self.assertTrue(result["has_deal"])
+        self.assertEqual(result["source_id"], 94744)
+        self.assertEqual(store.value["pending"][0]["posted_at_utc"], now.isoformat())
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual(len(store.writes), 1)
+
+    def test_missing_source_timestamp_waits_without_browser_or_click(self):
+        source = deal(94744)
+        source["posted_at_utc"] = None
+        store = FakeStore(baseline())
+        with patch.dict(os.environ, {"JIRUM_REQUIRE_FRESH_POST": "true"}):
+            with patch("gh_only.jirum_manual_queue.collect_since",
+                       return_value=[source]):
+                with patch("gh_only.jirum_manual_queue.enrich_posts", return_value=[]):
+                    result = scan(
+                        store, latest_fetch=lambda: "<div>test</div>",
+                        timestamp_fetcher=lambda source_id: None,
+                    )
+            with patch.dict(os.environ, {"GITHUB_RUN_ID": "test-run"}):
+                with patch("gh_only.jirum_manual_queue.build_next") as build:
+                    self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+                    build.assert_not_called()
+        self.assertEqual(result["status"], "WAIT_SOURCE_TIMESTAMP")
+        self.assertFalse(result["has_deal"])
+        self.assertEqual([x["id"] for x in store.value["pending"]], [94744])
+        self.assertIsNotNone(store.value["pending"][0]["first_seen_at_utc"])
+        self.assertIsNone(store.value["in_flight"])
+
+    def test_unverified_timestamp_expires_after_short_grace_not_falsely_fresh(self):
+        now = datetime(2026, 11, 4, 0, 0, tzinfo=timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744)], first_seen_at_utc=now.isoformat())
+        self.assertTrue(awaiting_source_timestamp(s["pending"][0], reference=now))
+        still, n = expire_pending(
+            s, reference=now + timedelta(seconds=TIMESTAMP_RETRY_GRACE_SECONDS - 1)
+        )
+        self.assertEqual(n, 0)
+        self.assertEqual(len(still["pending"]), 1)
+        expired, n = expire_pending(
+            still, reference=now + timedelta(seconds=TIMESTAMP_RETRY_GRACE_SECONDS)
+        )
+        self.assertEqual(n, 1)
+        self.assertEqual(expired["skipped_expired"]["94744"]["status"], "POSTED_AT_UNKNOWN")
+        self.assertEqual(expired["pending"], [])
+        self.assertNotIn("94744", expired["published"])
+
+    def test_existing_untimed_legacy_still_fails_closed_without_fake_time(self):
+        s, _, _ = ingest(baseline(), [deal(94744)])
+        self.assertNotIn("first_seen_at_utc", s["pending"][0])
+        self.assertFalse(awaiting_source_timestamp(s["pending"][0]))
+        expired, count = expire_pending(s)
+        self.assertEqual(count, 1)
+        self.assertEqual(expired["skipped_expired"]["94744"]["status"], "POSTED_AT_UNKNOWN")
+
+    def test_different_message_or_link_cannot_supply_timestamp(self):
+        source = deal(94744)
+        moment = datetime.now(timezone.utc).isoformat()
+        good = {**source, "posted_at_utc": moment}
+        self.assertEqual(matching_source_timestamp({
+            "id": 94744, "original_purchase_url": source["original_purchase_url"],
+        }, good), moment)
+        self.assertIsNone(matching_source_timestamp({
+            "id": 94744, "original_purchase_url": source["original_purchase_url"],
+        }, {**good, "source_message_id": 94745}))
+        self.assertIsNone(matching_source_timestamp({
+            "id": 94744, "original_purchase_url": source["original_purchase_url"],
+        }, {**good, "original_purchase_url": "https://link.coupang.com/a/wrong"}))
+        self.assertIsNone(matching_source_timestamp({
+            "id": 94744, "original_purchase_url": source["original_purchase_url"],
+        }, {**good, "posted_at_utc": "2026-11-04T00:00:00"}))
+
+    def test_exact_history_lookup_uses_bounded_id_and_no_guess(self):
+        d = deal(94744)
+        with patch("gh_only.jirum_manual_queue.older_html",
+                   return_value="mock history") as older:
+            with patch("gh_only.jirum_manual_queue.enrich_posts",
+                       return_value=[deal(94743), d]) as enrich:
+                item = fetch_exact_source_post(94744)
+        self.assertEqual(item["source_message_id"], 94744)
+        older.assert_called_once_with(94745)
+        enrich.assert_called_once_with("mock history", max_posts=200)
+        with self.assertRaisesRegex(ValueError, "INVALID_TELEGRAM_SOURCE_ID"):
+            fetch_exact_source_post(-1)
+
+    def test_event_rechecks_when_id_visible_but_timestamp_not_yet_available(self):
+        store = FakeStore(baseline())
+        delayed = {"status": "WAIT_SOURCE_TIMESTAMP", "has_deal": False,
+                   "last_scanned_id": 94744}
+        fresh = {"status": "READY_ONE", "has_deal": True,
+                 "last_scanned_id": 94744}
+        scanner = unittest.mock.Mock(side_effect=[delayed, fresh])
+        sleeper = unittest.mock.Mock()
+        result = scan_with_source_wait(
+            store, 94744, scanner=scanner, sleeper=sleeper,
+        )
+        self.assertEqual(result, fresh)
+        self.assertEqual(scanner.call_count, 2)
+        sleeper.assert_called_once_with(20)
+
     def test_dead_claim_is_archived_and_next_deal_unblocked(self):
         now = datetime.now(timezone.utc)
         s, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
@@ -462,7 +577,7 @@ class ManualQueueTests(unittest.TestCase):
                 "secret_fingerprint":kakao_secret_fingerprint(),
             }
         store = FakeStore(s)
-        recent = {"source_message_id":94745, "posted_at_utc":now.isoformat()}
+        recent = {**deal(94745), "posted_at_utc": now.isoformat()}
         with patch.dict(os.environ, {
             "JIRUM_IMAGE_SOURCE":"lowchart", "JIRUM_REQUIRE_FRESH_POST":"true"
         }), patch("gh_only.jirum_manual_queue.collect_since", return_value=[]), \

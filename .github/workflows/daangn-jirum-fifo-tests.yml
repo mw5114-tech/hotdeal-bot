@@ -5,6 +5,7 @@ on:
     branches:
       - codex/oracle-event-30min-backup-20261103
       - fix/github-api-stale-claim-recovery-20261103
+      - fix/jirum-timestamp-backfill-20261104
       - feat/daangn-body-discount-first-20261102
       - feat/muse-official-link-receipts-20261103
       - feat/daangn-post-then-muse-rewrite-20261103

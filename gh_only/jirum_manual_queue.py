@@ -36,6 +36,10 @@ DRAFT_DIR = Path("jirum-manual-one-draft")
 DRAIN_TIME_BUDGET_SECONDS = 11 * 60
 MAX_DEAL_AGE_SECONDS = 60 * 60
 MAX_FUTURE_SKEW_SECONDS = 5 * 60
+# Telegram's public page can lag the MTProto event or omit the timestamp on
+# an individual page. Never guess publication time from the GitHub run time.
+TIMESTAMP_RETRY_GRACE_SECONDS = 3 * 60
+MAX_DIRECT_TIMESTAMP_LOOKUPS = 3
 # A workflow job has a 15-minute hard timeout. Old claims must be archived,
 # never automatically reposted, after a generous 25-minute grace period.
 STALE_CLAIM_SECONDS = 25 * 60
@@ -88,6 +92,17 @@ def freshness_status(row: dict, *, reference: datetime | None = None) -> str:
     return "FRESH"
 
 
+def awaiting_source_timestamp(row: dict, *, reference: datetime | None = None) -> bool:
+    """A newly observed *untimed* post may be rechecked briefly, never posted."""
+    if _parse_utc(row.get("posted_at_utc")) is not None:
+        return False
+    seen = _parse_utc(row.get("first_seen_at_utc"))
+    if seen is None:
+        return False  # Pre-existing untimed legacy posts remain fail-closed.
+    age = ((reference or datetime.now(timezone.utc)) - seen).total_seconds()
+    return -MAX_FUTURE_SKEW_SECONDS <= age < TIMESTAMP_RETRY_GRACE_SECONDS
+
+
 def expire_pending(s: dict, *, reference: datetime | None = None) -> tuple[dict, int]:
     """Archive, never erase, already queued stale deals before any browser work.
 
@@ -100,7 +115,8 @@ def expire_pending(s: dict, *, reference: datetime | None = None) -> tuple[dict,
     count = 0
     for row in out["pending"]:
         status = freshness_status(row, reference=reference)
-        if status == "FRESH":
+        if status == "FRESH" or (status == "POSTED_AT_UNKNOWN"
+                                 and awaiting_source_timestamp(row, reference=reference)):
             keep.append(row)
             continue
         mid = str(row["id"])
@@ -306,7 +322,8 @@ def validate_state(s: dict) -> None:
         raise ValueError("INVALID_KAKAO_AUTH_BLOCK")
 
 
-def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
+def ingest(s: dict, discovered: list[dict], *,
+           first_seen_at_utc: str | None = None) -> tuple[dict, int, int]:
     """Pure, deterministic state transition; safe to unit-test offline."""
     validate_state(s)
     if s["in_flight"] is not None:
@@ -341,6 +358,11 @@ def ingest(s: dict, discovered: list[dict]) -> tuple[dict, int, int]:
         }
         if not isinstance(row["original_purchase_url"], str) or not row["original_purchase_url"].startswith("https://"):
             raise ValueError("COUPANG_URL_INVALID")
+        if _parse_utc(row["posted_at_utc"]) is None and first_seen_at_utc is not None:
+            if _parse_utc(first_seen_at_utc) is None:
+                raise ValueError("INVALID_FIRST_SEEN_TIMESTAMP")
+            # This is *observation* time, not proof of Telegram post time.
+            row["first_seen_at_utc"] = first_seen_at_utc
         if (d.get("image_provenance") == "telegram_attached_photo"
                 and isinstance(d.get("image_url_candidate"), str)):
             row["image_provenance"] = "telegram_attached_photo"
@@ -374,6 +396,28 @@ def older_html(before_id: int) -> str:
     if len(data) > 2_000_000:
         raise RuntimeError("HISTORY_PAGE_TOO_LARGE")
     return data.decode("utf-8-sig", "replace")
+
+
+def fetch_exact_source_post(source_id: int) -> dict | None:
+    """Try the exact public Telegram history boundary for a missing timestamp.
+
+    A history page can contain multiple posts; only an exact matching ID is
+    acceptable. HTTPS/host/response-size restrictions are in older_html().
+    """
+    if type(source_id) is not int or source_id <= START_AFTER or source_id >= 2**31 - 1:
+        raise ValueError("INVALID_TELEGRAM_SOURCE_ID")
+    batch = enrich_posts(older_html(source_id + 1), max_posts=200)
+    return next((post for post in batch if post["source_message_id"] == source_id), None)
+
+
+def matching_source_timestamp(row: dict, source: dict | None) -> str | None:
+    """No timestamp trust without exact ID, same source URL, and timezone."""
+    if (not isinstance(source, dict)
+            or source.get("source_message_id") != row["id"]
+            or source.get("original_purchase_url") != row["original_purchase_url"]):
+        return None
+    observed = source.get("posted_at_utc")
+    return _parse_utc(observed).isoformat() if _parse_utc(observed) else None
 
 
 def collect_since(watermark: int, latest_fetch=fetch_public_html, before_fetch=older_html,
@@ -510,7 +554,7 @@ def archive_abandoned_claim(store, *, reference: datetime | None = None) -> bool
 
 
 def scan(store: GithubState, latest_fetch=fetch_public_html,
-         before_fetch=older_html) -> dict:
+         before_fetch=older_html, *, timestamp_fetcher=None) -> dict:
     s, sha = store.read()
     if s["in_flight"] is not None:
         if archive_abandoned_claim(store):
@@ -519,7 +563,9 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
             print("FIFO_REVIEW_REQUIRED source_id=" + str(s["in_flight"]["id"]))
             return {"status": "REVIEW_REQUIRED", "has_deal": False, "pending": len(s["pending"])}
     discovered = collect_since(s["last_scanned_id"], latest_fetch, before_fetch)
-    new, added, skipped = ingest(s, discovered)
+    new, added, skipped = ingest(
+        s, discovered, first_seen_at_utc=now_utc() if timestamp_fetcher else None
+    )
     if lowchart_mode():
         # The new public photo path never needs the old Kakao auth blocker.
         new.pop("kakao_auth_block", None)
@@ -538,8 +584,9 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
                 by_id = {x["source_message_id"]: x for x in recent}
                 for item in new["pending"]:
                     source = by_id.get(item["id"], {})
-                    if item["id"] in legacy and _parse_utc(source.get("posted_at_utc")):
-                        item["posted_at_utc"] = source["posted_at_utc"]
+                    confirmed = matching_source_timestamp(item, source)
+                    if item["id"] in legacy and confirmed:
+                        item["posted_at_utc"] = confirmed
                     if (not item.get("image_url_candidate")
                             and source.get("image_provenance") == "telegram_attached_photo"
                             and isinstance(source.get("image_url_candidate"), str)):
@@ -547,6 +594,21 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
                         item["image_url_candidate"] = source["image_url_candidate"]
             except Exception as exc:
                 print("JIRUM_SOURCE_MEDIA_BACKFILL_UNAVAILABLE " + type(exc).__name__)
+        if timestamp_fetcher is not None:
+            missing = [row for row in new["pending"]
+                       if _parse_utc(row.get("posted_at_utc")) is None]
+            # Bound network work: never repeatedly fetch hundreds of old IDs.
+            for item in missing[:MAX_DIRECT_TIMESTAMP_LOOKUPS]:
+                try:
+                    source = timestamp_fetcher(item["id"])
+                    verified = matching_source_timestamp(item, source)
+                    if verified is not None:
+                        item["posted_at_utc"] = verified
+                        print("JIRUM_SOURCE_TIMESTAMP_CONFIRMED id=" + str(item["id"]))
+                    else:
+                        print("JIRUM_SOURCE_TIMESTAMP_NOT_CONFIRMED id=" + str(item["id"]))
+                except Exception as exc:
+                    print("JIRUM_SOURCE_TIMESTAMP_PROBE_UNAVAILABLE " + type(exc).__name__)
         new, expired = expire_pending(new)
     if new != s:
         store.write(new, sha, "state: checkpoint new Jirum messages, freshness and FIFO")
@@ -566,6 +628,7 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
         print("JIRUM_KAKAO_AUTH_REFRESHED_TRY_AGAIN")
     nxt = new["pending"][0]["id"] if new["pending"] else None
     paused = bool(block and kakao_block_for_current_secret(new) and nxt is not None)
+    timestamp_wait = bool(new["pending"] and awaiting_source_timestamp(new["pending"][0]))
     official_ready = True
     if official_link_mode() and nxt is not None:
         try:
@@ -575,8 +638,9 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
             official_ready = False
     result = {
         "status": ("KAKAO_REAUTH_REQUIRED" if paused
+                   else "WAIT_SOURCE_TIMESTAMP" if timestamp_wait
                    else "READY_ONE" if nxt is not None else "NO_NEW_COUPANG_DEAL"),
-        "has_deal": nxt is not None and not paused and official_ready,
+        "has_deal": nxt is not None and not paused and not timestamp_wait and official_ready,
         "official_link_ready": official_ready if nxt is not None else False,
         "source_id": nxt,
         "pending": len(new["pending"]),
@@ -803,6 +867,12 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                     "count": n_expired, "remaining": len(updated["pending"]),
                 }))
                 state = updated
+        if state["pending"] and awaiting_source_timestamp(state["pending"][0]):
+            print("JIRUM_FIFO_AWAIT_SOURCE_TIMESTAMP " + json.dumps({
+                "source_id": state["pending"][0]["id"],
+                "repost_attempted": False,
+            }))
+            return 0
         if not state["pending"]:
             print("JIRUM_FIFO_DRAIN_COMPLETE " + json.dumps({
                 "published_this_run": completed,
@@ -935,7 +1005,8 @@ def scan_with_source_wait(store, expected_source_id=0, *, scanner=None, sleeper=
     for attempt in range(4):
         result = scanner(store)
         if (not expected_source_id or result.get("status") == "REVIEW_REQUIRED"
-                or result.get("last_scanned_id", 0) >= expected_source_id):
+                or (result.get("last_scanned_id", 0) >= expected_source_id
+                    and result.get("status") != "WAIT_SOURCE_TIMESTAMP")):
             return result
         if attempt < 3:
             print("JIRUM_WAIT_PUBLIC_SOURCE " + json.dumps({
@@ -954,7 +1025,12 @@ def main():
     store = GithubState()
     if args.command == "scan":
         expected = int(os.getenv("JIRUM_EXPECTED_SOURCE_ID") or "0")
-        result = scan_with_source_wait(store, expected)
+        result = scan_with_source_wait(
+            store, expected,
+            scanner=lambda current: scan(
+                current, timestamp_fetcher=fetch_exact_source_post
+            ),
+        )
         output = os.getenv("GITHUB_OUTPUT")
         if output:
             with open(output, "a", encoding="utf-8") as f:
