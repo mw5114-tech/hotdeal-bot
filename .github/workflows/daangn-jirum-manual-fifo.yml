@@ -1,10 +1,11 @@
-name: Jirum Coupang | Daangn FIFO drain (5min + manual)
+name: Jirum Coupang | Daangn FIFO drain (Oracle event + 30min backup)
 
 on:
-  # Every 5 minutes at minute 2,7,12,...57, avoiding :00 congestion.
+  # Oracle's verified @jirum event bridge is primary; this is backup only.
+  # Every 30 minutes at :17 and :47, avoiding :00 congestion.
   # GitHub can delay or skip cron triggers under high load.
   schedule:
-    - cron: '2-57/5 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
       smoke_test:
@@ -114,6 +115,6 @@ jobs:
           retention-days: 1
           if-no-files-found: ignore
 
-# 5-minute cron + on-demand manual. Each run posts ALL available pending
+# Oracle events + 30-minute backup + on-demand manual. Each run posts ALL available pending
 # oldest-first, with a conservative runtime budget. Backlog that cannot finish
 # safely resumes next schedule. Never retry an uncertain post; stop on error.
