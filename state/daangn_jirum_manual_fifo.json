@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94929,
-  "pending": [
-    {
-      "id": 94929,
-      "source_post_url": "https://t.me/jirum/94929",
-      "original_purchase_url": "https://link.coupang.com/a/im8kmqRkQe",
-      "source_text": "👍대박 5,200원 (35.0% 할인)\n진로발효 바이오 크린콜 살균소독제 1L\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 2,800원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im8kmqRkQe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T06:45:34+00:00",
-      "title": "진로발효 바이오 크린콜 살균소독제 1L",
-      "sale_price_krw": 5200
-    }
-  ],
-  "in_flight": {
-    "id": 94929,
-    "status": "CLAIMED",
-    "run_id": "41591963654",
-    "at": "2026-11-03T06:46:47.737386+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -921,6 +906,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T06:25:53.616377+00:00",
       "run_id": "41589739873"
+    },
+    "94929": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A7%84%EB%A1%9C%EB%B0%9C%ED%9A%A8-%EB%B0%94%EC%9D%B4%EC%98%A4-%ED%81%AC%EB%A6%B0%EC%BD%9C-%EC%82%B4%EA%B7%A0%EC%86%8C%EB%8F%85%EC%A0%9C-1L-1%EA%B0%9C-dag8VQnA?from=write",
+      "posted_at_utc": "2026-11-03T06:45:34+00:00",
+      "product_id": "7856288030",
+      "item_id": "21426951619",
+      "vendor_item_id": null,
+      "at": "2026-11-03T06:47:03.806024+00:00",
+      "run_id": "41591963654"
     }
   },
   "skipped_non_coupang": 9,
