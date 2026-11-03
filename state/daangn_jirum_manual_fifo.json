@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94959,
-  "pending": [],
+  "last_scanned_id": 94960,
+  "pending": [
+    {
+      "id": 94960,
+      "source_post_url": "https://t.me/jirum/94960",
+      "original_purchase_url": "https://link.coupang.com/a/inMBVYGEsS",
+      "source_text": "☆특가 11,350원 (26.3% 할인)\n토종마을 국산 황기 절단, 300g, 1개\n📌 가격 현황\n- 정상가: 15,400원\n- 할인: 4,050원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inMBVYGEsS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T16:09:17+00:00",
+      "title": "토종마을 국산 황기 절단, 300g, 1개",
+      "sale_price_krw": 11350
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
