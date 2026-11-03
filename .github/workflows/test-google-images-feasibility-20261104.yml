@@ -1,0 +1,61 @@
+name: TEST read-only | Google image fallback feasibility
+on:
+  push:
+    branches: [test/google-images-fallback-feasibility-20261104]
+    paths: ['.github/workflows/test-google-images-feasibility-20261104.yml']
+permissions:
+  contents: read
+jobs:
+  google-image-diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Observe image search accessibility without posting
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from html import unescape
+          from urllib import request,error
+          from urllib.parse import urlencode,urlsplit
+          from html.parser import HTMLParser
+          
+          cases=[
+           ("94964","닥터스베스트 글루코사민 콘드로이친 MSM 캡슐 240정 1개"),
+           ("94961","풀무원 동치미냉면 4인분 1.692kg 2개"),
+          ]
+          class HTML(HTMLParser):
+           def __init__(self):
+            super().__init__();self.images=[];self.anchors=[];self.title="";self.title_active=False
+           def handle_starttag(self,tag,attrs):
+            a=dict(attrs)
+            if tag=="img":self.images.append({k:a.get(k,"")[:600] for k in ("alt","src","data-src")})
+            if tag=="a":self.anchors.append({k:a.get(k,"")[:900] for k in ("href","aria-label")})
+            if tag=="title":self.title_active=True
+           def handle_endtag(self,tag):
+            if tag=="title":self.title_active=False
+           def handle_data(self,data):
+            if self.title_active:self.title+=data
+          for sid,title in cases:
+           for mode,params in (("images",{"q":'site:coupang.com "'+title+'"',"tbm":"isch","hl":"ko","safe":"active"}),
+                               ("udm2",{"q":"쿠팡 "+title,"udm":"2","hl":"ko","safe":"active"}),
+                               ("web",{"q":"site:coupang.com "+title,"hl":"ko","safe":"active"})):
+            url="https://www.google.com/search?"+urlencode(params)
+            req=request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Accept-Language":"ko-KR,ko;q=0.9,en;q=0.8"})
+            rec={"sid":sid,"mode":mode}
+            try:
+             with request.urlopen(req,timeout=15) as resp:
+              body=resp.read(950001);html=body.decode("utf-8","replace")
+              p=HTML();p.feed(html)
+              rec.update(status=resp.status,final=urlsplit(resp.geturl()).hostname,bytes=len(body),
+                title=p.title[:100],img_tags=len(p.images),links=len(p.anchors),
+                coupang_product_links=len(re.findall(r"coupang\.com.{0,35}vp/products/",html)),
+                cdn_mentions=len(re.findall(r"(?:thumbnail\d*|image)\.coupangcdn\.com",html)),
+                original_images=len(re.findall(r'\"ou\":\"https?:',html)),
+                example_alt=[x["alt"][:90] for x in p.images[:4]],
+                text_challenge=any(t in html.lower() for t in ["unusual traffic","captcha","enable javascript","not a robot","계속하려면"]))
+            except error.HTTPError as exc:rec.update(status=exc.code,error="HTTPError")
+            except Exception as exc:rec.update(error=type(exc).__name__)
+            print("GOOGLE_IMAGE_FEASIBILITY "+json.dumps(rec,ensure_ascii=False))
+          print("TEST_ONLY_NO_POST_NO_PRODUCTION_WRITE")
+          
+          PY
