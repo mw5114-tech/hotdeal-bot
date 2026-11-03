@@ -1,12 +1,18 @@
-name: Jirum Coupang | Daangn FIFO drain (5min + manual)
+name: Jirum Coupang | Daangn FIFO drain (Oracle event + 30min backup)
 
 on:
-  # Every 5 minutes at minute 2,7,12,...57, avoiding :00 congestion.
+  # Oracle's verified @jirum event bridge is primary; this is backup only.
+  # Every 30 minutes at :17 and :47, avoiding :00 congestion.
   # GitHub can delay or skip cron triggers under high load.
   schedule:
-    - cron: '2-57/5 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
+      source_post_id:
+        description: 'Oracle event post ID; wait briefly for public Telegram visibility'
+        required: false
+        default: ''
+        type: string
       smoke_test:
         description: 'Read-only dispatch handshake (never scan or publish)'
         required: false
@@ -74,6 +80,8 @@ jobs:
       # The test workflow validates changes before release.
       - name: Scan Telegram and persist FIFO cursor (stdlib only)
         id: scan
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_post_id || '' }}
         run: python -m gh_only.jirum_manual_queue scan
 
       - name: Restore Playwright browser cache only for an eligible deal
@@ -114,6 +122,6 @@ jobs:
           retention-days: 1
           if-no-files-found: ignore
 
-# 5-minute cron + on-demand manual. Each run posts ALL available pending
+# Oracle events + 30-minute backup + on-demand manual. Each run posts ALL available pending
 # oldest-first, with a conservative runtime budget. Backlog that cannot finish
 # safely resumes next schedule. Never retry an uncertain post; stop on error.

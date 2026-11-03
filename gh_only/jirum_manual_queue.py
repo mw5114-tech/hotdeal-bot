@@ -835,6 +835,30 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             return 0
 
 
+def scan_with_source_wait(store, expected_source_id=0, *, scanner=None, sleeper=None):
+    """Allow an MTProto event to reach Telegram's public page before draining.
+
+    No extra GitHub dispatches, browser installs or posts. Each read uses the
+    existing scanner and durable cursor. Backup cron handles longer outages.
+    """
+    if type(expected_source_id) is not int or not 0 <= expected_source_id < 2**31:
+        raise ValueError("INVALID_EXPECTED_SOURCE_ID")
+    scanner = scanner or scan
+    sleeper = sleeper or time.sleep
+    for attempt in range(4):
+        result = scanner(store)
+        if (not expected_source_id or result.get("status") == "REVIEW_REQUIRED"
+                or result.get("last_scanned_id", 0) >= expected_source_id):
+            return result
+        if attempt < 3:
+            print("JIRUM_WAIT_PUBLIC_SOURCE " + json.dumps({
+                "expected_source_id": expected_source_id, "retry_in_seconds": 20,
+            }))
+            sleeper(20)
+    print("JIRUM_PUBLIC_SOURCE_DELAY_BACKUP_REQUIRED " + str(expected_source_id))
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("command", choices=("scan", "publish", "drain"))
@@ -842,7 +866,8 @@ def main():
     check_run_trigger()
     store = GithubState()
     if args.command == "scan":
-        result = scan(store)
+        expected = int(os.getenv("JIRUM_EXPECTED_SOURCE_ID") or "0")
+        result = scan_with_source_wait(store, expected)
         output = os.getenv("GITHUB_OUTPUT")
         if output:
             with open(output, "a", encoding="utf-8") as f:

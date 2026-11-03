@@ -15,4 +15,4 @@ exec systemd-run --quiet --wait --pipe --collect \
   --property=EnvironmentFile=/etc/hotdeal-live.env \
   --property=WorkingDirectory=/opt/hotdeal-live \
   --property=UMask=0077 \
-  /opt/hotdeal-live/.venv/bin/python /opt/hotdeal-live/jirum_live.py "$@"
+  /opt/hotdeal-live/.venv/bin/python /opt/hotdeal-live/watcher.py "$@"

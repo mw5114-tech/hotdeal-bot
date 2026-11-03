@@ -12,7 +12,7 @@ WorkingDirectory=/opt/hotdeal-live
 EnvironmentFile=/etc/hotdeal-live.env
 Environment=PYTHONUNBUFFERED=1
 Environment=PYTHONDONTWRITEBYTECODE=1
-ExecStart=/opt/hotdeal-live/.venv/bin/python /opt/hotdeal-live/jirum_live.py run
+ExecStart=/opt/hotdeal-live/.venv/bin/python /opt/hotdeal-live/watcher.py run
 Restart=always
 RestartSec=10
 TimeoutStopSec=45
