@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94922,
-  "pending": [
-    {
-      "id": 94921,
-      "source_post_url": "https://t.me/jirum/94921",
-      "original_purchase_url": "https://link.coupang.com/a/im2DwsOqQ0",
-      "source_text": "👍대박 13,940원 (37.7% 할인)\n멜릭서 립 버터, 03레드벨벳, 3.9g, 2개\n📌 가격 현황\n- 정상가: 22,370원\n- 할인: 8,430원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im2DwsOqQ0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T05:25:56+00:00",
-      "title": "멜릭서 립 버터, 03레드벨벳, 3.9g, 2개",
-      "sale_price_krw": 13940
-    }
-  ],
-  "in_flight": {
-    "id": 94921,
-    "status": "CLAIMED",
-    "run_id": "41583932808",
-    "at": "2026-11-03T05:27:16.309704+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -861,6 +846,16 @@
       "vendor_item_id": "86478559169",
       "at": "2026-11-03T05:23:09.810025+00:00",
       "run_id": "41583543456"
+    },
+    "94921": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A9%9C%EB%A6%AD%EC%84%9C-%EB%A6%BD-%EB%B2%84%ED%84%B0-03-%EB%A0%88%EB%93%9C%EB%B2%A8%EB%B2%B3-39g-2%EA%B0%9C-PwwYx6JP?from=write",
+      "posted_at_utc": "2026-11-03T05:25:56+00:00",
+      "product_id": "7417492189",
+      "item_id": "19168141337",
+      "vendor_item_id": "86286438513",
+      "at": "2026-11-03T05:27:32.766008+00:00",
+      "run_id": "41583932808"
     }
   },
   "skipped_non_coupang": 9,
