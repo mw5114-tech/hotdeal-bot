@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94914,
-  "pending": [
-    {
-      "id": 94914,
-      "source_post_url": "https://t.me/jirum/94914",
-      "original_purchase_url": "https://link.coupang.com/a/imX86HjmpM",
-      "source_text": "🔥🔥🔥무지성 3,990원 (56.0% 할인)🔥🔥🔥\n[로켓프레시] 하인즈 토마토 함박 스테이크 (냉동)\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 9,068원\n- 할인: 5,078원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imX86HjmpM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T04:23:06+00:00",
-      "title": "[로켓프레시] 하인즈 토마토 함박 스테이크 (냉동)",
-      "sale_price_krw": 3990
-    }
-  ],
-  "in_flight": {
-    "id": 94914,
-    "status": "CLAIMED",
-    "run_id": "41577897694",
-    "at": "2026-11-03T04:24:26.008810+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -791,6 +776,16 @@
       "vendor_item_id": "3922486817",
       "at": "2026-11-03T03:17:40.203052+00:00",
       "run_id": "41571266405"
+    },
+    "94914": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EC%9D%B8%EC%A6%88-%ED%86%A0%EB%A7%88%ED%86%A0-%ED%95%A8%EB%B0%95-%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC-%EB%83%89%EB%8F%99-380g-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-dJyoBrWP?from=write",
+      "posted_at_utc": "2026-11-03T04:23:06+00:00",
+      "product_id": "8264402977",
+      "item_id": "23811617969",
+      "vendor_item_id": null,
+      "at": "2026-11-03T04:24:42.579995+00:00",
+      "run_id": "41577897694"
     }
   },
   "skipped_non_coupang": 8,
