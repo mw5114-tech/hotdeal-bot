@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94922,
-  "pending": [],
+  "last_scanned_id": 94923,
+  "pending": [
+    {
+      "id": 94923,
+      "source_post_url": "https://t.me/jirum/94923",
+      "original_purchase_url": "https://link.coupang.com/a/im4gSUBvxs",
+      "source_text": "🔥🔥🔥무지성 12,630원 (63.9% 할인)🔥🔥🔥\n스탠리 올데이 캐리올 퀜처 H2.0 텀블러 스트랩백 1.18L, 크림, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 35,000원\n- 할인: 22,370원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im4gSUBvxs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T05:48:49+00:00",
+      "title": "스탠리 올데이 캐리올 퀜처 H2.0 텀블러 스트랩백 1.18L, 크림, 1개",
+      "sale_price_krw": 12630
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
