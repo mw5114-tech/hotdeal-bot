@@ -880,7 +880,7 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 "captured_at": now_utc(),
             }
             (DRAFT_DIR / "publish_outcome_receipt.json").write_text(
-                json.dumps(receipt, ensure_ascii=False, indent=2) + "\\n",
+                json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
                 encoding="utf-8",
             )
             print("JIRUM_LOCAL_PUBLISH_RECEIPT_SAVED source_id=" + str(source_id))
