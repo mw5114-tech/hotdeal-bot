@@ -671,12 +671,24 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
             or (row.get("image_source") == "telegram_attached_photo"
                 and row.get("source_photo_verified") is True
                 and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
+            or (row.get("image_source") == "naver_indexed_coupang_product_image"
+                and row.get("image_search_product_id_verified") is True
+                and row.get("image_search_title_verified") is True
+                and row.get("image_search_exact_item_id_verified") is False
+                and row.get("photo", {}).get("image_source") == "naver_indexed_coupang_product_image")
         ) if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
         or (lowchart_mode() and (
-            row.get("lowchart_title_verified") is not True
-            or row.get("product_name_source") != "lowchart_exact_item_page"
-            or not isinstance(row.get("lowchart_product_title"), str)
+            not (
+                (row.get("lowchart_title_verified") is True
+                 and row.get("product_name_source") == "lowchart_exact_item_page"
+                 and isinstance(row.get("lowchart_product_title"), str))
+                or (row.get("image_source") == "naver_indexed_coupang_product_image"
+                    and row.get("image_search_product_id_verified") is True
+                    and row.get("image_search_title_verified") is True
+                    and row.get("product_name_source") == "search_exact_product_id_index"
+                    and isinstance(row.get("search_product_title"), str))
+            )
             or not isinstance(row.get("caption", {}).get("product_name"), str)
             or article["body"].splitlines()[0] != row["caption"]["caption"].splitlines()[0]
             or not article["body"].splitlines()[0].endswith(row["caption"]["product_name"])

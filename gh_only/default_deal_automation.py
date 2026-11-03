@@ -28,6 +28,9 @@ from gh_only.lowchart_product_photo import (
     lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url,
 )
 from gh_only.telegram_source_photo import download_source_photo
+from gh_only.search_product_photo import (
+    lookup_search_product_photo, download_search_photo,
+)
 ALLOWED_CDN = ("thumbnail.coupangcdn.com", "image.coupangcdn.com")
 MAX_IMAGE_BYTES = 2_500_000
 
@@ -196,7 +199,8 @@ def download_og_photo(url: str | None, output: Path, source_message_id: int) -> 
 def enrich_deal(deal: dict, output_dir: Path,
                 resolver=resolve_identity, og_lookup=None,
                 history_fetch=fetch_one, photo_downloader=None,
-                session_secret: str = "", owner_tag: str = "") -> dict:
+                session_secret: str = "", owner_tag: str = "",
+                *, search_lookup=None, search_downloader=None) -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -270,6 +274,39 @@ def enrich_deal(deal: dict, output_dir: Path,
         if fallback_photo.get("status") == "IMAGE_SAVED":
             image_source = "telegram_attached_photo"
             source_photo_verified = True
+    # Lowchart remains first choice. Search runs ONLY when its photo fails.
+    # Google Images serves CAPTCHA to the GitHub runner. The accessible Naver
+    # public image index is the safe second choice, requiring exact Coupang
+    # product ID plus matching package/specs in the indexed result title.
+    search_result = {"status": "NOT_ATTEMPTED"}
+    search_photo_verified = False
+    search_title = None
+    if (using_public_lowchart
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and photo.get("status") != "IMAGE_SAVED"
+            and os.getenv("JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK") == "true"):
+        search_query_title = title if lowchart_title_verified else fallback_title
+        try:
+            search_fn = search_lookup or lookup_search_product_photo
+            search_result = search_fn(identity, search_query_title)
+            if (search_result.get("status") == "SEARCH_VERIFIED_COUPANG_PRODUCT_IMAGE"
+                    and search_result.get("image_search_product_id_verified") is True
+                    and search_result.get("image_search_title_verified") is True):
+                fetch_photo = search_downloader or download_search_photo
+                alternative = fetch_photo(search_result["og_image"], output_dir, source_id)
+                if alternative.get("status") == "IMAGE_SAVED":
+                    photo = alternative
+                    image_source = "naver_indexed_coupang_product_image"
+                    search_photo_verified = True
+                    search_title = search_result.get("og_title")
+                    if not lowchart_title_verified:
+                        title = search_title
+                else:
+                    search_result = {**search_result, "status": "SEARCH_PHOTO_DOWNLOAD_FAILED",
+                                     "download_status": alternative.get("status")}
+        except Exception as exc:
+            search_result = {"status": "SEARCH_IMAGE_EXCEPTION",
+                             "error_type": type(exc).__name__}
     caption = create_default_preview(sale, title, average, source_id)
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
@@ -295,18 +332,30 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_product_title": og_title.strip() if lowchart_title_verified else None,
         "product_name_source": (
             "lowchart_exact_item_page" if lowchart_title_verified
+            else "search_exact_product_id_index" if search_photo_verified
             else "unverified_fallback"
         ) if using_public_lowchart else "legacy_kakao",
+        "search_product_title": search_title,
+        "image_search_product_id_verified": search_photo_verified,
+        "image_search_title_verified": search_photo_verified,
+        "image_search_exact_item_id_verified": False,
+        "search_status": search_result.get("status"),
+        "search_provider": ("naver_image_index" if search_photo_verified else None),
         "kakao_status": og.get("status"),
         "kakao_product_match": matching and image_source == "legacy_kakao_og",
-        "image_product_match": matching,
+        "image_product_match": matching or search_photo_verified,
         "image_source": image_source,
         "image_metadata_status": og.get("status"),
         "image_http_status": og.get("http_status"),
         "image_error_type": og.get("error_type"),
         "source_photo_verified": source_photo_verified,
-        "image_match_basis": og.get("image_match_basis"),
-        "image_same_named_option": og.get("image_same_named_option"),
+        "image_match_basis": (
+            search_result.get("image_match_basis") if search_photo_verified
+            else og.get("image_match_basis")
+        ),
+        "image_same_named_option": (
+            True if search_photo_verified else og.get("image_same_named_option")
+        ),
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
