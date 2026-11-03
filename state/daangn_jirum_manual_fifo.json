@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94972,
-  "pending": [],
+  "last_scanned_id": 94973,
+  "pending": [
+    {
+      "id": 94973,
+      "source_post_url": "https://t.me/jirum/94973",
+      "original_purchase_url": "https://link.coupang.com/a/ioeYpcPtzU",
+      "source_text": "☆특가 21,340원 (26.7% 할인)\n곰곰 건조 망고 슬라이스, 80g, 10개\n📌 가격 현황\n- 정상가: 29,100원\n- 할인: 7,760원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioeYpcPtzU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:46:11+00:00",
+      "title": "곰곰 건조 망고 슬라이스, 80g, 10개",
+      "sale_price_krw": 21340
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
