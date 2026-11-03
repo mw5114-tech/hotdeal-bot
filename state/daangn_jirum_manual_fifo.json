@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94938,
-  "pending": [
-    {
-      "id": 94938,
-      "source_post_url": "https://t.me/jirum/94938",
-      "original_purchase_url": "https://link.coupang.com/a/injhZEkRS8",
-      "source_text": "☆특가 8,600원\n빼빼로 캐리어 4종 184g, 184g, 2세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/injhZEkRS8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T09:18:58+00:00",
-      "title": "☆특가 8,600원",
-      "sale_price_krw": 8600
-    }
-  ],
-  "in_flight": {
-    "id": 94938,
-    "status": "CLAIMED",
-    "run_id": "41610150935",
-    "at": "2026-11-03T09:20:23.035064+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1011,6 +996,16 @@
       "vendor_item_id": "95391242671",
       "at": "2026-11-03T08:54:34.247779+00:00",
       "run_id": "41606705646"
+    },
+    "94938": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%BC%EB%B9%BC%EB%A1%9C-%EC%BA%90%EB%A6%AC%EC%96%B4-4%EC%A2%85-184g-2%EC%84%B8%ED%8A%B8-40%ED%95%A0%EC%9D%B8-PmVY9O3d?from=write",
+      "posted_at_utc": "2026-11-03T09:18:58+00:00",
+      "product_id": "9740262342",
+      "item_id": "29157264088",
+      "vendor_item_id": null,
+      "at": "2026-11-03T09:20:40.198253+00:00",
+      "run_id": "41610150935"
     }
   },
   "skipped_non_coupang": 9,
