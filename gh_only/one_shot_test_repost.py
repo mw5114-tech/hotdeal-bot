@@ -18,7 +18,7 @@ from gh_only.jirum_manual_queue import (
 )
 from gh_only.official_link_receipts import parse_timestamp
 
-REPOST_KEY = "single_test_repost_20261103"
+REPOST_KEY = "single_test_repost_20261104"
 EXPECTED_REPO = "mw5114-tech/hotdeal-bot"
 EXPECTED_TRIGGER = "manual/trigger-repost-latest-20261103.txt"
 
