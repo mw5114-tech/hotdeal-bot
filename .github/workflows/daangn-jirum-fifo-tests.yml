@@ -56,6 +56,8 @@ on:
       - 'gh_only/test_daangn_editor_probe.py'
       - 'gh_only/test_default_deal_automation.py'
       - 'gh_only/lowchart_product_photo.py'
+      - 'gh_only/search_product_photo.py'
+      - 'gh_only/test_search_product_photo.py'
       - 'gh_only/lowchart_price_reference.py'
       - 'gh_only/test_lowchart_price_reference.py'
       - 'gh_only/test_lowchart_product_photo.py'
@@ -104,7 +106,7 @@ jobs:
           print("DAANGN_SUBMIT_WAIT_CONTRACT_OK")
           PY
           python -m unittest -v gh_only.test_default_deal_format gh_only.test_default_deal_automation gh_only.test_daangn_editor_probe
-          python -m unittest -v gh_only.test_lowchart_product_photo gh_only.test_lowchart_price_reference gh_only.test_pipeline
+          python -m unittest -v gh_only.test_lowchart_product_photo gh_only.test_search_product_photo gh_only.test_lowchart_price_reference gh_only.test_pipeline
           python -m py_compile gh_only/lowchart_product_photo.py gh_only/default_deal_automation.py gh_only/pipeline.py jirum_forward.py
           python - <<'PY'
           from pathlib import Path
@@ -112,6 +114,7 @@ jobs:
           assert "cron: '17,47 * * * *'" in yaml_text
           assert "workflow_dispatch:" in yaml_text
           assert "JIRUM_IMAGE_SOURCE: lowchart" in yaml_text
+          assert "JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK: 'true'" in yaml_text
           assert "JIRUM_REQUIRE_FRESH_POST: 'true'" in yaml_text
           assert "JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'" in yaml_text
           assert "JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'" in yaml_text
