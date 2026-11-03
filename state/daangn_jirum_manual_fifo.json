@@ -3,15 +3,6 @@
   "last_scanned_id": 94970,
   "pending": [
     {
-      "id": 94969,
-      "source_post_url": "https://t.me/jirum/94969",
-      "original_purchase_url": "https://link.coupang.com/a/iocNTlyIZo",
-      "source_text": "🔥🔥🔥무지성 3,790원 (64.0% 할인)🔥🔥🔥\n오뚜기 제주담음 한라봉 마말레이드 잼\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,528원\n- 할인: 6,738원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocNTlyIZo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:15:49+00:00",
-      "title": "오뚜기 제주담음 한라봉 마말레이드 잼",
-      "sale_price_krw": 3790
-    },
-    {
       "id": 94970,
       "source_post_url": "https://t.me/jirum/94970",
       "original_purchase_url": "https://link.coupang.com/a/iocOpWSieO",
@@ -21,12 +12,7 @@
       "sale_price_krw": 10310
     }
   ],
-  "in_flight": {
-    "id": 94969,
-    "status": "CLAIMED",
-    "run_id": "41729418945",
-    "at": "2026-11-03T22:17:41.035832+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1220,6 +1206,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T22:15:38.771368+00:00",
       "run_id": "41729037330"
+    },
+    "94969": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%A0%9C%EC%A3%BC%EB%8B%B4%EC%9D%8C-%ED%95%9C%EB%9D%BC%EB%B4%89-%EB%A7%88%EB%A7%90%EB%A0%88%EC%9D%B4%EB%93%9C-%EC%9E%BC-300g-2%EA%B0%9C-60%ED%95%A0%EC%9D%B8-PWM8ZOWj?from=write",
+      "posted_at_utc": "2026-11-03T22:15:49+00:00",
+      "product_id": "8244540794",
+      "item_id": "19459370861",
+      "vendor_item_id": null,
+      "at": "2026-11-03T22:17:56.804184+00:00",
+      "run_id": "41729418945"
     }
   },
   "skipped_non_coupang": 11,
