@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94924,
-  "pending": [],
+  "last_scanned_id": 94925,
+  "pending": [
+    {
+      "id": 94925,
+      "source_post_url": "https://t.me/jirum/94925",
+      "original_purchase_url": "https://link.coupang.com/a/im5wwVvGXA",
+      "source_text": "☆특가 26,900원 (29.2% 할인)\n까사니 쿠치나 IH 하이곰솥, 30cm, 1개\n📌 가격 현황\n- 정상가: 38,000원\n- 할인: 11,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im5wwVvGXA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T06:06:20+00:00",
+      "title": "까사니 쿠치나 IH 하이곰솥, 30cm, 1개",
+      "sale_price_krw": 26900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
