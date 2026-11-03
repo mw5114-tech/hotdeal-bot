@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94920,
-  "pending": [
-    {
-      "id": 94920,
-      "source_post_url": "https://t.me/jirum/94920",
-      "original_purchase_url": "https://link.coupang.com/a/im2lo77XVc",
-      "source_text": "☆특가 23,620원 (21.3% 할인)\n제주삼다수 그린 무라벨, 2L, 30개\n📌 가격 현황\n- 정상가: 30,000원\n- 할인: 6,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im2lo77XVc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T05:21:51+00:00",
-      "title": "제주삼다수 그린 무라벨, 2L, 30개",
-      "sale_price_krw": 23620
-    }
-  ],
-  "in_flight": {
-    "id": 94920,
-    "status": "CLAIMED",
-    "run_id": "41583543456",
-    "at": "2026-11-03T05:22:52.585443+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -851,6 +836,16 @@
       "vendor_item_id": "96039310973",
       "at": "2026-11-03T05:05:42.201144+00:00",
       "run_id": "41581786456"
+    },
+    "94920": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A0%9C%EC%A3%BC%EC%82%BC%EB%8B%A4%EC%88%98-%EA%B7%B8%EB%A6%B0-%EB%AC%B4%EB%9D%BC%EB%B2%A8-2L-30%EA%B0%9C-20%ED%95%A0%EC%9D%B8-jb0mbymP?from=write",
+      "posted_at_utc": "2026-11-03T05:21:51+00:00",
+      "product_id": "9725928327",
+      "item_id": "29105043299",
+      "vendor_item_id": "86478559169",
+      "at": "2026-11-03T05:23:09.810025+00:00",
+      "run_id": "41583543456"
     }
   },
   "skipped_non_coupang": 8,
