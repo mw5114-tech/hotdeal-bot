@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94950,
-  "pending": [
-    {
-      "id": 94950,
-      "source_post_url": "https://t.me/jirum/94950",
-      "original_purchase_url": "https://link.coupang.com/a/inwZLfEwzA",
-      "source_text": "❤️초대박 5,430원 (40.0% 할인)\n연두 요리에센스 순 830ml\n📌 가격 현황\n- 정상가: 9,050원\n- 할인: 3,620원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inwZLfEwzA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T12:30:46+00:00",
-      "title": "연두 요리에센스 순 830ml",
-      "sale_price_krw": 5430
-    }
-  ],
-  "in_flight": {
-    "id": 94950,
-    "status": "CLAIMED",
-    "run_id": "41636476622",
-    "at": "2026-11-03T12:32:10.852813+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1121,6 +1106,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T12:15:51.396980+00:00",
       "run_id": "41634125330"
+    },
+    "94950": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%B0%EB%91%90-%EC%9A%94%EB%A6%AC%EC%97%90%EC%84%BC%EC%8A%A4-%EC%88%9C-830ml-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PNDyYn0j?from=write",
+      "posted_at_utc": "2026-11-03T12:30:46+00:00",
+      "product_id": "8244245116",
+      "item_id": "19390694529",
+      "vendor_item_id": null,
+      "at": "2026-11-03T12:32:26.781141+00:00",
+      "run_id": "41636476622"
     }
   },
   "skipped_non_coupang": 10,
