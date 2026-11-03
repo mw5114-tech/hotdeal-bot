@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94970,
-  "pending": [
-    {
-      "id": 94970,
-      "source_post_url": "https://t.me/jirum/94970",
-      "original_purchase_url": "https://link.coupang.com/a/iocOpWSieO",
-      "source_text": "🔥🔥🔥무지성 10,310원 (50.9% 할인)🔥🔥🔥\n슈가로로 애사비 스파클링 콤부 레몬라임, 24개, 350ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 21,000원\n- 할인: 10,690원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocOpWSieO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:15:56+00:00",
-      "title": "슈가로로 애사비 스파클링 콤부 레몬라임, 24개, 350ml",
-      "sale_price_krw": 10310
-    }
-  ],
-  "in_flight": {
-    "id": 94970,
-    "status": "CLAIMED",
-    "run_id": "41729418945",
-    "at": "2026-11-03T22:18:04.509107+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1220,6 +1205,16 @@
       "item_id": "19459370861",
       "vendor_item_id": null,
       "at": "2026-11-03T22:17:56.804184+00:00",
+      "run_id": "41729418945"
+    },
+    "94970": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%88%EA%B0%80%EB%A1%9C%EB%A1%9C-%EC%95%A0%EC%82%AC%EB%B9%84-%EC%8A%A4%ED%8C%8C%ED%81%B4%EB%A7%81-%EC%BD%A4%EB%B6%80-%EB%A0%88%EB%AA%AC%EB%9D%BC%EC%9E%84-24%EA%B0%9C-350ml-55%ED%95%A0%EC%9D%B8-j8rN2lqP?from=write",
+      "posted_at_utc": "2026-11-03T22:15:56+00:00",
+      "product_id": "9574521285",
+      "item_id": "28578869861",
+      "vendor_item_id": "95522990867",
+      "at": "2026-11-03T22:18:20.304248+00:00",
       "run_id": "41729418945"
     }
   },
