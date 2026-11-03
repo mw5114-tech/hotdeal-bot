@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94915,
-  "pending": [
-    {
-      "id": 94915,
-      "source_post_url": "https://t.me/jirum/94915",
-      "original_purchase_url": "https://link.coupang.com/a/imYnQCVIUm",
-      "source_text": "🔥🔥🔥무지성 21,400원 (45.0% 할인)🔥🔥🔥\n[로켓프레시] 야끼니꾸 양념 꽃갈비살 구이용 (냉동)400g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 38,909원\n- 할인: 17,509원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imYnQCVIUm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T04:26:26+00:00",
-      "title": "[로켓프레시] 야끼니꾸 양념 꽃갈비살 구이용 (냉동)400g",
-      "sale_price_krw": 21400
-    }
-  ],
-  "in_flight": {
-    "id": 94915,
-    "status": "CLAIMED",
-    "run_id": "41578194715",
-    "at": "2026-11-03T04:27:24.649872+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -801,6 +786,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T04:24:42.579995+00:00",
       "run_id": "41577897694"
+    },
+    "94915": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%BC%EB%81%BC%EB%8B%88%EA%BE%B8-%EC%96%91%EB%85%90-%EA%BD%83%EA%B0%88%EB%B9%84%EC%82%B4-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EB%8F%99-1%EA%B0%9C-400g-Pk6Ek4DA?from=write",
+      "posted_at_utc": "2026-11-03T04:26:26+00:00",
+      "product_id": "8416553972",
+      "item_id": "24339797868",
+      "vendor_item_id": null,
+      "at": "2026-11-03T04:27:40.893396+00:00",
+      "run_id": "41578194715"
     }
   },
   "skipped_non_coupang": 8,
