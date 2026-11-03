@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94944,
-  "pending": [
-    {
-      "id": 94944,
-      "source_post_url": "https://t.me/jirum/94944",
-      "original_purchase_url": "https://link.coupang.com/a/inpXlUviQC",
-      "source_text": "👍대박 75,470원 (37.1% 할인)\n닌자 프로페셔널 블렌더 2.0\n📌 가격 현황\n- 정상가: 120,000원\n- 할인: 44,530원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inpXlUviQC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T10:52:16+00:00",
-      "title": "닌자 프로페셔널 블렌더 2.0",
-      "sale_price_krw": 75470
-    }
-  ],
-  "in_flight": {
-    "id": 94944,
-    "status": "CLAIMED",
-    "run_id": "41622899934",
-    "at": "2026-11-03T10:53:48.430690+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1070,6 +1055,16 @@
       "item_id": "5684276777",
       "vendor_item_id": "72983142950",
       "at": "2026-11-03T10:53:44.021950+00:00",
+      "run_id": "41622899934"
+    },
+    "94944": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%EC%9E%90-%ED%94%84%EB%A1%9C%ED%8E%98%EC%85%94%EB%84%90-%EB%B8%94%EB%A0%8C%EB%8D%94-20-BR201KR-40%ED%95%A0%EC%9D%B8-A34kWbqP?from=write",
+      "posted_at_utc": "2026-11-03T10:52:16+00:00",
+      "product_id": "8527603747",
+      "item_id": "24691428669",
+      "vendor_item_id": "91701244753",
+      "at": "2026-11-03T10:54:04.295496+00:00",
       "run_id": "41622899934"
     }
   },
