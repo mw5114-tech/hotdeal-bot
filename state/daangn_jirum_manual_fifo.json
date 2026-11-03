@@ -3,15 +3,6 @@
   "last_scanned_id": 94944,
   "pending": [
     {
-      "id": 94943,
-      "source_post_url": "https://t.me/jirum/94943",
-      "original_purchase_url": "https://link.coupang.com/a/inpXiVKStM",
-      "source_text": "☆특가 36,800원 (26.4% 할인)\n닌자 프로페셔널 초퍼 핸드블렌더\n📌 가격 현황\n- 정상가: 50,000원\n- 할인: 13,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inpXiVKStM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T10:52:15+00:00",
-      "title": "닌자 프로페셔널 초퍼 핸드블렌더",
-      "sale_price_krw": 36800
-    },
-    {
       "id": 94944,
       "source_post_url": "https://t.me/jirum/94944",
       "original_purchase_url": "https://link.coupang.com/a/inpXlUviQC",
@@ -21,12 +12,7 @@
       "sale_price_krw": 75470
     }
   ],
-  "in_flight": {
-    "id": 94943,
-    "status": "CLAIMED",
-    "run_id": "41622899934",
-    "at": "2026-11-03T10:53:28.655556+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1069,6 +1055,16 @@
       "item_id": "25079045863",
       "vendor_item_id": "91671811541",
       "at": "2026-11-03T10:53:23.798256+00:00",
+      "run_id": "41622899934"
+    },
+    "94943": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%EC%9E%90-%ED%94%84%EB%A1%9C%ED%8E%98%EC%85%94%EB%84%90-%EC%B4%88%ED%8D%BC-%ED%95%B8%EB%93%9C%EB%B8%94%EB%A0%8C%EB%8D%94-NJ1001KR-30%ED%95%A0%EC%9D%B8-AqrQRGRP?from=write",
+      "posted_at_utc": "2026-11-03T10:52:15+00:00",
+      "product_id": "4604878225",
+      "item_id": "5684276777",
+      "vendor_item_id": "72983142950",
+      "at": "2026-11-03T10:53:44.021950+00:00",
       "run_id": "41622899934"
     }
   },
