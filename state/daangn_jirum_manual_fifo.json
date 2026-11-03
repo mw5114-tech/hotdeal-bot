@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94906,
-  "pending": [],
+  "last_scanned_id": 94907,
+  "pending": [
+    {
+      "id": 94907,
+      "source_post_url": "https://t.me/jirum/94907",
+      "original_purchase_url": "https://link.coupang.com/a/imM3r9J3OC",
+      "source_text": "🔥🔥🔥무지성 10,330원 (50.8% 할인)🔥🔥🔥\n키오시아 EXCERIA 마이크로 메모리 카드 홈캠 블랙박스 CCTV SD LMEX1L064GG4 64GB*1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 21,000원\n- 할인: 10,670원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imM3r9J3OC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T01:47:54+00:00",
+      "title": "키오시아 EXCERIA 마이크로 메모리 카드 홈캠 블랙박스 CCTV SD LMEX1L064GG4 64GB*1개",
+      "sale_price_krw": 10330
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
