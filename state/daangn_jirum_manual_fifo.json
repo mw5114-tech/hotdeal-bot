@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94960,
-  "pending": [
-    {
-      "id": 94960,
-      "source_post_url": "https://t.me/jirum/94960",
-      "original_purchase_url": "https://link.coupang.com/a/inMBVYGEsS",
-      "source_text": "☆특가 11,350원 (26.3% 할인)\n토종마을 국산 황기 절단, 300g, 1개\n📌 가격 현황\n- 정상가: 15,400원\n- 할인: 4,050원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inMBVYGEsS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T16:09:17+00:00",
-      "title": "토종마을 국산 황기 절단, 300g, 1개",
-      "sale_price_krw": 11350
-    }
-  ],
-  "in_flight": {
-    "id": 94960,
-    "status": "CLAIMED",
-    "run_id": "41671373152",
-    "at": "2026-11-03T16:10:28.387583+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1171,6 +1156,16 @@
       "vendor_item_id": "86349564192",
       "at": "2026-11-03T15:15:50.659184+00:00",
       "run_id": "41661922391"
+    },
+    "94960": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%86%A0%EC%A2%85%EB%A7%88%EC%9D%84-%EA%B5%AD%EC%82%B0-%ED%99%A9%EA%B8%B0-%EC%A0%88%EB%8B%A8-300g-1%EA%B0%9C-A4QVJ61P?from=write",
+      "posted_at_utc": "2026-11-03T16:09:17+00:00",
+      "product_id": "7141704232",
+      "item_id": "17931956102",
+      "vendor_item_id": "3008386136",
+      "at": "2026-11-03T16:10:45.043329+00:00",
+      "run_id": "41671373152"
     }
   },
   "skipped_non_coupang": 11,
