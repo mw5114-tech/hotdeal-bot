@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94973,
-  "pending": [],
+  "last_scanned_id": 94975,
+  "pending": [
+    {
+      "id": 94974,
+      "source_post_url": "https://t.me/jirum/94974",
+      "original_purchase_url": "https://link.coupang.com/a/iofkUIyTlc",
+      "source_text": "👍대박 6,620원 (33.8% 할인)\n델몬트 베트남산 바나나, 5개, 800g\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 3,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iofkUIyTlc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:51:16+00:00",
+      "title": "델몬트 베트남산 바나나, 5개, 800g",
+      "sale_price_krw": 6620
+    },
+    {
+      "id": 94975,
+      "source_post_url": "https://t.me/jirum/94975",
+      "original_purchase_url": "https://link.coupang.com/a/iofnG65WFM",
+      "source_text": "☆특가 9,700원\n바디인솔 프리미엄 무지 중목 양말 20켤레\n📦 특가 바로가기\nhttps://link.coupang.com/a/iofnG65WFM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:51:53+00:00",
+      "title": "☆특가 9,700원",
+      "sale_price_krw": 9700
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
