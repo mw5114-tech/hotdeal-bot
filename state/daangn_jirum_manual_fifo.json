@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94910,
-  "pending": [
-    {
-      "id": 94910,
-      "source_post_url": "https://t.me/jirum/94910",
-      "original_purchase_url": "https://link.coupang.com/a/imPFzAih3s",
-      "source_text": "☆특가 4,930원\n깨끗한나라 포차코 겨울에디션 딥무드 에센셜케어 로션 미용티슈 미니 3겹, 140개입, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/imPFzAih3s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T02:24:29+00:00",
-      "title": "☆특가 4,930원",
-      "sale_price_krw": 4930
-    }
-  ],
-  "in_flight": {
-    "id": 94910,
-    "status": "CLAIMED",
-    "run_id": "41565970666",
-    "at": "2026-11-03T02:25:24.204473+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -751,6 +736,16 @@
       "vendor_item_id": "70544442350",
       "at": "2026-11-03T02:15:45.045215+00:00",
       "run_id": "41564917844"
+    },
+    "94910": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B9%A8%EB%81%97%ED%95%9C%EB%82%98%EB%9D%BC-%ED%8F%AC%EC%B0%A8%EC%BD%94-%EA%B2%A8%EC%9A%B8%EC%97%90%EB%94%94%EC%85%98-%EB%94%A5%EB%AC%B4%EB%93%9C-%EC%97%90%EC%84%BC%EC%85%9C%EC%BC%80%EC%96%B4-%EB%A1%9C%EC%85%98-%EB%AF%B8%EC%9A%A9%ED%8B%B0%EC%8A%88-60%ED%95%A0%EC%9D%B8-P5n2QGkd?from=write",
+      "posted_at_utc": "2026-11-03T02:24:29+00:00",
+      "product_id": "9178799993",
+      "item_id": "27065106135",
+      "vendor_item_id": null,
+      "at": "2026-11-03T02:25:41.512979+00:00",
+      "run_id": "41565970666"
     }
   },
   "skipped_non_coupang": 8,
