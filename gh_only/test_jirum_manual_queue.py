@@ -11,7 +11,7 @@ from unittest.mock import patch
 from gh_only.jirum_manual_queue import (
     START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest,
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
-    freshness_status, expire_pending,
+    freshness_status, expire_pending, scan_with_source_wait,
 )
 
 
@@ -59,6 +59,39 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_event_waits_for_public_source_then_uses_existing_fifo(self):
+        store = FakeStore(baseline())
+        visible = {'status': 'READY_ONE', 'has_deal': True, 'last_scanned_id': 94904}
+        scanner = unittest.mock.Mock(side_effect=[
+            {'status': 'NO_NEW_COUPANG_DEAL', 'has_deal': False, 'last_scanned_id': 94903},
+            visible,
+        ])
+        sleeper = unittest.mock.Mock()
+        self.assertEqual(scan_with_source_wait(store, 94904, scanner=scanner, sleeper=sleeper), visible)
+        self.assertEqual(scanner.call_count, 2)
+        sleeper.assert_called_once_with(20)
+        self.assertEqual(store.writes, [])
+
+    def test_public_source_wait_is_bounded_and_never_dispatches_or_posts(self):
+        result = {'status': 'NO_NEW_COUPANG_DEAL', 'has_deal': False, 'last_scanned_id': 94903}
+        scanner = unittest.mock.Mock(return_value=result)
+        sleeper = unittest.mock.Mock()
+        self.assertEqual(scan_with_source_wait(None, 94904, scanner=scanner, sleeper=sleeper), result)
+        self.assertEqual(scanner.call_count, 4)
+        self.assertEqual(sleeper.call_count, 3)
+
+    def test_backup_or_review_locked_fifo_never_waits_for_source(self):
+        for expected, result in (
+            (0, {'status': 'NO_NEW_COUPANG_DEAL'}),
+            (94904, {'status': 'REVIEW_REQUIRED'}),
+            (94904, {'status': 'NO_NEW_COUPANG_DEAL', 'last_scanned_id': 94904}),
+        ):
+            scanner = unittest.mock.Mock(return_value=result)
+            sleeper = unittest.mock.Mock()
+            self.assertEqual(scan_with_source_wait(None, expected, scanner=scanner, sleeper=sleeper), result)
+            scanner.assert_called_once_with(None)
+            sleeper.assert_not_called()
+
     def test_schedule_trigger_runs_only_on_main_first_attempt(self):
         for event in ("schedule", "workflow_dispatch", "push"):
             with self.subTest(event=event), patch.dict(os.environ, {

@@ -74,14 +74,19 @@ def coupang_event(post: dict) -> bool:
     return False
 
 
-def workflow_dispatch(token: str, opener=None, *, smoke_test: bool = False) -> None:
+def workflow_dispatch(token: str, opener=None, *, smoke_test: bool = False,
+                      source_post_id: int | None = None) -> None:
     """Call the official Actions write endpoint; never log the credential."""
     if not token or any(x.isspace() for x in token):
         raise RuntimeError("GITHUB_DISPATCH_TOKEN_INVALID")
     payload_obj = {"ref": "main"}
+    if source_post_id is not None:
+        if type(source_post_id) is not int or not 0 < source_post_id < 2**31:
+            raise RuntimeError("GITHUB_SOURCE_POST_ID_INVALID")
+        payload_obj["inputs"] = {"source_post_id": str(source_post_id)}
     if smoke_test:
         # Explicit caller-only option for the safe no-publish API smoke job.
-        payload_obj["inputs"] = {"smoke_test": "true"}
+        payload_obj.setdefault("inputs", {})["smoke_test"] = "true"
     payload = dumps(payload_obj).encode("utf-8")
     req = request.Request(
         ENDPOINT,
@@ -108,7 +113,7 @@ class GitHubEventBridge:
         self.store = store
         self.token = token
         self.clock = clock or time.time
-        self.sender = sender or workflow_dispatch
+        self.sender = sender
         self.logger = logger or (lambda code, **fields: None)
         self.wake = asyncio.Event()
 
@@ -149,7 +154,10 @@ class GitHubEventBridge:
         with self.store.db:
             self.store.set(INFLIGHT_KEY, pending)
         try:
-            await asyncio.to_thread(self.sender, self.token)
+            if self.sender is None:
+                await asyncio.to_thread(workflow_dispatch, self.token, source_post_id=pending)
+            else:
+                await asyncio.to_thread(self.sender, self.token)
         except Exception as exc:
             # Report only a safe reason, not HTTP URLs, errors or credentials.
             label = "GITHUB_REQUEST_FAILED"

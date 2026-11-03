@@ -118,6 +118,20 @@ class DispatchHttpTests(unittest.TestCase):
         ):
             self.assertFalse(coupang_event(post(102, url)))
 
+    def test_source_id_is_forwarded_without_message_body_or_product_url(self):
+        class Response:
+            status = 204
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+        def opened(req, timeout):
+            self.assertEqual(json.loads(req.data), {
+                'ref': 'main', 'inputs': {'source_post_id': '94904'}})
+            return Response()
+        workflow_dispatch('fake-token', opener=opened, source_post_id=94904)
+        for bad in (True, 0, -1, '94904', 2**31):
+            with self.assertRaisesRegex(RuntimeError, 'GITHUB_SOURCE_POST_ID_INVALID'):
+                workflow_dispatch('fake-token', opener=opened, source_post_id=bad)
+
 
 class BridgeTests(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
@@ -228,6 +242,16 @@ class BridgeTests(unittest.IsolatedAsyncioTestCase):
         self.clock.advance(10000)
         self.assertFalse(await self.make_bridge().process_once())
         self.assertEqual(self.calls, [])
+
+    async def test_default_sender_passes_coalesced_id_to_github(self):
+        bridge = GitHubEventBridge(self.store, 'test-token', clock=self.clock)
+        bridge.observe(post(101))
+        bridge.observe(post(102))
+        self.clock.advance(21)
+        with patch('jirum_github_dispatch.workflow_dispatch') as dispatch:
+            self.assertTrue(await bridge.process_once())
+        dispatch.assert_called_once_with('test-token', source_post_id=102)
+        self.assertEqual(self.store.get(LAST_ACK_ID_KEY), 102)
 
 
 if __name__ == "__main__":

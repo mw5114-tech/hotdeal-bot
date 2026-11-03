@@ -8,6 +8,11 @@ on:
     - cron: '17,47 * * * *'
   workflow_dispatch:
     inputs:
+      source_post_id:
+        description: 'Oracle event post ID; wait briefly for public Telegram visibility'
+        required: false
+        default: ''
+        type: string
       smoke_test:
         description: 'Read-only dispatch handshake (never scan or publish)'
         required: false
@@ -75,6 +80,8 @@ jobs:
       # The test workflow validates changes before release.
       - name: Scan Telegram and persist FIFO cursor (stdlib only)
         id: scan
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_post_id || '' }}
         run: python -m gh_only.jirum_manual_queue scan
 
       - name: Restore Playwright browser cache only for an eligible deal

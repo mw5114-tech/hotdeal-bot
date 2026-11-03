@@ -78,6 +78,9 @@ tokens에서 발급하고 만료 전에 교체합니다. Contents 쓰기나 Work
 - 신호가 없으면 GitHub API를 호출하지 않습니다. 운영 SQLite에 pending/ack를
   보관하며, 수신 중 새 신호가 생겨도 잃지 않습니다.
 - 대상은 `daangn-jirum-manual-fifo.yml`, `ref=main`의 `workflow_dispatch`입니다.
+  감지한 최신 글 ID만 `source_post_id` 입력으로 전달하며 본문과 URL은 전달하지
+  않습니다. MTProto보다 공개 페이지 반영이 늦는 경우 기존 FIFO 스캐너가
+  20초 간격으로 최대 3번 추가 확인합니다. 긴 지연은 백업 cron이 담당합니다.
   상품 검증·60분 만료·게시 중복 방지는 기존 GitHub FIFO가 담당합니다.
 - 명시적인 4xx 거절(408 제외)은 180초 뒤 재시도합니다. 타임아웃·5xx·전송 중
   종료는 inflight를 유지하고 자동 재전송을 차단합니다. 실제 실행 기록과
