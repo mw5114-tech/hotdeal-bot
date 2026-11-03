@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94905,
-  "pending": [
-    {
-      "id": 94905,
-      "source_post_url": "https://t.me/jirum/94905",
-      "original_purchase_url": "https://link.coupang.com/a/imK6NFAmu4",
-      "source_text": "☆특가 2,375,100원 (6.2% 할인)\nLG전자 2025 그램 Pro AI 16 WQXGA Ultra7, 에센스 화이트, 512GB, 32GB, WIN11 Home\n📌 가격 현황\n- 정상가: 2,531,700원\n- 할인: 156,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imK6NFAmu4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T01:20:40+00:00",
-      "title": "LG전자 2025 그램 Pro AI 16 WQXGA Ultra7, 에센스 화이트, 512GB, 32GB, WIN11 Home",
-      "sale_price_krw": 2375100
-    }
-  ],
-  "in_flight": {
-    "id": 94905,
-    "status": "CLAIMED",
-    "run_id": "41559166944",
-    "at": "2026-11-03T01:21:29.106316+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -701,6 +686,16 @@
       "vendor_item_id": null,
       "at": "2026-11-02T23:42:59.231816+00:00",
       "run_id": "41547452853"
+    },
+    "94905": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-LG%EC%A0%84%EC%9E%90-2025-%EA%B7%B8%EB%9E%A8-Pro-AI-16-WQXGA-Ultra7-%EC%97%90%EC%84%BC%EC%8A%A4-%ED%99%94-dg3ONYwd?from=write",
+      "posted_at_utc": "2026-11-03T01:20:40+00:00",
+      "product_id": "8518435233",
+      "item_id": "24662380326",
+      "vendor_item_id": "91672792980",
+      "at": "2026-11-03T01:21:46.264548+00:00",
+      "run_id": "41559166944"
     }
   },
   "skipped_non_coupang": 8,
