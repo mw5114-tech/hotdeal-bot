@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94927,
-  "pending": [],
+  "last_scanned_id": 94928,
+  "pending": [
+    {
+      "id": 94928,
+      "source_post_url": "https://t.me/jirum/94928",
+      "original_purchase_url": "https://link.coupang.com/a/im7LI6zaBE",
+      "source_text": "☆특가 990원\n가와시마야 실리콘 고기 집게 27cm 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/im7LI6zaBE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T06:37:46+00:00",
+      "title": "☆특가 990원",
+      "sale_price_krw": 990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
