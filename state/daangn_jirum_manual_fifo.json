@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94909,
-  "pending": [
-    {
-      "id": 94909,
-      "source_post_url": "https://t.me/jirum/94909",
-      "original_purchase_url": "https://link.coupang.com/a/imOWnEsR0m",
-      "source_text": "☆특가 13,750원 (27.6% 할인)\n7D 건조망고, 80g, 5개입\n📌 가격 현황\n- 정상가: 19,000원\n- 할인: 5,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imOWnEsR0m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T02:14:17+00:00",
-      "title": "7D 건조망고, 80g, 5개입",
-      "sale_price_krw": 13750
-    }
-  ],
-  "in_flight": {
-    "id": 94909,
-    "status": "CLAIMED",
-    "run_id": "41564917844",
-    "at": "2026-11-03T02:15:29.235578+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -741,6 +726,16 @@
       "vendor_item_id": "3008436224",
       "at": "2026-11-03T02:06:56.057776+00:00",
       "run_id": "41563970154"
+    },
+    "94909": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-7D-%EA%B1%B4%EC%A1%B0%EB%A7%9D%EA%B3%A0-80g-5%EA%B0%9C%EC%9E%85-25%ED%95%A0%EC%9D%B8-dGGn63kd?from=write",
+      "posted_at_utc": "2026-11-03T02:14:17+00:00",
+      "product_id": "1485959652",
+      "item_id": "2551868982",
+      "vendor_item_id": "70544442350",
+      "at": "2026-11-03T02:15:45.045215+00:00",
+      "run_id": "41564917844"
     }
   },
   "skipped_non_coupang": 8,
