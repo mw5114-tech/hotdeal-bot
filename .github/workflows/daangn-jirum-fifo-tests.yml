@@ -3,6 +3,7 @@ name: Tests | Jirum manual FIFO (offline only)
 on:
   push:
     branches:
+      - codex/oracle-event-30min-backup-20261103
       - feat/daangn-body-discount-first-20261102
       - feat/muse-official-link-receipts-20261103
       - feat/daangn-post-then-muse-rewrite-20261103
@@ -122,3 +123,4 @@ jobs:
           PY
 
 # Offline tests only. No live websites, no scheduled checks, no publish.
+
