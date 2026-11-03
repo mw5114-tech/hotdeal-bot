@@ -1,0 +1,34 @@
+name: TEST read-only | Search-image fallback live runtime
+on:
+  push:
+    branches: [test/google-images-fallback-feasibility-20261104]
+    paths: ['.github/workflows/test-feature-search-runtime-20261104.yml']
+permissions: {contents: read}
+jobs:
+  runtime:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/search-image-fallback-20261104
+          persist-credentials: false
+      - name: Inspect live indexed fallback using production HTTP client
+        run: |
+          python3 - <<'PY'
+          from gh_only.search_product_photo import lookup_search_product_photo
+          cases=[
+          (94964,"닥터스베스트 글루코사민 콘드로이친 MSM 캡슐, 240정, 1개","202217052","23987208247"),
+          (94961,"풀무원 동치미냉면 4인분, 1.692kg, 2개","276993573","19233172478"),
+          (94960,"토종마을 국산 황기 절단, 300g, 1개","7141704232","17931956102"),
+          (94950,"연두 요리에센스 순, 830ml, 1개","8244245116","19390694529"),
+          ]
+          for sid,title,pid,iid in cases:
+           out=lookup_search_product_photo({"status":"EXACT_ITEM_IDENTIFIED","product_id":pid,"item_id":iid},title)
+           print("SEARCH_FALLBACK_RUNTIME sid="+str(sid)+" status="+out.get("status","")+
+                 " product_id_matched="+str(out.get("image_search_product_id_verified",False))+
+                 " source="+str(out.get("image_source",""))+
+                 " got_image="+str(bool(out.get("og_image"))))
+          print("NO_DAANGN_POST_NO_STATE_WRITE")
+          
+          PY
