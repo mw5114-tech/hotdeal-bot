@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94963,
-  "pending": [
-    {
-      "id": 94963,
-      "source_post_url": "https://t.me/jirum/94963",
-      "original_purchase_url": "https://link.coupang.com/a/iobQzZiczA",
-      "source_text": "🔥🔥🔥무지성 39,120원 (51.1% 할인)🔥🔥🔥\n헬시오리진스 피크노제놀 100mg 베지 캡슐 120정*1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 80,000원\n- 할인: 40,880원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iobQzZiczA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:02:26+00:00",
-      "title": "헬시오리진스 피크노제놀 100mg 베지 캡슐 120정*1개",
-      "sale_price_krw": 39120
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1598,6 +1588,12 @@
       "source_post_url": "https://t.me/jirum/94962",
       "source_title": "나우푸드 커큐브레인 400mg 베지 캡슐, 50정, 4개",
       "at": "2026-11-03T22:01:55.459493+00:00"
+    },
+    "94963": {
+      "status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
+      "source_post_url": "https://t.me/jirum/94963",
+      "source_title": "헬시오리진스 피크노제놀 100mg 베지 캡슐 120정*1개",
+      "at": "2026-11-03T22:03:36.573578+00:00"
     }
   },
   "single_test_repost_20261103": {
