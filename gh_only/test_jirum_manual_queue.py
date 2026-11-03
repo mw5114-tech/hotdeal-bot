@@ -577,7 +577,7 @@ class ManualQueueTests(unittest.TestCase):
                 "secret_fingerprint":kakao_secret_fingerprint(),
             }
         store = FakeStore(s)
-        recent = {"source_message_id":94745, "posted_at_utc":now.isoformat()}
+        recent = {**deal(94745), "posted_at_utc": now.isoformat()}
         with patch.dict(os.environ, {
             "JIRUM_IMAGE_SOURCE":"lowchart", "JIRUM_REQUIRE_FRESH_POST":"true"
         }), patch("gh_only.jirum_manual_queue.collect_since", return_value=[]), \
