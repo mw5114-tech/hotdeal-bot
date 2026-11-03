@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94915,
-  "pending": [],
+  "last_scanned_id": 94916,
+  "pending": [
+    {
+      "id": 94916,
+      "source_post_url": "https://t.me/jirum/94916",
+      "original_purchase_url": "https://link.coupang.com/a/imZ2pVYShE",
+      "source_text": "👍대박 13,850원 (32.0% 할인)\n로아커 웨하스 미니스 나폴리타너 디스펜서 50p\n📌 가격 현황\n- 정상가: 20,368원\n- 할인: 6,518원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imZ2pVYShE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T04:49:35+00:00",
+      "title": "로아커 웨하스 미니스 나폴리타너 디스펜서 50p",
+      "sale_price_krw": 13850
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
