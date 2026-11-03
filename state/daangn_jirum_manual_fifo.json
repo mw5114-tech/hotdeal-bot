@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94927,
-  "pending": [
-    {
-      "id": 94927,
-      "source_post_url": "https://t.me/jirum/94927",
-      "original_purchase_url": "https://link.coupang.com/a/im6PIcH8XA",
-      "source_text": "🔥🔥🔥무지성 27,240원 (51.0% 할인)🔥🔥🔥\n모던하우스 어반 2인조 식기 홈세트 12p 2세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 55,592원\n- 할인: 28,352원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im6PIcH8XA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T06:24:40+00:00",
-      "title": "모던하우스 어반 2인조 식기 홈세트 12p 2세트",
-      "sale_price_krw": 27240
-    }
-  ],
-  "in_flight": {
-    "id": 94927,
-    "status": "CLAIMED",
-    "run_id": "41589739873",
-    "at": "2026-11-03T06:25:35.334841+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -911,6 +896,16 @@
       "vendor_item_id": "4196409538",
       "at": "2026-11-03T06:15:40.717549+00:00",
       "run_id": "41588697171"
+    },
+    "94927": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%A8%EB%8D%98%ED%95%98%EC%9A%B0%EC%8A%A4-%EC%96%B4%EB%B0%98-2%EC%9D%B8%EC%A1%B0-%EC%8B%9D%EA%B8%B0-%ED%99%88%EC%84%B8%ED%8A%B8-12p-%EC%95%84%EC%9D%B4%EB%B3%B4%EB%A6%AC-%EA%B7%B8%EB%A0%88-25%ED%95%A0%EC%9D%B8-dQMY0Zbd?from=write",
+      "posted_at_utc": "2026-11-03T06:24:40+00:00",
+      "product_id": "8854066198",
+      "item_id": "25318850574",
+      "vendor_item_id": null,
+      "at": "2026-11-03T06:25:53.616377+00:00",
+      "run_id": "41589739873"
     }
   },
   "skipped_non_coupang": 9,
