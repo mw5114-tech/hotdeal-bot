@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94951,
-  "pending": [
-    {
-      "id": 94951,
-      "source_post_url": "https://t.me/jirum/94951",
-      "original_purchase_url": "https://link.coupang.com/a/inx5I1BBV6",
-      "source_text": "👍대박 16,900원 (36.0% 할인)\n어부심 산지직송 산채로 포장한 생물새우 1kg\n📌 가격 현황\n- 정상가: 26,406원\n- 할인: 9,506원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inx5I1BBV6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T12:46:06+00:00",
-      "title": "어부심 산지직송 산채로 포장한 생물새우 1kg",
-      "sale_price_krw": 16900
-    }
-  ],
-  "in_flight": {
-    "id": 94951,
-    "status": "CLAIMED",
-    "run_id": "41638584299",
-    "at": "2026-11-03T12:47:35.369717+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1131,6 +1116,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T12:32:26.781141+00:00",
       "run_id": "41636476622"
+    },
+    "94951": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%96%B4%EB%B6%80%EC%8B%AC-%EC%82%B0%EC%A7%80%EC%A7%81%EC%86%A1-%EC%82%B0%EC%B1%84%EB%A1%9C-%ED%8F%AC%EC%9E%A5%ED%95%9C-%EC%83%9D%EB%AC%BC%EC%83%88%EC%9A%B0-1kg3040%EB%AF%B8-35%ED%95%A0%EC%9D%B8-AraRpJoj?from=write",
+      "posted_at_utc": "2026-11-03T12:46:06+00:00",
+      "product_id": "7473580292",
+      "item_id": "19505948971",
+      "vendor_item_id": null,
+      "at": "2026-11-03T12:47:52.805122+00:00",
+      "run_id": "41638584299"
     }
   },
   "skipped_non_coupang": 10,
