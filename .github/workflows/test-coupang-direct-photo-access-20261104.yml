@@ -1,0 +1,122 @@
+name: TEST read-only | Coupang direct product image access
+on:
+  push:
+    branches:
+      - test/coupang-direct-photo-access-20261104
+    paths:
+      - '.github/workflows/test-coupang-direct-photo-access-20261104.yml'
+permissions:
+  contents: read
+jobs:
+  direct-photo-diagnostic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - name: Check two known Coupang product pages for accessible OG photos
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from html.parser import HTMLParser
+          from urllib import request, error
+          from urllib.parse import urlsplit
+          from html import unescape
+          
+          TESTS = [
+              {"telegram_id":94964, "product_id":"202217052",
+               "item_id":"23987208247", "vendor_id":"4548111478",
+               "label":"Lowchart-404 / current skipped item"},
+              {"telegram_id":94961, "product_id":"276993573",
+               "item_id":"19233172478", "vendor_id":"86349640420",
+               "label":"Known published comparison item"},
+          ]
+          AGENTS = [
+              ("desktop", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"),
+              ("mobile", "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"),
+          ]
+          class RestrictedRedirect(request.HTTPRedirectHandler):
+              def redirect_request(self, req, fp, code, msg, headers, newurl):
+                  u=urlsplit(newurl)
+                  if u.scheme!="https" or u.hostname not in {"coupang.com","www.coupang.com"}:
+                      return None
+                  return super().redirect_request(req,fp,code,msg,headers,newurl)
+          client=request.build_opener(RestrictedRedirect())
+          class ImageTags(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.metas={}
+              def handle_starttag(self,tag,attrs):
+                  if tag=="meta":
+                      d=dict(attrs)
+                      key=d.get("property") or d.get("name") or ""
+                      if key.lower() in ("og:image","twitter:image","og:title"):
+                          self.metas[key.lower()]=d.get("content","")
+          def image_host_ok(url):
+              try:
+                  u=urlsplit(url)
+                  return (u.scheme=="https"
+                      and u.hostname is not None
+                      and re.fullmatch(r"(?:thumbnail\d*|image)\.coupangcdn\.com",u.hostname) is not None)
+              except ValueError:
+                  return False
+          def probe_image(url):
+              result={"cdn_host":urlsplit(url).hostname}
+              if not image_host_ok(url):
+                  result["image_probe"]="not_allowed_cdn"
+                  return result
+              req=request.Request(url,headers={"User-Agent":AGENTS[0][1],"Accept":"image/*","Range":"bytes=0-2047"})
+              try:
+                  with request.urlopen(req,timeout=15) as resp:
+                      magic=resp.read(32)
+                      mime=resp.headers.get("Content-Type","")
+                      good=(magic.startswith(b"\xff\xd8\xff")
+                            or magic.startswith(b"\x89PNG\r\n\x1a\n")
+                            or (magic.startswith(b"RIFF") and magic[8:12]==b"WEBP"))
+                      result.update(image_probe="readable" if good else "not_image",
+                                    image_http=resp.status, mime=mime[:70],image_header_valid=good)
+              except error.HTTPError as e:
+                  result.update(image_probe="http_error",image_http=e.code)
+              except Exception as e:
+                  result.update(image_probe="network_error",error_type=type(e).__name__)
+              return result
+          for item in TESTS:
+              url=(f"https://www.coupang.com/vp/products/{item['product_id']}"
+                   f"?itemId={item['item_id']}&vendorItemId={item['vendor_id']}")
+              attempted=[]
+              for mode,ua in AGENTS:
+                  rec={"agent":mode}
+                  req=request.Request(url,headers={"User-Agent":ua,"Accept":"text/html,application/xhtml+xml",
+                      "Accept-Language":"ko-KR,ko;q=0.9,en;q=0.8"})
+                  try:
+                      with client.open(req,timeout=18) as resp:
+                          body=resp.read(2_000_001)
+                          rec["http"]=resp.status
+                          rec["final_host"]=urlsplit(resp.geturl()).hostname
+                          rec["html_bytes_read"]=len(body)
+                          rec["truncated"]=len(body)>2_000_000
+                          html=body.decode("utf-8","replace")
+                          p=ImageTags()
+                          p.feed(html)
+                          og=unescape(p.metas.get("og:image") or p.metas.get("twitter:image") or "")
+                          rec["og_image_present"]=bool(og)
+                          rec["coupang_cdn_mentions"]=len(re.findall(r"(?:thumbnail\d*|image)\.coupangcdn\.com",html))
+                          rec["challenge_present"]=any(t in html.lower() for t in
+                              ("access denied","captcha","사용권한이 없습니다","bot detection","403 forbidden"))
+                          if og:
+                              rec.update(probe_image(og))
+                  except error.HTTPError as e:
+                      rec.update(http=e.code, final_host=urlsplit(e.geturl()).hostname,
+                                 response_bytes=len(e.read(4096)))
+                  except Exception as e:
+                      rec.update(error_type=type(e).__name__,error_message=str(e)[:100])
+                  attempted.append(rec)
+                  if rec.get("image_probe")=="readable":
+                      break
+              print("COUPANG_DIRECT_IMAGE_PROBE "+json.dumps({
+                  "source_telegram_id":item["telegram_id"],"label":item["label"],
+                  "product_id":item["product_id"],"item_id":item["item_id"],
+                  "results":attempted,
+              },ensure_ascii=False))
+          print("TEST_COMPLETE_NO_CAFE_WRITE_NO_SECRETS_NO_AFFILIATE_ACTION")
+          
+          PY
