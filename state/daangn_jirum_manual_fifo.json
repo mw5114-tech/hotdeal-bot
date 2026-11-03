@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94971,
-  "pending": [
-    {
-      "id": 94971,
-      "source_post_url": "https://t.me/jirum/94971",
-      "original_purchase_url": "https://link.coupang.com/a/ioc30KUU6S",
-      "source_text": "👍대박 8,890원 (31.6% 할인)\n가그린 제로 구강청결제, 1.2L, 2개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 4,110원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioc30KUU6S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:19:28+00:00",
-      "title": "가그린 제로 구강청결제, 1.2L, 2개",
-      "sale_price_krw": 8890
-    }
-  ],
-  "in_flight": {
-    "id": 94971,
-    "status": "CLAIMED",
-    "run_id": "41729882204",
-    "at": "2026-11-03T22:20:32.875260+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1231,6 +1216,16 @@
       "vendor_item_id": "95522990867",
       "at": "2026-11-03T22:18:20.304248+00:00",
       "run_id": "41729418945"
+    },
+    "94971": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B0%80%EA%B7%B8%EB%A6%B0-%EC%A0%9C%EB%A1%9C-%EA%B5%AC%EA%B0%95%EC%B2%AD%EA%B2%B0%EC%A0%9C-12L-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-A4QV7aoP?from=write",
+      "posted_at_utc": "2026-11-03T22:19:28+00:00",
+      "product_id": "6671243928",
+      "item_id": "19026712612",
+      "vendor_item_id": "3073291162",
+      "at": "2026-11-03T22:20:49.635489+00:00",
+      "run_id": "41729882204"
     }
   },
   "skipped_non_coupang": 11,
