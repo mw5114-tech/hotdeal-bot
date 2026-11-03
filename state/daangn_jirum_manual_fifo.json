@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94957,
-  "pending": [
-    {
-      "id": 94957,
-      "source_post_url": "https://t.me/jirum/94957",
-      "original_purchase_url": "https://link.coupang.com/a/inEOjmXhOC",
-      "source_text": "☆특가 60,700원\n[27년형]일월 웜슬립 전자파 안심 탄소매트 전기장판 카본 전기요\n📦 특가 바로가기\nhttps://link.coupang.com/a/inEOjmXhOC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T14:20:08+00:00",
-      "title": "☆특가 60,700원",
-      "sale_price_krw": 60700
-    }
-  ],
-  "in_flight": {
-    "id": 94957,
-    "status": "CLAIMED",
-    "run_id": "41656024104",
-    "at": "2026-11-03T14:41:01.686525+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1151,6 +1136,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T12:49:15.395597+00:00",
       "run_id": "41638816445"
+    },
+    "94957": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-27%EB%85%84%ED%98%95%EC%9D%BC%EC%9B%94-%EC%9B%9C%EC%8A%AC%EB%A6%BD-%EC%A0%84%EC%9E%90%ED%8C%8C-%EC%95%88%EC%8B%AC-%ED%83%84%EC%86%8C%EB%A7%A4%ED%8A%B8-%EC%A0%84%EA%B8%B0%EC%9E%A5%ED%8C%90-%EC%B9%B4%EB%B3%B8-%EC%A0%84%EA%B8%B0%EC%9A%94-%EB%8D%94%EB%B8%942-dymvKv0d?from=write",
+      "posted_at_utc": "2026-11-03T14:20:08+00:00",
+      "product_id": "9749185330",
+      "item_id": "29225499077",
+      "vendor_item_id": null,
+      "at": "2026-11-03T14:41:20.906690+00:00",
+      "run_id": "41656024104"
     }
   },
   "skipped_non_coupang": 11,
