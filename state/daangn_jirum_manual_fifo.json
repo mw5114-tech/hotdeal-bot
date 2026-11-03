@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94965,
-  "pending": [
-    {
-      "id": 94965,
-      "source_post_url": "https://t.me/jirum/94965",
-      "original_purchase_url": "https://link.coupang.com/a/iocxGlzRJY",
-      "source_text": "🔥🔥🔥무지성 10,450원 (57.0% 할인)🔥🔥🔥\n나우푸드 커큐브레인 400mg 베지 캡슐\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,302원\n- 할인: 13,852원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocxGlzRJY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:12:10+00:00",
-      "title": "나우푸드 커큐브레인 400mg 베지 캡슐",
-      "sale_price_krw": 10450
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1610,6 +1600,12 @@
       "source_post_url": "https://t.me/jirum/94964",
       "source_title": "닥터스베스트 글루코사민 콘드로이친 MSM 캡슐, 240정, 1개",
       "at": "2026-11-03T22:04:50.667414+00:00"
+    },
+    "94965": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/94965",
+      "source_title": "나우푸드 커큐브레인 400mg 베지 캡슐",
+      "at": "2026-11-03T22:13:39.043568+00:00"
     }
   },
   "single_test_repost_20261103": {
