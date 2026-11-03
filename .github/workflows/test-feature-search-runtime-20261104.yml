@@ -30,19 +30,19 @@ jobs:
                  " source="+str(out.get("image_source",""))+
                  " got_image="+str(bool(out.get("og_image"))))
           from gh_only.search_product_photo import download_search_photo
-from pathlib import Path
-from tempfile import TemporaryDirectory
-positive=lookup_search_product_photo(
- {"status":"EXACT_ITEM_IDENTIFIED","product_id":"7141704232","item_id":"17931956102"},
- "토종마을 국산 황기 절단, 300g, 1개")
-if positive.get("status")=="SEARCH_VERIFIED_COUPANG_PRODUCT_IMAGE":
- with TemporaryDirectory() as tmp:
-  photo=download_search_photo(positive.get("og_image"),Path(tmp),94960)
-  print("SEARCH_IMAGE_DOWNLOAD_PROBE "+str({
-   "status":photo.get("status"),"image_source":photo.get("image_source"),
-   "bytes":photo.get("bytes"),"file_present":bool(photo.get("saved_name")) and
-    (Path(tmp)/photo.get("saved_name","")).is_file()
-  }))
-print("NO_DAANGN_POST_NO_STATE_WRITE")
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          positive=lookup_search_product_photo(
+           {"status":"EXACT_ITEM_IDENTIFIED","product_id":"7141704232","item_id":"17931956102"},
+           "토종마을 국산 황기 절단, 300g, 1개")
+          if positive.get("status")=="SEARCH_VERIFIED_COUPANG_PRODUCT_IMAGE":
+           with TemporaryDirectory() as tmp:
+            photo=download_search_photo(positive.get("og_image"),Path(tmp),94960)
+            print("SEARCH_IMAGE_DOWNLOAD_PROBE "+str({
+             "status":photo.get("status"),"image_source":photo.get("image_source"),
+             "bytes":photo.get("bytes"),"file_present":bool(photo.get("saved_name")) and
+              (Path(tmp)/photo.get("saved_name","")).is_file()
+            }))
+          print("NO_DAANGN_POST_NO_STATE_WRITE")
           
           PY
