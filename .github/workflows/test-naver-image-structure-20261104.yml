@@ -1,0 +1,38 @@
+name: TEST read-only | Naver image result structure
+on:
+  push:
+    branches: [test/google-images-fallback-feasibility-20261104]
+    paths: ['.github/workflows/test-naver-image-structure-20261104.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Inspect bounded image evidence for exact product IDs
+        run: |
+          python3 - <<'PY'
+          import json,re,html
+          from urllib import request
+          from urllib.parse import urlencode
+          
+          rows=[
+           ("94964","닥터스베스트 글루코사민 콘드로이친 MSM 캡슐 240정 1개","202217052","23987208247"),
+           ("94961","풀무원 동치미냉면 4인분 1.692kg 2개","276993573","19233172478"),
+          ]
+          for sid,title,pid,iid in rows:
+           url="https://search.naver.com/search.naver?"+urlencode({"where":"image","query":"쿠팡 "+title})
+           req=request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Accept-Language":"ko-KR,ko;q=0.9"})
+           try:
+            with request.urlopen(req,timeout=15) as resp:body=resp.read(800000).decode("utf-8","replace")
+            print("NAVER_CONTEXT_META "+json.dumps({"id":sid,"html_len":len(body),"product_id_mentions":body.count(pid),"item_id_mentions":body.count(iid),"image_host_mentions":body.count("coupangcdn.com")},ensure_ascii=False))
+            for token in (pid,iid,"coupangcdn.com"):
+             offsets=[m.start() for m in re.finditer(re.escape(token),body)]
+             for idx,pos in enumerate(offsets[:4]):
+              excerpt=body[max(0,pos-230):pos+220]
+              excerpt=excerpt.replace("\\u0026","&").replace("\\/","/")
+              print("NAVER_CONTEXT "+json.dumps({"id":sid,"token":token,"index":idx,"snippet":excerpt},ensure_ascii=False))
+           except Exception as exc:print("NAVER_ERROR "+str(type(exc).__name__))
+          print("NAVER_STRUCTURE_NO_POST")
+          
+          PY
