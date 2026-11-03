@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94916,
-  "pending": [
-    {
-      "id": 94916,
-      "source_post_url": "https://t.me/jirum/94916",
-      "original_purchase_url": "https://link.coupang.com/a/imZ2pVYShE",
-      "source_text": "👍대박 13,850원 (32.0% 할인)\n로아커 웨하스 미니스 나폴리타너 디스펜서 50p\n📌 가격 현황\n- 정상가: 20,368원\n- 할인: 6,518원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imZ2pVYShE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T04:49:35+00:00",
-      "title": "로아커 웨하스 미니스 나폴리타너 디스펜서 50p",
-      "sale_price_krw": 13850
-    }
-  ],
-  "in_flight": {
-    "id": 94916,
-    "status": "CLAIMED",
-    "run_id": "41580383904",
-    "at": "2026-11-03T04:50:29.527819+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -811,6 +796,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T04:27:40.893396+00:00",
       "run_id": "41578194715"
+    },
+    "94916": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EC%95%84%EC%BB%A4-%EC%9B%A8%ED%95%98%EC%8A%A4-%EB%AF%B8%EB%8B%88%EC%8A%A4-%EB%82%98%ED%8F%B4%EB%A6%AC%ED%83%80%EB%84%88-%EB%94%94%EC%8A%A4%ED%8E%9C%EC%84%9C-50p-500g-30%ED%95%A0%EC%9D%B8-Ara4Ez5j?from=write",
+      "posted_at_utc": "2026-11-03T04:49:35+00:00",
+      "product_id": "6346514992",
+      "item_id": "13336977848",
+      "vendor_item_id": null,
+      "at": "2026-11-03T04:50:46.648759+00:00",
+      "run_id": "41580383904"
     }
   },
   "skipped_non_coupang": 8,
