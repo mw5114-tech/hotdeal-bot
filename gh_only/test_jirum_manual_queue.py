@@ -1,5 +1,8 @@
 """Offline FIFO regression tests. Never contact Telegram, GitHub or Daangn."""
+import base64
 import copy
+import io
+from urllib import error
 import json
 import os
 from datetime import datetime, timedelta, timezone
@@ -12,6 +15,7 @@ from gh_only.jirum_manual_queue import (
     START_AFTER, SCHEMA, check_run_trigger, collect_since, finish, ingest,
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
     freshness_status, expire_pending, scan_with_source_wait,
+    archive_abandoned_claim, GithubState, STALE_CLAIM_SECONDS,
 )
 
 
@@ -59,6 +63,116 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_dead_claim_is_archived_and_next_deal_unblocked(self):
+        now = datetime.now(timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        s["pending"][0]["posted_at_utc"] = (now - timedelta(hours=2)).isoformat()
+        s["pending"][1]["posted_at_utc"] = (now - timedelta(minutes=2)).isoformat()
+        s["in_flight"] = {
+            "id": 94744, "status": "CLAIMED", "run_id": "failed-504",
+            "at": (now - timedelta(seconds=STALE_CLAIM_SECONDS + 60)).isoformat(),
+        }
+        store = FakeStore(s)
+        with patch.dict(os.environ, {"JIRUM_REQUIRE_FRESH_POST": "true"}):
+            with patch("gh_only.jirum_manual_queue.collect_since", return_value=[]):
+                result = scan(store)
+        self.assertEqual(result["status"], "READY_ONE")
+        self.assertEqual([x["id"] for x in store.value["pending"]], [94745])
+        self.assertIsNone(store.value["in_flight"])
+        self.assertNotIn("94744", store.value["published"])
+        audit = store.value["skipped_unverifiable"]["94744"]
+        self.assertEqual(audit["status"], "PUBLISH_OUTCOME_UNKNOWN_NO_RETRY")
+        self.assertTrue(audit["may_already_be_published"])
+        self.assertEqual(audit["claimed_run_id"], "failed-504")
+
+    def test_recent_unknown_future_claims_are_never_auto_released(self):
+        now = datetime.now(timezone.utc)
+        for claimed in (now.isoformat(), "invalid",
+                        (now + timedelta(minutes=3)).isoformat()):
+            s, _, _ = ingest(baseline(), [deal(94744)])
+            s["in_flight"] = {
+                "id": 94744, "status": "CLAIMED", "run_id": "active", "at": claimed,
+            }
+            store = FakeStore(s)
+            self.assertFalse(archive_abandoned_claim(store, reference=now))
+            self.assertEqual(store.writes, [])
+            self.assertIsNotNone(store.value["in_flight"])
+
+    def test_claim_quarantine_is_idempotent_and_preserves_audit(self):
+        now = datetime.now(timezone.utc)
+        s, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        s["in_flight"] = {
+            "id": 94744, "status": "REVIEW_REQUIRED", "run_id": "old-run",
+            "at": (now - timedelta(hours=2)).isoformat(),
+        }
+        store = FakeStore(s)
+        self.assertTrue(archive_abandoned_claim(store, reference=now))
+        self.assertFalse(archive_abandoned_claim(store, reference=now))
+        self.assertEqual(len(store.writes), 1)
+        self.assertEqual([r["id"] for r in store.value["pending"]], [94745])
+        validate_state(store.value)
+
+    def test_read_retries_504_then_succeeds(self):
+        state = baseline()
+        encoded = base64.b64encode(json.dumps(state).encode()).decode()
+        response = io.BytesIO(json.dumps({
+            "type": "file", "sha": "sha-test", "content": encoded,
+        }).encode())
+        failure = error.HTTPError("https://api.github.com", 504, "Gateway Timeout", {}, None)
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",
+                                     "GH_STATE_TOKEN": "fake-test-token"}):
+            with patch("gh_only.jirum_manual_queue.request.urlopen",
+                       side_effect=[failure, response]) as opener:
+                with patch("gh_only.jirum_manual_queue.time.sleep") as sleeper:
+                    result, sha = GithubState().read()
+        self.assertEqual(result, state)
+        self.assertEqual(sha, "sha-test")
+        self.assertEqual(opener.call_count, 2)
+        sleeper.assert_called_once()
+
+    def test_read_never_retries_404(self):
+        failure = error.HTTPError("https://api.github.com", 404, "Not Found", {}, None)
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",
+                                     "GH_STATE_TOKEN": "fake-test-token"}):
+            with patch("gh_only.jirum_manual_queue.request.urlopen",
+                       side_effect=failure) as opener:
+                with self.assertRaises(error.HTTPError):
+                    GithubState().read()
+        opener.assert_called_once()
+
+    def test_ambiguous_put_checks_server_and_does_not_reissue_put(self):
+        state = baseline()
+        encoded = base64.b64encode(json.dumps(state).encode()).decode()
+        response = io.BytesIO(json.dumps({
+            "type": "file", "sha": "committed", "content": encoded,
+        }).encode())
+        failure = error.HTTPError("https://api.github.com", 504, "Gateway Timeout", {}, None)
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",
+                                     "GH_STATE_TOKEN": "fake-test-token"}):
+            with patch("gh_only.jirum_manual_queue.request.urlopen",
+                       side_effect=[failure, response]) as opener:
+                GithubState().write(state, "sha-old", "checkpoint test")
+        self.assertEqual([call.args[0].get_method() for call in opener.call_args_list],
+                         ["PUT", "GET"])
+
+    def test_unconfirmed_put_never_blindly_retries(self):
+        state = baseline()
+        different = baseline()
+        different["last_scanned_id"] += 1
+        encoded = base64.b64encode(json.dumps(different).encode()).decode()
+        response = io.BytesIO(json.dumps({
+            "type": "file", "sha": "different", "content": encoded,
+        }).encode())
+        failure = error.HTTPError("https://api.github.com", 500, "Server Error", {}, None)
+        with patch.dict(os.environ, {"GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",
+                                     "GH_STATE_TOKEN": "fake-test-token"}):
+            with patch("gh_only.jirum_manual_queue.request.urlopen",
+                       side_effect=[failure, response]) as opener:
+                with self.assertRaisesRegex(RuntimeError, "STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY"):
+                    GithubState().write(state, "sha-old", "checkpoint test")
+        self.assertEqual([call.args[0].get_method() for call in opener.call_args_list],
+                         ["PUT", "GET"])
+
     def test_event_waits_for_public_source_then_uses_existing_fifo(self):
         store = FakeStore(baseline())
         visible = {'status': 'READY_ONE', 'has_deal': True, 'last_scanned_id': 94904}
