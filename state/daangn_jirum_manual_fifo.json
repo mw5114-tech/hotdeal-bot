@@ -1,15 +1,15 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94955,
+  "last_scanned_id": 94957,
   "pending": [
     {
-      "id": 94955,
-      "source_post_url": "https://t.me/jirum/94955",
-      "original_purchase_url": "https://link.coupang.com/a/inzBkF1VLg",
-      "source_text": "👍대박 5,600원 (37.0% 할인)\n오설록 제주 순수녹차 20개입\n📌 가격 현황\n- 정상가: 8,889원\n- 할인: 3,289원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inzBkF1VLg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T13:07:14+00:00",
-      "title": "오설록 제주 순수녹차 20개입",
-      "sale_price_krw": 5600
+      "id": 94957,
+      "source_post_url": "https://t.me/jirum/94957",
+      "original_purchase_url": "https://link.coupang.com/a/inEOjmXhOC",
+      "source_text": "☆특가 60,700원\n[27년형]일월 웜슬립 전자파 안심 탄소매트 전기장판 카본 전기요\n📦 특가 바로가기\nhttps://link.coupang.com/a/inEOjmXhOC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T14:20:08+00:00",
+      "title": "☆특가 60,700원",
+      "sale_price_krw": 60700
     }
   ],
   "in_flight": null,
@@ -1478,6 +1478,20 @@
       "source_title": "☆특가 10,030원",
       "posted_at_utc": "2026-11-03T00:08:36+00:00",
       "at": "2026-11-03T01:21:15.127737+00:00"
+    },
+    "94955": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94955",
+      "source_title": "오설록 제주 순수녹차 20개입",
+      "posted_at_utc": "2026-11-03T13:07:14+00:00",
+      "at": "2026-11-03T14:40:45.461242+00:00"
+    },
+    "94956": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94956",
+      "source_title": "이니스프리 화산송이 모공 바하 클렌징 폼, 150g, 2개",
+      "posted_at_utc": "2026-11-03T13:11:15+00:00",
+      "at": "2026-11-03T14:40:45.461251+00:00"
     }
   },
   "skipped_unverifiable": {
