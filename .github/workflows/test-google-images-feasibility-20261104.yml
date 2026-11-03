@@ -59,3 +59,47 @@ jobs:
           print("TEST_ONLY_NO_POST_NO_PRODUCTION_WRITE")
           
           PY
+
+      - name: Install headless browser for Google Images result test
+        run: |
+          python3 -m pip install --quiet playwright==1.64.1
+          python3 -m playwright install --with-deps chromium
+      - name: Try Google Images in headless Chromium only
+        run: |
+          python3 - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from urllib.parse import quote_plus
+          import json,re
+          
+          cases=[
+           ("94964","닥터스베스트 글루코사민 콘드로이친 MSM 캡슐 240정 1개"),
+           ("94961","풀무원 동치미냉면 4인분 1.692kg 2개"),
+          ]
+          with sync_playwright() as p:
+           browser=p.chromium.launch(headless=True)
+           page=browser.new_page(locale="ko-KR",viewport={"width":1365,"height":900})
+           for sid,title in cases:
+            for prefix in ("https://www.google.com/search?tbm=isch&q=",
+                           "https://www.google.com/search?udm=2&q="):
+             query= "쿠팡 "+title
+             result={"sid":sid,"route":prefix.split("?")[1].split("=")[0]}
+             try:
+              resp=page.goto(prefix+quote_plus(query),wait_until="domcontentloaded",timeout=26000)
+              page.wait_for_timeout(2500)
+              result.update(status=resp.status if resp else None,url_host=page.url.split("/")[2],
+                 title=page.title()[:110],
+                 html_len=len(page.content()),
+                 img_count=page.locator("img").count(),
+                 image_candidates=page.locator('img[src*="gstatic"], img[src*="coupangcdn"]').count(),
+                 links=page.locator("a").count(),
+                 captcha=page.locator('iframe[src*="recaptcha"]').count(),
+                 text_start=(page.locator("body").inner_text(timeout=5000) or "")[:200],
+                 snippets=page.locator("img").evaluate_all(
+                   "imgs=>imgs.slice(0,6).map(el=>({alt:(el.alt||'').slice(0,100), src_host:(()=>{try{return new URL(el.src).hostname}catch{return ''}})(),w:el.naturalWidth,h:el.naturalHeight}))"),
+              )
+             except Exception as exc:result["error"]=type(exc).__name__+":"+str(exc)[:120]
+             print("GOOGLE_BROWSER_IMAGE_FEASIBILITY "+json.dumps(result,ensure_ascii=False))
+           browser.close()
+          print("BROWSER_PROBE_DONE_NO_POST")
+          
+          PY
