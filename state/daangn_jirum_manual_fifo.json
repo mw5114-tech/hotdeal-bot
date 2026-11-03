@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94958,
-  "pending": [
-    {
-      "id": 94958,
-      "source_post_url": "https://t.me/jirum/94958",
-      "original_purchase_url": "https://link.coupang.com/a/inIGPLCODk",
-      "source_text": "☆특가 11,960원 (26.1% 할인)\n풀무원 평양 물냉면 4인분, 1.692kg, 2개\n📌 가격 현황\n- 정상가: 16,180원\n- 할인: 4,220원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inIGPLCODk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T15:14:25+00:00",
-      "title": "풀무원 평양 물냉면 4인분, 1.692kg, 2개",
-      "sale_price_krw": 11960
-    }
-  ],
-  "in_flight": {
-    "id": 94958,
-    "status": "CLAIMED",
-    "run_id": "41661922391",
-    "at": "2026-11-03T15:15:34.102420+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1161,6 +1146,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T14:41:20.906690+00:00",
       "run_id": "41656024104"
+    },
+    "94958": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%ED%8F%89%EC%96%91-%EB%AC%BC%EB%83%89%EB%A9%B4-4%EC%9D%B8%EB%B6%84-1692kg-2%EA%B0%9C-PNDygEzj?from=write",
+      "posted_at_utc": "2026-11-03T15:14:25+00:00",
+      "product_id": "111268957",
+      "item_id": "19233094153",
+      "vendor_item_id": "86349564192",
+      "at": "2026-11-03T15:15:50.659184+00:00",
+      "run_id": "41661922391"
     }
   },
   "skipped_non_coupang": 11,
