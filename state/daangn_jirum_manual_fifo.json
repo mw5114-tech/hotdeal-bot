@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94916,
-  "pending": [],
+  "last_scanned_id": 94917,
+  "pending": [
+    {
+      "id": 94917,
+      "source_post_url": "https://t.me/jirum/94917",
+      "original_purchase_url": "https://link.coupang.com/a/im0fSsFhXE",
+      "source_text": "☆특가 10,620원\n빼빼로 혼합 10p 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/im0fSsFhXE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T04:52:37+00:00",
+      "title": "☆특가 10,620원",
+      "sale_price_krw": 10620
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
