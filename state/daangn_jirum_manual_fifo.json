@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94968,
-  "pending": [
-    {
-      "id": 94968,
-      "source_post_url": "https://t.me/jirum/94968",
-      "original_purchase_url": "https://link.coupang.com/a/iocGSc3wlw",
-      "source_text": "❤️초대박 5,250원 (43.0% 할인)\n[로켓프레시] 벌키니 닭 안심 오리지널 (냉동) 5개\n📌 가격 현황\n- 정상가: 9,211원\n- 할인: 3,961원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocGSc3wlw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:14:14+00:00",
-      "title": "[로켓프레시] 벌키니 닭 안심 오리지널 (냉동) 5개",
-      "sale_price_krw": 5250
-    }
-  ],
-  "in_flight": {
-    "id": 94968,
-    "status": "CLAIMED",
-    "run_id": "41729037330",
-    "at": "2026-11-03T22:15:22.773219+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1200,6 +1185,16 @@
       "item_id": "24929647810",
       "vendor_item_id": null,
       "at": "2026-11-03T22:15:12.369311+00:00",
+      "run_id": "41729037330"
+    },
+    "94968": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B2%8C%ED%82%A4%EB%8B%88-%EB%8B%AD-%EC%95%88%EC%8B%AC-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%83%89%EB%8F%99-100g-5%EA%B0%9C-1%EA%B0%9C%EC%9E%85-50%ED%95%A0%EC%9D%B8-PmVY84Xd?from=write",
+      "posted_at_utc": "2026-11-03T22:14:14+00:00",
+      "product_id": "9517516544",
+      "item_id": "28368748668",
+      "vendor_item_id": null,
+      "at": "2026-11-03T22:15:38.771368+00:00",
       "run_id": "41729037330"
     }
   },
