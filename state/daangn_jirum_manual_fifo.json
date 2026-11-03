@@ -3,15 +3,6 @@
   "last_scanned_id": 94955,
   "pending": [
     {
-      "id": 94954,
-      "source_post_url": "https://t.me/jirum/94954",
-      "original_purchase_url": "https://link.coupang.com/a/inyyQGMtzx",
-      "source_text": "👍대박 8,300원 (34.0% 할인)\n동서식품 미떼 핫초코 미니 오리지널 40개입\n📌 가격 현황\n- 정상가: 12,576원\n- 할인: 4,276원\n📦 특가 바로가기\nhttps://link.coupang.com/a/inyyQGMtzx\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T12:52:41+00:00",
-      "title": "동서식품 미떼 핫초코 미니 오리지널 40개입",
-      "sale_price_krw": 8300
-    },
-    {
       "id": 94955,
       "source_post_url": "https://t.me/jirum/94955",
       "original_purchase_url": "https://link.coupang.com/a/inzBkF1VLg",
@@ -21,12 +12,7 @@
       "sale_price_krw": 5600
     }
   ],
-  "in_flight": {
-    "id": 94954,
-    "status": "CLAIMED",
-    "run_id": "41641577350",
-    "at": "2026-11-03T13:08:07.896815+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1536,6 +1522,16 @@
       "source_post_url": "https://t.me/jirum/94928",
       "source_title": "☆특가 990원",
       "at": "2026-11-03T06:38:59.584781+00:00"
+    },
+    "94954": {
+      "status": "PUBLISH_OUTCOME_UNKNOWN_NO_RETRY",
+      "source_post_url": "https://t.me/jirum/94954",
+      "source_title": "동서식품 미떼 핫초코 미니 오리지널 40개입",
+      "claimed_run_id": "41641577350",
+      "claimed_at": "2026-11-03T13:08:07.896815+00:00",
+      "previous_claim_status": "CLAIMED",
+      "may_already_be_published": true,
+      "at": "2026-11-03T14:40:42.997998+00:00"
     }
   },
   "single_test_repost_20261103": {
