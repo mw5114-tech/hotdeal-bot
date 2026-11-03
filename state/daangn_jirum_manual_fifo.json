@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94975,
-  "pending": [
-    {
-      "id": 94975,
-      "source_post_url": "https://t.me/jirum/94975",
-      "original_purchase_url": "https://link.coupang.com/a/iofnG65WFM",
-      "source_text": "☆특가 9,700원\n바디인솔 프리미엄 무지 중목 양말 20켤레\n📦 특가 바로가기\nhttps://link.coupang.com/a/iofnG65WFM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:51:53+00:00",
-      "title": "☆특가 9,700원",
-      "sale_price_krw": 9700
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1698,6 +1688,12 @@
       "source_post_url": "https://t.me/jirum/94972",
       "source_title": "닥터스베스트 글루코사민 콘드로이친 MSM 캡슐, 120정, 2개",
       "at": "2026-11-03T22:24:39.696936+00:00"
+    },
+    "94975": {
+      "status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
+      "source_post_url": "https://t.me/jirum/94975",
+      "source_title": "☆특가 9,700원",
+      "at": "2026-11-03T22:53:02.075950+00:00"
     }
   },
   "single_test_repost_20261103": {
