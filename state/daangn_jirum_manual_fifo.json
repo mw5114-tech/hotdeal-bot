@@ -1,7 +1,35 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94965,
-  "pending": [],
+  "last_scanned_id": 94968,
+  "pending": [
+    {
+      "id": 94966,
+      "source_post_url": "https://t.me/jirum/94966",
+      "original_purchase_url": "https://link.coupang.com/a/iocCZpb7sW",
+      "source_text": "👍대박 6,000원 (38.0% 할인)\n곡물그대로21 크리스피롤 650g\n📌 가격 현황\n- 정상가: 9,677원\n- 할인: 3,677원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocCZpb7sW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:13:22+00:00",
+      "title": "곡물그대로21 크리스피롤 650g",
+      "sale_price_krw": 6000
+    },
+    {
+      "id": 94967,
+      "source_post_url": "https://t.me/jirum/94967",
+      "original_purchase_url": "https://link.coupang.com/a/iocDy7wVae",
+      "source_text": "🔥🔥🔥무지성 20,460원 (54.5% 할인)🔥🔥🔥\n닥터스베스트 글루코사민 콘드로이친 MSM 캡슐, 360정, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 45,000원\n- 할인: 24,540원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocDy7wVae\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:13:29+00:00",
+      "title": "닥터스베스트 글루코사민 콘드로이친 MSM 캡슐, 360정, 1개",
+      "sale_price_krw": 20460
+    },
+    {
+      "id": 94968,
+      "source_post_url": "https://t.me/jirum/94968",
+      "original_purchase_url": "https://link.coupang.com/a/iocGSc3wlw",
+      "source_text": "❤️초대박 5,250원 (43.0% 할인)\n[로켓프레시] 벌키니 닭 안심 오리지널 (냉동) 5개\n📌 가격 현황\n- 정상가: 9,211원\n- 할인: 3,961원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iocGSc3wlw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T22:14:14+00:00",
+      "title": "[로켓프레시] 벌키니 닭 안심 오리지널 (냉동) 5개",
+      "sale_price_krw": 5250
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
