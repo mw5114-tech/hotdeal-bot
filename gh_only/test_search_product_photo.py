@@ -64,6 +64,14 @@ class ImageSearchFallbackTests(unittest.TestCase):
         r = parse_naver_image_results(page(other), ITEM, NAME)
         self.assertEqual(r["status"], "SEARCH_EXACT_PRODUCT_AND_OPTION_NOT_FOUND")
 
+    def test_indexed_explicit_wrong_item_or_vendor_id_never_used(self):
+        wrong_item = {**RESULT, "link": RESULT["link"] + "?itemId=99999999"}
+        self.assertEqual(parse_naver_image_results(
+            page(wrong_item), ITEM, NAME)["status"], "SEARCH_EXACT_PRODUCT_AND_OPTION_NOT_FOUND")
+        wrong_vendor = {**RESULT, "link": RESULT["link"] + "?vendorItemId=99999999"}
+        self.assertEqual(parse_naver_image_results(
+            page(wrong_vendor), ITEM, NAME)["status"], "SEARCH_EXACT_PRODUCT_AND_OPTION_NOT_FOUND")
+
     def test_other_package_count_never_used(self):
         other = {**RESULT, "title": RESULT["title"].replace("1개", "3개")}
         r = parse_naver_image_results(page(other), ITEM, NAME)
