@@ -56,6 +56,8 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
+      # If Lowchart lacks a photo, try a bounded public image index with an exact Coupang product ID.
+      JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK: 'true'
       JIRUM_REQUIRE_FRESH_POST: 'true'
       # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
       # This is a locally composed candidate, not an officially issued shortlink.
