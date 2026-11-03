@@ -1595,10 +1595,13 @@
     "completed_at": "2026-11-02T21:53:06.320034+00:00"
   },
   "single_test_repost_20261104": {
-    "status": "CLAIMED",
+    "status": "PUBLISHED_TEST_VERIFIED",
     "source_id": 94961,
     "run_id": "41723395015",
     "original_post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EB%8F%99%EC%B9%98%EB%AF%B8%EB%83%89%EB%A9%B4-4%EC%9D%B8%EB%B6%84-1692kg-2%EA%B0%9C-PM0JekaA?from=write",
-    "claimed_at": "2026-11-03T21:37:38.927094+00:00"
+    "claimed_at": "2026-11-03T21:37:38.927094+00:00",
+    "result": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+    "test_post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EB%8F%99%EC%B9%98%EB%AF%B8%EB%83%89%EB%A9%B4-4%EC%9D%B8%EB%B6%84-1692kg-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dGGXgV3d?from=write",
+    "completed_at": "2026-11-03T21:37:55.497252+00:00"
   }
 }
