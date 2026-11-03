@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94911,
-  "pending": [
-    {
-      "id": 94911,
-      "source_post_url": "https://t.me/jirum/94911",
-      "original_purchase_url": "https://link.coupang.com/a/imRWiF883U",
-      "source_text": "🔥🔥🔥무지성 1,560원 (58.0% 할인)🔥🔥🔥\n해표 순알콩 국간장 840ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 3,714원\n- 할인: 2,154원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imRWiF883U\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T02:56:15+00:00",
-      "title": "해표 순알콩 국간장 840ml",
-      "sale_price_krw": 1560
-    }
-  ],
-  "in_flight": {
-    "id": 94911,
-    "status": "CLAIMED",
-    "run_id": "41569216891",
-    "at": "2026-11-03T02:57:24.924009+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -761,6 +746,16 @@
       "vendor_item_id": null,
       "at": "2026-11-03T02:25:41.512979+00:00",
       "run_id": "41565970666"
+    },
+    "94911": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%91%9C-%EC%88%9C%EC%95%8C%EC%BD%A9-%EA%B5%AD%EA%B0%84%EC%9E%A5-1%EA%B0%9C-840ml-45%ED%95%A0%EC%9D%B8-dym7O9ed?from=write",
+      "posted_at_utc": "2026-11-03T02:56:15+00:00",
+      "product_id": "8904044754",
+      "item_id": "26003071747",
+      "vendor_item_id": null,
+      "at": "2026-11-03T02:57:40.813295+00:00",
+      "run_id": "41569216891"
     }
   },
   "skipped_non_coupang": 8,
