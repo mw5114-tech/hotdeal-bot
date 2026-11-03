@@ -1,0 +1,37 @@
+name: TEST read-only | Naver indexed image records
+on:
+  push:
+    branches: [test/google-images-fallback-feasibility-20261104]
+    paths: ['.github/workflows/test-naver-items-json-20261104.yml']
+permissions: {contents: read}
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Decode bounded source-image search records
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from urllib import request
+          from urllib.parse import urlencode
+          cases=[
+           ("94964","닥터스베스트 글루코사민 콘드로이친 MSM 캡슐 240정 1개","202217052"),
+           ("94961","풀무원 동치미냉면 4인분 1.692kg 2개","276993573"),
+          ]
+          for sid,title,pid in cases:
+           for suffix in (""," "+pid):
+            url="https://search.naver.com/search.naver?"+urlencode({"where":"image","query":"쿠팡 "+title+suffix})
+            req=request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Accept-Language":"ko-KR,ko;q=0.9"})
+            with request.urlopen(req,timeout=15) as resp:html=resp.read(900000).decode("utf-8","replace")
+            print("NAVER_ITEMS_SUMMARY "+json.dumps({"id":sid,"by_id":bool(suffix),"len":len(html),"exact_id_mentions":html.count(pid)},ensure_ascii=False))
+            matches=list(re.finditer(r"\bitems:\s*(\[\{)",html))
+            print("NAVER_ITEMS_ARRAYS "+str(len(matches)))
+            for match in matches[:3]:
+             try:
+              data,end=json.JSONDecoder().raw_decode(html[match.start(1):])
+              print("NAVER_ITEMS_PARSED "+json.dumps({"id":sid,"by_id":bool(suffix),"array_len":len(data),"sample":[{"title":row.get("title"),"link":row.get("link"),"original_url_host":str(row.get("originalUrl","")).split("/")[2] if "/" in str(row.get("originalUrl","")) else None,"original_url_tail":str(row.get("originalUrl",""))[-80:]}for row in data[:8]]},ensure_ascii=False))
+             except Exception as exc:print("NAVER_ITEMS_PARSE_FAIL "+str(type(exc).__name__)+":"+str(exc)[:80])
+          print("END_NO_POST")
+          
+          PY
