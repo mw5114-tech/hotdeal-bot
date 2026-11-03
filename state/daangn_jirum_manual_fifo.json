@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94934,
-  "pending": [
-    {
-      "id": 94934,
-      "source_post_url": "https://t.me/jirum/94934",
-      "original_purchase_url": "https://link.coupang.com/a/ineAx5ICbY",
-      "source_text": "❤️초대박 77,600원 (40.3% 할인)\n(와멤데 쿠폰) 삼성전자 갤럭시 버즈3 FE 블루투스 이어폰\n📌 가격 현황\n- 정상가: 130,000원\n- 할인: 52,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ineAx5ICbY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T08:13:11+00:00",
-      "title": "(와멤데 쿠폰) 삼성전자 갤럭시 버즈3 FE 블루투스 이어폰",
-      "sale_price_krw": 77600
-    }
-  ],
-  "in_flight": {
-    "id": 94934,
-    "status": "CLAIMED",
-    "run_id": "41601731136",
-    "at": "2026-11-03T08:14:20.392282+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -971,6 +956,16 @@
       "vendor_item_id": "88370429633",
       "at": "2026-11-03T08:02:29.599961+00:00",
       "run_id": "41600273130"
+    },
+    "94934": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-%EA%B0%A4%EB%9F%AD%EC%8B%9C-%EB%B2%84%EC%A6%883-FE-%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4-%EC%9D%B4%EC%96%B4%ED%8F%B0-SM-R420N-45%ED%95%A0%EC%9D%B8-d9Xx71eP?from=write",
+      "posted_at_utc": "2026-11-03T08:13:11+00:00",
+      "product_id": "9019055318",
+      "item_id": "26442741419",
+      "vendor_item_id": "93418323317",
+      "at": "2026-11-03T08:14:36.499807+00:00",
+      "run_id": "41601731136"
     }
   },
   "skipped_non_coupang": 9,
