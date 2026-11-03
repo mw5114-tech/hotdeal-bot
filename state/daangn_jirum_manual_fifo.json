@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94941,
-  "pending": [
-    {
-      "id": 94941,
-      "source_post_url": "https://t.me/jirum/94941",
-      "original_purchase_url": "https://link.coupang.com/a/ino8xLBRhk",
-      "source_text": "🔥🔥🔥무지성 3,740원 (49.0% 할인)🔥🔥🔥\n[로켓프레시] 면사랑 간짜장 소스 3개입 (냉동)\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,333원\n- 할인: 3,593원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ino8xLBRhk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T10:40:48+00:00",
-      "title": "[로켓프레시] 면사랑 간짜장 소스 3개입 (냉동)",
-      "sale_price_krw": 3740
-    }
-  ],
-  "in_flight": {
-    "id": 94941,
-    "status": "CLAIMED",
-    "run_id": "41621368403",
-    "at": "2026-11-03T10:42:02.511097+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1041,6 +1026,16 @@
       "vendor_item_id": "91302414392",
       "at": "2026-11-03T10:23:21.884649+00:00",
       "run_id": "41618761655"
+    },
+    "94941": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A9%B4%EC%82%AC%EB%9E%91-%EA%B0%84%EC%A7%9C%EC%9E%A5-%EC%86%8C%EC%8A%A4-3%EA%B0%9C%EC%9E%85-%EB%83%89%EB%8F%99-540g-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PNDyKYmj?from=write",
+      "posted_at_utc": "2026-11-03T10:40:48+00:00",
+      "product_id": "9595724426",
+      "item_id": "28645336884",
+      "vendor_item_id": null,
+      "at": "2026-11-03T10:42:19.328013+00:00",
+      "run_id": "41621368403"
     }
   },
   "skipped_non_coupang": 9,
