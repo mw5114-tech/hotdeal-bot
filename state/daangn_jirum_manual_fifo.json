@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94962,
-  "pending": [
-    {
-      "id": 94962,
-      "source_post_url": "https://t.me/jirum/94962",
-      "original_purchase_url": "https://link.coupang.com/a/iobJO5SIiy",
-      "source_text": "🔥🔥🔥무지성 36,970원 (53.8% 할인)🔥🔥🔥\n나우푸드 커큐브레인 400mg 베지 캡슐, 50정, 4개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 80,000원\n- 할인: 43,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iobJO5SIiy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-03T22:00:55+00:00",
-      "title": "나우푸드 커큐브레인 400mg 베지 캡슐, 50정, 4개",
-      "sale_price_krw": 36970
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1592,6 +1582,12 @@
       "source_post_url": "https://t.me/jirum/94959",
       "source_title": "G7 퓨어블랙 원두커피믹스, 2g, 200개입, 1개",
       "at": "2026-11-03T15:23:40.216537+00:00"
+    },
+    "94962": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/94962",
+      "source_title": "나우푸드 커큐브레인 400mg 베지 캡슐, 50정, 4개",
+      "at": "2026-11-03T22:01:55.459493+00:00"
     }
   },
   "single_test_repost_20261103": {
