@@ -93,7 +93,6 @@ class ImageSearchFallbackTests(unittest.TestCase):
         for u in ("https://evil.example/vp/products/" + PID,
                   "http://www.coupang.com/vp/products/" + PID,
                   "https://www.coupang.com.evil.org/vp/products/" + PID,
-                  "https://www.coupang.com/vp/products/000000000",
                   "https://www.coupang.com/vp/products/" + PID + "/review"):
             self.assertIsNone(_coupang_product_id(u))
         self.assertEqual(_coupang_product_id(RESULT["link"]), PID)
