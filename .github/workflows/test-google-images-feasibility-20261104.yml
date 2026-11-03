@@ -103,3 +103,48 @@ jobs:
           print("BROWSER_PROBE_DONE_NO_POST")
           
           PY
+
+      - name: Compare public alternative image indexes (read only)
+        run: |
+          python3 - <<'PY'
+          import json,re
+          from html.parser import HTMLParser
+          from urllib import request,error
+          from urllib.parse import urlencode,urlsplit
+          
+          class Parser(HTMLParser):
+           def __init__(self):
+            super().__init__();self.img=[];self.links=[]
+           def handle_starttag(self,t,attrs):
+            d=dict(attrs)
+            if t=="img":self.img.append({"alt":d.get("alt","")[:130],"host":urlsplit(d.get("src","")).hostname})
+            if t=="a":self.links.append(d.get("href","")[:170])
+          cases=[
+           ("94964","닥터스베스트 글루코사민 콘드로이친 MSM 캡슐 240정 1개"),
+           ("94961","풀무원 동치미냉면 4인분 1.692kg 2개")
+          ]
+          for sid,title in cases:
+           for engine,url in (
+             ("bing","https://www.bing.com/images/search?"+urlencode({"q":"쿠팡 "+title,"qft":"+filterui:imagesize-large"})),
+             ("naver","https://search.naver.com/search.naver?"+urlencode({"where":"image","query":"쿠팡 "+title})),
+             ("duckduckgo","https://duckduckgo.com/?"+urlencode({"q":"쿠팡 "+title,"iax":"images","ia":"images"})),
+             ("yahoo","https://images.search.yahoo.com/search/images?"+urlencode({"p":"쿠팡 "+title})),
+           ):
+            req=request.Request(url,headers={"User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Accept":"text/html","Accept-Language":"ko-KR,ko;q=0.9"})
+            out={"id":sid,"engine":engine}
+            try:
+             with request.urlopen(req,timeout=14) as resp:
+              html=resp.read(1_200_001).decode("utf-8","replace")
+              p=Parser();p.feed(html)
+              out.update(status=resp.status,final_host=urlsplit(resp.geturl()).hostname,bytes=len(html),
+               imgs=len(p.img),links=len(p.links),image_sample=p.img[:3],
+               coupangcdn_occurrences=len(re.findall(r"coupangcdn",html,re.I)),
+               producturl_occurrences=len(re.findall(r"coupang.{0,35}vp/products/",html,re.I)),
+               image_results_count=len(re.findall(r"murl|data-src|image_link|imageUrl",html,re.I)),
+               captcha=any(x in html.lower() for x in ["captcha","unusual traffic","abnormal activity","자동입력 방지"]))
+            except error.HTTPError as e:out.update(status=e.code,error="http")
+            except Exception as e:out.update(error=type(e).__name__)
+            print("ALT_IMAGE_ENGINE_PROBE "+json.dumps(out,ensure_ascii=False))
+          print("ALT_IMAGE_TEST_DONE_NO_POST")
+          
+          PY
