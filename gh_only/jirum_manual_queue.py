@@ -36,6 +36,11 @@ DRAFT_DIR = Path("jirum-manual-one-draft")
 DRAIN_TIME_BUDGET_SECONDS = 11 * 60
 MAX_DEAL_AGE_SECONDS = 60 * 60
 MAX_FUTURE_SKEW_SECONDS = 5 * 60
+# A workflow job has a 15-minute hard timeout. Old claims must be archived,
+# never automatically reposted, after a generous 25-minute grace period.
+STALE_CLAIM_SECONDS = 25 * 60
+TRANSIENT_GITHUB_HTTP_CODES = frozenset((429, 500, 502, 503, 504))
+GITHUB_READ_ATTEMPTS = 4
 
 
 
@@ -282,7 +287,8 @@ def validate_state(s: dict) -> None:
                      "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
                      "LOWCHART_ITEM_PAGE_NOT_FOUND",
                      "LOWCHART_TITLE_UNVERIFIED",
-                     "PHOTO_EVIDENCE_UNAVAILABLE")
+                     "PHOTO_EVIDENCE_UNAVAILABLE",
+                     "PUBLISH_OUTCOME_UNKNOWN_NO_RETRY")
                    for k, v in skipped_unverifiable.items())
             or any(str(i) in skipped_unverifiable for i in ids)
             or any(k in published or k in skipped_expired for k in skipped_unverifiable)):
@@ -414,8 +420,19 @@ class GithubState:
             "User-Agent": "JirumManualFIFO/1.0",
             **({"Content-Type": "application/json"} if body is not None else {}),
         })
-        with request.urlopen(req, timeout=25) as resp:
-            return json.load(resp)
+        # GET is safe to retry for GitHub 5xx/429 and transient network errors.
+        # Never automatically retry a PUT: it could have committed already.
+        attempts = GITHUB_READ_ATTEMPTS if method == "GET" else 1
+        for index in range(attempts):
+            try:
+                with request.urlopen(req, timeout=25) as resp:
+                    return json.load(resp)
+            except (error.HTTPError, error.URLError, TimeoutError) as exc:
+                transient = (exc.code in TRANSIENT_GITHUB_HTTP_CODES
+                             if isinstance(exc, error.HTTPError) else True)
+                if not transient or index + 1 == attempts:
+                    raise
+                time.sleep(min(2 ** index, 4))
 
     def read(self) -> tuple[dict, str]:
         data = self.api("GET")
@@ -434,21 +451,73 @@ class GithubState:
         if len(raw.encode("utf-8")) > MAX_STATE_BYTES:
             raise RuntimeError("PERSISTED_STATE_TOO_LARGE")
         # GitHub verifies previous blob SHA; conflicting writes must fail.
-        result = self.api("PUT", {
-            "message": message + " [skip ci]",
-            "content": base64.b64encode(raw.encode("utf-8")).decode("ascii"),
-            "sha": expected_sha, "branch": "main",
-        })
+        try:
+            result = self.api("PUT", {
+                "message": message + " [skip ci]",
+                "content": base64.b64encode(raw.encode("utf-8")).decode("ascii"),
+                "sha": expected_sha, "branch": "main",
+            })
+        except (error.HTTPError, error.URLError, TimeoutError) as exc:
+            # PUT may have succeeded despite a lost response. Read it back;
+            # do not repeat ambiguous state writes with a possibly old SHA.
+            transient = (exc.code in TRANSIENT_GITHUB_HTTP_CODES
+                         if isinstance(exc, error.HTTPError) else True)
+            if not transient:
+                raise
+            confirmed_state, _ = self.read()
+            if confirmed_state == state:
+                print("JIRUM_GITHUB_WRITE_CONFIRMED_AFTER_RESPONSE_ERROR")
+                return
+            raise RuntimeError("STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY") from exc
         if not result.get("commit", {}).get("sha"):
             raise RuntimeError("STATE_COMMIT_NOT_CONFIRMED")
+
+
+def archive_abandoned_claim(store, *, reference: datetime | None = None) -> bool:
+    """Quarantine a dead publisher's claim, without replaying that source ID.
+
+    A completed/expired Actions job might already have published to Daangn.
+    Preserve an explicit uncertain audit record rather than claiming success.
+    """
+    state, sha = store.read()
+    flight = state["in_flight"]
+    if flight is None:
+        return False
+    reference = reference or datetime.now(timezone.utc)
+    claimed = _parse_utc(flight.get("at"))
+    if claimed is None or (reference - claimed).total_seconds() < STALE_CLAIM_SECONDS:
+        return False
+    if not state["pending"] or state["pending"][0]["id"] != flight["id"]:
+        raise RuntimeError("ABANDONED_CLAIM_FIFO_INCONSISTENT")
+    row = state["pending"].pop(0)
+    state.setdefault("skipped_unverifiable", {})[str(row["id"])] = {
+        "status": "PUBLISH_OUTCOME_UNKNOWN_NO_RETRY",
+        "source_post_url": row["source_post_url"],
+        "source_title": row.get("title", "")[:180],
+        "claimed_run_id": flight.get("run_id"),
+        "claimed_at": flight.get("at"),
+        "previous_claim_status": flight.get("status"),
+        "may_already_be_published": True,
+        "at": reference.isoformat(),
+    }
+    state["in_flight"] = None
+    store.write(state, sha, "state: quarantine abandoned claim without repost")
+    print("JIRUM_ABANDONED_CLAIM_QUARANTINED " + json.dumps({
+        "source_id": row["id"], "claimed_run_id": flight.get("run_id"),
+        "reposted": False, "needs_post_audit": True,
+    }))
+    return True
 
 
 def scan(store: GithubState, latest_fetch=fetch_public_html,
          before_fetch=older_html) -> dict:
     s, sha = store.read()
     if s["in_flight"] is not None:
-        print("FIFO_REVIEW_REQUIRED source_id=" + str(s["in_flight"]["id"]))
-        return {"status": "REVIEW_REQUIRED", "has_deal": False, "pending": len(s["pending"])}
+        if archive_abandoned_claim(store):
+            s, sha = store.read()
+        else:
+            print("FIFO_REVIEW_REQUIRED source_id=" + str(s["in_flight"]["id"]))
+            return {"status": "REVIEW_REQUIRED", "has_deal": False, "pending": len(s["pending"])}
     discovered = collect_since(s["last_scanned_id"], latest_fetch, before_fetch)
     new, added, skipped = ingest(s, discovered)
     if lowchart_mode():
@@ -800,7 +869,25 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             outcome["product_id"] = article.get("product_id")
             outcome["item_id"] = article.get("item_id")
             outcome["vendor_item_id"] = article.get("vendor_item_id")
-        # If the write fails after clicking, CLAIMED remains, blocking replay.
+        # Save safe public-only publisher evidence before a flaky GitHub API
+        # checkpoint. The existing Actions artifact captures it after failure.
+        try:
+            DRAFT_DIR.mkdir(parents=True, exist_ok=True)
+            receipt = {
+                "source_id": source_id, "run_id": run_id,
+                "status": outcome.get("status"), "post_url": outcome.get("post_url"),
+                "submit_attempted": outcome.get("submit_attempted"),
+                "captured_at": now_utc(),
+            }
+            (DRAFT_DIR / "publish_outcome_receipt.json").write_text(
+                json.dumps(receipt, ensure_ascii=False, indent=2) + "\\n",
+                encoding="utf-8",
+            )
+            print("JIRUM_LOCAL_PUBLISH_RECEIPT_SAVED source_id=" + str(source_id))
+        except OSError:
+            print("::warning::Unable to save publisher outcome receipt")
+        # If checkpoint is still unconfirmed, the claim is quarantined later,
+        # never replayed. Do not click the submit button twice.
         finish(store, source_id, run_id, outcome)
         print("JIRUM_MANUAL_PUBLISH " + json.dumps({
             "source_id": source_id, "status": outcome.get("status"),
