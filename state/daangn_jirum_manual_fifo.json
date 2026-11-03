@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94926,
-  "pending": [],
+  "last_scanned_id": 94927,
+  "pending": [
+    {
+      "id": 94927,
+      "source_post_url": "https://t.me/jirum/94927",
+      "original_purchase_url": "https://link.coupang.com/a/im6PIcH8XA",
+      "source_text": "🔥🔥🔥무지성 27,240원 (51.0% 할인)🔥🔥🔥\n모던하우스 어반 2인조 식기 홈세트 12p 2세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 55,592원\n- 할인: 28,352원\n📦 특가 바로가기\nhttps://link.coupang.com/a/im6PIcH8XA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T06:24:40+00:00",
+      "title": "모던하우스 어반 2인조 식기 홈세트 12p 2세트",
+      "sale_price_krw": 27240
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
