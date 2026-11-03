@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94905,
-  "pending": [],
+  "last_scanned_id": 94906,
+  "pending": [
+    {
+      "id": 94906,
+      "source_post_url": "https://t.me/jirum/94906",
+      "original_purchase_url": "https://link.coupang.com/a/imLXal38MK",
+      "source_text": "❤️초대박 26,720원 (41.9% 할인)\n(와멤데쿠폰) 펩시 제로 슈거 라임향 제로 카페인, 355ml, 24개, 3세트 구매 (총72개)\n📌 가격 현황\n- 정상가: 46,000원\n- 할인: 19,280원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imLXal38MK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T01:32:29+00:00",
+      "title": "(와멤데쿠폰) 펩시 제로 슈거 라임향 제로 카페인, 355ml, 24개, 3세트 구매 (총72개)",
+      "sale_price_krw": 26720
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
