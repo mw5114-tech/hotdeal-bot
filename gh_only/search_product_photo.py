@@ -13,7 +13,7 @@ import json
 import re
 from pathlib import Path
 from urllib import request, error
-from urllib.parse import urlencode, urlsplit
+from urllib.parse import urlencode, urlsplit, parse_qs
 
 from gh_only.default_deal_format import (
     normalized_product_name, same_named_option,
@@ -80,6 +80,13 @@ def parse_naver_image_results(html: str, identity: dict, telegram_title: str) ->
                 or not is_coupang_cdn_url(image)
                 or _coupang_product_id(link) != pid
                 or not _same_search_option(telegram_title, title)):
+            continue
+        query = parse_qs(urlsplit(link).query)
+        # An indexed result can omit the item ID, but an explicitly
+        # contradictory item/vendor ID is never acceptable.
+        if ((query.get("itemId") and query["itemId"] != [identity.get("item_id")])
+                or (query.get("vendorItemId") and identity.get("vendor_item_id")
+                    and query["vendorItemId"] != [identity["vendor_item_id"]])):
             continue
         candidates[image] = {"title": title, "source_url": link}
     if not candidates:
