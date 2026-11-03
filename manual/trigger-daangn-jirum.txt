@@ -31,3 +31,5 @@ Recovery validation after PR #56 — 2026-11-02 21:40 KST (single trigger)
 Lowchart-title source validation after PR #57 — 2026-11-02 21:55 KST (one normal live FIFO run)
 
 Body discount-first format validation after PR #58 — 2026-11-02 22:38 KST
+
+One-time no-repost recovery scan after PR #66: 20261103-2340-locked-94954
