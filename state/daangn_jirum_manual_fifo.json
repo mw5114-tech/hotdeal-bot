@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94914,
-  "pending": [],
+  "last_scanned_id": 94915,
+  "pending": [
+    {
+      "id": 94915,
+      "source_post_url": "https://t.me/jirum/94915",
+      "original_purchase_url": "https://link.coupang.com/a/imYnQCVIUm",
+      "source_text": "🔥🔥🔥무지성 21,400원 (45.0% 할인)🔥🔥🔥\n[로켓프레시] 야끼니꾸 양념 꽃갈비살 구이용 (냉동)400g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 38,909원\n- 할인: 17,509원\n📦 특가 바로가기\nhttps://link.coupang.com/a/imYnQCVIUm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-03T04:26:26+00:00",
+      "title": "[로켓프레시] 야끼니꾸 양념 꽃갈비살 구이용 (냉동)400g",
+      "sale_price_krw": 21400
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
