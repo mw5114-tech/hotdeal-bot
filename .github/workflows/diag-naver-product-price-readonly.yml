@@ -59,6 +59,8 @@ jobs:
                     return {url:location.href,body:(document.body?.innerText||'').slice(0,1000),priceTexts,shoppingLinks};
                   }""")
                   print("BROWSER",urllib.parse.urlparse(u).netloc,urllib.parse.parse_qs(urllib.parse.urlparse(u).query).get("where","default"),"status",resp.status if resp else None,"data",str(data)[:4500])
+                  if urllib.parse.urlparse(u).hostname=="m.search.naver.com":
+                    print("PRICE_DOM",page.evaluate("""() => [...document.querySelectorAll('span,strong,em')].filter(x=>/^\\s*\\d{1,3}(?:,\\d{3})+\\s*원?\\s*$/.test(x.innerText||'')).slice(0,4).map(x=>{let a=x;let out=[];for(let i=0;i<6&&a;i++,a=a.parentElement)out.push({tag:a.tagName,cls:String(a.className).slice(0,110),txt:(a.innerText||'').slice(0,250),hrefs:[...a.querySelectorAll('a[href]')].map(b=>b.getAttribute('href')?.slice(0,80)).slice(0,3)});return out})"""))
                 except Exception as e:
                   print("BROWSER_ERROR",urllib.parse.urlparse(u).netloc,type(e).__name__,str(e)[:190])
             finally: browser.close()
