@@ -153,7 +153,7 @@ class FallcentHighTests(unittest.TestCase):
             self.assertIn("💸 폴센트 관측 최고가 : 약 27,000원", row["caption"]["caption"])
             self.assertNotIn("쿠팡 평소 판매가 : 약 27,000원", row["caption"]["caption"])
             self.assertIn("[55%할인]", row["caption"]["caption"])
-            (folder / "drafts.json").write_text(json.dumps({"drafts":[row]},ensure_ascii=False),"utf-8")
+            (folder / "drafts.json").write_text(json.dumps({"schema":"github-jirum-default-price-photo-affsdp-draft-v2","drafts":[row]},ensure_ascii=False),"utf-8")
             with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE":"lowchart",
                                          "COUPANG_PARTNER_LPTAG":"AF9668915"}):
                 article = validate_draft(folder, 96123)
@@ -165,7 +165,7 @@ class FallcentHighTests(unittest.TestCase):
             row = process(folder, high_record(),
                           naver=lambda title: self.fail("No Naver"))
             row["fallcent_high_lookup"]["item_id"] = "1122334455"
-            (folder / "drafts.json").write_text(json.dumps({"drafts":[row]},ensure_ascii=False),"utf-8")
+            (folder / "drafts.json").write_text(json.dumps({"schema":"github-jirum-default-price-photo-affsdp-draft-v2","drafts":[row]},ensure_ascii=False),"utf-8")
             with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE":"lowchart",
                                          "COUPANG_PARTNER_LPTAG":"AF9668915"}):
                 with self.assertRaisesRegex(RuntimeError,"FALLCENT_HIGH_EVIDENCE_MISMATCH"):
