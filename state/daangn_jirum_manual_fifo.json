@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94980,
-  "pending": [
-    {
-      "id": 94980,
-      "source_post_url": "https://t.me/jirum/94980",
-      "original_purchase_url": "https://link.coupang.com/a/iolyEKPJpA",
-      "source_text": "❤️초대박 7,090원 (40.9% 할인)\n이클립스 쿨링 소프트 캔디 청포도향, 585g, 1개\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 4,910원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iolyEKPJpA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T00:18:20+00:00",
-      "title": "이클립스 쿨링 소프트 캔디 청포도향, 585g, 1개",
-      "sale_price_krw": 7090
-    }
-  ],
-  "in_flight": {
-    "id": 94980,
-    "status": "CLAIMED",
-    "run_id": "41745913838",
-    "at": "2026-11-04T00:19:34.406959+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1291,6 +1276,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T00:13:52.162582+00:00",
       "run_id": "41745157792"
+    },
+    "94980": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%ED%81%B4%EB%A6%BD%EC%8A%A4-%EC%BF%A8%EB%A7%81-%EC%86%8C%ED%94%84%ED%8A%B8-%EC%BA%94%EB%94%94-%EC%B2%AD%ED%8F%AC%EB%8F%84%ED%96%A5-585g-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-A6XOk0Ld?from=write",
+      "posted_at_utc": "2026-11-04T00:18:20+00:00",
+      "product_id": "7104173736",
+      "item_id": "21413591248",
+      "vendor_item_id": "80677043303",
+      "at": "2026-11-04T00:19:50.944281+00:00",
+      "run_id": "41745913838"
     }
   },
   "skipped_non_coupang": 12,
