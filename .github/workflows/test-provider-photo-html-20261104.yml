@@ -1,4 +1,4 @@
-name: TEST read-only | provider image HTML inspection
+name: TEST read-only | ordered provider photo download
 on:
   push:
     branches: [fix/ordered-lowchart-couspi-dangapick-20261104]
@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 jobs:
-  inspect-public-product-pages:
+  verify-real-product-photo-without-post:
     runs-on: ubuntu-24.04
     timeout-minutes: 3
     steps:
@@ -14,72 +14,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Read-only public HTML and image elements; no logins, no posting
-        shell: bash
+      - name: Fetch public image only; inspect signature and provenance
         run: |
           python - <<'PY'
-          from html.parser import HTMLParser
-          from urllib import request, error
-          import re
-          urls = [
-            'https://www.couspi.com/products/8522680027?itemId=91691060708',
-            'https://www.couspi.com/products/8522680027?itemId=91691060725',
-            'https://www.couspi.com/products/8522680027',
-            'https://dangapick.com/p/8522680027-24674417319-91691060725',
-            'https://dangapick.com/search?q=%EB%B0%94%EB%94%94%EC%9D%B8%EC%86%94',
-            'https://dangapick.com/c/%EC%96%91%EB%A7%90',
-            'https://dangapick.com/?q=%EB%B0%94%EB%94%94%EC%9D%B8%EC%86%94',
-            'https://image.couspi.com/cdn/8522680027/vendor_inventory/5266/a2c6f709a64b4f00f7ac66848b1fae16567f5217cf7e933ecb16ab1e619e.png',
-          ]
-          class Probe(HTMLParser):
-            def __init__(self):
-              super().__init__()
-              self.meta=[];self.img=[];self.forms=[];self.links=[]
-            def handle_starttag(self,tag,attrs):
-              a=dict(attrs)
-              if tag=='meta' and (a.get('property','').startswith('og:') or a.get('name')=='twitter:image'):self.meta.append(a)
-              if tag=='img':self.img.append(a)
-              if tag=='form':self.forms.append(a)
-              if tag=='a' and ('8522680027' in (a.get('href') or '')):self.links.append(a.get('href'))
-          urls.append('https://dangapick.com/app.js?v=34e11844')
-          urls.append('https://dangapick.com/data/products.json')
-          for url in urls:
-            print('PROBE_URL',url)
-            req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
-            try:
-              with request.urlopen(req,timeout=12) as r:
-                body=r.read(14000000 if 'products.json' in url else 1100000)
-                print('PROBE_LENGTH_HEADER',r.headers.get('Content-Length'))
-                print('PROBE_RESPONSE',r.status,r.geturl(),r.headers.get('Content-Type'),len(body))
-              html=body.decode('utf-8','replace');p=Probe();p.feed(html)
-              if 'products.json' in url:
-                import json
-                j=json.loads(html)
-                print('PROBE_JSON_ROOT_KEYS',list(j.keys()))
-                print('PROBE_JSON_PRODUCT_COUNT',len(j.get('products',[])))
-                print('PROBE_JSON_FIRST_PRODUCT',str(j.get('products',[None])[0])[:1800])
-                matches=[x for x in j.get('products',[]) if '8522680027' in str(x)]
-                print('PROBE_JSON_MATCHES',str(matches[:4])[:5000])
-                continue
-              if '/app.js?' in url:
-                for term in ('/api/', 'search', 'fetch(', 'function doSearch', 'qbtn'):
-                  for m in list(re.finditer(re.escape(term),html))[:6]:
-                    print('PROBE_JS_NEAR',term,html[max(0,m.start()-160):m.start()+320])
-              print('PROBE_META',[(x.get('property') or x.get('name'),(x.get('content') or '')[:210]) for x in p.meta[:20]])
-              print('PROBE_IMGS_COUNT',len(p.img))
-              for x in p.img[:18]:
-                print('PROBE_IMG',{k:(v[:220] if isinstance(v,str) else v) for k,v in x.items() if k in ('src','data-src','alt','width','height','class','loading')})
-              print('PROBE_FORMS',p.forms[:3])
-              for pattern in ('placeholder=', 'search', 'q=', 'name=', '/p/8522680027', '바디인솔', '<script'):
-                idx=html.find(pattern)
-                print('PROBE_MARKER',pattern,idx,html[max(0,idx-160):idx+250] if idx>=0 else '')
-              print('PROBE_JS',re.findall(r'<script[^>]+src=[^>]+>',html)[:10])
-              print('PROBE_LINKS',p.links[:8])
-              for pattern in ('image.couspi.com','coupangcdn.com','8522680027','/p/'):
-                print('PROBE_MARK',pattern,html.find(pattern))
-              for pattern in ('image.couspi.com','coupangcdn.com'):
-                for m in list(re.finditer(re.escape(pattern),html))[:2]:
-                  print('PROBE_NEAR',html[max(0,m.start()-150):m.start()+250])
-            except Exception as e:
-              print('PROBE_ERROR',type(e).__name__,str(e)[:240])
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from gh_only.ordered_product_photos import ordered_external_photo
+          identity={"status":"EXACT_ITEM_IDENTIFIED",
+                    "product_id":"8522680027",
+                    "item_id":"24674417324","vendor_item_id":None}
+          with TemporaryDirectory() as tmp:
+              result=ordered_external_photo(
+                  identity, "바디인솔 프리미엄 무지 중목 양말 20켤레",
+                  Path(tmp), 94975)
+              print("PHOTO_READ_ONLY_RESULT", {
+                  k: result.get(k) for k in (
+                    "status","image_source","image_provider_product_id",
+                    "image_provider_item_id","photo_provider_attempts",
+                    "saved_name","bytes")})
+              if result.get("status")=="IMAGE_SAVED":
+                  photo=Path(tmp)/result["saved_name"]
+                  print("PHOTO_READ_ONLY_BYTES",photo.is_file(),photo.stat().st_size,
+                        photo.read_bytes()[:12].hex())
+              assert result.get("status")=="IMAGE_SAVED", "provider fallback failed"
           PY
