@@ -1,0 +1,52 @@
+name: DIAG read-only | Fallcent public observed high
+on:
+  push:
+    branches: [feat/fallcent-observed-high-price-20261105]
+    paths: ['.github/workflows/diag-fallcent-high-20261105.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.11'}
+      - name: Inspect public Fallcent exact-ID HTML and indexed product page markup
+        run: |
+          python - <<'PY'
+          from urllib import request,parse,error
+          from html.parser import HTMLParser
+          import re,json
+          class Info(HTMLParser):
+              def __init__(self): super().__init__();self.text=[];self.links=[]
+              def handle_starttag(self,tag,attrs):
+                  if tag=='a':
+                      d=dict(attrs);u=d.get('href','')
+                      if '/product/' in u or 'fcnt.link' in u:self.links.append(u[:160])
+              def handle_data(self,s):
+                  if s.strip():self.text.append(s.strip())
+          urls=[
+              "https://www.fallcent.com/product/?item_id=25880144275&product_id=8870769472",
+              "https://fallcent.com/product/?item_id=25880144275&product_id=8870769472",
+              "https://fallcent.com/product/?item_id=2553387625&product_id=1487151401",
+              "https://www.fallcent.com/product/aj896MfKzPJCW5XZA64peOVIHuwMoiY0/",
+              "https://fallcent.com/product/search/?keyword="+parse.quote("삼성전자 4K UHD QLED TV KQ85QF6AAFXKR"),
+              "https://www.fallcent.com/"
+          ]
+          for u in urls:
+              req=request.Request(u,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
+              try:
+                  with request.urlopen(req,timeout=12) as resp:
+                      raw=resp.read(1750000)
+                      html=raw.decode('utf-8','replace')
+                      stat=resp.status;dest=resp.geturl()
+                  parser=Info();parser.feed(html)
+                  textbody=' '.join(parser.text)
+                  terms=['역대급최고가','역대최고가','최고가','평균가','그래프','priceHistory','highPrice','highestPrice','maxPrice','max_price','highest_price','priceChart','8870769472','25880144275','__NEXT_DATA__']
+                  marks={t: [html[max(0,m.start()-100):m.start()+150].replace('\n',' ')[:250] for m in list(re.finditer(re.escape(t),html,re.I))[:2]] for t in terms if t.lower() in html.lower()}
+                  print('FALLCENT_PROBE',json.dumps({'requested':u,'status':stat,'final_url':dest,'html_bytes':len(raw),'title':re.findall(r'<title[^>]*>(.*?)</title>',html,re.S|re.I)[:1],'plain_excerpt':textbody[:800],'links':parser.links[:12],'marks':marks},ensure_ascii=False)[:10500])
+              except Exception as exc:
+                  print('FALLCENT_PROBE_ERROR',json.dumps({'requested':u,'error':type(exc).__name__,'status':getattr(exc,'code',None),'msg':str(exc)[:170]},ensure_ascii=False))
+          PY
