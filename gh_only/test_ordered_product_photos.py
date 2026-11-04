@@ -157,7 +157,9 @@ class OrderedProductPhotoTests(unittest.TestCase):
             }
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
-            with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE": "lowchart"}):
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE": "lowchart",
+                "COUPANG_PARTNER_LPTAG": "AF9668915"}):
                 with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
                            return_value={"status":"LOWCHART_ITEM_PAGE_NOT_FOUND",
                                          "http_status":404}):
@@ -188,7 +190,9 @@ class OrderedProductPhotoTests(unittest.TestCase):
     def test_pipeline_exhausted_records_skip_not_lowchart_404(self):
         with tempfile.TemporaryDirectory() as tmp:
             folder = Path(tmp)
-            with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE": "lowchart"}):
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE": "lowchart",
+                "COUPANG_PARTNER_LPTAG": "AF9668915"}):
                 with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
                            return_value={"status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
                                          "http_status": 404}):
