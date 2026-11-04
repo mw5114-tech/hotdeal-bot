@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95031,
-  "pending": [
-    {
-      "id": 95031,
-      "source_post_url": "https://t.me/jirum/95031",
-      "original_purchase_url": "https://link.coupang.com/a/ipaEzQs2xM",
-      "source_text": "☆특가 570,000원 (27.0% 할인)\n샤크 에보파워 시스템 NEO 무선 핸디청소기\n📌 가격 현황\n- 정상가: 780,822원\n- 할인: 210,822원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipaEzQs2xM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:13:20+00:00",
-      "title": "샤크 에보파워 시스템 NEO 무선 핸디청소기",
-      "sale_price_krw": 570000
-    }
-  ],
-  "in_flight": {
-    "id": 95031,
-    "status": "CLAIMED",
-    "run_id": "41827464914",
-    "at": "2026-11-04T12:14:36.259729+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1701,6 +1686,16 @@
       "vendor_item_id": "87977818881",
       "at": "2026-11-04T12:05:50.869132+00:00",
       "run_id": "41826214107"
+    },
+    "95031": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%A4%ED%81%AC-%EC%97%90%EB%B3%B4%ED%8C%8C%EC%9B%8C-%EC%8B%9C%EC%8A%A4%ED%85%9C-NEO-%EB%AC%B4%EC%84%A0-%ED%95%B8%EB%94%94%EC%B2%AD%EC%86%8C%EA%B8%B0-%EC%95%84%EC%9D%B4%EB%B3%B4%EB%A6%AC-LC200KR-dY0eXw2P?from=write",
+      "posted_at_utc": "2026-11-04T12:13:20+00:00",
+      "product_id": "7986452450",
+      "item_id": "22185543357",
+      "vendor_item_id": null,
+      "at": "2026-11-04T12:14:53.324077+00:00",
+      "run_id": "41827464914"
     }
   },
   "skipped_non_coupang": 21,
