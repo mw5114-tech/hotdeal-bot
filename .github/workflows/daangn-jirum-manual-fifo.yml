@@ -58,7 +58,7 @@ jobs:
       JIRUM_IMAGE_SOURCE: lowchart
       # Lowchart first; use Naver general search only when historical mean missing.
       JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
-      # Missing Lowchart photos: ordinary Naver mobile image search first result, otherwise skip.
+      # Photo priority: exact Lowchart -> Fallcent product search -> Naver image search.
       JIRUM_REQUIRE_FRESH_POST: 'true'
       # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
       # This is a locally composed candidate, not an officially issued shortlink.

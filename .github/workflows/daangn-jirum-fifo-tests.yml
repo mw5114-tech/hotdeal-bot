@@ -12,6 +12,7 @@ on:
       - fix/naver-web-photo-and-user-replay-20261104
       - fix/user-replay-submit-expiry-20261104
       - fix/naver-product-price-fallback-20261104
+      - feat/fallcent-photo-second-before-naver-20261104
       - feat/daangn-body-discount-first-20261102
       - feat/muse-official-link-receipts-20261103
       - feat/daangn-post-then-muse-rewrite-20261103
@@ -63,6 +64,8 @@ on:
       - 'gh_only/search_product_photo.py'
       - 'gh_only/ordered_product_photos.py'
       - 'gh_only/naver_web_image_photo.py'
+      - 'gh_only/fallcent_search_photo.py'
+      - 'gh_only/test_fallcent_search_photo.py'
       - 'gh_only/naver_web_product_price.py'
       - 'gh_only/test_naver_web_product_price.py'
       - 'gh_only/test_naver_web_image_photo.py'
@@ -116,7 +119,7 @@ jobs:
           print("DAANGN_SUBMIT_WAIT_CONTRACT_OK")
           PY
           python -m unittest -v gh_only.test_default_deal_format gh_only.test_default_deal_automation gh_only.test_daangn_editor_probe
-          python -m unittest -v gh_only.test_lowchart_product_photo gh_only.test_search_product_photo gh_only.test_ordered_product_photos gh_only.test_naver_web_image_photo gh_only.test_naver_web_product_price gh_only.test_lowchart_price_reference gh_only.test_pipeline
+          python -m unittest -v gh_only.test_lowchart_product_photo gh_only.test_search_product_photo gh_only.test_ordered_product_photos gh_only.test_fallcent_search_photo gh_only.test_naver_web_image_photo gh_only.test_naver_web_product_price gh_only.test_lowchart_price_reference gh_only.test_pipeline
           python -m py_compile gh_only/lowchart_product_photo.py gh_only/default_deal_automation.py gh_only/pipeline.py jirum_forward.py
           python - <<'PY'
           from pathlib import Path
