@@ -1,7 +1,44 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94986,
-  "pending": [],
+  "last_scanned_id": 94990,
+  "pending": [
+    {
+      "id": 94987,
+      "source_post_url": "https://t.me/jirum/94987",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtxnns7M",
+      "source_text": "☆특가 7,980원\n무항생제 신선한 특란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtxnns7M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:08+00:00",
+      "title": "☆특가 7,980원",
+      "sale_price_krw": 7980
+    },
+    {
+      "id": 94988,
+      "source_post_url": "https://t.me/jirum/94988",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtCbf7Xo",
+      "source_text": "☆특가 7,990원\n무항생제 신선 특란 1.8kg, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtCbf7Xo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:09+00:00",
+      "title": "☆특가 7,990원",
+      "sale_price_krw": 7990
+    },
+    {
+      "id": 94989,
+      "source_post_url": "https://t.me/jirum/94989",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtFbt4pM",
+      "source_text": "☆특가 7,990원\n곰곰 무항생제 신선한 특란, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtFbt4pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:10+00:00",
+      "title": "☆특가 7,990원",
+      "sale_price_krw": 7990
+    },
+    {
+      "id": 94990,
+      "source_post_url": "https://t.me/jirum/94990",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtIxR5ci",
+      "source_text": "☆특가 6,990원\n신선한 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtIxR5ci\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:11+00:00",
+      "title": "☆특가 6,990원",
+      "sale_price_krw": 6990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
