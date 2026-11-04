@@ -3,15 +3,6 @@
   "last_scanned_id": 95036,
   "pending": [
     {
-      "id": 95033,
-      "source_post_url": "https://t.me/jirum/95033",
-      "original_purchase_url": "https://link.coupang.com/a/ipa19ZF2v6",
-      "source_text": "☆특가 830원\n농심 튀김우동 큰사발면 111g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa19ZF2v6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:18:40+00:00",
-      "title": "☆특가 830원",
-      "sale_price_krw": 830
-    },
-    {
       "id": 95034,
       "source_post_url": "https://t.me/jirum/95034",
       "original_purchase_url": "https://link.coupang.com/a/ipa2dGso6S",
@@ -39,12 +30,7 @@
       "sale_price_krw": 580
     }
   ],
-  "in_flight": {
-    "id": 95033,
-    "status": "CLAIMED",
-    "run_id": "41828239382",
-    "at": "2026-11-04T12:20:06.481960+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1747,6 +1733,16 @@
       "item_id": "26621968172",
       "vendor_item_id": "93594909069",
       "at": "2026-11-04T12:19:56.628770+00:00",
+      "run_id": "41828239382"
+    },
+    "95033": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%86%8D%EC%8B%AC-%ED%8A%80%EA%B9%80%EC%9A%B0%EB%8F%99-%ED%81%B0%EC%82%AC%EB%B0%9C%EB%A9%B4-111g-1%EA%B0%9C-55%ED%95%A0%EC%9D%B8-dGG3K6Nd?from=write",
+      "posted_at_utc": "2026-11-04T12:18:40+00:00",
+      "product_id": "9729725852",
+      "item_id": "29116304110",
+      "vendor_item_id": "96040821488",
+      "at": "2026-11-04T12:20:23.250173+00:00",
       "run_id": "41828239382"
     }
   },
