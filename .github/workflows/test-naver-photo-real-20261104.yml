@@ -2,7 +2,7 @@ name: DIAG read-only | Naver fallback actual product photo
 on:
   push:
     branches: [fix/naver-web-photo-and-user-replay-20261104]
-    paths: ['.github/workflows/test-naver-photo-real-20261104.yml']
+    paths: ['.github/workflows/test-naver-photo-real-20261104.yml', 'gh_only/naver_web_image_photo.py']
 permissions:
   contents: read
 jobs:
