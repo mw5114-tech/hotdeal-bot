@@ -50,3 +50,42 @@ jobs:
               except Exception as exc:
                   print('FALLCENT_PROBE_ERROR',json.dumps({'requested':u,'error':type(exc).__name__,'status':getattr(exc,'code',None),'msg':str(exc)[:170]},ensure_ascii=False))
           PY
+
+
+      - name: Inspect exact product page public DOM and chart labels
+        run: |
+          python -m pip install -q playwright==1.64.1
+          python -m playwright install --with-deps chromium > /dev/null
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from urllib.parse import urlsplit
+          import re,json
+          urls=[
+              "https://www.fallcent.com/product/?item_id=25880144275&product_id=8870769472",
+              "https://www.fallcent.com/product/aj896MfKzPJCW5XZA64peOVIHuwMoiY0/",
+              "https://www.fallcent.com/"
+          ]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for url in urls:
+                  page=browser.new_page(locale="ko-KR",viewport={"width":1200,"height":900})
+                  try:
+                      resp=page.goto(url,wait_until="domcontentloaded",timeout=20000)
+                      page.wait_for_timeout(2600)
+                      body=page.locator("body").inner_text(timeout=10000)
+                      # All public DOM, no authenticated/hidden API endpoints.
+                      hits=[body[max(0,m.start()-70):m.start()+160] for m in list(re.finditer(r"최고가|최저가|평균가|그래프",body))[:12]]
+                      print("FALLCENT_DOM",json.dumps({
+                          'input':url,'url':page.url,'status':resp.status if resp else None,
+                          'title':page.title()[:160],'body_length':len(body),
+                          'body_intro':body[:1000], 'price_hits':hits,
+                          'svg_count':page.locator('svg').count(),
+                          'canvas_count':page.locator('canvas').count(),
+                          'chartlabels':page.locator('text').all_inner_texts()[:15],
+                      },ensure_ascii=False)[:8500])
+                  except Exception as e:
+                      print("FALLCENT_DOM_ERROR",type(e).__name__,str(e)[:200])
+                  finally:
+                      page.close()
+              browser.close()
+          PY
