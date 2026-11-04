@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94982,
-  "pending": [
-    {
-      "id": 94982,
-      "source_post_url": "https://t.me/jirum/94982",
-      "original_purchase_url": "https://link.coupang.com/a/ioml2p5JrU",
-      "source_text": "☆특가 9,600원\nBebeen 120 유아물티슈 캡형, 10개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioml2p5JrU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T00:29:28+00:00",
-      "title": "☆특가 9,600원",
-      "sale_price_krw": 9600
-    }
-  ],
-  "in_flight": {
-    "id": 94982,
-    "status": "CLAIMED",
-    "run_id": "41747291050",
-    "at": "2026-11-04T00:30:41.629074+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1301,6 +1286,16 @@
       "vendor_item_id": "80677043303",
       "at": "2026-11-04T00:19:50.944281+00:00",
       "run_id": "41745913838"
+    },
+    "94982": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-Bebeen-120-%EC%9C%A0%EC%95%84%EB%AC%BC%ED%8B%B0%EC%8A%88-%EC%BA%A1%ED%98%95-50g-120%EB%A7%A4-10-25%ED%95%A0%EC%9D%B8-dDOBxnyP?from=write",
+      "posted_at_utc": "2026-11-04T00:29:28+00:00",
+      "product_id": "8548508229",
+      "item_id": "21436080703",
+      "vendor_item_id": null,
+      "at": "2026-11-04T00:30:58.137437+00:00",
+      "run_id": "41747291050"
     }
   },
   "skipped_non_coupang": 12,
