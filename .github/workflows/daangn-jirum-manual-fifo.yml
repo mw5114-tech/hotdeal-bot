@@ -56,7 +56,7 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
-      # Missing Lowchart photos: Couspi, then Dangapick, otherwise skip.
+      # Missing Lowchart photos: ordinary Naver mobile image search first result, otherwise skip.
       JIRUM_REQUIRE_FRESH_POST: 'true'
       # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
       # This is a locally composed candidate, not an officially issued shortlink.
