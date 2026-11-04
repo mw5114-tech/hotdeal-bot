@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95047,
-  "pending": [
-    {
-      "id": 95047,
-      "source_post_url": "https://t.me/jirum/95047",
-      "original_purchase_url": "https://link.coupang.com/a/ipRgTBZP5w",
-      "source_text": "🔥🔥🔥무지성 19,900원 (53.7% 할인)🔥🔥🔥\n뉴에라 아동용 MLB 스몰 로고 맨투맨 샌프란시스코 자이언츠\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 43,000원\n- 할인: 23,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipRgTBZP5w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T22:09:43+00:00",
-      "title": "뉴에라 아동용 MLB 스몰 로고 맨투맨 샌프란시스코 자이언츠",
-      "sale_price_krw": 19900
-    }
-  ],
-  "in_flight": {
-    "id": 95047,
-    "status": "CLAIMED",
-    "run_id": "41922912451",
-    "at": "2026-11-04T22:11:05.477921+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1851,6 +1836,16 @@
       "vendor_item_id": "93383175546",
       "at": "2026-11-04T22:10:04.481655+00:00",
       "run_id": "41922700897"
+    },
+    "95047": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%89%B4%EC%97%90%EB%9D%BC-%EC%95%84%EB%8F%99%EC%9A%A9-MLB-%EC%8A%A4%EB%AA%B0-%EB%A1%9C%EA%B3%A0-%EB%A7%A8%ED%88%AC%EB%A7%A8-%EC%83%8C%ED%94%84%EB%9E%80%EC%8B%9C%EC%8A%A4%EC%BD%94-%EC%9E%90%EC%9D%B4%EC%96%B8%EC%B8%A0-60%ED%95%A0%EC%9D%B8-A34xNyqP?from=write",
+      "posted_at_utc": "2026-11-04T22:09:43+00:00",
+      "product_id": "9015937489",
+      "item_id": "26431486713",
+      "vendor_item_id": "93407255808",
+      "at": "2026-11-04T22:11:21.536701+00:00",
+      "run_id": "41922912451"
     }
   },
   "skipped_non_coupang": 22,
