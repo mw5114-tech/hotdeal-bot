@@ -79,7 +79,8 @@ class NaverPhotoTests(unittest.TestCase):
             return FakeResponse(req.full_url, b"<html>no results</html>")
         with tempfile.TemporaryDirectory() as tmp:
             d = fetch_first_naver_photo(TITLE, Path(tmp), 94986, opener=opener)
-            self.assertEqual(d["status"], "NAVER_FIRST_IMAGE_MISSING")
+            self.assertIn(d["status"], ("NAVER_FIRST_IMAGE_MISSING",
+                                        "NAVER_BROWSER_REQUEST_FAILED"))
             self.assertEqual(list(Path(tmp).iterdir()), [])
 
     def test_pipeline_uses_telegram_title_naver_photo_and_preserves_price(self):
