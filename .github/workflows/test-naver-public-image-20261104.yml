@@ -83,3 +83,44 @@ jobs:
                     print("IMAGE_BROWSER_ERROR",type(exc).__name__,str(exc)[:180])
             browser.close()
           PY
+
+      - name: Inspect first Naver result images and test allowed direct file retrieval
+        run: |
+          python -m pip install -q playwright==1.64.1
+          python -m playwright install chromium >/dev/null
+          python - <<'PY'
+          from urllib.parse import quote, urlsplit
+          from urllib import request
+          from playwright.sync_api import sync_playwright
+          import json
+          q="삼성전자 4K UHD QLED TV KQ85QF6AAFXKR"
+          with sync_playwright() as p:
+            b=p.chromium.launch(headless=True)
+            page=b.new_page(locale="ko-KR",viewport={"width":1280,"height":820})
+            r=page.goto("https://m.search.naver.com/search.naver?where=m_image&query="+quote(q),wait_until="domcontentloaded",timeout=16000)
+            page.wait_for_timeout(2300)
+            rows=page.locator("img").evaluate_all("""els => els.slice(0,35).map((e,i)=>({
+              i, src:(e.currentSrc||e.getAttribute('src')||'').slice(0,260),
+              alt:(e.getAttribute('alt')||'').slice(0,110),
+              className:String(e.className).slice(0,90),
+              parentClass:String(e.parentElement?.className||'').slice(0,90),
+              href:(e.closest('a')?.href||'').slice(0,130),
+              width:e.naturalWidth,height:e.naturalHeight
+            }))""")
+            print("NAVER_IMAGE_PAGE",r.status if r else None,page.title(),len(rows))
+            for x in rows[:28]:print("NAVER_IMAGE_NODE",json.dumps(x,ensure_ascii=False))
+            candidates=[x for x in rows if x['src'].startswith('https://') and
+                        ('pstatic.net' in x['src'] or 'naver' in x['src']) and
+                        x['width']>=100 and x['height']>=100]
+            print("NAVER_IMAGE_VALID_CANDIDATES",len(candidates))
+            if candidates:
+              u=candidates[0]['src']
+              try:
+                req=request.Request(u,headers={'User-Agent':'Mozilla/5.0','Accept':'image/*'})
+                with request.urlopen(req,timeout=15) as resp:
+                  data=resp.read(3000000)
+                  print("NAVER_IMAGE_FETCH",resp.status,resp.headers.get('Content-Type'),len(data),data[:12].hex(),urlsplit(resp.geturl()).hostname)
+              except Exception as exc:
+                print("NAVER_IMAGE_FETCH_FAILED",type(exc).__name__,getattr(exc,'code',None))
+            b.close()
+          PY
