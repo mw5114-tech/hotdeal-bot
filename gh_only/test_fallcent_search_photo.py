@@ -116,7 +116,8 @@ class FallcentTests(unittest.TestCase):
                         side_effect=AssertionError("Naver must not run"))):
                 row = enrich_deal(DEAL, folder, resolver=lambda _: SALT_ID,
                                   history_fetch=lambda *a: {},
-                                  owner_tag="AF9668915", fallcent_lookup=fallcent)
+                                  owner_tag="AF9668915", fallcent_lookup=fallcent,
+                                  fallcent_high_lookup=lambda *_: {"status":"FALLCENT_HIGH_NOT_VISIBLE"})
             self.assertEqual(row["image_source"], IMAGE_SOURCE)
             self.assertTrue(row["representative_fallcent_image"])
             self.assertEqual([x["provider"] for x in row["photo_provider_attempts"]],
