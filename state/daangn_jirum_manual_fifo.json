@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95052,
-  "pending": [],
+  "last_scanned_id": 95053,
+  "pending": [
+    {
+      "id": 95053,
+      "source_post_url": "https://t.me/jirum/95053",
+      "original_purchase_url": "https://link.coupang.com/a/ipR0F7HB7c",
+      "source_text": "❤️초대박 8,000원 (40.2% 할인)\n도밍고 꿀차 3종 선물세트, 꿀홍차 10p + 꿀민트 10p + 꿀캐모마일 10p, 1세트\n📌 가격 현황\n- 정상가: 13,378원\n- 할인: 5,378원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipR0F7HB7c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T22:20:03+00:00",
+      "title": "도밍고 꿀차 3종 선물세트, 꿀홍차 10p + 꿀민트 10p + 꿀캐모마일 10p, 1세트",
+      "sale_price_krw": 8000
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
