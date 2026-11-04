@@ -3,16 +3,6 @@
   "last_scanned_id": 94997,
   "pending": [
     {
-      "id": 94989,
-      "source_post_url": "https://t.me/jirum/94989",
-      "original_purchase_url": "https://link.coupang.com/a/ioqtFbt4pM",
-      "source_text": "☆특가 7,990원\n곰곰 무항생제 신선한 특란, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtFbt4pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:27:10+00:00",
-      "title": "☆특가 7,990원",
-      "sale_price_krw": 7990,
-      "manual_replay_approved": true
-    },
-    {
       "id": 94990,
       "source_post_url": "https://t.me/jirum/94990",
       "original_purchase_url": "https://link.coupang.com/a/ioqtIxR5ci",
@@ -23,12 +13,7 @@
       "manual_replay_approved": true
     }
   ],
-  "in_flight": {
-    "id": 94989,
-    "status": "CLAIMED",
-    "run_id": "41763432846",
-    "at": "2026-11-04T02:52:53.778867+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1421,6 +1406,16 @@
       "item_id": "24969634153",
       "vendor_item_id": "91975230643",
       "at": "2026-11-04T02:52:50.549336+00:00",
+      "run_id": "41763432846"
+    },
+    "94989": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%AC%B4%ED%95%AD%EC%83%9D%EC%A0%9C-%EC%8B%A0%EC%84%A0%ED%95%9C-%ED%8A%B9%EB%9E%80-30%EA%B5%AC-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-PnNXJ9nP?from=write",
+      "posted_at_utc": "2026-11-04T01:27:10+00:00",
+      "product_id": "1271113288",
+      "item_id": "2275793934",
+      "vendor_item_id": "70272921457",
+      "at": "2026-11-04T02:53:09.475265+00:00",
       "run_id": "41763432846"
     }
   },
