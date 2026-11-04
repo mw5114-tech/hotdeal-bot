@@ -56,6 +56,8 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       # No Kakao credentials: public exact-item Lowchart photos only.
       JIRUM_IMAGE_SOURCE: lowchart
+      # Lowchart first; use Naver general search only when historical mean missing.
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
       # Missing Lowchart photos: ordinary Naver mobile image search first result, otherwise skip.
       JIRUM_REQUIRE_FRESH_POST: 'true'
       # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
