@@ -3,10 +3,34 @@
 No network calls and no click happens in these tests.
 """
 import unittest
+from datetime import datetime, timedelta, timezone
 
 from gh_only.jirum_manual_publisher import (
     choose_editor_submit_index, fit_title_to_limit, leading_image_ui_prefix,
+    deal_expired_before_submit,
 )
+
+
+class SubmitAgeReplayTests(unittest.TestCase):
+    def test_five_explicit_user_replays_only(self):
+        now = datetime(2026, 11, 4, 3, 0, tzinfo=timezone.utc)
+        stamp = (now - timedelta(hours=2)).isoformat()
+        for mid in range(94986, 94991):
+            self.assertFalse(deal_expired_before_submit({
+                "source_id": mid, "posted_at_utc": stamp,
+                "manual_replay_approved": True}, reference=now))
+            self.assertTrue(deal_expired_before_submit({
+                "source_id": mid, "posted_at_utc": stamp}, reference=now))
+        self.assertTrue(deal_expired_before_submit({
+            "source_id": 94991, "posted_at_utc": stamp,
+            "manual_replay_approved": True}, reference=now))
+        self.assertFalse(deal_expired_before_submit({
+            "source_id": 94991,
+            "posted_at_utc": (now-timedelta(minutes=20)).isoformat()},
+            reference=now))
+        self.assertTrue(deal_expired_before_submit({
+            "source_id": 94986, "posted_at_utc": "invalid",
+            "manual_replay_approved": True}, reference=now))
 
 
 class SubmitAnchorTests(unittest.TestCase):
