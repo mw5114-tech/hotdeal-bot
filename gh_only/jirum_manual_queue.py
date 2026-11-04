@@ -195,6 +195,13 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     if len(rows) != 1 or not isinstance(rows[0], dict):
         return None
     row = rows[0]
+    if row.get("photo", {}).get("status") == "PHOTO_EVIDENCE_UNAVAILABLE":
+        print("JIRUM_PHOTO_SOURCES_EXHAUSTED " + json.dumps({
+            "source_id": row.get("source_message_id"),
+            "lowchart": row.get("image_metadata_status"),
+            "fallback_attempts": row.get("photo_provider_attempts", []),
+        }, ensure_ascii=False))
+        return "PHOTO_EVIDENCE_UNAVAILABLE"
     reason = row.get("image_metadata_status")
     if reason in PERMANENT_LOWCHART_ISSUES:
         return reason
@@ -671,11 +678,13 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
             or (row.get("image_source") == "telegram_attached_photo"
                 and row.get("source_photo_verified") is True
                 and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
-            or (row.get("image_source") == "naver_indexed_coupang_product_image"
-                and row.get("image_search_product_id_verified") is True
-                and row.get("image_search_title_verified") is True
-                and row.get("image_search_exact_item_id_verified") is False
-                and row.get("photo", {}).get("image_source") == "naver_indexed_coupang_product_image")
+            or (row.get("image_source") in ("couspi_product_page",
+                                           "dangapick_product_page")
+                and row.get("image_provider_verified") is True
+                and row.get("image_provider_product_id") == row.get(
+                    "product_identity", {}).get("product_id")
+                and row.get("photo", {}).get("image_source") ==
+                    row.get("image_source"))
         ) if lowchart_mode() else row.get("kakao_product_match"))
         or type(row.get("caption", {}).get("sale_price_krw")) is not int
         or (lowchart_mode() and (
@@ -683,11 +692,14 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 (row.get("lowchart_title_verified") is True
                  and row.get("product_name_source") == "lowchart_exact_item_page"
                  and isinstance(row.get("lowchart_product_title"), str))
-                or (row.get("image_source") == "naver_indexed_coupang_product_image"
-                    and row.get("image_search_product_id_verified") is True
-                    and row.get("image_search_title_verified") is True
-                    and row.get("product_name_source") == "search_exact_product_id_index"
-                    and isinstance(row.get("search_product_title"), str))
+                or (row.get("image_source") in ("couspi_product_page",
+                                              "dangapick_product_page")
+                    and row.get("image_provider_verified") is True
+                    and row.get("product_name_source") == "external_product_id_page"
+                    and isinstance(row.get("image_provider_title"), str)
+                    and row.get("caption", {}).get("product_name") ==
+                        row.get("image_provider_title")[:len(
+                            row.get("caption", {}).get("product_name", ""))])
             )
             or not isinstance(row.get("caption", {}).get("product_name"), str)
             or article["body"].splitlines()[0] != row["caption"]["caption"].splitlines()[0]
