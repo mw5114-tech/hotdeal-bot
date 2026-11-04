@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95050,
-  "pending": [
-    {
-      "id": 95050,
-      "source_post_url": "https://t.me/jirum/95050",
-      "original_purchase_url": "https://link.coupang.com/a/ipRzVjB8ZE",
-      "source_text": "☆특가 1,029,865원 (23.7% 할인)\n로보락 로봇청소기 직배수 스테이션 S9 MaxV Ultra(S90VER+EWFD33HRR) 9 MaxV UltraS90VER+EWFD33HRR색상화이트\n📌 가격 현황\n- 정상가: 1,349,571원\n- 할인: 319,706원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipRzVjB8ZE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T22:14:01+00:00",
-      "title": "로보락 로봇청소기 직배수 스테이션 S9 MaxV Ultra(S90VER+EWFD33HRR) 9 MaxV UltraS90VER+EWFD33HRR색상화이트",
-      "sale_price_krw": 1029865
-    }
-  ],
-  "in_flight": {
-    "id": 95050,
-    "status": "CLAIMED",
-    "run_id": "41923577800",
-    "at": "2026-11-04T22:15:22.530942+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1881,6 +1866,16 @@
       "vendor_item_id": "95502497988",
       "at": "2026-11-04T22:14:19.728283+00:00",
       "run_id": "41923375003"
+    },
+    "95050": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EB%B3%B4%EB%9D%BD-%EB%A1%9C%EB%B4%87%EC%B2%AD%EC%86%8C%EA%B8%B0-%EC%A7%81%EB%B0%B0%EC%88%98-%EC%8A%A4%ED%85%8C%EC%9D%B4%EC%85%98-S9-MaxV-UltraS-20%ED%95%A0%EC%9D%B8-ARoJ1zwP?from=write",
+      "posted_at_utc": "2026-11-04T22:14:01+00:00",
+      "product_id": "8599247810",
+      "item_id": "24934237291",
+      "vendor_item_id": "91940353886",
+      "at": "2026-11-04T22:15:39.494014+00:00",
+      "run_id": "41923577800"
     }
   },
   "skipped_non_coupang": 22,
