@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95021,
-  "pending": [
-    {
-      "id": 95021,
-      "source_post_url": "https://t.me/jirum/95021",
-      "original_purchase_url": "https://link.coupang.com/a/ioUch0rfZ6",
-      "source_text": "☆특가 13,600원 (20.0% 할인)\n가시제거연구소 고등어밥상 오렌지라벨 4~5입 (냉동), 550g, 1개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 3,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioUch0rfZ6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T08:23:03+00:00",
-      "title": "가시제거연구소 고등어밥상 오렌지라벨 4~5입 (냉동), 550g, 1개",
-      "sale_price_krw": 13600
-    }
-  ],
-  "in_flight": {
-    "id": 95021,
-    "status": "CLAIMED",
-    "run_id": "41799121424",
-    "at": "2026-11-04T08:23:45.293249+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1621,6 +1606,16 @@
       "vendor_item_id": "91738080805",
       "at": "2026-11-04T08:19:05.319787+00:00",
       "run_id": "41798459850"
+    },
+    "95021": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B0%80%EC%8B%9C%EC%A0%9C%EA%B1%B0%EC%97%B0%EA%B5%AC%EC%86%8C-%EA%B3%A0%EB%93%B1%EC%96%B4%EB%B0%A5%EC%83%81-%EC%98%A4%EB%A0%8C%EC%A7%80%EB%9D%BC%EB%B2%A8-45%EC%9E%85-%EB%83%89%EB%8F%99-550-25%ED%95%A0%EC%9D%B8-A6XO0B9d?from=write",
+      "posted_at_utc": "2026-11-04T08:23:03+00:00",
+      "product_id": "7923609064",
+      "item_id": "27888814403",
+      "vendor_item_id": "94847806324",
+      "at": "2026-11-04T08:24:02.696315+00:00",
+      "run_id": "41799121424"
     }
   },
   "skipped_non_coupang": 19,
