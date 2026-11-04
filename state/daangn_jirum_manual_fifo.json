@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94990,
+  "last_scanned_id": 94991,
   "pending": [
     {
       "id": 94987,
@@ -37,6 +37,15 @@
       "posted_at_utc": "2026-11-04T01:27:11+00:00",
       "title": "☆특가 6,990원",
       "sale_price_krw": 6990
+    },
+    {
+      "id": 94991,
+      "source_post_url": "https://t.me/jirum/94991",
+      "original_purchase_url": "https://link.coupang.com/a/ioq9lqse4q",
+      "source_text": "👍대박 25,980원 (33.0% 할인)\n테팔 인덕션 티타늄 1X 데일리 컴포트 프라이팬\n📌 가격 현황\n- 정상가: 38,776원\n- 할인: 12,796원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioq9lqse4q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:36:34+00:00",
+      "title": "테팔 인덕션 티타늄 1X 데일리 컴포트 프라이팬",
+      "sale_price_krw": 25980
     }
   ],
   "in_flight": null,
