@@ -1,7 +1,58 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94997,
-  "pending": [],
+  "pending": [
+    {
+      "id": 94986,
+      "source_post_url": "https://t.me/jirum/94986",
+      "original_purchase_url": "https://link.coupang.com/a/ioqiG4QVPM",
+      "source_text": "☆특가 1,791,000원 (11.8% 할인)\n삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치\n📌 가격 현황\n- 정상가: 2,031,500원\n- 할인: 240,500원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqiG4QVPM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:24:41+00:00",
+      "title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치",
+      "sale_price_krw": 1791000,
+      "manual_replay_approved": true
+    },
+    {
+      "id": 94987,
+      "source_post_url": "https://t.me/jirum/94987",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtxnns7M",
+      "source_text": "☆특가 7,980원\n무항생제 신선한 특란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtxnns7M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:08+00:00",
+      "title": "☆특가 7,980원",
+      "sale_price_krw": 7980,
+      "manual_replay_approved": true
+    },
+    {
+      "id": 94988,
+      "source_post_url": "https://t.me/jirum/94988",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtCbf7Xo",
+      "source_text": "☆특가 7,990원\n무항생제 신선 특란 1.8kg, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtCbf7Xo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:09+00:00",
+      "title": "☆특가 7,990원",
+      "sale_price_krw": 7990,
+      "manual_replay_approved": true
+    },
+    {
+      "id": 94989,
+      "source_post_url": "https://t.me/jirum/94989",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtFbt4pM",
+      "source_text": "☆특가 7,990원\n곰곰 무항생제 신선한 특란, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtFbt4pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:10+00:00",
+      "title": "☆특가 7,990원",
+      "sale_price_krw": 7990,
+      "manual_replay_approved": true
+    },
+    {
+      "id": 94990,
+      "source_post_url": "https://t.me/jirum/94990",
+      "original_purchase_url": "https://link.coupang.com/a/ioqtIxR5ci",
+      "source_text": "☆특가 6,990원\n신선한 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtIxR5ci\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T01:27:11+00:00",
+      "title": "☆특가 6,990원",
+      "sale_price_krw": 6990,
+      "manual_replay_approved": true
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1712,34 +1763,6 @@
       "source_title": "이니스프리 화산송이 모공 바하 클렌징 폼, 150g, 2개",
       "posted_at_utc": "2026-11-03T13:11:15+00:00",
       "at": "2026-11-03T14:40:45.461251+00:00"
-    },
-    "94987": {
-      "status": "DEAL_OVER_60_MINUTES_OLD",
-      "source_post_url": "https://t.me/jirum/94987",
-      "source_title": "☆특가 7,980원",
-      "posted_at_utc": "2026-11-04T01:27:08+00:00",
-      "at": "2026-11-04T02:28:56.000843+00:00"
-    },
-    "94988": {
-      "status": "DEAL_OVER_60_MINUTES_OLD",
-      "source_post_url": "https://t.me/jirum/94988",
-      "source_title": "☆특가 7,990원",
-      "posted_at_utc": "2026-11-04T01:27:09+00:00",
-      "at": "2026-11-04T02:28:56.000852+00:00"
-    },
-    "94989": {
-      "status": "DEAL_OVER_60_MINUTES_OLD",
-      "source_post_url": "https://t.me/jirum/94989",
-      "source_title": "☆특가 7,990원",
-      "posted_at_utc": "2026-11-04T01:27:10+00:00",
-      "at": "2026-11-04T02:28:56.000856+00:00"
-    },
-    "94990": {
-      "status": "DEAL_OVER_60_MINUTES_OLD",
-      "source_post_url": "https://t.me/jirum/94990",
-      "source_title": "☆특가 6,990원",
-      "posted_at_utc": "2026-11-04T01:27:11+00:00",
-      "at": "2026-11-04T02:28:56.000860+00:00"
     }
   },
   "skipped_unverifiable": {
@@ -1848,12 +1871,6 @@
       "source_post_url": "https://t.me/jirum/94981",
       "source_title": "메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼",
       "at": "2026-11-04T00:23:14.778416+00:00"
-    },
-    "94986": {
-      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
-      "source_post_url": "https://t.me/jirum/94986",
-      "source_title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치",
-      "at": "2026-11-04T01:26:24.886097+00:00"
     }
   },
   "single_test_repost_20261103": {
@@ -1875,5 +1892,46 @@
     "result": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
     "test_post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EB%8F%99%EC%B9%98%EB%AF%B8%EB%83%89%EB%A9%B4-4%EC%9D%B8%EB%B6%84-1692kg-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dGGXgV3d?from=write",
     "completed_at": "2026-11-03T21:37:55.497252+00:00"
+  },
+  "manual_replay_archive": {
+    "94986": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/94986",
+      "source_title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치",
+      "at": "2026-11-04T01:26:24.886097+00:00",
+      "replay_reason": "user_requested_sequential_posting_2026-11-04"
+    },
+    "94987": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94987",
+      "source_title": "☆특가 7,980원",
+      "posted_at_utc": "2026-11-04T01:27:08+00:00",
+      "at": "2026-11-04T02:28:56.000843+00:00",
+      "replay_reason": "user_requested_sequential_posting_2026-11-04"
+    },
+    "94988": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94988",
+      "source_title": "☆특가 7,990원",
+      "posted_at_utc": "2026-11-04T01:27:09+00:00",
+      "at": "2026-11-04T02:28:56.000852+00:00",
+      "replay_reason": "user_requested_sequential_posting_2026-11-04"
+    },
+    "94989": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94989",
+      "source_title": "☆특가 7,990원",
+      "posted_at_utc": "2026-11-04T01:27:10+00:00",
+      "at": "2026-11-04T02:28:56.000856+00:00",
+      "replay_reason": "user_requested_sequential_posting_2026-11-04"
+    },
+    "94990": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94990",
+      "source_title": "☆특가 6,990원",
+      "posted_at_utc": "2026-11-04T01:27:11+00:00",
+      "at": "2026-11-04T02:28:56.000860+00:00",
+      "replay_reason": "user_requested_sequential_posting_2026-11-04"
+    }
   }
 }
