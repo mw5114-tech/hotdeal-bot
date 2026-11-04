@@ -211,6 +211,8 @@ class LowchartProductPhotoTests(unittest.TestCase):
                         return_value={"status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
                                       "error_type": "HTTPError", "http_status": 503}),
                   patch("gh_only.default_deal_automation.download_source_photo") as telegram,
+                  patch("gh_only.fallcent_search_photo.fetch_fallcent_product_photo",
+                        return_value={"status": "FALLCENT_NO_MATCHING_IMAGE"}),
                   patch("gh_only.naver_web_image_photo.fetch_first_naver_photo",
                         return_value={"status": "PHOTO_EVIDENCE_UNAVAILABLE",
                                       "photo_provider_attempts": []}) as providers):
