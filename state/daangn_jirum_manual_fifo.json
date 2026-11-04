@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95056,
-  "pending": [
-    {
-      "id": 95056,
-      "source_post_url": "https://t.me/jirum/95056",
-      "original_purchase_url": "https://link.coupang.com/a/ipTl4d7Xtk",
-      "source_text": "🔥🔥🔥무지성 5,990원 (51.0% 할인)🔥🔥🔥\n[로켓프레시] 오뚜기 실쏙 찹쌀 군만두 고기 (냉동)\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,224원\n- 할인: 6,234원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipTl4d7Xtk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T22:38:52+00:00",
-      "title": "[로켓프레시] 오뚜기 실쏙 찹쌀 군만두 고기 (냉동)",
-      "sale_price_krw": 5990
-    }
-  ],
-  "in_flight": {
-    "id": 95056,
-    "status": "CLAIMED",
-    "run_id": "41927159932",
-    "at": "2026-11-04T22:40:06.978757+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1931,6 +1916,16 @@
       "vendor_item_id": "81926576431",
       "at": "2026-11-04T22:27:05.820055+00:00",
       "run_id": "41925268586"
+    },
+    "95056": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%8B%A4%EC%8F%99-%EC%B0%B9%EC%8C%80-%EA%B5%B0%EB%A7%8C%EB%91%90-%EA%B3%A0%EA%B8%B0-%EB%83%89%EB%8F%99-15kg-1%EA%B0%9C-55%ED%95%A0%EC%9D%B8-dZnZxxNd?from=write",
+      "posted_at_utc": "2026-11-04T22:38:52+00:00",
+      "product_id": "7909700206",
+      "item_id": "21700568310",
+      "vendor_item_id": null,
+      "at": "2026-11-04T22:40:24.580490+00:00",
+      "run_id": "41927159932"
     }
   },
   "skipped_non_coupang": 23,
