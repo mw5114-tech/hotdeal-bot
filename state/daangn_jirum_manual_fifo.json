@@ -3,15 +3,6 @@
   "last_scanned_id": 95036,
   "pending": [
     {
-      "id": 95032,
-      "source_post_url": "https://t.me/jirum/95032",
-      "original_purchase_url": "https://link.coupang.com/a/ipa153y0EC",
-      "source_text": "☆특가 390원\n샘표국시 바지락칼국수 100.3g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa153y0EC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:18:39+00:00",
-      "title": "☆특가 390원",
-      "sale_price_krw": 390
-    },
-    {
       "id": 95033,
       "source_post_url": "https://t.me/jirum/95033",
       "original_purchase_url": "https://link.coupang.com/a/ipa19ZF2v6",
@@ -48,12 +39,7 @@
       "sale_price_krw": 580
     }
   ],
-  "in_flight": {
-    "id": 95032,
-    "status": "CLAIMED",
-    "run_id": "41828239382",
-    "at": "2026-11-04T12:19:40.348229+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1747,6 +1733,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T12:14:53.324077+00:00",
       "run_id": "41827464914"
+    },
+    "95032": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%98%ED%91%9C%EA%B5%AD%EC%8B%9C-%EB%B0%94%EC%A7%80%EB%9D%BD%EC%B9%BC%EA%B5%AD%EC%88%98-1003g-1%EA%B0%9C-65%ED%95%A0%EC%9D%B8-jvxz0X3P?from=write",
+      "posted_at_utc": "2026-11-04T12:18:39+00:00",
+      "product_id": "7851779547",
+      "item_id": "26621968172",
+      "vendor_item_id": "93594909069",
+      "at": "2026-11-04T12:19:56.628770+00:00",
+      "run_id": "41828239382"
     }
   },
   "skipped_non_coupang": 21,
