@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95013,
-  "pending": [
-    {
-      "id": 95013,
-      "source_post_url": "https://t.me/jirum/95013",
-      "original_purchase_url": "https://link.coupang.com/a/ioI0JYXv7Q",
-      "source_text": "☆특가 15,480원\n닛신 돈베이 튀김 소바 100g, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioI0JYXv7Q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T05:46:31+00:00",
-      "title": "☆특가 15,480원",
-      "sale_price_krw": 15480
-    }
-  ],
-  "in_flight": {
-    "id": 95013,
-    "status": "CLAIMED",
-    "run_id": "41781394510",
-    "at": "2026-11-04T05:47:59.943892+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1551,6 +1536,16 @@
       "vendor_item_id": "80593900702",
       "at": "2026-11-04T05:46:51.011305+00:00",
       "run_id": "41781264131"
+    },
+    "95013": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%9B%EC%8B%A0-%EB%8F%88%EB%B2%A0%EC%9D%B4-%ED%8A%80%EA%B9%80-%EC%86%8C%EB%B0%94-100g-24%EA%B0%9C-Pk6Bz8DA?from=write",
+      "posted_at_utc": "2026-11-04T05:46:31+00:00",
+      "product_id": "9461172065",
+      "item_id": "25538715172",
+      "vendor_item_id": "92530317017",
+      "at": "2026-11-04T05:48:16.013198+00:00",
+      "run_id": "41781394510"
     }
   },
   "skipped_non_coupang": 18,
