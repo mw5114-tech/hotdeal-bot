@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95053,
-  "pending": [
-    {
-      "id": 95053,
-      "source_post_url": "https://t.me/jirum/95053",
-      "original_purchase_url": "https://link.coupang.com/a/ipR0F7HB7c",
-      "source_text": "❤️초대박 8,000원 (40.2% 할인)\n도밍고 꿀차 3종 선물세트, 꿀홍차 10p + 꿀민트 10p + 꿀캐모마일 10p, 1세트\n📌 가격 현황\n- 정상가: 13,378원\n- 할인: 5,378원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipR0F7HB7c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T22:20:03+00:00",
-      "title": "도밍고 꿀차 3종 선물세트, 꿀홍차 10p + 꿀민트 10p + 꿀캐모마일 10p, 1세트",
-      "sale_price_krw": 8000
-    }
-  ],
-  "in_flight": {
-    "id": 95053,
-    "status": "CLAIMED",
-    "run_id": "41924484706",
-    "at": "2026-11-04T22:21:28.308229+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1911,6 +1896,16 @@
       "vendor_item_id": "94262426123",
       "at": "2026-11-04T22:18:58.179983+00:00",
       "run_id": "41924083711"
+    },
+    "95053": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8F%84%EB%B0%8D%EA%B3%A0-%EA%BF%80%EC%B0%A8-3%EC%A2%85-%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B8-%EA%BF%80%ED%99%8D%EC%B0%A8-10p-%EA%BF%80%EB%AF%BC%ED%8A%B8-10p-50%ED%95%A0%EC%9D%B8-PWMvgzmj?from=write",
+      "posted_at_utc": "2026-11-04T22:20:03+00:00",
+      "product_id": "7728540432",
+      "item_id": "20761327876",
+      "vendor_item_id": "70035188370",
+      "at": "2026-11-04T22:21:45.244971+00:00",
+      "run_id": "41924484706"
     }
   },
   "skipped_non_coupang": 22,
