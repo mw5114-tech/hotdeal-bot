@@ -139,75 +139,8 @@ class OrderedProductPhotoTests(unittest.TestCase):
         self.assertEqual(result["status"], "SOURCE_UNAVAILABLE")
         self.assertEqual(result["http_status"], 403)
 
-    def test_pipeline_uses_verified_dangapick_image_and_draft_validates(self):
-        def provider(identity, title, folder, source_id):
-            fake_saved(CDN, "dangapick", PID, folder, source_id)
-            return {
-                "status": "IMAGE_SAVED",
-                "image_source": "dangapick_product_page",
-                "saved_name": "jirum_94975_dangapick_photo.jpg",
-                "bytes": 1253,
-                "image_provider_verified": True,
-                "image_provider_product_id": PID,
-                "image_provider_item_id": "24674417319",
-                "image_provider_title": NAME,
-                "photo_provider_attempts": [
-                    {"provider":"couspi","status":"SOURCE_UNAVAILABLE"},
-                    {"provider":"dangapick","status":"IMAGE_SAVED"}],
-            }
-        with tempfile.TemporaryDirectory() as tmp:
-            folder = Path(tmp)
-            with patch.dict(os.environ, {
-                "JIRUM_IMAGE_SOURCE": "lowchart",
-                "COUPANG_PARTNER_LPTAG": "AF9668915"}):
-                with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
-                           return_value={"status":"LOWCHART_ITEM_PAGE_NOT_FOUND",
-                                         "http_status":404}):
-                    with patch("gh_only.ordered_product_photos.ordered_external_photo",
-                               side_effect=provider):
-                        row = enrich_deal(
-                            DEAL, folder, resolver=lambda _: IDENTITY,
-                            history_fetch=lambda *x: {},
-                            owner_tag="AF9668915")
-                self.assertEqual(row["photo"]["status"], "IMAGE_SAVED")
-                self.assertEqual(row["image_source"], "dangapick_product_page")
-                self.assertEqual(row["product_name_source"], "external_product_id_page")
-                self.assertEqual(row["caption"]["sale_price_krw"], 9700)
-                self.assertIn("[할인율 확인 중]", row["caption"]["caption"])
-                (folder / "drafts.json").write_text(
-                    json.dumps({"drafts": [row]}, ensure_ascii=False), "utf-8")
-                article = {"source_id": 94975,
-                           "image": folder / row["photo"]["saved_name"],
-                           "candidate_url": row["composed_affiliate_url"],
-                           "body": row["caption"]["caption"],
-                           "title": "[쿠팡🔥핫딜] " + row["caption"]["product_name"]}
-                with patch("gh_only.jirum_manual_queue.read_one_draft",
-                           return_value=article):
-                    output = validate_draft(folder, 94975)
-                self.assertEqual(output["product_id"], PID)
-                self.assertEqual(output["item_id"], IID)
-
-    def test_pipeline_exhausted_records_skip_not_lowchart_404(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            folder = Path(tmp)
-            with patch.dict(os.environ, {
-                "JIRUM_IMAGE_SOURCE": "lowchart",
-                "COUPANG_PARTNER_LPTAG": "AF9668915"}):
-                with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
-                           return_value={"status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
-                                         "http_status": 404}):
-                    with patch("gh_only.ordered_product_photos.ordered_external_photo",
-                               return_value={"status": "PHOTO_EVIDENCE_UNAVAILABLE",
-                                             "photo_provider_attempts": [
-                                                 {"provider": "couspi", "status": "SOURCE_UNAVAILABLE"},
-                                                 {"provider": "dangapick", "status": "NO_VERIFIED_IMAGE"}]}):
-                        row = enrich_deal(DEAL, folder, resolver=lambda _: IDENTITY,
-                                          owner_tag="AF9668915")
-                self.assertEqual(row["photo"]["status"], "PHOTO_EVIDENCE_UNAVAILABLE")
-                (folder / "drafts.json").write_text(
-                    json.dumps({"drafts": [row]}, ensure_ascii=False), "utf-8")
-                self.assertEqual(permanent_lowchart_failure(folder),
-                                 "PHOTO_EVIDENCE_UNAVAILABLE")
+    # Legacy provider unit tests are retained for reference; production
+    # integration is now covered by test_naver_web_image_photo.
 
 
 if __name__ == "__main__":

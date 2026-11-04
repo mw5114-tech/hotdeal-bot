@@ -265,8 +265,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         eligible_cdn = image_is_cdn(og.get("og_image") or "")
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
-    # Production order: Lowchart -> Couspi -> Dangapick -> skip.
-    # Do not silently use Telegram previews or arbitrary indexed images.
+    # Photo order: verified Lowchart exact item -> first public Naver image.
+    # The latter is a *representative* image, never an exact Coupang match.
     source_photo_verified = False
     search_result = {"status": "NOT_ATTEMPTED"}
     search_photo_verified = False
@@ -275,20 +275,29 @@ def enrich_deal(deal: dict, output_dir: Path,
     if (using_public_lowchart
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and photo.get("status") != "IMAGE_SAVED"):
-        from gh_only.ordered_product_photos import ordered_external_photo
-        provider_photo = ordered_external_photo(
-            identity, fallback_title or title, output_dir, source_id)
+        from gh_only.naver_web_image_photo import fetch_first_naver_photo
+        provider_photo = fetch_first_naver_photo(
+            fallback_title or title, output_dir, source_id)
+        provider_photo["photo_provider_attempts"] = [{
+            "provider": "naver_web",
+            "status": provider_photo.get("status"),
+            "error_type": provider_photo.get("error_type"),
+        }]
         if provider_photo.get("status") == "IMAGE_SAVED":
             photo = {k: provider_photo[k] for k in ("status", "saved_name",
                      "bytes", "image_source") if k in provider_photo}
             image_source = provider_photo["image_source"]
-            if not lowchart_title_verified:
-                title = provider_photo["image_provider_title"]
+            # Keep Telegram's title; Naver result may depict a different option.
+            title = fallback_title or title
         else:
             photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
-    provider_verified = (provider_photo.get("status") == "IMAGE_SAVED"
-                         and provider_photo.get("image_provider_verified") is True
-                         and provider_photo.get("image_provider_product_id") == p)
+    provider_verified = False
+    representative_naver_image = (
+        provider_photo.get("status") == "IMAGE_SAVED"
+        and provider_photo.get("image_source") == "naver_web_first_image"
+        and provider_photo.get("image_match_basis") ==
+            "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
+    )
     caption = create_default_preview(sale, title, average, source_id)
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
@@ -314,14 +323,15 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_product_title": og_title.strip() if lowchart_title_verified else None,
         "product_name_source": (
             "lowchart_exact_item_page" if lowchart_title_verified
-            else "external_product_id_page" if provider_verified
+            else "telegram_product_title" if representative_naver_image
             else "unverified_fallback"
         ) if using_public_lowchart else "legacy_kakao",
         "search_product_title": search_title,
         "image_search_product_id_verified": search_photo_verified,
         "image_search_title_verified": search_photo_verified,
         "image_search_exact_item_id_verified": False,
-        "search_status": search_result.get("status"),
+        "search_status": (provider_photo.get("status") if representative_naver_image
+                          else search_result.get("status")),
         "search_provider": ("naver_image_index" if search_photo_verified else None),
         "kakao_status": og.get("status"),
         "kakao_product_match": matching and image_source == "legacy_kakao_og",
@@ -332,7 +342,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "image_error_type": og.get("error_type"),
         "source_photo_verified": source_photo_verified,
         "image_match_basis": (
-            "SAME_COUPANG_PRODUCT_ID_EXTERNAL_PAGE" if provider_verified
+            "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT" if representative_naver_image
             else og.get("image_match_basis")
         ),
         "image_same_named_option": (
@@ -340,6 +350,7 @@ def enrich_deal(deal: dict, output_dir: Path,
             else og.get("image_same_named_option")
         ),
         "image_provider_verified": provider_verified,
+        "representative_naver_image": representative_naver_image,
         "image_provider_title": provider_photo.get("image_provider_title"),
         "image_provider_product_id": provider_photo.get("image_provider_product_id"),
         "image_provider_item_id": provider_photo.get("image_provider_item_id"),
