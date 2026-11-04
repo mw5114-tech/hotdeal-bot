@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95041,
-  "pending": [
-    {
-      "id": 95041,
-      "source_post_url": "https://t.me/jirum/95041",
-      "original_purchase_url": "https://link.coupang.com/a/ipkEbly6pM",
-      "source_text": "☆특가 21,060원 (24.7% 할인)\n용각산 목캔디 10봉, 100g, 10개\n📌 가격 현황\n- 정상가: 27,980원\n- 할인: 6,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipkEbly6pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T14:33:11+00:00",
-      "title": "용각산 목캔디 10봉, 100g, 10개",
-      "sale_price_krw": 21060
-    }
-  ],
-  "in_flight": {
-    "id": 95041,
-    "status": "CLAIMED",
-    "run_id": "41848858303",
-    "at": "2026-11-04T14:34:36.430626+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1801,6 +1786,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T13:29:39.893628+00:00",
       "run_id": "41838433475"
+    },
+    "95041": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9A%A9%EA%B0%81%EC%82%B0-%EB%AA%A9%EC%BA%94%EB%94%94-10%EB%B4%89-100g-10%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PmVg4Jxd?from=write",
+      "posted_at_utc": "2026-11-04T14:33:11+00:00",
+      "product_id": "7866106965",
+      "item_id": "24113269438",
+      "vendor_item_id": "91220867014",
+      "at": "2026-11-04T14:34:53.120332+00:00",
+      "run_id": "41848858303"
     }
   },
   "skipped_non_coupang": 21,
