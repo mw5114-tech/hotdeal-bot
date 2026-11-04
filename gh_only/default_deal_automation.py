@@ -200,7 +200,8 @@ def enrich_deal(deal: dict, output_dir: Path,
                 resolver=resolve_identity, og_lookup=None,
                 history_fetch=fetch_one, photo_downloader=None,
                 session_secret: str = "", owner_tag: str = "",
-                *, search_lookup=None, search_downloader=None) -> dict:
+                *, search_lookup=None, search_downloader=None,
+                naver_price_lookup=None) -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -250,6 +251,30 @@ def enrich_deal(deal: dict, output_dir: Path,
         except Exception as exc:
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
+
+    # Lowchart's exact-item historical mean wins. Only if it is absent,
+    # accept one current first-card Naver shopping quote as a comparison
+    # reference; never describe that quote as a historical mean/Coupang MSRP.
+    comparison_price = average
+    comparison_source = "lowchart_public_history"
+    naver_price = {"status": "NOT_ATTEMPTED", "price_krw": None}
+    if (using_public_lowchart
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and average is None and type(sale) is int and sale > 0
+            and os.getenv("JIRUM_ENABLE_NAVER_PRICE_FALLBACK") == "true"):
+        try:
+            if naver_price_lookup is None:
+                from gh_only.naver_web_product_price import fetch_first_naver_product_price
+                naver_price_lookup = fetch_first_naver_product_price
+            naver_price = naver_price_lookup(fallback_title or title)
+            quote = naver_price.get("price_krw")
+            if (naver_price.get("status") == "PRICE_FOUND"
+                    and type(quote) is int and 100 <= quote <= 100_000_000):
+                comparison_price = quote
+                comparison_source = "naver_general_search_first_shopping_card"
+        except Exception as exc:
+            naver_price = {"status": "NAVER_PRICE_QUERY_ERROR",
+                           "price_krw": None, "error_type": type(exc).__name__}
     image_source = og.get(
         "image_source",
         "lowchart_exact_item_public_page" if using_public_lowchart
@@ -298,7 +323,9 @@ def enrich_deal(deal: dict, output_dir: Path,
         and provider_photo.get("image_match_basis") ==
             "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
     )
-    caption = create_default_preview(sale, title, average, source_id)
+    caption = create_default_preview(
+        sale, title, comparison_price, source_id,
+        reference_source=comparison_source)
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
     candidate = (
@@ -358,6 +385,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
+        "naver_price_lookup": naver_price,
+        "comparison_price_source": (comparison_source if comparison_price is not None else None),
         "observed_low_verified_for_deal": (
             average is not None
             and type(history.get("observed_low_krw")) is int
