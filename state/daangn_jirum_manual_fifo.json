@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95003,
-  "pending": [],
+  "last_scanned_id": 95004,
+  "pending": [
+    {
+      "id": 95004,
+      "source_post_url": "https://t.me/jirum/95004",
+      "original_purchase_url": "https://link.coupang.com/a/ioCAXhDTMW",
+      "source_text": "☆특가 155,530원 (22.2% 할인)\n닌자 크리스피 올인원 유리 에어프라이어 3.8L + 1.4L 세트\n📌 가격 현황\n- 정상가: 200,000원\n- 할인: 44,470원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioCAXhDTMW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T04:16:44+00:00",
+      "title": "닌자 크리스피 올인원 유리 에어프라이어 3.8L + 1.4L 세트",
+      "sale_price_krw": 155530
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
