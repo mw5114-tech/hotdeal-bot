@@ -825,7 +825,8 @@ def build_next(s: dict) -> dict:
         "drafts": [candidate],
     }, ensure_ascii=False, indent=2) + "\n", "utf-8")
     article = validate_draft(DRAFT_DIR, row["id"])
-    return {**article, "posted_at_utc": row.get("posted_at_utc")}
+    return {**article, "posted_at_utc": row.get("posted_at_utc"),
+            "manual_replay_approved": row.get("manual_replay_approved") is True}
 
 
 def claim(store: GithubState, source_id: int, run_id: str) -> None:

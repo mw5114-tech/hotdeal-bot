@@ -10,6 +10,7 @@ on:
       - feat/search-image-fallback-20261104
       - fix/ordered-lowchart-couspi-dangapick-20261104
       - fix/naver-web-photo-and-user-replay-20261104
+      - fix/user-replay-submit-expiry-20261104
       - feat/daangn-body-discount-first-20261102
       - feat/muse-official-link-receipts-20261103
       - feat/daangn-post-then-muse-rewrite-20261103
