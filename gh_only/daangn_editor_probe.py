@@ -168,7 +168,7 @@ def read_one_draft(folder: Path) -> dict:
     if photo.get("status") == "IMAGE_SAVED":
         if (not isinstance(filename, str) or filename != Path(filename).name
                 or Path(filename).suffix.lower() not in IMAGE_EXTS
-                or not re.fullmatch(r"jirum_[0-9]+_(?:kakao_og|lowchart_photo|telegram_source_photo|couspi_photo|dangapick_photo|naver_web_photo)\.(?:jpg|jpeg|png|webp)", filename)):
+                or not re.fullmatch(r"jirum_[0-9]+_(?:kakao_og|lowchart_photo|telegram_source_photo|couspi_photo|dangapick_photo|fallcent_photo|naver_web_photo)\.(?:jpg|jpeg|png|webp)", filename)):
             raise ValueError("DRAFT_IMAGE_NAME_INVALID")
         image = folder / filename
         if not image.is_file() or image.stat().st_size > 2_500_000:
@@ -195,8 +195,12 @@ def read_one_draft(folder: Path) -> dict:
         raise ValueError("DRAFT_LINK_ROW_LAYOUT_INVALID")
     compact_body = before.rstrip("\n") + "\n" + link_line
     # One Enter around the link block, while retaining the wider disclosure gap.
-    image_notice = ("\n※ 이미지는 네이버 이미지 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
-                    if row.get("image_source") == "naver_web_first_image" else "")
+    if row.get("image_source") == "fallcent_search_representative":
+        image_notice = "\n※ 이미지는 폴센트 상품 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
+    elif row.get("image_source") == "naver_web_first_image":
+        image_notice = "\n※ 이미지는 네이버 이미지 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
+    else:
+        image_notice = ""
     clean_body = compact_body + "\n" + stock_notice + image_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
