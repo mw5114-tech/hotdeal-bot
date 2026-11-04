@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95021,
-  "pending": [],
+  "last_scanned_id": 95022,
+  "pending": [
+    {
+      "id": 95022,
+      "source_post_url": "https://t.me/jirum/95022",
+      "original_purchase_url": "https://link.coupang.com/a/ioUPKpvHZA",
+      "source_text": "❤️초대박 65,700원 (40.3% 할인)\n(와멤데 쿠폰) 설화수 자음 2종 세트, 1세트 (+에센셜 4종 키트 증정)\n📌 가격 현황\n- 정상가: 110,000원\n- 할인: 44,300원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioUPKpvHZA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T08:31:58+00:00",
+      "title": "(와멤데 쿠폰) 설화수 자음 2종 세트, 1세트 (+에센셜 4종 키트 증정)",
+      "sale_price_krw": 65700
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
