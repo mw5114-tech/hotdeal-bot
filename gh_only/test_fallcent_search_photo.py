@@ -129,7 +129,10 @@ class FallcentTests(unittest.TestCase):
                 "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
                 "drafts": [row],
             }, ensure_ascii=False), encoding="utf-8")
-            with patch.dict("os.environ", {"JIRUM_IMAGE_SOURCE": "lowchart"}):
+            with patch.dict("os.environ", {
+                    "JIRUM_IMAGE_SOURCE": "lowchart",
+                    "COUPANG_PARTNER_LPTAG": "AF9668915",
+            }):
                 article = validate_draft(folder, 96123)
             self.assertIn("폴센트 상품 검색 대표 사진", article["body"])
             self.assertEqual(article["image"].name, "jirum_96123_fallcent_photo.png")
