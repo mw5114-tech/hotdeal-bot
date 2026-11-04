@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95042,
-  "pending": [
-    {
-      "id": 95042,
-      "source_post_url": "https://t.me/jirum/95042",
-      "original_purchase_url": "https://link.coupang.com/a/ipEqO14en6",
-      "source_text": "👍대박 9,080원 (32.5% 할인)\n유에이지 맥세이프 그립톡 스마트링 거치대, 블랙 + 실버, 1개\n📌 가격 현황\n- 정상가: 13,450원\n- 할인: 4,370원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipEqO14en6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T19:10:02+00:00",
-      "title": "유에이지 맥세이프 그립톡 스마트링 거치대, 블랙 + 실버, 1개",
-      "sale_price_krw": 9080
-    }
-  ],
-  "in_flight": {
-    "id": 95042,
-    "status": "CLAIMED",
-    "run_id": "41894400681",
-    "at": "2026-11-04T19:11:07.587533+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1811,6 +1796,16 @@
       "vendor_item_id": "91220867014",
       "at": "2026-11-04T14:34:53.120332+00:00",
       "run_id": "41848858303"
+    },
+    "95042": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%A0%EC%97%90%EC%9D%B4%EC%A7%80-%EB%A7%A5%EC%84%B8%EC%9D%B4%ED%94%84-%EA%B7%B8%EB%A6%BD%ED%86%A1-%EC%8A%A4%EB%A7%88%ED%8A%B8%EB%A7%81-%EA%B1%B0%EC%B9%98%EB%8C%80-%EB%B8%94%EB%9E%99-%EC%8B%A4%EB%B2%84-1-95%ED%95%A0%EC%9D%B8-d9XVy0OP?from=write",
+      "posted_at_utc": "2026-11-04T19:10:02+00:00",
+      "product_id": "8178921473",
+      "item_id": "23378986290",
+      "vendor_item_id": "90409045851",
+      "at": "2026-11-04T19:11:24.096355+00:00",
+      "run_id": "41894400681"
     }
   },
   "skipped_non_coupang": 21,
