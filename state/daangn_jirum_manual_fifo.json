@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95024,
-  "pending": [
-    {
-      "id": 95024,
-      "source_post_url": "https://t.me/jirum/95024",
-      "original_purchase_url": "https://link.coupang.com/a/ioVT7Xzru8",
-      "source_text": "🔥🔥🔥무지성 22,050원 (54.0% 할인)🔥🔥🔥\n스탠리 아이스플로우 플립 스트로 2.0 텀블러\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 47,935원\n- 할인: 25,885원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioVT7Xzru8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T08:46:57+00:00",
-      "title": "스탠리 아이스플로우 플립 스트로 2.0 텀블러",
-      "sale_price_krw": 22050
-    }
-  ],
-  "in_flight": {
-    "id": 95024,
-    "status": "CLAIMED",
-    "run_id": "41802210332",
-    "at": "2026-11-04T08:48:13.191513+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1651,6 +1636,16 @@
       "vendor_item_id": "91738080737",
       "at": "2026-11-04T08:43:17.282456+00:00",
       "run_id": "41801537785"
+    },
+    "95024": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%EC%95%84%EC%9D%B4%EC%8A%A4%ED%94%8C%EB%A1%9C%EC%9A%B0-%ED%94%8C%EB%A6%BD-%EC%8A%A4%ED%8A%B8%EB%A1%9C-20-%ED%85%80%EB%B8%94%EB%9F%AC-%EC%95%A0%EC%89%AC-887-55%ED%95%A0%EC%9D%B8-dlY1llGj?from=write",
+      "posted_at_utc": "2026-11-04T08:46:57+00:00",
+      "product_id": "8640236446",
+      "item_id": "24729107508",
+      "vendor_item_id": null,
+      "at": "2026-11-04T08:48:29.951985+00:00",
+      "run_id": "41802210332"
     }
   },
   "skipped_non_coupang": 19,
