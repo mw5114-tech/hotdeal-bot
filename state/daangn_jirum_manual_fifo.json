@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95036,
-  "pending": [],
+  "last_scanned_id": 95038,
+  "pending": [
+    {
+      "id": 95037,
+      "source_post_url": "https://t.me/jirum/95037",
+      "original_purchase_url": "https://link.coupang.com/a/ipbiB03NBY",
+      "source_text": "👍대박 24,470원 (31.8% 할인)\n오스카마이어 로우 소디움 베이컨, 453g, 3개\n📌 가격 현황\n- 정상가: 35,870원\n- 할인: 11,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipbiB03NBY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:22:22+00:00",
+      "title": "오스카마이어 로우 소디움 베이컨, 453g, 3개",
+      "sale_price_krw": 24470
+    },
+    {
+      "id": 95038,
+      "source_post_url": "https://t.me/jirum/95038",
+      "original_purchase_url": "https://link.coupang.com/a/ipbjTqms5Q",
+      "source_text": "👍대박 6,680원 (34.3% 할인)\n파스퇴르 쾌변 요구르트 포도, 150ml, 4개입, 2개\n📌 가격 현황\n- 정상가: 10,160원\n- 할인: 3,480원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipbjTqms5Q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:22:40+00:00",
+      "title": "파스퇴르 쾌변 요구르트 포도, 150ml, 4개입, 2개",
+      "sale_price_krw": 6680
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
