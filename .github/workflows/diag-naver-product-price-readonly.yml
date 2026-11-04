@@ -65,3 +65,13 @@ jobs:
                   print("BROWSER_ERROR",urllib.parse.urlparse(u).netloc,type(e).__name__,str(e)[:190])
             finally: browser.close()
           PY
+
+      - name: Validate actual Naver fallback reader without posting
+        run: |
+          python - <<'PY'
+          from gh_only.naver_web_product_price import fetch_first_naver_product_price
+          row = fetch_first_naver_product_price("삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR")
+          print("NAVER_PRICE_EXTRACTOR", {k: row.get(k) for k in ("status", "price_krw", "result_title", "price_source")})
+          assert row["status"] == "PRICE_FOUND", row
+          assert 100 <= row["price_krw"] <= 100_000_000
+          PY
