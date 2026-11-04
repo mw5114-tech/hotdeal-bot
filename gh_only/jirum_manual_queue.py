@@ -200,8 +200,12 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     if len(rows) != 1 or not isinstance(rows[0], dict):
         return None
     row = rows[0]
-    # A working Naver image overrides a missing/404 Lowchart image.
-    if row.get("photo", {}).get("status") == "IMAGE_SAVED":
+    # Only a specifically documented Naver representative image can
+    # override a missing/404 Lowchart image. An unknown image cannot.
+    if (row.get("photo", {}).get("status") == "IMAGE_SAVED"
+            and row.get("image_source") == "naver_web_first_image"
+            and row.get("representative_naver_image") is True
+            and row.get("photo", {}).get("image_source") == "naver_web_first_image"):
         return None
     if row.get("photo", {}).get("status") == "PHOTO_EVIDENCE_UNAVAILABLE":
         print("JIRUM_PHOTO_SOURCES_EXHAUSTED " + json.dumps({
