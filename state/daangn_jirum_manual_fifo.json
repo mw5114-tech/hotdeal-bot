@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95015,
-  "pending": [
-    {
-      "id": 95015,
-      "source_post_url": "https://t.me/jirum/95015",
-      "original_purchase_url": "https://link.coupang.com/a/ioKU5Aobf2",
-      "source_text": "☆특가 3,990원\n엠토이 분리형 도시락 + 포크 + 숟가락 + 물병 + 수납 가방 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioKU5Aobf2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T06:13:14+00:00",
-      "title": "☆특가 3,990원",
-      "sale_price_krw": 3990
-    }
-  ],
-  "in_flight": {
-    "id": 95015,
-    "status": "CLAIMED",
-    "run_id": "41784179603",
-    "at": "2026-11-04T06:14:47.528675+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1571,6 +1556,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T06:02:48.647355+00:00",
       "run_id": "41782887539"
+    },
+    "95015": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%A0%ED%86%A0%EC%9D%B4-%EB%B6%84%EB%A6%AC%ED%98%95-%EB%8F%84%EC%8B%9C%EB%9D%BD-%ED%8F%AC%ED%81%AC-%EC%88%9F%EA%B0%80%EB%9D%BD-%EB%AC%BC%EB%B3%91-%EC%88%98%EB%82%A9-%EA%B0%80%EB%B0%A9-%EC%84%B8%ED%8A%B8-Pk6BzBaA?from=write",
+      "posted_at_utc": "2026-11-04T06:13:14+00:00",
+      "product_id": "8703252380",
+      "item_id": "25274413666",
+      "vendor_item_id": "92193933525",
+      "at": "2026-11-04T06:15:04.151546+00:00",
+      "run_id": "41784179603"
     }
   },
   "skipped_non_coupang": 18,
