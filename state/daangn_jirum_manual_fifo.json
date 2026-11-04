@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94982,
-  "pending": [],
+  "last_scanned_id": 94983,
+  "pending": [
+    {
+      "id": 94983,
+      "source_post_url": "https://t.me/jirum/94983",
+      "original_purchase_url": "https://link.coupang.com/a/ion92nIQo0",
+      "source_text": "🔥🔥🔥무지성 4,300원 (49.0% 할인)🔥🔥🔥\n[로켓프레시] 마니커에프앤지 통살 케이준 치킨텐더 (냉동) 400g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,431원\n- 할인: 4,131원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ion92nIQo0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T00:54:45+00:00",
+      "title": "[로켓프레시] 마니커에프앤지 통살 케이준 치킨텐더 (냉동) 400g",
+      "sale_price_krw": 4300
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
