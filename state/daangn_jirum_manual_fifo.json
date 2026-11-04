@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94998,
-  "pending": [
-    {
-      "id": 94998,
-      "source_post_url": "https://t.me/jirum/94998",
-      "original_purchase_url": "https://link.coupang.com/a/ioyamtfeVg",
-      "source_text": "🔥🔥🔥무지성 4,500원 (67.9% 할인)🔥🔥🔥\n이지실리 원형 전자레인지 멀티 실리콘 냄비 1200ml, 옐로우, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 9,500원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioyamtfeVg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T03:14:46+00:00",
-      "title": "이지실리 원형 전자레인지 멀티 실리콘 냄비 1200ml, 옐로우, 1개",
-      "sale_price_krw": 4500
-    }
-  ],
-  "in_flight": {
-    "id": 94998,
-    "status": "CLAIMED",
-    "run_id": "41765945381",
-    "at": "2026-11-04T03:15:35.803310+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1431,6 +1416,16 @@
       "vendor_item_id": "85491095723",
       "at": "2026-11-04T02:53:28.773148+00:00",
       "run_id": "41763432846"
+    },
+    "94998": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EC%A7%80%EC%8B%A4%EB%A6%AC-%EC%9B%90%ED%98%95-%EC%A0%84%EC%9E%90%EB%A0%88%EC%9D%B8%EC%A7%80-%EB%A9%80%ED%8B%B0-%EC%8B%A4%EB%A6%AC%EC%BD%98-%EB%83%84%EB%B9%84-1200ml-%EC%98%90%EB%A1%9C-70%ED%95%A0%EC%9D%B8-Px80nLzP?from=write",
+      "posted_at_utc": "2026-11-04T03:14:46+00:00",
+      "product_id": "8135393120",
+      "item_id": "23108785819",
+      "vendor_item_id": "90142047584",
+      "at": "2026-11-04T03:15:52.548733+00:00",
+      "run_id": "41765945381"
     }
   },
   "skipped_non_coupang": 15,
