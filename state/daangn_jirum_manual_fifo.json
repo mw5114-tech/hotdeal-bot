@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94986,
-  "pending": [
-    {
-      "id": 94986,
-      "source_post_url": "https://t.me/jirum/94986",
-      "original_purchase_url": "https://link.coupang.com/a/ioqiG4QVPM",
-      "source_text": "☆특가 1,791,000원 (11.8% 할인)\n삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치\n📌 가격 현황\n- 정상가: 2,031,500원\n- 할인: 240,500원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqiG4QVPM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:24:41+00:00",
-      "title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치",
-      "sale_price_krw": 1791000
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1790,6 +1780,12 @@
       "source_post_url": "https://t.me/jirum/94981",
       "source_title": "메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼",
       "at": "2026-11-04T00:23:14.778416+00:00"
+    },
+    "94986": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/94986",
+      "source_title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치",
+      "at": "2026-11-04T01:26:24.886097+00:00"
     }
   },
   "single_test_repost_20261103": {
