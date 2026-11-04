@@ -201,7 +201,7 @@ def enrich_deal(deal: dict, output_dir: Path,
                 history_fetch=fetch_one, photo_downloader=None,
                 session_secret: str = "", owner_tag: str = "",
                 *, search_lookup=None, search_downloader=None,
-                naver_price_lookup=None) -> dict:
+                naver_price_lookup=None, fallcent_lookup=None) -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -290,33 +290,60 @@ def enrich_deal(deal: dict, output_dir: Path,
         eligible_cdn = image_is_cdn(og.get("og_image") or "")
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
-    # Photo order: verified Lowchart exact item -> first public Naver image.
-    # The latter is a *representative* image, never an exact Coupang match.
+    # Photo order: Lowchart exact item -> Fallcent search -> Naver search.
+    # Search results are representative images, not exact item/option proof.
     source_photo_verified = False
     search_result = {"status": "NOT_ATTEMPTED"}
     search_photo_verified = False
     search_title = None
-    provider_photo = {"photo_provider_attempts": []}
+    provider_photo = {}
+    photo_attempts = []
     if (using_public_lowchart
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and photo.get("status") != "IMAGE_SAVED"):
-        from gh_only.naver_web_image_photo import fetch_first_naver_photo
-        provider_photo = fetch_first_naver_photo(
-            fallback_title or title, output_dir, source_id)
-        provider_photo["photo_provider_attempts"] = [{
-            "provider": "naver_web",
+        from gh_only.fallcent_search_photo import fetch_fallcent_product_photo
+        fetch_fallcent = fallcent_lookup or fetch_fallcent_product_photo
+        try:
+            provider_photo = fetch_fallcent(
+                fallback_title or title, output_dir, source_id)
+        except Exception as exc:
+            provider_photo = {"status": "FALLCENT_LOOKUP_ERROR",
+                              "error_type": type(exc).__name__}
+        photo_attempts.append({
+            "provider": "fallcent_search",
             "status": provider_photo.get("status"),
             "error_type": provider_photo.get("error_type"),
-        }]
+        })
+        if (provider_photo.get("status") != "IMAGE_SAVED"
+                or provider_photo.get("image_source") != "fallcent_search_representative"
+                or provider_photo.get("representative_fallcent_image") is not True):
+            from gh_only.naver_web_image_photo import fetch_first_naver_photo
+            try:
+                provider_photo = fetch_first_naver_photo(
+                    fallback_title or title, output_dir, source_id)
+            except Exception as exc:
+                provider_photo = {"status": "NAVER_IMAGE_LOOKUP_ERROR",
+                                  "error_type": type(exc).__name__}
+            photo_attempts.append({
+                "provider": "naver_web",
+                "status": provider_photo.get("status"),
+                "error_type": provider_photo.get("error_type"),
+            })
         if provider_photo.get("status") == "IMAGE_SAVED":
             photo = {k: provider_photo[k] for k in ("status", "saved_name",
                      "bytes", "image_source") if k in provider_photo}
             image_source = provider_photo["image_source"]
-            # Keep Telegram's title; Naver result may depict a different option.
             title = fallback_title or title
         else:
             photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
     provider_verified = False
+    representative_fallcent_image = (
+        provider_photo.get("status") == "IMAGE_SAVED"
+        and provider_photo.get("image_source") == "fallcent_search_representative"
+        and provider_photo.get("representative_fallcent_image") is True
+        and provider_photo.get("image_match_basis") ==
+            "UNVERIFIED_FALLCENT_SEARCH_RESULT"
+    )
     representative_naver_image = (
         provider_photo.get("status") == "IMAGE_SAVED"
         and provider_photo.get("image_source") == "naver_web_first_image"
@@ -350,15 +377,17 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_product_title": og_title.strip() if lowchart_title_verified else None,
         "product_name_source": (
             "lowchart_exact_item_page" if lowchart_title_verified
-            else "telegram_product_title" if representative_naver_image
+            else "telegram_product_title" if (
+                representative_naver_image or representative_fallcent_image)
             else "unverified_fallback"
         ) if using_public_lowchart else "legacy_kakao",
         "search_product_title": search_title,
         "image_search_product_id_verified": search_photo_verified,
         "image_search_title_verified": search_photo_verified,
         "image_search_exact_item_id_verified": False,
-        "search_status": (provider_photo.get("status") if representative_naver_image
-                          else search_result.get("status")),
+        "search_status": (provider_photo.get("status") if (
+            representative_naver_image or representative_fallcent_image)
+            else search_result.get("status")),
         "search_provider": ("naver_image_index" if search_photo_verified else None),
         "kakao_status": og.get("status"),
         "kakao_product_match": matching and image_source == "legacy_kakao_og",
@@ -369,7 +398,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "image_error_type": og.get("error_type"),
         "source_photo_verified": source_photo_verified,
         "image_match_basis": (
-            "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT" if representative_naver_image
+            "UNVERIFIED_FALLCENT_SEARCH_RESULT" if representative_fallcent_image
+            else "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT" if representative_naver_image
             else og.get("image_match_basis")
         ),
         "image_same_named_option": (
@@ -378,10 +408,11 @@ def enrich_deal(deal: dict, output_dir: Path,
         ),
         "image_provider_verified": provider_verified,
         "representative_naver_image": representative_naver_image,
+        "representative_fallcent_image": representative_fallcent_image,
         "image_provider_title": provider_photo.get("image_provider_title"),
         "image_provider_product_id": provider_photo.get("image_provider_product_id"),
         "image_provider_item_id": provider_photo.get("image_provider_item_id"),
-        "photo_provider_attempts": provider_photo.get("photo_provider_attempts", []),
+        "photo_provider_attempts": photo_attempts,
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
