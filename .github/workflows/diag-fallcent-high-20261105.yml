@@ -89,3 +89,21 @@ jobs:
                       page.close()
               browser.close()
           PY
+
+
+      - name: Verify new parser fails closed on live exact-item products
+        run: |
+          python - <<'PY'
+          from gh_only.fallcent_high_reference import fetch_exact_fallcent_high
+          targets=[
+           ("8870769472","25880144275","삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치"),
+           ("8863489459","28741784521","태평염전 간수뺀 햇소금 신안 천일염 탈수, 10kg, 1개")
+          ]
+          for pid,iid,title in targets:
+            identity={"status":"EXACT_ITEM_IDENTIFIED","product_id":pid,"item_id":iid}
+            v=fetch_exact_fallcent_high(identity,title)
+            print("FALLCENT_EXACT_HIGH",pid,{k:v.get(k) for k in ("status","observed_high_krw","source_title","product_id","item_id","source_url","error_type","http_status")})
+            if v.get("status")=="HIGH_FOUND":
+              assert v["product_id"]==pid and v["item_id"]==iid
+              assert 100<=v["observed_high_krw"]<=100000000
+          PY
