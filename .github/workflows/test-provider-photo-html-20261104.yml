@@ -48,13 +48,18 @@ jobs:
             req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
             try:
               with request.urlopen(req,timeout=12) as r:
-                body=r.read(1100000)
+                body=r.read(14000000 if 'products.json' in url else 1100000)
                 print('PROBE_LENGTH_HEADER',r.headers.get('Content-Length'))
                 print('PROBE_RESPONSE',r.status,r.geturl(),r.headers.get('Content-Type'),len(body))
               html=body.decode('utf-8','replace');p=Probe();p.feed(html)
               if 'products.json' in url:
-                print('PROBE_JSON_PREFIX',html[:850])
-                print('PROBE_JSON_PRODUCT_ID_POSITION',html.find('8522680027'))
+                import json
+                j=json.loads(html)
+                print('PROBE_JSON_ROOT_KEYS',list(j.keys()))
+                print('PROBE_JSON_PRODUCT_COUNT',len(j.get('products',[])))
+                print('PROBE_JSON_FIRST_PRODUCT',str(j.get('products',[None])[0])[:1800])
+                matches=[x for x in j.get('products',[]) if '8522680027' in str(x)]
+                print('PROBE_JSON_MATCHES',str(matches[:4])[:5000])
                 continue
               if '/app.js?' in url:
                 for term in ('/api/', 'search', 'fetch(', 'function doSearch', 'qbtn'):
