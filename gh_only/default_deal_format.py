@@ -96,10 +96,16 @@ def validated_history(history: dict | None, product_id: str, item_id: str,
 
 
 def create_default_preview(sale: int | None, title: str | None,
-                           average: int | None, source_id: int | None = None) -> dict:
+                           average: int | None, source_id: int | None = None,
+                           *, reference_source: str = "lowchart_public_history") -> dict:
     """Output only the user's chosen default copy; no fabricated source prices."""
     sale = sale if type(sale) is int and 0 < sale <= 100_000_000 else None
     average = average if type(average) is int and 0 < average <= 100_000_000 else None
+    if reference_source not in ("lowchart_public_history",
+                                "naver_general_search_first_shopping_card"):
+        raise ValueError("INVALID_REFERENCE_PRICE_SOURCE")
+    naver_reference = (average is not None
+                       and reference_source == "naver_general_search_first_shopping_card")
     approx = nearest_five_discount(sale, average)
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
@@ -113,7 +119,9 @@ def create_default_preview(sale: int | None, title: str | None,
     # If Lowchart history cannot establish a discount, never invent a rate.
     body_discount = f"[{approx}%할인]" if approx is not None else "[할인율 확인 중]"
     lines = [f"{body_discount} {product}"]
-    if average is not None:
+    if naver_reference:
+        lines.append(f"💸 비교 기준가(네이버 검색) : 약 {average:,}원")
+    elif average is not None:
         lines.append(f"💸 쿠팡 평소 판매가 : 약 {average:,}원")
     else:
         lines.append("💸 쿠팡 평소 판매가 : 확인 중")
@@ -131,11 +139,20 @@ def create_default_preview(sale: int | None, title: str | None,
         "product_name": product,
         "sale_price_krw": sale,
         "sale_price_source": "telegram_jirum_message",
-        "observed_average_krw": average,
-        "observed_average_source": "lowchart_public_history" if average is not None else None,
+        "observed_average_krw": None if naver_reference else average,
+        "observed_average_source": ("lowchart_public_history"
+                                    if average is not None and not naver_reference else None),
+        "comparison_reference_price_krw": average,
+        "comparison_reference_source": reference_source if average is not None else None,
+        "comparison_price_is_historical_average": not naver_reference and average is not None,
         "rounded_discount_step": DEFAULT_PERCENT_STEP,
+        "approx_discount_vs_reference_pct": approx,
         "approx_discount_vs_historical_mean_pct": approx,
         "actual_discount_vs_historical_mean_pct": (
+            round((average - sale) / average * 100, 1)
+            if approx is not None and not naver_reference else None
+        ),
+        "actual_discount_vs_reference_pct": (
             round((average - sale) / average * 100, 1)
             if approx is not None else None
         ),
