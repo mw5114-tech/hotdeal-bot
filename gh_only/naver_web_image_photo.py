@@ -109,7 +109,7 @@ def fetch_first_naver_photo(title: str, folder: Path, source_id: int,
                     response = page.goto(url, wait_until="domcontentloaded", timeout=16000)
                     if response and response.status == 200:
                         page.wait_for_timeout(1500)
-                        rows = page.locator("a.link_thumb img").evaluate_all(
+                        rows = page.locator(".link_thumb img").evaluate_all(
                             """els => els.slice(0,5).map(x => ({
                               src:x.currentSrc || x.getAttribute('src') || '',
                               alt:x.getAttribute('alt') || '',
