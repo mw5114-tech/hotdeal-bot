@@ -99,6 +99,32 @@ def fetch_first_naver_photo(title: str, folder: Path, source_id: int,
     parser = FirstImageParser()
     parser.feed(data.decode("utf-8", "replace"))
     first = parser.first
+    if not first:
+        try:
+            from playwright.sync_api import sync_playwright
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True)
+                try:
+                    page = browser.new_page(locale="ko-KR")
+                    response = page.goto(url, wait_until="domcontentloaded", timeout=16000)
+                    if response and response.status == 200:
+                        page.wait_for_timeout(1500)
+                        rows = page.locator("a.link_thumb img").evaluate_all(
+                            """els => els.slice(0,5).map(x => ({
+                              src:x.currentSrc || x.getAttribute('src') || '',
+                              alt:x.getAttribute('alt') || '',
+                              width:x.naturalWidth,height:x.naturalHeight
+                            }))""")
+                        for row in rows:
+                            if (_safe_image_url(row["src"]) and row["width"] >= 100
+                                    and row["height"] >= 100):
+                                first = (row["src"], row["alt"])
+                                break
+                finally:
+                    browser.close()
+        except Exception as exc:
+            return {**out, "status": "NAVER_BROWSER_REQUEST_FAILED",
+                    "error_type": type(exc).__name__}
     if not first or not _safe_image_url(first[0]):
         return {**out, "status": "NAVER_FIRST_IMAGE_MISSING"}
     image_url, image_alt = first
