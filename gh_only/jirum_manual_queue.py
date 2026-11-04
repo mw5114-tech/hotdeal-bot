@@ -87,6 +87,11 @@ def freshness_status(row: dict, *, reference: datetime | None = None) -> str:
     elapsed = (at - posted).total_seconds()
     if elapsed < -MAX_FUTURE_SKEW_SECONDS:
         return "POSTED_AT_IN_FUTURE"
+    # Explicit one-time user replay of the previously skipped TV and egg deals.
+    # The original posted timestamp is retained; do not exempt future deals.
+    if (row.get("manual_replay_approved") is True and
+            row.get("id") in (94986, 94987, 94988, 94989, 94990)):
+        return "FRESH"
     if elapsed >= MAX_DEAL_AGE_SECONDS:
         return "DEAL_OVER_60_MINUTES_OLD"
     return "FRESH"
@@ -195,6 +200,9 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     if len(rows) != 1 or not isinstance(rows[0], dict):
         return None
     row = rows[0]
+    # A working Naver image overrides a missing/404 Lowchart image.
+    if row.get("photo", {}).get("status") == "IMAGE_SAVED":
+        return None
     if row.get("photo", {}).get("status") == "PHOTO_EVIDENCE_UNAVAILABLE":
         print("JIRUM_PHOTO_SOURCES_EXHAUSTED " + json.dumps({
             "source_id": row.get("source_message_id"),
@@ -678,6 +686,10 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
             or (row.get("image_source") == "telegram_attached_photo"
                 and row.get("source_photo_verified") is True
                 and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
+            or (row.get("image_source") == "naver_web_first_image"
+                and row.get("representative_naver_image") is True
+                and row.get("image_match_basis") == "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
+                and row.get("photo", {}).get("image_source") == "naver_web_first_image")
             or (row.get("image_source") in ("couspi_product_page",
                                            "dangapick_product_page")
                 and row.get("image_provider_verified") is True
@@ -692,6 +704,10 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 (row.get("lowchart_title_verified") is True
                  and row.get("product_name_source") == "lowchart_exact_item_page"
                  and isinstance(row.get("lowchart_product_title"), str))
+                or (row.get("image_source") == "naver_web_first_image"
+                    and row.get("representative_naver_image") is True
+                    and row.get("product_name_source") == "telegram_product_title"
+                    and isinstance(row.get("caption", {}).get("product_name"), str))
                 or (row.get("image_source") in ("couspi_product_page",
                                               "dangapick_product_page")
                     and row.get("image_provider_verified") is True
