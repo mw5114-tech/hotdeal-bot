@@ -1,0 +1,62 @@
+name: TEST read-only | provider image HTML inspection
+on:
+  push:
+    branches: [fix/ordered-lowchart-couspi-dangapick-20261104]
+    paths: ['.github/workflows/test-provider-photo-html-20261104.yml']
+permissions:
+  contents: read
+jobs:
+  inspect-public-product-pages:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Read-only public HTML and image elements; no logins, no posting
+        shell: bash
+        run: |
+          python - <<'PY'
+          from html.parser import HTMLParser
+          from urllib import request, error
+          import re
+          urls = [
+            'https://www.couspi.com/products/8522680027?itemId=91691060708',
+            'https://www.couspi.com/products/8522680027?itemId=91691060725',
+            'https://www.couspi.com/products/8522680027',
+            'https://dangapick.com/p/8522680027-24674417319-91691060725',
+            'https://dangapick.com/?q=%EB%B0%94%EB%94%94%EC%9D%B8%EC%86%94',
+          ]
+          class Probe(HTMLParser):
+            def __init__(self):
+              super().__init__()
+              self.meta=[];self.img=[];self.forms=[];self.links=[]
+            def handle_starttag(self,tag,attrs):
+              a=dict(attrs)
+              if tag=='meta' and (a.get('property','').startswith('og:') or a.get('name')=='twitter:image'):self.meta.append(a)
+              if tag=='img':self.img.append(a)
+              if tag=='form':self.forms.append(a)
+              if tag=='a' and ('8522680027' in (a.get('href') or '')):self.links.append(a.get('href'))
+          for url in urls:
+            print('PROBE_URL',url)
+            req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
+            try:
+              with request.urlopen(req,timeout=12) as r:
+                body=r.read(1100000)
+                print('PROBE_RESPONSE',r.status,r.geturl(),r.headers.get('Content-Type'),len(body))
+              html=body.decode('utf-8','replace');p=Probe();p.feed(html)
+              print('PROBE_META',[(x.get('property') or x.get('name'),(x.get('content') or '')[:210]) for x in p.meta[:20]])
+              print('PROBE_IMGS_COUNT',len(p.img))
+              for x in p.img[:18]:
+                print('PROBE_IMG',{k:(v[:220] if isinstance(v,str) else v) for k,v in x.items() if k in ('src','data-src','alt','width','height','class','loading')})
+              print('PROBE_FORMS',p.forms[:3])
+              print('PROBE_LINKS',p.links[:8])
+              for pattern in ('image.couspi.com','coupangcdn.com','8522680027','/p/'):
+                print('PROBE_MARK',pattern,html.find(pattern))
+              for pattern in ('image.couspi.com','coupangcdn.com'):
+                for m in list(re.finditer(re.escape(pattern),html))[:2]:
+                  print('PROBE_NEAR',html[max(0,m.start()-150):m.start()+250])
+            except Exception as e:
+              print('PROBE_ERROR',type(e).__name__,str(e)[:240])
+          PY
