@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94998,
-  "pending": [],
+  "last_scanned_id": 95000,
+  "pending": [
+    {
+      "id": 95000,
+      "source_post_url": "https://t.me/jirum/95000",
+      "original_purchase_url": "https://link.coupang.com/a/ioyOd92gi4",
+      "source_text": "☆특가 1,880원\n순작 유기농 보리차 티백 10g*30개입*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioyOd92gi4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T03:23:45+00:00",
+      "title": "☆특가 1,880원",
+      "sale_price_krw": 1880
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1428,7 +1438,7 @@
       "run_id": "41765945381"
     }
   },
-  "skipped_non_coupang": 15,
+  "skipped_non_coupang": 16,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
