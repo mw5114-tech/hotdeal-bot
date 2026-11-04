@@ -1,0 +1,29 @@
+name: TEST ONLY | Fallcent 2026 salt photo read-only
+on:
+  push:
+    branches: [test/fallcent-salt-image-readonly-20261104]
+    paths: ['.github/workflows/fallcent-salt-photo-readonly.yml']
+permissions:
+  contents: read
+jobs:
+  read-only-photo:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet requests beautifulsoup4
+      - name: Resolve user Coupang link and verify Fallcent exact product/photo
+        run: python tools/test_fallcent_salt_image_readonly.py
+      - name: Attach exact image only if source verified and downloaded
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fallcent-salt-photo
+          path: fallcent-photo/
+          if-no-files-found: ignore
+          retention-days: 3
