@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95018,
-  "pending": [],
+  "last_scanned_id": 95019,
+  "pending": [
+    {
+      "id": 95019,
+      "source_post_url": "https://t.me/jirum/95019",
+      "original_purchase_url": "https://link.coupang.com/a/ioRU4mtihg",
+      "source_text": "👍대박 21,080원 (39.8% 할인)\n(와멤데 쿠폰) 제주삼다수 그린 무라벨, 2L, 12개. 3개 선택(총36개)\n📌 가격 현황\n- 정상가: 35,000원\n- 할인: 13,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioRU4mtihg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T07:51:11+00:00",
+      "title": "(와멤데 쿠폰) 제주삼다수 그린 무라벨, 2L, 12개. 3개 선택(총36개)",
+      "sale_price_krw": 21080
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
