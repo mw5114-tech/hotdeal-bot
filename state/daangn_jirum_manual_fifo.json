@@ -3,15 +3,6 @@
   "last_scanned_id": 95038,
   "pending": [
     {
-      "id": 95037,
-      "source_post_url": "https://t.me/jirum/95037",
-      "original_purchase_url": "https://link.coupang.com/a/ipbiB03NBY",
-      "source_text": "👍대박 24,470원 (31.8% 할인)\n오스카마이어 로우 소디움 베이컨, 453g, 3개\n📌 가격 현황\n- 정상가: 35,870원\n- 할인: 11,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipbiB03NBY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:22:22+00:00",
-      "title": "오스카마이어 로우 소디움 베이컨, 453g, 3개",
-      "sale_price_krw": 24470
-    },
-    {
       "id": 95038,
       "source_post_url": "https://t.me/jirum/95038",
       "original_purchase_url": "https://link.coupang.com/a/ipbjTqms5Q",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6680
     }
   ],
-  "in_flight": {
-    "id": 95037,
-    "status": "CLAIMED",
-    "run_id": "41828768799",
-    "at": "2026-11-04T12:23:36.182599+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1770,6 +1756,16 @@
       "vendor_item_id": "90916888418",
       "at": "2026-11-04T12:21:25.293453+00:00",
       "run_id": "41828239382"
+    },
+    "95037": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%8A%A4%EC%B9%B4%EB%A7%88%EC%9D%B4%EC%96%B4-%EB%A1%9C%EC%9A%B0-%EC%86%8C%EB%94%94%EC%9B%80-%EB%B2%A0%EC%9D%B4%EC%BB%A8-453g-3%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PBXL5p1j?from=write",
+      "posted_at_utc": "2026-11-04T12:22:22+00:00",
+      "product_id": "7322167759",
+      "item_id": "19597939950",
+      "vendor_item_id": "86705159618",
+      "at": "2026-11-04T12:23:53.865257+00:00",
+      "run_id": "41828768799"
     }
   },
   "skipped_non_coupang": 21,
