@@ -744,6 +744,29 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
         or article["body"].count(article["candidate_url"]) != 1):
         raise RuntimeError("POST_EVIDENCE_NOT_READY")
+    # A Fallcent historical maximum must be backed by a same-item public
+    # price observation, not merely the search-result representative photo.
+    caption = row.get("caption", {})
+    if caption.get("comparison_reference_source") == "fallcent_observed_high":
+        proof = row.get("fallcent_high_lookup", {})
+        ids = row.get("product_identity", {})
+        amount = proof.get("observed_high_krw")
+        source = urlsplit(proof.get("source_url") or "")
+        if (row.get("image_source") != "fallcent_search_representative"
+                or row.get("representative_fallcent_image") is not True
+                or proof.get("status") != "HIGH_FOUND"
+                or proof.get("price_basis") !=
+                    "fallcent_public_visible_historical_high"
+                or proof.get("product_id") != ids.get("product_id")
+                or proof.get("item_id") != ids.get("item_id")
+                or type(amount) is not int or amount <= caption.get("sale_price_krw", 0)
+                or caption.get("comparison_reference_price_krw") != amount
+                or caption.get("observed_average_krw") is not None
+                or source.scheme != "https"
+                or source.hostname not in ("fallcent.com", "www.fallcent.com")
+                or not source.path.startswith("/product/")
+                or f"💸 폴센트 관측 최고가 : 약 {amount:,}원" not in article["body"]):
+            raise RuntimeError("FALLCENT_HIGH_EVIDENCE_MISMATCH")
     from urllib.parse import parse_qs
     link = urlsplit(article["candidate_url"])
     qs = parse_qs(link.query)

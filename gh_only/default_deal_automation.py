@@ -201,7 +201,8 @@ def enrich_deal(deal: dict, output_dir: Path,
                 history_fetch=fetch_one, photo_downloader=None,
                 session_secret: str = "", owner_tag: str = "",
                 *, search_lookup=None, search_downloader=None,
-                naver_price_lookup=None, fallcent_lookup=None) -> dict:
+                naver_price_lookup=None, fallcent_lookup=None,
+                fallcent_high_lookup=None) -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -252,29 +253,13 @@ def enrich_deal(deal: dict, output_dir: Path,
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
 
-    # Lowchart's exact-item historical mean wins. Only if it is absent,
-    # accept one current first-card Naver shopping quote as a comparison
-    # reference; never describe that quote as a historical mean/Coupang MSRP.
+    # Lowchart historical average is preferred when available. Missing history
+    # may be replaced with a *confirmed* Fallcent observed high only when the
+    # Fallcent photo was selected, otherwise existing Naver comparison fallback.
     comparison_price = average
     comparison_source = "lowchart_public_history"
     naver_price = {"status": "NOT_ATTEMPTED", "price_krw": None}
-    if (using_public_lowchart
-            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
-            and average is None and type(sale) is int and sale > 0
-            and os.getenv("JIRUM_ENABLE_NAVER_PRICE_FALLBACK") == "true"):
-        try:
-            if naver_price_lookup is None:
-                from gh_only.naver_web_product_price import fetch_first_naver_product_price
-                naver_price_lookup = fetch_first_naver_product_price
-            naver_price = naver_price_lookup(fallback_title or title)
-            quote = naver_price.get("price_krw")
-            if (naver_price.get("status") == "PRICE_FOUND"
-                    and type(quote) is int and 100 <= quote <= 100_000_000):
-                comparison_price = quote
-                comparison_source = "naver_general_search_first_shopping_card"
-        except Exception as exc:
-            naver_price = {"status": "NAVER_PRICE_QUERY_ERROR",
-                           "price_krw": None, "error_type": type(exc).__name__}
+    fallcent_high = {"status": "NOT_ATTEMPTED", "observed_high_krw": None}
     image_source = og.get(
         "image_source",
         "lowchart_exact_item_public_page" if using_public_lowchart
@@ -350,6 +335,50 @@ def enrich_deal(deal: dict, output_dir: Path,
         and provider_photo.get("image_match_basis") ==
             "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
     )
+    # Only an actual downloaded Fallcent representative photo enables
+    # Fallcent historical-high lookup. It is a historical observed MAXIMUM,
+    # never an average or Coupang's ordinary/list price.
+    if (using_public_lowchart and average is None
+            and representative_fallcent_image
+            and type(sale) is int and 0 < sale <= 100_000_000):
+        try:
+            if fallcent_high_lookup is None:
+                from gh_only.fallcent_high_reference import fetch_exact_fallcent_high
+                fallcent_high_lookup = fetch_exact_fallcent_high
+            fallcent_high = fallcent_high_lookup(identity, fallback_title or title)
+            high = fallcent_high.get("observed_high_krw")
+            if (fallcent_high.get("status") == "HIGH_FOUND"
+                    and type(high) is int and sale < high <= 100_000_000
+                    and fallcent_high.get("product_id") == p
+                    and fallcent_high.get("item_id") == i
+                    and fallcent_high.get("price_basis") ==
+                        "fallcent_public_visible_historical_high"):
+                comparison_price = high
+                comparison_source = "fallcent_observed_high"
+        except Exception as exc:
+            fallcent_high = {"status": "FALLCENT_HIGH_QUERY_ERROR",
+                             "observed_high_krw": None,
+                             "error_type": type(exc).__name__}
+
+    # Naver is third priority for a comparison price, never treated as
+    # a historical high or an exact-variant reference.
+    if (using_public_lowchart
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and comparison_price is None and type(sale) is int and sale > 0
+            and os.getenv("JIRUM_ENABLE_NAVER_PRICE_FALLBACK") == "true"):
+        try:
+            if naver_price_lookup is None:
+                from gh_only.naver_web_product_price import fetch_first_naver_product_price
+                naver_price_lookup = fetch_first_naver_product_price
+            naver_price = naver_price_lookup(fallback_title or title)
+            quote = naver_price.get("price_krw")
+            if (naver_price.get("status") == "PRICE_FOUND"
+                    and type(quote) is int and 100 <= quote <= 100_000_000):
+                comparison_price = quote
+                comparison_source = "naver_general_search_first_shopping_card"
+        except Exception as exc:
+            naver_price = {"status": "NAVER_PRICE_QUERY_ERROR",
+                           "price_krw": None, "error_type": type(exc).__name__}
     caption = create_default_preview(
         sale, title, comparison_price, source_id,
         reference_source=comparison_source)
@@ -417,6 +446,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "history": history,
         "history_avg_accepted": average is not None,
         "naver_price_lookup": naver_price,
+        "fallcent_high_lookup": fallcent_high,
         "comparison_price_source": (comparison_source if comparison_price is not None else None),
         "observed_low_verified_for_deal": (
             average is not None
