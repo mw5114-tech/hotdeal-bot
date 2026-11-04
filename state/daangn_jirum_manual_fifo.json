@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95030,
-  "pending": [],
+  "last_scanned_id": 95031,
+  "pending": [
+    {
+      "id": 95031,
+      "source_post_url": "https://t.me/jirum/95031",
+      "original_purchase_url": "https://link.coupang.com/a/ipaEzQs2xM",
+      "source_text": "☆특가 570,000원 (27.0% 할인)\n샤크 에보파워 시스템 NEO 무선 핸디청소기\n📌 가격 현황\n- 정상가: 780,822원\n- 할인: 210,822원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipaEzQs2xM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:13:20+00:00",
+      "title": "샤크 에보파워 시스템 NEO 무선 핸디청소기",
+      "sale_price_krw": 570000
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
