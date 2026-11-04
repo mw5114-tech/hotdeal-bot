@@ -168,7 +168,7 @@ def read_one_draft(folder: Path) -> dict:
     if photo.get("status") == "IMAGE_SAVED":
         if (not isinstance(filename, str) or filename != Path(filename).name
                 or Path(filename).suffix.lower() not in IMAGE_EXTS
-                or not re.fullmatch(r"jirum_[0-9]+_(?:kakao_og|lowchart_photo|telegram_source_photo)\.(?:jpg|jpeg|png|webp)", filename)):
+                or not re.fullmatch(r"jirum_[0-9]+_(?:kakao_og|lowchart_photo|telegram_source_photo|couspi_photo|dangapick_photo)\.(?:jpg|jpeg|png|webp)", filename)):
             raise ValueError("DRAFT_IMAGE_NAME_INVALID")
         image = folder / filename
         if not image.is_file() or image.stat().st_size > 2_500_000:
