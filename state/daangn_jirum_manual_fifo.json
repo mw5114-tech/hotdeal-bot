@@ -1,43 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 94991,
+  "last_scanned_id": 94994,
   "pending": [
-    {
-      "id": 94987,
-      "source_post_url": "https://t.me/jirum/94987",
-      "original_purchase_url": "https://link.coupang.com/a/ioqtxnns7M",
-      "source_text": "☆특가 7,980원\n무항생제 신선한 특란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtxnns7M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:27:08+00:00",
-      "title": "☆특가 7,980원",
-      "sale_price_krw": 7980
-    },
-    {
-      "id": 94988,
-      "source_post_url": "https://t.me/jirum/94988",
-      "original_purchase_url": "https://link.coupang.com/a/ioqtCbf7Xo",
-      "source_text": "☆특가 7,990원\n무항생제 신선 특란 1.8kg, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtCbf7Xo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:27:09+00:00",
-      "title": "☆특가 7,990원",
-      "sale_price_krw": 7990
-    },
-    {
-      "id": 94989,
-      "source_post_url": "https://t.me/jirum/94989",
-      "original_purchase_url": "https://link.coupang.com/a/ioqtFbt4pM",
-      "source_text": "☆특가 7,990원\n곰곰 무항생제 신선한 특란, 30구, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtFbt4pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:27:10+00:00",
-      "title": "☆특가 7,990원",
-      "sale_price_krw": 7990
-    },
-    {
-      "id": 94990,
-      "source_post_url": "https://t.me/jirum/94990",
-      "original_purchase_url": "https://link.coupang.com/a/ioqtIxR5ci",
-      "source_text": "☆특가 6,990원\n신선한 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioqtIxR5ci\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T01:27:11+00:00",
-      "title": "☆특가 6,990원",
-      "sale_price_krw": 6990
-    },
     {
       "id": 94991,
       "source_post_url": "https://t.me/jirum/94991",
@@ -46,6 +10,15 @@
       "posted_at_utc": "2026-11-04T01:36:34+00:00",
       "title": "테팔 인덕션 티타늄 1X 데일리 컴포트 프라이팬",
       "sale_price_krw": 25980
+    },
+    {
+      "id": 94994,
+      "source_post_url": "https://t.me/jirum/94994",
+      "original_purchase_url": "https://link.coupang.com/a/iouQvm7Zka",
+      "source_text": "👍대박 10,990원 (35.4% 할인)\n이니스프리 포레스트 포맨 올인원 3종 기획 세트, 1개, 30g\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 6,010원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iouQvm7Zka\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T02:28:18+00:00",
+      "title": "이니스프리 포레스트 포맨 올인원 3종 기획 세트, 1개, 30g",
+      "sale_price_krw": 10990
     }
   ],
   "in_flight": null,
@@ -1374,7 +1347,7 @@
       "run_id": "41751734212"
     }
   },
-  "skipped_non_coupang": 12,
+  "skipped_non_coupang": 14,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -1718,6 +1691,34 @@
       "source_title": "이니스프리 화산송이 모공 바하 클렌징 폼, 150g, 2개",
       "posted_at_utc": "2026-11-03T13:11:15+00:00",
       "at": "2026-11-03T14:40:45.461251+00:00"
+    },
+    "94987": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94987",
+      "source_title": "☆특가 7,980원",
+      "posted_at_utc": "2026-11-04T01:27:08+00:00",
+      "at": "2026-11-04T02:28:56.000843+00:00"
+    },
+    "94988": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94988",
+      "source_title": "☆특가 7,990원",
+      "posted_at_utc": "2026-11-04T01:27:09+00:00",
+      "at": "2026-11-04T02:28:56.000852+00:00"
+    },
+    "94989": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94989",
+      "source_title": "☆특가 7,990원",
+      "posted_at_utc": "2026-11-04T01:27:10+00:00",
+      "at": "2026-11-04T02:28:56.000856+00:00"
+    },
+    "94990": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/94990",
+      "source_title": "☆특가 6,990원",
+      "posted_at_utc": "2026-11-04T01:27:11+00:00",
+      "at": "2026-11-04T02:28:56.000860+00:00"
     }
   },
   "skipped_unverifiable": {
