@@ -1,0 +1,48 @@
+name: Diagnostic | Naver Shopping public search read-only
+on:
+  push:
+    branches: [fix/naver-first-shopping-fallback-20261104]
+    paths: ['.github/workflows/test-naver-shopping-readonly-20261104.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check public shopping search HTML; no credentials or site writes
+        run: |
+          python - <<'PY'
+          from urllib import request, error, parse
+          import re,json
+          qs=['바디인솔 프리미엄 무지 중목 양말 20켤레','삼성전자 4K UHD QLED TV KQ85QF6AAFXKR']
+          hostpaths=[
+            'https://search.shopping.naver.com/search/all?query=',
+            'https://msearch.shopping.naver.com/search/all?query=',
+            'https://search.naver.com/search.naver?where=shop&query=',
+            'https://search.naver.com/search.naver?where=nexearch&query=',
+          ]
+          for q in qs:
+            for base in hostpaths:
+              url=base+parse.quote(q)
+              req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
+              try:
+                with request.urlopen(req,timeout=10) as resp:
+                  body=resp.read(1000000)
+                  status=resp.status
+                  landed=resp.geturl()
+                  ct=resp.headers.get('Content-Type')
+                s=body.decode('utf-8','replace')
+                keys=['__NEXT_DATA__','shopping-phinf.pstatic.net','\"products\"','productTitle','\"price\"','price','captcha','자동입력방지','접근이 제한','상품','KQ85QF6AAFXKR']
+                marks={k:s.find(k) for k in keys}
+                print('NAVER_PROBE',json.dumps({'base':base,'query':q[:25],'status':status,'landed':landed[:100],'content_type':ct,'size':len(body),'title':re.findall(r'<title[^>]*>(.*?)</title>',s,re.I|re.S)[:1],'markers':marks},ensure_ascii=False))
+                for k in ('__NEXT_DATA__','shopping-phinf.pstatic.net','KQ85QF6AAFXKR'):
+                  ix=s.find(k)
+                  if ix>=0: print('NAVER_HTML_MARKER',k,s[max(0,ix-180):ix+240][:450])
+              except Exception as exc:
+                print('NAVER_PROBE_ERR',json.dumps({'base':base,'query':q[:25],'error_type':type(exc).__name__,'http_status':getattr(exc,'code',None),'message':str(exc)[:120]},ensure_ascii=False))
+          PY
