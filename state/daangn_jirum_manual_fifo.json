@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95000,
-  "pending": [
-    {
-      "id": 95000,
-      "source_post_url": "https://t.me/jirum/95000",
-      "original_purchase_url": "https://link.coupang.com/a/ioyOd92gi4",
-      "source_text": "☆특가 1,880원\n순작 유기농 보리차 티백 10g*30개입*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioyOd92gi4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T03:23:45+00:00",
-      "title": "☆특가 1,880원",
-      "sale_price_krw": 1880
-    }
-  ],
-  "in_flight": {
-    "id": 95000,
-    "status": "CLAIMED",
-    "run_id": "41766894752",
-    "at": "2026-11-04T03:24:35.069110+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1441,6 +1426,16 @@
       "vendor_item_id": "90142047584",
       "at": "2026-11-04T03:15:52.548733+00:00",
       "run_id": "41765945381"
+    },
+    "95000": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%88%9C%EC%9E%91-%EC%9C%A0%EA%B8%B0%EB%86%8D-%EB%B3%B4%EB%A6%AC%EC%B0%A8-%ED%8B%B0%EB%B0%B1-10g-30%EA%B0%9C%EC%9E%85-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-d9XMRBWP?from=write",
+      "posted_at_utc": "2026-11-04T03:23:45+00:00",
+      "product_id": "2619592",
+      "item_id": "19406681625",
+      "vendor_item_id": "3000036461",
+      "at": "2026-11-04T03:24:50.684481+00:00",
+      "run_id": "41766894752"
     }
   },
   "skipped_non_coupang": 16,
