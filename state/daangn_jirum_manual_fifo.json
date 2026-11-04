@@ -1,7 +1,53 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95031,
-  "pending": [],
+  "last_scanned_id": 95036,
+  "pending": [
+    {
+      "id": 95032,
+      "source_post_url": "https://t.me/jirum/95032",
+      "original_purchase_url": "https://link.coupang.com/a/ipa153y0EC",
+      "source_text": "☆특가 390원\n샘표국시 바지락칼국수 100.3g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa153y0EC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:18:39+00:00",
+      "title": "☆특가 390원",
+      "sale_price_krw": 390
+    },
+    {
+      "id": 95033,
+      "source_post_url": "https://t.me/jirum/95033",
+      "original_purchase_url": "https://link.coupang.com/a/ipa19ZF2v6",
+      "source_text": "☆특가 830원\n농심 튀김우동 큰사발면 111g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa19ZF2v6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:18:40+00:00",
+      "title": "☆특가 830원",
+      "sale_price_krw": 830
+    },
+    {
+      "id": 95034,
+      "source_post_url": "https://t.me/jirum/95034",
+      "original_purchase_url": "https://link.coupang.com/a/ipa2dGso6S",
+      "source_text": "☆특가 690원\n삼양 짱구 115g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2dGso6S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:18:40+00:00",
+      "title": "☆특가 690원",
+      "sale_price_krw": 690
+    },
+    {
+      "id": 95035,
+      "source_post_url": "https://t.me/jirum/95035",
+      "original_purchase_url": "https://link.coupang.com/a/ipa2hvtsIK",
+      "source_text": "☆특가 650원\n왕뚜껑 짬뽕 컵라면 110g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2hvtsIK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:18:41+00:00",
+      "title": "☆특가 650원",
+      "sale_price_krw": 650
+    },
+    {
+      "id": 95036,
+      "source_post_url": "https://t.me/jirum/95036",
+      "original_purchase_url": "https://link.coupang.com/a/ipa2k3bjDU",
+      "source_text": "☆특가 580원\n오리온 나샌드 77g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2k3bjDU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T12:18:42+00:00",
+      "title": "☆특가 580원",
+      "sale_price_krw": 580
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
