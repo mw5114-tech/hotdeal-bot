@@ -3,15 +3,6 @@
   "last_scanned_id": 95036,
   "pending": [
     {
-      "id": 95035,
-      "source_post_url": "https://t.me/jirum/95035",
-      "original_purchase_url": "https://link.coupang.com/a/ipa2hvtsIK",
-      "source_text": "☆특가 650원\n왕뚜껑 짬뽕 컵라면 110g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2hvtsIK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:18:41+00:00",
-      "title": "☆특가 650원",
-      "sale_price_krw": 650
-    },
-    {
       "id": 95036,
       "source_post_url": "https://t.me/jirum/95036",
       "original_purchase_url": "https://link.coupang.com/a/ipa2k3bjDU",
@@ -21,12 +12,7 @@
       "sale_price_krw": 580
     }
   ],
-  "in_flight": {
-    "id": 95035,
-    "status": "CLAIMED",
-    "run_id": "41828239382",
-    "at": "2026-11-04T12:20:48.839210+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1749,6 +1735,16 @@
       "item_id": "22524706531",
       "vendor_item_id": "89566736005",
       "at": "2026-11-04T12:20:44.177047+00:00",
+      "run_id": "41828239382"
+    },
+    "95035": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%99%95%EB%9A%9C%EA%BB%91-%EC%A7%AC%EB%BD%95-%EC%BB%B5%EB%9D%BC%EB%A9%B4-110g-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PoV3zKkA?from=write",
+      "posted_at_utc": "2026-11-04T12:18:41+00:00",
+      "product_id": "9498949576",
+      "item_id": "28297230194",
+      "vendor_item_id": "95250042536",
+      "at": "2026-11-04T12:21:05.025179+00:00",
       "run_id": "41828239382"
     }
   },
