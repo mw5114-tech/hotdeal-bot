@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95040,
-  "pending": [],
+  "last_scanned_id": 95041,
+  "pending": [
+    {
+      "id": 95041,
+      "source_post_url": "https://t.me/jirum/95041",
+      "original_purchase_url": "https://link.coupang.com/a/ipkEbly6pM",
+      "source_text": "☆특가 21,060원 (24.7% 할인)\n용각산 목캔디 10봉, 100g, 10개\n📌 가격 현황\n- 정상가: 27,980원\n- 할인: 6,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipkEbly6pM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T14:33:11+00:00",
+      "title": "용각산 목캔디 10봉, 100g, 10개",
+      "sale_price_krw": 21060
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
