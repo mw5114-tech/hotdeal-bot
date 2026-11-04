@@ -1,0 +1,36 @@
+name: DIAG read-only | Naver fallback actual product photo
+on:
+  push:
+    branches: [fix/naver-web-photo-and-user-replay-20261104]
+    paths: ['.github/workflows/test-naver-photo-real-20261104.yml']
+permissions:
+  contents: read
+jobs:
+  photo-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify first image download, no Daangn login or posting
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from gh_only.naver_web_image_photo import fetch_first_naver_photo
+          for mid,title in [
+            (94986, "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 스탠드형, 방문설치"),
+            (94987, "무항생제 신선한 특란 30구")
+          ]:
+              with TemporaryDirectory() as tmp:
+                  result=fetch_first_naver_photo(title, Path(tmp),mid)
+                  print("NAVER_LIVE_RESULT",{
+                      k:result.get(k) for k in ('status','image_source','saved_name','bytes','error_type','image_provider_title')})
+                  if result.get('status')=='IMAGE_SAVED':
+                      file=Path(tmp)/result['saved_name']
+                      print("NAVER_LIVE_FILE",mid,file.is_file(),file.stat().st_size,file.read_bytes()[:10].hex())
+                  assert result.get('status')=='IMAGE_SAVED',f"Failed {mid}: {result.get('status')}"
+          PY
