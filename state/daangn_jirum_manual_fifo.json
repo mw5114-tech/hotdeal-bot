@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95016,
-  "pending": [
-    {
-      "id": 95016,
-      "source_post_url": "https://t.me/jirum/95016",
-      "original_purchase_url": "https://link.coupang.com/a/ioOdN07oNo",
-      "source_text": "☆특가 350원\n오뚜기 뿌셔뿌셔 양념치킨맛 90g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioOdN07oNo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T06:59:26+00:00",
-      "title": "☆특가 350원",
-      "sale_price_krw": 350
-    }
-  ],
-  "in_flight": {
-    "id": 95016,
-    "status": "CLAIMED",
-    "run_id": "41789234196",
-    "at": "2026-11-04T07:00:34.973080+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1581,6 +1566,16 @@
       "vendor_item_id": "92193933525",
       "at": "2026-11-04T06:15:04.151546+00:00",
       "run_id": "41784179603"
+    },
+    "95016": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EB%BF%8C%EC%85%94%EB%BF%8C%EC%85%94-%EC%96%91%EB%85%90%EC%B9%98%ED%82%A8%EB%A7%9B-90g-1%EA%B0%9C-65%ED%95%A0%EC%9D%B8-d9XMknWP?from=write",
+      "posted_at_utc": "2026-11-04T06:59:26+00:00",
+      "product_id": "9165726464",
+      "item_id": "26926945391",
+      "vendor_item_id": "93896189867",
+      "at": "2026-11-04T07:00:52.219726+00:00",
+      "run_id": "41789234196"
     }
   },
   "skipped_non_coupang": 18,
