@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95001,
-  "pending": [
-    {
-      "id": 95001,
-      "source_post_url": "https://t.me/jirum/95001",
-      "original_purchase_url": "https://link.coupang.com/a/ioAfPc2V0C",
-      "source_text": "☆특가 8,890원\n가그린 제로 구강청결제, 1.2L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioAfPc2V0C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T03:43:59+00:00",
-      "title": "☆특가 8,890원",
-      "sale_price_krw": 8890
-    }
-  ],
-  "in_flight": {
-    "id": 95001,
-    "status": "CLAIMED",
-    "run_id": "41769005593",
-    "at": "2026-11-04T03:45:17.968168+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1451,6 +1436,16 @@
       "vendor_item_id": "3000036461",
       "at": "2026-11-04T03:24:50.684481+00:00",
       "run_id": "41766894752"
+    },
+    "95001": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B0%80%EA%B7%B8%EB%A6%B0-%EC%A0%9C%EB%A1%9C-%EA%B5%AC%EA%B0%95%EC%B2%AD%EA%B2%B0%EC%A0%9C-12L-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-jvxW2eqP?from=write",
+      "posted_at_utc": "2026-11-04T03:43:59+00:00",
+      "product_id": "6671243928",
+      "item_id": "19026712612",
+      "vendor_item_id": null,
+      "at": "2026-11-04T03:45:34.790587+00:00",
+      "run_id": "41769005593"
     }
   },
   "skipped_non_coupang": 16,
