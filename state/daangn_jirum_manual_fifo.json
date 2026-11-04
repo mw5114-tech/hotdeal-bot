@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95004,
-  "pending": [
-    {
-      "id": 95004,
-      "source_post_url": "https://t.me/jirum/95004",
-      "original_purchase_url": "https://link.coupang.com/a/ioCAXhDTMW",
-      "source_text": "☆특가 155,530원 (22.2% 할인)\n닌자 크리스피 올인원 유리 에어프라이어 3.8L + 1.4L 세트\n📌 가격 현황\n- 정상가: 200,000원\n- 할인: 44,470원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioCAXhDTMW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T04:16:44+00:00",
-      "title": "닌자 크리스피 올인원 유리 에어프라이어 3.8L + 1.4L 세트",
-      "sale_price_krw": 155530
-    }
-  ],
-  "in_flight": {
-    "id": 95004,
-    "status": "CLAIMED",
-    "run_id": "41772271996",
-    "at": "2026-11-04T04:17:32.753763+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1471,6 +1456,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T04:04:40.834815+00:00",
       "run_id": "41770859241"
+    },
+    "95004": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%EC%9E%90-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%EC%98%AC%EC%9D%B8%EC%9B%90-%EC%9C%A0%EB%A6%AC-%EC%97%90%EC%96%B4%ED%94%84%EB%9D%BC%EC%9D%B4%EC%96%B4-38L-14L-25%ED%95%A0%EC%9D%B8-AraR6VRj?from=write",
+      "posted_at_utc": "2026-11-04T04:16:44+00:00",
+      "product_id": "9535512844",
+      "item_id": "28511144946",
+      "vendor_item_id": "95544876206",
+      "at": "2026-11-04T04:17:49.565264+00:00",
+      "run_id": "41772271996"
     }
   },
   "skipped_non_coupang": 17,
