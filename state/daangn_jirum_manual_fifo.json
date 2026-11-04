@@ -53,7 +53,12 @@
       "manual_replay_approved": true
     }
   ],
-  "in_flight": null,
+  "in_flight": {
+    "id": 94986,
+    "status": "CLAIMED",
+    "run_id": "41763051590",
+    "at": "2026-11-04T02:48:15.094061+00:00"
+  },
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
