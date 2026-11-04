@@ -107,7 +107,9 @@ class NaverPhotoTests(unittest.TestCase):
                 with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
                            return_value={"status":"LOWCHART_ITEM_PAGE_NOT_FOUND",
                                          "http_status": 404}):
-                    with patch("gh_only.naver_web_image_photo.fetch_first_naver_photo",
+                    with patch("gh_only.fallcent_search_photo.fetch_fallcent_product_photo",
+                               return_value={"status": "FALLCENT_NO_MATCHING_IMAGE"}), \
+                         patch("gh_only.naver_web_image_photo.fetch_first_naver_photo",
                                side_effect=fake_fetch):
                         row = enrich_deal(
                             DEAL, folder, resolver=lambda _: ID,
