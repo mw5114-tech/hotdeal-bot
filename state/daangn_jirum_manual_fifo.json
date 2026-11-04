@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95046,
-  "pending": [],
+  "last_scanned_id": 95047,
+  "pending": [
+    {
+      "id": 95047,
+      "source_post_url": "https://t.me/jirum/95047",
+      "original_purchase_url": "https://link.coupang.com/a/ipRgTBZP5w",
+      "source_text": "🔥🔥🔥무지성 19,900원 (53.7% 할인)🔥🔥🔥\n뉴에라 아동용 MLB 스몰 로고 맨투맨 샌프란시스코 자이언츠\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 43,000원\n- 할인: 23,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipRgTBZP5w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T22:09:43+00:00",
+      "title": "뉴에라 아동용 MLB 스몰 로고 맨투맨 샌프란시스코 자이언츠",
+      "sale_price_krw": 19900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
