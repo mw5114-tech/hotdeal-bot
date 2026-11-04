@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95009,
-  "pending": [
-    {
-      "id": 95009,
-      "source_post_url": "https://t.me/jirum/95009",
-      "original_purchase_url": "https://link.coupang.com/a/ioHFM8mMw0",
-      "source_text": "❤️초대박 9,420원 (44.6% 할인)\n곰곰 비프 스테이크 (냉동), 160g, 5개입\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 7,580원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioHFM8mMw0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T05:27:48+00:00",
-      "title": "곰곰 비프 스테이크 (냉동), 160g, 5개입",
-      "sale_price_krw": 9420
-    }
-  ],
-  "in_flight": {
-    "id": 95009,
-    "status": "CLAIMED",
-    "run_id": "41779428625",
-    "at": "2026-11-04T05:29:18.030401+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1521,6 +1506,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T05:13:51.197008+00:00",
       "run_id": "41777890397"
+    },
+    "95009": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%B9%84%ED%94%84-%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC-%EB%83%89%EB%8F%99-160g-5%EA%B0%9C%EC%9E%85-45%ED%95%A0%EC%9D%B8-AO6WvxDj?from=write",
+      "posted_at_utc": "2026-11-04T05:27:48+00:00",
+      "product_id": "6224314075",
+      "item_id": "12473682252",
+      "vendor_item_id": "79742509622",
+      "at": "2026-11-04T05:29:34.322774+00:00",
+      "run_id": "41779428625"
     }
   },
   "skipped_non_coupang": 17,
