@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95010,
-  "pending": [],
+  "last_scanned_id": 95012,
+  "pending": [
+    {
+      "id": 95012,
+      "source_post_url": "https://t.me/jirum/95012",
+      "original_purchase_url": "https://link.coupang.com/a/ioIUJCmrUy",
+      "source_text": "☆특가 10,340원 (28.2% 할인)\n풀무원 국산 홍 고춧가루 (냉장), 200g, 1개\n📌 가격 현황\n- 정상가: 14,400원\n- 할인: 4,060원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioIUJCmrUy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-04T05:45:10+00:00",
+      "title": "풀무원 국산 홍 고춧가루 (냉장), 200g, 1개",
+      "sale_price_krw": 10340
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1528,7 +1538,7 @@
       "run_id": "41779983304"
     }
   },
-  "skipped_non_coupang": 17,
+  "skipped_non_coupang": 18,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
