@@ -265,48 +265,30 @@ def enrich_deal(deal: dict, output_dir: Path,
         eligible_cdn = image_is_cdn(og.get("og_image") or "")
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
+    # Production order: Lowchart -> Couspi -> Dangapick -> skip.
+    # Do not silently use Telegram previews or arbitrary indexed images.
     source_photo_verified = False
-    if (using_public_lowchart and photo.get("status") != "IMAGE_SAVED"
-            and deal.get("image_provenance") == "telegram_attached_photo"):
-        fallback_photo = download_source_photo(
-            deal.get("image_url_candidate"), output_dir, source_id)
-        photo = fallback_photo
-        if fallback_photo.get("status") == "IMAGE_SAVED":
-            image_source = "telegram_attached_photo"
-            source_photo_verified = True
-    # Lowchart remains first choice. Search runs ONLY when its photo fails.
-    # Google Images serves CAPTCHA to the GitHub runner. The accessible Naver
-    # public image index is the safe second choice, requiring exact Coupang
-    # product ID plus matching package/specs in the indexed result title.
     search_result = {"status": "NOT_ATTEMPTED"}
     search_photo_verified = False
     search_title = None
+    provider_photo = {"photo_provider_attempts": []}
     if (using_public_lowchart
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
-            and photo.get("status") != "IMAGE_SAVED"
-            and os.getenv("JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK") == "true"):
-        search_query_title = title if lowchart_title_verified else fallback_title
-        try:
-            search_fn = search_lookup or lookup_search_product_photo
-            search_result = search_fn(identity, search_query_title)
-            if (search_result.get("status") == "SEARCH_VERIFIED_COUPANG_PRODUCT_IMAGE"
-                    and search_result.get("image_search_product_id_verified") is True
-                    and search_result.get("image_search_title_verified") is True):
-                fetch_photo = search_downloader or download_search_photo
-                alternative = fetch_photo(search_result["og_image"], output_dir, source_id)
-                if alternative.get("status") == "IMAGE_SAVED":
-                    photo = alternative
-                    image_source = "naver_indexed_coupang_product_image"
-                    search_photo_verified = True
-                    search_title = search_result.get("og_title")
-                    if not lowchart_title_verified:
-                        title = search_title
-                else:
-                    search_result = {**search_result, "status": "SEARCH_PHOTO_DOWNLOAD_FAILED",
-                                     "download_status": alternative.get("status")}
-        except Exception as exc:
-            search_result = {"status": "SEARCH_IMAGE_EXCEPTION",
-                             "error_type": type(exc).__name__}
+            and photo.get("status") != "IMAGE_SAVED"):
+        from gh_only.ordered_product_photos import ordered_external_photo
+        provider_photo = ordered_external_photo(
+            identity, fallback_title or title, output_dir, source_id)
+        if provider_photo.get("status") == "IMAGE_SAVED":
+            photo = {k: provider_photo[k] for k in ("status", "saved_name",
+                     "bytes", "image_source") if k in provider_photo}
+            image_source = provider_photo["image_source"]
+            if not lowchart_title_verified:
+                title = provider_photo["image_provider_title"]
+        else:
+            photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
+    provider_verified = (provider_photo.get("status") == "IMAGE_SAVED"
+                         and provider_photo.get("image_provider_verified") is True
+                         and provider_photo.get("image_provider_product_id") == p)
     caption = create_default_preview(sale, title, average, source_id)
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
@@ -332,7 +314,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_product_title": og_title.strip() if lowchart_title_verified else None,
         "product_name_source": (
             "lowchart_exact_item_page" if lowchart_title_verified
-            else "search_exact_product_id_index" if search_photo_verified
+            else "external_product_id_page" if provider_verified
             else "unverified_fallback"
         ) if using_public_lowchart else "legacy_kakao",
         "search_product_title": search_title,
@@ -343,19 +325,25 @@ def enrich_deal(deal: dict, output_dir: Path,
         "search_provider": ("naver_image_index" if search_photo_verified else None),
         "kakao_status": og.get("status"),
         "kakao_product_match": matching and image_source == "legacy_kakao_og",
-        "image_product_match": matching or search_photo_verified,
+        "image_product_match": matching or provider_verified,
         "image_source": image_source,
         "image_metadata_status": og.get("status"),
         "image_http_status": og.get("http_status"),
         "image_error_type": og.get("error_type"),
         "source_photo_verified": source_photo_verified,
         "image_match_basis": (
-            search_result.get("image_match_basis") if search_photo_verified
+            "SAME_COUPANG_PRODUCT_ID_EXTERNAL_PAGE" if provider_verified
             else og.get("image_match_basis")
         ),
         "image_same_named_option": (
-            True if search_photo_verified else og.get("image_same_named_option")
+            provider_photo.get("image_provider_item_id") == i if provider_verified
+            else og.get("image_same_named_option")
         ),
+        "image_provider_verified": provider_verified,
+        "image_provider_title": provider_photo.get("image_provider_title"),
+        "image_provider_product_id": provider_photo.get("image_provider_product_id"),
+        "image_provider_item_id": provider_photo.get("image_provider_item_id"),
+        "photo_provider_attempts": provider_photo.get("photo_provider_attempts", []),
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
