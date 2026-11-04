@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95019,
-  "pending": [
-    {
-      "id": 95019,
-      "source_post_url": "https://t.me/jirum/95019",
-      "original_purchase_url": "https://link.coupang.com/a/ioRU4mtihg",
-      "source_text": "👍대박 21,080원 (39.8% 할인)\n(와멤데 쿠폰) 제주삼다수 그린 무라벨, 2L, 12개. 3개 선택(총36개)\n📌 가격 현황\n- 정상가: 35,000원\n- 할인: 13,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioRU4mtihg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T07:51:11+00:00",
-      "title": "(와멤데 쿠폰) 제주삼다수 그린 무라벨, 2L, 12개. 3개 선택(총36개)",
-      "sale_price_krw": 21080
-    }
-  ],
-  "in_flight": {
-    "id": 95019,
-    "status": "CLAIMED",
-    "run_id": "41795254853",
-    "at": "2026-11-04T07:52:40.128034+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1601,6 +1586,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T07:42:49.530347+00:00",
       "run_id": "41794105175"
+    },
+    "95019": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A0%9C%EC%A3%BC%EC%82%BC%EB%8B%A4%EC%88%98-%EA%B7%B8%EB%A6%B0-%EB%AC%B4%EB%9D%BC%EB%B2%A8-2L-12%EA%B0%9C-d9XME6DP?from=write",
+      "posted_at_utc": "2026-11-04T07:51:11+00:00",
+      "product_id": "9725928327",
+      "item_id": "29105043010",
+      "vendor_item_id": "86478559145",
+      "at": "2026-11-04T07:52:57.264753+00:00",
+      "run_id": "41795254853"
     }
   },
   "skipped_non_coupang": 19,
