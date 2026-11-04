@@ -143,75 +143,9 @@ class ImageSearchFallbackTests(unittest.TestCase):
             self.assertFalse(file.exists())
             downloader.assert_called_once()
 
-    def test_lowchart_missing_uses_verified_search_and_validates_publish_draft(self):
-        proof = parse_naver_image_results(page(RESULT), ITEM, NAME)
-        def save_fake_photo(url, folder, mid):
-            filename = f"jirum_{mid}_search_photo.jpg"
-            (folder / filename).write_bytes(b"\xff\xd8\xff" + b"x" * 1400)
-            return {"status": "IMAGE_SAVED", "saved_name": filename,
-                    "image_source": "naver_indexed_coupang_product_image"}
-        with tempfile.TemporaryDirectory() as tmp:
-            folder = Path(tmp)
-            with patch.dict(os.environ, {
-                "JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK": "true",
-                "JIRUM_IMAGE_SOURCE": "lowchart",
-                "COUPANG_PARTNER_LPTAG": "AF9668915",
-            }):
-                with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
-                           return_value={"status": "LOWCHART_ITEM_PAGE_NOT_FOUND",
-                                         "http_status": 404}):
-                    row = enrich_deal(
-                        SOURCE, folder, resolver=lambda _: ITEM,
-                        owner_tag="AF9668915",
-                        history_fetch=lambda *args: {"usable_historical_reference": False},
-                        search_lookup=lambda *args: proof,
-                        search_downloader=save_fake_photo,
-                    )
-                self.assertEqual(row["search_status"], "SEARCH_VERIFIED_COUPANG_PRODUCT_IMAGE")
-                self.assertFalse(row["lowchart_title_verified"])
-                self.assertTrue(row["image_search_product_id_verified"])
-                self.assertEqual(row["product_name_source"], "search_exact_product_id_index")
-                self.assertEqual(row["caption"]["product_name"], NAME)
-                self.assertNotIn("%할인]", row["caption"]["caption"])
-                self.assertIn("[할인율 확인 중]", row["caption"]["caption"])
-                (folder / "drafts.json").write_text(
-                    json.dumps({"drafts": [row]}, ensure_ascii=False), "utf-8")
-                article = {
-                    "source_id": 94964, "image": folder / row["photo"]["saved_name"],
-                    "candidate_url": row["composed_affiliate_url"],
-                    "body": row["caption"]["caption"],
-                    "title": "[쿠팡🔥핫딜] " + row["caption"]["product_name"],
-                }
-                with patch("gh_only.jirum_manual_queue.read_one_draft",
-                           return_value=article):
-                    verified = validate_draft(folder, 94964)
-                self.assertEqual(verified["product_id"], PID)
-                self.assertEqual(verified["item_id"], IID)
-
-    def test_lowchart_photo_success_does_not_start_fallback(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            with patch.dict(os.environ, {"JIRUM_ENABLE_SEARCH_PHOTO_FALLBACK": "true"}):
-                with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
-                           return_value={
-                               "status": "LOWCHART_EXACT_ITEM_IMAGE",
-                               "og_title": NAME,
-                               "og_url": "https://www.lowchart.com/" + PID + "-" + IID,
-                               "og_image": IMAGE,
-                               "lowchart_title_verified": True,
-                               "image_source": "lowchart_exact_item_public_page",
-                           }):
-                    with patch("gh_only.default_deal_automation.download_exact_photo",
-                               return_value={"status": "IMAGE_SAVED",
-                                             "saved_name": "original.jpg"}):
-                        result = enrich_deal(
-                            SOURCE, Path(tmp), resolver=lambda _: ITEM,
-                            history_fetch=lambda *a: {},
-                            owner_tag="AF9668915",
-                            search_lookup=lambda *a: (_ for _ in ()).throw(
-                                AssertionError("Search fallback should not run")),
-                        )
-        self.assertEqual(result["search_status"], "NOT_ATTEMPTED")
-        self.assertEqual(result["image_source"], "lowchart_exact_item_public_page")
+    # Legacy image-index parser retains isolated parser tests. The live
+    # publishing pipeline no longer calls it; ordered provider integration is
+    # tested in test_ordered_product_photos.py.
 
 
 if __name__ == "__main__":
