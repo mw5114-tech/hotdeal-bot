@@ -41,6 +41,7 @@ jobs:
               if tag=='img':self.img.append(a)
               if tag=='form':self.forms.append(a)
               if tag=='a' and ('8522680027' in (a.get('href') or '')):self.links.append(a.get('href'))
+          urls.append('https://dangapick.com/app.js?v=34e11844')
           for url in urls:
             print('PROBE_URL',url)
             req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
@@ -49,6 +50,10 @@ jobs:
                 body=r.read(1100000)
                 print('PROBE_RESPONSE',r.status,r.geturl(),r.headers.get('Content-Type'),len(body))
               html=body.decode('utf-8','replace');p=Probe();p.feed(html)
+              if '/app.js?' in url:
+                for term in ('/api/', 'search', 'fetch(', 'function doSearch', 'qbtn'):
+                  for m in list(re.finditer(re.escape(term),html))[:6]:
+                    print('PROBE_JS_NEAR',term,html[max(0,m.start()-160):m.start()+320])
               print('PROBE_META',[(x.get('property') or x.get('name'),(x.get('content') or '')[:210]) for x in p.meta[:20]])
               print('PROBE_IMGS_COUNT',len(p.img))
               for x in p.img[:18]:
