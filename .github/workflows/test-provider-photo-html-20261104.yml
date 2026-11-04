@@ -42,14 +42,20 @@ jobs:
               if tag=='form':self.forms.append(a)
               if tag=='a' and ('8522680027' in (a.get('href') or '')):self.links.append(a.get('href'))
           urls.append('https://dangapick.com/app.js?v=34e11844')
+          urls.append('https://dangapick.com/data/products.json')
           for url in urls:
             print('PROBE_URL',url)
             req=request.Request(url,headers={'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/129.0.0.0 Safari/537.36','Accept':'text/html,application/xhtml+xml','Accept-Language':'ko-KR,ko;q=0.9'})
             try:
               with request.urlopen(req,timeout=12) as r:
                 body=r.read(1100000)
+                print('PROBE_LENGTH_HEADER',r.headers.get('Content-Length'))
                 print('PROBE_RESPONSE',r.status,r.geturl(),r.headers.get('Content-Type'),len(body))
               html=body.decode('utf-8','replace');p=Probe();p.feed(html)
+              if 'products.json' in url:
+                print('PROBE_JSON_PREFIX',html[:850])
+                print('PROBE_JSON_PRODUCT_ID_POSITION',html.find('8522680027'))
+                continue
               if '/app.js?' in url:
                 for term in ('/api/', 'search', 'fetch(', 'function doSearch', 'qbtn'):
                   for m in list(re.finditer(re.escape(term),html))[:6]:
