@@ -17,6 +17,23 @@ PREFIX = "/i-gagyeog-mos-c/posts/"
 BOARD = "🔥 오늘의 핫딜"
 
 
+def deal_expired_before_submit(article: dict, reference=None) -> bool:
+    """Keep 60-minute gate except explicitly user-replayed 94986-94990."""
+    from datetime import datetime, timezone
+    from gh_only.official_link_receipts import parse_timestamp
+    raw = article.get("posted_at_utc")
+    if not raw:
+        return False  # existing caller enforces source-time provenance
+    posted = parse_timestamp(raw)
+    if posted is None:
+        return True
+    elapsed = ((reference or datetime.now(timezone.utc)) - posted).total_seconds()
+    if elapsed < 3600:
+        return False
+    return not (article.get("manual_replay_approved") is True
+                and article.get("source_id") in (94986, 94987, 94988, 94989, 94990))
+
+
 def norm(s: str) -> str:
     return re.sub(r"\s+", "", s or "")
 
@@ -322,13 +339,8 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     raise RuntimeError("PRODUCT_LINK_PARAGRAPH_SPLIT_DO_NOT_SUBMIT")
                 # The deal may have aged past 60 minutes while the image
                 # uploaded. Do not submit such a post, even if already claimed.
-                if article.get("posted_at_utc"):
-                    from datetime import datetime, timezone
-                    from gh_only.official_link_receipts import parse_timestamp
-                    posted = parse_timestamp(article["posted_at_utc"])
-                    if (posted is None
-                            or (datetime.now(timezone.utc) - posted).total_seconds() >= 3600):
-                        raise RuntimeError("DEAL_EXPIRED_BEFORE_SUBMIT")
+                if deal_expired_before_submit(article):
+                    raise RuntimeError("DEAL_EXPIRED_BEFORE_SUBMIT")
                 # No retry under ANY condition, including timeout or navigation error.
                 result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
