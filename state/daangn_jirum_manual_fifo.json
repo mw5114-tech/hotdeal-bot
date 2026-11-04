@@ -3,15 +3,6 @@
   "last_scanned_id": 95036,
   "pending": [
     {
-      "id": 95034,
-      "source_post_url": "https://t.me/jirum/95034",
-      "original_purchase_url": "https://link.coupang.com/a/ipa2dGso6S",
-      "source_text": "☆특가 690원\n삼양 짱구 115g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2dGso6S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:18:40+00:00",
-      "title": "☆특가 690원",
-      "sale_price_krw": 690
-    },
-    {
       "id": 95035,
       "source_post_url": "https://t.me/jirum/95035",
       "original_purchase_url": "https://link.coupang.com/a/ipa2hvtsIK",
@@ -30,12 +21,7 @@
       "sale_price_krw": 580
     }
   ],
-  "in_flight": {
-    "id": 95034,
-    "status": "CLAIMED",
-    "run_id": "41828239382",
-    "at": "2026-11-04T12:20:27.836563+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1748,6 +1734,16 @@
       "item_id": "29116304110",
       "vendor_item_id": "96040821488",
       "at": "2026-11-04T12:20:23.250173+00:00",
+      "run_id": "41828239382"
+    },
+    "95034": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%96%91-%EC%A7%B1%EA%B5%AC-1%EA%B0%9C-115g-40%ED%95%A0%EC%9D%B8-PNDznvJj?from=write",
+      "posted_at_utc": "2026-11-04T12:18:40+00:00",
+      "product_id": "8042662122",
+      "item_id": "22524706531",
+      "vendor_item_id": "89566736005",
+      "at": "2026-11-04T12:20:44.177047+00:00",
       "run_id": "41828239382"
     }
   },
