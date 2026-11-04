@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95005,
-  "pending": [
-    {
-      "id": 95005,
-      "source_post_url": "https://t.me/jirum/95005",
-      "original_purchase_url": "https://link.coupang.com/a/ioD849LDVc",
-      "source_text": "☆특가 9,610원\n띵크유어도 그티 강아지 딩고껌 스틱형 24P\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioD849LDVc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T04:38:26+00:00",
-      "title": "☆특가 9,610원",
-      "sale_price_krw": 9610
-    }
-  ],
-  "in_flight": {
-    "id": 95005,
-    "status": "CLAIMED",
-    "run_id": "41774483470",
-    "at": "2026-11-04T04:39:45.484780+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1481,6 +1466,16 @@
       "vendor_item_id": "95544876206",
       "at": "2026-11-04T04:17:49.565264+00:00",
       "run_id": "41772271996"
+    },
+    "95005": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%B5%ED%81%AC%EC%9C%A0%EC%96%B4%EB%8F%84%EA%B7%B8%ED%8B%B0-%EA%B0%95%EC%95%84%EC%A7%80-%EB%94%A9%EA%B3%A0%EA%BB%8C-%EC%8A%A4%ED%8B%B1%ED%98%95-24P-%EC%B9%98%ED%82%A8-240g-30%ED%95%A0%EC%9D%B8-AeDbONzj?from=write",
+      "posted_at_utc": "2026-11-04T04:38:26+00:00",
+      "product_id": "8595950373",
+      "item_id": "11204937897",
+      "vendor_item_id": null,
+      "at": "2026-11-04T04:40:02.568843+00:00",
+      "run_id": "41774483470"
     }
   },
   "skipped_non_coupang": 17,
