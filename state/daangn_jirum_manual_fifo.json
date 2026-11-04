@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95006,
-  "pending": [
-    {
-      "id": 95006,
-      "source_post_url": "https://t.me/jirum/95006",
-      "original_purchase_url": "https://link.coupang.com/a/ioFk1eCejc",
-      "source_text": "👍대박 9,860원 (38.4% 할인)\n풀무원 얄피꽉찬 육즙진한 교자 (냉동), 400g, 4개\n📌 가격 현황\n- 정상가: 16,000원\n- 할인: 6,140원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioFk1eCejc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T04:55:07+00:00",
-      "title": "풀무원 얄피꽉찬 육즙진한 교자 (냉동), 400g, 4개",
-      "sale_price_krw": 9860
-    }
-  ],
-  "in_flight": {
-    "id": 95006,
-    "status": "CLAIMED",
-    "run_id": "41776148502",
-    "at": "2026-11-04T04:56:33.501593+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1491,6 +1476,16 @@
       "vendor_item_id": null,
       "at": "2026-11-04T04:40:02.568843+00:00",
       "run_id": "41774483470"
+    },
+    "95006": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%96%84%ED%94%BC%EA%BD%89%EC%B0%AC-%EC%9C%A1%EC%A6%99%EC%A7%84%ED%95%9C-%EA%B5%90%EC%9E%90-%EB%83%89%EB%8F%99-400g-4%EA%B0%9C-75%ED%95%A0%EC%9D%B8-A4QV8poP?from=write",
+      "posted_at_utc": "2026-11-04T04:55:07+00:00",
+      "product_id": "7662539636",
+      "item_id": "20535658858",
+      "vendor_item_id": "87612470208",
+      "at": "2026-11-04T04:56:49.256297+00:00",
+      "run_id": "41776148502"
     }
   },
   "skipped_non_coupang": 17,
