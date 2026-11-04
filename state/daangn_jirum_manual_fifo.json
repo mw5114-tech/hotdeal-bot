@@ -12,7 +12,12 @@
       "sale_price_krw": 15480
     }
   ],
-  "in_flight": null,
+  "in_flight": {
+    "id": 95013,
+    "status": "CLAIMED",
+    "run_id": "41781394510",
+    "at": "2026-11-04T05:47:59.943892+00:00"
+  },
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
