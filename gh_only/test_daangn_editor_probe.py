@@ -241,6 +241,31 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 read_one_draft(folder)
 
+    def test_supported_lowchart_and_external_photo_filenames(self):
+        for suffix in ("lowchart_photo", "couspi_photo", "dangapick_photo"):
+            with self.subTest(suffix=suffix), tempfile.TemporaryDirectory() as temp:
+                folder = Path(temp)
+                report = self._make_draft(folder)
+                old = folder / "jirum_94717_kakao_og.jpg"
+                new = folder / f"jirum_94717_{suffix}.jpg"
+                old.rename(new)
+                report["drafts"][0]["photo"]["saved_name"] = new.name
+                (folder / "drafts.json").write_text(
+                    json.dumps(report, ensure_ascii=False), encoding="utf-8"
+                )
+                self.assertEqual(read_one_draft(folder)["image"], new)
+
+    def test_rejects_wrong_photo_source_name(self):
+        with tempfile.TemporaryDirectory() as temp:
+            folder = Path(temp)
+            report = self._make_draft(folder)
+            report["drafts"][0]["photo"]["saved_name"] = "jirum_94717_unknown_photo.jpg"
+            (folder / "drafts.json").write_text(
+                json.dumps(report, ensure_ascii=False), encoding="utf-8"
+            )
+            with self.assertRaisesRegex(ValueError, "DRAFT_IMAGE_NAME_INVALID"):
+                read_one_draft(folder)
+
     def test_missing_photo_is_failure_not_guesswork(self):
         with tempfile.TemporaryDirectory() as temp:
             folder = Path(temp)
