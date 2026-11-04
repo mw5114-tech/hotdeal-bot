@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94981,
-  "pending": [
-    {
-      "id": 94981,
-      "source_post_url": "https://t.me/jirum/94981",
-      "original_purchase_url": "https://link.coupang.com/a/iolP1Kxnzw",
-      "source_text": "🔥🔥🔥무지성 29,900원 (57.3% 할인)🔥🔥🔥\n메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 70,000원\n- 할인: 40,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iolP1Kxnzw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T00:22:15+00:00",
-      "title": "메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼",
-      "sale_price_krw": 29900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1744,6 +1734,12 @@
       "source_post_url": "https://t.me/jirum/94975",
       "source_title": "☆특가 9,700원",
       "at": "2026-11-03T22:53:02.075950+00:00"
+    },
+    "94981": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/94981",
+      "source_title": "메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼",
+      "at": "2026-11-04T00:23:14.778416+00:00"
     }
   },
   "single_test_repost_20261103": {
