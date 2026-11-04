@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95010,
-  "pending": [
-    {
-      "id": 95010,
-      "source_post_url": "https://t.me/jirum/95010",
-      "original_purchase_url": "https://link.coupang.com/a/ioH2Uqr5EG",
-      "source_text": "🔥🔥🔥무지성 3,990원 (48.2% 할인)🔥🔥🔥\n(재입고)LEPOID 다기능 스마트폰 태블릿 집게형 거치대\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,700원\n- 할인: 3,710원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ioH2Uqr5EG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T05:33:01+00:00",
-      "title": "(재입고)LEPOID 다기능 스마트폰 태블릿 집게형 거치대",
-      "sale_price_krw": 3990
-    }
-  ],
-  "in_flight": {
-    "id": 95010,
-    "status": "CLAIMED",
-    "run_id": "41779983304",
-    "at": "2026-11-04T05:34:07.577758+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1531,6 +1516,16 @@
       "vendor_item_id": "79742509622",
       "at": "2026-11-04T05:29:34.322774+00:00",
       "run_id": "41779428625"
+    },
+    "95010": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9E%AC%EC%9E%85%EA%B3%A0LEPOID-%EB%8B%A4%EA%B8%B0%EB%8A%A5-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8F%B0-%ED%83%9C%EB%B8%94%EB%A6%BF-%EC%A7%91%EA%B2%8C%ED%98%95-%EA%B1%B0%EC%B9%98%EB%8C%80-95%ED%95%A0%EC%9D%B8-dymvxQVd?from=write",
+      "posted_at_utc": "2026-11-04T05:33:01+00:00",
+      "product_id": "8486241017",
+      "item_id": "24559721394",
+      "vendor_item_id": "91539723611",
+      "at": "2026-11-04T05:34:24.010716+00:00",
+      "run_id": "41779983304"
     }
   },
   "skipped_non_coupang": 17,
