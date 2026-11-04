@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95036,
-  "pending": [
-    {
-      "id": 95036,
-      "source_post_url": "https://t.me/jirum/95036",
-      "original_purchase_url": "https://link.coupang.com/a/ipa2k3bjDU",
-      "source_text": "☆특가 580원\n오리온 나샌드 77g\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipa2k3bjDU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T12:18:42+00:00",
-      "title": "☆특가 580원",
-      "sale_price_krw": 580
-    }
-  ],
-  "in_flight": {
-    "id": 95036,
-    "status": "CLAIMED",
-    "run_id": "41828239382",
-    "at": "2026-11-04T12:21:09.156655+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1750,6 +1735,16 @@
       "item_id": "28297230194",
       "vendor_item_id": "95250042536",
       "at": "2026-11-04T12:21:05.025179+00:00",
+      "run_id": "41828239382"
+    },
+    "95036": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EB%82%98%EC%83%8C%EB%93%9C-77g-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-ARoJ68wP?from=write",
+      "posted_at_utc": "2026-11-04T12:18:42+00:00",
+      "product_id": "7852025097",
+      "item_id": "23894229590",
+      "vendor_item_id": "90916888418",
+      "at": "2026-11-04T12:21:25.293453+00:00",
       "run_id": "41828239382"
     }
   },
