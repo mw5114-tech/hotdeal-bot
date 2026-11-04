@@ -19,7 +19,29 @@ jobs:
       - run: python -m pip install --quiet requests beautifulsoup4
       - name: Resolve user Coupang link and verify Fallcent exact product/photo
         run: python -m tools.test_fallcent_salt_image_readonly
-      - name: Attach exact image only if source verified and downloaded
+      - name: Download Fallcent-listed similar 10kg product photo (NOT original SKU)
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import requests
+          url="https://thumbnail.coupangcdn.com/thumbnails/remote/640x640ex/image/vendor_inventory/f72a/5ada27166b2c69351d396ab8ba7aa5fac96f6863422d9efc72208cd93e14.png"
+          r=requests.get(url,timeout=25,allow_redirects=False,headers={"User-Agent":"Mozilla/5.0"})
+          data=r.content
+          good=(r.status_code==200 and data.startswith(b"\x89PNG\r\n\x1a\n")
+                and 1000 <= len(data) <= 2500000 and "image" in r.headers.get("content-type",""))
+          print("FALLCENT_SIMILAR_IMAGE_DOWNLOAD",r.status_code,"bytes",len(data),"verified_png",good)
+          if good:
+              p=Path("fallcent-photo")
+              p.mkdir(exist_ok=True)
+              (p/"fallcent-similar-taepyeong-10kg.png").write_bytes(data)
+              (p/"READ_ME.txt").write_text(
+                "This is a similar 10kg Taepyeong salt photo from Fallcent search.\n"
+                "It is NOT verified to be the same Coupang item 8863489459/28741784521.\n"
+                "Search result: https://fallcent.com/product/search/?keyword=%ED%83%9C%ED%8F%89%EC%97%BC%EC%A0%84+%EA%B0%84%EC%88%98%EB%BA%80+%ED%96%87%EC%86%8C%EA%B8%88+10kg\n",
+                encoding="utf-8"
+              )
+          PY
+      - name: Attach downloaded photo (if any) with source warning
         if: success()
         uses: actions/upload-artifact@v4
         with:
