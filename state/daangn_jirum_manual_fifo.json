@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95052,
-  "pending": [
-    {
-      "id": 95052,
-      "source_post_url": "https://t.me/jirum/95052",
-      "original_purchase_url": "https://link.coupang.com/a/ipRQZRD2Sy",
-      "source_text": "👍대박 810,000원 (31.4% 할인)\nLG전자 울트라 HD TV 75인치 벽걸이형 방문설치\n📌 가격 현황\n- 정상가: 1,180,000원\n- 할인: 370,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ipRQZRD2Sy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T22:17:52+00:00",
-      "title": "LG전자 울트라 HD TV 75인치 벽걸이형 방문설치",
-      "sale_price_krw": 810000
-    }
-  ],
-  "in_flight": {
-    "id": 95052,
-    "status": "CLAIMED",
-    "run_id": "41924083711",
-    "at": "2026-11-04T22:18:40.988547+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1901,6 +1886,16 @@
       "vendor_item_id": "4204858155",
       "at": "2026-11-04T22:16:54.144117+00:00",
       "run_id": "41923778935"
+    },
+    "95052": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-LG%EC%A0%84%EC%9E%90-%EC%9A%B8%ED%8A%B8%EB%9D%BC-HD-TV-189cm75%EC%9D%B8%EC%B9%98-75UK7-35%ED%95%A0%EC%9D%B8-dDOrZGOP?from=write",
+      "posted_at_utc": "2026-11-04T22:17:52+00:00",
+      "product_id": "9230304954",
+      "item_id": "27295858444",
+      "vendor_item_id": "94262426123",
+      "at": "2026-11-04T22:18:58.179983+00:00",
+      "run_id": "41924083711"
     }
   },
   "skipped_non_coupang": 22,
