@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 94997,
-  "pending": [
-    {
-      "id": 94997,
-      "source_post_url": "https://t.me/jirum/94997",
-      "original_purchase_url": "https://link.coupang.com/a/iovj9rLYHY",
-      "source_text": "☆특가 4,980원\n퍼퓸드 사쉐 방향제 10g 8개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iovj9rLYHY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-04T02:34:59+00:00",
-      "title": "☆특가 4,980원",
-      "sale_price_krw": 4980
-    }
-  ],
-  "in_flight": {
-    "id": 94997,
-    "status": "CLAIMED",
-    "run_id": "41761744737",
-    "at": "2026-11-04T02:35:52.805166+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1371,6 +1356,16 @@
       "vendor_item_id": "85862451239",
       "at": "2026-11-04T02:30:57.089690+00:00",
       "run_id": "41761140834"
+    },
+    "94997": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A9%94%EC%A2%85%EB%B8%94%EB%9E%91-%ED%8D%BC%ED%93%B8%EB%93%9C-%EC%83%A4%EC%89%90-%EB%B3%B8%ED%92%88-%ED%94%8C%EB%A1%9C%EB%9F%B4-8%EA%B0%9C-10g-15%ED%95%A0%EC%9D%B8-PBX39lLj?from=write",
+      "posted_at_utc": "2026-11-04T02:34:59+00:00",
+      "product_id": "9685028667",
+      "item_id": "28963088759",
+      "vendor_item_id": null,
+      "at": "2026-11-04T02:36:09.148379+00:00",
+      "run_id": "41761744737"
     }
   },
   "skipped_non_coupang": 15,
