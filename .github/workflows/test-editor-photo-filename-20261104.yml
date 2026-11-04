@@ -1,0 +1,20 @@
+name: Tests | Daangn external image filename fix
+on:
+  push:
+    branches: [fix/naver-first-shopping-fallback-20261104]
+    paths: ['.github/workflows/test-editor-photo-filename-20261104.yml']
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile and test photo filename parser offline
+        run: |
+          python -m py_compile gh_only/daangn_editor_probe.py gh_only/test_daangn_editor_probe.py
+          python -m unittest -v gh_only.test_daangn_editor_probe
