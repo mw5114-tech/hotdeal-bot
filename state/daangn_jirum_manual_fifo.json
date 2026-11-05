@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95106,
-  "pending": [],
+  "last_scanned_id": 95107,
+  "pending": [
+    {
+      "id": 95107,
+      "source_post_url": "https://t.me/jirum/95107",
+      "original_purchase_url": "https://link.coupang.com/a/iqu6f5pLsy",
+      "source_text": "👍대박 8,700원 (33.1% 할인)\n더미식 유니자장면 297g, 4개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 4,300원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqu6f5pLsy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T07:27:04+00:00",
+      "title": "더미식 유니자장면 297g, 4개",
+      "sale_price_krw": 8700
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
