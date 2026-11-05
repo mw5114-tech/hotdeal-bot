@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95074,
-  "pending": [],
+  "last_scanned_id": 95075,
+  "pending": [
+    {
+      "id": 95075,
+      "source_post_url": "https://t.me/jirum/95075",
+      "original_purchase_url": "https://link.coupang.com/a/ip5g7F9M4W",
+      "source_text": "❤️초대박 4,990원 (42.3% 할인)\nWendini 네모 파스타접시* 6개\n📌 가격 현황\n- 정상가: 8,649원\n- 할인: 3,659원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip5g7F9M4W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T01:25:41+00:00",
+      "title": "Wendini 네모 파스타접시* 6개",
+      "sale_price_krw": 4990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
