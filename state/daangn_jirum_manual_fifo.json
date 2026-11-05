@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95083,
-  "pending": [
-    {
-      "id": 95083,
-      "source_post_url": "https://t.me/jirum/95083",
-      "original_purchase_url": "https://link.coupang.com/a/ip9dmhndro",
-      "source_text": "🔥🔥🔥무지성 2,370원 (49.0% 할인)🔥🔥🔥\n홀리카홀리카 홀리팝 쌍테라이너 0.5g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 4,647원\n- 할인: 2,277원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip9dmhndro\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T02:20:48+00:00",
-      "title": "홀리카홀리카 홀리팝 쌍테라이너 0.5g",
-      "sale_price_krw": 2370
-    }
-  ],
-  "in_flight": {
-    "id": 95083,
-    "status": "CLAIMED",
-    "run_id": "41954651229",
-    "at": "2026-11-05T02:21:44.786998+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2061,6 +2046,16 @@
       "vendor_item_id": "91591751099",
       "at": "2026-11-05T02:15:59.256147+00:00",
       "run_id": "41953986412"
+    },
+    "95083": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%99%80%EB%A6%AC%EC%B9%B4%ED%99%80%EB%A6%AC%EC%B9%B4-%ED%99%80%EB%A6%AC%ED%8C%9D-%EC%8C%8D%ED%85%8C%EB%9D%BC%EC%9D%B4%EB%84%88-05g-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-PBXLRzvj?from=write",
+      "posted_at_utc": "2026-11-05T02:20:48+00:00",
+      "product_id": "7885112053",
+      "item_id": "21573065524",
+      "vendor_item_id": null,
+      "at": "2026-11-05T02:22:01.385544+00:00",
+      "run_id": "41954651229"
     }
   },
   "skipped_non_coupang": 37,
