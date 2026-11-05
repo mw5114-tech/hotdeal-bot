@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95133,
-  "pending": [
-    {
-      "id": 95133,
-      "source_post_url": "https://t.me/jirum/95133",
-      "original_purchase_url": "https://link.coupang.com/a/iqQF0XZcnA",
-      "source_text": "☆특가 9,690원\n코멧 시그니처 아기물티슈 엠보싱 캡형 저자극 더마테스트 시험완료\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqQF0XZcnA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T12:29:00+00:00",
-      "title": "☆특가 9,690원",
-      "sale_price_krw": 9690
-    }
-  ],
-  "in_flight": {
-    "id": 95133,
-    "status": "CLAIMED",
-    "run_id": "42027555371",
-    "at": "2026-11-05T12:30:09.815132+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2381,6 +2366,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T12:22:25.287204+00:00",
       "run_id": "42026427762"
+    },
+    "95133": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EB%A9%A7-%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98-%EC%95%84%EA%B8%B0%EB%AC%BC%ED%8B%B0%EC%8A%88-%EC%97%A0%EB%B3%B4%EC%8B%B1-%EC%BA%A1%ED%98%95-%EC%A0%80%EC%9E%90%EA%B7%B9-%EB%8D%94%EB%A7%88%ED%85%8C%EC%8A%A4%ED%8A%B8-%EC%8B%9C%ED%97%98%EC%99%84-15%ED%95%A0%EC%9D%B8-jvxRNp1P?from=write",
+      "posted_at_utc": "2026-11-05T12:29:00+00:00",
+      "product_id": "252301180",
+      "item_id": "795038805",
+      "vendor_item_id": null,
+      "at": "2026-11-05T12:30:26.333877+00:00",
+      "run_id": "42027555371"
     }
   },
   "skipped_non_coupang": 55,
