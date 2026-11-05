@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95163,
-  "pending": [
-    {
-      "id": 95163,
-      "source_post_url": "https://t.me/jirum/95163",
-      "original_purchase_url": "https://link.coupang.com/a/irBcD46I3w",
-      "source_text": "☆특가 254,910원 (15.0% 할인)\n닌자 푸디 맥스 스마트 에어그릴 에어프라이어 5.7L\n📌 가격 현황\n- 정상가: 300,000원\n- 할인: 45,090원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irBcD46I3w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T23:20:04+00:00",
-      "title": "닌자 푸디 맥스 스마트 에어그릴 에어프라이어 5.7L",
-      "sale_price_krw": 254910
-    }
-  ],
-  "in_flight": {
-    "id": 95163,
-    "status": "CLAIMED",
-    "run_id": "42128879403",
-    "at": "2026-11-05T23:21:01.762251+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2571,6 +2556,16 @@
       "vendor_item_id": "86506398822",
       "at": "2026-11-05T23:04:12.343608+00:00",
       "run_id": "42126598375"
+    },
+    "95163": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%EC%9E%90-%ED%91%B8%EB%94%94-%EB%A7%A5%EC%8A%A4-%EC%8A%A4%EB%A7%88%ED%8A%B8-%EC%97%90%EC%96%B4%EA%B7%B8%EB%A6%B4-%EC%97%90%EC%96%B4%ED%94%84%EB%9D%BC%EC%9D%B4%EC%96%B4-AG551KR-25%ED%95%A0%EC%9D%B8-dDO3QwgP?from=write",
+      "posted_at_utc": "2026-11-05T23:20:04+00:00",
+      "product_id": "7959315674",
+      "item_id": "22002522180",
+      "vendor_item_id": "89050036796",
+      "at": "2026-11-05T23:21:18.332394+00:00",
+      "run_id": "42128879403"
     }
   },
   "skipped_non_coupang": 66,
