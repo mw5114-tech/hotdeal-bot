@@ -3,15 +3,6 @@
   "last_scanned_id": 95150,
   "pending": [
     {
-      "id": 95149,
-      "source_post_url": "https://t.me/jirum/95149",
-      "original_purchase_url": "https://link.coupang.com/a/irxoV1UABo",
-      "source_text": "☆특가 2,020원\n청정원 저당 토마토케찹, 285g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoV1UABo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:26:52+00:00",
-      "title": "☆특가 2,020원",
-      "sale_price_krw": 2020
-    },
-    {
       "id": 95150,
       "source_post_url": "https://t.me/jirum/95150",
       "original_purchase_url": "https://link.coupang.com/a/irxoZmyzim",
@@ -21,12 +12,7 @@
       "sale_price_krw": 2630
     }
   ],
-  "in_flight": {
-    "id": 95149,
-    "status": "CLAIMED",
-    "run_id": "42121647610",
-    "at": "2026-11-05T22:28:37.888188+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2519,6 +2505,16 @@
       "item_id": "28859367621",
       "vendor_item_id": "91343363575",
       "at": "2026-11-05T22:28:33.530274+00:00",
+      "run_id": "42121647610"
+    },
+    "95149": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B2%AD%EC%A0%95%EC%9B%90-%EC%A0%80%EB%8B%B9-%ED%86%A0%EB%A7%88%ED%86%A0%EC%BC%80%EC%B0%B9-285g-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-Pk6gD46A?from=write",
+      "posted_at_utc": "2026-11-05T22:26:52+00:00",
+      "product_id": "9235848086",
+      "item_id": "27106941975",
+      "vendor_item_id": "94075060716",
+      "at": "2026-11-05T22:28:53.481828+00:00",
       "run_id": "42121647610"
     }
   },
