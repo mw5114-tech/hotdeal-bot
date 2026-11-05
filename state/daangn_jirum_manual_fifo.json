@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95082,
-  "pending": [
-    {
-      "id": 95082,
-      "source_post_url": "https://t.me/jirum/95082",
-      "original_purchase_url": "https://link.coupang.com/a/ip8LS6hPUq",
-      "source_text": "👍대박 8,790원 (32.4% 할인)\n아이깨끗해 항균 폼 핸드솝 순 파우더향 리필용, 450ml, 4개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 4,210원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip8LS6hPUq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T02:14:36+00:00",
-      "title": "아이깨끗해 항균 폼 핸드솝 순 파우더향 리필용, 450ml, 4개",
-      "sale_price_krw": 8790
-    }
-  ],
-  "in_flight": {
-    "id": 95082,
-    "status": "CLAIMED",
-    "run_id": "41953986412",
-    "at": "2026-11-05T02:15:42.215864+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2051,6 +2036,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T01:44:01.606618+00:00",
       "run_id": "41950421397"
+    },
+    "95082": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%9D%B4%EA%B9%A8%EB%81%97%ED%95%B4-%ED%95%AD%EA%B7%A0-%ED%8F%BC-%ED%95%B8%EB%93%9C%EC%86%9D-%EC%88%9C-%ED%8C%8C%EC%9A%B0%EB%8D%94%ED%96%A5-%EB%A6%AC%ED%95%84%EC%9A%A9-450ml-30%ED%95%A0%EC%9D%B8-P12enNkd?from=write",
+      "posted_at_utc": "2026-11-05T02:14:36+00:00",
+      "product_id": "8802041287",
+      "item_id": "24489442528",
+      "vendor_item_id": "91591751099",
+      "at": "2026-11-05T02:15:59.256147+00:00",
+      "run_id": "41953986412"
     }
   },
   "skipped_non_coupang": 37,
