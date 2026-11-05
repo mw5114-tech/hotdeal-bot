@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95115,
-  "pending": [
-    {
-      "id": 95115,
-      "source_post_url": "https://t.me/jirum/95115",
-      "original_purchase_url": "https://link.coupang.com/a/iqARzCawvY",
-      "source_text": "🔥🔥🔥무지성 4,500원 (51.0% 할인)🔥🔥🔥\n리고 100% 땅콩버터 크리미\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 9,184원\n- 할인: 4,684원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqARzCawvY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T08:47:43+00:00",
-      "title": "리고 100% 땅콩버터 크리미",
-      "sale_price_krw": 4500
-    }
-  ],
-  "in_flight": {
-    "id": 95115,
-    "status": "CLAIMED",
-    "run_id": "41997269153",
-    "at": "2026-11-05T08:49:14.888770+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2281,6 +2266,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T08:36:42.858918+00:00",
       "run_id": "41995730473"
+    },
+    "95115": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%EA%B3%A0-100-%EB%95%85%EC%BD%A9%EB%B2%84%ED%84%B0-%ED%81%AC%EB%A6%AC%EB%AF%B8-453g-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-A6XmmX3d?from=write",
+      "posted_at_utc": "2026-11-05T08:47:43+00:00",
+      "product_id": "8283024107",
+      "item_id": "23881431260",
+      "vendor_item_id": null,
+      "at": "2026-11-05T08:49:32.294553+00:00",
+      "run_id": "41997269153"
     }
   },
   "skipped_non_coupang": 47,
