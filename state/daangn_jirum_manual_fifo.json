@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95115,
-  "pending": [],
+  "last_scanned_id": 95116,
+  "pending": [
+    {
+      "id": 95116,
+      "source_post_url": "https://t.me/jirum/95116",
+      "original_purchase_url": "https://link.coupang.com/a/iqAWBJxjlA",
+      "source_text": "🔥🔥🔥무지성 5,600원 (46.0% 할인)🔥🔥🔥\n[로켓프레시] 에치와이 메치니코프 오곡 씨리얼\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,370원\n- 할인: 4,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqAWBJxjlA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T08:48:51+00:00",
+      "title": "[로켓프레시] 에치와이 메치니코프 오곡 씨리얼",
+      "sale_price_krw": 5600
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
