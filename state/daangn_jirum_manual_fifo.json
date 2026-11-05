@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95138,
-  "pending": [
-    {
-      "id": 95138,
-      "source_post_url": "https://t.me/jirum/95138",
-      "original_purchase_url": "https://link.coupang.com/a/irr3Io57yS",
-      "source_text": "❤️초대박 8,060원 (41.0% 할인)\n아미고나쵸 그랩앤고 치즈\n📌 가격 현황\n- 정상가: 13,661원\n- 할인: 5,601원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irr3Io57yS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T21:12:07+00:00",
-      "title": "아미고나쵸 그랩앤고 치즈",
-      "sale_price_krw": 8060
-    }
-  ],
-  "in_flight": {
-    "id": 95138,
-    "status": "CLAIMED",
-    "run_id": "42110643707",
-    "at": "2026-11-05T21:13:41.803468+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2401,6 +2386,16 @@
       "vendor_item_id": "86285149850",
       "at": "2026-11-05T13:18:29.048254+00:00",
       "run_id": "42034477602"
+    },
+    "95138": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EB%AF%B8%EA%B3%A0%EB%82%98%EC%B5%B8-%EA%B7%B8%EB%9E%A9%EC%95%A4%EA%B3%A0-%EC%B9%98%EC%A6%88-100g-6%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dDO3wGKP?from=write",
+      "posted_at_utc": "2026-11-05T21:12:07+00:00",
+      "product_id": "6553473164",
+      "item_id": "20658019535",
+      "vendor_item_id": null,
+      "at": "2026-11-05T21:13:58.539456+00:00",
+      "run_id": "42110643707"
     }
   },
   "skipped_non_coupang": 58,
