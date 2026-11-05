@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95093,
-  "pending": [
-    {
-      "id": 95093,
-      "source_post_url": "https://t.me/jirum/95093",
-      "original_purchase_url": "https://link.coupang.com/a/iqfWjWKfSe",
-      "source_text": "🔥🔥🔥무지성 4,980원 (53.0% 할인)🔥🔥🔥\n이금기 팬더 굴소스\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,596원\n- 할인: 5,616원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqfWjWKfSe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T03:54:55+00:00",
-      "title": "이금기 팬더 굴소스",
-      "sale_price_krw": 4980
-    }
-  ],
-  "in_flight": {
-    "id": 95093,
-    "status": "CLAIMED",
-    "run_id": "41964568839",
-    "at": "2026-11-05T03:55:48.223574+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2131,6 +2116,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T03:51:23.619428+00:00",
       "run_id": "41964065602"
+    },
+    "95093": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EA%B8%88%EA%B8%B0-%ED%8C%AC%EB%8D%94-%EA%B5%B4%EC%86%8C%EC%8A%A4-320g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-jvxzVx3P?from=write",
+      "posted_at_utc": "2026-11-05T03:54:55+00:00",
+      "product_id": "9378826778",
+      "item_id": "28420179798",
+      "vendor_item_id": null,
+      "at": "2026-11-05T03:56:05.438002+00:00",
+      "run_id": "41964568839"
     }
   },
   "skipped_non_coupang": 40,
