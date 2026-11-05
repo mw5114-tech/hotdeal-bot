@@ -3,15 +3,6 @@
   "last_scanned_id": 95126,
   "pending": [
     {
-      "id": 95125,
-      "source_post_url": "https://t.me/jirum/95125",
-      "original_purchase_url": "https://link.coupang.com/a/iqIYV019OK",
-      "source_text": "☆특가 9,360원 (28.0% 할인)\n삼양 나가사끼 짬뽕 115g, 15개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 3,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqIYV019OK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T10:41:19+00:00",
-      "title": "삼양 나가사끼 짬뽕 115g, 15개",
-      "sale_price_krw": 9360
-    },
-    {
       "id": 95126,
       "source_post_url": "https://t.me/jirum/95126",
       "original_purchase_url": "https://link.coupang.com/a/iqIYZ2kSLQ",
@@ -21,12 +12,7 @@
       "sale_price_krw": 3150
     }
   ],
-  "in_flight": {
-    "id": 95125,
-    "status": "CLAIMED",
-    "run_id": "42012912697",
-    "at": "2026-11-05T10:42:41.342063+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2350,6 +2336,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T10:41:04.659516+00:00",
       "run_id": "42012637662"
+    },
+    "95125": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%96%91-%EB%82%98%EA%B0%80%EC%82%AC%EB%81%BC-%EC%A7%AC%EB%BD%95-115g-15%EA%B0%9C-25%ED%95%A0%EC%9D%B8-d9XpLWDP?from=write",
+      "posted_at_utc": "2026-11-05T10:41:19+00:00",
+      "product_id": "14345",
+      "item_id": "99218915",
+      "vendor_item_id": "84994378948",
+      "at": "2026-11-05T10:42:57.111846+00:00",
+      "run_id": "42012912697"
     }
   },
   "skipped_non_coupang": 51,
