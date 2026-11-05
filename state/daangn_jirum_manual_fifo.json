@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95086,
-  "pending": [],
+  "last_scanned_id": 95087,
+  "pending": [
+    {
+      "id": 95087,
+      "source_post_url": "https://t.me/jirum/95087",
+      "original_purchase_url": "https://link.coupang.com/a/iqbiyqAXoO",
+      "source_text": "❤️초대박 11,310원 (43.5% 할인)\n달바 나이아신아마이드 화이트 트러플 바이탈 스프레이 세럼, 1개, 100ml\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 8,690원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqbiyqAXoO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T02:49:58+00:00",
+      "title": "달바 나이아신아마이드 화이트 트러플 바이탈 스프레이 세럼, 1개, 100ml",
+      "sale_price_krw": 11310
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
