@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95151,
-  "pending": [],
+  "last_scanned_id": 95153,
+  "pending": [
+    {
+      "id": 95152,
+      "source_post_url": "https://t.me/jirum/95152",
+      "original_purchase_url": "https://link.coupang.com/a/irzhAr5Gjk",
+      "source_text": "☆특가 3,050원 (21.1% 할인)\n오뚜기 열라면 120g, 5개\n📌 가격 현황\n- 정상가: 3,866원\n- 할인: 816원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irzhAr5Gjk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:53:12+00:00",
+      "title": "오뚜기 열라면 120g, 5개",
+      "sale_price_krw": 3050
+    },
+    {
+      "id": 95153,
+      "source_post_url": "https://t.me/jirum/95153",
+      "original_purchase_url": "https://link.coupang.com/a/irzhDQs1wO",
+      "source_text": "☆특가 6,830원 (23.3% 할인)\n팔도 라볶이 봉지라면 145g, 8개\n📌 가격 현황\n- 정상가: 8,900원\n- 할인: 2,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irzhDQs1wO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:53:13+00:00",
+      "title": "팔도 라볶이 봉지라면 145g, 8개",
+      "sale_price_krw": 6830
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
