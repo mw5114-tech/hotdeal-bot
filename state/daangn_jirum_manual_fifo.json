@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95085,
-  "pending": [],
+  "last_scanned_id": 95086,
+  "pending": [
+    {
+      "id": 95086,
+      "source_post_url": "https://t.me/jirum/95086",
+      "original_purchase_url": "https://link.coupang.com/a/ip93HTQ3ci",
+      "source_text": "👍대박 75,900원 (31.0% 할인)\n(와멤데 쿠폰) 르무통 업 발 편한 메리노울 운동화 (사이즈 색상선택)\n📌 가격 현황\n- 정상가: 110,000원\n- 할인: 34,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip93HTQ3ci\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T02:32:37+00:00",
+      "title": "(와멤데 쿠폰) 르무통 업 발 편한 메리노울 운동화 (사이즈 색상선택)",
+      "sale_price_krw": 75900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
