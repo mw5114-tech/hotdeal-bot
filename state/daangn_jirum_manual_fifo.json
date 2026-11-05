@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95140,
-  "pending": [
-    {
-      "id": 95140,
-      "source_post_url": "https://t.me/jirum/95140",
-      "original_purchase_url": "https://link.coupang.com/a/irvQGPAc2K",
-      "source_text": "👍대박 16,730원 (33.1% 할인)\n더미식 백미밥, 210g, 24개\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 8,270원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irvQGPAc2K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:05:09+00:00",
-      "title": "더미식 백미밥, 210g, 24개",
-      "sale_price_krw": 16730
-    }
-  ],
-  "in_flight": {
-    "id": 95140,
-    "status": "CLAIMED",
-    "run_id": "42118596708",
-    "at": "2026-11-05T22:06:48.554653+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2421,6 +2406,16 @@
       "vendor_item_id": "96070525440",
       "at": "2026-11-05T21:57:06.426837+00:00",
       "run_id": "42117122274"
+    },
+    "95140": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%94%EB%AF%B8%EC%8B%9D-%EB%B0%B1%EB%AF%B8%EB%B0%A5-210g-24%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PnN6v2pP?from=write",
+      "posted_at_utc": "2026-11-05T22:05:09+00:00",
+      "product_id": "7351987688",
+      "item_id": "18921385871",
+      "vendor_item_id": "79035936721",
+      "at": "2026-11-05T22:07:04.097540+00:00",
+      "run_id": "42118596708"
     }
   },
   "skipped_non_coupang": 58,
