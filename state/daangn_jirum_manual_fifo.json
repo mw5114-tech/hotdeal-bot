@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95144,
-  "pending": [
-    {
-      "id": 95144,
-      "source_post_url": "https://t.me/jirum/95144",
-      "original_purchase_url": "https://link.coupang.com/a/irwoS6n3GS",
-      "source_text": "👍대박 6,830원 (31.7% 할인)\n고로고로 마루용 테이프 크리너 리필 3개입,\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 3,170원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irwoS6n3GS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:12:52+00:00",
-      "title": "고로고로 마루용 테이프 크리너 리필 3개입,",
-      "sale_price_krw": 6830
-    }
-  ],
-  "in_flight": {
-    "id": 95144,
-    "status": "CLAIMED",
-    "run_id": "42119609546",
-    "at": "2026-11-05T22:14:08.657338+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2460,6 +2445,16 @@
       "item_id": "25415543180",
       "vendor_item_id": "92408866024",
       "at": "2026-11-05T22:14:03.975883+00:00",
+      "run_id": "42119609546"
+    },
+    "95144": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%A0%EB%A1%9C%EA%B3%A0%EB%A1%9C-%EB%A7%88%EB%A3%A8%EC%9A%A9-%ED%85%8C%EC%9D%B4%ED%94%84-%ED%81%AC%EB%A6%AC%EB%84%88-%EB%A6%AC%ED%95%84-3%EA%B0%9C%EC%9E%85-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dEb689nj?from=write",
+      "posted_at_utc": "2026-11-05T22:12:52+00:00",
+      "product_id": "22754796",
+      "item_id": "88401403",
+      "vendor_item_id": "3152078161",
+      "at": "2026-11-05T22:14:25.017977+00:00",
       "run_id": "42119609546"
     }
   },
