@@ -1,7 +1,44 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95146,
-  "pending": [],
+  "last_scanned_id": 95150,
+  "pending": [
+    {
+      "id": 95147,
+      "source_post_url": "https://t.me/jirum/95147",
+      "original_purchase_url": "https://link.coupang.com/a/irxoPrwwoe",
+      "source_text": "☆특가 2,160원\n비비드키친 저칼로리 머스터드소스, 320g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoPrwwoe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:26:51+00:00",
+      "title": "☆특가 2,160원",
+      "sale_price_krw": 2160
+    },
+    {
+      "id": 95148,
+      "source_post_url": "https://t.me/jirum/95148",
+      "original_purchase_url": "https://link.coupang.com/a/irxoSBFlgO",
+      "source_text": "☆특가 2,160원\n비비드키친 저칼로리 스윗칠리소스\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoSBFlgO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:26:52+00:00",
+      "title": "☆특가 2,160원",
+      "sale_price_krw": 2160
+    },
+    {
+      "id": 95149,
+      "source_post_url": "https://t.me/jirum/95149",
+      "original_purchase_url": "https://link.coupang.com/a/irxoV1UABo",
+      "source_text": "☆특가 2,020원\n청정원 저당 토마토케찹, 285g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoV1UABo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:26:52+00:00",
+      "title": "☆특가 2,020원",
+      "sale_price_krw": 2020
+    },
+    {
+      "id": 95150,
+      "source_post_url": "https://t.me/jirum/95150",
+      "original_purchase_url": "https://link.coupang.com/a/irxoZmyzim",
+      "source_text": "☆특가 2,630원\n하인즈 버거소스, 230g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoZmyzim\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:26:53+00:00",
+      "title": "☆특가 2,630원",
+      "sale_price_krw": 2630
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
