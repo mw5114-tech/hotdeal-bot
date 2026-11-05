@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95087,
-  "pending": [],
+  "last_scanned_id": 95088,
+  "pending": [
+    {
+      "id": 95088,
+      "source_post_url": "https://t.me/jirum/95088",
+      "original_purchase_url": "https://link.coupang.com/a/iqdbuvbRhA",
+      "source_text": "☆특가 6,490원\n케플러 스톤 발각질 제거기\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqdbuvbRhA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T03:16:21+00:00",
+      "title": "☆특가 6,490원",
+      "sale_price_krw": 6490
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
