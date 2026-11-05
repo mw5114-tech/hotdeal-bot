@@ -3,15 +3,6 @@
   "last_scanned_id": 95150,
   "pending": [
     {
-      "id": 95147,
-      "source_post_url": "https://t.me/jirum/95147",
-      "original_purchase_url": "https://link.coupang.com/a/irxoPrwwoe",
-      "source_text": "☆특가 2,160원\n비비드키친 저칼로리 머스터드소스, 320g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoPrwwoe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:26:51+00:00",
-      "title": "☆특가 2,160원",
-      "sale_price_krw": 2160
-    },
-    {
       "id": 95148,
       "source_post_url": "https://t.me/jirum/95148",
       "original_purchase_url": "https://link.coupang.com/a/irxoSBFlgO",
@@ -39,12 +30,7 @@
       "sale_price_krw": 2630
     }
   ],
-  "in_flight": {
-    "id": 95147,
-    "status": "CLAIMED",
-    "run_id": "42121647610",
-    "at": "2026-11-05T22:27:55.118575+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2518,6 +2504,16 @@
       "vendor_item_id": "94722737421",
       "at": "2026-11-05T22:18:36.873515+00:00",
       "run_id": "42120179542"
+    },
+    "95147": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EB%B9%84%EB%93%9C%ED%82%A4%EC%B9%9C-%EC%A0%80%EC%B9%BC%EB%A1%9C%EB%A6%AC-%EB%A8%B8%EC%8A%A4%ED%84%B0%EB%93%9C%EC%86%8C%EC%8A%A4-320g-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dEb6Wp8j?from=write",
+      "posted_at_utc": "2026-11-05T22:26:51+00:00",
+      "product_id": "8413329969",
+      "item_id": "24327706850",
+      "vendor_item_id": "91343363563",
+      "at": "2026-11-05T22:28:12.548686+00:00",
+      "run_id": "42121647610"
     }
   },
   "skipped_non_coupang": 58,
