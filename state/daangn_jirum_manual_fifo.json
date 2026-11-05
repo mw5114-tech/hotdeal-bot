@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95126,
-  "pending": [
-    {
-      "id": 95126,
-      "source_post_url": "https://t.me/jirum/95126",
-      "original_purchase_url": "https://link.coupang.com/a/iqIYZ2kSLQ",
-      "source_text": "☆특가 3,150원 (30.0% 할인)\n삼양 맛있는라면 115g, 5개\n📌 가격 현황\n- 정상가: 4,499원\n- 할인: 1,349원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqIYZ2kSLQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T10:41:20+00:00",
-      "title": "삼양 맛있는라면 115g, 5개",
-      "sale_price_krw": 3150
-    }
-  ],
-  "in_flight": {
-    "id": 95126,
-    "status": "CLAIMED",
-    "run_id": "42012912697",
-    "at": "2026-11-05T10:43:01.789124+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2350,6 +2335,16 @@
       "item_id": "99218915",
       "vendor_item_id": "84994378948",
       "at": "2026-11-05T10:42:57.111846+00:00",
+      "run_id": "42012912697"
+    },
+    "95126": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%96%91-%EB%A7%9B%EC%9E%88%EB%8A%94%EB%9D%BC%EB%A9%B4-115g-5%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dg3nzWEd?from=write",
+      "posted_at_utc": "2026-11-05T10:41:20+00:00",
+      "product_id": "14336",
+      "item_id": "42030",
+      "vendor_item_id": "3000014976",
+      "at": "2026-11-05T10:43:17.035718+00:00",
       "run_id": "42012912697"
     }
   },
