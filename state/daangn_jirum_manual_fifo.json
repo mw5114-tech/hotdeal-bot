@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95100,
-  "pending": [
-    {
-      "id": 95100,
-      "source_post_url": "https://t.me/jirum/95100",
-      "original_purchase_url": "https://link.coupang.com/a/iqld9Agqtw",
-      "source_text": "❤️초대박 6,680원 (43.0% 할인)\n파스퇴르 쾌변 사과\n📌 가격 현황\n- 정상가: 11,719원\n- 할인: 5,039원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqld9Agqtw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T05:08:55+00:00",
-      "title": "파스퇴르 쾌변 사과",
-      "sale_price_krw": 6680
-    }
-  ],
-  "in_flight": {
-    "id": 95100,
-    "status": "CLAIMED",
-    "run_id": "41972190185",
-    "at": "2026-11-05T05:09:49.010460+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2181,6 +2166,16 @@
       "vendor_item_id": "88835234063",
       "at": "2026-11-05T04:55:00.618592+00:00",
       "run_id": "41970657124"
+    },
+    "95100": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%8C%EC%8A%A4%ED%87%B4%EB%A5%B4-%EC%BE%8C%EB%B3%80-%EC%82%AC%EA%B3%BC-150ml-4%EA%B0%9C%EC%9E%85-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-AeDN6pKj?from=write",
+      "posted_at_utc": "2026-11-05T05:08:55+00:00",
+      "product_id": "6137504519",
+      "item_id": "11747177141",
+      "vendor_item_id": null,
+      "at": "2026-11-05T05:10:05.393704+00:00",
+      "run_id": "41972190185"
     }
   },
   "skipped_non_coupang": 42,
