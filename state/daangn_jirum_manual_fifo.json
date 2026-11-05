@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95097,
-  "pending": [
-    {
-      "id": 95097,
-      "source_post_url": "https://t.me/jirum/95097",
-      "original_purchase_url": "https://link.coupang.com/a/iqjzm0aLdY",
-      "source_text": "☆특가 32,300원\n바겐슈타이거 연마제 없는 스텐 사각 트레이 세트, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqjzm0aLdY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T04:45:43+00:00",
-      "title": "☆특가 32,300원",
-      "sale_price_krw": 32300
-    }
-  ],
-  "in_flight": {
-    "id": 95097,
-    "status": "CLAIMED",
-    "run_id": "41969857241",
-    "at": "2026-11-05T04:46:47.578758+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2161,6 +2146,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T04:18:19.387130+00:00",
       "run_id": "41966896127"
+    },
+    "95097": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EA%B2%90%EC%8A%88%ED%83%80%EC%9D%B4%EA%B1%B0-%EC%97%B0%EB%A7%88%EC%A0%9C-%EC%97%86%EB%8A%94-%EC%8A%A4%ED%85%90-%EC%82%AC%EA%B0%81-%ED%8A%B8%EB%A0%88%EC%9D%B4-%EC%84%B8%ED%8A%B8-%EB%B0%A7%EB%93%9C-%EB%9E%99-%ED%8A%B8%EB%A0%88%EC%9D%B4-P12eYZKd?from=write",
+      "posted_at_utc": "2026-11-05T04:45:43+00:00",
+      "product_id": "4970215252",
+      "item_id": "6597056039",
+      "vendor_item_id": null,
+      "at": "2026-11-05T04:47:04.155936+00:00",
+      "run_id": "41969857241"
     }
   },
   "skipped_non_coupang": 41,
