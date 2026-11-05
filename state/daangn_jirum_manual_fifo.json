@@ -3,15 +3,6 @@
   "last_scanned_id": 95150,
   "pending": [
     {
-      "id": 95148,
-      "source_post_url": "https://t.me/jirum/95148",
-      "original_purchase_url": "https://link.coupang.com/a/irxoSBFlgO",
-      "source_text": "☆특가 2,160원\n비비드키친 저칼로리 스윗칠리소스\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxoSBFlgO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:26:52+00:00",
-      "title": "☆특가 2,160원",
-      "sale_price_krw": 2160
-    },
-    {
       "id": 95149,
       "source_post_url": "https://t.me/jirum/95149",
       "original_purchase_url": "https://link.coupang.com/a/irxoV1UABo",
@@ -30,12 +21,7 @@
       "sale_price_krw": 2630
     }
   ],
-  "in_flight": {
-    "id": 95148,
-    "status": "CLAIMED",
-    "run_id": "42121647610",
-    "at": "2026-11-05T22:28:17.903112+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2518,6 +2504,16 @@
       "item_id": "24327706850",
       "vendor_item_id": "91343363563",
       "at": "2026-11-05T22:28:12.548686+00:00",
+      "run_id": "42121647610"
+    },
+    "95148": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EB%B9%84%EB%93%9C%ED%82%A4%EC%B9%9C-%EC%A0%80%EC%B9%BC%EB%A1%9C%EB%A6%AC-%EC%8A%A4%EC%9C%97%EC%B9%A0%EB%A6%AC%EC%86%8C%EC%8A%A4-1%EA%B0%9C-320g-45%ED%95%A0%EC%9D%B8-dymy6aBd?from=write",
+      "posted_at_utc": "2026-11-05T22:26:52+00:00",
+      "product_id": "9328338059",
+      "item_id": "28859367621",
+      "vendor_item_id": "91343363575",
+      "at": "2026-11-05T22:28:33.530274+00:00",
       "run_id": "42121647610"
     }
   },
