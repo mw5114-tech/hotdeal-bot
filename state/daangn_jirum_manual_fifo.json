@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95145,
-  "pending": [
-    {
-      "id": 95145,
-      "source_post_url": "https://t.me/jirum/95145",
-      "original_purchase_url": "https://link.coupang.com/a/irwv094K0i",
-      "source_text": "👍대박 9,900원 (34.0% 할인)\n이롬 황성주 박사의 국산콩 두유 검은콩 고칼슘, 190ml, 24개\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irwv094K0i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:14:29+00:00",
-      "title": "이롬 황성주 박사의 국산콩 두유 검은콩 고칼슘, 190ml, 24개",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 95145,
-    "status": "CLAIMED",
-    "run_id": "42119931265",
-    "at": "2026-11-05T22:15:54.963252+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2471,6 +2456,16 @@
       "vendor_item_id": "3152078161",
       "at": "2026-11-05T22:14:25.017977+00:00",
       "run_id": "42119609546"
+    },
+    "95145": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EB%A1%AC-%ED%99%A9%EC%84%B1%EC%A3%BC-%EB%B0%95%EC%82%AC%EC%9D%98-%EA%B5%AD%EC%82%B0%EC%BD%A9-%EB%91%90%EC%9C%A0-%EA%B2%80%EC%9D%80%EC%BD%A9-%EA%B3%A0%EC%B9%BC%EC%8A%98-190ml-35%ED%95%A0%EC%9D%B8-PM0RNMYA?from=write",
+      "posted_at_utc": "2026-11-05T22:14:29+00:00",
+      "product_id": "8788886173",
+      "item_id": "10833917555",
+      "vendor_item_id": "3000036302",
+      "at": "2026-11-05T22:16:11.429139+00:00",
+      "run_id": "42119931265"
     }
   },
   "skipped_non_coupang": 58,
