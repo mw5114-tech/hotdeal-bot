@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95083,
-  "pending": [],
+  "last_scanned_id": 95084,
+  "pending": [
+    {
+      "id": 95084,
+      "source_post_url": "https://t.me/jirum/95084",
+      "original_purchase_url": "https://link.coupang.com/a/ip9w7ybadU",
+      "source_text": "☆특가 9,900원 (23.8% 할인)\n에라토 크림모노 2인 그릇 홈세트 12p 7종*1세트\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 3,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip9w7ybadU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T02:25:16+00:00",
+      "title": "에라토 크림모노 2인 그릇 홈세트 12p 7종*1세트",
+      "sale_price_krw": 9900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
