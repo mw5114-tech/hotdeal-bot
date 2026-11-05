@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95097,
-  "pending": [],
+  "last_scanned_id": 95098,
+  "pending": [
+    {
+      "id": 95098,
+      "source_post_url": "https://t.me/jirum/95098",
+      "original_purchase_url": "https://link.coupang.com/a/iqj7ExFpSK",
+      "source_text": "☆특가 426,550원 (26.5% 할인)\n시디즈 T50 AIR 화이트쉘 메쉬의자 + 좌판커버 방문설치, 그레이, 67 x 62.5 x 106.5cm\n📌 가격 현황\n- 정상가: 580,490원\n- 할인: 153,940원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqj7ExFpSK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T04:53:27+00:00",
+      "title": "시디즈 T50 AIR 화이트쉘 메쉬의자 + 좌판커버 방문설치, 그레이, 67 x 62.5 x 106.5cm",
+      "sale_price_krw": 426550
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
