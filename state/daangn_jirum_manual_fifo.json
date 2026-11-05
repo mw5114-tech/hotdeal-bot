@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95074,
-  "pending": [
-    {
-      "id": 95074,
-      "source_post_url": "https://t.me/jirum/95074",
-      "original_purchase_url": "https://link.coupang.com/a/ip47TAbaUK",
-      "source_text": "👍대박 37,950원 (36.8% 할인)\n아트뮤 PD3.1 150W PPS GaN 접지 멀티 초고속 충전기 GX410 1개\n📌 가격 현황\n- 정상가: 60,000원\n- 할인: 22,050원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip47TAbaUK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T01:23:36+00:00",
-      "title": "아트뮤 PD3.1 150W PPS GaN 접지 멀티 초고속 충전기 GX410 1개",
-      "sale_price_krw": 37950
-    }
-  ],
-  "in_flight": {
-    "id": 95074,
-    "status": "CLAIMED",
-    "run_id": "41948291403",
-    "at": "2026-11-05T01:25:05.439524+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2010,6 +1995,16 @@
       "item_id": "26049870294",
       "vendor_item_id": "93617014464",
       "at": "2026-11-05T01:24:59.606577+00:00",
+      "run_id": "41948291403"
+    },
+    "95074": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%ED%8A%B8%EB%AE%A4-PD31-150W-PPS-GaN-%EC%A0%91%EC%A7%80-%EB%A9%80%ED%8B%B0-%EC%B4%88%EA%B3%A0%EC%86%8D-%EC%B6%A9-30%ED%95%A0%EC%9D%B8-PM07k4YA?from=write",
+      "posted_at_utc": "2026-11-05T01:23:36+00:00",
+      "product_id": "8915834419",
+      "item_id": "26049839494",
+      "vendor_item_id": "93617014471",
+      "at": "2026-11-05T01:25:21.606963+00:00",
       "run_id": "41948291403"
     }
   },
