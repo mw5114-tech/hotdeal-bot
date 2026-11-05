@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95153,
-  "pending": [
-    {
-      "id": 95153,
-      "source_post_url": "https://t.me/jirum/95153",
-      "original_purchase_url": "https://link.coupang.com/a/irzhDQs1wO",
-      "source_text": "☆특가 6,830원 (23.3% 할인)\n팔도 라볶이 봉지라면 145g, 8개\n📌 가격 현황\n- 정상가: 8,900원\n- 할인: 2,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irzhDQs1wO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:53:13+00:00",
-      "title": "팔도 라볶이 봉지라면 145g, 8개",
-      "sale_price_krw": 6830
-    }
-  ],
-  "in_flight": {
-    "id": 95153,
-    "status": "CLAIMED",
-    "run_id": "42125390613",
-    "at": "2026-11-05T22:55:12.251452+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2550,6 +2535,16 @@
       "item_id": "36896979",
       "vendor_item_id": "3000293367",
       "at": "2026-11-05T22:55:08.067863+00:00",
+      "run_id": "42125390613"
+    },
+    "95153": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%94%EB%8F%84-%EB%9D%BC%EB%B3%B6%EC%9D%B4-%EB%B4%89%EC%A7%80%EB%9D%BC%EB%A9%B4-145g-8%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dagOB9lA?from=write",
+      "posted_at_utc": "2026-11-05T22:53:13+00:00",
+      "product_id": "12670333",
+      "item_id": "17905766460",
+      "vendor_item_id": "85068508758",
+      "at": "2026-11-05T22:55:29.103783+00:00",
       "run_id": "42125390613"
     }
   },
