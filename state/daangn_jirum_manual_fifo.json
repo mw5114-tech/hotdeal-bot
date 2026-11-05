@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95121,
-  "pending": [
-    {
-      "id": 95121,
-      "source_post_url": "https://t.me/jirum/95121",
-      "original_purchase_url": "https://link.coupang.com/a/iqHynf1srs",
-      "source_text": "👍대박 128,400원 (35.8% 할인)\n쿠첸 브레인 듀얼프레셔 IH압력 전기밥솥 6인용\n📌 가격 현황\n- 정상가: 200,000원\n- 할인: 71,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqHynf1srs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T10:21:20+00:00",
-      "title": "쿠첸 브레인 듀얼프레셔 IH압력 전기밥솥 6인용",
-      "sale_price_krw": 128400
-    }
-  ],
-  "in_flight": {
-    "id": 95121,
-    "status": "CLAIMED",
-    "run_id": "42010121536",
-    "at": "2026-11-05T10:22:30.776569+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2301,6 +2286,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T08:50:37.768734+00:00",
       "run_id": "41997435089"
+    },
+    "95121": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BF%A0%EC%B2%B8-%EB%B8%8C%EB%A0%88%EC%9D%B8-%EB%93%80%EC%96%BC%ED%94%84%EB%A0%88%EC%85%94-IH%EC%95%95%EB%A0%A5-%EC%A0%84%EA%B8%B0%EB%B0%A5%EC%86%A5-6%EC%9D%B8%EC%9A%A9-CRH-TW-40%ED%95%A0%EC%9D%B8-dagV3anA?from=write",
+      "posted_at_utc": "2026-11-05T10:21:20+00:00",
+      "product_id": "8519963498",
+      "item_id": "20498133979",
+      "vendor_item_id": "87756145912",
+      "at": "2026-11-05T10:22:47.579739+00:00",
+      "run_id": "42010121536"
     }
   },
   "skipped_non_coupang": 51,
