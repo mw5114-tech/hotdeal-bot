@@ -3,15 +3,6 @@
   "last_scanned_id": 95144,
   "pending": [
     {
-      "id": 95143,
-      "source_post_url": "https://t.me/jirum/95143",
-      "original_purchase_url": "https://link.coupang.com/a/irwmpjN4FM",
-      "source_text": "👍대박 4,580원 (39.4% 할인)\n오뚜기 라면의 맵쏘디 120g, 10개\n📌 가격 현황\n- 정상가: 7,554원\n- 할인: 2,974원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irwmpjN4FM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:12:18+00:00",
-      "title": "오뚜기 라면의 맵쏘디 120g, 10개",
-      "sale_price_krw": 4580
-    },
-    {
       "id": 95144,
       "source_post_url": "https://t.me/jirum/95144",
       "original_purchase_url": "https://link.coupang.com/a/irwoS6n3GS",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6830
     }
   ],
-  "in_flight": {
-    "id": 95143,
-    "status": "CLAIMED",
-    "run_id": "42119609546",
-    "at": "2026-11-05T22:13:47.184625+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2460,6 +2446,16 @@
       "vendor_item_id": "85761965409",
       "at": "2026-11-05T22:11:17.207704+00:00",
       "run_id": "42119185588"
+    },
+    "95143": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EB%9D%BC%EB%A9%B4%EC%9D%98-%EB%A7%B5%EC%8F%98%EB%94%94-120g-10%EA%B0%9C-40%ED%95%A0%EC%9D%B8-PwwGL35P?from=write",
+      "posted_at_utc": "2026-11-05T22:12:18+00:00",
+      "product_id": "8742859359",
+      "item_id": "25415543180",
+      "vendor_item_id": "92408866024",
+      "at": "2026-11-05T22:14:03.975883+00:00",
+      "run_id": "42119609546"
     }
   },
   "skipped_non_coupang": 58,
