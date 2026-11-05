@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95123,
-  "pending": [],
+  "last_scanned_id": 95124,
+  "pending": [
+    {
+      "id": 95124,
+      "source_post_url": "https://t.me/jirum/95124",
+      "original_purchase_url": "https://link.coupang.com/a/iqISyBYDEO",
+      "source_text": "🔥🔥🔥무지성 5,750원 (53.0% 할인)🔥🔥🔥\n[로켓프레시] 한반도 비파괴 당도선별 샤인머스켓\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,234원\n- 할인: 6,484원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqISyBYDEO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T10:39:53+00:00",
+      "title": "[로켓프레시] 한반도 비파괴 당도선별 샤인머스켓",
+      "sale_price_krw": 5750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
