@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95139,
-  "pending": [
-    {
-      "id": 95139,
-      "source_post_url": "https://t.me/jirum/95139",
-      "original_purchase_url": "https://link.coupang.com/a/irvam2rXwq",
-      "source_text": "👍대박 3,600원 (34.5% 할인)\n빼빼로 화이트 쿠키 2p x 딸기 2p + 랜덤 한교동 책갈피 세트\n📌 가격 현황\n- 정상가: 5,494원\n- 할인: 1,894원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irvam2rXwq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T21:55:36+00:00",
-      "title": "빼빼로 화이트 쿠키 2p x 딸기 2p + 랜덤 한교동 책갈피 세트",
-      "sale_price_krw": 3600
-    }
-  ],
-  "in_flight": {
-    "id": 95139,
-    "status": "CLAIMED",
-    "run_id": "42117122274",
-    "at": "2026-11-05T21:56:49.418820+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2411,6 +2396,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T21:13:58.539456+00:00",
       "run_id": "42110643707"
+    },
+    "95139": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%BC%EB%B9%BC%EB%A1%9C-%ED%99%94%EC%9D%B4%ED%8A%B8-%EC%BF%A0%ED%82%A4-2p-x-%EB%94%B8%EA%B8%B0-2p-%EB%9E%9C%EB%8D%A4-%ED%95%9C%EA%B5%90%EB%8F%99-%EC%B1%85%EA%B0%88%ED%94%BC-45%ED%95%A0%EC%9D%B8-PM0RNp6A?from=write",
+      "posted_at_utc": "2026-11-05T21:55:36+00:00",
+      "product_id": "9738829611",
+      "item_id": "29147219964",
+      "vendor_item_id": "96070525440",
+      "at": "2026-11-05T21:57:06.426837+00:00",
+      "run_id": "42117122274"
     }
   },
   "skipped_non_coupang": 58,
