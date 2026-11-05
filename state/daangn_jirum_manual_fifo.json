@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95086,
-  "pending": [
-    {
-      "id": 95086,
-      "source_post_url": "https://t.me/jirum/95086",
-      "original_purchase_url": "https://link.coupang.com/a/ip93HTQ3ci",
-      "source_text": "👍대박 75,900원 (31.0% 할인)\n(와멤데 쿠폰) 르무통 업 발 편한 메리노울 운동화 (사이즈 색상선택)\n📌 가격 현황\n- 정상가: 110,000원\n- 할인: 34,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip93HTQ3ci\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T02:32:37+00:00",
-      "title": "(와멤데 쿠폰) 르무통 업 발 편한 메리노울 운동화 (사이즈 색상선택)",
-      "sale_price_krw": 75900
-    }
-  ],
-  "in_flight": {
-    "id": 95086,
-    "status": "CLAIMED",
-    "run_id": "41955975903",
-    "at": "2026-11-05T02:33:53.795628+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2091,6 +2076,16 @@
       "vendor_item_id": "94576237237",
       "at": "2026-11-05T02:31:28.230305+00:00",
       "run_id": "41955642010"
+    },
+    "95086": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%99%80%EB%A9%A4%EB%8D%B0-%EC%BF%A0%ED%8F%B0-%EB%A5%B4%EB%AC%B4%ED%86%B5-%EC%97%85-%EB%B0%9C-%ED%8E%B8%ED%95%9C-%EB%A9%94%EB%A6%AC%EB%85%B8%EC%9A%B8-%EC%9A%B4%EB%8F%99%ED%99%94-%EC%82%AC%EC%9D%B4%EC%A6%88-30%ED%95%A0%EC%9D%B8-dY0eMR7P?from=write",
+      "posted_at_utc": "2026-11-05T02:32:37+00:00",
+      "product_id": "8926297289",
+      "item_id": "26090385115",
+      "vendor_item_id": "92809317063",
+      "at": "2026-11-05T02:34:10.690106+00:00",
+      "run_id": "41955975903"
     }
   },
   "skipped_non_coupang": 37,
