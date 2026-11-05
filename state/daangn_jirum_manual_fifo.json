@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95133,
-  "pending": [],
+  "last_scanned_id": 95135,
+  "pending": [
+    {
+      "id": 95135,
+      "source_post_url": "https://t.me/jirum/95135",
+      "original_purchase_url": "https://link.coupang.com/a/iqT7w7gQ7o",
+      "source_text": "☆특가 19,750원 (23.7% 할인)\n폰즈 클리어 훼이스 스파 립 앤 아이 메이크업 리무버, 120ml, 5개\n📌 가격 현황\n- 정상가: 25,900원\n- 할인: 6,150원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqT7w7gQ7o\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T13:17:12+00:00",
+      "title": "폰즈 클리어 훼이스 스파 립 앤 아이 메이크업 리무버, 120ml, 5개",
+      "sale_price_krw": 19750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2378,7 +2388,7 @@
       "run_id": "42027555371"
     }
   },
-  "skipped_non_coupang": 55,
+  "skipped_non_coupang": 56,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
