@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95153,
-  "pending": [],
+  "last_scanned_id": 95155,
+  "pending": [
+    {
+      "id": 95155,
+      "source_post_url": "https://t.me/jirum/95155",
+      "original_purchase_url": "https://link.coupang.com/a/irzXcVanMO",
+      "source_text": "☆특가 19,980원 (26.3% 할인)\n귤탐 당도선별 11Brix 감귤, 2kg(로열과), 2개\n📌 가격 현황\n- 정상가: 27,120원\n- 할인: 7,140원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irzXcVanMO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T23:02:36+00:00",
+      "title": "귤탐 당도선별 11Brix 감귤, 2kg(로열과), 2개",
+      "sale_price_krw": 19980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2548,7 +2558,7 @@
       "run_id": "42125390613"
     }
   },
-  "skipped_non_coupang": 58,
+  "skipped_non_coupang": 59,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
