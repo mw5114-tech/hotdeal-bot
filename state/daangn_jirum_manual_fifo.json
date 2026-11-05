@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95112,
-  "pending": [],
+  "last_scanned_id": 95113,
+  "pending": [
+    {
+      "id": 95113,
+      "source_post_url": "https://t.me/jirum/95113",
+      "original_purchase_url": "https://link.coupang.com/a/iqziThZ6wm",
+      "source_text": "❤️초대박 9,980원 (41.3% 할인)\n풀무원 올바른 핫도그 개별 (냉동) 75g*7개입*2개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 7,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqziThZ6wm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T08:25:53+00:00",
+      "title": "풀무원 올바른 핫도그 개별 (냉동) 75g*7개입*2개",
+      "sale_price_krw": 9980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
