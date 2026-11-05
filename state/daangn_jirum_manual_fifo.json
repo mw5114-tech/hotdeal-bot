@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95085,
-  "pending": [
-    {
-      "id": 95085,
-      "source_post_url": "https://t.me/jirum/95085",
-      "original_purchase_url": "https://link.coupang.com/a/ip9RvuPIOW",
-      "source_text": "👍대박 79,000원 (38.8% 할인)\n(와멤데 쿠폰)나이키 여성용 에어 포스 1 07 운동화 DD8959-100 + 추가 신발끈 세트\n📌 가격 현황\n- 정상가: 129,000원\n- 할인: 50,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip9RvuPIOW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T02:29:52+00:00",
-      "title": "(와멤데 쿠폰)나이키 여성용 에어 포스 1 07 운동화 DD8959-100 + 추가 신발끈 세트",
-      "sale_price_krw": 79000
-    }
-  ],
-  "in_flight": {
-    "id": 95085,
-    "status": "CLAIMED",
-    "run_id": "41955642010",
-    "at": "2026-11-05T02:31:11.166029+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2081,6 +2066,16 @@
       "vendor_item_id": "4722854367",
       "at": "2026-11-05T02:27:00.612376+00:00",
       "run_id": "41955200103"
+    },
+    "95085": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%82%98%EC%9D%B4%ED%82%A4-%EC%97%AC%EC%84%B1%EC%9A%A9-%EC%97%90%EC%96%B4-%ED%8F%AC%EC%8A%A4-1-07-%EC%9A%B4%EB%8F%99%ED%99%94-DD8959-100-55%ED%95%A0%EC%9D%B8-ALEXekWP?from=write",
+      "posted_at_utc": "2026-11-05T02:29:52+00:00",
+      "product_id": "9570781020",
+      "item_id": "28565628964",
+      "vendor_item_id": "94576237237",
+      "at": "2026-11-05T02:31:28.230305+00:00",
+      "run_id": "41955642010"
     }
   },
   "skipped_non_coupang": 37,
