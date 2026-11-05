@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95142,
-  "pending": [
-    {
-      "id": 95142,
-      "source_post_url": "https://t.me/jirum/95142",
-      "original_purchase_url": "https://link.coupang.com/a/irwbHWNodM",
-      "source_text": "🔥🔥🔥무지성 3,780원 (62.2% 할인)🔥🔥🔥\n오뚜기 제주담음 제주 흑돼지 카레, 250g, 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 6,220원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irwbHWNodM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T22:09:54+00:00",
-      "title": "오뚜기 제주담음 제주 흑돼지 카레, 250g, 3개",
-      "sale_price_krw": 3780
-    }
-  ],
-  "in_flight": {
-    "id": 95142,
-    "status": "CLAIMED",
-    "run_id": "42119185588",
-    "at": "2026-11-05T22:11:01.666008+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2441,6 +2426,16 @@
       "vendor_item_id": "91015969031",
       "at": "2026-11-05T22:08:33.072949+00:00",
       "run_id": "42118786834"
+    },
+    "95142": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%A0%9C%EC%A3%BC%EB%8B%B4%EC%9D%8C-%EC%A0%9C%EC%A3%BC-%ED%9D%91%EB%8F%BC%EC%A7%80-%EC%B9%B4%EB%A0%88-250g-3%EA%B0%9C-60%ED%95%A0%EC%9D%B8-dz9WBpqP?from=write",
+      "posted_at_utc": "2026-11-05T22:09:54+00:00",
+      "product_id": "7784050773",
+      "item_id": "21044006763",
+      "vendor_item_id": "85761965409",
+      "at": "2026-11-05T22:11:17.207704+00:00",
+      "run_id": "42119185588"
     }
   },
   "skipped_non_coupang": 58,
