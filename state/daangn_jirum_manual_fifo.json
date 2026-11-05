@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95068,
-  "pending": [
-    {
-      "id": 95068,
-      "source_post_url": "https://t.me/jirum/95068",
-      "original_purchase_url": "https://link.coupang.com/a/ip0nGUV7EO",
-      "source_text": "☆특가 2,830원\n라멜린 카멜리아 수분 젤 크림\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip0nGUV7EO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T00:17:12+00:00",
-      "title": "☆특가 2,830원",
-      "sale_price_krw": 2830
-    }
-  ],
-  "in_flight": {
-    "id": 95068,
-    "status": "CLAIMED",
-    "run_id": "41940315098",
-    "at": "2026-11-05T00:18:38.571568+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1961,6 +1946,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T00:06:54.662229+00:00",
       "run_id": "41938792688"
+    },
+    "95068": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%BC%EB%A9%9C%EB%A6%B0-%EC%B9%B4%EB%A9%9C%EB%A6%AC%EC%95%84-%EC%88%98%EB%B6%84-%EC%A0%A4-%ED%81%AC%EB%A6%BC-1%EA%B0%9C-50ml-95%ED%95%A0%EC%9D%B8-dagVyn9A?from=write",
+      "posted_at_utc": "2026-11-05T00:17:12+00:00",
+      "product_id": "8461240015",
+      "item_id": "24477228195",
+      "vendor_item_id": "91490710744",
+      "at": "2026-11-05T00:18:54.302954+00:00",
+      "run_id": "41940315098"
     }
   },
   "skipped_non_coupang": 32,
