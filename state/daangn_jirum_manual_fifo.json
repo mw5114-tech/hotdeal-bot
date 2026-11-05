@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95155,
-  "pending": [],
+  "last_scanned_id": 95163,
+  "pending": [
+    {
+      "id": 95163,
+      "source_post_url": "https://t.me/jirum/95163",
+      "original_purchase_url": "https://link.coupang.com/a/irBcD46I3w",
+      "source_text": "☆특가 254,910원 (15.0% 할인)\n닌자 푸디 맥스 스마트 에어그릴 에어프라이어 5.7L\n📌 가격 현황\n- 정상가: 300,000원\n- 할인: 45,090원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irBcD46I3w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T23:20:04+00:00",
+      "title": "닌자 푸디 맥스 스마트 에어그릴 에어프라이어 5.7L",
+      "sale_price_krw": 254910
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2558,7 +2568,7 @@
       "run_id": "42126598375"
     }
   },
-  "skipped_non_coupang": 59,
+  "skipped_non_coupang": 66,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
