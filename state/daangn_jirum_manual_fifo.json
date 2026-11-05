@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95087,
-  "pending": [
-    {
-      "id": 95087,
-      "source_post_url": "https://t.me/jirum/95087",
-      "original_purchase_url": "https://link.coupang.com/a/iqbiyqAXoO",
-      "source_text": "❤️초대박 11,310원 (43.5% 할인)\n달바 나이아신아마이드 화이트 트러플 바이탈 스프레이 세럼, 1개, 100ml\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 8,690원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqbiyqAXoO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T02:49:58+00:00",
-      "title": "달바 나이아신아마이드 화이트 트러플 바이탈 스프레이 세럼, 1개, 100ml",
-      "sale_price_krw": 11310
-    }
-  ],
-  "in_flight": {
-    "id": 95087,
-    "status": "CLAIMED",
-    "run_id": "41957767944",
-    "at": "2026-11-05T02:50:46.588537+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2101,6 +2086,16 @@
       "vendor_item_id": "92809317063",
       "at": "2026-11-05T02:34:10.690106+00:00",
       "run_id": "41955975903"
+    },
+    "95087": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%AC%EB%B0%94-%EB%82%98%EC%9D%B4%EC%95%84%EC%8B%A0%EC%95%84%EB%A7%88%EC%9D%B4%EB%93%9C-%ED%99%94%EC%9D%B4%ED%8A%B8-%ED%8A%B8%EB%9F%AC%ED%94%8C-%EB%B0%94%EC%9D%B4%ED%83%88-%EC%8A%A4%ED%94%84%EB%A0%88%EC%9D%B4-%EC%84%B8%EB%9F%BC-1-35%ED%95%A0%EC%9D%B8-P5n8pWrd?from=write",
+      "posted_at_utc": "2026-11-05T02:49:58+00:00",
+      "product_id": "9596078635",
+      "item_id": "28646467585",
+      "vendor_item_id": "95589034575",
+      "at": "2026-11-05T02:51:04.392585+00:00",
+      "run_id": "41957767944"
     }
   },
   "skipped_non_coupang": 37,
