@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95072,
-  "pending": [
-    {
-      "id": 95072,
-      "source_post_url": "https://t.me/jirum/95072",
-      "original_purchase_url": "https://link.coupang.com/a/ip3VXK5Bim",
-      "source_text": "☆특가 24,650원\n(와멤데 쿠폰) 더미식 백미밥, 210g, 36개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ip3VXK5Bim\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-05T01:06:55+00:00",
-      "title": "☆특가 24,650원",
-      "sale_price_krw": 24650
-    }
-  ],
-  "in_flight": {
-    "id": 95072,
-    "status": "CLAIMED",
-    "run_id": "41946305919",
-    "at": "2026-11-05T01:07:44.422483+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -1991,6 +1976,16 @@
       "vendor_item_id": null,
       "at": "2026-11-05T01:01:41.991635+00:00",
       "run_id": "41945507657"
+    },
+    "95072": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%94%EB%AF%B8%EC%8B%9D-%EB%B0%B1%EB%AF%B8%EB%B0%A5-210g-36%EA%B0%9C-40%ED%95%A0%EC%9D%B8-PM076JYA?from=write",
+      "posted_at_utc": "2026-11-05T01:06:55+00:00",
+      "product_id": "7351987688",
+      "item_id": "23929003497",
+      "vendor_item_id": "85425155764",
+      "at": "2026-11-05T01:08:00.177807+00:00",
+      "run_id": "41946305919"
     }
   },
   "skipped_non_coupang": 33,
