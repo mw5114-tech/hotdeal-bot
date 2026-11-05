@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95150,
-  "pending": [],
+  "last_scanned_id": 95151,
+  "pending": [
+    {
+      "id": 95151,
+      "source_post_url": "https://t.me/jirum/95151",
+      "original_purchase_url": "https://link.coupang.com/a/irxJUGxydE",
+      "source_text": "☆특가 5,780원 (-542.2% 할인)\n물하나 ECO 생수 무라벨, 2L, 18개\n📌 가격 현황\n- 정상가: 900원\n- 할인: -4,880원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irxJUGxydE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T22:31:36+00:00",
+      "title": "물하나 ECO 생수 무라벨, 2L, 18개",
+      "sale_price_krw": 5780
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
