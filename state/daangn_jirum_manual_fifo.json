@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95091,
-  "pending": [],
+  "last_scanned_id": 95092,
+  "pending": [
+    {
+      "id": 95092,
+      "source_post_url": "https://t.me/jirum/95092",
+      "original_purchase_url": "https://link.coupang.com/a/iqfzMys82m",
+      "source_text": "🔥🔥🔥무지성 4,200원 (61.0% 할인)🔥🔥🔥\n케이트 3D 아이브로우 컬러 Z 6.3g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,769원\n- 할인: 6,569원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iqfzMys82m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-05T03:49:50+00:00",
+      "title": "케이트 3D 아이브로우 컬러 Z 6.3g",
+      "sale_price_krw": 4200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
