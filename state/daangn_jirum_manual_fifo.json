@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95189,
-  "pending": [],
+  "last_scanned_id": 95191,
+  "pending": [
+    {
+      "id": 95191,
+      "source_post_url": "https://t.me/jirum/95191",
+      "original_purchase_url": "https://link.coupang.com/a/irU9EK9hiC",
+      "source_text": "❤️초대박 2,470원 (44.0% 할인)\n알로 블랙 트러플 하몽 크래커 11p\n📌 가격 현황\n- 정상가: 4,411원\n- 할인: 1,941원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irU9EK9hiC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T03:59:16+00:00",
+      "title": "알로 블랙 트러플 하몽 크래커 11p",
+      "sale_price_krw": 2470
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2788,7 +2798,7 @@
       "run_id": "42158457684"
     }
   },
-  "skipped_non_coupang": 70,
+  "skipped_non_coupang": 71,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
