@@ -3,15 +3,6 @@
   "last_scanned_id": 95251,
   "pending": [
     {
-      "id": 95250,
-      "source_post_url": "https://t.me/jirum/95250",
-      "original_purchase_url": "https://link.coupang.com/a/itd9XjvpMi",
-      "source_text": "☆특가 990원\n엠토이 더블 레이어 타이머 밀폐용기 베이지 1400ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/itd9XjvpMi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T22:52:49+00:00",
-      "title": "☆특가 990원",
-      "sale_price_krw": 990
-    },
-    {
       "id": 95251,
       "source_post_url": "https://t.me/jirum/95251",
       "original_purchase_url": "https://link.coupang.com/a/itd92OyUgu",
@@ -21,12 +12,7 @@
       "sale_price_krw": 990
     }
   ],
-  "in_flight": {
-    "id": 95250,
-    "status": "CLAIMED",
-    "run_id": "42307996273",
-    "at": "2026-11-06T22:53:38.722218+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3210,6 +3196,16 @@
       "vendor_item_id": "95840125317",
       "at": "2026-11-06T22:45:44.279470+00:00",
       "run_id": "42307027887"
+    },
+    "95250": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%A0%ED%86%A0%EC%9D%B4-%EB%8D%94%EB%B8%94-%EB%A0%88%EC%9D%B4%EC%96%B4-%ED%83%80%EC%9D%B4%EB%A8%B8-%EB%B0%80%ED%8F%90%EC%9A%A9%EA%B8%B0-%EB%B2%A0%EC%9D%B4%EC%A7%80-1400ml-60%ED%95%A0%EC%9D%B8-dGGbDb5d?from=write",
+      "posted_at_utc": "2026-11-06T22:52:49+00:00",
+      "product_id": "8703196486",
+      "item_id": "25274240778",
+      "vendor_item_id": "92182917215",
+      "at": "2026-11-06T22:53:54.705092+00:00",
+      "run_id": "42307996273"
     }
   },
   "skipped_non_coupang": 90,
