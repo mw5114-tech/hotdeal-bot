@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95174,
-  "pending": [],
+  "last_scanned_id": 95176,
+  "pending": [
+    {
+      "id": 95175,
+      "source_post_url": "https://t.me/jirum/95175",
+      "original_purchase_url": "https://link.coupang.com/a/irNktfsDvw",
+      "source_text": "☆특가 13,600원\n피죤 레귤러 섬유유연제 핑크로즈 본품, 3.1L, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irNktfsDvw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T02:09:46+00:00",
+      "title": "☆특가 13,600원",
+      "sale_price_krw": 13600
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2658,7 +2668,7 @@
       "run_id": "42147029933"
     }
   },
-  "skipped_non_coupang": 68,
+  "skipped_non_coupang": 69,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
