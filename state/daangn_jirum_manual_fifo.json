@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95241,
-  "pending": [],
+  "last_scanned_id": 95242,
+  "pending": [
+    {
+      "id": 95242,
+      "source_post_url": "https://t.me/jirum/95242",
+      "original_purchase_url": "https://link.coupang.com/a/itbjxsUFCS",
+      "source_text": "🔥🔥🔥무지성 4,960원 (50.4% 할인)🔥🔥🔥\n차오차이 짜장 마파두부 체험팩 5종 세트, 900g, 1세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 5,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itbjxsUFCS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T22:13:00+00:00",
+      "title": "차오차이 짜장 마파두부 체험팩 5종 세트, 900g, 1세트",
+      "sale_price_krw": 4960
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
