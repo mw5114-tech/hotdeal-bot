@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95189,
-  "pending": [
-    {
-      "id": 95189,
-      "source_post_url": "https://t.me/jirum/95189",
-      "original_purchase_url": "https://link.coupang.com/a/irT8TvS5rU",
-      "source_text": "👍대박 6,040원 (39.0% 할인)\n듀이트리 하이 아미노 올 클렌저, 150ml, 2개\n📌 가격 현황\n- 정상가: 9,900원\n- 할인: 3,860원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irT8TvS5rU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T03:45:06+00:00",
-      "title": "듀이트리 하이 아미노 올 클렌저, 150ml, 2개",
-      "sale_price_krw": 6040
-    }
-  ],
-  "in_flight": {
-    "id": 95189,
-    "status": "CLAIMED",
-    "run_id": "42158457684",
-    "at": "2026-11-06T03:46:15.303015+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2791,6 +2776,16 @@
       "vendor_item_id": "92180148424",
       "at": "2026-11-06T03:34:00.134560+00:00",
       "run_id": "42157221585"
+    },
+    "95189": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%93%80%EC%9D%B4%ED%8A%B8%EB%A6%AC-%ED%95%98%EC%9D%B4-%EC%95%84%EB%AF%B8%EB%85%B8-%EC%98%AC-%ED%81%B4%EB%A0%8C%EC%A0%80-150ml-2%EA%B0%9C-40%ED%95%A0%EC%9D%B8-PBXgqzxj?from=write",
+      "posted_at_utc": "2026-11-06T03:45:06+00:00",
+      "product_id": "1711446154",
+      "item_id": "2912786409",
+      "vendor_item_id": "70901485555",
+      "at": "2026-11-06T03:46:31.263333+00:00",
+      "run_id": "42158457684"
     }
   },
   "skipped_non_coupang": 70,
