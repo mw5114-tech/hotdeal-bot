@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95178,
-  "pending": [],
+  "last_scanned_id": 95179,
+  "pending": [
+    {
+      "id": 95179,
+      "source_post_url": "https://t.me/jirum/95179",
+      "original_purchase_url": "https://link.coupang.com/a/irONKdmm4W",
+      "source_text": "🔥🔥🔥무지성 4,480원 (55.2% 할인)🔥🔥🔥\n프로그 라텍스 컴포트 고무장갑 5세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 5,520원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irONKdmm4W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T02:30:22+00:00",
+      "title": "프로그 라텍스 컴포트 고무장갑 5세트",
+      "sale_price_krw": 4480
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
