@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95235,
-  "pending": [
-    {
-      "id": 95235,
-      "source_post_url": "https://t.me/jirum/95235",
-      "original_purchase_url": "https://link.coupang.com/a/isEmais2Me",
-      "source_text": "🔥🔥🔥무지성 15,550원 (48.2% 할인)🔥🔥🔥\n르까프 L플립 2.0 런닝화\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 30,000원\n- 할인: 14,450원\n📦 특가 바로가기\nhttps://link.coupang.com/a/isEmais2Me\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T14:31:48+00:00",
-      "title": "르까프 L플립 2.0 런닝화",
-      "sale_price_krw": 15550
-    }
-  ],
-  "in_flight": {
-    "id": 95235,
-    "status": "CLAIMED",
-    "run_id": "42234781205",
-    "at": "2026-11-06T14:32:49.100310+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3061,6 +3046,16 @@
       "vendor_item_id": "93299351477",
       "at": "2026-11-06T13:10:46.571614+00:00",
       "run_id": "42223297885"
+    },
+    "95235": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A5%B4%EA%B9%8C%ED%94%84-L%ED%94%8C%EB%A6%BD-20-%EB%9F%B0%EB%8B%9D%ED%99%94-45%ED%95%A0%EC%9D%B8-PwwBRqJP?from=write",
+      "posted_at_utc": "2026-11-06T14:31:48+00:00",
+      "product_id": "8164275549",
+      "item_id": "23288638523",
+      "vendor_item_id": "90320874598",
+      "at": "2026-11-06T14:33:04.790678+00:00",
+      "run_id": "42234781205"
     }
   },
   "skipped_non_coupang": 89,
