@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95218,
-  "pending": [
-    {
-      "id": 95217,
-      "source_post_url": "https://t.me/jirum/95217",
-      "original_purchase_url": "https://link.coupang.com/a/isg4NG4vIq",
-      "source_text": "☆특가 17,640원 (29.0% 할인)\n[로켓프레시] 목우촌 주부9단 슬라이스 로스구이 (냉동)\n📌 가격 현황\n- 정상가: 24,845원\n- 할인: 7,205원\n📦 특가 바로가기\nhttps://link.coupang.com/a/isg4NG4vIq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T09:06:02+00:00",
-      "title": "[로켓프레시] 목우촌 주부9단 슬라이스 로스구이 (냉동)",
-      "sale_price_krw": 17640
-    }
-  ],
-  "in_flight": {
-    "id": 95217,
-    "status": "CLAIMED",
-    "run_id": "42192524516",
-    "at": "2026-11-06T09:07:21.915019+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2961,6 +2946,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T08:14:34.724865+00:00",
       "run_id": "42186189807"
+    },
+    "95217": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%A9%EC%9A%B0%EC%B4%8C-%EC%A3%BC%EB%B6%809%EB%8B%A8-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8A%A4-%EB%A1%9C%EC%8A%A4%EA%B5%AC%EC%9D%B4-%EB%83%89%EB%8F%99-1kg-2%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PV2qVQaP?from=write",
+      "posted_at_utc": "2026-11-06T09:06:02+00:00",
+      "product_id": "7543579367",
+      "item_id": "19920013964",
+      "vendor_item_id": null,
+      "at": "2026-11-06T09:07:39.989678+00:00",
+      "run_id": "42192524516"
     }
   },
   "skipped_non_coupang": 82,
