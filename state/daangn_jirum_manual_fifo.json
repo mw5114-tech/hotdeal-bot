@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95178,
-  "pending": [
-    {
-      "id": 95178,
-      "source_post_url": "https://t.me/jirum/95178",
-      "original_purchase_url": "https://link.coupang.com/a/irOyPYuE2u",
-      "source_text": "👍대박 7,870원 (39.5% 할인)\n써지오 개별 안전커버 멀티탭 5구 DH-1658-MT + 안전커버 2p, 3m\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 5,130원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irOyPYuE2u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T02:27:00+00:00",
-      "title": "써지오 개별 안전커버 멀티탭 5구 DH-1658-MT + 안전커버 2p, 3m",
-      "sale_price_krw": 7870
-    }
-  ],
-  "in_flight": {
-    "id": 95178,
-    "status": "CLAIMED",
-    "run_id": "42150444246",
-    "at": "2026-11-06T02:27:59.585587+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2691,6 +2676,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T02:23:32.139771+00:00",
       "run_id": "42149947758"
+    },
+    "95178": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8D%A8%EC%A7%80%EC%98%A4-%EA%B0%9C%EB%B3%84-%EC%95%88%EC%A0%84%EC%BB%A4%EB%B2%84-%EB%A9%80%ED%8B%B0%ED%83%AD-5%EA%B5%AC-DH-1658-MT-%EC%95%88%EC%A0%84-40%ED%95%A0%EC%9D%B8-dlY4g41j?from=write",
+      "posted_at_utc": "2026-11-06T02:27:00+00:00",
+      "product_id": "7912980013",
+      "item_id": "21718136275",
+      "vendor_item_id": "88767406011",
+      "at": "2026-11-06T02:28:16.406185+00:00",
+      "run_id": "42150444246"
     }
   },
   "skipped_non_coupang": 69,
