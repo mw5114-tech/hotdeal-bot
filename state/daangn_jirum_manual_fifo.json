@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95237,
-  "pending": [
-    {
-      "id": 95237,
-      "source_post_url": "https://t.me/jirum/95237",
-      "original_purchase_url": "https://link.coupang.com/a/isSItoOEGi",
-      "source_text": "☆특가 12,810원 (26.8% 할인)\n이니스프리 화산송이 BHA 모공 클렌징폼 대용량, 250g, 2개\n📌 가격 현황\n- 정상가: 17,500원\n- 할인: 4,690원\n📦 특가 바로가기\nhttps://link.coupang.com/a/isSItoOEGi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T17:52:45+00:00",
-      "title": "이니스프리 화산송이 BHA 모공 클렌징폼 대용량, 250g, 2개",
-      "sale_price_krw": 12810
-    }
-  ],
-  "in_flight": {
-    "id": 95237,
-    "status": "CLAIMED",
-    "run_id": "42265709376",
-    "at": "2026-11-06T17:53:39.323168+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3071,6 +3056,16 @@
       "vendor_item_id": "90320874598",
       "at": "2026-11-06T14:33:04.790678+00:00",
       "run_id": "42234781205"
+    },
+    "95237": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EB%8B%88%EC%8A%A4%ED%94%84%EB%A6%AC-%ED%99%94%EC%82%B0%EC%86%A1%EC%9D%B4-BHA-%EB%AA%A8%EA%B3%B5-%ED%81%B4%EB%A0%8C%EC%A7%95%ED%8F%BC-%EB%8C%80%EC%9A%A9%EB%9F%89-250g-35%ED%95%A0%EC%9D%B8-jK23emQd?from=write",
+      "posted_at_utc": "2026-11-06T17:52:45+00:00",
+      "product_id": "8209844068",
+      "item_id": "19170953678",
+      "vendor_item_id": "87149808480",
+      "at": "2026-11-06T17:53:57.776672+00:00",
+      "run_id": "42265709376"
     }
   },
   "skipped_non_coupang": 90,
