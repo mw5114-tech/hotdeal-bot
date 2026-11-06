@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95239,
-  "pending": [
-    {
-      "id": 95239,
-      "source_post_url": "https://t.me/jirum/95239",
-      "original_purchase_url": "https://link.coupang.com/a/itaCiTQIea",
-      "source_text": "☆특가 52,180원\n셀루코어 C4 오리지널 프리-워크아웃 핑크 레모네이드, 408g, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/itaCiTQIea\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T22:03:15+00:00",
-      "title": "☆특가 52,180원",
-      "sale_price_krw": 52180
-    }
-  ],
-  "in_flight": {
-    "id": 95239,
-    "status": "CLAIMED",
-    "run_id": "42301724068",
-    "at": "2026-11-06T22:04:33.817289+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3090,6 +3075,16 @@
       "item_id": "25248163427",
       "vendor_item_id": "81956611627",
       "at": "2026-11-06T22:04:24.453344+00:00",
+      "run_id": "42301724068"
+    },
+    "95239": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%85%80%EB%A3%A8%EC%BD%94%EC%96%B4-C4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%ED%94%84%EB%A6%AC-%EC%9B%8C%ED%81%AC%EC%95%84%EC%9B%83-%ED%95%91%ED%81%AC-%EB%A0%88%EB%AA%A8%EB%84%A4%EC%9D%B4%EB%93%9C-408-55%ED%95%A0%EC%9D%B8-PBXM210j?from=write",
+      "posted_at_utc": "2026-11-06T22:03:15+00:00",
+      "product_id": "9413466122",
+      "item_id": "25248163552",
+      "vendor_item_id": "81956611640",
+      "at": "2026-11-06T22:04:51.133212+00:00",
       "run_id": "42301724068"
     }
   },
