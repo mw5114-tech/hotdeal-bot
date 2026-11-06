@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95233,
-  "pending": [],
+  "last_scanned_id": 95234,
+  "pending": [
+    {
+      "id": 95234,
+      "source_post_url": "https://t.me/jirum/95234",
+      "original_purchase_url": "https://link.coupang.com/a/isytdZvlTg",
+      "source_text": "🔥🔥🔥무지성 53,100원 (75.9% 할인)🔥🔥🔥\n파슬 제시 버킷 숄더백 ZB11002 18.4cm*17.8cm*두께 12.7cm색상블랙\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 220,000원\n- 할인: 166,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/isytdZvlTg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T13:09:26+00:00",
+      "title": "파슬 제시 버킷 숄더백 ZB11002 18.4cm*17.8cm*두께 12.7cm색상블랙",
+      "sale_price_krw": 53100
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
