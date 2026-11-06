@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95230,
-  "pending": [
-    {
-      "id": 95230,
-      "source_post_url": "https://t.me/jirum/95230",
-      "original_purchase_url": "https://link.coupang.com/a/isrbyG0TL2",
-      "source_text": "☆특가 21,780원\n레고 듀플로 10954 숫자 기차\n📦 특가 바로가기\nhttps://link.coupang.com/a/isrbyG0TL2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T11:27:30+00:00",
-      "title": "☆특가 21,780원",
-      "sale_price_krw": 21780
-    }
-  ],
-  "in_flight": {
-    "id": 95230,
-    "status": "CLAIMED",
-    "run_id": "42210433691",
-    "at": "2026-11-06T11:28:16.282395+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3041,6 +3026,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T11:26:50.942832+00:00",
       "run_id": "42210193404"
+    },
+    "95230": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A0%88%EA%B3%A0-%EB%93%80%ED%94%8C%EB%A1%9C-10954-%EC%88%AB%EC%9E%90-%EA%B8%B0%EC%B0%A8-1%EA%B0%9C-%ED%98%BC%ED%95%A9%EC%83%89%EC%83%81-15%ED%95%A0%EC%9D%B8-dpW1GGXP?from=write",
+      "posted_at_utc": "2026-11-06T11:27:30+00:00",
+      "product_id": "5613543083",
+      "item_id": "9077474813",
+      "vendor_item_id": null,
+      "at": "2026-11-06T11:28:32.330972+00:00",
+      "run_id": "42210433691"
     }
   },
   "skipped_non_coupang": 86,
