@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95185,
-  "pending": [],
+  "last_scanned_id": 95186,
+  "pending": [
+    {
+      "id": 95186,
+      "source_post_url": "https://t.me/jirum/95186",
+      "original_purchase_url": "https://link.coupang.com/a/irSSlRIiFE",
+      "source_text": "🔥🔥🔥무지성 26,900원 (52.0% 할인)🔥🔥🔥\n브랜든 여행용 2WAY 멀티 패커블 백팩 슬링백\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 56,042원\n- 할인: 29,142원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irSSlRIiFE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T03:27:23+00:00",
+      "title": "브랜든 여행용 2WAY 멀티 패커블 백팩 슬링백",
+      "sale_price_krw": 26900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
