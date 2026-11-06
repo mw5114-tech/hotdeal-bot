@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95191,
-  "pending": [
-    {
-      "id": 95191,
-      "source_post_url": "https://t.me/jirum/95191",
-      "original_purchase_url": "https://link.coupang.com/a/irU9EK9hiC",
-      "source_text": "❤️초대박 2,470원 (44.0% 할인)\n알로 블랙 트러플 하몽 크래커 11p\n📌 가격 현황\n- 정상가: 4,411원\n- 할인: 1,941원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irU9EK9hiC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T03:59:16+00:00",
-      "title": "알로 블랙 트러플 하몽 크래커 11p",
-      "sale_price_krw": 2470
-    }
-  ],
-  "in_flight": {
-    "id": 95191,
-    "status": "CLAIMED",
-    "run_id": "42159839386",
-    "at": "2026-11-06T04:00:29.479563+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2801,6 +2786,16 @@
       "vendor_item_id": "70901485555",
       "at": "2026-11-06T03:46:31.263333+00:00",
       "run_id": "42158457684"
+    },
+    "95191": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%8C%EB%A1%9C-%EB%B8%94%EB%9E%99-%ED%8A%B8%EB%9F%AC%ED%94%8C-%ED%95%98%EB%AA%BD-%ED%81%AC%EB%9E%98%EC%BB%A4-11p-1%EA%B0%9C-319g-35%ED%95%A0%EC%9D%B8-j8rOq67P?from=write",
+      "posted_at_utc": "2026-11-06T03:59:16+00:00",
+      "product_id": "8883183561",
+      "item_id": "28235053486",
+      "vendor_item_id": null,
+      "at": "2026-11-06T04:00:46.942305+00:00",
+      "run_id": "42159839386"
     }
   },
   "skipped_non_coupang": 71,
