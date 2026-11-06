@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95193,
-  "pending": [
-    {
-      "id": 95193,
-      "source_post_url": "https://t.me/jirum/95193",
-      "original_purchase_url": "https://link.coupang.com/a/irYC31epoq",
-      "source_text": "☆특가 3,000원 (23.0% 할인)\n하인즈 토마토 케찹\n📌 가격 현황\n- 정상가: 3,896원\n- 할인: 896원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irYC31epoq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T04:47:53+00:00",
-      "title": "하인즈 토마토 케찹",
-      "sale_price_krw": 3000
-    }
-  ],
-  "in_flight": {
-    "id": 95193,
-    "status": "CLAIMED",
-    "run_id": "42164669646",
-    "at": "2026-11-06T04:49:02.646038+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2811,6 +2796,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T04:00:46.942305+00:00",
       "run_id": "42159839386"
+    },
+    "95193": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EC%9D%B8%EC%A6%88-%ED%86%A0%EB%A7%88%ED%86%A0-%EC%BC%80%EC%B0%B9-570g-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-d9XpD3OP?from=write",
+      "posted_at_utc": "2026-11-06T04:47:53+00:00",
+      "product_id": "6714158527",
+      "item_id": "2614506235",
+      "vendor_item_id": null,
+      "at": "2026-11-06T04:49:18.595213+00:00",
+      "run_id": "42164669646"
     }
   },
   "skipped_non_coupang": 72,
