@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95206,
-  "pending": [
-    {
-      "id": 95206,
-      "source_post_url": "https://t.me/jirum/95206",
-      "original_purchase_url": "https://link.coupang.com/a/ir7NNZx1bw",
-      "source_text": "☆특가 2,500원\n위더스욕실용품 웜무드 남녀공용 체크 머플러 목도리 (색상선택)\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir7NNZx1bw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T06:56:16+00:00",
-      "title": "☆특가 2,500원",
-      "sale_price_krw": 2500
-    }
-  ],
-  "in_flight": {
-    "id": 95206,
-    "status": "CLAIMED",
-    "run_id": "42177702280",
-    "at": "2026-11-06T06:57:49.869157+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2901,6 +2886,16 @@
       "vendor_item_id": "86673470157",
       "at": "2026-11-06T06:46:00.835253+00:00",
       "run_id": "42176452832"
+    },
+    "95206": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%84%EB%8D%94%EC%8A%A4%EC%9A%95%EC%8B%A4%EC%9A%A9%ED%92%88-%EC%9B%9C%EB%AC%B4%EB%93%9C-%EB%82%A8%EB%85%80%EA%B3%B5%EC%9A%A9-%EC%B2%B4%ED%81%AC-%EB%A8%B8%ED%94%8C%EB%9F%AC-%EB%AA%A9%EB%8F%84%EB%A6%AC-%EC%83%89%EC%83%81%EC%84%A0%ED%83%9D-75%ED%95%A0%EC%9D%B8-dlY42Qej?from=write",
+      "posted_at_utc": "2026-11-06T06:56:16+00:00",
+      "product_id": "9072409528",
+      "item_id": "26645156037",
+      "vendor_item_id": "93617774408",
+      "at": "2026-11-06T06:58:05.745180+00:00",
+      "run_id": "42177702280"
     }
   },
   "skipped_non_coupang": 76,
