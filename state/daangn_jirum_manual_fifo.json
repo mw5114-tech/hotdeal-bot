@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95177,
-  "pending": [],
+  "last_scanned_id": 95178,
+  "pending": [
+    {
+      "id": 95178,
+      "source_post_url": "https://t.me/jirum/95178",
+      "original_purchase_url": "https://link.coupang.com/a/irOyPYuE2u",
+      "source_text": "👍대박 7,870원 (39.5% 할인)\n써지오 개별 안전커버 멀티탭 5구 DH-1658-MT + 안전커버 2p, 3m\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 5,130원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irOyPYuE2u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T02:27:00+00:00",
+      "title": "써지오 개별 안전커버 멀티탭 5구 DH-1658-MT + 안전커버 2p, 3m",
+      "sale_price_krw": 7870
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
