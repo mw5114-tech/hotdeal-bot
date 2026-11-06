@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95226,
-  "pending": [
-    {
-      "id": 95226,
-      "source_post_url": "https://t.me/jirum/95226",
-      "original_purchase_url": "https://link.coupang.com/a/ispCJOAnqC",
-      "source_text": "☆특가 4,880원\n삼립 밀크후레쉬팡\n📦 특가 바로가기\nhttps://link.coupang.com/a/ispCJOAnqC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T11:05:39+00:00",
-      "title": "☆특가 4,880원",
-      "sale_price_krw": 4880
-    }
-  ],
-  "in_flight": {
-    "id": 95226,
-    "status": "CLAIMED",
-    "run_id": "42207747570",
-    "at": "2026-11-06T11:07:01.190052+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3011,6 +2996,16 @@
       "vendor_item_id": "86349757658",
       "at": "2026-11-06T10:31:15.223813+00:00",
       "run_id": "42203202256"
+    },
+    "95226": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EB%A6%BD-%EB%B0%80%ED%81%AC%ED%9B%84%EB%A0%88%EC%89%AC%ED%8C%A1-560g-1%EA%B0%9C%EC%9E%85-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PmV3zZXd?from=write",
+      "posted_at_utc": "2026-11-06T11:05:39+00:00",
+      "product_id": "192137571",
+      "item_id": "549656325",
+      "vendor_item_id": null,
+      "at": "2026-11-06T11:07:17.609899+00:00",
+      "run_id": "42207747570"
     }
   },
   "skipped_non_coupang": 85,
