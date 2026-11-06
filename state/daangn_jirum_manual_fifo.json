@@ -3,15 +3,6 @@
   "last_scanned_id": 95167,
   "pending": [
     {
-      "id": 95166,
-      "source_post_url": "https://t.me/jirum/95166",
-      "original_purchase_url": "https://link.coupang.com/a/irG5z8zAVE",
-      "source_text": "🔥🔥🔥무지성 5,880원 (46.5% 할인)🔥🔥🔥\n다향 고향의장맛 오리주물럭 불고기맛 500g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 11,000원\n- 할인: 5,120원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irG5z8zAVE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T00:42:26+00:00",
-      "title": "다향 고향의장맛 오리주물럭 불고기맛 500g",
-      "sale_price_krw": 5880
-    },
-    {
       "id": 95167,
       "source_post_url": "https://t.me/jirum/95167",
       "original_purchase_url": "https://link.coupang.com/a/irG5FFiVvE",
@@ -21,12 +12,7 @@
       "sale_price_krw": 10480
     }
   ],
-  "in_flight": {
-    "id": 95166,
-    "status": "CLAIMED",
-    "run_id": "42138904160",
-    "at": "2026-11-06T00:43:55.397465+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2610,6 +2596,16 @@
       "vendor_item_id": "95545248074",
       "at": "2026-11-06T00:17:31.807524+00:00",
       "run_id": "42135620275"
+    },
+    "95166": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%ED%96%A5-%EA%B3%A0%ED%96%A5%EC%9D%98%EC%9E%A5%EB%A7%9B-%EC%98%A4%EB%A6%AC%EC%A3%BC%EB%AC%BC%EB%9F%AD-%EB%B6%88%EA%B3%A0%EA%B8%B0%EB%A7%9B-500g-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-dpW1alzP?from=write",
+      "posted_at_utc": "2026-11-06T00:42:26+00:00",
+      "product_id": "156688988",
+      "item_id": "451180300",
+      "vendor_item_id": "4117267726",
+      "at": "2026-11-06T00:44:10.444122+00:00",
+      "run_id": "42138904160"
     }
   },
   "skipped_non_coupang": 66,
