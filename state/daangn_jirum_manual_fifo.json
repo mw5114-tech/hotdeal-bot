@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95186,
-  "pending": [
-    {
-      "id": 95186,
-      "source_post_url": "https://t.me/jirum/95186",
-      "original_purchase_url": "https://link.coupang.com/a/irSSlRIiFE",
-      "source_text": "🔥🔥🔥무지성 26,900원 (52.0% 할인)🔥🔥🔥\n브랜든 여행용 2WAY 멀티 패커블 백팩 슬링백\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 56,042원\n- 할인: 29,142원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irSSlRIiFE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T03:27:23+00:00",
-      "title": "브랜든 여행용 2WAY 멀티 패커블 백팩 슬링백",
-      "sale_price_krw": 26900
-    }
-  ],
-  "in_flight": {
-    "id": 95186,
-    "status": "CLAIMED",
-    "run_id": "42156718335",
-    "at": "2026-11-06T03:28:36.765008+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2761,6 +2746,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T03:26:58.839628+00:00",
       "run_id": "42156516581"
+    },
+    "95186": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B8%8C%EB%9E%9C%EB%93%A0-%EC%97%AC%ED%96%89%EC%9A%A9-2WAY-%EB%A9%80%ED%8B%B0-%ED%8C%A8%EC%BB%A4%EB%B8%94-%EB%B0%B1%ED%8C%A9-%EC%8A%AC%EB%A7%81%EB%B0%B1-d7L50knj?from=write",
+      "posted_at_utc": "2026-11-06T03:27:23+00:00",
+      "product_id": "8933340960",
+      "item_id": "26116398291",
+      "vendor_item_id": null,
+      "at": "2026-11-06T03:28:52.579581+00:00",
+      "run_id": "42156718335"
     }
   },
   "skipped_non_coupang": 70,
