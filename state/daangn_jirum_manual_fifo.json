@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95201,
-  "pending": [
-    {
-      "id": 95201,
-      "source_post_url": "https://t.me/jirum/95201",
-      "original_purchase_url": "https://link.coupang.com/a/ir3aqjn0cm",
-      "source_text": "☆특가 854,050원 (28.8% 할인)\nHP 빅터스 15 라이젠7 라이젠 7000 시리즈 지포스 RTX 4050 512GB*8GB*Free DOS 게이밍노트북\n📌 가격 현황\n- 정상가: 1,200,000원\n- 할인: 345,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir3aqjn0cm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T05:51:24+00:00",
-      "title": "HP 빅터스 15 라이젠7 라이젠 7000 시리즈 지포스 RTX 4050 512GB*8GB*Free DOS 게이밍노트북",
-      "sale_price_krw": 854050
-    }
-  ],
-  "in_flight": {
-    "id": 95201,
-    "status": "CLAIMED",
-    "run_id": "42170955032",
-    "at": "2026-11-06T05:52:37.680497+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2871,6 +2856,16 @@
       "vendor_item_id": "94976797190",
       "at": "2026-11-06T05:48:55.273089+00:00",
       "run_id": "42170561648"
+    },
+    "95201": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-HP-%EB%B9%85%ED%84%B0%EC%8A%A4-15-%EB%9D%BC%EC%9D%B4%EC%A0%A07-%EB%9D%BC%EC%9D%B4%EC%A0%A0-7000-%EC%8B%9C%EB%A6%AC%EC%A6%88-%EC%A7%80%ED%8F%AC%EC%8A%A4-RT-40%ED%95%A0%EC%9D%B8-dg3nGEvd?from=write",
+      "posted_at_utc": "2026-11-06T05:51:24+00:00",
+      "product_id": "9724920050",
+      "item_id": "29102163402",
+      "vendor_item_id": "96027226300",
+      "at": "2026-11-06T05:52:54.129199+00:00",
+      "run_id": "42170955032"
     }
   },
   "skipped_non_coupang": 74,
