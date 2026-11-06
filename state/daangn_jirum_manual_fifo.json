@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95224,
-  "pending": [
-    {
-      "id": 95224,
-      "source_post_url": "https://t.me/jirum/95224",
-      "original_purchase_url": "https://link.coupang.com/a/ism3EntU6e",
-      "source_text": "☆특가 27,810원 (25.0% 할인)\n잔다리 서리태 속청 로스팅 콩, 250g, 5개\n📌 가격 현황\n- 정상가: 37,080원\n- 할인: 9,270원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ism3EntU6e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T10:29:44+00:00",
-      "title": "잔다리 서리태 속청 로스팅 콩, 250g, 5개",
-      "sale_price_krw": 27810
-    }
-  ],
-  "in_flight": {
-    "id": 95224,
-    "status": "CLAIMED",
-    "run_id": "42203202256",
-    "at": "2026-11-06T10:30:58.874681+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3001,6 +2986,16 @@
       "vendor_item_id": "86554190599",
       "at": "2026-11-06T10:22:19.993643+00:00",
       "run_id": "42202057505"
+    },
+    "95224": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9E%94%EB%8B%A4%EB%A6%AC-%EC%84%9C%EB%A6%AC%ED%83%9C-%EC%86%8D%EC%B2%AD-%EB%A1%9C%EC%8A%A4%ED%8C%85-%EC%BD%A9-250g-5%EA%B0%9C-35%ED%95%A0%EC%9D%B8-A04xJOzA?from=write",
+      "posted_at_utc": "2026-11-06T10:29:44+00:00",
+      "product_id": "7743063355",
+      "item_id": "19233291307",
+      "vendor_item_id": "86349757658",
+      "at": "2026-11-06T10:31:15.223813+00:00",
+      "run_id": "42203202256"
     }
   },
   "skipped_non_coupang": 84,
