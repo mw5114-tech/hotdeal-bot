@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95165,
-  "pending": [
-    {
-      "id": 95165,
-      "source_post_url": "https://t.me/jirum/95165",
-      "original_purchase_url": "https://link.coupang.com/a/irFcp3LbVY",
-      "source_text": "👍대박 10,830원 (32.3% 할인)\n사무실 과자세트 스낵 15입 세트 (참크래커 + 허니버터칩 + 칸쵸 + 구운감자 4p + 딸기웨하스 + 초코홈런볼 4번들 + 돌아온 썬 핫스파이 + 씨리얼초코 + 고래밥 볶음양념맛)\n📌 가격 현황\n- 정상가: 16,000원\n- 할인: 5,170원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irFcp3LbVY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T00:16:00+00:00",
-      "title": "사무실 과자세트 스낵 15입 세트 (참크래커 + 허니버터칩 + 칸쵸 + 구운감자 4p + 딸기웨하스 + 초코홈런볼 4번들 + 돌아온 썬 핫스파이 + 씨리얼초코 + 고래밥 볶음양념맛)",
-      "sale_price_krw": 10830
-    }
-  ],
-  "in_flight": {
-    "id": 95165,
-    "status": "CLAIMED",
-    "run_id": "42135620275",
-    "at": "2026-11-06T00:17:13.975214+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2591,6 +2576,16 @@
       "vendor_item_id": "4117267726",
       "at": "2026-11-05T23:37:22.511842+00:00",
       "run_id": "42130692819"
+    },
+    "95165": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%AC%EB%AC%B4%EC%8B%A4-%EA%B3%BC%EC%9E%90%EC%84%B8%ED%8A%B8-%EC%8A%A4%EB%82%B5-15%EC%9E%85-%EC%84%B8%ED%8A%B8-%EC%B0%B8%ED%81%AC%EB%9E%98%EC%BB%A4-%ED%97%88%EB%8B%88%EB%B2%84%ED%84%B0%EC%B9%A9-40%ED%95%A0%EC%9D%B8-dlY4oZ1j?from=write",
+      "posted_at_utc": "2026-11-06T00:16:00+00:00",
+      "product_id": "9581703310",
+      "item_id": "28601656475",
+      "vendor_item_id": "95545248074",
+      "at": "2026-11-06T00:17:31.807524+00:00",
+      "run_id": "42135620275"
     }
   },
   "skipped_non_coupang": 66,
