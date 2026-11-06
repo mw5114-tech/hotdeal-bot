@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95181,
-  "pending": [
-    {
-      "id": 95181,
-      "source_post_url": "https://t.me/jirum/95181",
-      "original_purchase_url": "https://link.coupang.com/a/irPsmdgsH6",
-      "source_text": "👍대박 68,830원 (37.4% 할인)\n알텐바흐 인덕션 헥사 통5중 프라이팬세트 2종 30cm + 궁중팬 30cm + 유리 커버 30cm*1개\n📌 가격 현황\n- 정상가: 110,000원\n- 할인: 41,170원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irPsmdgsH6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T02:39:32+00:00",
-      "title": "알텐바흐 인덕션 헥사 통5중 프라이팬세트 2종 30cm + 궁중팬 30cm + 유리 커버 30cm*1개",
-      "sale_price_krw": 68830
-    }
-  ],
-  "in_flight": {
-    "id": 95181,
-    "status": "CLAIMED",
-    "run_id": "42151753435",
-    "at": "2026-11-06T02:40:23.705834+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2711,6 +2696,16 @@
       "vendor_item_id": "82824617668",
       "at": "2026-11-06T02:31:32.339667+00:00",
       "run_id": "42150800226"
+    },
+    "95181": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%8C%ED%85%90%EB%B0%94%ED%9D%90-%EC%9D%B8%EB%8D%95%EC%85%98-%ED%97%A5%EC%82%AC-%ED%86%B55%EC%A4%91-%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC%EC%84%B8%ED%8A%B8-2%EC%A2%85-%ED%98%BC%ED%95%A9%EC%83%89%EC%83%81-%ED%94%84-40%ED%95%A0%EC%9D%B8-AraXZBRj?from=write",
+      "posted_at_utc": "2026-11-06T02:39:32+00:00",
+      "product_id": "9555759794",
+      "item_id": "17685546310",
+      "vendor_item_id": "84850697902",
+      "at": "2026-11-06T02:40:41.931113+00:00",
+      "run_id": "42151753435"
     }
   },
   "skipped_non_coupang": 70,
