@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95205,
-  "pending": [
-    {
-      "id": 95205,
-      "source_post_url": "https://t.me/jirum/95205",
-      "original_purchase_url": "https://link.coupang.com/a/ir6XImgpH2",
-      "source_text": "☆특가 9,300원 (25.2% 할인)\n오뚜기 컵누들 매콤한맛 37.8g, 12개\n📌 가격 현황\n- 정상가: 12,430원\n- 할인: 3,130원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir6XImgpH2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T06:44:30+00:00",
-      "title": "오뚜기 컵누들 매콤한맛 37.8g, 12개",
-      "sale_price_krw": 9300
-    }
-  ],
-  "in_flight": {
-    "id": 95205,
-    "status": "CLAIMED",
-    "run_id": "42176452832",
-    "at": "2026-11-06T06:45:45.323506+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2891,6 +2876,16 @@
       "vendor_item_id": "90416515425",
       "at": "2026-11-06T06:03:33.919334+00:00",
       "run_id": "42171954089"
+    },
+    "95205": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%BB%B5%EB%88%84%EB%93%A4-%EB%A7%A4%EC%BD%A4%ED%95%9C%EB%A7%9B-378g-12%EA%B0%9C-25%ED%95%A0%EC%9D%B8-dQMWO8Nd?from=write",
+      "posted_at_utc": "2026-11-06T06:44:30+00:00",
+      "product_id": "7038376642",
+      "item_id": "19565593133",
+      "vendor_item_id": "86673470157",
+      "at": "2026-11-06T06:46:00.835253+00:00",
+      "run_id": "42176452832"
     }
   },
   "skipped_non_coupang": 76,
