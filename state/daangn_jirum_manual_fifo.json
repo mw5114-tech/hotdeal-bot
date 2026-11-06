@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95170,
-  "pending": [
-    {
-      "id": 95170,
-      "source_post_url": "https://t.me/jirum/95170",
-      "original_purchase_url": "https://link.coupang.com/a/irJEPPBiEe",
-      "source_text": "☆특가 7,960원\n오리온 고래밥 초코송이 미니믹스 과자세트, 고래밥 볶음 양념맛, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/irJEPPBiEe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T01:18:23+00:00",
-      "title": "☆특가 7,960원",
-      "sale_price_krw": 7960
-    }
-  ],
-  "in_flight": {
-    "id": 95170,
-    "status": "CLAIMED",
-    "run_id": "42142977620",
-    "at": "2026-11-06T01:19:09.115714+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2631,6 +2616,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T01:00:25.747570+00:00",
       "run_id": "42140757647"
+    },
+    "95170": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EA%B3%A0%EB%9E%98%EB%B0%A5-%EC%B4%88%EC%BD%94%EC%86%A1%EC%9D%B4-%EB%AF%B8%EB%8B%88%EB%AF%B9%EC%8A%A4-%EA%B3%BC%EC%9E%90%EC%84%B8%ED%8A%B8-%EA%B3%A0%EB%9E%98%EB%B0%A5-%EB%B3%B6%EC%9D%8C-%EC%96%91%EB%85%90%EB%A7%9B-15%ED%95%A0%EC%9D%B8-PM0R4JRA?from=write",
+      "posted_at_utc": "2026-11-06T01:18:23+00:00",
+      "product_id": "1421686681",
+      "item_id": "2460282952",
+      "vendor_item_id": null,
+      "at": "2026-11-06T01:19:26.078628+00:00",
+      "run_id": "42142977620"
     }
   },
   "skipped_non_coupang": 67,
