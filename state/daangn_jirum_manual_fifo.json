@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95165,
-  "pending": [],
+  "last_scanned_id": 95167,
+  "pending": [
+    {
+      "id": 95166,
+      "source_post_url": "https://t.me/jirum/95166",
+      "original_purchase_url": "https://link.coupang.com/a/irG5z8zAVE",
+      "source_text": "🔥🔥🔥무지성 5,880원 (46.5% 할인)🔥🔥🔥\n다향 고향의장맛 오리주물럭 불고기맛 500g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 11,000원\n- 할인: 5,120원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irG5z8zAVE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T00:42:26+00:00",
+      "title": "다향 고향의장맛 오리주물럭 불고기맛 500g",
+      "sale_price_krw": 5880
+    },
+    {
+      "id": 95167,
+      "source_post_url": "https://t.me/jirum/95167",
+      "original_purchase_url": "https://link.coupang.com/a/irG5FFiVvE",
+      "source_text": "❤️초대박 10,480원 (41.8% 할인)\n비비고 찰보리 감자만두 (냉동), 400g, 4개입\n📌 가격 현황\n- 정상가: 18,000원\n- 할인: 7,520원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irG5FFiVvE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T00:42:28+00:00",
+      "title": "비비고 찰보리 감자만두 (냉동), 400g, 4개입",
+      "sale_price_krw": 10480
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
