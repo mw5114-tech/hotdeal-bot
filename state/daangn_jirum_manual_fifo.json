@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95188,
-  "pending": [],
+  "last_scanned_id": 95189,
+  "pending": [
+    {
+      "id": 95189,
+      "source_post_url": "https://t.me/jirum/95189",
+      "original_purchase_url": "https://link.coupang.com/a/irT8TvS5rU",
+      "source_text": "👍대박 6,040원 (39.0% 할인)\n듀이트리 하이 아미노 올 클렌저, 150ml, 2개\n📌 가격 현황\n- 정상가: 9,900원\n- 할인: 3,860원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irT8TvS5rU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T03:45:06+00:00",
+      "title": "듀이트리 하이 아미노 올 클렌저, 150ml, 2개",
+      "sale_price_krw": 6040
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
