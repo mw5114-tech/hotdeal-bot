@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95182,
-  "pending": [],
+  "last_scanned_id": 95183,
+  "pending": [
+    {
+      "id": 95183,
+      "source_post_url": "https://t.me/jirum/95183",
+      "original_purchase_url": "https://link.coupang.com/a/irRJE3sN1V",
+      "source_text": "🔥🔥🔥무지성 19,850원 (54.9% 할인)🔥🔥🔥\n스탠리 퀜처 H2.0 플로우 스테이트 텀블러 887ml*1개, 모브 쉬머\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 44,000원\n- 할인: 24,150원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irRJE3sN1V\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T03:11:25+00:00",
+      "title": "스탠리 퀜처 H2.0 플로우 스테이트 텀블러 887ml*1개, 모브 쉬머",
+      "sale_price_krw": 19850
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
