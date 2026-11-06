@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95174,
-  "pending": [
-    {
-      "id": 95174,
-      "source_post_url": "https://t.me/jirum/95174",
-      "original_purchase_url": "https://link.coupang.com/a/irMiqd1wiW",
-      "source_text": "👍대박 6,590원 (34.1% 할인)\n명진 소프트컬러 고무장갑 5세트\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 3,410원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irMiqd1wiW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T01:55:18+00:00",
-      "title": "명진 소프트컬러 고무장갑 5세트",
-      "sale_price_krw": 6590
-    }
-  ],
-  "in_flight": {
-    "id": 95174,
-    "status": "CLAIMED",
-    "run_id": "42147029933",
-    "at": "2026-11-06T01:56:36.517671+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2661,6 +2646,16 @@
       "vendor_item_id": "90736511490",
       "at": "2026-11-06T01:29:27.624995+00:00",
       "run_id": "42144104191"
+    },
+    "95174": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%85%EC%A7%84-%EC%86%8C%ED%94%84%ED%8A%B8%EC%BB%AC%EB%9F%AC-%EA%B3%A0%EB%AC%B4%EC%9E%A5%EA%B0%91-%EB%8B%A4%ED%81%AC%EA%B7%B8%EB%A6%B0-%EC%A4%91M-5%EC%84%B8%ED%8A%B8-40%ED%95%A0%EC%9D%B8-P5nkKrOd?from=write",
+      "posted_at_utc": "2026-11-06T01:55:18+00:00",
+      "product_id": "6806647007",
+      "item_id": "18366336030",
+      "vendor_item_id": "85509954631",
+      "at": "2026-11-06T01:56:53.837136+00:00",
+      "run_id": "42147029933"
     }
   },
   "skipped_non_coupang": 68,
