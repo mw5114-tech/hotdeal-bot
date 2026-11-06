@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95240,
-  "pending": [
-    {
-      "id": 95240,
-      "source_post_url": "https://t.me/jirum/95240",
-      "original_purchase_url": "https://link.coupang.com/a/itaR1uyxmC",
-      "source_text": "👍대박 12,470원 (30.7% 할인)\n리큐 진한겔 하이브리드 드럼세탁기용 액상세제 플로럴 부케향 리필, 2.1L, 4개\n📌 가격 현황\n- 정상가: 18,000원\n- 할인: 5,530원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itaR1uyxmC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T22:06:48+00:00",
-      "title": "리큐 진한겔 하이브리드 드럼세탁기용 액상세제 플로럴 부케향 리필, 2.1L, 4개",
-      "sale_price_krw": 12470
-    }
-  ],
-  "in_flight": {
-    "id": 95240,
-    "status": "CLAIMED",
-    "run_id": "42302261166",
-    "at": "2026-11-06T22:08:04.063070+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3101,6 +3086,16 @@
       "vendor_item_id": "81956611640",
       "at": "2026-11-06T22:04:51.133212+00:00",
       "run_id": "42301724068"
+    },
+    "95240": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%ED%81%90-%EC%A7%84%ED%95%9C%EA%B2%94-%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C-%EB%93%9C%EB%9F%BC%EC%84%B8%ED%83%81%EA%B8%B0%EC%9A%A9-%EC%95%A1%EC%83%81%EC%84%B8%EC%A0%9C-%ED%94%8C%EB%A1%9C%EB%9F%B4-%EB%B6%80%EC%BC%80%ED%96%A5-%EB%A6%AC-35%ED%95%A0%EC%9D%B8-PBXM2lqj?from=write",
+      "posted_at_utc": "2026-11-06T22:06:48+00:00",
+      "product_id": "7235489530",
+      "item_id": "15028163821",
+      "vendor_item_id": "3116820081",
+      "at": "2026-11-06T22:08:22.145958+00:00",
+      "run_id": "42302261166"
     }
   },
   "skipped_non_coupang": 90,
