@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95211,
-  "pending": [
-    {
-      "id": 95211,
-      "source_post_url": "https://t.me/jirum/95211",
-      "original_purchase_url": "https://link.coupang.com/a/ir95zckT1g",
-      "source_text": "☆특가 21,680원\n풀무원 특등급 국산콩 두유, 190ml, 48개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir95zckT1g\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T07:28:15+00:00",
-      "title": "☆특가 21,680원",
-      "sale_price_krw": 21680
-    }
-  ],
-  "in_flight": {
-    "id": 95211,
-    "status": "CLAIMED",
-    "run_id": "42181144022",
-    "at": "2026-11-06T07:29:20.913814+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2931,6 +2916,16 @@
       "vendor_item_id": "84394234669",
       "at": "2026-11-06T07:11:23.510379+00:00",
       "run_id": "42179150598"
+    },
+    "95211": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%ED%8A%B9%EB%93%B1%EA%B8%89-%EA%B5%AD%EC%82%B0%EC%BD%A9-%EB%91%90%EC%9C%A0-190ml-48%EA%B0%9C-40%ED%95%A0%EC%9D%B8-Pk6gnGqA?from=write",
+      "posted_at_utc": "2026-11-06T07:28:15+00:00",
+      "product_id": "9361457966",
+      "item_id": "29237896266",
+      "vendor_item_id": "96156546338",
+      "at": "2026-11-06T07:29:37.538758+00:00",
+      "run_id": "42181144022"
     }
   },
   "skipped_non_coupang": 78,
