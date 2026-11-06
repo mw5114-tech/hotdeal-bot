@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95212,
-  "pending": [
-    {
-      "id": 95212,
-      "source_post_url": "https://t.me/jirum/95212",
-      "original_purchase_url": "https://link.coupang.com/a/isa58byN7k",
-      "source_text": "❤️초대박 13,600원 (41.0% 할인)\n[로켓프레시] 오뚜기 UNO 후랑크 핫도그 오리지널 (냉동)\n📌 가격 현황\n- 정상가: 23,051원\n- 할인: 9,451원\n📦 특가 바로가기\nhttps://link.coupang.com/a/isa58byN7k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T07:42:22+00:00",
-      "title": "[로켓프레시] 오뚜기 UNO 후랑크 핫도그 오리지널 (냉동)",
-      "sale_price_krw": 13600
-    }
-  ],
-  "in_flight": {
-    "id": 95212,
-    "status": "CLAIMED",
-    "run_id": "42182742453",
-    "at": "2026-11-06T07:43:49.239658+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2941,6 +2926,16 @@
       "vendor_item_id": "96156546338",
       "at": "2026-11-06T07:29:37.538758+00:00",
       "run_id": "42181144022"
+    },
+    "95212": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-UNO-%ED%9B%84%EB%9E%91%ED%81%AC-%ED%95%AB%EB%8F%84%EA%B7%B8-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%83%89%EB%8F%99-75g-5%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dz9WNRWP?from=write",
+      "posted_at_utc": "2026-11-06T07:42:22+00:00",
+      "product_id": "7967322972",
+      "item_id": "22051742752",
+      "vendor_item_id": null,
+      "at": "2026-11-06T07:44:06.969549+00:00",
+      "run_id": "42182742453"
     }
   },
   "skipped_non_coupang": 78,
