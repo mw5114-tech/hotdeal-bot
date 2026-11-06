@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95172,
-  "pending": [
-    {
-      "id": 95172,
-      "source_post_url": "https://t.me/jirum/95172",
-      "original_purchase_url": "https://link.coupang.com/a/irKndEbX3Y",
-      "source_text": "☆특가 20,980원\n(와멤데 쿠폰) 의성군농협 2026년산 햅쌀 바른고을 의성진쌀 백미 상등급 10kg*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/irKndEbX3Y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T01:28:24+00:00",
-      "title": "☆특가 20,980원",
-      "sale_price_krw": 20980
-    }
-  ],
-  "in_flight": {
-    "id": 95172,
-    "status": "CLAIMED",
-    "run_id": "42144104191",
-    "at": "2026-11-06T01:29:10.457936+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2651,6 +2636,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T01:27:32.306820+00:00",
       "run_id": "42143861125"
+    },
+    "95172": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%98%EC%84%B1%EA%B5%B0%EB%86%8D%ED%98%91-2026%EB%85%84%EC%82%B0-%ED%96%85%EC%8C%80-%EB%B0%94%EB%A5%B8%EA%B3%A0%EC%9D%84-%EC%9D%98%EC%84%B1%EC%A7%84%EC%8C%80-%EB%B0%B1%EB%AF%B8-%EC%83%81%EB%93%B1%EA%B8%89-35%ED%95%A0%EC%9D%B8-Pk6gV9xA?from=write",
+      "posted_at_utc": "2026-11-06T01:28:24+00:00",
+      "product_id": "8238734773",
+      "item_id": "23711550036",
+      "vendor_item_id": "90736511490",
+      "at": "2026-11-06T01:29:27.624995+00:00",
+      "run_id": "42144104191"
     }
   },
   "skipped_non_coupang": 67,
