@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95206,
-  "pending": [],
+  "last_scanned_id": 95209,
+  "pending": [
+    {
+      "id": 95209,
+      "source_post_url": "https://t.me/jirum/95209",
+      "original_purchase_url": "https://link.coupang.com/a/ir8GSkZ5RQ",
+      "source_text": "☆특가 17,940원 (25.2% 할인)\n프로그 라텍스 컴포트 고무장갑, 베이비핑크, 중(M), 20세트\n📌 가격 현황\n- 정상가: 23,990원\n- 할인: 6,050원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir8GSkZ5RQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-06T07:08:41+00:00",
+      "title": "프로그 라텍스 컴포트 고무장갑, 베이비핑크, 중(M), 20세트",
+      "sale_price_krw": 17940
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -2898,7 +2908,7 @@
       "run_id": "42177702280"
     }
   },
-  "skipped_non_coupang": 76,
+  "skipped_non_coupang": 78,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
