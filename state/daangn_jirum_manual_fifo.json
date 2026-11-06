@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95210,
-  "pending": [
-    {
-      "id": 95210,
-      "source_post_url": "https://t.me/jirum/95210",
-      "original_purchase_url": "https://link.coupang.com/a/ir8M1eIjOC",
-      "source_text": "🔥🔥🔥무지성 175,350원 (49.9% 할인)🔥🔥🔥\n휴롬 착즙기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 350,000원\n- 할인: 174,650원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir8M1eIjOC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T07:10:04+00:00",
-      "title": "휴롬 착즙기",
-      "sale_price_krw": 175350
-    }
-  ],
-  "in_flight": {
-    "id": 95210,
-    "status": "CLAIMED",
-    "run_id": "42179150598",
-    "at": "2026-11-06T07:11:06.252852+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2921,6 +2906,16 @@
       "vendor_item_id": "86951613509",
       "at": "2026-11-06T07:10:09.496618+00:00",
       "run_id": "42179005034"
+    },
+    "95210": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9C%B4%EB%A1%AC-%EC%B0%A9%EC%A6%99%EA%B8%B0-H400-%EC%9B%9C%ED%99%94%EC%9D%B4%ED%8A%B8-50%ED%95%A0%EC%9D%B8-dY0x7DXP?from=write",
+      "posted_at_utc": "2026-11-06T07:10:04+00:00",
+      "product_id": "7798290805",
+      "item_id": "21142728518",
+      "vendor_item_id": "84394234669",
+      "at": "2026-11-06T07:11:23.510379+00:00",
+      "run_id": "42179150598"
     }
   },
   "skipped_non_coupang": 78,
