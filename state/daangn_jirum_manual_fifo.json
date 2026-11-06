@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95169,
-  "pending": [
-    {
-      "id": 95169,
-      "source_post_url": "https://t.me/jirum/95169",
-      "original_purchase_url": "https://link.coupang.com/a/irIipy3thA",
-      "source_text": "👍대박 8,300원 (32.0% 할인)\n( 한정판 ) 겨울엔 미떼 핫초코 오리지널 마시멜로팩 강아지 강쥐팩 멍멍이\n📌 가격 현황\n- 정상가: 12,206원\n- 할인: 3,906원\n📦 특가 바로가기\nhttps://link.coupang.com/a/irIipy3thA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T00:59:20+00:00",
-      "title": "( 한정판 ) 겨울엔 미떼 핫초코 오리지널 마시멜로팩 강아지 강쥐팩 멍멍이",
-      "sale_price_krw": 8300
-    }
-  ],
-  "in_flight": {
-    "id": 95169,
-    "status": "CLAIMED",
-    "run_id": "42140757647",
-    "at": "2026-11-06T01:00:09.105042+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2621,6 +2606,16 @@
       "vendor_item_id": "79145976500",
       "at": "2026-11-06T00:44:28.546606+00:00",
       "run_id": "42138904160"
+    },
+    "95169": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EB%96%BC-%ED%95%AB%EC%B4%88%EC%BD%94-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0-17g-40%EA%B0%9C%EC%9E%85-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-Px8JlWzP?from=write",
+      "posted_at_utc": "2026-11-06T00:59:20+00:00",
+      "product_id": "7092292932",
+      "item_id": "476804087",
+      "vendor_item_id": null,
+      "at": "2026-11-06T01:00:25.747570+00:00",
+      "run_id": "42140757647"
     }
   },
   "skipped_non_coupang": 67,
