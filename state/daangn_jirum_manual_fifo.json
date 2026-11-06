@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95200,
-  "pending": [
-    {
-      "id": 95200,
-      "source_post_url": "https://t.me/jirum/95200",
-      "original_purchase_url": "https://link.coupang.com/a/ir2UlwFXBQ",
-      "source_text": "❤️초대박 8,270원 (44.9% 할인)\n브리츠 오픈형 무선 블루투스 이어폰 (색상선택)\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 6,730원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ir2UlwFXBQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T05:47:46+00:00",
-      "title": "브리츠 오픈형 무선 블루투스 이어폰 (색상선택)",
-      "sale_price_krw": 8270
-    }
-  ],
-  "in_flight": {
-    "id": 95200,
-    "status": "CLAIMED",
-    "run_id": "42170561648",
-    "at": "2026-11-06T05:48:37.563887+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -2861,6 +2846,16 @@
       "vendor_item_id": null,
       "at": "2026-11-06T05:30:58.111699+00:00",
       "run_id": "42168785259"
+    },
+    "95200": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B8%8C%EB%A6%AC%EC%B8%A0-%EC%98%A4%ED%94%88%ED%98%95-%EB%AC%B4%EC%84%A0-%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4-%EC%9D%B4%EC%96%B4%ED%8F%B0-%ED%99%94%EC%9D%B4%ED%8A%B8-Inspire5-60%ED%95%A0%EC%9D%B8-AqrYG7oP?from=write",
+      "posted_at_utc": "2026-11-06T05:47:46+00:00",
+      "product_id": "9425996422",
+      "item_id": "28019566265",
+      "vendor_item_id": "94976797190",
+      "at": "2026-11-06T05:48:55.273089+00:00",
+      "run_id": "42170561648"
     }
   },
   "skipped_non_coupang": 74,
