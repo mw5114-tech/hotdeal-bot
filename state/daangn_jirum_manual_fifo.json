@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95246,
-  "pending": [
-    {
-      "id": 95246,
-      "source_post_url": "https://t.me/jirum/95246",
-      "original_purchase_url": "https://link.coupang.com/a/itcCHZJohE",
-      "source_text": "🔥🔥🔥무지성 4,170원 (47.9% 할인)🔥🔥🔥\n첫맛 만능 멸치육수, 1kg, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 3,830원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itcCHZJohE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-06T22:31:19+00:00",
-      "title": "첫맛 만능 멸치육수, 1kg, 1개",
-      "sale_price_krw": 4170
-    }
-  ],
-  "in_flight": {
-    "id": 95246,
-    "status": "CLAIMED",
-    "run_id": "42305418456",
-    "at": "2026-11-06T22:32:31.825332+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3161,6 +3146,16 @@
       "vendor_item_id": "70557700633",
       "at": "2026-11-06T22:32:04.145954+00:00",
       "run_id": "42305247873"
+    },
+    "95246": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B2%AB%EB%A7%9B-%EB%A7%8C%EB%8A%A5-%EB%A9%B8%EC%B9%98%EC%9C%A1%EC%88%98-1kg-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-dEbnzqej?from=write",
+      "posted_at_utc": "2026-11-06T22:31:19+00:00",
+      "product_id": "6352727510",
+      "item_id": "13374482829",
+      "vendor_item_id": "92976220991",
+      "at": "2026-11-06T22:32:47.665523+00:00",
+      "run_id": "42305418456"
     }
   },
   "skipped_non_coupang": 90,
