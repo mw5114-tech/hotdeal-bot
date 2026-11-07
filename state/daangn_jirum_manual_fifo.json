@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95287,
-  "pending": [
-    {
-      "id": 95287,
-      "source_post_url": "https://t.me/jirum/95287",
-      "original_purchase_url": "https://link.coupang.com/a/itGtv0KEz6",
-      "source_text": "☆특가 3,990원 (27.0% 할인)\n[로켓프레시] 삼립 발효미종 정통단팥 호빵\n📌 가격 현황\n- 정상가: 5,466원\n- 할인: 1,476원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itGtv0KEz6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T05:29:04+00:00",
-      "title": "[로켓프레시] 삼립 발효미종 정통단팥 호빵",
-      "sale_price_krw": 3990
-    }
-  ],
-  "in_flight": {
-    "id": 95287,
-    "status": "CLAIMED",
-    "run_id": "42342950219",
-    "at": "2026-11-07T05:30:26.556353+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3391,6 +3376,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T05:05:21.346790+00:00",
       "run_id": "42341161669"
+    },
+    "95287": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EB%A6%BD-%EB%B0%9C%ED%9A%A8%EB%AF%B8%EC%A2%85-%EC%A0%95%ED%86%B5%EB%8B%A8%ED%8C%A5-%ED%98%B8%EB%B9%B5-95g-4%EA%B0%9C%EC%9E%85-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-Pk6NeN3A?from=write",
+      "posted_at_utc": "2026-11-07T05:29:04+00:00",
+      "product_id": "7643660061",
+      "item_id": "20317819463",
+      "vendor_item_id": null,
+      "at": "2026-11-07T05:30:42.641026+00:00",
+      "run_id": "42342950219"
     }
   },
   "skipped_non_coupang": 108,
