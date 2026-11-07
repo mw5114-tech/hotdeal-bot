@@ -2,6 +2,7 @@
 import tempfile
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 from gh_only.default_deal_automation import (
     enrich_deal, og_matches_product, get_title_tokens
@@ -74,6 +75,24 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertFalse(enriched["personal_affiliate_link_created"])
         self.assertFalse(enriched["affsdp"]["commission_attribution_verified"])
         self.assertEqual(enriched["posts_published"], 0)
+
+    def test_production_subid_passes_through_pipeline(self):
+        from urllib.parse import parse_qs, urlsplit
+        with patch.dict("os.environ", {"COUPANG_PARTNER_SUBID": "daangncafe"}):
+            with tempfile.TemporaryDirectory() as tmp:
+                enriched = enrich_deal(
+                    DEAL, Path(tmp),
+                    resolver=lambda _: IDENTITY,
+                    og_lookup=lambda *args: OG,
+                    history_fetch=lambda *args: parse_reference(
+                        HIST_HTML, build_url(PID, IID), PID, IID,
+                        ("휘카레", "230g", "20개"), 12050),
+                    photo_downloader=lambda *args: {
+                        "status": "IMAGE_SAVED", "saved_name": "product.jpg"},
+                    owner_tag="AF9668915")
+        link = enriched["composed_affiliate_url"]
+        self.assertEqual(parse_qs(urlsplit(link).query)["subid"], ["daangncafe"])
+        self.assertEqual(enriched["caption"]["caption"].count(link), 1)
 
     def test_unresolved_shortlink_does_not_compose_revenue_url(self):
         result = enrich_deal(

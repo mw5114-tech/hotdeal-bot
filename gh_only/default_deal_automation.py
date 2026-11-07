@@ -385,7 +385,9 @@ def enrich_deal(deal: dict, output_dir: Path,
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
     candidate = (
-        compose_affsdp_candidate(identity, owner_tag) if owner_tag else
+        compose_affsdp_candidate(
+            identity, owner_tag, subid=os.getenv("COUPANG_PARTNER_SUBID", "")
+        ) if owner_tag else
         {"status": "OWNER_LPTAG_NOT_CONFIGURED", "candidate_url": None,
          "official_link_issued": False, "commission_attribution_verified": False,
          "ready_for_automatic_publication": False}

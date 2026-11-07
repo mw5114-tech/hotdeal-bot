@@ -26,6 +26,29 @@ class AffsdpCandidateTests(unittest.TestCase):
         self.assertFalse(out["commission_attribution_verified"])
         self.assertFalse(out["ready_for_automatic_publication"])
 
+    def test_subid_preserves_owner_and_exact_product(self):
+        out = compose_affsdp_candidate(self.identity, "AF9668915", "daangncafe")
+        self.assertEqual(out["status"], "UNISSUED_AFFSDP_CANDIDATE")
+        parsed = urlsplit(out["candidate_url"])
+        self.assertEqual(parsed.hostname, "link.coupang.com")
+        self.assertEqual(parsed.path, "/re/AFFSDP")
+        qs = parse_qs(parsed.query)
+        self.assertEqual(qs["lptag"], ["AF9668915"])
+        self.assertEqual(qs["pageKey"], ["9217210892"])
+        self.assertEqual(qs["itemId"], ["27232840915"])
+        self.assertEqual(qs["vendorItemId"], ["94199974724"])
+        self.assertEqual(qs["subid"], ["daangncafe"])
+        self.assertEqual(out["candidate_url"].count("subid="), 1)
+        self.assertFalse(out["commission_attribution_verified"])
+
+    def test_subid_rejects_parameter_injection(self):
+        for value in ("telegram1&lptag=AF4625512", "hello world", "한글",
+                      "x?x=1", "abc#fragment", "a" * 65, None):
+            with self.subTest(value=value):
+                out = compose_affsdp_candidate(self.identity, "AF9668915", value)
+                self.assertEqual(out["status"], "INVALID_SUBID")
+                self.assertIsNone(out["candidate_url"])
+
     def test_missing_vendor_never_invents_a_vendor(self):
         identity = {**self.identity, "vendor_item_id": None}
         out = compose_affsdp_candidate(identity, "AF9668915")

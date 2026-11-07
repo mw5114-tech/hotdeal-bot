@@ -12,6 +12,7 @@ import re
 from urllib.parse import urlencode
 
 LPTAG_PATTERN = re.compile(r"AF[0-9]{5,12}\Z")
+SUBID_PATTERN = re.compile(r"[A-Za-z0-9_-]{1,64}\Z")
 INTEGER_PATTERN = re.compile(r"[1-9][0-9]{0,17}\Z")
 
 
@@ -19,7 +20,7 @@ def _positive_id(value: object) -> bool:
     return isinstance(value, str) and bool(INTEGER_PATTERN.fullmatch(value))
 
 
-def compose_affsdp_candidate(identity: dict, owner_tag: str) -> dict:
+def compose_affsdp_candidate(identity: dict, owner_tag: str, subid: str = "") -> dict:
     """Compose a tentative outbound URL using ONLY observed product/item IDs.
 
     We only trust identity after the upstream Coupang URL one-hop resolver.
@@ -36,6 +37,8 @@ def compose_affsdp_candidate(identity: dict, owner_tag: str) -> dict:
     }
     if not isinstance(owner_tag, str) or not LPTAG_PATTERN.fullmatch(owner_tag):
         return {**result, "status": "INVALID_OWNER_LPTAG"}
+    if not isinstance(subid, str) or (subid and not SUBID_PATTERN.fullmatch(subid)):
+        return {**result, "status": "INVALID_SUBID"}
     if not isinstance(identity, dict) or identity.get("status") != "EXACT_ITEM_IDENTIFIED":
         return {**result, "status": "SOURCE_PRODUCT_ITEM_NOT_IDENTIFIED"}
 
@@ -50,6 +53,8 @@ def compose_affsdp_candidate(identity: dict, owner_tag: str) -> dict:
     fields = [("lptag", owner_tag), ("pageKey", product), ("itemId", item)]
     if vendor:
         fields.append(("vendorItemId", vendor))
+    if subid:
+        fields.append(("subid", subid))
     url = "https://link.coupang.com/re/AFFSDP?" + urlencode(fields)
     return {
         **result,

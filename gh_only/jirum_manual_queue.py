@@ -789,7 +789,9 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         raise RuntimeError("OFFICIAL_LINK_RECEIPT_REQUIRED")
     elif (qs.get("lptag") != [os.getenv("COUPANG_PARTNER_LPTAG")]
             or qs.get("pageKey") != [ids.get("product_id")]
-            or qs.get("itemId") != [ids.get("item_id")]):
+            or qs.get("itemId") != [ids.get("item_id")]
+            or (qs.get("subid") != [os.getenv("COUPANG_PARTNER_SUBID")]
+                if os.getenv("COUPANG_PARTNER_SUBID") else "subid" in qs)):
         raise RuntimeError("OWNER_LINK_ITEM_OR_TAG_MISMATCH")
     return {**article, "product_id": ids["product_id"],
             "item_id": ids["item_id"],
