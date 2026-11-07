@@ -1,0 +1,41 @@
+name: Tests | Daangn affiliate SubID (offline)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gh_only/affsdp_candidate.py'
+      - 'gh_only/default_deal_automation.py'
+      - 'gh_only/jirum_manual_queue.py'
+      - 'gh_only/test_affsdp_candidate.py'
+      - 'gh_only/test_default_deal_automation.py'
+      - '.github/workflows/daangn-jirum-manual-fifo.yml'
+      - '.github/workflows/daangn-subid-regression.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-subid-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Compile modified Python modules
+        run: python -m py_compile gh_only/affsdp_candidate.py gh_only/default_deal_automation.py gh_only/jirum_manual_queue.py gh_only/test_affsdp_candidate.py gh_only/test_default_deal_automation.py
+      - name: Run link-generation and draft tests without publishing
+        run: python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation
+      - name: Verify production environment uses own lptag and dedicated SubID
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          s = Path('.github/workflows/daangn-jirum-manual-fifo.yml').read_text()
+          assert 'COUPANG_PARTNER_LPTAG: AF9668915' in s
+          assert 'COUPANG_PARTNER_SUBID: daangncafe' in s
+          assert 'COUPANG_PARTNER_LPTAG: AF4625512' not in s
+          print('SUBID_CONFIG_VALID')
+          PY
