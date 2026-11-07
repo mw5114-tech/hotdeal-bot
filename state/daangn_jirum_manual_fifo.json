@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95297,
-  "pending": [],
+  "last_scanned_id": 95298,
+  "pending": [
+    {
+      "id": 95298,
+      "source_post_url": "https://t.me/jirum/95298",
+      "original_purchase_url": "https://link.coupang.com/a/itXtmvVOtU",
+      "source_text": "☆특가 29,380원 (27.4% 할인)\n다우니 호텔 초고농축 컬렉션 섬유유연제 시트러스 앤 버베나 리필, 2.6L, 2개\n📌 가격 현황\n- 정상가: 40,490원\n- 할인: 11,110원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itXtmvVOtU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T09:26:55+00:00",
+      "title": "다우니 호텔 초고농축 컬렉션 섬유유연제 시트러스 앤 버베나 리필, 2.6L, 2개",
+      "sale_price_krw": 29380
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
