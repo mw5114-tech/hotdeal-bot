@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95321,
-  "pending": [],
+  "last_scanned_id": 95322,
+  "pending": [
+    {
+      "id": 95322,
+      "source_post_url": "https://t.me/jirum/95322",
+      "original_purchase_url": "https://link.coupang.com/a/iuRIQqZ7GS",
+      "source_text": "❤️초대박 2,970원 (40.6% 할인)\n애경바세린 모이스처 버블 핸드워시 500ml*1개\n📌 가격 현황\n- 정상가: 5,000원\n- 할인: 2,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuRIQqZ7GS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T22:34:03+00:00",
+      "title": "애경바세린 모이스처 버블 핸드워시 500ml*1개",
+      "sale_price_krw": 2970
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
