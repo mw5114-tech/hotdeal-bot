@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95259,
-  "pending": [],
+  "last_scanned_id": 95261,
+  "pending": [
+    {
+      "id": 95261,
+      "source_post_url": "https://t.me/jirum/95261",
+      "original_purchase_url": "https://link.coupang.com/a/itk5SdzO6S",
+      "source_text": "🔥🔥🔥무지성 23,900원 (62.0% 할인)🔥🔥🔥\nQCY 크로스키 C50i 트루 무선 오픈형 이어폰\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 62,895원\n- 할인: 38,995원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itk5SdzO6S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T00:29:51+00:00",
+      "title": "QCY 크로스키 C50i 트루 무선 오픈형 이어폰",
+      "sale_price_krw": 23900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -3208,7 +3218,7 @@
       "run_id": "42307996273"
     }
   },
-  "skipped_non_coupang": 98,
+  "skipped_non_coupang": 99,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
