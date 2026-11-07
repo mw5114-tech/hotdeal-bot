@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95268,
-  "pending": [],
+  "last_scanned_id": 95269,
+  "pending": [
+    {
+      "id": 95269,
+      "source_post_url": "https://t.me/jirum/95269",
+      "original_purchase_url": "https://link.coupang.com/a/ituCrcKR3I",
+      "source_text": "👍대박 26,110원 (30.4% 할인)\n크린스킨 마스터 니트릴장갑, 블랙, 혼합, 3개\n📌 가격 현황\n- 정상가: 37,530원\n- 할인: 11,420원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ituCrcKR3I\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T02:43:09+00:00",
+      "title": "크린스킨 마스터 니트릴장갑, 블랙, 혼합, 3개",
+      "sale_price_krw": 26110
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
