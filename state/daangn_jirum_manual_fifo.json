@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95296,
-  "pending": [
-    {
-      "id": 95296,
-      "source_post_url": "https://t.me/jirum/95296",
-      "original_purchase_url": "https://link.coupang.com/a/itWmVf20AK",
-      "source_text": "☆특가 4,490원 (30.0% 할인)\n메이플조 메이플 시럽, 150g, 1개\n📌 가격 현황\n- 정상가: 6,414원\n- 할인: 1,924원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itWmVf20AK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T09:11:28+00:00",
-      "title": "메이플조 메이플 시럽, 150g, 1개",
-      "sale_price_krw": 4490
-    }
-  ],
-  "in_flight": {
-    "id": 95296,
-    "status": "CLAIMED",
-    "run_id": "42358710167",
-    "at": "2026-11-07T09:12:27.183130+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3441,6 +3426,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T08:57:54.757005+00:00",
       "run_id": "42357632558"
+    },
+    "95296": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A9%94%EC%9D%B4%ED%94%8C%EC%A1%B0-%EB%A9%94%EC%9D%B4%ED%94%8C-%EC%8B%9C%EB%9F%BD-150g-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PWMyEeWj?from=write",
+      "posted_at_utc": "2026-11-07T09:11:28+00:00",
+      "product_id": "1792664596",
+      "item_id": "18352623507",
+      "vendor_item_id": "81255243727",
+      "at": "2026-11-07T09:12:43.518840+00:00",
+      "run_id": "42358710167"
     }
   },
   "skipped_non_coupang": 112,
