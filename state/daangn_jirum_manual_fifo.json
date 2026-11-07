@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95302,
-  "pending": [],
+  "last_scanned_id": 95303,
+  "pending": [
+    {
+      "id": 95303,
+      "source_post_url": "https://t.me/jirum/95303",
+      "original_purchase_url": "https://link.coupang.com/a/it4fh07XRk",
+      "source_text": "☆특가 22,870원\n(와멤데 쿠폰) 곰곰x농협 소중한 우리쌀 새청무 백미 * 10KG\n📦 특가 바로가기\nhttps://link.coupang.com/a/it4fh07XRk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T11:01:42+00:00",
+      "title": "☆특가 22,870원",
+      "sale_price_krw": 22870
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
