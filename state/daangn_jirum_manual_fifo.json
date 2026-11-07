@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95312,
-  "pending": [
-    {
-      "id": 95312,
-      "source_post_url": "https://t.me/jirum/95312",
-      "original_purchase_url": "https://link.coupang.com/a/iuIAg1y4pU",
-      "source_text": "👍대박 9,980원 (31.0% 할인)\n풀무원 올바른 핫도그 개별 (냉동), 75g, 7개입, 2개\n📌 가격 현황\n- 정상가: 14,460원\n- 할인: 4,480원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuIAg1y4pU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T20:26:11+00:00",
-      "title": "풀무원 올바른 핫도그 개별 (냉동), 75g, 7개입, 2개",
-      "sale_price_krw": 9980
-    }
-  ],
-  "in_flight": {
-    "id": 95312,
-    "status": "CLAIMED",
-    "run_id": "42411090439",
-    "at": "2026-11-07T20:27:13.220438+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3541,6 +3526,16 @@
       "vendor_item_id": "90773941346",
       "at": "2026-11-07T13:38:29.026855+00:00",
       "run_id": "42377817850"
+    },
+    "95312": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%98%AC%EB%B0%94%EB%A5%B8-%ED%95%AB%EB%8F%84%EA%B7%B8-%EA%B0%9C%EB%B3%84-%EB%83%89%EB%8F%99-75g-7%EA%B0%9C%EC%9E%85-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-AqrbQw4P?from=write",
+      "posted_at_utc": "2026-11-07T20:26:11+00:00",
+      "product_id": "222515135",
+      "item_id": "2102448804",
+      "vendor_item_id": "70101358154",
+      "at": "2026-11-07T20:27:30.166228+00:00",
+      "run_id": "42411090439"
     }
   },
   "skipped_non_coupang": 118,
