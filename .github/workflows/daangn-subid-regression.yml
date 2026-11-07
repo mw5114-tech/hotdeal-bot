@@ -25,6 +25,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Install lightweight Playwright Python import dependency
+        run: python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
       - name: Compile modified Python modules
         run: python -m py_compile gh_only/affsdp_candidate.py gh_only/default_deal_automation.py gh_only/jirum_manual_queue.py gh_only/test_affsdp_candidate.py gh_only/test_default_deal_automation.py
       - name: Run link-generation and draft tests without publishing
