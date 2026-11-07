@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95299,
-  "pending": [],
+  "last_scanned_id": 95300,
+  "pending": [
+    {
+      "id": 95300,
+      "source_post_url": "https://t.me/jirum/95300",
+      "original_purchase_url": "https://link.coupang.com/a/it1lVyeD48",
+      "source_text": "❤️초대박 19,440원 (43.0% 할인)\n스탠리 퀜처 프로투어 플립스트로 텀블러, 체리 블로썸, 591ml, 1개\n📌 가격 현황\n- 정상가: 34,105원\n- 할인: 14,665원\n📦 특가 바로가기\nhttps://link.coupang.com/a/it1lVyeD48\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T10:21:13+00:00",
+      "title": "스탠리 퀜처 프로투어 플립스트로 텀블러, 체리 블로썸, 591ml, 1개",
+      "sale_price_krw": 19440
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
