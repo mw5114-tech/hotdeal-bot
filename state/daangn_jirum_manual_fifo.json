@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95317,
-  "pending": [],
+  "last_scanned_id": 95318,
+  "pending": [
+    {
+      "id": 95318,
+      "source_post_url": "https://t.me/jirum/95318",
+      "original_purchase_url": "https://link.coupang.com/a/iuQWQAhkxE",
+      "source_text": "👍대박 6,420원 (35.8% 할인)\n후버 착즙 오렌지주스, 1L, 2개\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 3,580원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuQWQAhkxE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T22:23:13+00:00",
+      "title": "후버 착즙 오렌지주스, 1L, 2개",
+      "sale_price_krw": 6420
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
