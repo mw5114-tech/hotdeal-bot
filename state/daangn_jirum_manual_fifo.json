@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95323,
-  "pending": [
-    {
-      "id": 95323,
-      "source_post_url": "https://t.me/jirum/95323",
-      "original_purchase_url": "https://link.coupang.com/a/iuR7I2eBQO",
-      "source_text": "🔥🔥🔥무지성 3,420원 (56.2% 할인)🔥🔥🔥\n휘오 다이아몬드 EC 무라벨, 20개, 500ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,800원\n- 할인: 4,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuR7I2eBQO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:39:40+00:00",
-      "title": "휘오 다이아몬드 EC 무라벨, 20개, 500ml",
-      "sale_price_krw": 3420
-    }
-  ],
-  "in_flight": {
-    "id": 95323,
-    "status": "CLAIMED",
-    "run_id": "42421706050",
-    "at": "2026-11-07T22:40:53.563999+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3651,6 +3636,16 @@
       "vendor_item_id": "71263536929",
       "at": "2026-11-07T22:35:49.700285+00:00",
       "run_id": "42421243645"
+    },
+    "95323": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9C%98%EC%98%A4-%EB%8B%A4%EC%9D%B4%EC%95%84%EB%AA%AC%EB%93%9C-EC-%EB%AC%B4%EB%9D%BC%EB%B2%A8-20%EA%B0%9C-500ml-55%ED%95%A0%EC%9D%B8-PwwBQ2yP?from=write",
+      "posted_at_utc": "2026-11-07T22:39:40+00:00",
+      "product_id": "9043881292",
+      "item_id": "27200227599",
+      "vendor_item_id": "3001769850",
+      "at": "2026-11-07T22:41:09.460471+00:00",
+      "run_id": "42421706050"
     }
   },
   "skipped_non_coupang": 118,
