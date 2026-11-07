@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95326,
-  "pending": [
-    {
-      "id": 95326,
-      "source_post_url": "https://t.me/jirum/95326",
-      "original_purchase_url": "https://link.coupang.com/a/iuSUT8tRAa",
-      "source_text": "☆특가 7,180원 (20.2% 할인)\n맛선생 참치액, 950g, 2개\n📌 가격 현황\n- 정상가: 9,000원\n- 할인: 1,820원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuSUT8tRAa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:50:46+00:00",
-      "title": "맛선생 참치액, 950g, 2개",
-      "sale_price_krw": 7180
-    }
-  ],
-  "in_flight": {
-    "id": 95326,
-    "status": "CLAIMED",
-    "run_id": "42422556550",
-    "at": "2026-11-07T22:52:10.924189+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3681,6 +3666,16 @@
       "vendor_item_id": "91840052488",
       "at": "2026-11-07T22:47:08.813891+00:00",
       "run_id": "42422168707"
+    },
+    "95326": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%9B%EC%84%A0%EC%83%9D-%EC%B0%B8%EC%B9%98%EC%95%A1-950g-2%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dpWL1vJP?from=write",
+      "posted_at_utc": "2026-11-07T22:50:46+00:00",
+      "product_id": "8938904491",
+      "item_id": "27895178200",
+      "vendor_item_id": "94854110003",
+      "at": "2026-11-07T22:52:28.489155+00:00",
+      "run_id": "42422556550"
     }
   },
   "skipped_non_coupang": 118,
