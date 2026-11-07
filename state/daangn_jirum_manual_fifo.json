@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95277,
-  "pending": [],
+  "last_scanned_id": 95279,
+  "pending": [
+    {
+      "id": 95279,
+      "source_post_url": "https://t.me/jirum/95279",
+      "original_purchase_url": "https://link.coupang.com/a/itA6AjIUA8",
+      "source_text": "❤️초대박 13,950원 (41.9% 할인)\n오사닛 캔디, 캐모마일, 7.5g, 2개\n📌 가격 현황\n- 정상가: 24,030원\n- 할인: 10,080원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itA6AjIUA8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T04:13:55+00:00",
+      "title": "오사닛 캔디, 캐모마일, 7.5g, 2개",
+      "sale_price_krw": 13950
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -3348,7 +3358,7 @@
       "run_id": "42335323488"
     }
   },
-  "skipped_non_coupang": 102,
+  "skipped_non_coupang": 103,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
