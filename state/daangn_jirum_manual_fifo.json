@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95279,
-  "pending": [
-    {
-      "id": 95279,
-      "source_post_url": "https://t.me/jirum/95279",
-      "original_purchase_url": "https://link.coupang.com/a/itA6AjIUA8",
-      "source_text": "❤️초대박 13,950원 (41.9% 할인)\n오사닛 캔디, 캐모마일, 7.5g, 2개\n📌 가격 현황\n- 정상가: 24,030원\n- 할인: 10,080원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itA6AjIUA8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T04:13:55+00:00",
-      "title": "오사닛 캔디, 캐모마일, 7.5g, 2개",
-      "sale_price_krw": 13950
-    }
-  ],
-  "in_flight": {
-    "id": 95279,
-    "status": "CLAIMED",
-    "run_id": "42337566237",
-    "at": "2026-11-07T04:15:03.772311+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3361,6 +3346,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T03:44:45.832912+00:00",
       "run_id": "42335323488"
+    },
+    "95279": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%82%AC%EB%8B%9B-%EC%BA%94%EB%94%94-%EC%BA%90%EB%AA%A8%EB%A7%88%EC%9D%BC-2%EA%B0%9C-75g-45%ED%95%A0%EC%9D%B8-dymY6ped?from=write",
+      "posted_at_utc": "2026-11-07T04:13:55+00:00",
+      "product_id": "284781354",
+      "item_id": "18819442097",
+      "vendor_item_id": "85949803487",
+      "at": "2026-11-07T04:15:20.150854+00:00",
+      "run_id": "42337566237"
     }
   },
   "skipped_non_coupang": 103,
