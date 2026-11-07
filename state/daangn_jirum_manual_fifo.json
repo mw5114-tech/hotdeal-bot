@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95302,
-  "pending": [
-    {
-      "id": 95302,
-      "source_post_url": "https://t.me/jirum/95302",
-      "original_purchase_url": "https://link.coupang.com/a/it3KZhqhKC",
-      "source_text": "☆특가 9,600원\n블렌디 포션 커피 블랙, 18g, 24개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/it3KZhqhKC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T10:54:52+00:00",
-      "title": "☆특가 9,600원",
-      "sale_price_krw": 9600
-    }
-  ],
-  "in_flight": {
-    "id": 95302,
-    "status": "CLAIMED",
-    "run_id": "42365960376",
-    "at": "2026-11-07T10:55:38.734289+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3481,6 +3466,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T10:22:46.270040+00:00",
       "run_id": "42363631994"
+    },
+    "95302": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B8%94%EB%A0%8C%EB%94%94-%ED%8F%AC%EC%85%98-%EC%BB%A4%ED%94%BC-%EB%B8%94%EB%9E%99-18g-24%EA%B0%9C%EC%9E%85-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-AO6Yw4yj?from=write",
+      "posted_at_utc": "2026-11-07T10:54:52+00:00",
+      "product_id": "8245782232",
+      "item_id": "22002334016",
+      "vendor_item_id": null,
+      "at": "2026-11-07T10:55:55.193670+00:00",
+      "run_id": "42365960376"
     }
   },
   "skipped_non_coupang": 114,
