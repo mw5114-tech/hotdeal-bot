@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95315,
-  "pending": [
-    {
-      "id": 95315,
-      "source_post_url": "https://t.me/jirum/95315",
-      "original_purchase_url": "https://link.coupang.com/a/iuPx5GAjFk",
-      "source_text": "☆특가 387,810원 (22.4% 할인)\n다이슨 에어랩 i.d. 멀티 스타일러 앤 드라이어\n📌 가격 현황\n- 정상가: 500,000원\n- 할인: 112,190원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuPx5GAjFk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:03:38+00:00",
-      "title": "다이슨 에어랩 i.d. 멀티 스타일러 앤 드라이어",
-      "sale_price_krw": 387810
-    }
-  ],
-  "in_flight": {
-    "id": 95315,
-    "status": "CLAIMED",
-    "run_id": "42418822460",
-    "at": "2026-11-07T22:04:22.721665+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3571,6 +3556,16 @@
       "vendor_item_id": "93310839164",
       "at": "2026-11-07T22:03:45.064867+00:00",
       "run_id": "42418716501"
+    },
+    "95315": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%EC%9D%B4%EC%8A%A8-%EC%97%90%EC%96%B4%EB%9E%A9-id-%EB%A9%80%ED%8B%B0-%EC%8A%A4%ED%83%80%EC%9D%BC%EB%9F%AC-%EC%95%A4-%EB%93%9C%EB%9D%BC%EC%9D%B4%EC%96%B4-16182-25%ED%95%A0%EC%9D%B8-A6XZmJvd?from=write",
+      "posted_at_utc": "2026-11-07T22:03:38+00:00",
+      "product_id": "8882805356",
+      "item_id": "28690562053",
+      "vendor_item_id": "95631898100",
+      "at": "2026-11-07T22:04:40.276171+00:00",
+      "run_id": "42418822460"
     }
   },
   "skipped_non_coupang": 118,
