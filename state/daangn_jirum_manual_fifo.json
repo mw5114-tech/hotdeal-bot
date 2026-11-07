@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95294,
-  "pending": [],
+  "last_scanned_id": 95295,
+  "pending": [
+    {
+      "id": 95295,
+      "source_post_url": "https://t.me/jirum/95295",
+      "original_purchase_url": "https://link.coupang.com/a/itVg662nT2",
+      "source_text": "👍대박 10,960원 (35.0% 할인)\n티젠 콤부차 파인애플\n📌 가격 현황\n- 정상가: 16,862원\n- 할인: 5,902원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itVg662nT2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T08:56:10+00:00",
+      "title": "티젠 콤부차 파인애플",
+      "sale_price_krw": 10960
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
