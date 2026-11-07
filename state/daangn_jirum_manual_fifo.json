@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95317,
-  "pending": [
-    {
-      "id": 95317,
-      "source_post_url": "https://t.me/jirum/95317",
-      "original_purchase_url": "https://link.coupang.com/a/iuP8a5jDGe",
-      "source_text": "🔥🔥🔥무지성 10,970원 (54.3% 할인)🔥🔥🔥\n사푸토 스트링 치즈 라이트 23.5g*24개입*2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 13,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuP8a5jDGe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:11:47+00:00",
-      "title": "사푸토 스트링 치즈 라이트 23.5g*24개입*2개",
-      "sale_price_krw": 10970
-    }
-  ],
-  "in_flight": {
-    "id": 95317,
-    "status": "CLAIMED",
-    "run_id": "42419509350",
-    "at": "2026-11-07T22:12:46.003979+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3591,6 +3576,16 @@
       "vendor_item_id": "4856592140",
       "at": "2026-11-07T22:08:33.459331+00:00",
       "run_id": "42419135358"
+    },
+    "95317": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%AC%ED%91%B8%ED%86%A0-%EC%8A%A4%ED%8A%B8%EB%A7%81-%EC%B9%98%EC%A6%88-%EB%9D%BC%EC%9D%B4%ED%8A%B8-235g-2%EA%B0%9C-24%EA%B0%9C%EC%9E%85-55%ED%95%A0%EC%9D%B8-PM0B7byA?from=write",
+      "posted_at_utc": "2026-11-07T22:11:47+00:00",
+      "product_id": "8734690236",
+      "item_id": "26146477042",
+      "vendor_item_id": "93126521033",
+      "at": "2026-11-07T22:13:03.487829+00:00",
+      "run_id": "42419509350"
     }
   },
   "skipped_non_coupang": 118,
