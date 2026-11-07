@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95303,
-  "pending": [],
+  "last_scanned_id": 95304,
+  "pending": [
+    {
+      "id": 95304,
+      "source_post_url": "https://t.me/jirum/95304",
+      "original_purchase_url": "https://link.coupang.com/a/it6N2w2Otw",
+      "source_text": "☆특가 9,350원\n립튼 콤부챠 사과 5g 50개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/it6N2w2Otw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T11:37:32+00:00",
+      "title": "☆특가 9,350원",
+      "sale_price_krw": 9350
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
