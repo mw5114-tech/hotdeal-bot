@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95262,
-  "pending": [],
+  "last_scanned_id": 95263,
+  "pending": [
+    {
+      "id": 95263,
+      "source_post_url": "https://t.me/jirum/95263",
+      "original_purchase_url": "https://link.coupang.com/a/itllNwotbM",
+      "source_text": "👍대박 9,900원 (38.1% 할인)\n리벤스 인덕션 세라믹 스텐 통3중 IH 프라이팬, 24cm, 1개\n📌 가격 현황\n- 정상가: 16,000원\n- 할인: 6,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itllNwotbM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T00:33:27+00:00",
+      "title": "리벤스 인덕션 세라믹 스텐 통3중 IH 프라이팬, 24cm, 1개",
+      "sale_price_krw": 9900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
