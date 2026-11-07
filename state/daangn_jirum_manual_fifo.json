@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95303,
-  "pending": [
-    {
-      "id": 95303,
-      "source_post_url": "https://t.me/jirum/95303",
-      "original_purchase_url": "https://link.coupang.com/a/it4fh07XRk",
-      "source_text": "☆특가 22,870원\n(와멤데 쿠폰) 곰곰x농협 소중한 우리쌀 새청무 백미 * 10KG\n📦 특가 바로가기\nhttps://link.coupang.com/a/it4fh07XRk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T11:01:42+00:00",
-      "title": "☆특가 22,870원",
-      "sale_price_krw": 22870
-    }
-  ],
-  "in_flight": {
-    "id": 95303,
-    "status": "CLAIMED",
-    "run_id": "42366444932",
-    "at": "2026-11-07T11:02:38.027332+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3491,6 +3476,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T10:55:55.193670+00:00",
       "run_id": "42365960376"
+    },
+    "95303": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0x%EB%86%8D%ED%98%91-%EC%86%8C%EC%A4%91%ED%95%9C-%EC%9A%B0%EB%A6%AC%EC%8C%80-%EC%83%88%EC%B2%AD%EB%AC%B4-%EB%B0%B1%EB%AF%B8-10kg-1%EA%B0%9C-%EC%83%81-35%ED%95%A0%EC%9D%B8-dagx4bnA?from=write",
+      "posted_at_utc": "2026-11-07T11:01:42+00:00",
+      "product_id": "8163296986",
+      "item_id": "23282765847",
+      "vendor_item_id": "90315052879",
+      "at": "2026-11-07T11:02:54.955772+00:00",
+      "run_id": "42366444932"
     }
   },
   "skipped_non_coupang": 114,
