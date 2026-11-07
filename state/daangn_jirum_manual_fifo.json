@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95304,
-  "pending": [
-    {
-      "id": 95304,
-      "source_post_url": "https://t.me/jirum/95304",
-      "original_purchase_url": "https://link.coupang.com/a/it6N2w2Otw",
-      "source_text": "☆특가 9,350원\n립튼 콤부챠 사과 5g 50개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/it6N2w2Otw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T11:37:32+00:00",
-      "title": "☆특가 9,350원",
-      "sale_price_krw": 9350
-    }
-  ],
-  "in_flight": {
-    "id": 95304,
-    "status": "CLAIMED",
-    "run_id": "42369019167",
-    "at": "2026-11-07T11:38:40.971402+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3501,6 +3486,16 @@
       "vendor_item_id": "90315052879",
       "at": "2026-11-07T11:02:54.955772+00:00",
       "run_id": "42366444932"
+    },
+    "95304": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%BD%ED%86%A4-%EC%BD%A4%EB%B6%80%EC%B0%A8-%EC%82%AC%EA%B3%BC-5g-1%EA%B0%9C-50%EA%B0%9C%EC%9E%85-30%ED%95%A0%EC%9D%B8-jK23EkQd?from=write",
+      "posted_at_utc": "2026-11-07T11:37:32+00:00",
+      "product_id": "9548916943",
+      "item_id": "28489214718",
+      "vendor_item_id": null,
+      "at": "2026-11-07T11:38:56.682588+00:00",
+      "run_id": "42369019167"
     }
   },
   "skipped_non_coupang": 114,
