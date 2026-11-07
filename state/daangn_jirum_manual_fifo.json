@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95300,
-  "pending": [
-    {
-      "id": 95300,
-      "source_post_url": "https://t.me/jirum/95300",
-      "original_purchase_url": "https://link.coupang.com/a/it1lVyeD48",
-      "source_text": "❤️초대박 19,440원 (43.0% 할인)\n스탠리 퀜처 프로투어 플립스트로 텀블러, 체리 블로썸, 591ml, 1개\n📌 가격 현황\n- 정상가: 34,105원\n- 할인: 14,665원\n📦 특가 바로가기\nhttps://link.coupang.com/a/it1lVyeD48\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T10:21:13+00:00",
-      "title": "스탠리 퀜처 프로투어 플립스트로 텀블러, 체리 블로썸, 591ml, 1개",
-      "sale_price_krw": 19440
-    }
-  ],
-  "in_flight": {
-    "id": 95300,
-    "status": "CLAIMED",
-    "run_id": "42363631994",
-    "at": "2026-11-07T10:22:29.812331+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3471,6 +3456,16 @@
       "vendor_item_id": "85762156200",
       "at": "2026-11-07T09:28:24.485710+00:00",
       "run_id": "42359828760"
+    },
+    "95300": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%ED%80%9C%EC%B2%98-%ED%94%84%EB%A1%9C%ED%88%AC%EC%96%B4-%ED%94%8C%EB%A6%BD%EC%8A%A4%ED%8A%B8%EB%A1%9C-%ED%85%80%EB%B8%94%EB%9F%AC-%EC%B2%B4%EB%A6%AC-%EB%B8%94%EB%A1%9C%EC%8D%B8-591-45%ED%95%A0%EC%9D%B8-A34qbz8P?from=write",
+      "posted_at_utc": "2026-11-07T10:21:13+00:00",
+      "product_id": "8949531373",
+      "item_id": "25476888008",
+      "vendor_item_id": null,
+      "at": "2026-11-07T10:22:46.270040+00:00",
+      "run_id": "42363631994"
     }
   },
   "skipped_non_coupang": 113,
