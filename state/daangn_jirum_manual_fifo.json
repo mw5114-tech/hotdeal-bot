@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95316,
-  "pending": [],
+  "last_scanned_id": 95317,
+  "pending": [
+    {
+      "id": 95317,
+      "source_post_url": "https://t.me/jirum/95317",
+      "original_purchase_url": "https://link.coupang.com/a/iuP8a5jDGe",
+      "source_text": "🔥🔥🔥무지성 10,970원 (54.3% 할인)🔥🔥🔥\n사푸토 스트링 치즈 라이트 23.5g*24개입*2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 13,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuP8a5jDGe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T22:11:47+00:00",
+      "title": "사푸토 스트링 치즈 라이트 23.5g*24개입*2개",
+      "sale_price_krw": 10970
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
