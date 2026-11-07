@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95263,
-  "pending": [],
+  "last_scanned_id": 95264,
+  "pending": [
+    {
+      "id": 95264,
+      "source_post_url": "https://t.me/jirum/95264",
+      "original_purchase_url": "https://link.coupang.com/a/itmaUK5KKa",
+      "source_text": "🔥🔥🔥무지성 45,930원 (49.0% 할인)🔥🔥🔥\n까사베니 인덕션 크레멜라 세라믹 팬 냄비 5종 세트, 18cm + 양수 20cm + 프라이팬 28cm + 궁중팬 28cm + 유리뚜껑 28cm*1세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 90,000원\n- 할인: 44,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itmaUK5KKa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T00:44:59+00:00",
+      "title": "까사베니 인덕션 크레멜라 세라믹 팬 냄비 5종 세트, 18cm + 양수 20cm + 프라이팬 28cm + 궁중팬 28cm + 유리뚜껑 28cm*1세트",
+      "sale_price_krw": 45930
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
