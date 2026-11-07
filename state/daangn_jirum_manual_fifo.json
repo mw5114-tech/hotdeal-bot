@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95268,
-  "pending": [
-    {
-      "id": 95268,
-      "source_post_url": "https://t.me/jirum/95268",
-      "original_purchase_url": "https://link.coupang.com/a/its3EfG7B6",
-      "source_text": "🔥🔥🔥무지성 12,100원 (69.8% 할인)🔥🔥🔥\n크리스피크림도넛 오리지널 글레이즈드 48g*9개입*3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 27,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/its3EfG7B6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T02:21:18+00:00",
-      "title": "크리스피크림도넛 오리지널 글레이즈드 48g*9개입*3개",
-      "sale_price_krw": 12100
-    }
-  ],
-  "in_flight": {
-    "id": 95268,
-    "status": "CLAIMED",
-    "run_id": "42328857624",
-    "at": "2026-11-07T02:22:24.693144+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3281,6 +3266,16 @@
       "vendor_item_id": "70407972149",
       "at": "2026-11-07T01:53:46.698167+00:00",
       "run_id": "42326368540"
+    },
+    "95268": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC%ED%81%AC%EB%A6%BC%EB%8F%84%EB%84%9B-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EA%B8%80%EB%A0%88%EC%9D%B4%EC%A6%88%EB%93%9C-48g-9%EA%B0%9C%EC%9E%85-3%EA%B0%9C-70%ED%95%A0%EC%9D%B8-PmVEkoed?from=write",
+      "posted_at_utc": "2026-11-07T02:21:18+00:00",
+      "product_id": "1391864201",
+      "item_id": "19225305120",
+      "vendor_item_id": "86341956468",
+      "at": "2026-11-07T02:22:41.807400+00:00",
+      "run_id": "42328857624"
     }
   },
   "skipped_non_coupang": 100,
