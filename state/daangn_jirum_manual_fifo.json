@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95297,
-  "pending": [
-    {
-      "id": 95297,
-      "source_post_url": "https://t.me/jirum/95297",
-      "original_purchase_url": "https://link.coupang.com/a/itWIP5Zt3k",
-      "source_text": "☆특가 18,610원\n위트빅스 오리지날 시리얼, 1.2kg, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/itWIP5Zt3k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T09:16:25+00:00",
-      "title": "☆특가 18,610원",
-      "sale_price_krw": 18610
-    }
-  ],
-  "in_flight": {
-    "id": 95297,
-    "status": "CLAIMED",
-    "run_id": "42359075497",
-    "at": "2026-11-07T09:17:29.432189+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3451,6 +3436,16 @@
       "vendor_item_id": "81255243727",
       "at": "2026-11-07T09:12:43.518840+00:00",
       "run_id": "42358710167"
+    },
+    "95297": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%84%ED%8A%B8%EB%B9%85%EC%8A%A4-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0-%EC%8B%9C%EB%A6%AC%EC%96%BC-12kg-2%EA%B0%9C-15%ED%95%A0%EC%9D%B8-PND1BKEj?from=write",
+      "posted_at_utc": "2026-11-07T09:16:25+00:00",
+      "product_id": "7090409838",
+      "item_id": "18797125686",
+      "vendor_item_id": null,
+      "at": "2026-11-07T09:17:45.956991+00:00",
+      "run_id": "42359075497"
     }
   },
   "skipped_non_coupang": 112,
