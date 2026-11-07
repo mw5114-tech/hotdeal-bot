@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95324,
-  "pending": [
-    {
-      "id": 95324,
-      "source_post_url": "https://t.me/jirum/95324",
-      "original_purchase_url": "https://link.coupang.com/a/iuSnhP54CW",
-      "source_text": "☆특가 21,880원 (27.1% 할인)\n펩시 제로슈거 라임향 제로카페인 무라벨, 300ml, 40개\n📌 가격 현황\n- 정상가: 30,000원\n- 할인: 8,120원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuSnhP54CW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:43:11+00:00",
-      "title": "펩시 제로슈거 라임향 제로카페인 무라벨, 300ml, 40개",
-      "sale_price_krw": 21880
-    }
-  ],
-  "in_flight": {
-    "id": 95324,
-    "status": "CLAIMED",
-    "run_id": "42421965420",
-    "at": "2026-11-07T22:44:11.902797+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3661,6 +3646,16 @@
       "vendor_item_id": "3001769850",
       "at": "2026-11-07T22:41:09.460471+00:00",
       "run_id": "42421706050"
+    },
+    "95324": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8E%A9%EC%8B%9C-%EC%A0%9C%EB%A1%9C%EC%8A%88%EA%B1%B0-%EB%9D%BC%EC%9E%84%ED%96%A5-%EC%A0%9C%EB%A1%9C%EC%B9%B4%ED%8E%98%EC%9D%B8-%EB%AC%B4%EB%9D%BC%EB%B2%A8-300ml-40%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dpWL6LeP?from=write",
+      "posted_at_utc": "2026-11-07T22:43:11+00:00",
+      "product_id": "8700921701",
+      "item_id": "25274458698",
+      "vendor_item_id": "92270113836",
+      "at": "2026-11-07T22:44:29.135205+00:00",
+      "run_id": "42421965420"
     }
   },
   "skipped_non_coupang": 118,
