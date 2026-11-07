@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95264,
-  "pending": [
-    {
-      "id": 95264,
-      "source_post_url": "https://t.me/jirum/95264",
-      "original_purchase_url": "https://link.coupang.com/a/itmaUK5KKa",
-      "source_text": "🔥🔥🔥무지성 45,930원 (49.0% 할인)🔥🔥🔥\n까사베니 인덕션 크레멜라 세라믹 팬 냄비 5종 세트, 18cm + 양수 20cm + 프라이팬 28cm + 궁중팬 28cm + 유리뚜껑 28cm*1세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 90,000원\n- 할인: 44,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itmaUK5KKa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T00:44:59+00:00",
-      "title": "까사베니 인덕션 크레멜라 세라믹 팬 냄비 5종 세트, 18cm + 양수 20cm + 프라이팬 28cm + 궁중팬 28cm + 유리뚜껑 28cm*1세트",
-      "sale_price_krw": 45930
-    }
-  ],
-  "in_flight": {
-    "id": 95264,
-    "status": "CLAIMED",
-    "run_id": "42320177946",
-    "at": "2026-11-07T00:46:05.937670+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3251,6 +3236,16 @@
       "vendor_item_id": "92174243696",
       "at": "2026-11-07T00:34:49.380500+00:00",
       "run_id": "42319018088"
+    },
+    "95264": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B9%8C%EC%82%AC%EB%B2%A0%EB%8B%88-%EC%9D%B8%EB%8D%95%EC%85%98-%ED%81%AC%EB%A0%88%EB%A9%9C%EB%9D%BC-%EC%84%B8%EB%9D%BC%EB%AF%B9-%ED%8C%AC-%EB%83%84%EB%B9%84-5%EC%A2%85-%EC%84%B8%ED%8A%B8-%ED%98%BC%ED%95%A9%EC%83%89%EC%83%81-50%ED%95%A0%EC%9D%B8-ARozEYoP?from=write",
+      "posted_at_utc": "2026-11-07T00:44:59+00:00",
+      "product_id": "8416773496",
+      "item_id": "24340652273",
+      "vendor_item_id": "91356155580",
+      "at": "2026-11-07T00:46:22.743917+00:00",
+      "run_id": "42320177946"
     }
   },
   "skipped_non_coupang": 99,
