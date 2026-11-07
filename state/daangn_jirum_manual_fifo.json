@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95295,
-  "pending": [
-    {
-      "id": 95295,
-      "source_post_url": "https://t.me/jirum/95295",
-      "original_purchase_url": "https://link.coupang.com/a/itVg662nT2",
-      "source_text": "👍대박 10,960원 (35.0% 할인)\n티젠 콤부차 파인애플\n📌 가격 현황\n- 정상가: 16,862원\n- 할인: 5,902원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itVg662nT2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T08:56:10+00:00",
-      "title": "티젠 콤부차 파인애플",
-      "sale_price_krw": 10960
-    }
-  ],
-  "in_flight": {
-    "id": 95295,
-    "status": "CLAIMED",
-    "run_id": "42357632558",
-    "at": "2026-11-07T08:57:37.501079+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3431,6 +3416,16 @@
       "vendor_item_id": null,
       "at": "2026-11-07T08:56:40.016820+00:00",
       "run_id": "42357548186"
+    },
+    "95295": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8B%B0%EC%A0%A0-%EC%BD%A4%EB%B6%80%EC%B0%A8-%ED%8C%8C%EC%9D%B8%EC%95%A0%ED%94%8C-5g-50%EA%B0%9C%EC%9E%85-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-ARoz5mQP?from=write",
+      "posted_at_utc": "2026-11-07T08:56:10+00:00",
+      "product_id": "6456346159",
+      "item_id": "17094183500",
+      "vendor_item_id": null,
+      "at": "2026-11-07T08:57:54.757005+00:00",
+      "run_id": "42357632558"
     }
   },
   "skipped_non_coupang": 112,
