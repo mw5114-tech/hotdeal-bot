@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95321,
-  "pending": [
-    {
-      "id": 95321,
-      "source_post_url": "https://t.me/jirum/95321",
-      "original_purchase_url": "https://link.coupang.com/a/iuRoL16460",
-      "source_text": "☆특가 9,720원 (25.2% 할인)\n마이비데 키즈 화장실용 물티슈 캡형, 40매, 9개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 3,280원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuRoL16460\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:29:31+00:00",
-      "title": "마이비데 키즈 화장실용 물티슈 캡형, 40매, 9개",
-      "sale_price_krw": 9720
-    }
-  ],
-  "in_flight": {
-    "id": 95321,
-    "status": "CLAIMED",
-    "run_id": "42420947632",
-    "at": "2026-11-07T22:31:03.725745+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3631,6 +3616,16 @@
       "vendor_item_id": "96056428616",
       "at": "2026-11-07T22:30:09.712049+00:00",
       "run_id": "42420839272"
+    },
+    "95321": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EC%9D%B4%EB%B9%84%EB%8D%B0-%ED%82%A4%EC%A6%88-%ED%99%94%EC%9E%A5%EC%8B%A4%EC%9A%A9-%EB%AC%BC%ED%8B%B0%EC%8A%88-%EC%BA%A1%ED%98%95-40%EB%A7%A4-9%EA%B0%9C-30%ED%95%A0%EC%9D%B8-P5ne8Qvd?from=write",
+      "posted_at_utc": "2026-11-07T22:29:31+00:00",
+      "product_id": "8502358197",
+      "item_id": "3469643955",
+      "vendor_item_id": "82511800403",
+      "at": "2026-11-07T22:31:20.904671+00:00",
+      "run_id": "42420947632"
     }
   },
   "skipped_non_coupang": 118,
