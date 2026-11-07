@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95324,
-  "pending": [],
+  "last_scanned_id": 95325,
+  "pending": [
+    {
+      "id": 95325,
+      "source_post_url": "https://t.me/jirum/95325",
+      "original_purchase_url": "https://link.coupang.com/a/iuSxYSchJ6",
+      "source_text": "👍대박 5,380원 (31.9% 할인)\n트리오 뉴 레트로 주방세제 리필 2.1L*2개\n📌 가격 현황\n- 정상가: 7,900원\n- 할인: 2,520원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuSxYSchJ6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T22:45:36+00:00",
+      "title": "트리오 뉴 레트로 주방세제 리필 2.1L*2개",
+      "sale_price_krw": 5380
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
