@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95311,
-  "pending": [
-    {
-      "id": 95311,
-      "source_post_url": "https://t.me/jirum/95311",
-      "original_purchase_url": "https://link.coupang.com/a/iuflgG9VWm",
-      "source_text": "👍대박 1,870원 (34.9% 할인)\n서울우유 요거트 딸기, 85g, 4개\n📌 가격 현황\n- 정상가: 2,874원\n- 할인: 1,004원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuflgG9VWm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T13:36:58+00:00",
-      "title": "서울우유 요거트 딸기, 85g, 4개",
-      "sale_price_krw": 1870
-    }
-  ],
-  "in_flight": {
-    "id": 95311,
-    "status": "CLAIMED",
-    "run_id": "42377817850",
-    "at": "2026-11-07T13:38:12.738428+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3530,6 +3515,16 @@
       "item_id": "6220448859",
       "vendor_item_id": "73516319275",
       "at": "2026-11-07T13:38:09.370342+00:00",
+      "run_id": "42377817850"
+    },
+    "95311": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%9C%EC%9A%B8%EC%9A%B0%EC%9C%A0-%EC%9A%94%EA%B1%B0%ED%8A%B8-%EB%94%B8%EA%B8%B0-85g-4%EA%B0%9C-30%ED%95%A0%EC%9D%B8-AO6YneOj?from=write",
+      "posted_at_utc": "2026-11-07T13:36:58+00:00",
+      "product_id": "8249919616",
+      "item_id": "23749406999",
+      "vendor_item_id": "90773941346",
+      "at": "2026-11-07T13:38:29.026855+00:00",
       "run_id": "42377817850"
     }
   },
