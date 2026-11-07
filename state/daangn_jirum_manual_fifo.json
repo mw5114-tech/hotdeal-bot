@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95266,
-  "pending": [
-    {
-      "id": 95266,
-      "source_post_url": "https://t.me/jirum/95266",
-      "original_purchase_url": "https://link.coupang.com/a/itqYQx5cu4",
-      "source_text": "☆특가 11,640원 (22.4% 할인)\n해태제과 오사쯔, 60g, 16개\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 3,360원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itqYQx5cu4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T01:52:14+00:00",
-      "title": "해태제과 오사쯔, 60g, 16개",
-      "sale_price_krw": 11640
-    }
-  ],
-  "in_flight": {
-    "id": 95266,
-    "status": "CLAIMED",
-    "run_id": "42326368540",
-    "at": "2026-11-07T01:53:29.472490+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3271,6 +3256,16 @@
       "vendor_item_id": "89625796096",
       "at": "2026-11-07T01:32:49.341683+00:00",
       "run_id": "42324579513"
+    },
+    "95266": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%83%9C%EC%A0%9C%EA%B3%BC-%EC%98%A4%EC%82%AC%EC%AF%94-60g-16%EA%B0%9C-25%ED%95%A0%EC%9D%B8-A34qXXqP?from=write",
+      "posted_at_utc": "2026-11-07T01:52:14+00:00",
+      "product_id": "1379454338",
+      "item_id": "18039152578",
+      "vendor_item_id": "70407972149",
+      "at": "2026-11-07T01:53:46.698167+00:00",
+      "run_id": "42326368540"
     }
   },
   "skipped_non_coupang": 99,
