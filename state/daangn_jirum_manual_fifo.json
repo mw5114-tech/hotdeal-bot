@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95342,
-  "pending": [],
+  "last_scanned_id": 95343,
+  "pending": [
+    {
+      "id": 95343,
+      "source_post_url": "https://t.me/jirum/95343",
+      "original_purchase_url": "https://link.coupang.com/a/iuXotsr61k",
+      "source_text": "❤️초대박 20,130원 (42.5% 할인)\n농심 누룽지팝, 142g, 16개\n📌 가격 현황\n- 정상가: 35,000원\n- 할인: 14,870원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuXotsr61k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T23:53:25+00:00",
+      "title": "농심 누룽지팝, 142g, 16개",
+      "sale_price_krw": 20130
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
