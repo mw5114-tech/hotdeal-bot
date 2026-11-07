@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95293,
-  "pending": [],
+  "last_scanned_id": 95294,
+  "pending": [
+    {
+      "id": 95294,
+      "source_post_url": "https://t.me/jirum/95294",
+      "original_purchase_url": "https://link.coupang.com/a/itVb4OzEXY",
+      "source_text": "👍대박 12,300원 (35.0% 할인)\n임실치즈마을 요거트 더 새콤 블루베리 10개입\n📌 가격 현황\n- 정상가: 18,923원\n- 할인: 6,623원\n📦 특가 바로가기\nhttps://link.coupang.com/a/itVb4OzEXY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T08:55:02+00:00",
+      "title": "임실치즈마을 요거트 더 새콤 블루베리 10개입",
+      "sale_price_krw": 12300
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
