@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95319,
-  "pending": [
-    {
-      "id": 95319,
-      "source_post_url": "https://t.me/jirum/95319",
-      "original_purchase_url": "https://link.coupang.com/a/iuQ2Ob7m2e",
-      "source_text": "🔥🔥🔥무지성 9,220원 (58.1% 할인)🔥🔥🔥\n해맑음 히말라야핑크솔트 흑화고 견과 선물세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 22,000원\n- 할인: 12,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuQ2Ob7m2e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T22:24:34+00:00",
-      "title": "해맑음 히말라야핑크솔트 흑화고 견과 선물세트",
-      "sale_price_krw": 9220
-    }
-  ],
-  "in_flight": {
-    "id": 95319,
-    "status": "CLAIMED",
-    "run_id": "42420540460",
-    "at": "2026-11-07T22:26:01.146548+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3611,6 +3596,16 @@
       "vendor_item_id": "87911617797",
       "at": "2026-11-07T22:24:32.477200+00:00",
       "run_id": "42420418645"
+    },
+    "95319": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%EB%A7%91%EC%9D%8C-%ED%9E%88%EB%A7%90%EB%9D%BC%EC%95%BC%ED%95%91%ED%81%AC%EC%86%94%ED%8A%B8-%ED%9D%91%ED%99%94%EA%B3%A0-%EA%B2%AC%EA%B3%BC-%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B8-55%ED%95%A0%EC%9D%B8-ALEoXm0P?from=write",
+      "posted_at_utc": "2026-11-07T22:24:34+00:00",
+      "product_id": "6006388635",
+      "item_id": "10886366865",
+      "vendor_item_id": "78166248617",
+      "at": "2026-11-07T22:26:17.230845+00:00",
+      "run_id": "42420540460"
     }
   },
   "skipped_non_coupang": 118,
