@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95315,
-  "pending": [],
+  "last_scanned_id": 95316,
+  "pending": [
+    {
+      "id": 95316,
+      "source_post_url": "https://t.me/jirum/95316",
+      "original_purchase_url": "https://link.coupang.com/a/iuPNOdNuou",
+      "source_text": "☆특가 2,950원\n데니그리스 사과식초 허니크랜베리, 500ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuPNOdNuou\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-07T22:07:11+00:00",
+      "title": "☆특가 2,950원",
+      "sale_price_krw": 2950
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
