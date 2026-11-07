@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95271,
-  "pending": [
-    {
-      "id": 95271,
-      "source_post_url": "https://t.me/jirum/95271",
-      "original_purchase_url": "https://link.coupang.com/a/ituNjUxnae",
-      "source_text": "👍대박 11,920원 (38.0% 할인)\n킨더 해피 모먼츠 미니 믹스 초콜릿\n📌 가격 현황\n- 정상가: 19,226원\n- 할인: 7,306원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ituNjUxnae\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-07T02:45:36+00:00",
-      "title": "킨더 해피 모먼츠 미니 믹스 초콜릿",
-      "sale_price_krw": 11920
-    }
-  ],
-  "in_flight": {
-    "id": 95271,
-    "status": "CLAIMED",
-    "run_id": "42330810242",
-    "at": "2026-11-07T02:46:54.635260+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3310,6 +3295,16 @@
       "item_id": "23988357939",
       "vendor_item_id": null,
       "at": "2026-11-07T02:46:46.858676+00:00",
+      "run_id": "42330810242"
+    },
+    "95271": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%82%A8%EB%8D%94-%ED%95%B4%ED%94%BC-%EB%AA%A8%EB%A8%BC%EC%B8%A0-%EB%AF%B8%EB%8B%88-%EB%AF%B9%EC%8A%A4-%EC%B4%88%EC%BD%9C%EB%A6%BF-1%EA%B0%9C-161g-80%ED%95%A0%EC%9D%B8-P21DoEoA?from=write",
+      "posted_at_utc": "2026-11-07T02:45:36+00:00",
+      "product_id": "8490304512",
+      "item_id": "26442041326",
+      "vendor_item_id": null,
+      "at": "2026-11-07T02:47:10.209062+00:00",
       "run_id": "42330810242"
     }
   },
