@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95361,
-  "pending": [
-    {
-      "id": 95361,
-      "source_post_url": "https://t.me/jirum/95361",
-      "original_purchase_url": "https://link.coupang.com/a/ivexvcC3Km",
-      "source_text": "👍대박 8,140원 (39.0% 할인)\n아카데미 북앤드 L형 4p, 그레이, 대(140 x 150 x 210 mm)\n📌 가격 현황\n- 정상가: 13,340원\n- 할인: 5,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivexvcC3Km\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T03:53:21+00:00",
-      "title": "아카데미 북앤드 L형 4p, 그레이, 대(140 x 150 x 210 mm)",
-      "sale_price_krw": 8140
-    }
-  ],
-  "in_flight": {
-    "id": 95361,
-    "status": "CLAIMED",
-    "run_id": "42444588809",
-    "at": "2026-11-08T03:54:17.315609+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3821,6 +3806,16 @@
       "vendor_item_id": "3001095114",
       "at": "2026-11-08T02:10:30.187365+00:00",
       "run_id": "42437331849"
+    },
+    "95361": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%B9%B4%EB%8D%B0%EB%AF%B8-%EB%B6%81%EC%95%A4%EB%93%9C-L%ED%98%95-4p-%EA%B7%B8%EB%A0%88%EC%9D%B4-AeDQXDZj?from=write",
+      "posted_at_utc": "2026-11-08T03:53:21+00:00",
+      "product_id": "17532785",
+      "item_id": "70347385",
+      "vendor_item_id": "3113787201",
+      "at": "2026-11-08T03:54:33.091761+00:00",
+      "run_id": "42444588809"
     }
   },
   "skipped_non_coupang": 138,
