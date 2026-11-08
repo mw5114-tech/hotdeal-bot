@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95354,
-  "pending": [],
+  "last_scanned_id": 95355,
+  "pending": [
+    {
+      "id": 95355,
+      "source_post_url": "https://t.me/jirum/95355",
+      "original_purchase_url": "https://link.coupang.com/a/iu42d8LlHE",
+      "source_text": "☆특가 10,970원\n파워에이드 마운틴 블라스트, 900ml, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu42d8LlHE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:40:21+00:00",
+      "title": "☆특가 10,970원",
+      "sale_price_krw": 10970
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
