@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95411,
-  "pending": [
-    {
-      "id": 95411,
-      "source_post_url": "https://t.me/jirum/95411",
-      "original_purchase_url": "https://link.coupang.com/a/iwunWzMc7o",
-      "source_text": "☆특가 3,250원\n리큐 찌든 얼룩 딥클린 액상세제 일반용, 1개, 2.1L\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwunWzMc7o\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:02:42+00:00",
-      "title": "☆특가 3,250원",
-      "sale_price_krw": 3250
-    }
-  ],
-  "in_flight": {
-    "id": 95411,
-    "status": "CLAIMED",
-    "run_id": "42528328596",
-    "at": "2026-11-08T22:04:32.936928+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4111,6 +4096,16 @@
       "vendor_item_id": "92984321427",
       "at": "2026-11-08T22:03:33.194894+00:00",
       "run_id": "42528214981"
+    },
+    "95411": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%ED%81%90-%EC%B0%8C%EB%93%A0-%EC%96%BC%EB%A3%A9-%EB%94%A5%ED%81%B4%EB%A6%B0-%EC%95%A1%EC%83%81%EC%84%B8%EC%A0%9C-%EC%9D%BC%EB%B0%98%EC%9A%A9-1%EA%B0%9C-21L-50%ED%95%A0%EC%9D%B8-Px816nQP?from=write",
+      "posted_at_utc": "2026-11-08T22:02:42+00:00",
+      "product_id": "9240350339",
+      "item_id": "26621468098",
+      "vendor_item_id": "79219017197",
+      "at": "2026-11-08T22:04:49.838539+00:00",
+      "run_id": "42528328596"
     }
   },
   "skipped_non_coupang": 158,
