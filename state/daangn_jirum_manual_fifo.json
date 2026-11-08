@@ -1,7 +1,35 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95348,
-  "pending": [],
+  "last_scanned_id": 95351,
+  "pending": [
+    {
+      "id": 95349,
+      "source_post_url": "https://t.me/jirum/95349",
+      "original_purchase_url": "https://link.coupang.com/a/iu3rHxHYL8",
+      "source_text": "☆특가 5,750원 (28.1% 할인)\n2080 퓨어치약 핑크마일드민트향, 150g, 6개\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 2,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3rHxHYL8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:18:07+00:00",
+      "title": "2080 퓨어치약 핑크마일드민트향, 150g, 6개",
+      "sale_price_krw": 5750
+    },
+    {
+      "id": 95350,
+      "source_post_url": "https://t.me/jirum/95350",
+      "original_purchase_url": "https://link.coupang.com/a/iu3rNaOWtg",
+      "source_text": "👍대박 6,420원 (34.1% 할인)\n샤워메이트 산양유 비누 플러스, 90g, 12개입\n📌 가격 현황\n- 정상가: 9,745원\n- 할인: 3,325원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3rNaOWtg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:18:08+00:00",
+      "title": "샤워메이트 산양유 비누 플러스, 90g, 12개입",
+      "sale_price_krw": 6420
+    },
+    {
+      "id": 95351,
+      "source_post_url": "https://t.me/jirum/95351",
+      "original_purchase_url": "https://link.coupang.com/a/iu3s6ngbJI",
+      "source_text": "👍대박 10,760원 (34.0% 할인)\n모던하우스 온 미유 수저세트\n📌 가격 현황\n- 정상가: 16,303원\n- 할인: 5,543원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3s6ngbJI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:18:25+00:00",
+      "title": "모던하우스 온 미유 수저세트",
+      "sale_price_krw": 10760
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
