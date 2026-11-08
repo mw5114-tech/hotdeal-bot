@@ -3,15 +3,6 @@
   "last_scanned_id": 95351,
   "pending": [
     {
-      "id": 95350,
-      "source_post_url": "https://t.me/jirum/95350",
-      "original_purchase_url": "https://link.coupang.com/a/iu3rNaOWtg",
-      "source_text": "👍대박 6,420원 (34.1% 할인)\n샤워메이트 산양유 비누 플러스, 90g, 12개입\n📌 가격 현황\n- 정상가: 9,745원\n- 할인: 3,325원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3rNaOWtg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T01:18:08+00:00",
-      "title": "샤워메이트 산양유 비누 플러스, 90g, 12개입",
-      "sale_price_krw": 6420
-    },
-    {
       "id": 95351,
       "source_post_url": "https://t.me/jirum/95351",
       "original_purchase_url": "https://link.coupang.com/a/iu3s6ngbJI",
@@ -21,12 +12,7 @@
       "sale_price_krw": 10760
     }
   ],
-  "in_flight": {
-    "id": 95350,
-    "status": "CLAIMED",
-    "run_id": "42433697808",
-    "at": "2026-11-08T01:19:32.722345+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3739,6 +3725,16 @@
       "item_id": "25557075726",
       "vendor_item_id": "4703935466",
       "at": "2026-11-08T01:19:27.890784+00:00",
+      "run_id": "42433697808"
+    },
+    "95350": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%A4%EC%9B%8C%EB%A9%94%EC%9D%B4%ED%8A%B8-%EC%82%B0%EC%96%91%EC%9C%A0-%EB%B9%84%EB%88%84-%ED%94%8C%EB%9F%AC%EC%8A%A4-90g-12%EA%B0%9C%EC%9E%85-35%ED%95%A0%EC%9D%B8-jvx4lN6P?from=write",
+      "posted_at_utc": "2026-11-08T01:18:08+00:00",
+      "product_id": "184630928",
+      "item_id": "13302295821",
+      "vendor_item_id": "4374652671",
+      "at": "2026-11-08T01:19:48.777492+00:00",
       "run_id": "42433697808"
     }
   },
