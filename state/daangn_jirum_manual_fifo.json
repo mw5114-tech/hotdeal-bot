@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95371,
-  "pending": [
-    {
-      "id": 95371,
-      "source_post_url": "https://t.me/jirum/95371",
-      "original_purchase_url": "https://link.coupang.com/a/ivh804v4UK",
-      "source_text": "👍대박 19,750원 (37.0% 할인)\n세브란스케어 구수한맛 미니 완전균형 영양식 24개\n📌 가격 현황\n- 정상가: 31,349원\n- 할인: 11,599원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivh804v4UK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T04:43:48+00:00",
-      "title": "세브란스케어 구수한맛 미니 완전균형 영양식 24개",
-      "sale_price_krw": 19750
-    }
-  ],
-  "in_flight": {
-    "id": 95371,
-    "status": "CLAIMED",
-    "run_id": "42447995308",
-    "at": "2026-11-08T04:44:57.358952+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3851,6 +3836,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T04:30:31.839375+00:00",
       "run_id": "42447041058"
+    },
+    "95371": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%B8%EB%B8%8C%EB%9E%80%EC%8A%A4%EC%BC%80%EC%96%B4-%EA%B5%AC%EC%88%98%ED%95%9C%EB%A7%9B-%EB%AF%B8%EB%8B%88-%EC%99%84%EC%A0%84%EA%B7%A0%ED%98%95-%EC%98%81%EC%96%91%EC%8B%9D-150ml-24-35%ED%95%A0%EC%9D%B8-ALE6EQ5P?from=write",
+      "posted_at_utc": "2026-11-08T04:43:48+00:00",
+      "product_id": "9625964519",
+      "item_id": "27449278320",
+      "vendor_item_id": null,
+      "at": "2026-11-08T04:45:14.546891+00:00",
+      "run_id": "42447995308"
     }
   },
   "skipped_non_coupang": 145,
