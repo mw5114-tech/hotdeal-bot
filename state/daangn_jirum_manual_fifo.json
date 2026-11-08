@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95382,
-  "pending": [],
+  "last_scanned_id": 95383,
+  "pending": [
+    {
+      "id": 95383,
+      "source_post_url": "https://t.me/jirum/95383",
+      "original_purchase_url": "https://link.coupang.com/a/ivtNxAe9aS",
+      "source_text": "❤️초대박 8,080원 (42.3% 할인)\n샘표 국산콩 백일된장, 450g, 2개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 5,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivtNxAe9aS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T07:26:52+00:00",
+      "title": "샘표 국산콩 백일된장, 450g, 2개",
+      "sale_price_krw": 8080
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
