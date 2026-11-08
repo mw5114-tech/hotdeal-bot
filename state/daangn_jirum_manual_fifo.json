@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95345,
-  "pending": [
-    {
-      "id": 95345,
-      "source_post_url": "https://t.me/jirum/95345",
-      "original_purchase_url": "https://link.coupang.com/a/iuYfM9InZY",
-      "source_text": "🔥🔥🔥무지성 4,170원 (50.8% 할인)🔥🔥🔥\n오뚜기 보들보들 치즈볶음면 매운맛 130g, 8개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,480원\n- 할인: 4,310원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iuYfM9InZY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T00:05:27+00:00",
-      "title": "오뚜기 보들보들 치즈볶음면 매운맛 130g, 8개",
-      "sale_price_krw": 4170
-    }
-  ],
-  "in_flight": {
-    "id": 95345,
-    "status": "CLAIMED",
-    "run_id": "42428190491",
-    "at": "2026-11-08T00:06:20.157747+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3701,6 +3686,16 @@
       "vendor_item_id": "92355406346",
       "at": "2026-11-07T23:54:47.580003+00:00",
       "run_id": "42427293528"
+    },
+    "95345": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EB%B3%B4%EB%93%A4%EB%B3%B4%EB%93%A4-%EC%B9%98%EC%A6%88%EB%B3%B6%EC%9D%8C%EB%A9%B4-%EB%A7%A4%EC%9A%B4%EB%A7%9B-130g-8%EA%B0%9C-60%ED%95%A0%EC%9D%B8-dz9XXxMP?from=write",
+      "posted_at_utc": "2026-11-08T00:05:27+00:00",
+      "product_id": "8248026651",
+      "item_id": "23995024743",
+      "vendor_item_id": "91015969031",
+      "at": "2026-11-08T00:06:36.420276+00:00",
+      "run_id": "42428190491"
     }
   },
   "skipped_non_coupang": 135,
