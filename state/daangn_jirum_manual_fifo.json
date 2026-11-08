@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95353,
-  "pending": [],
+  "last_scanned_id": 95354,
+  "pending": [
+    {
+      "id": 95354,
+      "source_post_url": "https://t.me/jirum/95354",
+      "original_purchase_url": "https://link.coupang.com/a/iu3SPc33bE",
+      "source_text": "👍대박 9,090원 (37.0% 할인)\nKitKat 미니어처 헤이즐넛 25p\n📌 가격 현황\n- 정상가: 14,429원\n- 할인: 5,339원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3SPc33bE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:24:14+00:00",
+      "title": "KitKat 미니어처 헤이즐넛 25p",
+      "sale_price_krw": 9090
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
