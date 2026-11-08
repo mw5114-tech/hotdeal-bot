@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95383,
-  "pending": [
-    {
-      "id": 95383,
-      "source_post_url": "https://t.me/jirum/95383",
-      "original_purchase_url": "https://link.coupang.com/a/ivtNxAe9aS",
-      "source_text": "❤️초대박 8,080원 (42.3% 할인)\n샘표 국산콩 백일된장, 450g, 2개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 5,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivtNxAe9aS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T07:26:52+00:00",
-      "title": "샘표 국산콩 백일된장, 450g, 2개",
-      "sale_price_krw": 8080
-    }
-  ],
-  "in_flight": {
-    "id": 95383,
-    "status": "CLAIMED",
-    "run_id": "42458863068",
-    "at": "2026-11-08T07:27:48.115377+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3921,6 +3906,16 @@
       "vendor_item_id": "3014009661",
       "at": "2026-11-08T06:42:19.991253+00:00",
       "run_id": "42455766981"
+    },
+    "95383": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%98%ED%91%9C-%EA%B5%AD%EC%82%B0%EC%BD%A9-%EB%B0%B1%EC%9D%BC%EB%90%9C%EC%9E%A5-450g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-d7LBG8Wj?from=write",
+      "posted_at_utc": "2026-11-08T07:26:52+00:00",
+      "product_id": "1448865",
+      "item_id": "15018977602",
+      "vendor_item_id": "85322415773",
+      "at": "2026-11-08T07:28:03.997566+00:00",
+      "run_id": "42458863068"
     }
   },
   "skipped_non_coupang": 150,
