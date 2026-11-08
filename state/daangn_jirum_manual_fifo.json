@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95420,
-  "pending": [
-    {
-      "id": 95420,
-      "source_post_url": "https://t.me/jirum/95420",
-      "original_purchase_url": "https://link.coupang.com/a/iwvPbVfa0a",
-      "source_text": "☆특가 13,850원 (18.5% 할인)\n토레타 제로 이온음료, 500ml, 24개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 3,150원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwvPbVfa0a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:22:50+00:00",
-      "title": "토레타 제로 이온음료, 500ml, 24개",
-      "sale_price_krw": 13850
-    }
-  ],
-  "in_flight": {
-    "id": 95420,
-    "status": "CLAIMED",
-    "run_id": "42530012722",
-    "at": "2026-11-08T22:24:03.271762+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4201,6 +4186,16 @@
       "vendor_item_id": "85422902819",
       "at": "2026-11-08T22:17:53.751380+00:00",
       "run_id": "42529470119"
+    },
+    "95420": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%86%A0%EB%A0%88%ED%83%80-%EC%A0%9C%EB%A1%9C-%EC%9D%B4%EC%98%A8%EC%9D%8C%EB%A3%8C-500ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-Pww6yb2P?from=write",
+      "posted_at_utc": "2026-11-08T22:22:50+00:00",
+      "product_id": "7961386819",
+      "item_id": "25126789380",
+      "vendor_item_id": "90859138058",
+      "at": "2026-11-08T22:24:19.389373+00:00",
+      "run_id": "42530012722"
     }
   },
   "skipped_non_coupang": 158,
