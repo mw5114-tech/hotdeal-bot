@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95388,
-  "pending": [
-    {
-      "id": 95388,
-      "source_post_url": "https://t.me/jirum/95388",
-      "original_purchase_url": "https://link.coupang.com/a/ivvjbXFWFg",
-      "source_text": "🔥🔥🔥무지성 5,690원 (81.0% 할인)🔥🔥🔥\n담터 호두 아몬드 율무차 18g*130개입*1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 30,000원\n- 할인: 24,310원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivvjbXFWFg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T07:48:01+00:00",
-      "title": "담터 호두 아몬드 율무차 18g*130개입*1개",
-      "sale_price_krw": 5690
-    }
-  ],
-  "in_flight": {
-    "id": 95388,
-    "status": "CLAIMED",
-    "run_id": "42460277016",
-    "at": "2026-11-08T07:48:51.217969+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3961,6 +3946,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T07:41:53.030433+00:00",
       "run_id": "42459796748"
+    },
+    "95388": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%B4%ED%84%B0-%ED%98%B8%EB%91%90-%EC%95%84%EB%AA%AC%EB%93%9C-%EC%9C%A8%EB%AC%B4%EC%B0%A8-18g-130%EA%B0%9C%EC%9E%85-1%EA%B0%9C-80%ED%95%A0%EC%9D%B8-dY093E6P?from=write",
+      "posted_at_utc": "2026-11-08T07:48:01+00:00",
+      "product_id": "7835509725",
+      "item_id": "20012383713",
+      "vendor_item_id": "3005267158",
+      "at": "2026-11-08T07:49:07.195937+00:00",
+      "run_id": "42460277016"
     }
   },
   "skipped_non_coupang": 150,
