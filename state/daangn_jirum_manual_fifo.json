@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95387,
-  "pending": [
-    {
-      "id": 95387,
-      "source_post_url": "https://t.me/jirum/95387",
-      "original_purchase_url": "https://link.coupang.com/a/ivuKk2sNlQ",
-      "source_text": "👍대박 4,430원 (39.0% 할인)\n청정원 건강한 쌀올리고당\n📌 가격 현황\n- 정상가: 7,262원\n- 할인: 2,832원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivuKk2sNlQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T07:40:09+00:00",
-      "title": "청정원 건강한 쌀올리고당",
-      "sale_price_krw": 4430
-    }
-  ],
-  "in_flight": {
-    "id": 95387,
-    "status": "CLAIMED",
-    "run_id": "42459796748",
-    "at": "2026-11-08T07:41:37.298755+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3951,6 +3936,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T07:40:41.484869+00:00",
       "run_id": "42459708126"
+    },
+    "95387": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B2%AD%EC%A0%95%EC%9B%90-%EA%B1%B4%EA%B0%95%ED%95%9C-%EC%8C%80%EC%98%AC%EB%A6%AC%EA%B3%A0%EB%8B%B9-12kg-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dXE8kwwj?from=write",
+      "posted_at_utc": "2026-11-08T07:40:09+00:00",
+      "product_id": "96510",
+      "item_id": "188655",
+      "vendor_item_id": null,
+      "at": "2026-11-08T07:41:53.030433+00:00",
+      "run_id": "42459796748"
     }
   },
   "skipped_non_coupang": 150,
