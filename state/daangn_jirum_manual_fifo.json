@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95377,
-  "pending": [
-    {
-      "id": 95377,
-      "source_post_url": "https://t.me/jirum/95377",
-      "original_purchase_url": "https://link.coupang.com/a/ivoFKy53Qa",
-      "source_text": "👍대박 146,410원 (36.3% 할인)\n더순삭 대용량 강력분쇄 내솥 자동세척 모드 음식물 처리기 가정용 4L\n📌 가격 현황\n- 정상가: 230,000원\n- 할인: 83,590원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivoFKy53Qa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T06:15:09+00:00",
-      "title": "더순삭 대용량 강력분쇄 내솥 자동세척 모드 음식물 처리기 가정용 4L",
-      "sale_price_krw": 146410
-    }
-  ],
-  "in_flight": {
-    "id": 95377,
-    "status": "CLAIMED",
-    "run_id": "42454021728",
-    "at": "2026-11-08T06:16:13.642308+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3901,6 +3886,16 @@
       "vendor_item_id": "86340366492",
       "at": "2026-11-08T05:47:28.823643+00:00",
       "run_id": "42452097817"
+    },
+    "95377": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%94%EC%88%9C%EC%82%AD-%EB%8C%80%EC%9A%A9%EB%9F%89-%EA%B0%95%EB%A0%A5%EB%B6%84%EC%87%84-%EB%82%B4%EC%86%A5-%EC%9E%90%EB%8F%99%EC%84%B8%EC%B2%99-%EB%AA%A8%EB%93%9C-%EC%9D%8C%EC%8B%9D%EB%AC%BC-%EC%B2%98%EB%A6%AC%EA%B8%B0-%EA%B0%80%EC%A0%95-40%ED%95%A0%EC%9D%B8-Pk6aYN4A?from=write",
+      "posted_at_utc": "2026-11-08T06:15:09+00:00",
+      "product_id": "8461441948",
+      "item_id": "24478031618",
+      "vendor_item_id": "91491495137",
+      "at": "2026-11-08T06:16:30.162269+00:00",
+      "run_id": "42454021728"
     }
   },
   "skipped_non_coupang": 146,
