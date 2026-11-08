@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95385,
-  "pending": [
-    {
-      "id": 95385,
-      "source_post_url": "https://t.me/jirum/95385",
-      "original_purchase_url": "https://link.coupang.com/a/ivuy5F75eS",
-      "source_text": "🔥🔥🔥무지성 2,190원 (56.2% 할인)🔥🔥🔥\n포카칩 오리지널, 66g, 4개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 5,000원\n- 할인: 2,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivuy5F75eS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T07:37:36+00:00",
-      "title": "포카칩 오리지널, 66g, 4개",
-      "sale_price_krw": 2190
-    }
-  ],
-  "in_flight": {
-    "id": 95385,
-    "status": "CLAIMED",
-    "run_id": "42459615672",
-    "at": "2026-11-08T07:38:47.895074+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3931,6 +3916,16 @@
       "vendor_item_id": "85322415773",
       "at": "2026-11-08T07:28:03.997566+00:00",
       "run_id": "42458863068"
+    },
+    "95385": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%AC%EC%B9%B4%EC%B9%A9-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-66g-4%EA%B0%9C-55%ED%95%A0%EC%9D%B8-ALE6V70P?from=write",
+      "posted_at_utc": "2026-11-08T07:37:36+00:00",
+      "product_id": "13288253",
+      "item_id": "1053055",
+      "vendor_item_id": "3000992488",
+      "at": "2026-11-08T07:39:05.169408+00:00",
+      "run_id": "42459615672"
     }
   },
   "skipped_non_coupang": 150,
