@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95405,
-  "pending": [
-    {
-      "id": 95405,
-      "source_post_url": "https://t.me/jirum/95405",
-      "original_purchase_url": "https://link.coupang.com/a/ivTCbV3kjs",
-      "source_text": "☆특가 6,420원\n상품명: 샤워메이트 산양유 비누 플러스 우유향 90g × 12개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivTCbV3kjs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T13:28:09+00:00",
-      "title": "☆특가 6,420원",
-      "sale_price_krw": 6420
-    }
-  ],
-  "in_flight": {
-    "id": 95405,
-    "status": "CLAIMED",
-    "run_id": "42485156627",
-    "at": "2026-11-08T13:29:18.791055+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4081,6 +4066,16 @@
       "vendor_item_id": "86285373246",
       "at": "2026-11-08T13:01:41.303663+00:00",
       "run_id": "42482904245"
+    },
+    "95405": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%A4%EC%9B%8C%EB%A9%94%EC%9D%B4%ED%8A%B8-%EC%82%B0%EC%96%91%EC%9C%A0-%EB%B9%84%EB%88%84-%ED%94%8C%EB%9F%AC%EC%8A%A4-90g-12%EA%B0%9C%EC%9E%85-35%ED%95%A0%EC%9D%B8-PoVkGOqA?from=write",
+      "posted_at_utc": "2026-11-08T13:28:09+00:00",
+      "product_id": "184630928",
+      "item_id": "13302295821",
+      "vendor_item_id": null,
+      "at": "2026-11-08T13:29:34.909301+00:00",
+      "run_id": "42485156627"
     }
   },
   "skipped_non_coupang": 155,
