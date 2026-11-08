@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95389,
-  "pending": [],
+  "last_scanned_id": 95390,
+  "pending": [
+    {
+      "id": 95390,
+      "source_post_url": "https://t.me/jirum/95390",
+      "original_purchase_url": "https://link.coupang.com/a/ivxp7BW0LR",
+      "source_text": "🔥🔥🔥무지성 11,850원 (48.5% 할인)🔥🔥🔥\n트레비 자몽 ECO 탄산음료 무라벨, 350ml, 40개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 23,000원\n- 할인: 11,150원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivxp7BW0LR\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T08:17:34+00:00",
+      "title": "트레비 자몽 ECO 탄산음료 무라벨, 350ml, 40개",
+      "sale_price_krw": 11850
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
