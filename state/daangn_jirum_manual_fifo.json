@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95347,
-  "pending": [
-    {
-      "id": 95347,
-      "source_post_url": "https://t.me/jirum/95347",
-      "original_purchase_url": "https://link.coupang.com/a/iu1BPGvzLU",
-      "source_text": "☆특가 11,490원\n가격\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu1BPGvzLU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T00:52:25+00:00",
-      "title": "☆특가 11,490원",
-      "sale_price_krw": 11490
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4160,6 +4150,12 @@
       "source_post_url": "https://t.me/jirum/94981",
       "source_title": "메라치 천국의계단 클라이밍 머신 가정용 실내 운동기구 조절가능 스텝퍼",
       "at": "2026-11-04T00:23:14.778416+00:00"
+    },
+    "95347": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/95347",
+      "source_title": "☆특가 11,490원",
+      "at": "2026-11-08T00:53:35.586733+00:00"
     }
   },
   "single_test_repost_20261103": {
