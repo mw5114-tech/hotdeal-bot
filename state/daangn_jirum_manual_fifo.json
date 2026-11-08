@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95417,
-  "pending": [
-    {
-      "id": 95417,
-      "source_post_url": "https://t.me/jirum/95417",
-      "original_purchase_url": "https://link.coupang.com/a/iwu9387jxc",
-      "source_text": "🔥🔥🔥무지성 9,370원 (62.5% 할인)🔥🔥🔥\nBRUNO 초음파 가습기 5.5L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 15,630원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwu9387jxc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:13:33+00:00",
-      "title": "BRUNO 초음파 가습기 5.5L",
-      "sale_price_krw": 9370
-    }
-  ],
-  "in_flight": {
-    "id": 95417,
-    "status": "CLAIMED",
-    "run_id": "42529240704",
-    "at": "2026-11-08T22:14:53.507095+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4171,6 +4156,16 @@
       "vendor_item_id": "90125277250",
       "at": "2026-11-08T22:13:51.882653+00:00",
       "run_id": "42529129678"
+    },
+    "95417": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-BRUNO-%EC%B4%88%EC%9D%8C%ED%8C%8C-%EA%B0%80%EC%8A%B5%EA%B8%B0-55L-HFC-2320-%ED%99%94%EC%9D%B4%ED%8A%B8-65%ED%95%A0%EC%9D%B8-dQMJb02d?from=write",
+      "posted_at_utc": "2026-11-08T22:13:33+00:00",
+      "product_id": "8222981851",
+      "item_id": "23640525234",
+      "vendor_item_id": "90665944601",
+      "at": "2026-11-08T22:15:09.334628+00:00",
+      "run_id": "42529240704"
     }
   },
   "skipped_non_coupang": 158,
