@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95423,
-  "pending": [
-    {
-      "id": 95423,
-      "source_post_url": "https://t.me/jirum/95423",
-      "original_purchase_url": "https://link.coupang.com/a/iww9m6y7AO",
-      "source_text": "☆특가 13,150원 (22.6% 할인)\n나이키 남녀공용 페이서 라이너 러닝 양손착용 장갑 HM9024-042 1세트\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 3,850원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iww9m6y7AO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:41:23+00:00",
-      "title": "나이키 남녀공용 페이서 라이너 러닝 양손착용 장갑 HM9024-042 1세트",
-      "sale_price_krw": 13150
-    }
-  ],
-  "in_flight": {
-    "id": 95423,
-    "status": "CLAIMED",
-    "run_id": "42531519034",
-    "at": "2026-11-08T22:42:42.221712+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4231,6 +4216,16 @@
       "vendor_item_id": "87920092283",
       "at": "2026-11-08T22:31:38.376387+00:00",
       "run_id": "42530609453"
+    },
+    "95423": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%82%98%EC%9D%B4%ED%82%A4-%ED%8E%98%EC%9D%B4%EC%84%9C-%EB%9D%BC%EC%9D%B4%EB%84%88-%EB%9F%AC%EB%8B%9D-%EC%B6%95%EA%B5%AC-%EC%9E%A5%EA%B0%91-%EC%84%B8%ED%8A%B8-%EC%96%91%EC%86%90%EC%B0%A9%EC%9A%A9-HM902-35%ED%95%A0%EC%9D%B8-d9X7k58P?from=write",
+      "posted_at_utc": "2026-11-08T22:41:23+00:00",
+      "product_id": "8275254647",
+      "item_id": "23853033305",
+      "vendor_item_id": "90876393138",
+      "at": "2026-11-08T22:42:59.207877+00:00",
+      "run_id": "42531519034"
     }
   },
   "skipped_non_coupang": 158,
