@@ -14,8 +14,9 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
-from urllib import request
+from urllib import error, request
 from urllib.parse import parse_qs, urlsplit
+import time
 
 from jirum_forward import PUBLIC_URL, parse_listing
 
@@ -263,18 +264,68 @@ def enrich_posts(html: str, max_posts: int = 8) -> list[dict]:
     return deals
 
 
+# Public Telegram occasionally responds with a temporary 502/503 when the
+# GitHub runner scans a newly published deal. Retry reads only; never advance
+# the durable FIFO cursor or attempt a post on a failed scan.
+TELEGRAM_READ_ATTEMPTS = 3
+TRANSIENT_TELEGRAM_HTTP_CODES = frozenset((429, 500, 502, 503, 504))
+MAX_TELEGRAM_HTML_BYTES = 2_000_000
+
+
+def read_public_telegram_html(url: str, *, redirect_error: str,
+                              too_large_error: str,
+                              opener=None, sleeper=None) -> str:
+    """Bounded, read-only retries for public Telegram history/listing pages.
+
+    Every attempt checks the same HTTPS host/path and response size. A
+    permanent 4xx, unexpected redirect or oversized response fails closed.
+    """
+    parsed = urlsplit(url)
+    if (parsed.scheme != "https" or parsed.hostname != "t.me"
+            or parsed.path != "/s/jirum" or parsed.username or parsed.password
+            or parsed.port not in (None, 443)):
+        raise ValueError("INVALID_TELEGRAM_PUBLIC_URL")
+    opener = opener or request.urlopen
+    sleeper = sleeper or time.sleep
+    for attempt in range(TELEGRAM_READ_ATTEMPTS):
+        req = request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (compatible; PublicDealReader/1.0)",
+            "Accept": "text/html",
+        })
+        try:
+            with opener(req, timeout=25) as response:
+                final = urlsplit(response.geturl())
+                if (final.scheme != "https" or final.hostname != "t.me"
+                        or final.path != "/s/jirum" or final.username
+                        or final.password or final.port not in (None, 443)):
+                    raise RuntimeError(redirect_error)
+                data = response.read(MAX_TELEGRAM_HTML_BYTES + 1)
+            if len(data) > MAX_TELEGRAM_HTML_BYTES:
+                raise RuntimeError(too_large_error)
+            return data.decode("utf-8-sig", "replace")
+        except (error.HTTPError, error.URLError, TimeoutError,
+                ConnectionError) as exc:
+            transient = (
+                exc.code in TRANSIENT_TELEGRAM_HTTP_CODES
+                if isinstance(exc, error.HTTPError) else True
+            )
+            if not transient or attempt + 1 == TELEGRAM_READ_ATTEMPTS:
+                raise
+            wait = 2 ** attempt
+            print("JIRUM_TELEGRAM_READ_RETRY " +
+                  f"attempt={attempt+1}/{TELEGRAM_READ_ATTEMPTS} " +
+                  f"error={type(exc).__name__} " +
+                  f"http_status={getattr(exc, 'code', None)} wait_seconds={wait}")
+            sleeper(wait)
+    raise AssertionError("UNREACHABLE_TELEGRAM_RETRY_STATE")
+
+
 def fetch_public_html() -> str:
-    req = request.Request(PUBLIC_URL, headers={
-        "User-Agent": "Mozilla/5.0 (compatible; PublicDealReader/1.0)",
-        "Accept": "text/html",
-    })
-    with request.urlopen(req, timeout=25) as response:
-        if urlsplit(response.geturl()).hostname != "t.me":
-            raise RuntimeError("PUBLIC_CHANNEL_REDIRECT")
-        data = response.read(2_000_001)
-    if len(data) > 2_000_000:
-        raise RuntimeError("PUBLIC_CHANNEL_TOO_LARGE")
-    return data.decode("utf-8-sig", "replace")
+    return read_public_telegram_html(
+        PUBLIC_URL,
+        redirect_error="PUBLIC_CHANNEL_REDIRECT",
+        too_large_error="PUBLIC_CHANNEL_TOO_LARGE",
+    )
 
 
 def run(mode: str, output: Path, html_path: Path | None = None):
