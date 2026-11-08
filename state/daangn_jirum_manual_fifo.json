@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95410,
-  "pending": [
-    {
-      "id": 95410,
-      "source_post_url": "https://t.me/jirum/95410",
-      "original_purchase_url": "https://link.coupang.com/a/iwuko8n8XA",
-      "source_text": "☆특가 3,660원\n피죤 강력탈취 섬유유연제 퍼플라벤더 리필, 2.1L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwuko8n8XA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:01:54+00:00",
-      "title": "☆특가 3,660원",
-      "sale_price_krw": 3660
-    }
-  ],
-  "in_flight": {
-    "id": 95410,
-    "status": "CLAIMED",
-    "run_id": "42528214981",
-    "at": "2026-11-08T22:03:16.853891+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4101,6 +4086,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T13:39:30.911150+00:00",
       "run_id": "42485926848"
+    },
+    "95410": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%BC%EC%A3%A4-%EA%B0%95%EB%A0%A5%ED%83%88%EC%B7%A8-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%ED%8D%BC%ED%94%8C%EB%9D%BC%EB%B2%A4%EB%8D%94-%EB%A6%AC%ED%95%84-21L-2%EA%B0%9C-50%ED%95%A0%EC%9D%B8-PWMxBLqj?from=write",
+      "posted_at_utc": "2026-11-08T22:01:54+00:00",
+      "product_id": "9334798614",
+      "item_id": "6574589752",
+      "vendor_item_id": "92984321427",
+      "at": "2026-11-08T22:03:33.194894+00:00",
+      "run_id": "42528214981"
     }
   },
   "skipped_non_coupang": 158,
