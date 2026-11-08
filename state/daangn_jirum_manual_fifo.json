@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95413,
-  "pending": [],
+  "last_scanned_id": 95415,
+  "pending": [
+    {
+      "id": 95414,
+      "source_post_url": "https://t.me/jirum/95414",
+      "original_purchase_url": "https://link.coupang.com/a/iwuYl4kY1s",
+      "source_text": "❤️초대박 39,330원 (43.8% 할인)\n뉴발란스 아리쉬 프레시 폼 런닝화 220\n📌 가격 현황\n- 정상가: 70,000원\n- 할인: 30,670원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwuYl4kY1s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T22:10:55+00:00",
+      "title": "뉴발란스 아리쉬 프레시 폼 런닝화 220",
+      "sale_price_krw": 39330
+    },
+    {
+      "id": 95415,
+      "source_post_url": "https://t.me/jirum/95415",
+      "original_purchase_url": "https://link.coupang.com/a/iwuYpqeQOO",
+      "source_text": "☆특가 45,750원 (23.8% 할인)\n뉴발란스 플래시 런닝화 230\n📌 가격 현황\n- 정상가: 60,000원\n- 할인: 14,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwuYpqeQOO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T22:10:55+00:00",
+      "title": "뉴발란스 플래시 런닝화 230",
+      "sale_price_krw": 45750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
