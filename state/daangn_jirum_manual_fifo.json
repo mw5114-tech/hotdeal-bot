@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95363,
-  "pending": [],
+  "last_scanned_id": 95369,
+  "pending": [
+    {
+      "id": 95369,
+      "source_post_url": "https://t.me/jirum/95369",
+      "original_purchase_url": "https://link.coupang.com/a/ivg6rRMB0C",
+      "source_text": "🔥🔥🔥무지성 16,240원 (48.0% 할인)🔥🔥🔥\n모던하우스 스웰 베리가든 알러지케어 차렵이불\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 31,231원\n- 할인: 14,991원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivg6rRMB0C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T04:29:13+00:00",
+      "title": "모던하우스 스웰 베리가든 알러지케어 차렵이불",
+      "sale_price_krw": 16240
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -3828,7 +3838,7 @@
       "run_id": "42446866796"
     }
   },
-  "skipped_non_coupang": 139,
+  "skipped_non_coupang": 144,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
