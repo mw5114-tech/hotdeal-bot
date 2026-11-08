@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95404,
-  "pending": [
-    {
-      "id": 95404,
-      "source_post_url": "https://t.me/jirum/95404",
-      "original_purchase_url": "https://link.coupang.com/a/ivRB9TmYaO",
-      "source_text": "☆특가 17,400원 (29.0% 할인)\n크린스킨 블랙마스터 니트릴장갑, 혼합, 2개\n📌 가격 현황\n- 정상가: 24,500원\n- 할인: 7,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivRB9TmYaO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T13:00:09+00:00",
-      "title": "크린스킨 블랙마스터 니트릴장갑, 혼합, 2개",
-      "sale_price_krw": 17400
-    }
-  ],
-  "in_flight": {
-    "id": 95404,
-    "status": "CLAIMED",
-    "run_id": "42482904245",
-    "at": "2026-11-08T13:01:25.038285+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4071,6 +4056,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T12:21:13.222718+00:00",
       "run_id": "42479757237"
+    },
+    "95404": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%B0%EC%8A%A4%ED%82%A8-%EB%A7%88%EC%8A%A4%ED%84%B0-%EB%8B%88%ED%8A%B8%EB%A6%B4%EC%9E%A5%EA%B0%91-%EB%B8%94%EB%9E%99-%EC%A4%91M-2%EA%B0%9C-50%ED%95%A0%EC%9D%B8-PWMxLMMj?from=write",
+      "posted_at_utc": "2026-11-08T13:00:09+00:00",
+      "product_id": "8520314683",
+      "item_id": "6264356152",
+      "vendor_item_id": "86285373246",
+      "at": "2026-11-08T13:01:41.303663+00:00",
+      "run_id": "42482904245"
     }
   },
   "skipped_non_coupang": 155,
