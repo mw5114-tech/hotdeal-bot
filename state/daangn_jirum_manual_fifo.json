@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95401,
-  "pending": [],
+  "last_scanned_id": 95403,
+  "pending": [
+    {
+      "id": 95402,
+      "source_post_url": "https://t.me/jirum/95402",
+      "original_purchase_url": "https://link.coupang.com/a/ivOAG8ZuuW",
+      "source_text": "☆특가 9,700원\n대박\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivOAG8ZuuW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T12:17:50+00:00",
+      "title": "☆특가 9,700원",
+      "sale_price_krw": 9700
+    },
+    {
+      "id": 95403,
+      "source_post_url": "https://t.me/jirum/95403",
+      "original_purchase_url": "https://link.coupang.com/a/ivOHRtAIUu",
+      "source_text": "☆특가 5,750원\n2080 퓨어치약 핑크마일드민트향, 150g, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivOHRtAIUu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T12:19:27+00:00",
+      "title": "☆특가 5,750원",
+      "sale_price_krw": 5750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
