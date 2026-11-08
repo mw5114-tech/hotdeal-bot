@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95429,
-  "pending": [],
+  "last_scanned_id": 95433,
+  "pending": [
+    {
+      "id": 95433,
+      "source_post_url": "https://t.me/jirum/95433",
+      "original_purchase_url": "https://link.coupang.com/a/iwBgzEOEPA",
+      "source_text": "☆특가 23,915원 (27.5% 할인)\n프리메라 맨 오가니언스 2종 세트, 1세트\n📌 가격 현황\n- 정상가: 33,000원\n- 할인: 9,085원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwBgzEOEPA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T23:38:59+00:00",
+      "title": "프리메라 맨 오가니언스 2종 세트, 1세트",
+      "sale_price_krw": 23915
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4238,7 +4248,7 @@
       "run_id": "42532870180"
     }
   },
-  "skipped_non_coupang": 163,
+  "skipped_non_coupang": 166,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
