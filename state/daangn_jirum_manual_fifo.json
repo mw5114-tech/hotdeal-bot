@@ -3,15 +3,6 @@
   "last_scanned_id": 95351,
   "pending": [
     {
-      "id": 95349,
-      "source_post_url": "https://t.me/jirum/95349",
-      "original_purchase_url": "https://link.coupang.com/a/iu3rHxHYL8",
-      "source_text": "☆특가 5,750원 (28.1% 할인)\n2080 퓨어치약 핑크마일드민트향, 150g, 6개\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 2,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3rHxHYL8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T01:18:07+00:00",
-      "title": "2080 퓨어치약 핑크마일드민트향, 150g, 6개",
-      "sale_price_krw": 5750
-    },
-    {
       "id": 95350,
       "source_post_url": "https://t.me/jirum/95350",
       "original_purchase_url": "https://link.coupang.com/a/iu3rNaOWtg",
@@ -30,12 +21,7 @@
       "sale_price_krw": 10760
     }
   ],
-  "in_flight": {
-    "id": 95349,
-    "status": "CLAIMED",
-    "run_id": "42433697808",
-    "at": "2026-11-08T01:19:11.398612+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3739,6 +3725,16 @@
       "vendor_item_id": "79564818383",
       "at": "2026-11-08T00:58:26.443763+00:00",
       "run_id": "42432123302"
+    },
+    "95349": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-2080-%ED%93%A8%EC%96%B4%EC%B9%98%EC%95%BD-%ED%95%91%ED%81%AC%EB%A7%88%EC%9D%BC%EB%93%9C%EB%AF%BC%ED%8A%B8%ED%96%A5-150g-6%EA%B0%9C-30%ED%95%A0%EC%9D%B8-ALE60y5P?from=write",
+      "posted_at_utc": "2026-11-08T01:18:07+00:00",
+      "product_id": "84025689",
+      "item_id": "25557075726",
+      "vendor_item_id": "4703935466",
+      "at": "2026-11-08T01:19:27.890784+00:00",
+      "run_id": "42433697808"
     }
   },
   "skipped_non_coupang": 136,
