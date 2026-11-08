@@ -19,7 +19,7 @@ from pathlib import Path
 from urllib import error, request
 from urllib.parse import urlsplit
 
-from gh_only.pipeline import enrich_posts, fetch_public_html
+from gh_only.pipeline import enrich_posts, fetch_public_html, read_public_telegram_html
 from gh_only.daangn_editor_probe import read_one_draft
 from gh_only.official_link_receipts import load_receipt
 
@@ -408,20 +408,15 @@ def ingest(s: dict, discovered: list[dict], *,
 
 
 def older_html(before_id: int) -> str:
-    url = f"https://t.me/s/jirum?before={before_id}"
-    req = request.Request(url, headers={
-        "User-Agent": "Mozilla/5.0 (compatible; PublicDealReader/1.0)",
-        "Accept": "text/html",
-    })
-    with request.urlopen(req, timeout=25) as res:
-        u = urlsplit(res.geturl())
-        if u.scheme != "https" or u.hostname != "t.me" or u.path != "/s/jirum":
-            raise RuntimeError("HISTORY_PAGE_REDIRECT")
-        data = res.read(2_000_001)
-    if len(data) > 2_000_000:
-        raise RuntimeError("HISTORY_PAGE_TOO_LARGE")
-    return data.decode("utf-8-sig", "replace")
-
+    # History pagination must tolerate the same transient Telegram 502s as
+    # the newest page, without ever skipping an unseen FIFO source message.
+    if type(before_id) is not int or before_id <= 0:
+        raise ValueError("INVALID_TELEGRAM_BEFORE_ID")
+    return read_public_telegram_html(
+        f"https://t.me/s/jirum?before={before_id}",
+        redirect_error="HISTORY_PAGE_REDIRECT",
+        too_large_error="HISTORY_PAGE_TOO_LARGE",
+    )
 
 def fetch_exact_source_post(source_id: int) -> dict | None:
     """Try the exact public Telegram history boundary for a missing timestamp.
