@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95396,
-  "pending": [
-    {
-      "id": 95396,
-      "source_post_url": "https://t.me/jirum/95396",
-      "original_purchase_url": "https://link.coupang.com/a/ivGVNzRSQm",
-      "source_text": "❤️초대박 206,310원 (41.1% 할인)\n휴롬 투톤 착즙기\n📌 가격 현황\n- 정상가: 350,000원\n- 할인: 143,690원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivGVNzRSQm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T10:30:39+00:00",
-      "title": "휴롬 투톤 착즙기",
-      "sale_price_krw": 206310
-    }
-  ],
-  "in_flight": {
-    "id": 95396,
-    "status": "CLAIMED",
-    "run_id": "42471798509",
-    "at": "2026-11-08T10:32:07.168629+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4011,6 +3996,16 @@
       "vendor_item_id": "92548580658",
       "at": "2026-11-08T09:19:28.486481+00:00",
       "run_id": "42466626888"
+    },
+    "95396": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9C%B4%EB%A1%AC-%ED%88%AC%ED%86%A4-%EC%B0%A9%EC%A6%99%EA%B8%B0-H400-%EC%9B%9C%ED%99%94%EC%9D%B4%ED%8A%B8%EC%83%8C%EB%93%9C%EB%B2%A0%EC%9D%B4%EC%A7%80-35%ED%95%A0%EC%9D%B8-P5ngE6Xd?from=write",
+      "posted_at_utc": "2026-11-08T10:30:39+00:00",
+      "product_id": "7798290805",
+      "item_id": "24079545907",
+      "vendor_item_id": "91099140011",
+      "at": "2026-11-08T10:32:23.824017+00:00",
+      "run_id": "42471798509"
     }
   },
   "skipped_non_coupang": 153,
