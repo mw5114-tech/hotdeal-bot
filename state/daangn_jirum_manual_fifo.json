@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95394,
-  "pending": [
-    {
-      "id": 95394,
-      "source_post_url": "https://t.me/jirum/95394",
-      "original_purchase_url": "https://link.coupang.com/a/ivBH1P8qyG",
-      "source_text": "👍대박 15,360원 (33.2% 할인)\n크리스마스 갓성비 PVC 그린팁 트리 + 오너먼트 + 별토퍼 + 트리스커트 풀세트\n📌 가격 현황\n- 정상가: 23,000원\n- 할인: 7,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivBH1P8qyG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T09:17:35+00:00",
-      "title": "크리스마스 갓성비 PVC 그린팁 트리 + 오너먼트 + 별토퍼 + 트리스커트 풀세트",
-      "sale_price_krw": 15360
-    }
-  ],
-  "in_flight": {
-    "id": 95394,
-    "status": "CLAIMED",
-    "run_id": "42466626888",
-    "at": "2026-11-08T09:19:12.416776+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4001,6 +3986,16 @@
       "vendor_item_id": "93370924577",
       "at": "2026-11-08T09:13:18.166568+00:00",
       "run_id": "42466197117"
+    },
+    "95394": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-%EA%B0%93%EC%84%B1%EB%B9%84-PVC-%EA%B7%B8%EB%A6%B0%ED%8C%81-%ED%8A%B8%EB%A6%AC-%EC%98%A4%EB%84%88%EB%A8%BC%ED%8A%B8-%EB%B3%84%ED%86%A0%ED%8D%BC-30%ED%95%A0%EC%9D%B8-dz9zlayP?from=write",
+      "posted_at_utc": "2026-11-08T09:17:35+00:00",
+      "product_id": "8200166028",
+      "item_id": "25557208390",
+      "vendor_item_id": "92548580658",
+      "at": "2026-11-08T09:19:28.486481+00:00",
+      "run_id": "42466626888"
     }
   },
   "skipped_non_coupang": 152,
