@@ -3,15 +3,6 @@
   "last_scanned_id": 95415,
   "pending": [
     {
-      "id": 95414,
-      "source_post_url": "https://t.me/jirum/95414",
-      "original_purchase_url": "https://link.coupang.com/a/iwuYl4kY1s",
-      "source_text": "❤️초대박 39,330원 (43.8% 할인)\n뉴발란스 아리쉬 프레시 폼 런닝화 220\n📌 가격 현황\n- 정상가: 70,000원\n- 할인: 30,670원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwuYl4kY1s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T22:10:55+00:00",
-      "title": "뉴발란스 아리쉬 프레시 폼 런닝화 220",
-      "sale_price_krw": 39330
-    },
-    {
       "id": 95415,
       "source_post_url": "https://t.me/jirum/95415",
       "original_purchase_url": "https://link.coupang.com/a/iwuYpqeQOO",
@@ -21,12 +12,7 @@
       "sale_price_krw": 45750
     }
   ],
-  "in_flight": {
-    "id": 95414,
-    "status": "CLAIMED",
-    "run_id": "42529012432",
-    "at": "2026-11-08T22:12:21.169529+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4150,6 +4136,16 @@
       "vendor_item_id": "94948474607",
       "at": "2026-11-08T22:07:31.612806+00:00",
       "run_id": "42528574451"
+    },
+    "95414": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%89%B4%EB%B0%9C%EB%9E%80%EC%8A%A4-%EC%95%84%EB%A6%AC%EC%89%AC-%ED%94%84%EB%A0%88%EC%8B%9C-%ED%8F%BC-%EB%9F%B0%EB%8B%9D%ED%99%94-220-60%ED%95%A0%EC%9D%B8-j8rYX7WP?from=write",
+      "posted_at_utc": "2026-11-08T22:10:55+00:00",
+      "product_id": "8181374376",
+      "item_id": "23392291363",
+      "vendor_item_id": "90419761999",
+      "at": "2026-11-08T22:12:37.480537+00:00",
+      "run_id": "42529012432"
     }
   },
   "skipped_non_coupang": 158,
