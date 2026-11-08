@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95400,
-  "pending": [],
+  "last_scanned_id": 95401,
+  "pending": [
+    {
+      "id": 95401,
+      "source_post_url": "https://t.me/jirum/95401",
+      "original_purchase_url": "https://link.coupang.com/a/ivOtEeqTkG",
+      "source_text": "☆특가 18,580원 (23.7% 할인)\n곰곰 대추방울토마토, 2kg, 2개\n📌 가격 현황\n- 정상가: 24,360원\n- 할인: 5,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivOtEeqTkG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T12:16:15+00:00",
+      "title": "곰곰 대추방울토마토, 2kg, 2개",
+      "sale_price_krw": 18580
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
