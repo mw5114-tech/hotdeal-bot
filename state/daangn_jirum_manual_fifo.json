@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95401,
-  "pending": [
-    {
-      "id": 95401,
-      "source_post_url": "https://t.me/jirum/95401",
-      "original_purchase_url": "https://link.coupang.com/a/ivOtEeqTkG",
-      "source_text": "☆특가 18,580원 (23.7% 할인)\n곰곰 대추방울토마토, 2kg, 2개\n📌 가격 현황\n- 정상가: 24,360원\n- 할인: 5,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivOtEeqTkG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T12:16:15+00:00",
-      "title": "곰곰 대추방울토마토, 2kg, 2개",
-      "sale_price_krw": 18580
-    }
-  ],
-  "in_flight": {
-    "id": 95401,
-    "status": "CLAIMED",
-    "run_id": "42479489322",
-    "at": "2026-11-08T12:17:14.464884+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4041,6 +4026,16 @@
       "vendor_item_id": "4492731863",
       "at": "2026-11-08T11:34:26.435018+00:00",
       "run_id": "42476298372"
+    },
+    "95401": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%8C%80%EC%B6%94%EB%B0%A9%EC%9A%B8%ED%86%A0%EB%A7%88%ED%86%A0-2kg-2%EA%B0%9C-25%ED%95%A0%EC%9D%B8-jvx4y50P?from=write",
+      "posted_at_utc": "2026-11-08T12:16:15+00:00",
+      "product_id": "7665795956",
+      "item_id": "21123118665",
+      "vendor_item_id": "88184902329",
+      "at": "2026-11-08T12:17:31.594710+00:00",
+      "run_id": "42479489322"
     }
   },
   "skipped_non_coupang": 155,
