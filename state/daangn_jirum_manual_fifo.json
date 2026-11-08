@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95372,
-  "pending": [
-    {
-      "id": 95372,
-      "source_post_url": "https://t.me/jirum/95372",
-      "original_purchase_url": "https://link.coupang.com/a/ivi9cYelpY",
-      "source_text": "👍대박 8,170원 (32.0% 할인)\n프로그 하루에 한장씩 빨아쓰는 행주 50개입2개\n📌 가격 현황\n- 정상가: 12,015원\n- 할인: 3,845원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivi9cYelpY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T04:57:50+00:00",
-      "title": "프로그 하루에 한장씩 빨아쓰는 행주 50개입2개",
-      "sale_price_krw": 8170
-    }
-  ],
-  "in_flight": {
-    "id": 95372,
-    "status": "CLAIMED",
-    "run_id": "42448928087",
-    "at": "2026-11-08T04:59:14.672817+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3861,6 +3846,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T04:45:14.546891+00:00",
       "run_id": "42447995308"
+    },
+    "95372": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%84%EB%A1%9C%EA%B7%B8-%ED%95%98%EB%A3%A8%EC%97%90-%ED%95%9C%EC%9E%A5%EC%94%A9-%EB%B9%A8%EC%95%84%EC%93%B0%EB%8A%94-%ED%96%89%EC%A3%BC-50%EA%B0%9C%EC%9E%85-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dag3DkQA?from=write",
+      "posted_at_utc": "2026-11-08T04:57:50+00:00",
+      "product_id": "6119998271",
+      "item_id": "22022842398",
+      "vendor_item_id": null,
+      "at": "2026-11-08T04:59:30.453081+00:00",
+      "run_id": "42448928087"
     }
   },
   "skipped_non_coupang": 145,
