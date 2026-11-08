@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95405,
-  "pending": [],
+  "last_scanned_id": 95406,
+  "pending": [
+    {
+      "id": 95406,
+      "source_post_url": "https://t.me/jirum/95406",
+      "original_purchase_url": "https://link.coupang.com/a/ivUj583XX2",
+      "source_text": "☆특가 20,610원\n릴라코 엉금엉금 기어가는 멜로디 거북이 장난감\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivUj583XX2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T13:38:03+00:00",
+      "title": "☆특가 20,610원",
+      "sale_price_krw": 20610
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
