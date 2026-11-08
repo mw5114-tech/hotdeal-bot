@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95359,
-  "pending": [],
+  "last_scanned_id": 95361,
+  "pending": [
+    {
+      "id": 95361,
+      "source_post_url": "https://t.me/jirum/95361",
+      "original_purchase_url": "https://link.coupang.com/a/ivexvcC3Km",
+      "source_text": "👍대박 8,140원 (39.0% 할인)\n아카데미 북앤드 L형 4p, 그레이, 대(140 x 150 x 210 mm)\n📌 가격 현황\n- 정상가: 13,340원\n- 할인: 5,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivexvcC3Km\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T03:53:21+00:00",
+      "title": "아카데미 북앤드 L형 4p, 그레이, 대(140 x 150 x 210 mm)",
+      "sale_price_krw": 8140
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -3808,7 +3818,7 @@
       "run_id": "42437331849"
     }
   },
-  "skipped_non_coupang": 137,
+  "skipped_non_coupang": 138,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
