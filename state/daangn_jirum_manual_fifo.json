@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95398,
-  "pending": [],
+  "last_scanned_id": 95399,
+  "pending": [
+    {
+      "id": 95399,
+      "source_post_url": "https://t.me/jirum/95399",
+      "original_purchase_url": "https://link.coupang.com/a/ivLl1HbV8u",
+      "source_text": "☆특가 4,010원 (28.0% 할인)\n첵스초코 오곡으로 만든 마시멜로 시리얼 400g\n📌 가격 현황\n- 정상가: 5,569원\n- 할인: 1,559원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivLl1HbV8u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T11:32:33+00:00",
+      "title": "첵스초코 오곡으로 만든 마시멜로 시리얼 400g",
+      "sale_price_krw": 4010
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
