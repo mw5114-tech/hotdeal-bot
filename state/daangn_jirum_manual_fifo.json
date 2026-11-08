@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95406,
-  "pending": [
-    {
-      "id": 95406,
-      "source_post_url": "https://t.me/jirum/95406",
-      "original_purchase_url": "https://link.coupang.com/a/ivUj583XX2",
-      "source_text": "☆특가 20,610원\n릴라코 엉금엉금 기어가는 멜로디 거북이 장난감\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivUj583XX2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T13:38:03+00:00",
-      "title": "☆특가 20,610원",
-      "sale_price_krw": 20610
-    }
-  ],
-  "in_flight": {
-    "id": 95406,
-    "status": "CLAIMED",
-    "run_id": "42485926848",
-    "at": "2026-11-08T13:39:13.999915+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4091,6 +4076,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T13:29:34.909301+00:00",
       "run_id": "42485156627"
+    },
+    "95406": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%B4%EB%9D%BC%EC%BD%94-%EC%97%89%EA%B8%88%EC%97%89%EA%B8%88-%EA%B8%B0%EC%96%B4%EA%B0%80%EB%8A%94-%EB%A9%9C%EB%A1%9C%EB%94%94-%EA%B1%B0%EB%B6%81%EC%9D%B4-%EC%9E%A5%EB%82%9C%EA%B0%90-1%EA%B0%9C-%EA%B7%B8%EB%A6%B0-40%ED%95%A0%EC%9D%B8-PNDXbpvj?from=write",
+      "posted_at_utc": "2026-11-08T13:38:03+00:00",
+      "product_id": "9499530073",
+      "item_id": "28299393639",
+      "vendor_item_id": null,
+      "at": "2026-11-08T13:39:30.911150+00:00",
+      "run_id": "42485926848"
     }
   },
   "skipped_non_coupang": 155,
