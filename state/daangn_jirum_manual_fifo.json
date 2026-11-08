@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95373,
-  "pending": [],
+  "last_scanned_id": 95374,
+  "pending": [
+    {
+      "id": 95374,
+      "source_post_url": "https://t.me/jirum/95374",
+      "original_purchase_url": "https://link.coupang.com/a/ivkqRdQMyy",
+      "source_text": "🔥🔥🔥무지성 151,370원 (49.5% 할인)🔥🔥🔥\n마이디어 인덕션 3구 방문설치\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 300,000원\n- 할인: 148,630원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivkqRdQMyy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T05:15:49+00:00",
+      "title": "마이디어 인덕션 3구 방문설치",
+      "sale_price_krw": 151370
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
