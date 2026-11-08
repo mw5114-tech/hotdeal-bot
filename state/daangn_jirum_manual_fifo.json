@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95393,
-  "pending": [],
+  "last_scanned_id": 95394,
+  "pending": [
+    {
+      "id": 95394,
+      "source_post_url": "https://t.me/jirum/95394",
+      "original_purchase_url": "https://link.coupang.com/a/ivBH1P8qyG",
+      "source_text": "👍대박 15,360원 (33.2% 할인)\n크리스마스 갓성비 PVC 그린팁 트리 + 오너먼트 + 별토퍼 + 트리스커트 풀세트\n📌 가격 현황\n- 정상가: 23,000원\n- 할인: 7,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ivBH1P8qyG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T09:17:35+00:00",
+      "title": "크리스마스 갓성비 PVC 그린팁 트리 + 오너먼트 + 별토퍼 + 트리스커트 풀세트",
+      "sale_price_krw": 15360
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
