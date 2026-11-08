@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95353,
-  "pending": [
-    {
-      "id": 95353,
-      "source_post_url": "https://t.me/jirum/95353",
-      "original_purchase_url": "https://link.coupang.com/a/iu3Bj67mCG",
-      "source_text": "👍대박 13,300원 (30.0% 할인)\n곰곰 가득담은 칵테일 새우 (냉동)\n📌 가격 현황\n- 정상가: 19,000원\n- 할인: 5,700원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3Bj67mCG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-08T01:20:17+00:00",
-      "title": "곰곰 가득담은 칵테일 새우 (냉동)",
-      "sale_price_krw": 13300
-    }
-  ],
-  "in_flight": {
-    "id": 95353,
-    "status": "CLAIMED",
-    "run_id": "42433892737",
-    "at": "2026-11-08T01:21:44.029405+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -3761,6 +3746,16 @@
       "vendor_item_id": null,
       "at": "2026-11-08T01:20:53.054326+00:00",
       "run_id": "42433791434"
+    },
+    "95353": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EA%B0%80%EB%93%9D%EB%8B%B4%EC%9D%80-%EC%B9%B5%ED%85%8C%EC%9D%BC-%EC%83%88%EC%9A%B0-%EB%83%89%EB%8F%99-900g-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-jvx4lwmP?from=write",
+      "posted_at_utc": "2026-11-08T01:20:17+00:00",
+      "product_id": "7621402282",
+      "item_id": "6051828067",
+      "vendor_item_id": null,
+      "at": "2026-11-08T01:22:00.639271+00:00",
+      "run_id": "42433892737"
     }
   },
   "skipped_non_coupang": 136,
