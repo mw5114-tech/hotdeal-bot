@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95351,
-  "pending": [],
+  "last_scanned_id": 95352,
+  "pending": [
+    {
+      "id": 95352,
+      "source_post_url": "https://t.me/jirum/95352",
+      "original_purchase_url": "https://link.coupang.com/a/iu3vz4LwxE",
+      "source_text": "👍대박 11,500원 (32.0% 할인)\n우리차 콘푸레이크 천마차 150T\n📌 가격 현황\n- 정상가: 16,912원\n- 할인: 5,412원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iu3vz4LwxE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-08T01:18:59+00:00",
+      "title": "우리차 콘푸레이크 천마차 150T",
+      "sale_price_krw": 11500
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
