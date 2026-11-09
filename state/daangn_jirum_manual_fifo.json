@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95484,
-  "pending": [],
+  "last_scanned_id": 95485,
+  "pending": [
+    {
+      "id": 95485,
+      "source_post_url": "https://t.me/jirum/95485",
+      "original_purchase_url": "https://link.coupang.com/a/ixh1g5f4tE",
+      "source_text": "☆특가 7,510원\n비앤비 주방세제 액상형, 1L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixh1g5f4tE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T09:37:16+00:00",
+      "title": "☆특가 7,510원",
+      "sale_price_krw": 7510
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
