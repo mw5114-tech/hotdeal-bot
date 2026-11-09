@@ -90,6 +90,29 @@ def get_editor_frame(page):
               f"EDITABLES={editables}; INPUTS={inputs}; "
               f"TITLE_SECTIONS={title_class}; BODY_SECTIONS={body_class}; "
               f"PASSWORD_FIELDS={login_field}")
+        try:
+            for area in ("TITLE", "BODY"):
+                sel = ".se-section-documentTitle" if area == "TITLE" else ".se-section-text"
+                section = frame.locator(sel)
+                if section.count() == 1:
+                    meta = section.first.evaluate("""e => ({
+                        tag: e.tagName,
+                        className: (e.className || '').slice(0,90),
+                        child: Array.from(e.querySelectorAll('p,div,[contenteditable]')).slice(0,8).map(x => ({
+                            tag: x.tagName,
+                            classes: (x.className || '').slice(0,90),
+                            editable: x.getAttribute('contenteditable')
+                        }))
+                    })""")
+                    print(f"SECTION_{i}_{area}={json.dumps(meta,ensure_ascii=True)}")
+            edit_meta = frame.locator("[contenteditable]").evaluate_all("""els => els.slice(0,5).map(e => ({
+                tag: e.tagName, classes: (e.className || '').slice(0,90),
+                editable: e.getAttribute('contenteditable'),
+                parent: (e.parentElement && e.parentElement.className || '').slice(0,90)
+            }))""")
+            print(f"EDITABLES_{i}={json.dumps(edit_meta,ensure_ascii=True)}")
+        except Exception:
+            print(f"SECTION_METADATA_UNAVAILABLE_{i}")
         for group, selectors in (("TITLE", TITLE_SELECTORS), ("BODY", BODY_SELECTORS)):
             for j, css in enumerate(selectors):
                 try:
