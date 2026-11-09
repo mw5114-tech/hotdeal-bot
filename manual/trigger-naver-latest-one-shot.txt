@@ -1,0 +1,6 @@
+Owner-authorized single live Naver Blog test publish
+Date: 2026-11-09
+Source: newest visible Coupang message in public @jirum
+One latest message only. A previously posted/claimed source ID is never repeated.
+Allow at most 24 hours since Telegram source timestamp for this manual test.
+No retries after uncertain submit; normal Oracle publishing remains unchanged.
