@@ -201,32 +201,20 @@ def make_article(source: dict, output: Path, *, tag: str,
     # The Daangn validator enforces exact item identifiers, image provenance,
     # one matching owner link, safe discount claims, and local image presence.
     verified = old.validate_draft(output, source["source_message_id"])
-    price_lines = draft["caption"]["caption"]
-    if not isinstance(price_lines, str) or not price_lines.strip():
-        raise RuntimeError("EMPTY_DEAL_COPY")
-    image_source = draft.get("image_source")
-    image_notice = (
-        "\n\n※ 상품 사진은 외부 상품 검색의 대표 이미지로, 실제 옵션과 다를 수 있습니다."
-        if image_source in ("fallcent_search_representative", "naver_web_first_image")
-        else ""
-    )
-    manual_note = (
-        "※ 자동화 발행 테스트 글입니다. 텔레그램 원문 게시 시점의 가격 정보이며 "
-        "현재 가격·재고는 구매 전에 판매처에서 확인해야 합니다.\n\n"
-        if manual_test_replay else ""
-    )
-    body = (
-        DISCLOSURE + "\n\n" + manual_note + price_lines
-        + "\n\n※ 가격과 재고는 판매처에서 실시간으로 달라질 수 있습니다."
-        + image_notice
-        + "\n\n출처: " + source["source_post_url"]
-    )
+    # Native SmartEditor blocks give real blank paragraphs, a photo directly
+    # after the disclosure, and actual bold labels (not literal Markdown).
+    from gh_only.naver_blog_format import build_blocks, plain_body, validate_blocks
     url = verified["candidate_url"]
     validate_naver_link_subid(url)
-    if body.count(url) != 1 or len(body) > 9000 or not verified["image"]:
+    blocks = build_blocks(
+        draft, verified, source, manual_test_replay=manual_test_replay
+    )
+    validate_blocks(blocks, url)
+    body = plain_body(blocks)
+    if not verified["image"]:
         raise RuntimeError("NAVER_DRAFT_UNSAFE")
     return {
-        "title": verified["title"], "body": body,
+        "title": verified["title"], "body": body, "blocks": blocks,
         "image": verified["image"],
         "source_id": source["source_message_id"], "link": url,
         "unissued_link": verified["unissued_affsdp_candidate"],
