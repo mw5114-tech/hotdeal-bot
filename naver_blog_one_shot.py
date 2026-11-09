@@ -157,6 +157,20 @@ def publish_exactly_one(frame, page):
         if element.locator("xpath=ancestor::*[contains(@class,'publish') or @role='dialog']").count() > 0
     ]
     if len(confirm_candidates) != 1:
+        print(f"PUBLISH_MODAL_DEBUG: visible={len(shown)} class_candidates={len(confirm_candidates)}")
+        for i, element in enumerate(shown):
+            try:
+                # Log only static element class/role metadata, never page text,
+                # cookies or post content.
+                meta = element.evaluate("""e => ({
+                    tag: e.tagName, cls: (e.className || '').slice(0,130),
+                    parentClass: (e.parentElement?.className || '').slice(0,130),
+                    grandparentClass: (e.parentElement?.parentElement?.className || '').slice(0,130),
+                    role: e.getAttribute('role'), type: e.getAttribute('type')
+                })""")
+                print(f"PUBLISH_MODAL_BTN_{i}={json.dumps(meta,ensure_ascii=True)}")
+            except Exception:
+                print(f"PUBLISH_MODAL_BTN_{i}=UNAVAILABLE")
         raise RuntimeError("PUBLISH_CONFIRMATION_AMBIGUOUS")
     confirm_candidates[0].click(timeout=7000)
     page.wait_for_timeout(2500)
