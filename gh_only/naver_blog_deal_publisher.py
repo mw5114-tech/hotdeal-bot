@@ -233,6 +233,19 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                 except Exception:
                     pass
             page.wait_for_timeout(700)
+            for current_frame in page.frames:
+                try:
+                    popup = current_frame.locator(".se-popup.se-popup-alert-confirm")
+                    if popup.count() and popup.first.is_visible():
+                        details = popup.first.locator("button").evaluate_all(
+                            """els => els.slice(0,8).map(b => ({
+                                label: (b.innerText || '').trim().slice(0,22),
+                                classes: (b.className || '').slice(0,100)
+                            }))"""
+                        )
+                        print("NAVER_PENDING_ALERT_BUTTONS " + str(details))
+                except Exception:
+                    print("NAVER_PENDING_ALERT_METADATA_UNAVAILABLE")
             frame, title, body_element = get_editor_frame(page)
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
