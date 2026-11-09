@@ -68,9 +68,8 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     blocks = [
         _block(DISCLOSURE, kind="disclosure"),
         {"type": "image", "kind": "hero_photo"},
-        _block("🛍️ 오늘의 쿠팡 핫딜", label="🛍️ 오늘의 쿠팡 핫딜", kind="heading"),
+        _block("🛍️ 실시간 쿠팡 핫딜", label="🛍️ 실시간 쿠팡 핫딜", kind="heading"),
         _block(product, kind="product"),
-        _block(f"🔥 오늘 특가 : {price_line(sale)}", label="🔥 오늘 특가", kind="price"),
     ]
 
     # Do not represent Fallcent HIGH or Naver search as a usual price.
@@ -95,27 +94,28 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             kind="reference"
         ))
 
-    if type(discount) is int and 1 <= discount <= 95 and comparison is not None and pct_basis:
-        blocks.append(_block(
-            f"✅ 참고 할인율 : 약 {discount}% ({pct_basis})",
-            label="✅ 참고 할인율", kind="discount"
-        ))
-    else:
-        blocks.append(_block(
-            "✅ 할인율 : 비교할 기준 가격이 확인되지 않음",
-            label="✅ 할인율", kind="discount"
-        ))
+    # Put the reference price first, then the deal price with its honest
+    # reference-relative discount. Never invent a percent when history or
+    # comparison price is missing. The inventory notice follows immediately.
+    # Any reference-source caveat remains below the sale and notice.
+    has_discount = (
+        type(discount) is int and 1 <= discount <= 95
+        and comparison is not None and bool(pct_basis)
+    )
+    sale_line = f"🔥 오늘 특가 : {price_line(sale)}"
+    if has_discount:
+        sale_line += f" [약 {discount}% 할인]"
+    blocks.append(_block(sale_line, label="🔥 오늘 특가", kind="price"))
+    blocks.append(_block(
+        "※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.",
+        kind="note"
+    ))
 
     if comparison is not None and basis in SOURCES:
         blocks.append(_block(
             f"📊 가격 비교 기준 : {label} · 쿠팡 공식 정가 아님",
             label="📊 가격 비교 기준", kind="source_basis"
         ))
-
-    blocks += [
-        _block("💡 구매 전 확인", label="💡 구매 전 확인", kind="heading"),
-        _block("※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.", kind="note"),
-    ]
     if manual_test_replay:
         blocks.append(_block(
             "※ 자동화 서식 테스트 게시글입니다. 소개된 가격은 현재 판매가가 아닐 수 있습니다.",
