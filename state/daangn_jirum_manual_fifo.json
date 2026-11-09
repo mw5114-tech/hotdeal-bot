@@ -3,15 +3,6 @@
   "last_scanned_id": 95438,
   "pending": [
     {
-      "id": 95437,
-      "source_post_url": "https://t.me/jirum/95437",
-      "original_purchase_url": "https://link.coupang.com/a/iwC8918wua",
-      "source_text": "☆특가 13,400원 (21.2% 할인)\n라운드랩 독도 토너, 500ml, 1개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 3,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwC8918wua\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T00:05:18+00:00",
-      "title": "라운드랩 독도 토너, 500ml, 1개",
-      "sale_price_krw": 13400
-    },
-    {
       "id": 95438,
       "source_post_url": "https://t.me/jirum/95438",
       "original_purchase_url": "https://link.coupang.com/a/iwC9dzyr12",
@@ -21,12 +12,7 @@
       "sale_price_krw": 9790
     }
   ],
-  "in_flight": {
-    "id": 95437,
-    "status": "CLAIMED",
-    "run_id": "42538327854",
-    "at": "2026-11-09T00:06:17.479330+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4280,6 +4266,16 @@
       "vendor_item_id": "91685815917",
       "at": "2026-11-08T23:41:59.865527+00:00",
       "run_id": "42536360685"
+    },
+    "95437": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%9E%A9-%EB%8F%85%EB%8F%84-%ED%86%A0%EB%84%88-500ml-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-jK24g3zd?from=write",
+      "posted_at_utc": "2026-11-09T00:05:18+00:00",
+      "product_id": "1414809213",
+      "item_id": "18355752168",
+      "vendor_item_id": "70445138100",
+      "at": "2026-11-09T00:06:33.466054+00:00",
+      "run_id": "42538327854"
     }
   },
   "skipped_non_coupang": 168,
