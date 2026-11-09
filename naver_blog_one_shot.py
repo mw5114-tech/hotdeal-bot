@@ -72,6 +72,24 @@ def get_editor_frame(page):
         body = find_unique(frame, BODY_SELECTORS)
         if title is not None and body is not None:
             return frame, title, body
+    # Inspect only sanitized frame topology and editor-element counts.
+    # Never expose URLs with query strings, cookies, page text, or HTML.
+    for i, frame in enumerate(page.frames[:8]):
+        parsed = urlsplit(frame.url)
+        domain = parsed.hostname or "unknown"
+        known_path = parsed.path[:72]
+        try:
+            editables = frame.locator("[contenteditable=true]").count()
+            inputs = frame.locator("input").count()
+            title_class = frame.locator(".se-section-documentTitle").count()
+            body_class = frame.locator(".se-section-text").count()
+            login_field = frame.locator("input[type=password]").count()
+        except Exception:
+            editables = inputs = title_class = body_class = login_field = -1
+        print(f"EDITOR_FRAME_{i}: DOMAIN={domain}; PATH={known_path}; "
+              f"EDITABLES={editables}; INPUTS={inputs}; "
+              f"TITLE_SECTIONS={title_class}; BODY_SECTIONS={body_class}; "
+              f"PASSWORD_FIELDS={login_field}")
     raise RuntimeError("EDITOR_CONTROLS_NOT_VERIFIED")
 
 
