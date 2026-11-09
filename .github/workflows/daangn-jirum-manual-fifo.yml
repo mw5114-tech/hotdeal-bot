@@ -151,8 +151,9 @@ jobs:
       NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
       # Owner approved live Naver Blog publishing on 2026-11-09.
       # One fresh eligible Jirum item per run; Daangn remains paused.
-      # Temporary safe pause while native short CTA hyperlink is being verified.
-      NAVER_BLOG_PUBLISH_ENABLED: 'false'
+      # Owner-authorized auto publish resumed after short-link deduplication
+      # passed a real SmartEditor editor check and a live one-shot publish.
+      NAVER_BLOG_PUBLISH_ENABLED: 'true'
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
