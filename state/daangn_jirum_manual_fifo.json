@@ -3,15 +3,6 @@
   "last_scanned_id": 95472,
   "pending": [
     {
-      "id": 95467,
-      "source_post_url": "https://t.me/jirum/95467",
-      "original_purchase_url": "https://link.coupang.com/a/iw0jZfCU5Q",
-      "source_text": "🔥🔥🔥무지성 16,130원 (45.7% 할인)🔥🔥🔥\n오리온 비쵸비 초코맛 125g x 3p + 딸기맛 125g x 3p 세트, 2세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 29,708원\n- 할인: 13,578원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw0jZfCU5Q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T05:29:36+00:00",
-      "title": "오리온 비쵸비 초코맛 125g x 3p + 딸기맛 125g x 3p 세트, 2세트",
-      "sale_price_krw": 16130
-    },
-    {
       "id": 95469,
       "source_post_url": "https://t.me/jirum/95469",
       "original_purchase_url": "https://link.coupang.com/a/iw2jQTGePY",
@@ -4797,6 +4788,13 @@
       "source_title": "해태제과 후렌치파이 딸기, 384g, 3개",
       "posted_at_utc": "2026-11-09T05:20:08+00:00",
       "at": "2026-11-09T06:26:53.578675+00:00"
+    },
+    "95467": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95467",
+      "source_title": "오리온 비쵸비 초코맛 125g x 3p + 딸기맛 125g x 3p 세트, 2세트",
+      "posted_at_utc": "2026-11-09T05:29:36+00:00",
+      "at": "2026-11-09T06:37:14.029455+00:00"
     }
   },
   "skipped_unverifiable": {
