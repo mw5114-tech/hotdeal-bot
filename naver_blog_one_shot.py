@@ -27,6 +27,7 @@ BODY_SELECTORS = (
     ".se-section-text [contenteditable='true']",
     ".se-section-text .se-text-paragraph[contenteditable='true']",
     ".se-component-content [contenteditable='true']",
+    ".se-section-text .se-text-paragraph",
 )
 
 
@@ -205,10 +206,21 @@ def run(phase: str) -> int:
                     print("EDITOR_READ_ONLY_SUCCESS")
                     return 0
 
-                title.fill(TEST_TITLE, timeout=10000)
-                body.fill(TEST_BODY, timeout=10000)
-                if TEST_TITLE not in title.inner_text() or "GitHub 자동화" not in body.inner_text():
-                    raise RuntimeError("EDITOR_TEXT_VERIFICATION_FAILED")
+                if title.inner_text().strip() or body.inner_text().strip():
+                    raise RuntimeError("EDITOR_ALREADY_CONTAINS_TEXT_STOP")
+                # SmartEditor ONE uses focus-managed contenteditable, not an
+                # editable <p> itself. Click the section to focus its editor,
+                # then type through keyboard as a human would.
+                title.click(timeout=10000)
+                page.keyboard.insert_text(TEST_TITLE)
+                page.wait_for_timeout(650)
+                if TEST_TITLE not in title.inner_text():
+                    raise RuntimeError("TITLE_INPUT_NOT_VERIFIED")
+                body.click(timeout=10000)
+                page.keyboard.insert_text(TEST_BODY)
+                page.wait_for_timeout(800)
+                if "GitHub 자동화" not in body.inner_text():
+                    raise RuntimeError("BODY_INPUT_NOT_VERIFIED")
                 print("TEST_CONTENT_FILLED")
                 if phase == "draft":
                     print("DRAFT_ONLY_NO_PUBLISH_CLICK")
