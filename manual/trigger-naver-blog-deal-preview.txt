@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: inspect CSS computed font-weight for verified Korean price paragraphs
+NO_PUBLISH: native click then Home ShiftEnd CtrlB to bold full price lines
