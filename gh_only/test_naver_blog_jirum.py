@@ -2,7 +2,10 @@
 from datetime import datetime, timedelta, timezone
 import unittest
 
-from gh_only.naver_blog_jirum import ingest, validate_state, source_fresh, validate_naver_link_subid
+from gh_only.naver_blog_jirum import (
+    ingest, validate_state, source_fresh, validate_naver_link_subid,
+    naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
+)
 
 
 def state():
@@ -24,6 +27,49 @@ def deal(source_id, *, price=11900, minutes=10, kind="coupang_shortlink"):
 
 
 class NaverQueueTests(unittest.TestCase):
+    def test_long_title_is_safely_shortened_and_keeps_discount(self):
+        title = "[쿠팡🔥핫딜] " + ("테팔 인덕션 매직핸즈 스테인리스 프라이팬 22cm + " * 6) + "[30%할인]"
+        actual = naver_title(title)
+        self.assertLessEqual(len(actual.encode("utf-16-le")) // 2, NAVER_TITLE_MAX_UTF16_UNITS)
+        self.assertTrue(actual.startswith("[쿠팡🔥핫딜] "))
+        self.assertTrue(actual.endswith("[30%할인]"))
+        self.assertIn("…", actual)
+        self.assertEqual(naver_title("[쿠팡🔥핫딜] 짧은 상품 [25%할인]"),
+                         "[쿠팡🔥핫딜] 짧은 상품 [25%할인]")
+
+    def test_long_title_with_emoji_stays_within_utf16_limit(self):
+        original = "[쿠팡🔥핫딜] " + "📱🥘" * 55 + " [20%할인]"
+        actual = naver_title(original)
+        self.assertLessEqual(len(actual.encode("utf-16-le")) // 2, NAVER_TITLE_MAX_UTF16_UNITS)
+        self.assertTrue(actual.endswith(" [20%할인]"))
+
+    def test_abandoned_claim_quarantine_never_replays(self):
+        s = state()
+        row = deal(95496, minutes=90)
+        ingest(s, [row], reference=datetime.now(timezone.utc) - timedelta(minutes=85))
+        s["in_flight"] = {
+            "id":95496, "status":"REVIEW_REQUIRED",
+            "run_id":"42712155025",
+            "at": (datetime.now(timezone.utc) - timedelta(minutes=80)).isoformat()
+        }
+        validate_state(s)
+        self.assertTrue(archive_stale_claim(s))
+        self.assertIsNone(s["in_flight"])
+        self.assertEqual(s["pending"], [])
+        self.assertEqual(s["skipped"]["95496"]["reason"], "PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY")
+        self.assertEqual(s["skipped"]["95496"]["claimed_run_id"], "42712155025")
+
+    def test_recent_claim_remains_locked(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        s["in_flight"] = {
+            "id":95496, "status":"REVIEW_REQUIRED",
+            "run_id":"999",
+            "at": (datetime.now(timezone.utc) - timedelta(minutes=5)).isoformat()
+        }
+        self.assertFalse(archive_stale_claim(s))
+        self.assertEqual(s["pending"][0]["id"], 95496)
+
     def test_new_fresh_deal_enqueued_once(self):
         s = state()
         n, expired = ingest(s, [deal(95497), deal(95496)])
