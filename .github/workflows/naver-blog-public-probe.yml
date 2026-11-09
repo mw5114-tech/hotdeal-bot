@@ -1,0 +1,44 @@
+name: Naver Blog | public access preflight (NO PUBLISH)
+
+on:
+  push:
+    paths:
+      - 'naver_blog_probe.py'
+      - 'test_naver_blog_probe.py'
+      - '.github/workflows/naver-blog-public-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-blog-public-preflight
+  cancel-in-progress: false
+
+jobs:
+  readonly-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout source (existing live automations untouched)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run offline validation
+        run: |
+          python -m py_compile naver_blog_probe.py
+          python -m unittest -v test_naver_blog_probe.py
+      - name: Install isolated headless browser
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Check public blog page without any login or posting
+        run: |
+          python naver_blog_probe.py --mode public --blog-id mw5114
+
+# This workflow does not use account credentials or session cookies.
+# It never logs in, opens the editor, saves, posts, or changes Telegram/Daangn automation.
