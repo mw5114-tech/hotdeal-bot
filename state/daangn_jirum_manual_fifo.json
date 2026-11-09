@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95513,
+  "last_scanned_id": 95514,
   "pending": [
     {
       "id": 95502,
@@ -109,6 +109,15 @@
       "posted_at_utc": "2026-11-09T22:39:01+00:00",
       "title": "키드오 크리미 버터 크래커 샌드위치",
       "sale_price_krw": 1010
+    },
+    {
+      "id": 95514,
+      "source_post_url": "https://t.me/jirum/95514",
+      "original_purchase_url": "https://link.coupang.com/a/iybWqcCnHo",
+      "source_text": "🔥🔥🔥무지성 16,560원 (64.0% 할인)🔥🔥🔥\n재미스 잼있는 사과쿠키 200개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 46,000원\n- 할인: 29,440원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iybWqcCnHo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T22:39:48+00:00",
+      "title": "재미스 잼있는 사과쿠키 200개",
+      "sale_price_krw": 16560
     }
   ],
   "in_flight": null,
