@@ -113,8 +113,6 @@ def build_blocks(draft: dict, verified: dict, source: dict,
         ))
 
     blocks += [
-        _block("📦 쿠팡에서 상품정보 더보기", label="📦 쿠팡에서 상품정보 더보기", kind="cta"),
-        _block(link, kind="affiliate_link"),
         _block("💡 구매 전 확인", label="💡 구매 전 확인", kind="heading"),
         _block("핫딜 정보는 텔레그램 게시 시점 기준입니다. 상품 옵션·배송비·재고·실제 결제가는 구매 전에 확인해 주세요.", kind="note"),
     ]
@@ -131,6 +129,14 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             kind="image_notice"
         ))
     blocks.append(_block(f"원문 출처 : {telegram}", kind="source"))
+    # Put the URL LAST: typing Enter after a full URL makes SmartEditor
+    # automatically insert a large open-graph preview card, often duplicating
+    # the product image. A final URL paragraph avoids that extra card.
+    blocks += [
+        _block("📦 쿠팡에서 상품정보 더보기",
+               label="📦 쿠팡에서 상품정보 더보기", kind="cta"),
+        _block(link, kind="affiliate_link"),
+    ]
 
     return blocks
 
