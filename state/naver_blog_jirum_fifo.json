@@ -19,5 +19,11 @@
     }
   },
   "skipped": {},
-  "in_flight": null
+  "in_flight": null,
+  "style_test_once_20261109": {
+    "status": "REVIEW_REQUIRED",
+    "source_id": 95498,
+    "claimed_at": "2026-11-09T14:07:19.346540+00:00",
+    "run_id": "42631466782"
+  }
 }
