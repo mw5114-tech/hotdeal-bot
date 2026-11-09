@@ -192,19 +192,29 @@ def _apply_native_affiliate_link(page, frame, url: str, label: str) -> bool:
     )
     if paragraph.count() != 1 or paragraph.first.inner_text().strip() != label:
         raise RuntimeError("NAVER_LINK_LABEL_PARAGRAPH_AMBIGUOUS")
-    paragraph.first.click(timeout=6000)
-    # SmartEditor ignores Playwright's DOM Range selection for link operations:
-    # its toolbar inserts the URL at the caret instead of wrapping the text.
-    # Use actual editor-owned keyboard selection for the entire short line.
-    page.keyboard.press("Home")
-    page.keyboard.press("Shift+End")
-    selection = frame.evaluate("() => (window.getSelection()?.toString() || '').trim()")
+    # Establish an actual selection before clicking Naver's link UI.
+    # Record selection from both page/iframe for diagnosis, without URLs.
+    paragraph.first.select_text(timeout=5000)
+    frame_selected = frame.evaluate(
+        "() => (window.getSelection()?.toString() || '').trim()"
+    )
+    page_selected = page.evaluate(
+        "() => (window.getSelection()?.toString() || '').trim()"
+    )
     print("NAVER_CTA_SELECTION_CHECK " + str({
-        "selected_chars": len(selection),
+        "frame_selected_chars": len(frame_selected),
+        "page_selected_chars": len(page_selected),
         "expected_chars": len(label),
-        "exact": selection == label,
+        "frame_exact": frame_selected == label,
+        "page_exact": page_selected == label,
     }))
-    if selection != label:
+    if frame_selected != label and page_selected != label:
+        structure = paragraph.first.evaluate(
+            """e=>({html:e.outerHTML.slice(0,1000),
+                userSelect:getComputedStyle(e).userSelect,
+                contentEditable:e.getAttribute('contenteditable')})"""
+        )
+        print("NAVER_CTA_SELECTOR_STRUCTURE " + str(structure))
         raise RuntimeError("NAVER_CTA_FULL_SELECTION_NOT_ESTABLISHED")
     toolbar = frame.locator(
         "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
