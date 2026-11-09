@@ -98,9 +98,14 @@ def _bold_existing_labels(page, frame, blocks: list[dict]) -> int:
         if paragraph.count() != 1 or not paragraph.first.is_visible():
             print("NAVER_BOLD_PARAGRAPH_UNAVAILABLE " + str(item.get("kind")))
             continue
-        paragraph.first.select_text(timeout=5000)
+        # A programmatic Range alone does not activate SmartEditor's
+        # format command. Click the actual paragraph first, then select its
+        # current line using native keys with an editor-owned caret.
+        paragraph.first.click(timeout=5000)
+        page.keyboard.press("Home")
+        page.keyboard.press("Shift+End")
         page.keyboard.press("Control+b")
-        page.wait_for_timeout(170)
+        page.wait_for_timeout(220)
         count += 1
     print("NAVER_BOLD_LABEL_PARAGRAPHS_APPLIED=" + str(count))
     return count
