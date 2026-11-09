@@ -1,0 +1,5 @@
+2026-11-09 Naver Blog one-post user-authorized test.
+Target blog: mw5114.
+Execution gate: NAVER_BLOG_STORAGE_STATE_JSON secret must exist.
+If missing, fail safely without opening a browser or publishing.
+Only this single commit triggers the one-shot publishing attempt.
