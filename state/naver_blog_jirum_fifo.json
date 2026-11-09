@@ -37,9 +37,11 @@
     "published_at": "2026-11-09T14:28:37.405648+00:00"
   },
   "short_cta_test_once_20261109": {
-    "status": "REVIEW_REQUIRED",
+    "status": "PUBLISHED",
     "source_id": 95498,
     "claimed_at": "2026-11-09T14:54:37.180453+00:00",
-    "run_id": "42639175336"
+    "run_id": "42639175336",
+    "post_url": "https://blog.naver.com/mw5114/224470950756",
+    "published_at": "2026-11-09T14:55:25.587869+00:00"
   }
 }
