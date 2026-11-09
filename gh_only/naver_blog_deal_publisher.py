@@ -87,6 +87,17 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             page.wait_for_timeout(3300)
             if not response or response.status >= 400:
                 raise RuntimeError("NAVER_EDITOR_HTTP_DENIED")
+            # Match the proven Naver one-shot writer: close the editor's
+            # previous-draft popup before attempting to focus the title.
+            for current_frame in page.frames:
+                try:
+                    cancel = current_frame.locator("button.se-popup-button-cancel")
+                    if cancel.count() == 1 and cancel.is_visible():
+                        cancel.click(timeout=4000)
+                        print("NAVER_EDITOR_RESTORE_POPUP_DISMISSED")
+                except Exception:
+                    pass
+            page.wait_for_timeout(700)
             frame, title, body_element = get_editor_frame(page)
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
