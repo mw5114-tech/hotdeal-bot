@@ -166,6 +166,40 @@ def _affiliate_anchors(frame, url: str) -> dict:
             "labels": [m["label"] for m in matches]}
 
 
+def _apply_native_affiliate_link(page, frame, url: str) -> bool:
+    """Apply a real href to selected URL via SmartEditor's native link form.
+
+    Never fake an HTML anchor in the DOM: use the editor's own persisted link
+    model, then verify the actual href before allowing publication.
+    """
+    paragraph = frame.locator(".se-section-text .se-text-paragraph").filter(
+        has_text=url
+    )
+    if paragraph.count() != 1:
+        raise RuntimeError("NAVER_LINK_PARAGRAPH_AMBIGUOUS")
+    paragraph.first.click(timeout=6000)
+    page.keyboard.press("Home")
+    page.keyboard.press("Shift+End")
+    toolbar = frame.locator(
+        "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
+    )
+    if toolbar.count() != 1:
+        raise RuntimeError("NAVER_NATIVE_LINK_BUTTON_UNAVAILABLE")
+    toolbar.click(timeout=4500)
+    field = frame.locator("input.se-custom-layer-link-input:visible")
+    apply = frame.locator("button.se-custom-layer-link-apply-button:visible")
+    if field.count() != 1 or apply.count() != 1:
+        raise RuntimeError("NAVER_NATIVE_LINK_DIALOG_UNVERIFIED")
+    field.fill(url, timeout=6000)
+    if field.input_value() != url:
+        raise RuntimeError("NAVER_NATIVE_LINK_URL_INPUT_MISMATCH")
+    apply.click(timeout=6000)
+    page.wait_for_timeout(950)
+    result = _affiliate_anchors(frame, url)
+    print("NAVER_NATIVE_LINK_APPLY_RESULT " + str(result))
+    return result["count"] == 1
+
+
 def _diagnose_link_toolbar(page, frame, url: str):
     candidates = frame.locator("button").evaluate_all(
         """els => els.filter(b => /link|링크|연결|url/i.test(
@@ -285,7 +319,10 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     after_link = _affiliate_anchors(frame, article["link"])
     print("NAVER_LINK_AUTO_AFTER_SPACE " + str(after_link))
     if after_link["count"] != 1:
-        _diagnose_link_toolbar(page, frame, article["link"])
+        native_ok = _apply_native_affiliate_link(page, frame, article["link"])
+        if not native_ok:
+            _diagnose_link_toolbar(page, frame, article["link"])
+            raise RuntimeError("NAVER_NATIVE_AFFILIATE_HREF_NOT_VERIFIED")
     bold_applied = _bold_existing_labels(page, frame, blocks)
     page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
