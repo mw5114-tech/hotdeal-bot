@@ -178,8 +178,8 @@ def _apply_native_affiliate_link(page, frame, url: str) -> bool:
     if paragraph.count() != 1:
         raise RuntimeError("NAVER_LINK_PARAGRAPH_AMBIGUOUS")
     paragraph.first.click(timeout=6000)
-    page.keyboard.press("Home")
-    page.keyboard.press("Shift+End")
+    # Select the entire logical paragraph, not one visually wrapped line.
+    paragraph.first.select_text(timeout=5000)
     toolbar = frame.locator(
         "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
     )
@@ -196,7 +196,23 @@ def _apply_native_affiliate_link(page, frame, url: str) -> bool:
     apply.click(timeout=6000)
     page.wait_for_timeout(950)
     result = _affiliate_anchors(frame, url)
+    spans = frame.locator(".se-section-text .se-link").evaluate_all(
+        """(els, target) => els.map(e => ({
+            text_chars: (e.innerText || '').length,
+            text_matches_full_url: (e.innerText || '').trim() === target,
+            text_is_substring: target.includes((e.innerText || '').trim()),
+            attr_names: e.getAttributeNames(),
+            attr_match_full_url: e.getAttributeNames().filter(
+                k => (e.getAttribute(k) || '') === target
+            ),
+            attr_contains_url: e.getAttributeNames().filter(
+                k => (e.getAttribute(k) || '').includes(target)
+            ),
+            parent_class: (e.parentElement?.className || '').slice(0,75)
+        }))""", url
+    )
     print("NAVER_NATIVE_LINK_APPLY_RESULT " + str(result))
+    print("NAVER_NATIVE_LINK_SPAN_DIAGNOSTIC " + str(spans))
     return result["count"] == 1
 
 
