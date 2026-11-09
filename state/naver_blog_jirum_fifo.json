@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95502,
-  "pending": [
-    {
-      "id": 95502,
-      "source_message_id": 95502,
-      "source_post_url": "https://t.me/jirum/95502",
-      "original_purchase_url": "https://link.coupang.com/a/ix9A1b2pPw",
-      "title": "르크루제 시애틀 머그 400ml + 쇼핑백S, 머랭, 2개",
-      "source_text": "🔥🔥🔥무지성 27,110원 (45.8% 할인)🔥🔥🔥\n르크루제 시애틀 머그 400ml + 쇼핑백S, 머랭, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 50,000원\n- 할인: 22,890원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ix9A1b2pPw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 27110,
-      "posted_at_utc": "2026-11-09T22:06:59+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -35,15 +24,14 @@
     "95501": {
       "url": "https://blog.naver.com/mw5114/224471080997",
       "at": "2026-11-09T19:42:27.298885+00:00"
+    },
+    "95502": {
+      "url": "https://blog.naver.com/mw5114/224471139514",
+      "at": "2026-11-09T22:09:36.522714+00:00"
     }
   },
   "skipped": {},
-  "in_flight": {
-    "id": 95502,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42709051095",
-    "at": "2026-11-09T22:08:54.045239+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
