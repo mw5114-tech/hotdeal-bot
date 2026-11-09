@@ -25,6 +25,19 @@ DRAFT_DIR = Path("naver-blog-one-draft")
 MAX_PENDING = 40
 MAX_HISTORY = 200
 DISCLOSURE = "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
+NAVER_BLOG_SUBID = "naverblog"
+
+
+def validate_naver_link_subid(url: str) -> None:
+    """Prevent Daangn tracking labels leaking into Naver Blog posts."""
+    parsed = urlsplit(url)
+    query = parse_qs(parsed.query)
+    if (parsed.scheme != "https"
+            or parsed.hostname != "link.coupang.com"
+            or parsed.path != "/re/AFFSDP"
+            or query.get("subid") != [NAVER_BLOG_SUBID]):
+        raise ValueError("NAVER_BLOG_SUBID_NOT_NAVERBLOG")
+
 
 
 def now_utc() -> str:
@@ -192,6 +205,7 @@ def make_article(source: dict, output: Path, *, tag: str):
         + "\n\n출처: " + source["source_post_url"]
     )
     url = verified["candidate_url"]
+    validate_naver_link_subid(url)
     if body.count(url) != 1 or len(body) > 9000 or not verified["image"]:
         raise RuntimeError("NAVER_DRAFT_UNSAFE")
     return {
