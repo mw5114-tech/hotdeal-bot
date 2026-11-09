@@ -1,4 +1,3 @@
 phase=probe
-Blog: mw5114
-Purpose: authenticated editor access only
-Never publish in this phase
+blog=mw5114
+read-only session test 2
