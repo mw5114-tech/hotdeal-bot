@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95512,
+  "last_scanned_id": 95513,
   "pending": [
     {
       "id": 95502,
@@ -100,6 +100,15 @@
       "posted_at_utc": "2026-11-09T22:36:29+00:00",
       "title": "닌자 크리스피 올인원 유리 멀티쿠커 에어프라이어 1.4L",
       "sale_price_krw": 129000
+    },
+    {
+      "id": 95513,
+      "source_post_url": "https://t.me/jirum/95513",
+      "original_purchase_url": "https://link.coupang.com/a/iybSTNqbzE",
+      "source_text": "👍대박 1,010원 (38.0% 할인)\n키드오 크리미 버터 크래커 샌드위치\n📌 가격 현황\n- 정상가: 1,629원\n- 할인: 619원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iybSTNqbzE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T22:39:01+00:00",
+      "title": "키드오 크리미 버터 크래커 샌드위치",
+      "sale_price_krw": 1010
     }
   ],
   "in_flight": null,
