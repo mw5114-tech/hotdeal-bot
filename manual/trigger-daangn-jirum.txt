@@ -38,3 +38,5 @@ User-requested latest natural Coupang deal test (no repost): 20261104-0633-KST; 
 User-requested sequential replay after Naver image fallback patch: 94986-94990; start TV first; one FIFO drain; 2026-11-04.
 
 User replay TV 94986 retry after verified pre-submit age gate fix PR73: 2026-11-04, sequential FIFO 94986-94990; one action run.
+
+Naver Blog Oracle workflow integration scan-only test: 2026-11-09. Daangn publication stays paused.
