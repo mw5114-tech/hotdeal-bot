@@ -114,7 +114,7 @@ def build_blocks(draft: dict, verified: dict, source: dict,
 
     blocks += [
         _block("💡 구매 전 확인", label="💡 구매 전 확인", kind="heading"),
-        _block("핫딜 정보는 텔레그램 게시 시점 기준입니다. 상품 옵션·배송비·재고·실제 결제가는 구매 전에 확인해 주세요.", kind="note"),
+        _block("※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.", kind="note"),
     ]
     if manual_test_replay:
         blocks.append(_block(
@@ -128,10 +128,9 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             "※ 사진은 검색 결과의 대표 이미지이며 실제 상품·옵션과 다를 수 있습니다.",
             kind="image_notice"
         ))
-    blocks.append(_block(f"원문 출처 : {telegram}", kind="source"))
-    # Put the URL LAST: typing Enter after a full URL makes SmartEditor
-    # automatically insert a large open-graph preview card, often duplicating
-    # the product image. A final URL paragraph avoids that extra card.
+
+    # Keep the affiliate call-to-action at the end. The SmartEditor writer
+    # must turn the URL into a real clickable anchor before publication.
     blocks += [
         _block("📦 쿠팡에서 상품정보 더보기",
                label="📦 쿠팡에서 상품정보 더보기", kind="cta"),
