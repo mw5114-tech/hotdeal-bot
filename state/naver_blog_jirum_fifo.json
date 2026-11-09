@@ -30,12 +30,7 @@
     }
   },
   "skipped": {},
-  "in_flight": {
-    "id": 95500,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42641805298",
-    "at": "2026-11-09T15:11:47.718436+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
@@ -59,5 +54,14 @@
     "run_id": "42639175336",
     "post_url": "https://blog.naver.com/mw5114/224470950756",
     "published_at": "2026-11-09T14:55:25.587869+00:00"
+  },
+  "reviewed_pre_submit_failures": {
+    "42641805298": {
+      "id": 95500,
+      "error": "NAVER_ALERT_STILL_VISIBLE_STOP",
+      "stage": "before_title_or_publish",
+      "evidence": "GitHub Actions job 129244573112 failed at editor popup, no post attempted",
+      "preserved_in_pending": true
+    }
   }
 }
