@@ -75,7 +75,14 @@ def _write_styled_block(page, item: dict) -> None:
     Switching Ctrl+B during a Korean label can DROP text in SmartEditor;
     actual bold is applied to already-composed paragraphs afterwards.
     """
-    enter_text_in_chunks(page, item["text"])
+    # A new SmartEditor paragraph initially accepts only the first emoji/
+    # character if a long insertText lands while its selection model mounts.
+    # Prime one character, let it settle, then type the rest as native keys.
+    content = item["text"]
+    page.keyboard.insert_text(content[:1])
+    page.wait_for_timeout(550)
+    page.keyboard.type(content[1:], delay=22)
+    page.wait_for_timeout(260)
 
 
 def _bold_existing_labels(page, frame, blocks: list[dict]) -> int:
@@ -178,6 +185,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         if index:
             page.keyboard.press("Enter")
             page.keyboard.press("Enter")
+            page.wait_for_timeout(450)
         _write_styled_block(page, item)
         written.append(item["text"])
         page.wait_for_timeout(90)
