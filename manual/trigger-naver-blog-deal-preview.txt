@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: check native se-link[data-href] exact full affiliate URL and notice removal
+NO_PUBLISH: clickable short single CTA label with exact AFFSDP data-href; no raw URL visible
