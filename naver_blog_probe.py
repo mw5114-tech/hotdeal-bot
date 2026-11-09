@@ -70,6 +70,38 @@ def run(mode: str, blog_id: str) -> int:
                 return 2
             if mode == "public":
                 print("PUBLIC_PAGE_HTTP_OK; this does not prove authenticated access")
+                test_title = "[자동화 테스트] 네이버 블로그 글쓰기 연결 확인"
+                # Search currently visible public pages, not account-private drafts.
+                checked = 0
+                for frame in page.frames:
+                    try:
+                        text = frame.locator("body").inner_text(timeout=4000)
+                        checked += 1
+                        if test_title in text:
+                            print("TEST_POST_TITLE_VISIBLE_ON_BLOG_HOME")
+                            return 0
+                    except Exception:
+                        pass
+                for candidate in (
+                    "https://rss.blog.naver.com/mw5114.xml",
+                    "https://m.blog.naver.com/mw5114",
+                ):
+                    extra = context.new_page()
+                    try:
+                        response2 = extra.goto(candidate, wait_until="domcontentloaded", timeout=16000)
+                        extra.wait_for_timeout(1600)
+                        if response2 and response2.status < 400:
+                            checked += 1
+                            page_text = extra.locator("body").inner_text(timeout=5000)
+                            if test_title in page_text:
+                                print("TEST_POST_TITLE_VISIBLE_ON_PUBLIC_FEED_OR_MOBILE")
+                                return 0
+                    except Exception:
+                        pass
+                    finally:
+                        extra.close()
+                print(f"TEST_POST_TITLE_NOT_FOUND_IN_CHECKED_PUBLIC_VIEWS={checked}")
+                print("NOT_FOUND_IS_NOT_PROOF_OF_NONPUBLICATION")
                 return 0
 
             state = editor_state([page.url] + [frame.url for frame in page.frames])
