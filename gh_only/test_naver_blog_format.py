@@ -59,6 +59,14 @@ class FormattingTests(unittest.TestCase):
         self.assertIn("평소 판매가 : 확인되지 않음", body)
         self.assertNotIn("약 25%", body)
 
+    def test_user_requested_disclaimer_replaces_old_note_and_source(self):
+        blocks, body = self.format()
+        self.assertIn("※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.", body)
+        self.assertNotIn("핫딜 정보는 텔레그램 게시 시점 기준입니다", body)
+        self.assertNotIn("원문 출처", body)
+        self.assertNotIn("https://t.me/jirum", body)
+        self.assertEqual(blocks[-1]["kind"], "affiliate_link")
+
     def test_manual_test_notice(self):
         d,v,s = row()
         blocks = build_blocks(d,v,s,manual_test_replay=True)
