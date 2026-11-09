@@ -1,24 +1,15 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95496,
+  "last_scanned_id": 95497,
   "pending": [
     {
-      "id": 95493,
-      "source_post_url": "https://t.me/jirum/95493",
-      "original_purchase_url": "https://link.coupang.com/a/ixrs1FrhPU",
-      "source_text": "☆특가 10,930원\n해태htb 포도 봉봉 제로, 340ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixrs1FrhPU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T11:49:28+00:00",
-      "title": "☆특가 10,930원",
-      "sale_price_krw": 10930
-    },
-    {
-      "id": 95495,
-      "source_post_url": "https://t.me/jirum/95495",
-      "original_purchase_url": "https://link.coupang.com/a/ixskRW9Yiq",
-      "source_text": "☆특가 14,530원\n위칙 소독 섬유유연제 본품, 2L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixskRW9Yiq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T12:01:37+00:00",
-      "title": "☆특가 14,530원",
-      "sale_price_krw": 14530
+      "id": 95497,
+      "source_post_url": "https://t.me/jirum/95497",
+      "original_purchase_url": "https://link.coupang.com/a/ixxjkHsFRA",
+      "source_text": "❤️초대박 3,980원 (43.0% 할인)\n[로켓프레시] 청정원 짜지 않은 리치부어스트 200g\n📌 가격 현황\n- 정상가: 6,982원\n- 할인: 3,002원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixxjkHsFRA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T13:11:15+00:00",
+      "title": "[로켓프레시] 청정원 짜지 않은 리치부어스트 200g",
+      "sale_price_krw": 3980
     }
   ],
   "in_flight": null,
@@ -4870,6 +4861,20 @@
       "source_title": "석관동떡볶이 치즈쭈욱 (밀떡) (냉동) 420g 2개",
       "posted_at_utc": "2026-11-09T11:09:01+00:00",
       "at": "2026-11-09T12:33:03.065376+00:00"
+    },
+    "95493": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95493",
+      "source_title": "☆특가 10,930원",
+      "posted_at_utc": "2026-11-09T11:49:28+00:00",
+      "at": "2026-11-09T13:12:14.720286+00:00"
+    },
+    "95495": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95495",
+      "source_title": "☆특가 14,530원",
+      "posted_at_utc": "2026-11-09T12:01:37+00:00",
+      "at": "2026-11-09T13:12:14.720294+00:00"
     }
   },
   "skipped_unverifiable": {
