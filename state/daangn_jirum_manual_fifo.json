@@ -1,26 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95479,
-  "pending": [
-    {
-      "id": 95478,
-      "source_post_url": "https://t.me/jirum/95478",
-      "original_purchase_url": "https://link.coupang.com/a/ixadulvvIO",
-      "source_text": "❤️초대박 3,900원 (44.3% 할인)\n히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 3,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixadulvvIO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T07:48:04+00:00",
-      "title": "히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개",
-      "sale_price_krw": 3900
-    },
-    {
-      "id": 95479,
-      "source_post_url": "https://t.me/jirum/95479",
-      "original_purchase_url": "https://link.coupang.com/a/ixa9Vb3KWy",
-      "source_text": "🔥🔥🔥무지성 9,900원 (75.2% 할인)🔥🔥🔥\nKURUA 학생 대용량 원형 책장 거실 서재 회전형 책꽂이 45cm*3단\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 30,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixa9Vb3KWy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T08:01:15+00:00",
-      "title": "KURUA 학생 대용량 원형 책장 거실 서재 회전형 책꽂이 45cm*3단",
-      "sale_price_krw": 9900
-    }
-  ],
+  "last_scanned_id": 95484,
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4337,7 +4318,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 181,
+  "skipped_non_coupang": 186,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4835,6 +4816,20 @@
       "source_title": "☆특가 18,610원",
       "posted_at_utc": "2026-11-09T07:07:47+00:00",
       "at": "2026-11-09T08:37:16.884692+00:00"
+    },
+    "95478": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95478",
+      "source_title": "히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개",
+      "posted_at_utc": "2026-11-09T07:48:04+00:00",
+      "at": "2026-11-09T09:38:14.823270+00:00"
+    },
+    "95479": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95479",
+      "source_title": "KURUA 학생 대용량 원형 책장 거실 서재 회전형 책꽂이 45cm*3단",
+      "posted_at_utc": "2026-11-09T08:01:15+00:00",
+      "at": "2026-11-09T09:38:14.823292+00:00"
     }
   },
   "skipped_unverifiable": {
