@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95472,
+  "last_scanned_id": 95474,
   "pending": [
     {
       "id": 95469,
@@ -28,6 +28,24 @@
       "posted_at_utc": "2026-11-09T06:25:52+00:00",
       "title": "쉐푸드 고추마요치킨 330g",
       "sale_price_krw": 2990
+    },
+    {
+      "id": 95473,
+      "source_post_url": "https://t.me/jirum/95473",
+      "original_purchase_url": "https://link.coupang.com/a/iw454bK5qm",
+      "source_text": "🔥🔥🔥무지성 4,510원 (48.0% 할인)🔥🔥🔥\n샤프란 케어 냄새뺌 섬유탈취제 방금 씻은 비누향 본품 400ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,673원\n- 할인: 4,163원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw454bK5qm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T06:36:25+00:00",
+      "title": "샤프란 케어 냄새뺌 섬유탈취제 방금 씻은 비누향 본품 400ml",
+      "sale_price_krw": 4510
+    },
+    {
+      "id": 95474,
+      "source_post_url": "https://t.me/jirum/95474",
+      "original_purchase_url": "https://link.coupang.com/a/iw49YqYBP2",
+      "source_text": "👍대박 19,800원 (36.0% 할인)\nApple 정품 전원 어댑터 20W USB C\n📌 가격 현황\n- 정상가: 30,938원\n- 할인: 11,138원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw49YqYBP2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T06:37:18+00:00",
+      "title": "Apple 정품 전원 어댑터 20W USB C",
+      "sale_price_krw": 19800
     }
   ],
   "in_flight": null,
