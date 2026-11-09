@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95495,
+  "last_scanned_id": 95496,
   "pending": [
-    {
-      "id": 95488,
-      "source_post_url": "https://t.me/jirum/95488",
-      "original_purchase_url": "https://link.coupang.com/a/ixozPyXEwC",
-      "source_text": "👍대박 8,680원 (34.0% 할인)\n석관동떡볶이 치즈쭈욱 (밀떡) (냉동) 420g 2개\n📌 가격 현황\n- 정상가: 13,152원\n- 할인: 4,472원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixozPyXEwC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T11:09:01+00:00",
-      "title": "석관동떡볶이 치즈쭈욱 (밀떡) (냉동) 420g 2개",
-      "sale_price_krw": 8680
-    },
     {
       "id": 95493,
       "source_post_url": "https://t.me/jirum/95493",
@@ -4346,7 +4337,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 192,
+  "skipped_non_coupang": 193,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4872,6 +4863,13 @@
       "source_title": "켄리프 어텀 머스크 바디워시, 710ml, 5개",
       "posted_at_utc": "2026-11-09T10:55:28+00:00",
       "at": "2026-11-09T12:02:17.723998+00:00"
+    },
+    "95488": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95488",
+      "source_title": "석관동떡볶이 치즈쭈욱 (밀떡) (냉동) 420g 2개",
+      "posted_at_utc": "2026-11-09T11:09:01+00:00",
+      "at": "2026-11-09T12:33:03.065376+00:00"
     }
   },
   "skipped_unverifiable": {
