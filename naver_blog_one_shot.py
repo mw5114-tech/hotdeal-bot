@@ -214,9 +214,14 @@ def run(phase: str) -> int:
 
                 title_initial = meaningful_text(title)
                 body_initial = meaningful_text(body)
-                print(f"EDITOR_INITIAL_TEXT_LENGTHS: TITLE={len(title_initial)} BODY={len(body_initial)}")
-                if title_initial or body_initial:
-                    raise RuntimeError("EDITOR_ALREADY_CONTAINS_TEXT_STOP")
+                # SmartEditor displays placeholder copy inside its <p> even
+                # when the module itself is marked se-is-empty.
+                title_empty = frame.locator(".se-section-documentTitle .se-module.se-is-empty").count() == 1
+                body_empty = frame.locator(".se-section-text .se-module.se-is-empty").count() == 1
+                print(f"EDITOR_EMPTY_FLAGS: TITLE={title_empty} BODY={body_empty}; "
+                      f"PLACEHOLDER_LENGTHS={len(title_initial)},{len(body_initial)}")
+                if not title_empty or not body_empty:
+                    raise RuntimeError("EDITOR_NOT_MARKED_EMPTY_STOP")
                 # SmartEditor ONE uses focus-managed contenteditable, not an
                 # editable <p> itself. Click the section to focus its editor,
                 # then type through keyboard as a human would.
