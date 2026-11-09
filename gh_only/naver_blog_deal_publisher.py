@@ -184,6 +184,13 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         "photo_between": _photo_between_disclosure_and_price(frame, blocks[0]["text"]),
     }
     print("NAVER_FORMAT_CHECK " + str(conditions))
+    if not conditions["sale"] or not conditions["photo_between"]:
+        # The price/label copy is intentionally public; do not log full URLs.
+        snippets = []
+        for i, para in enumerate(frame.locator(".se-text-paragraph").all_inner_texts()[:28]):
+            stripped = para.replace(article["link"], "[AFFILIATE_LINK]")
+            snippets.append((i, stripped[:100]))
+        print("NAVER_PARAGRAPH_DIAGNOSTIC " + str(snippets))
     _editor_layout(frame, "FINAL")
     if not all((conditions["disclosure"], conditions["sale"],
                 conditions["link"], conditions["closing_note"],
