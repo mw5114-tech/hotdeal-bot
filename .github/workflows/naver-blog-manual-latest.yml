@@ -1,0 +1,61 @@
+name: Naver Blog - publish latest Coupang Telegram once (MANUAL TEST)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-naver-latest-one-shot.txt'
+
+permissions:
+  contents: read
+
+# Shares the LIVE Oracle Naver writer's queue/state lock. No parallel posting.
+concurrency:
+  group: naver-blog-jirum-state-and-publisher
+  cancel-in-progress: false
+
+jobs:
+  once:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      NAVER_MANUAL_LATEST_ONE_SHOT: 'true'
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      GH_STATE_TOKEN: ${{ github.token }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate one-shot source selection, time bound, unique state
+        run: |
+          python -m py_compile gh_only/naver_blog_latest_manual.py gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
+          python -m unittest -v gh_only.test_naver_blog_latest_manual gh_only.test_naver_blog_jirum
+      - name: Install browser for exactly one authorized test post
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Submit latest Coupang Telegram deal once and checkpoint
+        run: python -m gh_only.naver_blog_latest_manual
+      - name: Save non-sensitive source/photo diagnostics on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naver-manual-latest-diagnostics-${{ github.run_id }}
+          path: naver-blog-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore
+
+# No schedule or workflow_dispatch. Only the one manual trigger file can
+# activate this job; state preclaim blocks accidental replay on reruns.
