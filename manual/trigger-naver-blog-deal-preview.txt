@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: isolate title focus with proven test title and genuine price/photo
+NO_PUBLISH: segmented text paste and image insertion test
