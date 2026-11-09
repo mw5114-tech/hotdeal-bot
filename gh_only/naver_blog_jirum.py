@@ -11,6 +11,7 @@ import base64
 from datetime import datetime, timezone
 import json
 import os
+import re
 from pathlib import Path
 from urllib import error
 from urllib.parse import parse_qs, urlsplit
@@ -26,6 +27,73 @@ MAX_PENDING = 40
 MAX_HISTORY = 200
 DISCLOSURE = "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
 NAVER_BLOG_SUBID = "naverblog"
+NAVER_TITLE_MAX_UTF16_UNITS = 88
+STALE_PUBLISH_CLAIM_SECONDS = 30 * 60
+
+
+def naver_title(title: str) -> str:
+    """Fit long hotdeal headlines safely under SmartEditor title input limits.
+
+    Preserve the [쿠팡🔥핫딜] prefix and trailing [NN%할인] where possible.
+    Use UTF-16 code units since emoji occupy two units in browser editors.
+    """
+    prefix = "[쿠팡🔥핫딜] "
+    if not isinstance(title, str) or not title.startswith(prefix):
+        raise ValueError("NAVER_TITLE_PREFIX_INVALID")
+    original = re.sub(r"\s+", " ", title).strip()
+    match = re.search(r"( \[[0-9]{1,3}%할인\])$", original)
+    suffix = match.group(1) if match else ""
+    product = original[len(prefix):len(original) - len(suffix) if suffix else None]
+    if not product.strip():
+        raise ValueError("NAVER_TITLE_PRODUCT_MISSING")
+    def units(value: str) -> int:
+        return len(value.encode("utf-16-le")) // 2
+    if units(original) <= NAVER_TITLE_MAX_UTF16_UNITS:
+        return original
+    budget = NAVER_TITLE_MAX_UTF16_UNITS - units(prefix) - units(suffix) - 1
+    if budget < 8:
+        raise ValueError("NAVER_TITLE_INSUFFICIENT_BUDGET")
+    out = ""
+    for ch in product.strip():
+        if units(out + ch) > budget:
+            break
+        out += ch
+    shortened = (prefix + out.rstrip() + "…" + suffix).strip()
+    if units(shortened) > NAVER_TITLE_MAX_UTF16_UNITS:
+        raise ValueError("NAVER_TITLE_SIZE_EXCEEDED")
+    return shortened
+
+
+def archive_stale_claim(state: dict, *, reference: datetime | None = None) -> bool:
+    """Quarantine a dead writer without replaying a potentially posted deal.
+
+    A workflow may have clicked publish before its result was lost. A claim
+    older than 30 minutes is no longer backed by a running 15-minute job.
+    Put it in skipped rather than retrying or locking all future posts.
+    """
+    claim = state.get("in_flight")
+    if claim is None:
+        return False
+    reference = reference or datetime.now(timezone.utc)
+    claimed_at = old._parse_utc(claim.get("at"))
+    if claimed_at is None:
+        raise RuntimeError("NAVER_CLAIM_TIMESTAMP_MISSING_MANUAL_REVIEW")
+    if (reference - claimed_at).total_seconds() < STALE_PUBLISH_CLAIM_SECONDS:
+        return False
+    if (not state.get("pending")
+            or state["pending"][0].get("id") != claim.get("id")):
+        raise RuntimeError("NAVER_CLAIM_QUEUE_INCONSISTENT")
+    source = state["pending"].pop(0)
+    state["skipped"][str(source["id"])] = {
+        "reason": "PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY",
+        "claimed_run_id": claim.get("run_id"),
+        "claimed_at": claim.get("at"),
+        "source_post_url": source.get("source_post_url"),
+        "at": reference.isoformat(),
+    }
+    state["in_flight"] = None
+    validate_state(state)
+    return True
 
 
 def validate_naver_link_subid(url: str) -> None:
@@ -163,14 +231,19 @@ def ingest(s: dict, items: list[dict], reference: datetime | None = None):
 
 def scan(store: Store):
     s, sha = store.read()
+    archived = False
     if s["in_flight"] is not None:
-        print("NAVER_PUBLISH_REVIEW_REQUIRED_NO_NEW_POST")
-        return {"ready": False, "review": True}
+        archived = archive_stale_claim(s)
+        if not archived:
+            print("NAVER_PUBLISH_REVIEW_REQUIRED_NO_NEW_POST")
+            return {"ready": False, "review": True}
+        print("NAVER_ABANDONED_CLAIM_QUARANTINED_NO_AUTORETRY")
     discovered = old.collect_since(s["last_scanned_id"], fetch_public_html, old.older_html)
     added, expired = ingest(s, discovered)
-    if added or expired or discovered:
-        store.write(s, sha, "state: Naver Blog collect fresh Jirum FIFO")
+    if archived or added or expired or discovered:
+        store.write(s, sha, "state: Naver scan, quarantine stale claim and expire old deals")
     result = {"ready": bool(s["pending"]), "new": added, "expired": expired,
+              "archived_stale_claim": archived,
               "pending": len(s["pending"]), "last_scanned_id": s["last_scanned_id"]}
     print("NAVER_BLOG_FIFO_SCAN " + json.dumps(result, ensure_ascii=False))
     return result
@@ -214,7 +287,7 @@ def make_article(source: dict, output: Path, *, tag: str,
     if not verified["image"]:
         raise RuntimeError("NAVER_DRAFT_UNSAFE")
     return {
-        "title": verified["title"], "body": body, "blocks": blocks,
+        "title": naver_title(verified["title"]), "body": body, "blocks": blocks,
         "image": verified["image"],
         "source_id": source["source_message_id"], "link": url,
         "unissued_link": verified["unissued_affsdp_candidate"],
@@ -253,9 +326,31 @@ def publish_one(store: Store):
     store.write(s, sha, "state: Naver one-post pre-submit claim")
     # Any crash or uncertain confirmation leaves the claim locked. Never
     # automatically retry a second click or repeat that source ID.
-    from gh_only.naver_blog_deal_publisher import submit_one
-    url = submit_one(article, os.environ.get("NAVER_BLOG_STORAGE_STATE_JSON", ""),
-                     publish=True)
+    from gh_only.naver_blog_deal_publisher import (
+        NaverPreSubmitTitleError, submit_one,
+    )
+    try:
+        url = submit_one(article, os.environ.get("NAVER_BLOG_STORAGE_STATE_JSON", ""),
+                         publish=True)
+    except NaverPreSubmitTitleError:
+        # Explicitly thrown BEFORE any publish button could have been clicked.
+        # Quarantine this source only and free the rest of the FIFO. A new
+        # source ID is required for any future post; never blindly retry.
+        failed, sha_after = store.read()
+        if (failed.get("in_flight", {}).get("id") != source_id
+                or not failed["pending"]
+                or failed["pending"][0]["id"] != source_id):
+            raise RuntimeError("NAVER_PRE_SUBMIT_STATE_CHANGED_REVIEW_REQUIRED")
+        failed["pending"].pop(0)
+        failed["skipped"][str(source_id)] = {
+            "reason": "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST",
+            "claimed_run_id": os.environ.get("GITHUB_RUN_ID", "unknown"),
+            "at": now_utc(),
+        }
+        failed["in_flight"] = None
+        store.write(failed, sha_after, "state: mark title validation failure before submit")
+        print("NAVER_PRE_SUBMIT_TITLE_ERROR_QUARANTINED_NO_POST")
+        raise
     new, sha = store.read()
     if not new["in_flight"] or new["in_flight"]["id"] != source_id:
         raise RuntimeError("NAVER_POST_CLAIM_LOST")
