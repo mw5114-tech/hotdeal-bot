@@ -43,8 +43,30 @@ class FormattingTests(unittest.TestCase):
         self.assertIn("쿠팡 평소 판매가(로우차트 관측 평균)", body)
         self.assertIn("14,530원", body)
         self.assertIn("19,900원", body)
-        self.assertIn("약 25%", body)
+        self.assertIn("[약 25% 할인]", body)
         self.assertTrue(any(x.get("bold_prefix") == "🔥 오늘 특가" for x in blocks))
+
+    def test_user_requested_real_time_order_and_adjacent_notice(self):
+        blocks, body = self.format()
+        items = [x for x in blocks if x.get("type") == "text"]
+        kinds = [x.get("kind") for x in items]
+        self.assertIn("🛍️ 실시간 쿠팡 핫딜", body)
+        self.assertNotIn("🛍️ 오늘의 쿠팡 핫딜", body)
+        ref = kinds.index("reference")
+        self.assertEqual(kinds[ref + 1], "price")
+        self.assertEqual(kinds[ref + 2], "note")
+        self.assertEqual(items[ref + 1]["text"],
+                         "🔥 오늘 특가 : 약 14,530원 [약 25% 할인]")
+        self.assertEqual(items[ref + 2]["text"],
+                         "※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.")
+        self.assertEqual(kinds.count("note"), 1)
+        self.assertEqual(kinds.count("discount"), 0)
+
+    def test_missing_comparison_never_invents_discount_badge(self):
+        blocks, _ = self.format(None, reference=None, discount=65)
+        sale = next(x["text"] for x in blocks if x.get("kind") == "price")
+        self.assertNotIn("%", sale)
+        self.assertIn("평소 판매가 : 확인되지 않음", plain_body(blocks))
 
     def test_fallcent_max_not_mislabeled_typical(self):
         _, body = self.format("fallcent_observed_high")
