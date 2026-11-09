@@ -1,4 +1,3 @@
 2026-11-09
 mode=preview
-source=telegram-jirum
-NO_PUBLISH: title focus fallback test
+NO_PUBLISH: verify complete Naver rich title/body section and photo
