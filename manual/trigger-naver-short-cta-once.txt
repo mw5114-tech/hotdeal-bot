@@ -1,0 +1,4 @@
+User requested one new final Naver Blog post after correcting a fragmented affiliate hyperlink.
+2026-11-09 one-shot live publication with short CTA heading + exactly one complete clickable owner AFFSDP URL on the next paragraph.
+Require the real Naver link model and no duplicated visible URL fragments. Keep source timestamp and photo validation, always include disclosure.
+This is a one-time live test with the durable state key short_cta_test_once_20261109; no retries and no scheduled re-runs.
