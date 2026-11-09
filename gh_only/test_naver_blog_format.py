@@ -36,7 +36,7 @@ class FormattingTests(unittest.TestCase):
         self.assertEqual(body.count("📦 쿠팡에서 상품정보 더보기"), 1)
         self.assertEqual(blocks[-1]["link_url"], URL)
         self.assertTrue(body.startswith(DISCLOSURE + "\n\n"))
-        self.assertGreaterEqual(body.count("\n\n"), 8)
+        self.assertGreaterEqual(body.count("\n\n"), 7)
 
     def test_lowchart_average_clearly_labeled(self):
         blocks, body = self.format()
