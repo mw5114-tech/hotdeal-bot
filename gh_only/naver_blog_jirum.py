@@ -176,9 +176,21 @@ def scan(store: Store):
     return result
 
 
-def make_article(source: dict, output: Path, *, tag: str):
-    """Reuse the tested Daangn price/photo/link pipeline, change only blog copy."""
-    if not source_fresh(source):
+def make_article(source: dict, output: Path, *, tag: str,
+                 manual_test_replay: bool = False):
+    """Reuse the tested Daangn price/photo/link pipeline, change only blog copy.
+
+    Manual replay is reserved for a separately authorized single-post script;
+    the normal Oracle auto-publisher always uses the 60-minute freshness gate.
+    """
+    if manual_test_replay:
+        ts = old._parse_utc(source.get("posted_at_utc"))
+        if ts is None:
+            raise RuntimeError("MANUAL_TEST_SOURCE_TIMESTAMP_REQUIRED")
+        elapsed = (datetime.now(timezone.utc) - ts).total_seconds()
+        if not -300 <= elapsed <= 24 * 3600:
+            raise RuntimeError("MANUAL_TEST_SOURCE_OLDER_THAN_24H")
+    elif not source_fresh(source):
         raise RuntimeError("SOURCE_EXPIRED_OR_UNTIMED")
     output.mkdir(parents=True, exist_ok=True)
     draft = enrich_deal(source, output, owner_tag=tag)
@@ -198,8 +210,13 @@ def make_article(source: dict, output: Path, *, tag: str):
         if image_source in ("fallcent_search_representative", "naver_web_first_image")
         else ""
     )
+    manual_note = (
+        "※ 자동화 발행 테스트 글입니다. 텔레그램 원문 게시 시점의 가격 정보이며 "
+        "현재 가격·재고는 구매 전에 판매처에서 확인해야 합니다.\n\n"
+        if manual_test_replay else ""
+    )
     body = (
-        DISCLOSURE + "\n\n" + price_lines
+        DISCLOSURE + "\n\n" + manual_note + price_lines
         + "\n\n※ 가격과 재고는 판매처에서 실시간으로 달라질 수 있습니다."
         + image_notice
         + "\n\n출처: " + source["source_post_url"]
