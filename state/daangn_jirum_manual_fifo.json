@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95505,
+  "last_scanned_id": 95506,
   "pending": [
     {
       "id": 95502,
@@ -35,6 +35,15 @@
       "original_purchase_url": "https://link.coupang.com/a/ix971Oefh6",
       "source_text": "☆특가 990원\n가와시마야 소프트 실리콘 아이스 트레이 6구 XW-481 10.3*7.4*4.1cm*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ix971Oefh6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "posted_at_utc": "2026-11-09T22:14:27+00:00",
+      "title": "☆특가 990원",
+      "sale_price_krw": 990
+    },
+    {
+      "id": 95506,
+      "source_post_url": "https://t.me/jirum/95506",
+      "original_purchase_url": "https://link.coupang.com/a/iyaiFTdCxM",
+      "source_text": "☆특가 990원\nFDUCE 미니 밀봉 실링기, 1개, 화이트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyaiFTdCxM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T22:16:51+00:00",
       "title": "☆특가 990원",
       "sale_price_krw": 990
     }
