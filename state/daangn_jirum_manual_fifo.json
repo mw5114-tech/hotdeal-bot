@@ -1,26 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95498,
-  "pending": [
-    {
-      "id": 95497,
-      "source_post_url": "https://t.me/jirum/95497",
-      "original_purchase_url": "https://link.coupang.com/a/ixxjkHsFRA",
-      "source_text": "❤️초대박 3,980원 (43.0% 할인)\n[로켓프레시] 청정원 짜지 않은 리치부어스트 200g\n📌 가격 현황\n- 정상가: 6,982원\n- 할인: 3,002원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixxjkHsFRA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T13:11:15+00:00",
-      "title": "[로켓프레시] 청정원 짜지 않은 리치부어스트 200g",
-      "sale_price_krw": 3980
-    },
-    {
-      "id": 95498,
-      "source_post_url": "https://t.me/jirum/95498",
-      "original_purchase_url": "https://link.coupang.com/a/ixyQGlcuoS",
-      "source_text": "🔥🔥🔥무지성 1,990원 (48.4% 할인)🔥🔥🔥\n[비건라이프] 자연퐁 베이킹소다파워 3X 클린 라임향 리필 1L*1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 3,855원\n- 할인: 1,865원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixyQGlcuoS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T13:32:46+00:00",
-      "title": "[비건라이프] 자연퐁 베이킹소다파워 3X 클린 라임향 리필 1L*1개",
-      "sale_price_krw": 1990
-    }
-  ],
+  "last_scanned_id": 95499,
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4337,7 +4318,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 193,
+  "skipped_non_coupang": 194,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4884,6 +4865,20 @@
       "source_title": "☆특가 14,530원",
       "posted_at_utc": "2026-11-09T12:01:37+00:00",
       "at": "2026-11-09T13:12:14.720294+00:00"
+    },
+    "95497": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95497",
+      "source_title": "[로켓프레시] 청정원 짜지 않은 리치부어스트 200g",
+      "posted_at_utc": "2026-11-09T13:11:15+00:00",
+      "at": "2026-11-09T15:08:23.121766+00:00"
+    },
+    "95498": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95498",
+      "source_title": "[비건라이프] 자연퐁 베이킹소다파워 3X 클린 라임향 리필 1L*1개",
+      "posted_at_utc": "2026-11-09T13:32:46+00:00",
+      "at": "2026-11-09T15:08:23.121777+00:00"
     }
   },
   "skipped_unverifiable": {
