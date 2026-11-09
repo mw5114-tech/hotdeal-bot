@@ -1,3 +1,3 @@
 phase=probe
 blog=mw5114
-readonly frame diagnostic run=3
+readonly selector diagnostic run=4
