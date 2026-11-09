@@ -166,18 +166,56 @@ def _affiliate_anchors(frame, url: str) -> dict:
             "labels": [m["label"] for m in matches]}
 
 
-def _diagnose_link_toolbar(frame):
+def _diagnose_link_toolbar(page, frame, url: str):
     candidates = frame.locator("button").evaluate_all(
         """els => els.filter(b => /link|링크|연결|url/i.test(
             [b.className,b.title,b.getAttribute('aria-label'),b.innerText].join(' ')
-        )).slice(0,25).map(b => ({
+        )).slice(0,15).map(b => ({
             cls: (b.className || '').slice(0,140),
             label: (b.innerText || '').slice(0,50),
-            title: (b.title || '').slice(0,40),
             visible: b.getClientRects().length > 0
         }))"""
     )
     print("NAVER_LINK_TOOLBAR_CANDIDATES " + str(candidates))
+    paragraph = frame.locator(".se-section-text .se-text-paragraph").filter(has_text=url)
+    if paragraph.count() != 1:
+        print("NAVER_LINK_PARAGRAPH_NON_UNIQUE=" + str(paragraph.count()))
+        return
+    paragraph.first.click(timeout=5000)
+    page.keyboard.press("Home")
+    page.keyboard.press("Shift+End")
+    toolbar = frame.locator(
+        "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
+    )
+    print("NAVER_LINK_TOOLBAR_COUNT=" + str(toolbar.count()))
+    if toolbar.count() != 1:
+        return
+    toolbar.click(timeout=4500)
+    page.wait_for_timeout(550)
+    inputs = frame.locator("input, textarea").evaluate_all(
+        """els => els.filter(e => e.getClientRects().length > 0).slice(0,20).map(e => ({
+            tag: e.tagName, type:e.getAttribute('type'),
+            placeholder:(e.getAttribute('placeholder')||'').slice(0,75),
+            cls:(e.className||'').slice(0,110)
+        }))"""
+    )
+    controls = frame.locator("button").evaluate_all(
+        """els => els.filter(b => b.getClientRects().length > 0 &&
+            /확인|적용|저장|링크|취소|완료|연결/i.test(b.innerText || '')
+        ).slice(0,18).map(b => ({
+            label:(b.innerText || '').slice(0,45),
+            cls:(b.className||'').slice(0,120)
+        }))"""
+    )
+    layers = frame.locator("[class*='se-link']").evaluate_all(
+        """els => els.filter(e => e.getClientRects().length > 0).slice(-16).map(e => ({
+            tag:e.tagName, cls:(e.className||'').slice(0,110),
+            text:(e.innerText||'').slice(0,80)
+        }))"""
+    )
+    print("NAVER_LINK_DIALOG_INPUTS " + str(inputs))
+    print("NAVER_LINK_DIALOG_BUTTONS " + str(controls))
+    print("NAVER_LINK_DIALOG_LAYERS " + str(layers))
 
 
 def render_readable_blocks(page, frame, body_element, article: dict) -> None:
@@ -247,7 +285,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     after_link = _affiliate_anchors(frame, article["link"])
     print("NAVER_LINK_AUTO_AFTER_SPACE " + str(after_link))
     if after_link["count"] != 1:
-        _diagnose_link_toolbar(frame)
+        _diagnose_link_toolbar(page, frame, article["link"])
     bold_applied = _bold_existing_labels(page, frame, blocks)
     page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
