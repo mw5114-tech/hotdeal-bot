@@ -129,13 +129,14 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             kind="image_notice"
         ))
 
-    # Keep the affiliate call-to-action at the end. The SmartEditor writer
-    # must turn the URL into a real clickable anchor before publication.
-    blocks += [
-        _block("📦 쿠팡에서 상품정보 더보기",
-               label="📦 쿠팡에서 상품정보 더보기", kind="cta"),
-        _block(link, kind="affiliate_link"),
-    ]
+    # Show one short, readable clickable label; never put the 100+ character
+    # AFFSDP URL into public visible text. Store the full verified URL only as
+    # structured metadata for Naver's native hyperlink editor.
+    blocks.append({
+        **_block("📦 쿠팡에서 상품정보 더보기",
+                 label="📦 쿠팡에서 상품정보 더보기", kind="affiliate_link"),
+        "link_url": link,
+    })
 
     return blocks
 
@@ -153,11 +154,16 @@ def validate_blocks(blocks: list[dict], expected_url: str) -> None:
         raise ValueError("NAVER_FORMAT_DISCLOSURE_IMAGE_ORDER")
     if sum(x.get("type") == "image" for x in blocks) != 1:
         raise ValueError("NAVER_FORMAT_IMAGE_COUNT")
-    if sum(x.get("kind") == "affiliate_link" for x in blocks) != 1:
-        raise ValueError("NAVER_FORMAT_LINK_COUNT")
+    link_blocks = [x for x in blocks if x.get("kind") == "affiliate_link"]
+    if len(link_blocks) != 1 or blocks[-1] is not link_blocks[0]:
+        raise ValueError("NAVER_FORMAT_LINK_COUNT_OR_POSITION")
+    if (link_blocks[0].get("link_url") != expected_url
+            or link_blocks[0].get("text") != "📦 쿠팡에서 상품정보 더보기"):
+        raise ValueError("NAVER_FORMAT_LINK_TARGET_OR_LABEL")
     body = plain_body(blocks)
-    if body.count(expected_url) != 1 or len(body) > 9000:
-        raise ValueError("NAVER_FORMAT_LINK_OR_LENGTH")
+    if (expected_url in body or "https://link.coupang.com/" in body
+            or body.count(link_blocks[0]["text"]) != 1 or len(body) > 9000):
+        raise ValueError("NAVER_FORMAT_DUPLICATED_VISIBLE_URL")
     for block in blocks:
         if block.get("type") == "text":
             _block(block["text"], label=block.get("bold_prefix", ""))
