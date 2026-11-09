@@ -169,7 +169,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         page.wait_for_timeout(90)
 
     page.wait_for_timeout(1000)
-    section = frame.locator(".se-section-text").inner_text()
+    section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
     conditions = {
         "disclosure": blocks[0]["text"] in section,
         "sale": "오늘 특가" in section,
