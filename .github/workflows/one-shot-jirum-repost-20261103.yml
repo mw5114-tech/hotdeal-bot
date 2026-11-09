@@ -17,7 +17,9 @@ concurrency:
 
 jobs:
   publish-latest-again-once:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    # TEMPORARILY PAUSED at user's request; keep the repost module unchanged.
+    # This test path must not bypass the normal Daangn publishing pause.
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && false
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     env:
