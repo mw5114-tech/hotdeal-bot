@@ -109,8 +109,14 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
             title.click(timeout=8000)
-            enter_text_in_chunks(page, article["title"])
-            page.wait_for_timeout(500)
+            # SmartEditor can discard the first long insertText event while
+            # activating a fresh title section. Prime it with one ASCII char,
+            # allow its selection model to settle, then type the remaining
+            # Unicode content like native keypresses (including emojis).
+            page.keyboard.insert_text(article["title"][:1])
+            page.wait_for_timeout(800)
+            page.keyboard.type(article["title"][1:], delay=35)
+            page.wait_for_timeout(900)
             actual_title = frame.locator(".se-section-documentTitle").inner_text()
             print("NAVER_TITLE_CHECK " + str({
                 "expected_chars": len(article["title"]),
