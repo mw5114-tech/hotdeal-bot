@@ -269,9 +269,7 @@ def preview_latest():
     }))
     if os.getenv("NAVER_BLOG_STORAGE_STATE_JSON"):
         from gh_only.naver_blog_deal_publisher import submit_one
-        diagnostic = dict(article, title="[자동화 테스트] 네이버 블로그 글쓰기 연결 확인")
-        print("NAVER_TITLE_DIAGNOSTIC_PROVEN_TEST_COPY_NO_PUBLISH")
-        submit_one(diagnostic, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"],
+        submit_one(article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"],
                    publish=False)
     return 0
 
