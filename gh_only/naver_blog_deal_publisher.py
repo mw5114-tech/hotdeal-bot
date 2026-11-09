@@ -70,19 +70,33 @@ def enter_text_in_chunks(page, content: str, chunk_size: int = 20):
 
 
 def _write_styled_block(page, item: dict) -> None:
-    """Use Naver's documented Ctrl+B shortcut on the label only."""
-    text = item["text"]
-    bold = item.get("bold_prefix", "")
-    if bold:
-        if not text.startswith(bold):
-            raise RuntimeError("NAVER_BOLD_PREFIX_MISMATCH")
-        page.keyboard.press("Control+b")
-        enter_text_in_chunks(page, bold)
-        page.keyboard.press("Control+b")
-        enter_text_in_chunks(page, text[len(bold):])
-    else:
-        enter_text_in_chunks(page, text)
+    """Enter a complete Korean text block without interrupting IME composition.
 
+    Switching Ctrl+B during a Korean label can DROP text in SmartEditor;
+    actual bold is applied to already-composed paragraphs afterwards.
+    """
+    enter_text_in_chunks(page, item["text"])
+
+
+def _bold_existing_labels(page, frame, blocks: list[dict]) -> int:
+    """Style existing complete paragraphs using Naver's Ctrl+B shortcut."""
+    count = 0
+    for item in blocks:
+        label = item.get("bold_prefix", "")
+        if not label:
+            continue
+        paragraph = frame.locator(".se-section-text .se-text-paragraph").filter(
+            has_text=item["text"]
+        )
+        if paragraph.count() != 1 or not paragraph.first.is_visible():
+            print("NAVER_BOLD_PARAGRAPH_UNAVAILABLE " + str(item.get("kind")))
+            continue
+        paragraph.first.select_text(timeout=5000)
+        page.keyboard.press("Control+b")
+        page.wait_for_timeout(170)
+        count += 1
+    print("NAVER_BOLD_LABEL_PARAGRAPHS_APPLIED=" + str(count))
+    return count
 
 def _editor_layout(frame, phase: str) -> None:
     try:
@@ -168,7 +182,9 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         written.append(item["text"])
         page.wait_for_timeout(90)
 
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(600)
+    bold_applied = _bold_existing_labels(page, frame, blocks)
+    page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
     conditions = {
         "disclosure": blocks[0]["text"] in section,
@@ -176,6 +192,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         "link": section.count(article["link"]) == 1,
         "closing_note": blocks[-1]["text"] in section,
         "paragraphs": frame.locator(".se-text-paragraph").count(),
+        "bold_applied": bold_applied,
         "bold_segments": frame.locator(
             ".se-section-text strong, .se-section-text b, "
             ".se-section-text span[style*='font-weight: bold'], "
@@ -198,7 +215,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
     if conditions["paragraphs"] < 7:
         raise RuntimeError("NAVER_FORMAT_PARAGRAPHS_MISSING")
-    if conditions["bold_segments"] < 2:
+    if conditions["bold_applied"] < 3 or conditions["bold_segments"] < 3:
         raise RuntimeError("NAVER_FORMAT_BOLD_NOT_APPLIED")
     print("NAVER_READABLE_LAYOUT_VERIFIED")
 
