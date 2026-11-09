@@ -1,0 +1,5 @@
+User requested one newly published Naver Blog post after final revision
+Date: 2026-11-09
+Copy: exact inventory depletion disclaimer; no Telegram source in public copy
+Affiliate URL: must be native se-link[data-href] equal to full owner's Coupang URL; subid=naverblog
+Run once only; durable state key final_link_test_once_20261109; no automatic retries.
