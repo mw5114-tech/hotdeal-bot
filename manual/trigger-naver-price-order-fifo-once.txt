@@ -1,0 +1,5 @@
+Owner-approved one-time live Naver Blog hotdeal price-order test.
+Source: existing pending Telegram @jirum message 95500; previously failed before any Naver editor title or publishing click in GitHub run 42641805298.
+Layout: 🛍️ 실시간 쿠팡 핫딜, product, verified reference price, discounted sale price with [약 NN% 할인], stock notice immediately below, then one clickable AFFSDP link.
+This trigger is explicitly single use and the workflow aborts if source 95500 is missing/claimed/published.
+No Daangn publication. Temporarily held Oracle Naver job will be resumed after this test.
