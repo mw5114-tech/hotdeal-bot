@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95450,
+  "last_scanned_id": 95452,
   "pending": [
     {
       "id": 95450,
@@ -10,6 +10,24 @@
       "posted_at_utc": "2026-11-09T02:15:57+00:00",
       "title": "☆특가 6,800원",
       "sale_price_krw": 6800
+    },
+    {
+      "id": 95451,
+      "source_post_url": "https://t.me/jirum/95451",
+      "original_purchase_url": "https://link.coupang.com/a/iwMOGsHplc",
+      "source_text": "🔥🔥🔥무지성 3,690원 (50.8% 할인)🔥🔥🔥\n바바김밥 야채김밥 (냉동), 230g, 2개입\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,494원\n- 할인: 3,804원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwMOGsHplc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T02:20:37+00:00",
+      "title": "바바김밥 야채김밥 (냉동), 230g, 2개입",
+      "sale_price_krw": 3690
+    },
+    {
+      "id": 95452,
+      "source_post_url": "https://t.me/jirum/95452",
+      "original_purchase_url": "https://link.coupang.com/a/iwMOKpRRMi",
+      "source_text": "🔥🔥🔥무지성 3,990원 (47.4% 할인)🔥🔥🔥\n올곧 바바김밥 참치마요김밥 (냉동), 2개, 240g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,585원\n- 할인: 3,595원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwMOKpRRMi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T02:20:38+00:00",
+      "title": "올곧 바바김밥 참치마요김밥 (냉동), 2개, 240g",
+      "sale_price_krw": 3990
     }
   ],
   "in_flight": null,
