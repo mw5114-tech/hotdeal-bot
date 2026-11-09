@@ -68,6 +68,134 @@ def enter_text_in_chunks(page, content: str, chunk_size: int = 20):
         page.wait_for_timeout(90)
 
 
+
+def _write_styled_block(page, item: dict) -> None:
+    """Use Naver's documented Ctrl+B shortcut on the label only."""
+    text = item["text"]
+    bold = item.get("bold_prefix", "")
+    if bold:
+        if not text.startswith(bold):
+            raise RuntimeError("NAVER_BOLD_PREFIX_MISMATCH")
+        page.keyboard.press("Control+b")
+        enter_text_in_chunks(page, bold)
+        page.keyboard.press("Control+b")
+        enter_text_in_chunks(page, text[len(bold):])
+    else:
+        enter_text_in_chunks(page, text)
+
+
+def _editor_layout(frame, phase: str) -> None:
+    try:
+        components = frame.locator(".se-component").evaluate_all("""
+            els => els.slice(0,26).map(e => ({
+                kind: (e.className || '').split(' ').filter(
+                    x => /^se-component-(text|image)/.test(x)
+                ).join(','),
+                editables: e.querySelectorAll('[contenteditable]').length,
+                textLength: (e.innerText || '').length
+            }))
+        """)
+        print("NAVER_LAYOUT_" + phase + " " + str(components))
+    except Exception:
+        print("NAVER_LAYOUT_" + phase + "_UNAVAILABLE")
+
+
+def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
+    return frame.evaluate("""
+        (disclosure) => {
+            const root = document;
+            const ps = Array.from(root.querySelectorAll('.se-text-paragraph'));
+            const intro = ps.find(e => (e.innerText || '').includes(disclosure));
+            const price = ps.find(e => (e.innerText || '').includes('오늘 특가'));
+            const img = root.querySelector('.se-component-image');
+            if (!intro || !price || !img) return false;
+            const follows = (left, right) =>
+                (left.compareDocumentPosition(right) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+            return follows(intro, img) && follows(img, price);
+        }
+    """, disclosure)
+
+
+def render_readable_blocks(page, frame, body_element, article: dict) -> None:
+    """Native paragraphs + bold labels + photo after disclosure, no HTML paste.
+
+    The editor is verified empty before calling; any uncertain focus/order
+    causes a hard stop before the publish button is reached.
+    """
+    from gh_only.naver_blog_format import validate_blocks
+    blocks = article["blocks"]
+    validate_blocks(blocks, article["link"])
+    body_element.click(timeout=8000)
+    _write_styled_block(page, blocks[0])
+    page.wait_for_timeout(350)
+    # Separate disclosure into its own paragraph and leave a blank paragraph.
+    page.keyboard.press("Enter")
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(450)
+    upload_image(page, frame, article["image"])
+    _editor_layout(frame, "AFTER_PHOTO")
+
+    # New SmartEditor text component after the inserted photo. Only accept a
+    # text component actually ordered after the photo, not the intro above it.
+    next_text = frame.locator(
+        ".se-component-image ~ .se-component-text .se-text-paragraph"
+    )
+    if next_text.count():
+        candidate = next_text.last
+        candidate.click(timeout=7000)
+    else:
+        # Enter on the image's trailing boundary may create the next text block.
+        image = frame.locator(".se-component-image").last
+        image.click(timeout=7000)
+        page.keyboard.press("ArrowDown")
+        page.keyboard.press("Enter")
+        page.wait_for_timeout(450)
+        next_text = frame.locator(
+            ".se-component-image ~ .se-component-text .se-text-paragraph"
+        )
+        if next_text.count() == 0:
+            raise RuntimeError("NAVER_TEXT_AFTER_PHOTO_NOT_FOUND")
+        next_text.last.click(timeout=7000)
+
+    written = []
+    for index, item in enumerate(blocks[2:]):
+        if item.get("type") != "text":
+            raise RuntimeError("NAVER_UNEXPECTED_BLOCK_TYPE")
+        if index:
+            page.keyboard.press("Enter")
+            page.keyboard.press("Enter")
+        _write_styled_block(page, item)
+        written.append(item["text"])
+        page.wait_for_timeout(90)
+
+    page.wait_for_timeout(1000)
+    section = frame.locator(".se-section-text").inner_text()
+    conditions = {
+        "disclosure": blocks[0]["text"] in section,
+        "sale": "오늘 특가" in section,
+        "link": section.count(article["link"]) == 1,
+        "closing_note": blocks[-1]["text"] in section,
+        "paragraphs": frame.locator(".se-text-paragraph").count(),
+        "bold_segments": frame.locator(
+            ".se-section-text strong, .se-section-text b, "
+            ".se-section-text span[style*='font-weight: bold'], "
+            ".se-section-text .se-text-format-bold"
+        ).count(),
+        "photo_between": _photo_between_disclosure_and_price(frame, blocks[0]["text"]),
+    }
+    print("NAVER_FORMAT_CHECK " + str(conditions))
+    _editor_layout(frame, "FINAL")
+    if not all((conditions["disclosure"], conditions["sale"],
+                conditions["link"], conditions["closing_note"],
+                conditions["photo_between"])):
+        raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
+    if conditions["paragraphs"] < 7:
+        raise RuntimeError("NAVER_FORMAT_PARAGRAPHS_MISSING")
+    if conditions["bold_segments"] < 2:
+        raise RuntimeError("NAVER_FORMAT_BOLD_NOT_APPLIED")
+    print("NAVER_READABLE_LAYOUT_VERIFIED")
+
+
 def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None:
     from playwright.sync_api import sync_playwright
 
@@ -145,21 +273,18 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                     }))
                 if article["title"] not in actual_title:
                     raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
-            body_element.click(timeout=8000)
-            enter_text_in_chunks(page, body)
-            page.wait_for_timeout(700)
-            actual_body = frame.locator(".se-section-text").inner_text()
-            print("NAVER_BODY_CHECK " + str({
-                "expected_chars": len(body), "actual_chars": len(actual_body),
-                "disclosure": body[:32] in actual_body,
-                "link_present": article["link"] in actual_body,
-                "link_count": actual_body.count(article["link"]),
-            }))
-            if (body[:32] not in actual_body
-                    or article["link"] not in actual_body
-                    or actual_body.count(article["link"]) != 1):
-                raise RuntimeError("NAVER_BODY_NOT_APPLIED")
-            upload_image(page, frame, image)
+            if article.get("blocks"):
+                render_readable_blocks(page, frame, body_element, article)
+            else:
+                # Compatibility with the original one-shot plain-text test.
+                body_element.click(timeout=8000)
+                enter_text_in_chunks(page, body)
+                page.wait_for_timeout(700)
+                actual_body = frame.locator(".se-section-text").inner_text()
+                if (body[:32] not in actual_body
+                        or actual_body.count(article["link"]) != 1):
+                    raise RuntimeError("NAVER_BODY_NOT_APPLIED")
+                upload_image(page, frame, image)
             if not publish:
                 print("NAVER_IMAGE_AND_TEXT_DRAFT_OK_NO_PUBLISH")
                 return None
