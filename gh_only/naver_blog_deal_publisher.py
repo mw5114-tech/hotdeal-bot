@@ -88,9 +88,7 @@ def _editor_layout(frame, phase: str) -> None:
     try:
         components = frame.locator(".se-component").evaluate_all("""
             els => els.slice(0,26).map(e => ({
-                kind: (e.className || '').split(' ').filter(
-                    x => /^se-component-(text|image)/.test(x)
-                ).join(','),
+                kind: (e.className || '').slice(0,120),
                 editables: e.querySelectorAll('[contenteditable]').length,
                 textLength: (e.innerText || '').length
             }))
@@ -107,7 +105,7 @@ def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
             const ps = Array.from(root.querySelectorAll('.se-text-paragraph'));
             const intro = ps.find(e => (e.innerText || '').includes(disclosure));
             const price = ps.find(e => (e.innerText || '').includes('오늘 특가'));
-            const img = root.querySelector('.se-component-image');
+            const img = root.querySelector('.se-component.se-image, .se-section-image');
             if (!intro || !price || !img) return false;
             const follows = (left, right) =>
                 (left.compareDocumentPosition(right) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
@@ -138,20 +136,22 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     # New SmartEditor text component after the inserted photo. Only accept a
     # text component actually ordered after the photo, not the intro above it.
     next_text = frame.locator(
-        ".se-component-image ~ .se-component-text .se-text-paragraph"
+        ".se-component.se-image ~ .se-component.se-text .se-text-paragraph"
     )
     if next_text.count():
         candidate = next_text.last
         candidate.click(timeout=7000)
     else:
         # Enter on the image's trailing boundary may create the next text block.
-        image = frame.locator(".se-component-image").last
+        image = frame.locator(".se-section-image").last
+        if not image.count():
+            raise RuntimeError("NAVER_IMAGE_COMPONENT_NOT_FOUND")
         image.click(timeout=7000)
         page.keyboard.press("ArrowDown")
         page.keyboard.press("Enter")
         page.wait_for_timeout(450)
         next_text = frame.locator(
-            ".se-component-image ~ .se-component-text .se-text-paragraph"
+            ".se-component.se-image ~ .se-component.se-text .se-text-paragraph"
         )
         if next_text.count() == 0:
             raise RuntimeError("NAVER_TEXT_AFTER_PHOTO_NOT_FOUND")
