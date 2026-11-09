@@ -286,7 +286,11 @@ def main():
         raise RuntimeError("NAVER_UNSUPPORTED_RUN_CONTEXT")
     store = Store()
     if args.action == "scan":
-        scan(store)
+        result = scan(store)
+        output = os.getenv("GITHUB_OUTPUT")
+        if output:
+            with open(output, "a", encoding="utf-8") as fh:
+                fh.write("ready=" + ("true" if result.get("ready") else "false") + "\n")
         return 0
     if os.getenv("NAVER_BLOG_PUBLISH_ENABLED") != "true":
         print("NAVER_BLOG_PUBLISH_PAUSED")
