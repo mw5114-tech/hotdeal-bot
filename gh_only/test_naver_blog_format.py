@@ -72,7 +72,8 @@ class FormattingTests(unittest.TestCase):
         _, body = self.format("fallcent_observed_high")
         self.assertIn("폴센트 관측 최고가", body)
         self.assertNotIn("쿠팡 평소 판매가", body)
-        self.assertIn("폴센트 최고가 대비", body)
+        self.assertIn("가격 비교 기준 : 폴센트 관측 최고가", body)
+        self.assertIn("[약 25% 할인]", body)
 
     def test_naver_search_is_comparison_not_average(self):
         _, body = self.format("naver_general_search_first_shopping_card")
