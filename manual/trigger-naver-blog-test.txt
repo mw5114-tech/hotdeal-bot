@@ -1,4 +1,4 @@
 phase=publish
 blog=mw5114
-one-authorized-test-post=2026-11-09
-no-automatic-retries
+one-shot-publish-button-diagnostic=2
+no-automatic-retry
