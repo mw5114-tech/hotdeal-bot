@@ -15,8 +15,10 @@ Target: https://blog.naver.com/mw5114
 
 ## Safety and current state
 
-- Automatic Naver publication is **PAUSED** until a real fresh Telegram deal
-  passes SmartEditor title + body + product image dry run.
+- Automatic Naver publication was **enabled by owner request on 2026-11-09**
+  after a fresh Telegram deal passed SmartEditor title + body + product image
+  dry-run. The new-deal auto-publish path remains unverified by a live affiliate
+  publication until the first eligible Telegram event arrives.
 - The public test post confirmed basic login and text-only publication;
   an image-backed affiliate post is **not yet verified**.
 - The link generator may produce an unissued `/re/AFFSDP` candidate.
@@ -39,9 +41,10 @@ Target: https://blog.naver.com/mw5114
 3. `scan` updates independent Naver source watermark and queue.
 4. `post` is intentionally a guarded one-item manual test requiring the
    registered channel and approval of the candidate link format.
-5. The existing Oracle-triggered job currently has
-   `NAVER_BLOG_PUBLISH_ENABLED: 'false'`. Change to `'true'` only after
-   image/upload and real one-item publication have been verified.
+5. The existing Oracle-triggered job now has
+   `NAVER_BLOG_PUBLISH_ENABLED: 'true'` by owner request. The separate Daangn
+   publishing gate remains `DAANGN_PUBLISH_PAUSED: 'true'`.
+   Turn the Naver flag back to `'false'` to pause only Naver posting.
 
 ## Failure handling
 
