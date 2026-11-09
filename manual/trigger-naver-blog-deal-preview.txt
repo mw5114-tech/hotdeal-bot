@@ -1,3 +1,3 @@
-2026-11-09
+2026-11-10
 mode=preview
-NO_PUBLISH: dedicated blank URL paragraph, native complete link, zero split/duplicate fragments
+NO_PUBLISH: realtime heading + reference then discounted sale + immediate inventory notice, image, full native URL
