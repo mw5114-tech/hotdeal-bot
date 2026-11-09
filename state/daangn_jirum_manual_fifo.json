@@ -1,34 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95476,
+  "last_scanned_id": 95478,
   "pending": [
-    {
-      "id": 95472,
-      "source_post_url": "https://t.me/jirum/95472",
-      "original_purchase_url": "https://link.coupang.com/a/iw4lgaVLum",
-      "source_text": "🔥🔥🔥무지성 2,990원 (65.0% 할인)🔥🔥🔥\n쉐푸드 고추마요치킨 330g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,543원\n- 할인: 5,553원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw4lgaVLum\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T06:25:52+00:00",
-      "title": "쉐푸드 고추마요치킨 330g",
-      "sale_price_krw": 2990
-    },
-    {
-      "id": 95473,
-      "source_post_url": "https://t.me/jirum/95473",
-      "original_purchase_url": "https://link.coupang.com/a/iw454bK5qm",
-      "source_text": "🔥🔥🔥무지성 4,510원 (48.0% 할인)🔥🔥🔥\n샤프란 케어 냄새뺌 섬유탈취제 방금 씻은 비누향 본품 400ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,673원\n- 할인: 4,163원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw454bK5qm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T06:36:25+00:00",
-      "title": "샤프란 케어 냄새뺌 섬유탈취제 방금 씻은 비누향 본품 400ml",
-      "sale_price_krw": 4510
-    },
-    {
-      "id": 95474,
-      "source_post_url": "https://t.me/jirum/95474",
-      "original_purchase_url": "https://link.coupang.com/a/iw49YqYBP2",
-      "source_text": "👍대박 19,800원 (36.0% 할인)\nApple 정품 전원 어댑터 20W USB C\n📌 가격 현황\n- 정상가: 30,938원\n- 할인: 11,138원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw49YqYBP2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T06:37:18+00:00",
-      "title": "Apple 정품 전원 어댑터 20W USB C",
-      "sale_price_krw": 19800
-    },
     {
       "id": 95475,
       "source_post_url": "https://t.me/jirum/95475",
@@ -46,6 +19,15 @@
       "posted_at_utc": "2026-11-09T07:07:47+00:00",
       "title": "☆특가 18,610원",
       "sale_price_krw": 18610
+    },
+    {
+      "id": 95478,
+      "source_post_url": "https://t.me/jirum/95478",
+      "original_purchase_url": "https://link.coupang.com/a/ixadulvvIO",
+      "source_text": "❤️초대박 3,900원 (44.3% 할인)\n히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 3,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixadulvvIO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T07:48:04+00:00",
+      "title": "히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개",
+      "sale_price_krw": 3900
     }
   ],
   "in_flight": null,
@@ -4364,7 +4346,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 180,
+  "skipped_non_coupang": 181,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4827,6 +4809,27 @@
       "source_title": "페이스팩토리 UV 충전형 전동 발각질제거기",
       "posted_at_utc": "2026-11-09T06:07:34+00:00",
       "at": "2026-11-09T07:08:47.726518+00:00"
+    },
+    "95472": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95472",
+      "source_title": "쉐푸드 고추마요치킨 330g",
+      "posted_at_utc": "2026-11-09T06:25:52+00:00",
+      "at": "2026-11-09T07:49:09.931375+00:00"
+    },
+    "95473": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95473",
+      "source_title": "샤프란 케어 냄새뺌 섬유탈취제 방금 씻은 비누향 본품 400ml",
+      "posted_at_utc": "2026-11-09T06:36:25+00:00",
+      "at": "2026-11-09T07:49:09.931382+00:00"
+    },
+    "95474": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95474",
+      "source_title": "Apple 정품 전원 어댑터 20W USB C",
+      "posted_at_utc": "2026-11-09T06:37:18+00:00",
+      "at": "2026-11-09T07:49:09.931385+00:00"
     }
   },
   "skipped_unverifiable": {
