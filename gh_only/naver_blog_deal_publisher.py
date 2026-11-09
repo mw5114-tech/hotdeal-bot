@@ -216,6 +216,21 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     print("NAVER_FORMAT_CHECK " + str(conditions))
     if conditions["bold_applied"] >= 3 and conditions["bold_segments"] < 3:
         try:
+            buttons = frame.locator("button").evaluate_all(
+                """els => els.filter(b => /bold|굵게|strong/i.test(
+                    [b.className,b.title,b.getAttribute('aria-label'),b.innerText].join(' ')
+                )).slice(0,12).map(b => ({
+                    cls: (b.className || '').slice(0,110),
+                    title: (b.title || '').slice(0,50),
+                    aria: (b.getAttribute('aria-label') || '').slice(0,50),
+                    text: (b.innerText || '').slice(0,25),
+                    visible: b.getClientRects().length > 0
+                }))"""
+            )
+            print("NAVER_BOLD_TOOLBAR_CANDIDATES " + str(buttons))
+        except Exception:
+            print("NAVER_BOLD_TOOLBAR_DIAGNOSTIC_UNAVAILABLE")
+        try:
             metrics = frame.locator(".se-section-text .se-text-paragraph").evaluate_all(
                 """els => els.filter(e => /오늘 특가|평소 판매가|참고 할인율|오늘의 쿠팡|상품정보/.test(e.innerText || '')).slice(0,12).map(e => ({
                     text: (e.innerText || '').slice(0,55),
