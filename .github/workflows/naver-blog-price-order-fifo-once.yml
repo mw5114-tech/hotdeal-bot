@@ -1,0 +1,60 @@
+name: Naver Blog - one owner-approved pending hotdeal price-order test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-naver-price-order-fifo-once.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-blog-jirum-state-and-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish-just-one:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      NAVER_BLOG_PUBLISH_ENABLED: 'true'
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify updated price order and exact one allowed pending message
+        run: |
+          python -m py_compile gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
+          python -m unittest -v gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum
+          python - <<'PY'
+          from gh_only.naver_blog_jirum import Store
+          s, sha = Store().read()
+          if (s.get("in_flight") is not None or len(s["pending"]) != 1
+                  or s["pending"][0]["id"] != 95500
+                  or "95500" in s["published"]):
+              raise RuntimeError("NOT_EXACTLY_ONE_OWNER_APPROVED_PENDING_ID_95500")
+          print("NAVER_PRICE_ORDER_ONE_PENDING_SOURCE_ID=95500")
+          PY
+      - name: Install browser for single source
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Publish exactly source 95500 using newly tested live publisher
+        run: python -m gh_only.naver_blog_jirum post
+# One manual push trigger only; no cron, no workflow_dispatch.
+# Source ID hard-coded to the explicitly reviewed unsent pending item 95500.
