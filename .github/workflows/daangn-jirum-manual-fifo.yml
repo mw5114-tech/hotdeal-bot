@@ -133,3 +133,54 @@ jobs:
 # Oracle events + 30-minute backup + on-demand manual. Each run posts ALL available pending
 # oldest-first, with a conservative runtime budget. Backlog that cannot finish
 # safely resumes next schedule. Never retry an uncertain post; stop on error.
+
+
+  # Reuse the exact Oracle -> GitHub dispatch and 30-minute backup triggers.
+  # Independent Naver state: no Daangn publishing or cursor is changed.
+  naver-blog-fifo:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'workflow_dispatch' || inputs.smoke_test != true)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: naver-blog-jirum-state-and-publisher
+      cancel-in-progress: false
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      # STOP: enable only after real Telegram hotdeal photo+copy dry run.
+      NAVER_BLOG_PUBLISH_ENABLED: 'false'
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scan fresh Telegram items into separate Naver queue
+        id: naver_scan
+        run: python -m gh_only.naver_blog_jirum scan
+      - name: Install browser only for a verified eligible Naver item
+        if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Publish max one eligible Naver Blog post
+        if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        run: python -m gh_only.naver_blog_jirum post
+      - name: Keep public-only Naver draft receipt if available
+        if: always() && steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: naver-blog-fifo-${{ github.run_id }}
+          path: naver-blog-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore
