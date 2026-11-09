@@ -152,6 +152,34 @@ def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
     """, disclosure)
 
 
+def _affiliate_anchors(frame, url: str) -> dict:
+    """Check real DOM hyperlinks, not visual URL text or generated OG labels."""
+    matches = frame.locator(".se-component a[href]").evaluate_all(
+        """(els, target) => els.filter(a => a.getAttribute('href') === target ||
+            a.href === target).map(a => ({
+                label: (a.innerText || '').slice(0,70),
+                component: (a.closest('.se-component')?.className || '').slice(0,80),
+                href: a.getAttribute('href')
+            }))""", url
+    )
+    return {"count": len(matches), "components": [m["component"] for m in matches],
+            "labels": [m["label"] for m in matches]}
+
+
+def _diagnose_link_toolbar(frame):
+    candidates = frame.locator("button").evaluate_all(
+        """els => els.filter(b => /link|링크|연결|url/i.test(
+            [b.className,b.title,b.getAttribute('aria-label'),b.innerText].join(' ')
+        )).slice(0,25).map(b => ({
+            cls: (b.className || '').slice(0,140),
+            label: (b.innerText || '').slice(0,50),
+            title: (b.title || '').slice(0,40),
+            visible: b.getClientRects().length > 0
+        }))"""
+    )
+    print("NAVER_LINK_TOOLBAR_CANDIDATES " + str(candidates))
+
+
 def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     """Native paragraphs + bold labels + photo after disclosure, no HTML paste.
 
@@ -207,11 +235,24 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         written.append(item["text"])
         page.wait_for_timeout(90)
 
-    page.wait_for_timeout(600)
+    page.wait_for_timeout(650)
+    # A URL typed as the final paragraph often remains inert plain text.
+    # A trailing space may trigger the native SmartEditor link recognizer
+    # without an Enter that creates an oversized OG preview component.
+    before_link = _affiliate_anchors(frame, article["link"])
+    print("NAVER_LINK_AUTO_BEFORE_SPACE " + str(before_link))
+    if before_link["count"] == 0:
+        page.keyboard.press("Space")
+        page.wait_for_timeout(1000)
+    after_link = _affiliate_anchors(frame, article["link"])
+    print("NAVER_LINK_AUTO_AFTER_SPACE " + str(after_link))
+    if after_link["count"] != 1:
+        _diagnose_link_toolbar(frame)
     bold_applied = _bold_existing_labels(page, frame, blocks)
     page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
     conditions = {
+        "affiliate_anchor": _affiliate_anchors(frame, article["link"])["count"] == 1,
         "disclosure": blocks[0]["text"] in section,
         "sale": "오늘 특가" in section,
         "link": section.count(article["link"]) == 1,
@@ -279,6 +320,8 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
                 conditions["link"], conditions["closing_note"],
                 conditions["photo_between"])):
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
+    if not conditions["affiliate_anchor"]:
+        raise RuntimeError("NAVER_AFFILIATE_LINK_NOT_CLICKABLE")
     if conditions["paragraphs"] < 7:
         raise RuntimeError("NAVER_FORMAT_PARAGRAPHS_MISSING")
     if conditions["bold_applied"] < 3 or conditions["computed_bold_paragraphs"] < 3:
