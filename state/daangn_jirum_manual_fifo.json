@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95492,
+  "last_scanned_id": 95493,
   "pending": [
     {
       "id": 95487,
@@ -19,6 +19,15 @@
       "posted_at_utc": "2026-11-09T11:09:01+00:00",
       "title": "석관동떡볶이 치즈쭈욱 (밀떡) (냉동) 420g 2개",
       "sale_price_krw": 8680
+    },
+    {
+      "id": 95493,
+      "source_post_url": "https://t.me/jirum/95493",
+      "original_purchase_url": "https://link.coupang.com/a/ixrs1FrhPU",
+      "source_text": "☆특가 10,930원\n해태htb 포도 봉봉 제로, 340ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixrs1FrhPU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T11:49:28+00:00",
+      "title": "☆특가 10,930원",
+      "sale_price_krw": 10930
     }
   ],
   "in_flight": null,
