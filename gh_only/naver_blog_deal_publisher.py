@@ -90,7 +90,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             title.click(timeout=8000)
             page.keyboard.insert_text(article["title"])
             page.wait_for_timeout(500)
-            actual_title = title.inner_text()
+            actual_title = frame.locator(".se-section-documentTitle").inner_text()
             print("NAVER_TITLE_CHECK " + str({
                 "expected_chars": len(article["title"]),
                 "actual_chars": len(actual_title),
@@ -101,7 +101,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                 # A fresh SmartEditor can discard an insertText when the title
                 # field only had the active placeholder. One alternate keypath
                 # is safe ONLY while the title module is still marked empty.
-                body_now = body_element.inner_text()
+                body_now = frame.locator(".se-section-text").inner_text()
                 print("NAVER_TITLE_FOCUS_CHECK " + str({
                     "empty": section_empty(frame, "title"),
                     "body_has_title": article["title"] in body_now,
@@ -111,7 +111,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                     title.click(timeout=8000)
                     page.keyboard.type(article["title"], delay=16)
                     page.wait_for_timeout(900)
-                    actual_title = title.inner_text()
+                    actual_title = frame.locator(".se-section-documentTitle").inner_text()
                     print("NAVER_TITLE_FALLBACK " + str({
                         "actual_chars": len(actual_title),
                         "exact": article["title"] in actual_title,
@@ -121,7 +121,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             body_element.click(timeout=8000)
             page.keyboard.insert_text(body)
             page.wait_for_timeout(700)
-            actual_body = body_element.inner_text()
+            actual_body = frame.locator(".se-section-text").inner_text()
             if (body[:32] not in actual_body
                     or article["link"] not in actual_body
                     or actual_body.count(article["link"]) != 1):
