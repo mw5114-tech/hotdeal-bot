@@ -549,38 +549,43 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             page.wait_for_timeout(3300)
             if not response or response.status >= 400:
                 raise RuntimeError("NAVER_EDITOR_HTTP_DENIED")
-            # Naver can have several hidden old-draft alerts sharing a CSS
-            # class. Count VISIBLE popups, not all matching DOM nodes.
-            # Always choose '취소', never '확인' on an unknown dialog.
-            for _ in range(4):
-                dismissed = False
+            # Old-draft popups can mount *after* domcontentloaded. Allow the
+            # editor to settle, then dismiss only a visibly labelled CANCEL
+            # button (never Confirm/restore/delete).
+            page.wait_for_timeout(1800)
+            for attempt in range(7):
+                visible_popups = []
                 for current_frame in page.frames:
-                    try:
-                        visible = current_frame.locator(
-                            ".se-popup.se-popup-alert-confirm:visible"
-                        )
-                        if visible.count() == 0:
-                            continue
-                        popup = visible.first
-                        cancel = popup.locator("button.se-popup-button-cancel:visible")
-                        if cancel.count() != 1:
-                            raise RuntimeError("NAVER_UNKNOWN_ALERT_REQUIRES_OWNER")
-                        cancel.click(timeout=3500)
-                        print("NAVER_EDITOR_ALERT_CANCELLED")
-                        dismissed = True
-                    except RuntimeError:
-                        raise
-                    except Exception:
-                        raise RuntimeError("NAVER_ALERT_CANNOT_SAFELY_DISMISS")
-                if not dismissed:
-                    break
-                page.wait_for_timeout(350)
-            for current_frame in page.frames:
-                if current_frame.locator(
-                    ".se-popup.se-popup-alert-confirm:visible"
-                ).count():
-                    raise RuntimeError("NAVER_ALERT_STILL_VISIBLE_STOP")
-            page.wait_for_timeout(350)
+                    popup = current_frame.locator(
+                        ".se-popup.se-popup-alert-confirm:visible"
+                    )
+                    if popup.count():
+                        visible_popups.append(popup.first)
+                if not visible_popups:
+                    # A delayed popup may still be mounting. Require two
+                    # successive clean polls, not one instant DOM snapshot.
+                    page.wait_for_timeout(600)
+                    if not any(
+                        fr.locator(".se-popup.se-popup-alert-confirm:visible").count()
+                        for fr in page.frames
+                    ):
+                        break
+                    continue
+                for popup in visible_popups:
+                    cancel = popup.locator("button.se-popup-button-cancel:visible")
+                    if cancel.count() != 1:
+                        raise RuntimeError("NAVER_UNKNOWN_ALERT_REQUIRES_OWNER")
+                    cancel.click(timeout=3500)
+                    print("NAVER_EDITOR_ALERT_CANCELLED")
+                page.wait_for_timeout(450)
+            else:
+                raise RuntimeError("NAVER_REPEATED_ALERT_STOP")
+            if any(
+                fr.locator(".se-popup.se-popup-alert-confirm:visible").count()
+                for fr in page.frames
+            ):
+                raise RuntimeError("NAVER_ALERT_STILL_VISIBLE_STOP")
+            page.wait_for_timeout(400)
             frame, title, body_element = get_editor_frame(page)
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
