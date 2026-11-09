@@ -22,5 +22,10 @@
     }
   },
   "skipped": {},
-  "in_flight": null
+  "in_flight": {
+    "id": 95497,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "42623378258",
+    "at": "2026-11-09T13:12:40.471289+00:00"
+  }
 }
