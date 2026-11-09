@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: cancel only visible Naver old-draft alert before styled layout
+NO_PUBLISH: verify multi-section bold paragraphs + hero photo layout
