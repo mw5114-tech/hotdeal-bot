@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95503,
-  "pending": [],
+  "last_scanned_id": 95505,
+  "pending": [
+    {
+      "id": 95504,
+      "source_message_id": 95504,
+      "source_post_url": "https://t.me/jirum/95504",
+      "original_purchase_url": "https://link.coupang.com/a/ix937Xsk7U",
+      "title": "하루온 군인핫팩 포켓용 대용량 핫팩 160g, 30개",
+      "source_text": "☆특가 9,930원 (23.6% 할인)\n하루온 군인핫팩 포켓용 대용량 핫팩 160g, 30개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 3,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ix937Xsk7U\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9930,
+      "posted_at_utc": "2026-11-09T22:13:34+00:00"
+    },
+    {
+      "id": 95505,
+      "source_message_id": 95505,
+      "source_post_url": "https://t.me/jirum/95505",
+      "original_purchase_url": "https://link.coupang.com/a/ix971Oefh6",
+      "title": "☆특가 990원",
+      "source_text": "☆특가 990원\n가와시마야 소프트 실리콘 아이스 트레이 6구 XW-481 10.3*7.4*4.1cm*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ix971Oefh6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 990,
+      "posted_at_utc": "2026-11-09T22:14:27+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
