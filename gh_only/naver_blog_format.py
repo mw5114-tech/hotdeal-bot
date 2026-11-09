@@ -148,7 +148,7 @@ def plain_body(blocks: list[dict]) -> str:
 
 
 def validate_blocks(blocks: list[dict], expected_url: str) -> None:
-    if not isinstance(blocks, list) or len(blocks) < 9:
+    if not isinstance(blocks, list) or len(blocks) < 8:
         raise ValueError("NAVER_FORMAT_BLOCKS_MISSING")
     if blocks[0].get("text") != DISCLOSURE or blocks[1].get("type") != "image":
         raise ValueError("NAVER_FORMAT_DISCLOSURE_IMAGE_ORDER")
