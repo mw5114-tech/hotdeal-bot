@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95478,
+  "last_scanned_id": 95479,
   "pending": [
-    {
-      "id": 95475,
-      "source_post_url": "https://t.me/jirum/95475",
-      "original_purchase_url": "https://link.coupang.com/a/iw6jYAg9V6",
-      "source_text": "🔥🔥🔥무지성 16,130원 (56.4% 할인)🔥🔥🔥\n켈로그 에너지바 K 레드베리 12p, 420g, 4개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 37,000원\n- 할인: 20,870원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw6jYAg9V6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T06:53:33+00:00",
-      "title": "켈로그 에너지바 K 레드베리 12p, 420g, 4개",
-      "sale_price_krw": 16130
-    },
     {
       "id": 95476,
       "source_post_url": "https://t.me/jirum/95476",
@@ -28,6 +19,15 @@
       "posted_at_utc": "2026-11-09T07:48:04+00:00",
       "title": "히말라야 울트라 모이스쳐라이징 튜브형 립밤 10g* 2개",
       "sale_price_krw": 3900
+    },
+    {
+      "id": 95479,
+      "source_post_url": "https://t.me/jirum/95479",
+      "original_purchase_url": "https://link.coupang.com/a/ixa9Vb3KWy",
+      "source_text": "🔥🔥🔥무지성 9,900원 (75.2% 할인)🔥🔥🔥\nKURUA 학생 대용량 원형 책장 거실 서재 회전형 책꽂이 45cm*3단\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 30,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixa9Vb3KWy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T08:01:15+00:00",
+      "title": "KURUA 학생 대용량 원형 책장 거실 서재 회전형 책꽂이 45cm*3단",
+      "sale_price_krw": 9900
     }
   ],
   "in_flight": null,
@@ -4830,6 +4830,13 @@
       "source_title": "Apple 정품 전원 어댑터 20W USB C",
       "posted_at_utc": "2026-11-09T06:37:18+00:00",
       "at": "2026-11-09T07:49:09.931385+00:00"
+    },
+    "95475": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95475",
+      "source_title": "켈로그 에너지바 K 레드베리 12p, 420g, 4개",
+      "posted_at_utc": "2026-11-09T06:53:33+00:00",
+      "at": "2026-11-09T08:02:11.274381+00:00"
     }
   },
   "skipped_unverifiable": {
