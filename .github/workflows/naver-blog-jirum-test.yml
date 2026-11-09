@@ -1,0 +1,124 @@
+name: Naver Blog - Jirum one-deal preview and guarded test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-naver-blog-deal-preview.txt'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'preview = prepare photo/copy and editor only; scan = check FIFO; post = one real FIFO item'
+        required: true
+        default: preview
+        type: choice
+        options: [preview, scan, post]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-blog-jirum-state-and-publisher
+  cancel-in-progress: false
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Validate separate Naver FIFO with no network access
+        run: |
+          python -m py_compile gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
+          python -m unittest -v gh_only.test_naver_blog_jirum test_naver_blog_one_shot
+
+  preview:
+    if: github.event_name == 'push' || inputs.mode == 'preview'
+    needs: tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Playwright only for an authenticated non-publishing editor check
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Prepare one current Telegram hotdeal and inspect editor (NO PUBLISH)
+        run: python -m gh_only.naver_blog_jirum preview
+      - name: Keep price, photo and prepared copy for owner inspection
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: naver-one-hotdeal-preview
+          path: naver-blog-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore
+
+  scan:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'scan'
+    needs: tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: write
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      GITHUB_RUN_ATTEMPT: ${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m gh_only.naver_blog_jirum scan
+
+  post:
+    if: github.event_name == 'workflow_dispatch' && inputs.mode == 'post'
+    needs: tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      NAVER_BLOG_PUBLISH_ENABLED: 'true'
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - run: python -m gh_only.naver_blog_jirum post
+
+# No cron or automatic publishing in this test workflow.
+# Existing Oracle-triggered workflow gets a separate Naver job.
