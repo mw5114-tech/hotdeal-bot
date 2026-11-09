@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95469,
+  "last_scanned_id": 95470,
   "pending": [
-    {
-      "id": 95465,
-      "source_post_url": "https://t.me/jirum/95465",
-      "original_purchase_url": "https://link.coupang.com/a/iwYI2E9xK0",
-      "source_text": "☆특가 6,990원\n신선한 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwYI2E9xK0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T05:07:16+00:00",
-      "title": "☆특가 6,990원",
-      "sale_price_krw": 6990
-    },
     {
       "id": 95466,
       "source_post_url": "https://t.me/jirum/95466",
@@ -37,6 +28,15 @@
       "posted_at_utc": "2026-11-09T05:57:33+00:00",
       "title": "청우식품 쫀득초코칩 240g 2개",
       "sale_price_krw": 4540
+    },
+    {
+      "id": 95470,
+      "source_post_url": "https://t.me/jirum/95470",
+      "original_purchase_url": "https://link.coupang.com/a/iw22d13ACy",
+      "source_text": "🔥🔥🔥무지성 10,890원 (45.6% 할인)🔥🔥🔥\n페이스팩토리 UV 충전형 전동 발각질제거기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 9,110원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw22d13ACy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T06:07:34+00:00",
+      "title": "페이스팩토리 UV 충전형 전동 발각질제거기",
+      "sale_price_krw": 10890
     }
   ],
   "in_flight": null,
@@ -4783,6 +4783,13 @@
       "source_title": "☆특가 1,830원",
       "posted_at_utc": "2026-11-09T04:55:15+00:00",
       "at": "2026-11-09T05:58:15.150391+00:00"
+    },
+    "95465": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95465",
+      "source_title": "☆특가 6,990원",
+      "posted_at_utc": "2026-11-09T05:07:16+00:00",
+      "at": "2026-11-09T06:08:12.627599+00:00"
     }
   },
   "skipped_unverifiable": {
