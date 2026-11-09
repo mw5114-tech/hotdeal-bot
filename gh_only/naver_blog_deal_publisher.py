@@ -193,8 +193,19 @@ def _apply_native_affiliate_link(page, frame, url: str, label: str) -> bool:
     if paragraph.count() != 1 or paragraph.first.inner_text().strip() != label:
         raise RuntimeError("NAVER_LINK_LABEL_PARAGRAPH_AMBIGUOUS")
     paragraph.first.click(timeout=6000)
-    # Select the entire logical paragraph, not one visually wrapped line.
-    paragraph.first.select_text(timeout=5000)
+    # SmartEditor ignores Playwright's DOM Range selection for link operations:
+    # its toolbar inserts the URL at the caret instead of wrapping the text.
+    # Use actual editor-owned keyboard selection for the entire short line.
+    page.keyboard.press("Home")
+    page.keyboard.press("Shift+End")
+    selection = frame.evaluate("() => (window.getSelection()?.toString() || '').trim()")
+    print("NAVER_CTA_SELECTION_CHECK " + str({
+        "selected_chars": len(selection),
+        "expected_chars": len(label),
+        "exact": selection == label,
+    }))
+    if selection != label:
+        raise RuntimeError("NAVER_CTA_FULL_SELECTION_NOT_ESTABLISHED")
     toolbar = frame.locator(
         "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
     )
