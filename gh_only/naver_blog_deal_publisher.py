@@ -222,30 +222,38 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             page.wait_for_timeout(3300)
             if not response or response.status >= 400:
                 raise RuntimeError("NAVER_EDITOR_HTTP_DENIED")
-            # Match the proven Naver one-shot writer: close the editor's
-            # previous-draft popup before attempting to focus the title.
-            for current_frame in page.frames:
-                try:
-                    cancel = current_frame.locator("button.se-popup-button-cancel")
-                    if cancel.count() == 1 and cancel.is_visible():
-                        cancel.click(timeout=4000)
-                        print("NAVER_EDITOR_RESTORE_POPUP_DISMISSED")
-                except Exception:
-                    pass
-            page.wait_for_timeout(700)
-            for current_frame in page.frames:
-                try:
-                    popup = current_frame.locator(".se-popup.se-popup-alert-confirm")
-                    if popup.count() and popup.first.is_visible():
-                        details = popup.first.locator("button").evaluate_all(
-                            """els => els.slice(0,8).map(b => ({
-                                label: (b.innerText || '').trim().slice(0,22),
-                                classes: (b.className || '').slice(0,100)
-                            }))"""
+            # Naver can have several hidden old-draft alerts sharing a CSS
+            # class. Count VISIBLE popups, not all matching DOM nodes.
+            # Always choose '취소', never '확인' on an unknown dialog.
+            for _ in range(4):
+                dismissed = False
+                for current_frame in page.frames:
+                    try:
+                        visible = current_frame.locator(
+                            ".se-popup.se-popup-alert-confirm:visible"
                         )
-                        print("NAVER_PENDING_ALERT_BUTTONS " + str(details))
-                except Exception:
-                    print("NAVER_PENDING_ALERT_METADATA_UNAVAILABLE")
+                        if visible.count() == 0:
+                            continue
+                        popup = visible.first
+                        cancel = popup.locator("button.se-popup-button-cancel:visible")
+                        if cancel.count() != 1:
+                            raise RuntimeError("NAVER_UNKNOWN_ALERT_REQUIRES_OWNER")
+                        cancel.click(timeout=3500)
+                        print("NAVER_EDITOR_ALERT_CANCELLED")
+                        dismissed = True
+                    except RuntimeError:
+                        raise
+                    except Exception:
+                        raise RuntimeError("NAVER_ALERT_CANNOT_SAFELY_DISMISS")
+                if not dismissed:
+                    break
+                page.wait_for_timeout(350)
+            for current_frame in page.frames:
+                if current_frame.locator(
+                    ".se-popup.se-popup-alert-confirm:visible"
+                ).count():
+                    raise RuntimeError("NAVER_ALERT_STILL_VISIBLE_STOP")
+            page.wait_for_timeout(350)
             frame, title, body_element = get_editor_frame(page)
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
