@@ -1,0 +1,52 @@
+name: Naver Blog - short CTA visible label one-post test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-naver-short-cta-once.txt'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-blog-jirum-state-and-publisher
+  cancel-in-progress: false
+
+jobs:
+  format-test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    env:
+      NAVER_SHORT_CTA_TEST_ONE_SHOT: 'true'
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      GH_STATE_TOKEN: ${{ github.token }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline layout/source provenance verification
+        run: |
+          python -m py_compile gh_only/naver_blog_short_cta_one_shot.py gh_only/naver_blog_deal_publisher.py gh_only/naver_blog_format.py
+          python -m unittest -v gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum
+      - name: Install browser
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --with-deps chromium
+      - name: Publish one clean short CTA with full hidden affiliate URL
+        run: python -m gh_only.naver_blog_short_cta_one_shot
+
+# No cron, no workflow dispatch, no repeated production handler.
+# Durable short_cta_test_once_20261109 stops any second attempt.
