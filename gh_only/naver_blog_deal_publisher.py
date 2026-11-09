@@ -98,7 +98,26 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                 "product_tail": article["title"][-12:] in actual_title,
             }))
             if article["title"] not in actual_title:
-                raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
+                # A fresh SmartEditor can discard an insertText when the title
+                # field only had the active placeholder. One alternate keypath
+                # is safe ONLY while the title module is still marked empty.
+                body_now = body_element.inner_text()
+                print("NAVER_TITLE_FOCUS_CHECK " + str({
+                    "empty": section_empty(frame, "title"),
+                    "body_has_title": article["title"] in body_now,
+                    "body_chars": len(body_now),
+                }))
+                if section_empty(frame, "title") and article["title"] not in body_now:
+                    title.click(timeout=8000)
+                    page.keyboard.type(article["title"], delay=16)
+                    page.wait_for_timeout(900)
+                    actual_title = title.inner_text()
+                    print("NAVER_TITLE_FALLBACK " + str({
+                        "actual_chars": len(actual_title),
+                        "exact": article["title"] in actual_title,
+                    }))
+                if article["title"] not in actual_title:
+                    raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
             body_element.click(timeout=8000)
             page.keyboard.insert_text(body)
             page.wait_for_timeout(700)
