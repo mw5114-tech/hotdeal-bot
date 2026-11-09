@@ -14,6 +14,11 @@ from naver_blog_one_shot import (
 BLOG_EDITOR = "https://blog.naver.com/PostWriteForm.naver?blogId=mw5114"
 
 
+class NaverPreSubmitTitleError(RuntimeError):
+    """Title could not be applied; this path never clicks publish."""
+
+
+
 def section_empty(frame, name: str) -> bool:
     selector = (".se-section-documentTitle" if name == "title"
                 else ".se-section-text") + " .se-module.se-is-empty"
@@ -528,6 +533,9 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
         or (not publish and article["title"] == "[자동화 테스트] 네이버 블로그 글쓰기 연결 확인")
     ):
         raise RuntimeError("NAVER_DEAL_TITLE_INVALID")
+    from gh_only.naver_blog_jirum import NAVER_TITLE_MAX_UTF16_UNITS
+    if len(article["title"].encode("utf-16-le")) // 2 > NAVER_TITLE_MAX_UTF16_UNITS:
+        raise NaverPreSubmitTitleError("NAVER_TITLE_OVER_SAFE_INPUT_LIMIT")
     body = article.get("body")
     if (not isinstance(body, str) or len(body) > 9000
             or not body.startswith("이 포스팅은 쿠팡 파트너스")
@@ -625,7 +633,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                         "exact": article["title"] in actual_title,
                     }))
                 if article["title"] not in actual_title:
-                    raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
+                    raise NaverPreSubmitTitleError("NAVER_TITLE_NOT_APPLIED")
             if article.get("blocks"):
                 render_readable_blocks(page, frame, body_element, article)
             else:
