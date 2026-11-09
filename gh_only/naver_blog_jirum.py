@@ -271,16 +271,23 @@ def publish_one(store: Store):
 
 
 def preview_latest():
-    """Manual, non-publishing test using one fresh public Telegram item."""
+    """Manual non-publishing editor check of the newest recent Coupang deal.
+
+    Use the latest up-to-24h source only for a manual read-only preview.
+    Oracle's normal automatic source freshness window is unchanged.
+    """
+    from gh_only.naver_blog_latest_manual import latest_coupang, manual_source
     items = enrich_posts(fetch_public_html(), max_posts=100)
-    fresh = [d for d in reversed(items)
-             if d.get("url_kind") in old.COUPANG_KINDS
-             and type(d.get("sale_price_krw")) is int and source_fresh(d)]
-    if not fresh:
-        print("NAVER_PREVIEW_NO_FRESH_ELIGIBLE_DEAL")
+    latest = latest_coupang(items)
+    if latest is None:
+        print("NAVER_PREVIEW_NO_COUPANG_DEAL")
         return 0
-    article = make_article(fresh[0], DRAFT_DIR,
-                           tag=os.environ.get("COUPANG_PARTNER_LPTAG", ""))
+    source = manual_source(latest)
+    article = make_article(
+        source, DRAFT_DIR,
+        tag=os.environ.get("COUPANG_PARTNER_LPTAG", ""),
+        manual_test_replay=True,
+    )
     print("NAVER_PREVIEW_PREPARED " + json.dumps({
         "source_id": article["source_id"], "title_chars": len(article["title"]),
         "body_chars": len(article["body"]), "image": bool(article["image"]),
