@@ -1,25 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95475,
+  "last_scanned_id": 95476,
   "pending": [
-    {
-      "id": 95469,
-      "source_post_url": "https://t.me/jirum/95469",
-      "original_purchase_url": "https://link.coupang.com/a/iw2jQTGePY",
-      "source_text": "👍대박 4,540원 (30.0% 할인)\n청우식품 쫀득초코칩 240g 2개\n📌 가격 현황\n- 정상가: 6,486원\n- 할인: 1,946원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw2jQTGePY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T05:57:33+00:00",
-      "title": "청우식품 쫀득초코칩 240g 2개",
-      "sale_price_krw": 4540
-    },
-    {
-      "id": 95470,
-      "source_post_url": "https://t.me/jirum/95470",
-      "original_purchase_url": "https://link.coupang.com/a/iw22d13ACy",
-      "source_text": "🔥🔥🔥무지성 10,890원 (45.6% 할인)🔥🔥🔥\n페이스팩토리 UV 충전형 전동 발각질제거기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 20,000원\n- 할인: 9,110원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw22d13ACy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T06:07:34+00:00",
-      "title": "페이스팩토리 UV 충전형 전동 발각질제거기",
-      "sale_price_krw": 10890
-    },
     {
       "id": 95472,
       "source_post_url": "https://t.me/jirum/95472",
@@ -55,6 +37,15 @@
       "posted_at_utc": "2026-11-09T06:53:33+00:00",
       "title": "켈로그 에너지바 K 레드베리 12p, 420g, 4개",
       "sale_price_krw": 16130
+    },
+    {
+      "id": 95476,
+      "source_post_url": "https://t.me/jirum/95476",
+      "original_purchase_url": "https://link.coupang.com/a/iw7kYkJ3dI",
+      "source_text": "☆특가 18,610원\n위트빅스 오리지날 시리얼, 1.2kg, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw7kYkJ3dI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T07:07:47+00:00",
+      "title": "☆특가 18,610원",
+      "sale_price_krw": 18610
     }
   ],
   "in_flight": null,
@@ -4822,6 +4813,20 @@
       "source_title": "오리온 비쵸비 초코맛 125g x 3p + 딸기맛 125g x 3p 세트, 2세트",
       "posted_at_utc": "2026-11-09T05:29:36+00:00",
       "at": "2026-11-09T06:37:14.029455+00:00"
+    },
+    "95469": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95469",
+      "source_title": "청우식품 쫀득초코칩 240g 2개",
+      "posted_at_utc": "2026-11-09T05:57:33+00:00",
+      "at": "2026-11-09T07:08:47.726509+00:00"
+    },
+    "95470": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95470",
+      "source_title": "페이스팩토리 UV 충전형 전동 발각질제거기",
+      "posted_at_utc": "2026-11-09T06:07:34+00:00",
+      "at": "2026-11-09T07:08:47.726518+00:00"
     }
   },
   "skipped_unverifiable": {
