@@ -9,10 +9,6 @@ on:
         default: probe
         type: choice
         options: [probe, draft, publish]
-  push:
-    branches: [main]
-    paths:
-      - 'manual/trigger-naver-blog-test.txt'
 
 permissions:
   contents: read
@@ -72,4 +68,4 @@ jobs:
           python naver_blog_one_shot.py --phase "$PHASE"
 
 # No cron, Telegram/Oracle changes, automatic retries, or stored login artifacts.
-# Only an explicit phase=publish trigger attempts one test post.
+# Manual workflow_dispatch only; no push-triggered or scheduled reposts.
