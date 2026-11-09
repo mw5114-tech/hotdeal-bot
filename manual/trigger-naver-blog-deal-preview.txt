@@ -1,4 +1,4 @@
 2026-11-09
 mode=preview
 source=telegram-jirum
-NO_PUBLISH: first real deal photo+copy check
+NO_PUBLISH: second deal draft and editor title metadata trial
