@@ -1,15 +1,10 @@
-name: Naver Blog | one post authorized test (MANUAL / ONE-SHOT)
+name: Naver Blog - One shot authorized test
 
 on:
-  pull_request:
-    paths:
-      - 'naver_blog_one_shot.py'
-      - 'test_naver_blog_one_shot.py'
-      - '.github/workflows/naver-blog-one-shot.yml'
   workflow_dispatch:
     inputs:
       phase:
-        description: 'probe = editor only, draft = fill without publishing, publish = ONE test post'
+        description: 'probe = read editor; draft = fill; publish = one test post'
         required: true
         default: probe
         type: choice
@@ -37,13 +32,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Run offline tests only (no network/login/publishing)
+      - name: Offline validation only
         run: |
           python -m py_compile naver_blog_one_shot.py
           python -m unittest -v test_naver_blog_one_shot.py
 
   one-shot:
-    if: github.event_name != 'pull_request'
     needs: offline-tests
     runs-on: ubuntu-24.04
     timeout-minutes: 12
@@ -57,23 +51,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Check that owner supplied private Naver session; never echo secret
+      - name: Validate that owner supplied private Naver session
         run: |
           python -c "import os,sys; ok=bool(os.environ.get('NAVER_BLOG_STORAGE_STATE_JSON', '').strip()); print('NAVER_AUTH_SECRET_PRESENT' if ok else 'AUTH_SESSION_MISSING_NEEDS_OWNER_LOGIN'); sys.exit(0 if ok else 3)"
-      - name: Install browser only after session is available
+      - name: Install Playwright browser after session validation
         run: |
           python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
           python -m playwright install --with-deps chromium
-      - name: Run selected one-shot phase
+      - name: Run selected single test phase
         shell: bash
         run: |
           set -euo pipefail
           if [ "${{ github.event_name }}" = "push" ]; then
-            PHASE="$(grep -E '^phase=(probe|draft|publish)
-
-# No cron, no Telegram/Oracle changes, no passwords, no session artifacts.
-# Trigger-file pushes execute only the explicit phase=probe|draft|publish value.
- manual/trigger-naver-blog-test.txt | tail -n1 | cut -d= -f2)"
+            PHASE="$(python -c "from pathlib import Path; print(next((l.split('=',1)[1] for l in Path('manual/trigger-naver-blog-test.txt').read_text().splitlines() if l.startswith('phase=')), ''))")"
           else
             PHASE="$TEST_PHASE"
           fi
@@ -81,5 +71,5 @@ jobs:
           echo "ONE_SHOT_PHASE=$PHASE"
           python naver_blog_one_shot.py --phase "$PHASE"
 
-# No cron, no Telegram/Oracle changes, no passwords, no session artifacts.
-# Only dedicated trigger-file pushes run publish automatically.
+# No cron, Telegram/Oracle changes, automatic retries, or stored login artifacts.
+# Only an explicit phase=publish trigger attempts one test post.
