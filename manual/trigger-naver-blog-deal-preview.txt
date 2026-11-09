@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: diagnose short CTA native se-link exact text coverage and hidden href
+NO_PUBLISH: keyboard editor-owned full CTA text selection then native Naver link wrap
