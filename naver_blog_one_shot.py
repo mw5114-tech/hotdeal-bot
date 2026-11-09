@@ -152,9 +152,12 @@ def publish_exactly_one(frame, page):
     if len(shown) < 2:
         raise RuntimeError("PUBLISH_CONFIRMATION_NOT_VERIFIED")
     # Prefer explicit publish dialog buttons; never guess when ambiguous.
+    # SmartEditor has both a top "publish_btn__..." toolbar button and
+    # a final "confirm_btn__..." layer button. Select only the latter.
     confirm_candidates = [
         element for element in shown
-        if element.locator("xpath=ancestor::*[contains(@class,'publish') or @role='dialog']").count() > 0
+        if any(token.startswith("confirm_btn__")
+               for token in (element.get_attribute("class") or "").split())
     ]
     if len(confirm_candidates) != 1:
         print(f"PUBLISH_MODAL_DEBUG: visible={len(shown)} class_candidates={len(confirm_candidates)}")
