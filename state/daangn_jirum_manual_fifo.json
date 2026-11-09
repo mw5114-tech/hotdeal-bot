@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95449,
-  "pending": [],
+  "last_scanned_id": 95450,
+  "pending": [
+    {
+      "id": 95450,
+      "source_post_url": "https://t.me/jirum/95450",
+      "original_purchase_url": "https://link.coupang.com/a/iwMt2h4nvg",
+      "source_text": "☆특가 6,800원\n깔끔의정석 욕실 바닥·화장실 청소도구 7종 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwMt2h4nvg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T02:15:57+00:00",
+      "title": "☆특가 6,800원",
+      "sale_price_krw": 6800
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
