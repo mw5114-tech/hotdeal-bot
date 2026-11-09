@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95445,
-  "pending": [
-    {
-      "id": 95445,
-      "source_post_url": "https://t.me/jirum/95445",
-      "original_purchase_url": "https://link.coupang.com/a/iwEKV2DNCe",
-      "source_text": "👍대박 31,920원 (30.0% 할인)\n빼빼로 스키즈 아몬드, 37g, 40개\n📌 가격 현황\n- 정상가: 45,600원\n- 할인: 13,680원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwEKV2DNCe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T00:27:49+00:00",
-      "title": "빼빼로 스키즈 아몬드, 37g, 40개",
-      "sale_price_krw": 31920
-    }
-  ],
-  "in_flight": {
-    "id": 95445,
-    "status": "CLAIMED",
-    "run_id": "42540438762",
-    "at": "2026-11-09T00:29:51.236297+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4301,6 +4286,16 @@
       "vendor_item_id": "84994376480",
       "at": "2026-11-09T00:28:41.414856+00:00",
       "run_id": "42540325529"
+    },
+    "95445": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/i-gagyeog-mos-c/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%BC%EB%B9%BC%EB%A1%9C-%EC%8A%A4%ED%82%A4%EC%A6%88-%EC%95%84%EB%AA%AC%EB%93%9C-37g-40%EA%B0%9C-20%ED%95%A0%EC%9D%B8-PV2ewJbP?from=write",
+      "posted_at_utc": "2026-11-09T00:27:49+00:00",
+      "product_id": "8349117",
+      "item_id": "29243362363",
+      "vendor_item_id": "96161764370",
+      "at": "2026-11-09T00:30:08.634597+00:00",
+      "run_id": "42540438762"
     }
   },
   "skipped_non_coupang": 173,
