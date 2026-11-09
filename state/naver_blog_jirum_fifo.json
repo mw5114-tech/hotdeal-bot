@@ -42,7 +42,12 @@
     }
   },
   "skipped": {},
-  "in_flight": null,
+  "in_flight": {
+    "id": 95503,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "42710008297",
+    "at": "2026-11-09T22:14:51.115302+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
