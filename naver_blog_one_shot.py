@@ -206,7 +206,16 @@ def run(phase: str) -> int:
                     print("EDITOR_READ_ONLY_SUCCESS")
                     return 0
 
-                if title.inner_text().strip() or body.inner_text().strip():
+                def meaningful_text(locator):
+                    value = locator.inner_text()
+                    for invisible in ("\u200b", "\u200c", "\u200d", "\ufeff", "\u2060", "\xa0"):
+                        value = value.replace(invisible, "")
+                    return value.strip()
+
+                title_initial = meaningful_text(title)
+                body_initial = meaningful_text(body)
+                print(f"EDITOR_INITIAL_TEXT_LENGTHS: TITLE={len(title_initial)} BODY={len(body_initial)}")
+                if title_initial or body_initial:
                     raise RuntimeError("EDITOR_ALREADY_CONTAINS_TEXT_STOP")
                 # SmartEditor ONE uses focus-managed contenteditable, not an
                 # editable <p> itself. Click the section to focus its editor,
