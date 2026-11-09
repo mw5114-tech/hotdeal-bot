@@ -152,44 +152,46 @@ def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
     """, disclosure)
 
 
-def _affiliate_anchors(frame, url: str) -> dict:
+def _affiliate_anchors(frame, url: str, label: str) -> dict:
     """Validate the exact persisted hyperlink model used by Naver SmartEditor.
 
-    In editing mode, SmartEditor stores a clickable URL in a span.se-link
-    data-href attribute rather than an HTML a[href] element. On public pages
-    it may render an ordinary anchor. Accept only exact full URL matches,
-    including the owner lptag, item IDs and naverblog tracking subid.
+    Editing mode stores the destination in span.se-link[data-href] instead
+    of a[href]. Reject any partial hyperlink range, duplicate label, visible
+    raw URL or wrong affiliate destination before publication.
     """
     matches = frame.locator(
         ".se-component a[href], .se-section-text .se-link[data-href]"
     ).evaluate_all(
-        """(els, target) => els.filter(e => {
+        """(els, args) => els.filter(e => {
             const href = e.matches('a[href]') ? e.getAttribute('href') :
                          e.getAttribute('data-href');
-            return href === target && (e.innerText || '').trim() === target;
+            const paragraph = e.closest('.se-text-paragraph');
+            return href === args.url
+                && (e.innerText || '').trim() === args.label
+                && paragraph && (paragraph.innerText || '').trim() === args.label;
         }).map(e => ({
             component: (e.closest('.se-component')?.className || '').slice(0,80),
             native_model: e.matches('.se-link[data-href]'),
-            full_text_match: (e.innerText || '').trim() === target
-        }))""", url
+            label_match: (e.innerText || '').trim() === args.label
+        }))""", {"url": url, "label": label}
     )
     return {"count": len(matches),
             "components": [m["component"] for m in matches],
             "native_models": [m["native_model"] for m in matches],
-            "full_text_matches": [m["full_text_match"] for m in matches]}
+            "label_matches": [m["label_match"] for m in matches]}
 
 
-def _apply_native_affiliate_link(page, frame, url: str) -> bool:
+def _apply_native_affiliate_link(page, frame, url: str, label: str) -> bool:
     """Apply a real href to selected URL via SmartEditor's native link form.
 
     Never fake an HTML anchor in the DOM: use the editor's own persisted link
     model, then verify the actual href before allowing publication.
     """
     paragraph = frame.locator(".se-section-text .se-text-paragraph").filter(
-        has_text=url
+        has_text=label
     )
-    if paragraph.count() != 1:
-        raise RuntimeError("NAVER_LINK_PARAGRAPH_AMBIGUOUS")
+    if paragraph.count() != 1 or paragraph.first.inner_text().strip() != label:
+        raise RuntimeError("NAVER_LINK_LABEL_PARAGRAPH_AMBIGUOUS")
     paragraph.first.click(timeout=6000)
     # Select the entire logical paragraph, not one visually wrapped line.
     paragraph.first.select_text(timeout=5000)
@@ -208,24 +210,8 @@ def _apply_native_affiliate_link(page, frame, url: str) -> bool:
         raise RuntimeError("NAVER_NATIVE_LINK_URL_INPUT_MISMATCH")
     apply.click(timeout=6000)
     page.wait_for_timeout(950)
-    result = _affiliate_anchors(frame, url)
-    spans = frame.locator(".se-section-text .se-link").evaluate_all(
-        """(els, target) => els.map(e => ({
-            text_chars: (e.innerText || '').length,
-            text_matches_full_url: (e.innerText || '').trim() === target,
-            text_is_substring: target.includes((e.innerText || '').trim()),
-            attr_names: e.getAttributeNames(),
-            attr_match_full_url: e.getAttributeNames().filter(
-                k => (e.getAttribute(k) || '') === target
-            ),
-            attr_contains_url: e.getAttributeNames().filter(
-                k => (e.getAttribute(k) || '').includes(target)
-            ),
-            parent_class: (e.parentElement?.className || '').slice(0,75)
-        }))""", url
-    )
+    result = _affiliate_anchors(frame, url, label)
     print("NAVER_NATIVE_LINK_APPLY_RESULT " + str(result))
-    print("NAVER_NATIVE_LINK_SPAN_DIAGNOSTIC " + str(spans))
     return result["count"] == 1
 
 
@@ -337,30 +323,32 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         page.wait_for_timeout(90)
 
     page.wait_for_timeout(650)
-    # A URL typed as the final paragraph often remains inert plain text.
-    # A trailing space may trigger the native SmartEditor link recognizer
-    # without an Enter that creates an oversized OG preview component.
-    before_link = _affiliate_anchors(frame, article["link"])
-    print("NAVER_LINK_AUTO_BEFORE_SPACE " + str(before_link))
-    if before_link["count"] == 0:
-        page.keyboard.press("Space")
-        page.wait_for_timeout(1000)
-    after_link = _affiliate_anchors(frame, article["link"])
-    print("NAVER_LINK_AUTO_AFTER_SPACE " + str(after_link))
-    if after_link["count"] != 1:
-        native_ok = _apply_native_affiliate_link(page, frame, article["link"])
-        if not native_ok:
-            _diagnose_link_toolbar(page, frame, article["link"])
-            raise RuntimeError("NAVER_NATIVE_AFFILIATE_HREF_NOT_VERIFIED")
+    # The final paragraph is a SHORT human-readable CTA. Apply the owner's
+    # complete affiliate URL as a native hyperlink instead of displaying a
+    # long wrapped URL. Never type the raw URL into visible body content.
+    cta_label = blocks[-1]["text"]
+    if blocks[-1].get("kind") != "affiliate_link":
+        raise RuntimeError("NAVER_AFFILIATE_CTA_NOT_LAST")
+    native_ok = _apply_native_affiliate_link(
+        page, frame, article["link"], cta_label
+    )
+    if not native_ok:
+        raise RuntimeError("NAVER_NATIVE_CTA_LINK_NOT_VERIFIED")
     bold_applied = _bold_existing_labels(page, frame, blocks)
     page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
     conditions = {
-        "affiliate_anchor": _affiliate_anchors(frame, article["link"])["count"] == 1,
+        "affiliate_anchor": _affiliate_anchors(
+            frame, article["link"], cta_label
+        )["count"] == 1,
         "disclosure": blocks[0]["text"] in section,
         "sale": "오늘 특가" in section,
-        "link": section.count(article["link"]) == 1,
-        "closing_note": blocks[-1]["text"] in section,
+        "cta_label_once": section.count(cta_label) == 1,
+        "no_visible_raw_url": "https://link.coupang.com/" not in section,
+        "closing_note": any(
+            x.get("kind") == "note" and x["text"] in section
+            for x in blocks
+        ),
         "paragraphs": frame.locator(".se-text-paragraph").count(),
         "bold_applied": bold_applied,
         "computed_bold_paragraphs": frame.locator(
@@ -421,11 +409,12 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         print("NAVER_PARAGRAPH_DIAGNOSTIC " + str(snippets))
     _editor_layout(frame, "FINAL")
     if not all((conditions["disclosure"], conditions["sale"],
-                conditions["link"], conditions["closing_note"],
+                conditions["cta_label_once"], conditions["no_visible_raw_url"],
+                conditions["closing_note"],
                 conditions["photo_between"])):
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
     if not conditions["affiliate_anchor"]:
-        raise RuntimeError("NAVER_AFFILIATE_LINK_NOT_CLICKABLE")
+        raise RuntimeError("NAVER_AFFILIATE_CTA_NOT_FULLY_CLICKABLE")
     if conditions["paragraphs"] < 7:
         raise RuntimeError("NAVER_FORMAT_PARAGRAPHS_MISSING")
     if conditions["bold_applied"] < 3 or conditions["computed_bold_paragraphs"] < 3:
@@ -445,7 +434,11 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
     body = article.get("body")
     if (not isinstance(body, str) or len(body) > 9000
             or not body.startswith("이 포스팅은 쿠팡 파트너스")
-            or body.count(article.get("link", "")) != 1):
+            or "https://link.coupang.com/" in body
+            or body.count("📦 쿠팡에서 상품정보 더보기") != 1
+            or not isinstance(article.get("link"), str)
+            or not article["link"].startswith("https://link.coupang.com/re/AFFSDP?")
+            or not isinstance(article.get("blocks"), list)):
         raise RuntimeError("NAVER_DISCLOSURE_OR_LINK_INVALID")
     image = article.get("image")
     if not isinstance(image, Path):
