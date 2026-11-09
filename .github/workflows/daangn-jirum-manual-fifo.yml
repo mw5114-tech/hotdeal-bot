@@ -153,7 +153,8 @@ jobs:
       # One fresh eligible Jirum item per run; Daangn remains paused.
       # Owner-authorized auto publish resumed after short-link deduplication
       # passed a real SmartEditor editor check and a live one-shot publish.
-      NAVER_BLOG_PUBLISH_ENABLED: 'true'
+      # Brief test-only pause; restart after verified post.
+      NAVER_BLOG_PUBLISH_ENABLED: 'false'
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
