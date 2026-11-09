@@ -149,8 +149,9 @@ jobs:
     env:
       GH_STATE_TOKEN: ${{ github.token }}
       NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
-      # STOP: enable only after real Telegram hotdeal photo+copy dry run.
-      NAVER_BLOG_PUBLISH_ENABLED: 'false'
+      # Owner approved live Naver Blog publishing on 2026-11-09.
+      # One fresh eligible Jirum item per run; Daangn remains paused.
+      NAVER_BLOG_PUBLISH_ENABLED: 'true'
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
