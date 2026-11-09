@@ -35,7 +35,7 @@ jobs:
       - name: Validate separate Naver FIFO with no network access
         run: |
           python -m py_compile gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
-          python -m unittest -v gh_only.test_naver_blog_jirum test_naver_blog_one_shot
+          python -m unittest -v gh_only.test_naver_blog_jirum gh_only.test_naver_blog_format test_naver_blog_one_shot
 
   preview:
     if: github.event_name == 'push' || inputs.mode == 'preview'
