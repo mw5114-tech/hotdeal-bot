@@ -90,6 +90,17 @@ def get_editor_frame(page):
               f"EDITABLES={editables}; INPUTS={inputs}; "
               f"TITLE_SECTIONS={title_class}; BODY_SECTIONS={body_class}; "
               f"PASSWORD_FIELDS={login_field}")
+        for group, selectors in (("TITLE", TITLE_SELECTORS), ("BODY", BODY_SELECTORS)):
+            for j, css in enumerate(selectors):
+                try:
+                    loc = frame.locator(css)
+                    count = loc.count()
+                    visible = loc.first.is_visible() if count else False
+                    tag = loc.first.evaluate("(e) => e.tagName") if count else "-"
+                    editable = loc.first.get_attribute("contenteditable") if count else "-"
+                    print(f"SELECTOR_{i}_{group}{j}: N={count} V={visible} TAG={tag} CE={editable}")
+                except Exception:
+                    print(f"SELECTOR_{i}_{group}{j}: UNAVAILABLE")
     raise RuntimeError("EDITOR_CONTROLS_NOT_VERIFIED")
 
 
