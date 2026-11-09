@@ -104,8 +104,20 @@ def _bold_existing_labels(page, frame, blocks: list[dict]) -> int:
         paragraph.first.click(timeout=5000)
         page.keyboard.press("Home")
         page.keyboard.press("Shift+End")
-        page.keyboard.press("Control+b")
-        page.wait_for_timeout(220)
+        # SmartEditor's real native bold buttons. Chrome/Linux Ctrl+B does
+        # not consistently apply styling in this content section.
+        bold = frame.locator(
+            "button.se-bold-toolbar-button.se-property-toolbar-toggle-button:visible"
+        )
+        if bold.count() != 1:
+            bold = frame.locator(
+                "button.se-bold-toolbar-button.se-contents-toolbar-toggle-button:visible"
+            )
+        if bold.count() != 1:
+            print("NAVER_BOLD_TOOLBAR_UNAVAILABLE " + str(item.get("kind")))
+            continue
+        bold.first.click(timeout=5000)
+        page.wait_for_timeout(260)
         count += 1
     print("NAVER_BOLD_LABEL_PARAGRAPHS_APPLIED=" + str(count))
     return count
@@ -206,6 +218,16 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         "closing_note": blocks[-1]["text"] in section,
         "paragraphs": frame.locator(".se-text-paragraph").count(),
         "bold_applied": bold_applied,
+        "computed_bold_paragraphs": frame.locator(
+            ".se-section-text .se-text-paragraph"
+        ).evaluate_all(
+            """els => els.filter(e => Array.from(
+                 e.querySelectorAll('span,strong,b')
+                ).some(x => {
+                    const w = getComputedStyle(x).fontWeight;
+                    return w === 'bold' || parseInt(w,10) >= 600;
+                })).length"""
+        ),
         "bold_segments": frame.locator(
             ".se-section-text strong, .se-section-text b, "
             ".se-section-text span[style*='font-weight: bold'], "
@@ -259,7 +281,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
     if conditions["paragraphs"] < 7:
         raise RuntimeError("NAVER_FORMAT_PARAGRAPHS_MISSING")
-    if conditions["bold_applied"] < 3 or conditions["bold_segments"] < 3:
+    if conditions["bold_applied"] < 3 or conditions["computed_bold_paragraphs"] < 3:
         raise RuntimeError("NAVER_FORMAT_BOLD_NOT_APPLIED")
     print("NAVER_READABLE_LAYOUT_VERIFIED")
 
