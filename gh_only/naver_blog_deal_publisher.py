@@ -153,17 +153,30 @@ def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
 
 
 def _affiliate_anchors(frame, url: str) -> dict:
-    """Check real DOM hyperlinks, not visual URL text or generated OG labels."""
-    matches = frame.locator(".se-component a[href]").evaluate_all(
-        """(els, target) => els.filter(a => a.getAttribute('href') === target ||
-            a.href === target).map(a => ({
-                label: (a.innerText || '').slice(0,70),
-                component: (a.closest('.se-component')?.className || '').slice(0,80),
-                href: a.getAttribute('href')
-            }))""", url
+    """Validate the exact persisted hyperlink model used by Naver SmartEditor.
+
+    In editing mode, SmartEditor stores a clickable URL in a span.se-link
+    data-href attribute rather than an HTML a[href] element. On public pages
+    it may render an ordinary anchor. Accept only exact full URL matches,
+    including the owner lptag, item IDs and naverblog tracking subid.
+    """
+    matches = frame.locator(
+        ".se-component a[href], .se-section-text .se-link[data-href]"
+    ).evaluate_all(
+        """(els, target) => els.filter(e => {
+            const href = e.matches('a[href]') ? e.getAttribute('href') :
+                         e.getAttribute('data-href');
+            return href === target && (e.innerText || '').trim() === target;
+        }).map(e => ({
+            component: (e.closest('.se-component')?.className || '').slice(0,80),
+            native_model: e.matches('.se-link[data-href]'),
+            full_text_match: (e.innerText || '').trim() === target
+        }))""", url
     )
-    return {"count": len(matches), "components": [m["component"] for m in matches],
-            "labels": [m["label"] for m in matches]}
+    return {"count": len(matches),
+            "components": [m["component"] for m in matches],
+            "native_models": [m["native_model"] for m in matches],
+            "full_text_matches": [m["full_text_match"] for m in matches]}
 
 
 def _apply_native_affiliate_link(page, frame, url: str) -> bool:
