@@ -3,16 +3,6 @@
   "last_scanned_id": 95506,
   "pending": [
     {
-      "id": 95505,
-      "source_message_id": 95505,
-      "source_post_url": "https://t.me/jirum/95505",
-      "original_purchase_url": "https://link.coupang.com/a/ix971Oefh6",
-      "title": "☆특가 990원",
-      "source_text": "☆특가 990원\n가와시마야 소프트 실리콘 아이스 트레이 6구 XW-481 10.3*7.4*4.1cm*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ix971Oefh6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 990,
-      "posted_at_utc": "2026-11-09T22:14:27+00:00"
-    },
-    {
       "id": 95506,
       "source_message_id": 95506,
       "source_post_url": "https://t.me/jirum/95506",
@@ -57,15 +47,14 @@
     "95504": {
       "url": "https://blog.naver.com/mw5114/224471143786",
       "at": "2026-11-09T22:17:00.415716+00:00"
+    },
+    "95505": {
+      "url": "https://blog.naver.com/mw5114/224471144804",
+      "at": "2026-11-09T22:18:48.700331+00:00"
     }
   },
   "skipped": {},
-  "in_flight": {
-    "id": 95505,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42710508985",
-    "at": "2026-11-09T22:18:02.327782+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
