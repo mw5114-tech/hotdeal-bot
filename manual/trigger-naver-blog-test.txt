@@ -1,3 +1,4 @@
-phase=draft
+phase=publish
 blog=mw5114
-recognized-editor-empty-placeholders trial=3
+one-authorized-test-post=2026-11-09
+no-automatic-retries
