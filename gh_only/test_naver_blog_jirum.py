@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta, timezone
 import unittest
 
-from gh_only.naver_blog_jirum import ingest, validate_state, source_fresh
+from gh_only.naver_blog_jirum import ingest, validate_state, source_fresh, validate_naver_link_subid
 
 
 def state():
@@ -65,6 +65,17 @@ class NaverQueueTests(unittest.TestCase):
 
     def test_timestamp_not_inferred(self):
         self.assertFalse(source_fresh({"posted_at_utc": None}))
+
+    def test_naverblog_subid_is_required(self):
+        good = ("https://link.coupang.com/re/AFFSDP?"
+                "lptag=AF9668915&subid=naverblog&pageKey=123&itemId=456")
+        self.assertIsNone(validate_naver_link_subid(good))
+        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
+            validate_naver_link_subid(good.replace("subid=naverblog", "subid=daangncafe"))
+        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
+            validate_naver_link_subid(good.replace("subid=naverblog", "subid=naverblog2"))
+        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
+            validate_naver_link_subid(good.replace("subid=naverblog&", ""))
 
     def test_separate_state_schema(self):
         s = state()
