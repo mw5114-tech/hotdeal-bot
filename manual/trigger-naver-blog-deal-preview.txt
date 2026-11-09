@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: apply exact affiliate href via Naver native link dialog and validate DOM anchor
+NO_PUBLISH: select full wrapped link paragraph; inspect se-link native link metadata exact URL
