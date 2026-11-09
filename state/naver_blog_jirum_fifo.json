@@ -27,5 +27,11 @@
     "run_id": "42631466782",
     "post_url": "https://blog.naver.com/mw5114/224470904438",
     "published_at": "2026-11-09T14:08:12.270353+00:00"
+  },
+  "final_link_test_once_20261109": {
+    "status": "REVIEW_REQUIRED",
+    "source_id": 95498,
+    "claimed_at": "2026-11-09T14:27:44.477962+00:00",
+    "run_id": "42634812962"
   }
 }
