@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95511,
+  "last_scanned_id": 95512,
   "pending": [
     {
       "id": 95502,
@@ -91,6 +91,15 @@
       "posted_at_utc": "2026-11-09T22:35:12+00:00",
       "title": "바겐슈타이거 연마제 없는 드레인 스텐 박스 3종 세트 245*190*80 mm*뚜껑 + 스텐채반 + 스텐박스*1세트",
       "sale_price_krw": 17920
+    },
+    {
+      "id": 95512,
+      "source_post_url": "https://t.me/jirum/95512",
+      "original_purchase_url": "https://link.coupang.com/a/iybHGLbtN6",
+      "source_text": "👍대박 129,000원 (34.0% 할인)\n닌자 크리스피 올인원 유리 멀티쿠커 에어프라이어 1.4L\n📌 가격 현황\n- 정상가: 195,455원\n- 할인: 66,455원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iybHGLbtN6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T22:36:29+00:00",
+      "title": "닌자 크리스피 올인원 유리 멀티쿠커 에어프라이어 1.4L",
+      "sale_price_krw": 129000
     }
   ],
   "in_flight": null,
