@@ -209,6 +209,22 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         "photo_between": _photo_between_disclosure_and_price(frame, blocks[0]["text"]),
     }
     print("NAVER_FORMAT_CHECK " + str(conditions))
+    if conditions["bold_applied"] >= 3 and conditions["bold_segments"] < 3:
+        try:
+            metrics = frame.locator(".se-section-text .se-text-paragraph").evaluate_all(
+                """els => els.filter(e => /오늘 특가|평소 판매가|참고 할인율|오늘의 쿠팡|상품정보/.test(e.innerText || '')).slice(0,12).map(e => ({
+                    text: (e.innerText || '').slice(0,55),
+                    rootWeight: getComputedStyle(e).fontWeight,
+                    children: Array.from(e.querySelectorAll('span,strong,b')).slice(0,6).map(s => ({
+                        tag: s.tagName,
+                        cls: (s.className || '').slice(0,90),
+                        weight: getComputedStyle(s).fontWeight
+                    }))
+                }))"""
+            )
+            print("NAVER_COMPUTED_BOLD_DIAGNOSTIC " + str(metrics))
+        except Exception:
+            print("NAVER_COMPUTED_BOLD_DIAGNOSTIC_UNAVAILABLE")
     if not conditions["sale"] or not conditions["photo_between"]:
         # The price/label copy is intentionally public; do not log full URLs.
         snippets = []
