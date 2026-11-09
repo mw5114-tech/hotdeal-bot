@@ -1,3 +1,3 @@
 2026-11-09
 mode=preview
-NO_PUBLISH: compose all Korean text first, then bold existing paragraphs; URL last to avoid duplicate OG card
+NO_PUBLISH: fresh-paragraph 1 char warmup then slow Korean keyboard native typing
