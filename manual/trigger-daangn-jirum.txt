@@ -42,3 +42,5 @@ User replay TV 94986 retry after verified pre-submit age gate fix PR73: 2026-11-
 Naver Blog Oracle workflow integration scan-only test: 2026-11-09. Daangn publication stays paused.
 
 2026-11-09: verify owner-enabled Naver Blog automatic publishing on existing Oracle-linked workflow; Daangn still paused.
+
+2026-11-10: user explicitly requested Naver Blog production auto publishing START NOW; force immediate one GitHub FIFO scan. Daangn remains PAUSED. Normal Oracle event + 30 minute backup unchanged.
