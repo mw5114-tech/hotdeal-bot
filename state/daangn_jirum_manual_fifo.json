@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95493,
+  "last_scanned_id": 95495,
   "pending": [
-    {
-      "id": 95487,
-      "source_post_url": "https://t.me/jirum/95487",
-      "original_purchase_url": "https://link.coupang.com/a/ixnBMyw1Cu",
-      "source_text": "🔥🔥🔥무지성 13,000원 (71.1% 할인)🔥🔥🔥\n켄리프 어텀 머스크 바디워시, 710ml, 5개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 45,000원\n- 할인: 32,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixnBMyw1Cu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T10:55:28+00:00",
-      "title": "켄리프 어텀 머스크 바디워시, 710ml, 5개",
-      "sale_price_krw": 13000
-    },
     {
       "id": 95488,
       "source_post_url": "https://t.me/jirum/95488",
@@ -28,6 +19,15 @@
       "posted_at_utc": "2026-11-09T11:49:28+00:00",
       "title": "☆특가 10,930원",
       "sale_price_krw": 10930
+    },
+    {
+      "id": 95495,
+      "source_post_url": "https://t.me/jirum/95495",
+      "original_purchase_url": "https://link.coupang.com/a/ixskRW9Yiq",
+      "source_text": "☆특가 14,530원\n위칙 소독 섬유유연제 본품, 2L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/ixskRW9Yiq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T12:01:37+00:00",
+      "title": "☆특가 14,530원",
+      "sale_price_krw": 14530
     }
   ],
   "in_flight": null,
@@ -4346,7 +4346,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 191,
+  "skipped_non_coupang": 192,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4865,6 +4865,13 @@
       "source_title": "☆특가 7,510원",
       "posted_at_utc": "2026-11-09T09:37:16+00:00",
       "at": "2026-11-09T10:37:51.016066+00:00"
+    },
+    "95487": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95487",
+      "source_title": "켄리프 어텀 머스크 바디워시, 710ml, 5개",
+      "posted_at_utc": "2026-11-09T10:55:28+00:00",
+      "at": "2026-11-09T12:02:17.723998+00:00"
     }
   },
   "skipped_unverifiable": {
