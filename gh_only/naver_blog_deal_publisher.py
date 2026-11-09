@@ -90,7 +90,14 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             title.click(timeout=8000)
             page.keyboard.insert_text(article["title"])
             page.wait_for_timeout(500)
-            if article["title"] not in title.inner_text():
+            actual_title = title.inner_text()
+            print("NAVER_TITLE_CHECK " + str({
+                "expected_chars": len(article["title"]),
+                "actual_chars": len(actual_title),
+                "exact": article["title"] in actual_title,
+                "product_tail": article["title"][-12:] in actual_title,
+            }))
+            if article["title"] not in actual_title:
                 raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
             body_element.click(timeout=8000)
             page.keyboard.insert_text(body)
