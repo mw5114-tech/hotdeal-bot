@@ -261,6 +261,54 @@ def _apply_native_affiliate_link(page, frame, url: str, label: str) -> bool:
     return result["count"] == 1
 
 
+def _insert_clean_standalone_url(page, frame, url: str) -> bool:
+    """Use SmartEditor's insertion-style link UI in its own empty paragraph.
+
+    Unlike selected-text hyperlink attempts, this cannot leave a plain-text
+    URL prefix/suffix because the visible URL was never typed in the editor.
+    The entire URL must be one native se-link[data-href] span, with exactly
+    the same URL as its parent paragraph's complete visible text.
+    """
+    page.keyboard.press("Enter")
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(550)
+    last_para = frame.locator(".se-section-text .se-text-paragraph").last
+    if not last_para.count() or last_para.inner_text().strip():
+        raise RuntimeError("NAVER_STANDALONE_LINK_EMPTY_PARAGRAPH_MISSING")
+    toolbar = frame.locator(
+        "button.se-link-toolbar-button.se-property-toolbar-custom-layer-button:visible"
+    )
+    if toolbar.count() != 1:
+        raise RuntimeError("NAVER_STANDALONE_LINK_TOOLBAR_UNAVAILABLE")
+    toolbar.click(timeout=5000)
+    field = frame.locator("input.se-custom-layer-link-input:visible")
+    apply = frame.locator("button.se-custom-layer-link-apply-button:visible")
+    if field.count() != 1 or apply.count() != 1:
+        raise RuntimeError("NAVER_STANDALONE_LINK_FORM_INVALID")
+    field.fill(url, timeout=7000)
+    if field.input_value() != url:
+        raise RuntimeError("NAVER_STANDALONE_LINK_FORM_URL_MISMATCH")
+    apply.click(timeout=7000)
+    page.wait_for_timeout(1000)
+    result = _affiliate_anchors(frame, url, url)
+    visible_paragraphs = frame.locator(
+        ".se-section-text .se-text-paragraph"
+    ).all_inner_texts()
+    urls = [p.strip() for p in visible_paragraphs if "link.coupang.com" in p]
+    status = {
+        "native_link_count": result["count"],
+        "url_paragraphs": len(urls),
+        "sole_paragraph_exact": len(urls) == 1 and urls[0] == url,
+        "url_text_occurrences": "\n".join(visible_paragraphs).count(url),
+    }
+    print("NAVER_STANDALONE_LINK_CHECK " + str(status))
+    return bool(
+        status["native_link_count"] == 1
+        and status["sole_paragraph_exact"]
+        and status["url_text_occurrences"] == 1
+    )
+
+
 def _diagnose_link_toolbar(page, frame, url: str):
     candidates = frame.locator("button").evaluate_all(
         """els => els.filter(b => /link|링크|연결|url/i.test(
@@ -369,28 +417,30 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         page.wait_for_timeout(90)
 
     page.wait_for_timeout(650)
-    # The final paragraph is a SHORT human-readable CTA. Apply the owner's
-    # complete affiliate URL as a native hyperlink instead of displaying a
-    # long wrapped URL. Never type the raw URL into visible body content.
+    # Naver's property link form INSERTS a new URL rather than wrapping
+    # selected user-facing text. Reserve its own empty paragraph so it never
+    # splits or duplicates the visible URL alongside the short CTA heading.
     cta_label = blocks[-1]["text"]
     if blocks[-1].get("kind") != "affiliate_link":
         raise RuntimeError("NAVER_AFFILIATE_CTA_NOT_LAST")
-    native_ok = _apply_native_affiliate_link(
-        page, frame, article["link"], cta_label
-    )
-    if not native_ok:
-        raise RuntimeError("NAVER_NATIVE_CTA_LINK_NOT_VERIFIED")
+    if not _insert_clean_standalone_url(page, frame, article["link"]):
+        raise RuntimeError("NAVER_STANDALONE_LINK_NOT_VERIFIED")
     bold_applied = _bold_existing_labels(page, frame, blocks)
     page.wait_for_timeout(550)
     section = "\n".join(frame.locator(".se-section-text").all_inner_texts())
     conditions = {
         "affiliate_anchor": _affiliate_anchors(
-            frame, article["link"], cta_label
+            frame, article["link"], article["link"]
         )["count"] == 1,
         "disclosure": blocks[0]["text"] in section,
         "sale": "오늘 특가" in section,
         "cta_label_once": section.count(cta_label) == 1,
-        "no_visible_raw_url": "https://link.coupang.com/" not in section,
+        "full_link_once": section.count(article["link"]) == 1,
+        "no_duplicate_link_fragments": len([
+            p for p in frame.locator(
+                ".se-section-text .se-text-paragraph"
+            ).all_inner_texts() if "link.coupang.com" in p
+        ]) == 1,
         "closing_note": any(
             x.get("kind") == "note" and x["text"] in section
             for x in blocks
@@ -455,7 +505,8 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         print("NAVER_PARAGRAPH_DIAGNOSTIC " + str(snippets))
     _editor_layout(frame, "FINAL")
     if not all((conditions["disclosure"], conditions["sale"],
-                conditions["cta_label_once"], conditions["no_visible_raw_url"],
+                conditions["cta_label_once"], conditions["full_link_once"],
+                conditions["no_duplicate_link_fragments"],
                 conditions["closing_note"],
                 conditions["photo_between"])):
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
