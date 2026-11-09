@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95510,
+  "last_scanned_id": 95511,
   "pending": [
     {
       "id": 95502,
@@ -82,6 +82,15 @@
       "posted_at_utc": "2026-11-09T22:28:26+00:00",
       "title": "Apple 아이폰 Air 자급제, 클라우드 화이트, 512GB",
       "sale_price_krw": 1254000
+    },
+    {
+      "id": 95511,
+      "source_post_url": "https://t.me/jirum/95511",
+      "original_purchase_url": "https://link.coupang.com/a/iybB1FWOnQ",
+      "source_text": "👍대박 17,920원 (36.0% 할인)\n바겐슈타이거 연마제 없는 드레인 스텐 박스 3종 세트 245*190*80 mm*뚜껑 + 스텐채반 + 스텐박스*1세트\n📌 가격 현황\n- 정상가: 28,000원\n- 할인: 10,080원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iybB1FWOnQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T22:35:12+00:00",
+      "title": "바겐슈타이거 연마제 없는 드레인 스텐 박스 3종 세트 245*190*80 mm*뚜껑 + 스텐채반 + 스텐박스*1세트",
+      "sale_price_krw": 17920
     }
   ],
   "in_flight": null,
