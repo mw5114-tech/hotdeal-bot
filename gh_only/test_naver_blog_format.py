@@ -31,7 +31,10 @@ class FormattingTests(unittest.TestCase):
         blocks, body = self.format()
         self.assertEqual(blocks[0]["text"], DISCLOSURE)
         self.assertEqual(blocks[1]["kind"], "hero_photo")
-        self.assertEqual(body.count(URL), 1)
+        self.assertEqual(body.count(URL), 0)
+        self.assertNotIn("https://link.coupang.com/", body)
+        self.assertEqual(body.count("📦 쿠팡에서 상품정보 더보기"), 1)
+        self.assertEqual(blocks[-1]["link_url"], URL)
         self.assertTrue(body.startswith(DISCLOSURE + "\n\n"))
         self.assertGreaterEqual(body.count("\n\n"), 8)
 
@@ -66,6 +69,19 @@ class FormattingTests(unittest.TestCase):
         self.assertNotIn("원문 출처", body)
         self.assertNotIn("https://t.me/jirum", body)
         self.assertEqual(blocks[-1]["kind"], "affiliate_link")
+
+    def test_affiliate_url_is_only_a_hidden_native_link_target(self):
+        blocks, body = self.format()
+        self.assertEqual(blocks[-1]["kind"], "affiliate_link")
+        self.assertEqual(blocks[-1]["text"], "📦 쿠팡에서 상품정보 더보기")
+        self.assertEqual(blocks[-1]["link_url"], URL)
+        self.assertEqual(body.count("📦 쿠팡에서 상품정보 더보기"), 1)
+        self.assertNotIn("AFFSDP", body)
+        self.assertNotIn("subid=naverblog", body)
+        broken = [dict(x) for x in blocks]
+        broken[-1]["link_url"] = URL.replace("subid=naverblog", "subid=daangncafe")
+        with self.assertRaisesRegex(ValueError, "LINK_TARGET"):
+            validate_blocks(broken, URL)
 
     def test_manual_test_notice(self):
         d,v,s = row()
