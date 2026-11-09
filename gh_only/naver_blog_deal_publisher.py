@@ -61,6 +61,13 @@ def upload_image(page, frame, image: Path):
     print("NAVER_PRODUCT_PHOTO_INSERTED")
 
 
+def enter_text_in_chunks(page, content: str, chunk_size: int = 20):
+    """SmartEditor accepts small native insertText events more reliably."""
+    for offset in range(0, len(content), chunk_size):
+        page.keyboard.insert_text(content[offset:offset+chunk_size])
+        page.wait_for_timeout(90)
+
+
 def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None:
     from playwright.sync_api import sync_playwright
 
@@ -102,7 +109,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
             title.click(timeout=8000)
-            page.keyboard.insert_text(article["title"])
+            enter_text_in_chunks(page, article["title"])
             page.wait_for_timeout(500)
             actual_title = frame.locator(".se-section-documentTitle").inner_text()
             print("NAVER_TITLE_CHECK " + str({
@@ -133,9 +140,15 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                 if article["title"] not in actual_title:
                     raise RuntimeError("NAVER_TITLE_NOT_APPLIED")
             body_element.click(timeout=8000)
-            page.keyboard.insert_text(body)
+            enter_text_in_chunks(page, body)
             page.wait_for_timeout(700)
             actual_body = frame.locator(".se-section-text").inner_text()
+            print("NAVER_BODY_CHECK " + str({
+                "expected_chars": len(body), "actual_chars": len(actual_body),
+                "disclosure": body[:32] in actual_body,
+                "link_present": article["link"] in actual_body,
+                "link_count": actual_body.count(article["link"]),
+            }))
             if (body[:32] not in actual_body
                     or article["link"] not in actual_body
                     or actual_body.count(article["link"]) != 1):
