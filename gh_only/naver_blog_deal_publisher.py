@@ -212,6 +212,31 @@ def _apply_native_affiliate_link(page, frame, url: str, label: str) -> bool:
     page.wait_for_timeout(950)
     result = _affiliate_anchors(frame, url, label)
     print("NAVER_NATIVE_LINK_APPLY_RESULT " + str(result))
+    if result["count"] != 1:
+        spans = frame.locator(".se-section-text .se-link, .se-section-text a[href]").evaluate_all(
+            """(els, args) => els.slice(-12).map(e => {
+                const text=(e.innerText||'').trim();
+                const par=(e.closest('.se-text-paragraph')?.innerText||'').trim();
+                const href=e.getAttribute('data-href')||e.getAttribute('href')||'';
+                return {
+                    node:e.tagName, char_count:text.length, paragraph_chars:par.length,
+                    text_equals_label:text===args.label,
+                    paragraph_equals_label:par===args.label,
+                    text_is_prefix:args.label.startsWith(text),
+                    text_is_suffix:args.label.endsWith(text),
+                    href_exact:href===args.url,
+                    href_char_count:href.length,
+                    node_classes:(e.className||'').slice(0,90),
+                    label_preview:text.slice(0,50)
+                };
+            })""", {"url":url,"label":label}
+        )
+        print("NAVER_SHORT_CTA_SPAN_DIAGNOSTIC " + str(spans))
+        print("NAVER_SHORT_CTA_PARAGRAPH " + str([
+            x[:90] for x in frame.locator(
+                ".se-section-text .se-text-paragraph"
+            ).all_inner_texts() if "상품정보 더보기" in x
+        ]))
     return result["count"] == 1
 
 
