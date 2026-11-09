@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95470,
+  "last_scanned_id": 95472,
   "pending": [
-    {
-      "id": 95466,
-      "source_post_url": "https://t.me/jirum/95466",
-      "original_purchase_url": "https://link.coupang.com/a/iwZD5DS0zs",
-      "source_text": "🔥🔥🔥무지성 6,380원 (54.4% 할인)🔥🔥🔥\n해태제과 후렌치파이 딸기, 384g, 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 7,620원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iwZD5DS0zs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-09T05:20:08+00:00",
-      "title": "해태제과 후렌치파이 딸기, 384g, 3개",
-      "sale_price_krw": 6380
-    },
     {
       "id": 95467,
       "source_post_url": "https://t.me/jirum/95467",
@@ -37,6 +28,15 @@
       "posted_at_utc": "2026-11-09T06:07:34+00:00",
       "title": "페이스팩토리 UV 충전형 전동 발각질제거기",
       "sale_price_krw": 10890
+    },
+    {
+      "id": 95472,
+      "source_post_url": "https://t.me/jirum/95472",
+      "original_purchase_url": "https://link.coupang.com/a/iw4lgaVLum",
+      "source_text": "🔥🔥🔥무지성 2,990원 (65.0% 할인)🔥🔥🔥\n쉐푸드 고추마요치킨 330g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,543원\n- 할인: 5,553원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iw4lgaVLum\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-09T06:25:52+00:00",
+      "title": "쉐푸드 고추마요치킨 330g",
+      "sale_price_krw": 2990
     }
   ],
   "in_flight": null,
@@ -4355,7 +4355,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 179,
+  "skipped_non_coupang": 180,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -4790,6 +4790,13 @@
       "source_title": "☆특가 6,990원",
       "posted_at_utc": "2026-11-09T05:07:16+00:00",
       "at": "2026-11-09T06:08:12.627599+00:00"
+    },
+    "95466": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95466",
+      "source_title": "해태제과 후렌치파이 딸기, 384g, 3개",
+      "posted_at_utc": "2026-11-09T05:20:08+00:00",
+      "at": "2026-11-09T06:26:53.578675+00:00"
     }
   },
   "skipped_unverifiable": {
