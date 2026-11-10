@@ -343,20 +343,96 @@ def prepare_next(store: Store):
     return make_article(source, DRAFT_DIR, tag=tag)
 
 
+def claim_before_publish(store: Store, source_id: int) -> None:
+    """Rebase only pre-submit claim writes following a known GitHub 409."""
+    for attempt in range(5):
+        state, sha = store.read()
+        if (not state["pending"] or state["pending"][0]["id"] != source_id
+                or state["in_flight"] is not None
+                or str(source_id) in state["published"]
+                or str(source_id) in state["skipped"]):
+            raise RuntimeError("NAVER_FIFO_CHANGED_BEFORE_CLAIM")
+        state["in_flight"] = {
+            "id": source_id, "status": "REVIEW_REQUIRED",
+            "run_id": os.environ.get("GITHUB_RUN_ID", "unknown"),
+            "at": now_utc(),
+        }
+        try:
+            store.write(state, sha, "state: Naver one-post pre-submit claim")
+            return
+        except NaverStateConflict:
+            if attempt == 4:
+                raise
+            _after_known_conflict(attempt)
+    raise RuntimeError("NAVER_PRE_SUBMIT_CLAIM_409_EXHAUSTED")
+
+
+def checkpoint_published(store: Store, source_id: int, url: str) -> None:
+    """Only retry GitHub state checkpoint after an already confirmed post.
+
+    Never click the publish button a second time; preserve unrelated writes
+    and verify the same one-source in-flight claim for each fresh SHA.
+    """
+    for attempt in range(5):
+        state, sha = store.read()
+        previously = state["published"].get(str(source_id))
+        if previously is not None:
+            if previously.get("url") == url and not any(
+                p["id"] == source_id for p in state["pending"]
+            ):
+                return
+            raise RuntimeError("NAVER_PUBLISHED_RECEIPT_CONFLICT")
+        if (not state["in_flight"]
+                or state["in_flight"]["id"] != source_id
+                or not state["pending"]
+                or state["pending"][0]["id"] != source_id):
+            raise RuntimeError("NAVER_POST_CLAIM_LOST")
+        state["pending"].pop(0)
+        state["in_flight"] = None
+        state["published"][str(source_id)] = {"url": url, "at": now_utc()}
+        try:
+            store.write(state, sha, "state: Naver blog post published exactly once")
+            return
+        except NaverStateConflict:
+            if attempt == 4:
+                raise
+            _after_known_conflict(attempt)
+    raise RuntimeError("NAVER_PUBLISHED_RECEIPT_409_EXHAUSTED")
+
+
+def quarantine_title_failure(store: Store, source_id: int) -> None:
+    """A *definite* pre-publish title failure is safe to skip, not repost."""
+    for attempt in range(5):
+        state, sha = store.read()
+        if (not state["in_flight"]
+                or state["in_flight"]["id"] != source_id
+                or not state["pending"]
+                or state["pending"][0]["id"] != source_id):
+            raise RuntimeError("NAVER_PRE_SUBMIT_STATE_CHANGED_REVIEW_REQUIRED")
+        state["pending"].pop(0)
+        state["skipped"][str(source_id)] = {
+            "reason": "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST",
+            "claimed_run_id": os.environ.get("GITHUB_RUN_ID", "unknown"),
+            "at": now_utc(),
+        }
+        state["in_flight"] = None
+        try:
+            store.write(state, sha, "state: mark title validation failure before submit")
+            return
+        except NaverStateConflict:
+            if attempt == 4:
+                raise
+            _after_known_conflict(attempt)
+    raise RuntimeError("NAVER_TITLE_FAILURE_409_EXHAUSTED")
+
+
 def publish_one(store: Store):
-    """No posting until one-time photo+copy test succeeds and flag is enabled."""
+    """One blog submission only; 409 retries are STATE-only, not post retries."""
     article = prepare_next(store)
     if article is None:
         return 0
-    s, sha = store.read()
     source_id = article["source_id"]
-    if not s["pending"] or s["pending"][0]["id"] != source_id or s["in_flight"]:
-        raise RuntimeError("NAVER_FIFO_CHANGED_BEFORE_CLAIM")
-    s["in_flight"] = {
-        "id": source_id, "status": "REVIEW_REQUIRED",
-        "run_id": os.environ.get("GITHUB_RUN_ID", "unknown"), "at": now_utc()
-    }
-    store.write(s, sha, "state: Naver one-post pre-submit claim")
+    claim_before_publish(store, source_id)
     # Any crash or uncertain confirmation leaves the claim locked. Never
     # automatically retry a second click or repeat that source ID.
     from gh_only.naver_blog_deal_publisher import (
@@ -366,37 +442,15 @@ def publish_one(store: Store):
         url = submit_one(article, os.environ.get("NAVER_BLOG_STORAGE_STATE_JSON", ""),
                          publish=True)
     except NaverPreSubmitTitleError:
-        # Explicitly thrown BEFORE any publish button could have been clicked.
-        # Quarantine this source only and free the rest of the FIFO. A new
-        # source ID is required for any future post; never blindly retry.
-        failed, sha_after = store.read()
-        if (failed.get("in_flight", {}).get("id") != source_id
-                or not failed["pending"]
-                or failed["pending"][0]["id"] != source_id):
-            raise RuntimeError("NAVER_PRE_SUBMIT_STATE_CHANGED_REVIEW_REQUIRED")
-        failed["pending"].pop(0)
-        failed["skipped"][str(source_id)] = {
-            "reason": "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST",
-            "claimed_run_id": os.environ.get("GITHUB_RUN_ID", "unknown"),
-            "at": now_utc(),
-        }
-        failed["in_flight"] = None
-        store.write(failed, sha_after, "state: mark title validation failure before submit")
+        quarantine_title_failure(store, source_id)
         print("NAVER_PRE_SUBMIT_TITLE_ERROR_QUARANTINED_NO_POST")
         raise
-    new, sha = store.read()
-    if not new["in_flight"] or new["in_flight"]["id"] != source_id:
-        raise RuntimeError("NAVER_POST_CLAIM_LOST")
-    new["pending"].pop(0)
-    new["in_flight"] = None
-    new["published"][str(source_id)] = {"url": url, "at": now_utc()}
-    store.write(new, sha, "state: Naver blog post published exactly once")
+    checkpoint_published(store, source_id, url)
     print("NAVER_BLOG_PUBLISHED " + json.dumps({
         "source_id": source_id, "url": url,
         "unissued_affiliate_candidate": article["unissued_link"]
     }, ensure_ascii=False))
     return 0
-
 
 def preview_latest():
     """Manual non-publishing editor check of the newest recent Coupang deal.
