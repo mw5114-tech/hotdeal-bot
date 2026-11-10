@@ -3,16 +3,6 @@
   "last_scanned_id": 95594,
   "pending": [
     {
-      "id": 95593,
-      "source_message_id": 95593,
-      "source_post_url": "https://t.me/jirum/95593",
-      "original_purchase_url": "https://link.coupang.com/a/izQOIkYiey",
-      "title": "☆특가 4,280원",
-      "source_text": "☆특가 4,280원\n농심 김치 사발면 86g, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/izQOIkYiey\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4280,
-      "posted_at_utc": "2026-11-10T22:39:25+00:00"
-    },
-    {
       "id": 95594,
       "source_message_id": 95594,
       "source_post_url": "https://t.me/jirum/95594",
@@ -245,6 +235,10 @@
     "95592": {
       "url": "https://blog.naver.com/mw5114/224472510988",
       "at": "2026-11-10T22:41:10.164292+00:00"
+    },
+    "95593": {
+      "url": "https://blog.naver.com/mw5114/224472512184",
+      "at": "2026-11-10T22:43:11.253417+00:00"
     }
   },
   "skipped": {
@@ -306,12 +300,7 @@
       "at": "2026-11-10T16:32:15.431466+00:00"
     }
   },
-  "in_flight": {
-    "id": 95593,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42916953805",
-    "at": "2026-11-10T22:42:28.234977+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
