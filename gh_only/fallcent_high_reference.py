@@ -76,6 +76,24 @@ def _single_visible_price(text: str, pattern: re.Pattern) -> tuple[int | None, b
     )
 
 
+def exact_item_title_compatible(requested: str, heading: str) -> bool:
+    """Title-family check *after* exact product_id+item_id verification.
+
+    Fallcent's H1 sometimes lists the product family without selected option
+    (e.g., 'Apple clear case'), while the Telegram title specifies '17 Pro'.
+    Accept a shorter H1 only if the family matches, and reject explicitly
+    contradictory size/quantity tokens when both headings list them.
+    """
+    if not _same_product_family(requested, heading):
+        return False
+    from gh_only.default_deal_format import _option_specs
+    requested_specs = set(_option_specs(requested))
+    heading_specs = set(_option_specs(heading))
+    if requested_specs and heading_specs and requested_specs.isdisjoint(heading_specs):
+        return False
+    return True
+
+
 def parse_visible_high(html: str, requested_title: str) -> dict:
     """Only exact-item h1 and visibly labelled high/current/low, no inferred prices.
 
@@ -91,7 +109,7 @@ def parse_visible_high(html: str, requested_title: str) -> dict:
     parser = VisibleText()
     parser.feed(html)
     heading = " ".join(parser.headings).strip()
-    if not heading or not _same_product_family(requested_title, heading):
+    if not heading or not exact_item_title_compatible(requested_title, heading):
         return {**out, "status": "FALLCENT_PRODUCT_TITLE_MISMATCH",
                 "source_title": heading[:180]}
     text = " ".join(parser.fragments)
