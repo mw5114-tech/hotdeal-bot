@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95538,
+  "last_scanned_id": 95539,
   "pending": [
     {
       "id": 95534,
@@ -46,6 +46,15 @@
       "posted_at_utc": "2026-11-10T01:47:25+00:00",
       "title": "상도푸드 갓성비 달콤한 닭강정 (냉동), 700g, 2개",
       "sale_price_krw": 9840
+    },
+    {
+      "id": 95539,
+      "source_post_url": "https://t.me/jirum/95539",
+      "original_purchase_url": "https://link.coupang.com/a/iypLzssV2a",
+      "source_text": "👍대박 8,410원 (39.9% 할인)\n오뚜기 고소한 참기름, 500ml, 1개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 5,590원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iypLzssV2a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T01:53:16+00:00",
+      "title": "오뚜기 고소한 참기름, 500ml, 1개",
+      "sale_price_krw": 8410
     }
   ],
   "in_flight": null,
