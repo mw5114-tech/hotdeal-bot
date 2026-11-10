@@ -75,10 +75,26 @@ class FormattingTests(unittest.TestCase):
         self.assertIn("가격 비교 기준 : 폴센트 관측 최고가", body)
         self.assertIn("[약 25% 할인]", body)
 
-    def test_naver_search_is_comparison_not_average(self):
-        _, body = self.format("naver_general_search_first_shopping_card")
-        self.assertIn("네이버 쇼핑 검색 비교가", body)
+    def test_fallcent_midpoint_is_explicitly_not_typical_price(self):
+        _, body = self.format("fallcent_high_low_midpoint")
+        self.assertIn("폴센트 최고·최저 중간값 : 약 19,900원", body)
+        self.assertIn("가격 비교 기준 : 폴센트 최고·최저 중간값", body)
         self.assertNotIn("쿠팡 평소 판매가", body)
+
+    def test_fallcent_current_and_low_references_are_accurately_labeled(self):
+        for source, label in (
+            ("fallcent_observed_current", "폴센트 관측 현재가"),
+            ("fallcent_observed_low", "폴센트 관측 최저가"),
+        ):
+            with self.subTest(source=source):
+                _, body = self.format(source)
+                self.assertIn(f"{label} : 약 19,900원", body)
+                self.assertIn(f"가격 비교 기준 : {label}", body)
+                self.assertNotIn("쿠팡 평소 판매가", body)
+
+    def test_naver_search_reference_is_rejected_even_in_legacy_draft(self):
+        with self.assertRaisesRegex(ValueError, "NAVER_PRICE_REFERENCE_DISABLED"):
+            self.format("naver_general_search_first_shopping_card")
 
     def test_unknown_reference_has_no_fabricated_percent(self):
         _, body = self.format(None, reference=None, discount=None)
