@@ -3,16 +3,6 @@
   "last_scanned_id": 95538,
   "pending": [
     {
-      "id": 95537,
-      "source_message_id": 95537,
-      "source_post_url": "https://t.me/jirum/95537",
-      "original_purchase_url": "https://link.coupang.com/a/iymGNmAn4S",
-      "title": "☆특가 10,930원",
-      "source_text": "☆특가 10,930원\n스카치브라이트 올뉴 재활용 PET 사용 정전기 청소포 표준형 200p, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iymGNmAn4S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10930,
-      "posted_at_utc": "2026-11-10T01:10:13+00:00"
-    },
-    {
       "id": 95538,
       "source_message_id": 95538,
       "source_post_url": "https://t.me/jirum/95538",
@@ -93,6 +83,10 @@
     "95536": {
       "url": "https://blog.naver.com/mw5114/224471357925",
       "at": "2026-11-10T01:47:52.158447+00:00"
+    },
+    "95537": {
+      "url": "https://blog.naver.com/mw5114/224471360252",
+      "at": "2026-11-10T01:49:29.023076+00:00"
     }
   },
   "skipped": {
@@ -139,12 +133,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95537,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42738339768",
-    "at": "2026-11-10T01:48:45.534953+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
