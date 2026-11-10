@@ -138,7 +138,12 @@ jobs:
   # Reuse the exact Oracle -> GitHub dispatch and 30-minute backup triggers.
   # Independent Naver state: no Daangn publishing or cursor is changed.
   naver-blog-fifo:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'workflow_dispatch' || inputs.smoke_test != true)
+    # GitHub Contents writes for DIFFERENT state files still compete for the
+    # same branch HEAD. Serialize the Daangn scan and Naver scan within each
+    # run to prevent 409 Conflict, even while Daangn publishing is paused.
+    # Keep Naver independent if the Daangn scan errors.
+    needs: drain-backlog
+    if: always() && github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'workflow_dispatch' || inputs.smoke_test != true)
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
