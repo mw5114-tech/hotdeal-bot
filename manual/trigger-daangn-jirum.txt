@@ -44,3 +44,4 @@ Naver Blog Oracle workflow integration scan-only test: 2026-11-09. Daangn public
 2026-11-09: verify owner-enabled Naver Blog automatic publishing on existing Oracle-linked workflow; Daangn still paused.
 
 2026-11-10: user explicitly requested Naver Blog production auto publishing START NOW; force immediate one GitHub FIFO scan. Daangn remains PAUSED. Normal Oracle event + 30 minute backup unchanged.
+2026-11-10 09:00 KST audit: run existing Oracle-pattern workflow once after Naver title-length and stale-claim recovery patches; Daangn publish remains paused.
