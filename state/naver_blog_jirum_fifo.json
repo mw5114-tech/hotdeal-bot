@@ -3,16 +3,6 @@
   "last_scanned_id": 95547,
   "pending": [
     {
-      "id": 95546,
-      "source_message_id": 95546,
-      "source_post_url": "https://t.me/jirum/95546",
-      "original_purchase_url": "https://link.coupang.com/a/iyuUoUsN7k",
-      "title": "Apple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max",
-      "source_text": "🔥🔥🔥무지성 12,590원 (47.5% 할인)🔥🔥🔥\nApple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 11,410원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyuUoUsN7k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12590,
-      "posted_at_utc": "2026-11-10T03:05:14+00:00"
-    },
-    {
       "id": 95547,
       "source_message_id": 95547,
       "source_post_url": "https://t.me/jirum/95547",
@@ -121,6 +111,10 @@
     "95545": {
       "url": "https://blog.naver.com/mw5114/224471466916",
       "at": "2026-11-10T03:07:25.185258+00:00"
+    },
+    "95546": {
+      "url": "https://blog.naver.com/mw5114/224471475007",
+      "at": "2026-11-10T03:14:16.385032+00:00"
     }
   },
   "skipped": {
@@ -167,12 +161,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95546,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42747933870",
-    "at": "2026-11-10T03:13:33.759979+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
