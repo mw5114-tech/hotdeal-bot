@@ -101,15 +101,17 @@ def create_default_preview(sale: int | None, title: str | None,
     """Output only the user's chosen default copy; no fabricated source prices."""
     sale = sale if type(sale) is int and 0 < sale <= 100_000_000 else None
     average = average if type(average) is int and 0 < average <= 100_000_000 else None
-    if reference_source not in ("lowchart_public_history",
-                                "naver_general_search_first_shopping_card",
-                                "fallcent_observed_high"):
+    labels = {
+        "lowchart_public_history": "💸 쿠팡 평소 판매가",
+        "naver_general_search_first_shopping_card": "💸 비교 기준가(네이버 검색)",
+        "fallcent_observed_high": "💸 폴센트 관측 최고가",
+        "fallcent_high_low_midpoint": "💸 폴센트 최고·최저 중간값",
+        "fallcent_observed_current": "💸 폴센트 관측 현재가",
+        "fallcent_observed_low": "💸 폴센트 관측 최저가",
+    }
+    if reference_source not in labels:
         raise ValueError("INVALID_REFERENCE_PRICE_SOURCE")
-    naver_reference = (average is not None
-                       and reference_source == "naver_general_search_first_shopping_card")
-    fallcent_high_reference = (average is not None
-                               and reference_source == "fallcent_observed_high")
-    nonaverage_reference = naver_reference or fallcent_high_reference
+    nonaverage_reference = (reference_source != "lowchart_public_history")
     approx = nearest_five_discount(sale, average)
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
@@ -123,12 +125,8 @@ def create_default_preview(sale: int | None, title: str | None,
     # If Lowchart history cannot establish a discount, never invent a rate.
     body_discount = f"[{approx}%할인]" if approx is not None else "[할인율 확인 중]"
     lines = [f"{body_discount} {product}"]
-    if fallcent_high_reference:
-        lines.append(f"💸 폴센트 관측 최고가 : 약 {average:,}원")
-    elif naver_reference:
-        lines.append(f"💸 비교 기준가(네이버 검색) : 약 {average:,}원")
-    elif average is not None:
-        lines.append(f"💸 쿠팡 평소 판매가 : 약 {average:,}원")
+    if average is not None:
+        lines.append(f"{labels[reference_source]} : 약 {average:,}원")
     else:
         lines.append("💸 쿠팡 평소 판매가 : 확인 중")
     if sale is not None:
@@ -153,7 +151,9 @@ def create_default_preview(sale: int | None, title: str | None,
         "comparison_price_is_historical_average": not nonaverage_reference and average is not None,
         "rounded_discount_step": DEFAULT_PERCENT_STEP,
         "approx_discount_vs_reference_pct": approx,
-        "approx_discount_vs_historical_mean_pct": approx,
+        "approx_discount_vs_historical_mean_pct": (
+            approx if not nonaverage_reference else None
+        ),
         "actual_discount_vs_historical_mean_pct": (
             round((average - sale) / average * 100, 1)
             if approx is not None and not nonaverage_reference else None
