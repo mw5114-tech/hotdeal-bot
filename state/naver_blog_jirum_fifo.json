@@ -3,16 +3,6 @@
   "last_scanned_id": 95548,
   "pending": [
     {
-      "id": 95547,
-      "source_message_id": 95547,
-      "source_post_url": "https://t.me/jirum/95547",
-      "original_purchase_url": "https://link.coupang.com/a/iyvoiX2sAm",
-      "title": "☆특가 3,200원",
-      "source_text": "☆특가 3,200원\n꼬깔콘 군옥수수맛 지퍼백, 235g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyvoiX2sAm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3200,
-      "posted_at_utc": "2026-11-10T03:11:59+00:00"
-    },
-    {
       "id": 95548,
       "source_message_id": 95548,
       "source_post_url": "https://t.me/jirum/95548",
@@ -125,6 +115,10 @@
     "95546": {
       "url": "https://blog.naver.com/mw5114/224471475007",
       "at": "2026-11-10T03:14:16.385032+00:00"
+    },
+    "95547": {
+      "url": "https://blog.naver.com/mw5114/224471476941",
+      "at": "2026-11-10T03:15:52.159199+00:00"
     }
   },
   "skipped": {
@@ -171,12 +165,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95547,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42748083030",
-    "at": "2026-11-10T03:15:09.857471+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
