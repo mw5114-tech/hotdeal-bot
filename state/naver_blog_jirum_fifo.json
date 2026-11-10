@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95552,
-  "pending": [
-    {
-      "id": 95552,
-      "source_message_id": 95552,
-      "source_post_url": "https://t.me/jirum/95552",
-      "original_purchase_url": "https://link.coupang.com/a/iyztlBZYvQ",
-      "title": "폴스 팜하우스 골드 밀크, 1L, 12개",
-      "source_text": "☆특가 32,140원 (27.8% 할인)\n폴스 팜하우스 골드 밀크, 1L, 12개\n📌 가격 현황\n- 정상가: 44,520원\n- 할인: 12,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyztlBZYvQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 32140,
-      "posted_at_utc": "2026-11-10T04:09:06+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -131,6 +120,10 @@
     "95551": {
       "url": "https://blog.naver.com/mw5114/224471512177",
       "at": "2026-11-10T03:46:17.771832+00:00"
+    },
+    "95552": {
+      "url": "https://blog.naver.com/mw5114/224471542161",
+      "at": "2026-11-10T04:11:30.680387+00:00"
     }
   },
   "skipped": {
@@ -177,12 +170,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95552,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42754083989",
-    "at": "2026-11-10T04:10:52.000379+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
