@@ -366,6 +366,13 @@ def enrich_deal(deal: dict, output_dir: Path,
             high = fallcent_high.get("observed_high_krw")
             low = fallcent_high.get("observed_low_krw")
             current = fallcent_high.get("observed_current_krw")
+            fallcent_average = fallcent_high.get("observed_average_krw")
+            average_ok = (
+                verified and type(fallcent_average) is int
+                and 100 <= fallcent_average <= 100_000_000
+                and fallcent_high.get("average_basis") ==
+                    "fallcent_public_visible_observed_average"
+            )
             high_ok = (
                 verified and fallcent_high.get("status") == "HIGH_FOUND"
                 and type(high) is int and 100 <= high <= 100_000_000
@@ -383,27 +390,30 @@ def enrich_deal(deal: dict, output_dir: Path,
                 and fallcent_high.get("current_basis") ==
                     "fallcent_public_visible_current"
             )
-            if high_ok and low_ok and high >= low:
-                # Fallcent defines its midpoint as (period high + low)/2.
-                # Call it a MIDPOINT, never an official normal/list price.
+            if average_ok:
+                # The actual labelled Fallcent observed average, NEVER the
+                # current price or a price reversed from a percent badge.
+                comparison_price = fallcent_average
+                comparison_source = "fallcent_observed_average"
+            elif high_ok and low_ok and high >= low:
+                # A computed high/low MIDPOINT is not the site's average.
                 comparison_price = (high + low) // 2
                 comparison_source = "fallcent_high_low_midpoint"
             elif high_ok:
                 comparison_price = high
                 comparison_source = "fallcent_observed_high"
-            elif current_ok:
-                comparison_price = current
-                comparison_source = "fallcent_observed_current"
-            elif low_ok:
-                comparison_price = low
-                comparison_source = "fallcent_observed_low"
-            # If no verifiable price is public, leave comparison blank.
-            # Never substitute a Naver product card or infer a historical high.
+            # Do not fall back to Fallcent's CURRENT or LOW price: the user
+            # wants a comparison to an observed historical reference.
+            # The site's displayed percent alone cannot establish a genuine
+            # ordinary price, and Telegram's sale might have a different
+            # observation time. No invented historical reference.
+            # If unavailable, no discount can be claimed.
         except Exception as exc:
             fallcent_high = {"status": "FALLCENT_PRICE_QUERY_ERROR",
                              "observed_high_krw": None,
                              "observed_current_krw": None,
                              "observed_low_krw": None,
+                             "observed_average_krw": None,
                              "error_type": type(exc).__name__}
     naver_price = {"status": "DISABLED_BY_USER_PRICE_SOURCE_POLICY",
                    "price_krw": None}
