@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95554,
-  "pending": [
-    {
-      "id": 95554,
-      "source_message_id": 95554,
-      "source_post_url": "https://t.me/jirum/95554",
-      "original_purchase_url": "https://link.coupang.com/a/iyBHZr7E1A",
-      "title": "☆특가 7,930원",
-      "source_text": "☆특가 7,930원\n퍼기 어린이 7종야채 채수팩 10개입, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyBHZr7E1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7930,
-      "posted_at_utc": "2026-11-10T04:40:23+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -139,6 +128,10 @@
     "95553": {
       "url": "https://blog.naver.com/mw5114/224471550863",
       "at": "2026-11-10T04:18:32.819108+00:00"
+    },
+    "95554": {
+      "url": "https://blog.naver.com/mw5114/224471582937",
+      "at": "2026-11-10T04:42:43.137236+00:00"
     }
   },
   "skipped": {
@@ -185,12 +178,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95554,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42757403047",
-    "at": "2026-11-10T04:42:00.208162+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
