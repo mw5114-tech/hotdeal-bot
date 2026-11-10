@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95600,
-  "pending": [
-    {
-      "id": 95595,
-      "source_message_id": 95595,
-      "source_post_url": "https://t.me/jirum/95595",
-      "original_purchase_url": "https://link.coupang.com/a/izRNljI4ho",
-      "title": "[로켓프레시] CJ제일제당 소바바 소이허니 순살치킨 (냉동) 240g",
-      "source_text": "🔥🔥🔥무지성 3,680원 (46.0% 할인)🔥🔥🔥\n[로켓프레시] CJ제일제당 소바바 소이허니 순살치킨 (냉동) 240g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 6,815원\n- 할인: 3,135원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izRNljI4ho\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3680,
-      "posted_at_utc": "2026-11-10T22:53:06+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -256,6 +245,14 @@
       "note": "Job log shows failure before any body composition or publish click; no auto replay",
       "at": "2026-11-10T00:00:00+00:00"
     },
+    "95509": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-10T00:02:05.360952+00:00"
+    },
+    "95510": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-10T00:02:05.360956+00:00"
+    },
     "95511": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-10T00:02:05.360887+00:00"
@@ -280,14 +277,6 @@
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-10T00:02:05.360927+00:00"
     },
-    "95509": {
-      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
-      "at": "2026-11-10T00:02:05.360952+00:00"
-    },
-    "95510": {
-      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
-      "at": "2026-11-10T00:02:05.360956+00:00"
-    },
     "95568": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-10T07:56:07.779209+00:00"
@@ -302,14 +291,17 @@
       "claimed_at": "2026-11-10T15:42:55.308073+00:00",
       "source_post_url": "https://t.me/jirum/95588",
       "at": "2026-11-10T16:32:15.431466+00:00"
+    },
+    "95595": {
+      "reason": "PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY",
+      "claimed_run_id": "42921783208",
+      "claimed_at": "2026-11-10T23:15:31.224896+00:00",
+      "source_post_url": "https://t.me/jirum/95595",
+      "at": "2026-11-10T23:42:27.159Z",
+      "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95595,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42921783208",
-    "at": "2026-11-10T23:15:31.224896+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,

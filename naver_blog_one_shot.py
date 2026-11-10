@@ -9,6 +9,7 @@ import argparse
 import json
 import os
 import re
+from time import monotonic, sleep
 from urllib.parse import parse_qs, urlsplit
 
 BLOG_ID = "mw5114"
@@ -129,14 +130,84 @@ def get_editor_frame(page):
 
 
 def publication_log_number(url: str) -> str | None:
-    parsed = urlsplit(url)
-    if parsed.hostname not in ("blog.naver.com", "m.blog.naver.com"):
+    """Accept only an HTTPS view URL for *our* blog, never a foreign logNo."""
+    try:
+        parsed = urlsplit(url)
+        if (parsed.scheme != "https"
+                or parsed.hostname not in ("blog.naver.com", "m.blog.naver.com")
+                or parsed.username or parsed.password
+                or parsed.port not in (None, 443)):
+            return None
+    except (TypeError, ValueError):
         return None
-    number = (parse_qs(parsed.query).get("logNo") or [None])[0]
-    if not number:
-        match = re.search(r"/mw5114/(\d+)(?:/|$)", parsed.path)
+    if parsed.path.rstrip("/") == "/PostView.naver":
+        params = parse_qs(parsed.query)
+        if params.get("blogId") != [BLOG_ID]:
+            return None
+        numbers = params.get("logNo")
+        number = numbers[0] if numbers and len(numbers) == 1 else None
+    else:
+        match = re.fullmatch(rf"/{re.escape(BLOG_ID)}/(\d{{8,18}})/?", parsed.path)
         number = match.group(1) if match else None
     return number if number and re.fullmatch(r"\d{8,18}", number) else None
+
+
+def _post_receipts_in_open_pages(page) -> set[str]:
+    """Inspect URLs only, including a new tab opened by SmartEditor."""
+    try:
+        pages = list(page.context.pages)
+    except Exception:
+        pages = [page]
+    if page not in pages:
+        pages.insert(0, page)
+    receipts = set()
+    for tab in pages:
+        try:
+            if tab.is_closed():
+                continue
+            candidates = [tab.url] + [frame.url for frame in tab.frames]
+        except Exception:
+            continue
+        for target in candidates:
+            receipt = publication_log_number(target)
+            if receipt:
+                receipts.add(receipt)
+    return receipts
+
+
+def wait_for_publication_receipt(page, *, timeout_ms: int = 15000,
+                                 interval_ms: int = 300) -> str:
+    """Wait for a verified own-blog URL without clicking publish again.
+
+    A fixed 2.5-second snapshot falsely marked delayed redirects as failures.
+    The browser may navigate its current tab, iframe, or a newly opened tab.
+    Treat zero or multiple distinct post IDs as uncertain, never auto-retry.
+    """
+    if not 100 <= timeout_ms <= 30000 or not 50 <= interval_ms <= 1000:
+        raise ValueError("NAVER_RECEIPT_WAIT_BOUNDS_INVALID")
+    deadline = monotonic() + timeout_ms / 1000
+    while True:
+        numbers = _post_receipts_in_open_pages(page)
+        if len(numbers) == 1:
+            print("NAVER_PUBLISH_RECEIPT_CONFIRMED")
+            return next(iter(numbers))
+        remaining_ms = int((deadline - monotonic()) * 1000)
+        if remaining_ms <= 0:
+            break
+        pause_ms = min(interval_ms, max(1, remaining_ms))
+        try:
+            pages = list(page.context.pages)
+            awake = next((p for p in pages if not p.is_closed()), None)
+            if awake is None:
+                sleep(pause_ms / 1000)
+            else:
+                # Playwright wait processes navigation/popup events.
+                awake.wait_for_timeout(pause_ms)
+        except Exception:
+            # Closed editor tab? Keep inspecting other tabs until deadline.
+            sleep(pause_ms / 1000)
+    print("NAVER_PUBLISH_RECEIPT_UNCONFIRMED_NO_RETRY")
+    raise RuntimeError("SUBMISSION_UNCERTAIN_DO_NOT_RETRY")
 
 
 def publish_exactly_one(frame, page):
@@ -176,15 +247,12 @@ def publish_exactly_one(frame, page):
                 print(f"PUBLISH_MODAL_BTN_{i}=UNAVAILABLE")
         raise RuntimeError("PUBLISH_CONFIRMATION_AMBIGUOUS")
     confirm_candidates[0].click(timeout=7000)
-    page.wait_for_timeout(2500)
 
-    # Check the navigation target; no retries after any submission click.
-    candidates = [page.url] + [f.url for f in page.frames]
-    for target in candidates:
-        log_no = publication_log_number(target)
-        if log_no:
-            return log_no
-    raise RuntimeError("SUBMISSION_UNCERTAIN_DO_NOT_RETRY")
+    # The final publish click is NEVER repeated. Wait for a verified URL from
+    # the existing tab, its iframe, or a new tab; otherwise preserve the FIFO
+    # REVIEW_REQUIRED claim for manual reconciliation instead of reposting.
+    print("NAVER_PUBLISH_CONFIRM_CLICKED_AWAITING_RECEIPT")
+    return wait_for_publication_receipt(page)
 
 
 def run(phase: str) -> int:

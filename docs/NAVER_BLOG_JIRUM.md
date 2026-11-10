@@ -52,7 +52,16 @@ Target: https://blog.naver.com/mw5114
 ## Failure handling
 
 - Absence of photo, title, price, source timestamp, or session: no blind submit.
-- Any uncertain submission: leave pre-claim recorded, require manual review.
+- After the single final publish click, poll the editor tab, frames and any new
+  tab for a verified URL belonging to `mw5114` for up to 15 seconds.
+  Never click submit twice; a missing or ambiguous receipt is NOT proof of
+  non-publication and stays `REVIEW_REQUIRED` for manual review.
+- On a later scan, a completed writer's pre-submit claim older than 30 minutes
+  is quarantined as `PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY`, not reposted.
+  This safely unlocks later fresh deals. Do not equate a green scan-only run
+  with a published article.
+- Do not reset or replay an uncertain source merely because its run failed.
+  Reconcile it against actual Naver posts before editing its audit record.
 - No extra Oracle poller or scheduled task is installed; the existing dispatch
   and backup schedule are reused.
 - Do not automatically post every unreviewed Telegram item in bulk to a newly
