@@ -745,8 +745,9 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     caption = row.get("caption", {})
     basis = caption.get("comparison_reference_source")
     fallcent_basis = {
-        "fallcent_observed_high", "fallcent_high_low_midpoint",
-        "fallcent_observed_current", "fallcent_observed_low",
+        "fallcent_observed_average", "fallcent_observed_high",
+        "fallcent_high_low_midpoint", "fallcent_observed_current",
+        "fallcent_observed_low",
     }
     if basis == "naver_general_search_first_shopping_card":
         raise RuntimeError("NAVER_PRICE_FALLBACK_DISABLED")
@@ -772,6 +773,11 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         high, low, current = (proof.get("observed_high_krw"),
                               proof.get("observed_low_krw"),
                               proof.get("observed_current_krw"))
+        observed_average = proof.get("observed_average_krw")
+        average_ok = (proof.get("average_basis") ==
+                          "fallcent_public_visible_observed_average"
+                      and type(observed_average) is int
+                      and 100 <= observed_average <= 100_000_000)
         high_ok = (proof.get("status") == "HIGH_FOUND"
                    and proof.get("price_basis") ==
                        "fallcent_public_visible_historical_high"
@@ -783,6 +789,10 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                           "fallcent_public_visible_current"
                       and type(current) is int and 100 <= current <= 100_000_000)
         expected = {
+            "fallcent_observed_average": (
+                observed_average if average_ok else None,
+                "💸 쿠팡 평소 판매가(폴센트 관측 평균)"
+            ),
             "fallcent_observed_high": (
                 high if high_ok else None, "💸 폴센트 관측 최고가"
             ),
@@ -801,7 +811,10 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         if (not verified or type(price) is not int or type(sale) is not int
                 or price != value or
                 f"{display_label} : 약 {price:,}원" not in article["body"]
-                or caption.get("observed_average_krw") is not None):
+                or caption.get("observed_average_krw") is not None
+                or (caption.get("fallcent_observed_average_krw") != price
+                    if basis == "fallcent_observed_average"
+                    else caption.get("fallcent_observed_average_krw") is not None)):
             raise RuntimeError("FALLCENT_PRICE_EVIDENCE_MISMATCH")
     from urllib.parse import parse_qs
     link = urlsplit(article["candidate_url"])
