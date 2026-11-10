@@ -1,3 +1,5 @@
 2026-11-10
 mode=preview
 NO_PUBLISH: revised real-time heading, reference first, sale with discount, immediate stock disclaimer, late popup guarded
+
+2026-11-10T08:54+09:00 production audit: regress long title UTF-16, quarantine stalled pre-submit claim, non-publish Naver editor smoke.
