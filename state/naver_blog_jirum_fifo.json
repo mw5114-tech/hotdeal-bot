@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95585,
-  "pending": [],
+  "last_scanned_id": 95587,
+  "pending": [
+    {
+      "id": 95587,
+      "source_message_id": 95587,
+      "source_post_url": "https://t.me/jirum/95587",
+      "original_purchase_url": "https://link.coupang.com/a/izkO2BQEGO",
+      "title": "(종료)에이서 2026 스위프트 에어 14 코어5 코어 시리즈3",
+      "source_text": "☆특가 674,000원 (25.1% 할인)\n(종료)에이서 2026 스위프트 에어 14 코어5 코어 시리즈3\n📌 가격 현황\n- 정상가: 900,000원\n- 할인: 226,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izkO2BQEGO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 674000,
+      "posted_at_utc": "2026-11-10T15:11:42+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
