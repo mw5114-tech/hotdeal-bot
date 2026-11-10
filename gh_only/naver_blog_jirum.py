@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 import json
 import os
 import re
+import time
 from pathlib import Path
 from urllib import error
 from urllib.parse import parse_qs, urlsplit
@@ -140,6 +141,10 @@ def validate_state(s: dict) -> None:
         raise ValueError("NAVER_FIFO_TOO_LARGE")
 
 
+class NaverStateConflict(RuntimeError):
+    """Known GitHub Contents 409: no blind PUT retry; rebase the operation."""
+
+
 class Store(old.GithubState):
     """Reuse the existing credential-safe GitHub Contents transport only."""
     def __init__(self):
@@ -160,12 +165,23 @@ class Store(old.GithubState):
             raw.encode("utf-8")).decode("ascii"), "sha": sha, "branch": "main"}
         try:
             response = self.api("PUT", data)
-        except (error.HTTPError, error.URLError, TimeoutError):
-            # GitHub might have committed. Read it back; NEVER retry the PUT.
+        except error.HTTPError as exc:
+            # For a confirmed 409, GitHub refused this stale commit. Read the
+            # persisted state once; the CALLER may recompute an operation from
+            # the latest SHA, but never replay this identical PUT.
             confirmed, _ = self.read()
             if confirmed == state:
                 return
-            raise RuntimeError("NAVER_STATE_COMMIT_UNCERTAIN")
+            if exc.code == 409:
+                raise NaverStateConflict("NAVER_STATE_KNOWN_409_REBASE") from exc
+            raise RuntimeError("NAVER_STATE_COMMIT_UNCERTAIN") from exc
+        except (error.URLError, TimeoutError) as exc:
+            # Transport errors may have committed despite a lost response.
+            # Do not retry an ambiguous write.
+            confirmed, _ = self.read()
+            if confirmed == state:
+                return
+            raise RuntimeError("NAVER_STATE_COMMIT_UNCERTAIN") from exc
         if not response.get("commit", {}).get("sha"):
             raise RuntimeError("NAVER_STATE_COMMIT_UNCONFIRMED")
 
@@ -229,24 +245,41 @@ def ingest(s: dict, items: list[dict], reference: datetime | None = None):
     return added, expired
 
 
+def _after_known_conflict(attempt: int) -> None:
+    """Back off only after a confirmed 409; all other write errors stay fatal."""
+    print("NAVER_GITHUB_409_REBASE_ATTEMPT=" + str(attempt + 1))
+    time.sleep(min(0.35 * (attempt + 1), 1.5))
+
+
 def scan(store: Store):
-    s, sha = store.read()
-    archived = False
-    if s["in_flight"] is not None:
-        archived = archive_stale_claim(s)
-        if not archived:
-            print("NAVER_PUBLISH_REVIEW_REQUIRED_NO_NEW_POST")
-            return {"ready": False, "review": True}
-        print("NAVER_ABANDONED_CLAIM_QUARANTINED_NO_AUTORETRY")
-    discovered = old.collect_since(s["last_scanned_id"], fetch_public_html, old.older_html)
-    added, expired = ingest(s, discovered)
-    if archived or added or expired or discovered:
-        store.write(s, sha, "state: Naver scan, quarantine stale claim and expire old deals")
-    result = {"ready": bool(s["pending"]), "new": added, "expired": expired,
-              "archived_stale_claim": archived,
-              "pending": len(s["pending"]), "last_scanned_id": s["last_scanned_id"]}
-    print("NAVER_BLOG_FIFO_SCAN " + json.dumps(result, ensure_ascii=False))
-    return result
+    # A Daangn scan or unrelated GitHub state update can advance the branch
+    # while Naver is saving its *different* state file. Read and recompute
+    # against the latest SHA after a verified 409; never blindly repeat a PUT.
+    for attempt in range(5):
+        s, sha = store.read()
+        archived = False
+        if s["in_flight"] is not None:
+            archived = archive_stale_claim(s)
+            if not archived:
+                print("NAVER_PUBLISH_REVIEW_REQUIRED_NO_NEW_POST")
+                return {"ready": False, "review": True}
+            print("NAVER_ABANDONED_CLAIM_QUARANTINED_NO_AUTORETRY")
+        discovered = old.collect_since(s["last_scanned_id"], fetch_public_html, old.older_html)
+        added, expired = ingest(s, discovered)
+        if archived or added or expired or discovered:
+            try:
+                store.write(s, sha, "state: Naver scan, quarantine stale claim and expire old deals")
+            except NaverStateConflict:
+                if attempt == 4:
+                    raise
+                _after_known_conflict(attempt)
+                continue
+        result = {"ready": bool(s["pending"]), "new": added, "expired": expired,
+                  "archived_stale_claim": archived,
+                  "pending": len(s["pending"]), "last_scanned_id": s["last_scanned_id"]}
+        print("NAVER_BLOG_FIFO_SCAN " + json.dumps(result, ensure_ascii=False))
+        return result
+    raise RuntimeError("NAVER_SCAN_CONFLICT_RETRY_EXHAUSTED")
 
 
 def make_article(source: dict, output: Path, *, tag: str,
