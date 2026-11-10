@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95550,
-  "pending": [
-    {
-      "id": 95550,
-      "source_message_id": 95550,
-      "source_post_url": "https://t.me/jirum/95550",
-      "original_purchase_url": "https://link.coupang.com/a/iyxi35044a",
-      "title": "☆특가 3,530원",
-      "source_text": "☆특가 3,530원\n팔도 바지락짬뽕 120g 4개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyxi35044a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3530,
-      "posted_at_utc": "2026-11-10T03:38:47+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -123,6 +112,10 @@
     "95548": {
       "url": "https://blog.naver.com/mw5114/224471498842",
       "at": "2026-11-10T03:34:45.895457+00:00"
+    },
+    "95550": {
+      "url": "https://blog.naver.com/mw5114/224471508474",
+      "at": "2026-11-10T03:43:07.797782+00:00"
     }
   },
   "skipped": {
@@ -169,12 +162,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95550,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42750827129",
-    "at": "2026-11-10T03:42:25.519431+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
