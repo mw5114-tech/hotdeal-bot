@@ -3,16 +3,6 @@
   "last_scanned_id": 95595,
   "pending": [
     {
-      "id": 95594,
-      "source_message_id": 95594,
-      "source_post_url": "https://t.me/jirum/95594",
-      "original_purchase_url": "https://link.coupang.com/a/izQXpEGWqG",
-      "title": "ㅇ카,톡,무,지,성,핫,딜 검색후 들어오세요 (테-스,트)",
-      "source_text": "👍대박 3,080원 (38.4% 할인)\nㅇ카,톡,무,지,성,핫,딜 검색후 들어오세요 (테-스,트)\n📌 가격 현황\n- 정상가: 5,000원\n- 할인: 1,920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izQXpEGWqG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3080,
-      "posted_at_utc": "2026-11-10T22:41:23+00:00"
-    },
-    {
       "id": 95595,
       "source_message_id": 95595,
       "source_post_url": "https://t.me/jirum/95595",
@@ -249,6 +239,10 @@
     "95593": {
       "url": "https://blog.naver.com/mw5114/224472512184",
       "at": "2026-11-10T22:43:11.253417+00:00"
+    },
+    "95594": {
+      "url": "https://blog.naver.com/mw5114/224472520093",
+      "at": "2026-11-10T22:55:29.139246+00:00"
     }
   },
   "skipped": {
@@ -310,12 +304,7 @@
       "at": "2026-11-10T16:32:15.431466+00:00"
     }
   },
-  "in_flight": {
-    "id": 95594,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42918700671",
-    "at": "2026-11-10T22:54:44.500582+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
