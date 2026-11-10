@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95582,
-  "pending": [],
+  "last_scanned_id": 95585,
+  "pending": [
+    {
+      "id": 95583,
+      "source_message_id": 95583,
+      "source_post_url": "https://t.me/jirum/95583",
+      "original_purchase_url": "https://link.coupang.com/a/iy7e5wRAaW",
+      "title": "[로켓프레시] 널담 고단백 저당 네모바게트 치즈올리브 (냉동) 12개",
+      "source_text": "🔥🔥🔥무지성 11,840원 (48.0% 할인)🔥🔥🔥\n[로켓프레시] 널담 고단백 저당 네모바게트 치즈올리브 (냉동) 12개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 22,769원\n- 할인: 10,929원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iy7e5wRAaW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11840,
+      "posted_at_utc": "2026-11-10T12:01:40+00:00"
+    },
+    {
+      "id": 95585,
+      "source_message_id": 95585,
+      "source_post_url": "https://t.me/jirum/95585",
+      "original_purchase_url": "https://link.coupang.com/a/iy8HnQj2nk",
+      "title": "(종료)샘표국시 바지락칼국수 100.3g*5개",
+      "source_text": "👍대박 3,950원 (33.1% 할인)\n(종료)샘표국시 바지락칼국수 100.3g*5개\n📌 가격 현황\n- 정상가: 5,900원\n- 할인: 1,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iy8HnQj2nk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3950,
+      "posted_at_utc": "2026-11-10T12:22:02+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
