@@ -1,6 +1,6 @@
 """Public, exact-item Fallcent historical-high reference.
 
-Read ONLY the visible, explicitly labelled price on the exact productId/itemId
+Read ONLY visible, explicitly labelled prices on the exact productId/itemId
 public detail page; never infer it from discounts, graph placeholders,
 home-page examples or an unrelated search result. No login/private APIs.
 """
@@ -18,6 +18,16 @@ HOSTS = frozenset(("fallcent.com", "www.fallcent.com"))
 PRICE_HIGH_RE = re.compile(
     r"(?:역대급\s*최고가|역대\s*최고가|(?<![가-힣])최고가)"
     r"\s*[:：]?\s*((?:[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d{2,8}))\s*원\b"
+)
+# Only labelled, user-visible figures from the verified exact item detail.
+# Do NOT infer hidden highs from an unlabeled 64% badge or sample cards.
+PRICE_LOW_RE = re.compile(
+    r"(?:역대급\s*최저가|역대\s*최저가|(?<![가-힣])최저가)"
+    r"\s*[:：]?\s*((?:[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d{2,8}))\s*원\b"
+)
+PRICE_CURRENT_RE = re.compile(
+    r"(?<![가-힣])현재\s*가\s*[:：]?\s*"
+    r"((?:[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d{2,8}))\s*원\b"
 )
 VALID_ID = re.compile(r"\d{5,18}")
 
@@ -57,9 +67,25 @@ def _same_product_family(requested: str, heading: str) -> bool:
                 (a.startswith(b) or b.startswith(a)))
 
 
+def _single_visible_price(text: str, pattern: re.Pattern) -> tuple[int | None, bool]:
+    """Return (price, ambiguous); ignore all non-visible HTML/script contents."""
+    values = [int(m.group(1).replace(",", "")) for m in pattern.finditer(text)]
+    values = [v for v in values if 100 <= v <= 100_000_000]
+    return (values[0], False) if len(set(values)) == 1 and values else (
+        None, len(set(values)) > 1
+    )
+
+
 def parse_visible_high(html: str, requested_title: str) -> dict:
-    """Parse a single visible, labelled high; exclude disclaimers and examples."""
-    out = {"status": "FALLCENT_HIGH_NOT_VISIBLE", "observed_high_krw": None}
+    """Only exact-item h1 and visibly labelled high/current/low, no inferred prices.
+
+    Keeps legacy 'FALLCENT_HIGH_NOT_VISIBLE' status when only current/low
+    appear. Those individually verified prices may still be a truthful
+    comparison, but cannot be called a normal/list/historical-average price.
+    """
+    out = {"status": "FALLCENT_HIGH_NOT_VISIBLE",
+           "observed_high_krw": None, "observed_current_krw": None,
+           "observed_low_krw": None}
     if not isinstance(html, str) or not isinstance(requested_title, str):
         return {**out, "status": "INVALID_PRICE_SOURCE_INPUT"}
     parser = VisibleText()
@@ -69,16 +95,30 @@ def parse_visible_high(html: str, requested_title: str) -> dict:
         return {**out, "status": "FALLCENT_PRODUCT_TITLE_MISMATCH",
                 "source_title": heading[:180]}
     text = " ".join(parser.fragments)
-    matches = [int(m.group(1).replace(",", "")) for m in PRICE_HIGH_RE.finditer(text)]
-    matches = [v for v in matches if 100 <= v <= 100_000_000]
-    if not matches:
-        return {**out, "source_title": heading[:180]}
-    if len(set(matches)) != 1:
-        return {**out, "status": "FALLCENT_HIGH_AMBIGUOUS",
+    high, bad_high = _single_visible_price(text, PRICE_HIGH_RE)
+    current, bad_current = _single_visible_price(text, PRICE_CURRENT_RE)
+    low, bad_low = _single_visible_price(text, PRICE_LOW_RE)
+    if bad_high or bad_current or bad_low:
+        return {**out, "status": (
+            "FALLCENT_HIGH_AMBIGUOUS" if bad_high else "FALLCENT_PRICES_AMBIGUOUS"
+        ), "source_title": heading[:180]}
+    if high is not None and low is not None and high < low:
+        return {**out, "status": "FALLCENT_PRICES_INCONSISTENT",
                 "source_title": heading[:180]}
-    return {"status": "HIGH_FOUND", "observed_high_krw": matches[0],
-            "source_title": heading[:180],
-            "price_basis": "fallcent_public_visible_historical_high"}
+    return {
+        **out,
+        "status": "HIGH_FOUND" if high is not None else "FALLCENT_HIGH_NOT_VISIBLE",
+        "observed_high_krw": high,
+        "observed_current_krw": current,
+        "observed_low_krw": low,
+        "source_title": heading[:180],
+        "price_basis": ("fallcent_public_visible_historical_high"
+                        if high is not None else None),
+        "current_basis": ("fallcent_public_visible_current"
+                          if current is not None else None),
+        "low_basis": ("fallcent_public_visible_historical_low"
+                      if low is not None else None),
+    }
 
 
 class _FallcentRedirect(request.HTTPRedirectHandler):
@@ -94,7 +134,7 @@ class _FallcentRedirect(request.HTTPRedirectHandler):
 
 def fetch_exact_fallcent_high(identity: dict, requested_title: str,
                              *, opener=None) -> dict:
-    """Fetch public direct-ID page. A missing historical high never becomes one."""
+    """Fetch public exact-ID detail; current/low never masquerade as a high."""
     out = {"status": "FALLCENT_HIGH_UNAVAILABLE", "observed_high_krw": None}
     if not isinstance(identity, dict):
         return {**out, "status": "INVALID_PRODUCT_IDENTITY"}
