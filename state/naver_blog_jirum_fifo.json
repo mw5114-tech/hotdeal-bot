@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95585,
-  "pending": [
-    {
-      "id": 95585,
-      "source_message_id": 95585,
-      "source_post_url": "https://t.me/jirum/95585",
-      "original_purchase_url": "https://link.coupang.com/a/iy8HnQj2nk",
-      "title": "(종료)샘표국시 바지락칼국수 100.3g*5개",
-      "source_text": "👍대박 3,950원 (33.1% 할인)\n(종료)샘표국시 바지락칼국수 100.3g*5개\n📌 가격 현황\n- 정상가: 5,900원\n- 할인: 1,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iy8HnQj2nk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3950,
-      "posted_at_utc": "2026-11-10T12:22:02+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -263,6 +252,10 @@
     "95568": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-10T07:56:07.779209+00:00"
+    },
+    "95585": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-10T13:23:39.931179+00:00"
     }
   },
   "in_flight": null,
