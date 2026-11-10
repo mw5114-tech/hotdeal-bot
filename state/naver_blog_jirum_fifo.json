@@ -3,16 +3,6 @@
   "last_scanned_id": 95539,
   "pending": [
     {
-      "id": 95538,
-      "source_message_id": 95538,
-      "source_post_url": "https://t.me/jirum/95538",
-      "original_purchase_url": "https://link.coupang.com/a/iyplD2P6IK",
-      "title": "상도푸드 갓성비 달콤한 닭강정 (냉동), 700g, 2개",
-      "source_text": "❤️초대박 9,840원 (42.1% 할인)\n상도푸드 갓성비 달콤한 닭강정 (냉동), 700g, 2개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 7,160원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyplD2P6IK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9840,
-      "posted_at_utc": "2026-11-10T01:47:25+00:00"
-    },
-    {
       "id": 95539,
       "source_message_id": 95539,
       "source_post_url": "https://t.me/jirum/95539",
@@ -97,6 +87,10 @@
     "95537": {
       "url": "https://blog.naver.com/mw5114/224471360252",
       "at": "2026-11-10T01:49:29.023076+00:00"
+    },
+    "95538": {
+      "url": "https://blog.naver.com/mw5114/224471384470",
+      "at": "2026-11-10T02:06:05.772759+00:00"
     }
   },
   "skipped": {
@@ -143,12 +137,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95538,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42740020197",
-    "at": "2026-11-10T02:05:24.019183+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
