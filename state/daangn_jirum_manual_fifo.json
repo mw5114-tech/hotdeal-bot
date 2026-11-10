@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95539,
+  "last_scanned_id": 95540,
   "pending": [
     {
       "id": 95538,
@@ -19,6 +19,15 @@
       "posted_at_utc": "2026-11-10T01:53:16+00:00",
       "title": "오뚜기 고소한 참기름, 500ml, 1개",
       "sale_price_krw": 8410
+    },
+    {
+      "id": 95540,
+      "source_post_url": "https://t.me/jirum/95540",
+      "original_purchase_url": "https://link.coupang.com/a/iyrJb4NpU4",
+      "source_text": "🔥🔥🔥무지성 15,000원 (62.5% 할인)🔥🔥🔥\nApple 정품 아이폰 맥세이프 투명 케이스17 PRO\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyrJb4NpU4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T02:20:43+00:00",
+      "title": "Apple 정품 아이폰 맥세이프 투명 케이스17 PRO",
+      "sale_price_krw": 15000
     }
   ],
   "in_flight": null,
