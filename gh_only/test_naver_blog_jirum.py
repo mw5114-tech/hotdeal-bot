@@ -1,10 +1,13 @@
 """Offline regression checks for Naver queue segregation and safe source filtering."""
 from datetime import datetime, timedelta, timezone
 import unittest
+from copy import deepcopy
+from unittest.mock import patch
 
 from gh_only.naver_blog_jirum import (
     ingest, validate_state, source_fresh, validate_naver_link_subid,
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
+    NaverStateConflict, scan, claim_before_publish, checkpoint_published,
 )
 
 
@@ -26,7 +29,91 @@ def deal(source_id, *, price=11900, minutes=10, kind="coupang_shortlink"):
     }
 
 
+class ConflictStore:
+    """Simulates a second workflow advancing the GitHub branch head."""
+    def __init__(self, initial=None, conflicts=1):
+        self.current = deepcopy(initial if initial is not None else state())
+        self.conflicts = conflicts
+        self.write_count = 0
+        self.read_count = 0
+
+    def read(self):
+        self.read_count += 1
+        return deepcopy(self.current), f"sha-{self.read_count}"
+
+    def write(self, next_state, sha, message):
+        self.write_count += 1
+        if self.write_count <= self.conflicts:
+            # The OTHER workflow updated state independently. A fresh
+            # read/recompute must preserve this new entry.
+            self.current["published"]["95490"] = {
+                "url": "https://blog.naver.com/mw5114/1",
+                "at": "2026-11-10T00:00:00Z",
+            }
+            raise NaverStateConflict("NAVER_STATE_KNOWN_409_REBASE")
+        self.current = deepcopy(next_state)
+
+
 class NaverQueueTests(unittest.TestCase):
+    def test_known_409_scan_rebases_and_preserves_other_state(self):
+        store = ConflictStore()
+        with patch("gh_only.naver_blog_jirum.old.collect_since",
+                   return_value=[deal(95496)]), patch(
+                   "gh_only.naver_blog_jirum.time.sleep"):
+            result = scan(store)
+        self.assertEqual(result["new"], 1)
+        self.assertEqual(store.write_count, 2)
+        self.assertEqual(store.current["pending"][0]["id"], 95496)
+        self.assertIn("95490", store.current["published"])
+
+    def test_known_409_before_claim_rebases_without_post(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=1)
+        with patch("gh_only.naver_blog_jirum.time.sleep"):
+            claim_before_publish(store, 95496)
+        self.assertEqual(store.write_count, 2)
+        self.assertEqual(store.current["in_flight"]["id"], 95496)
+        self.assertIn("95490", store.current["published"])
+
+    def test_known_409_post_receipt_retries_only_state_commit(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        s["in_flight"] = {"id":95496, "status":"REVIEW_REQUIRED",
+                          "run_id":"42738963892",
+                          "at":datetime.now(timezone.utc).isoformat()}
+        store = ConflictStore(initial=s, conflicts=1)
+        link = "https://blog.naver.com/mw5114/224471000000"
+        with patch("gh_only.naver_blog_jirum.time.sleep"):
+            checkpoint_published(store, 95496, link)
+        self.assertIsNone(store.current["in_flight"])
+        self.assertEqual(store.current["pending"], [])
+        self.assertEqual(store.current["published"]["95496"]["url"], link)
+        self.assertIn("95490", store.current["published"])
+        self.assertEqual(store.write_count, 2)
+
+    def test_409_retry_is_bounded_and_does_not_touch_live_publish(self):
+        store = ConflictStore(conflicts=10)
+        with patch("gh_only.naver_blog_jirum.old.collect_since",
+                   return_value=[deal(95496)]), patch(
+                   "gh_only.naver_blog_jirum.time.sleep"):
+            with self.assertRaises(NaverStateConflict):
+                scan(store)
+        self.assertEqual(store.write_count, 5)
+
+    def test_ambiguous_write_error_is_never_retried(self):
+        class UncertainStore(ConflictStore):
+            def write(self, next_state, sha, message):
+                self.write_count += 1
+                raise RuntimeError("NAVER_STATE_COMMIT_UNCERTAIN")
+        store = UncertainStore()
+        with patch("gh_only.naver_blog_jirum.old.collect_since",
+                   return_value=[deal(95496)]), patch(
+                   "gh_only.naver_blog_jirum.time.sleep"):
+            with self.assertRaisesRegex(RuntimeError, "COMMIT_UNCERTAIN"):
+                scan(store)
+        self.assertEqual(store.write_count, 1)
+
     def test_long_title_is_safely_shortened_and_keeps_discount(self):
         title = "[쿠팡🔥핫딜] " + ("테팔 인덕션 매직핸즈 스테인리스 프라이팬 22cm + " * 6) + "[30%할인]"
         actual = naver_title(title)
