@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95587,
-  "pending": [],
+  "last_scanned_id": 95588,
+  "pending": [
+    {
+      "id": 95588,
+      "source_message_id": 95588,
+      "source_post_url": "https://t.me/jirum/95588",
+      "original_purchase_url": "https://link.coupang.com/a/izmVQV5mzB",
+      "title": "(종료)PACE 쿨 크러쉬 대용량 쉐이빙 폼, 250ml, 1개",
+      "source_text": "🔥🔥🔥무지성 1,100원 (80.7% 할인)🔥🔥🔥\n(종료)PACE 쿨 크러쉬 대용량 쉐이빙 폼, 250ml, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 5,696원\n- 할인: 4,596원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izmVQV5mzB\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1100,
+      "posted_at_utc": "2026-11-10T15:41:13+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
