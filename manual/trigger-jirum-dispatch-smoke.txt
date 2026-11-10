@@ -2,3 +2,5 @@ Read-only event-to-GitHub API dispatch smoke. NO CAFE POST.
 Started 2026-11-01; after PR #46.
 
 Production RAW_MODE bridge synthetic event → real GitHub API smoke after PR #47.
+
+Safe Naver-main migration bridge smoke trigger (2026-11-10); smoke_test=true, no posting.
