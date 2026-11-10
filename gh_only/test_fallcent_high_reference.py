@@ -168,7 +168,7 @@ class FallcentHighTests(unittest.TestCase):
             (folder / "drafts.json").write_text(json.dumps({"schema":"github-jirum-default-price-photo-affsdp-draft-v2","drafts":[row]},ensure_ascii=False),"utf-8")
             with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE":"lowchart",
                                          "COUPANG_PARTNER_LPTAG":"AF9668915"}):
-                with self.assertRaisesRegex(RuntimeError,"FALLCENT_HIGH_EVIDENCE_MISMATCH"):
+                with self.assertRaisesRegex(RuntimeError,"FALLCENT_PRICE_EVIDENCE_MISMATCH"):
                     validate_draft(folder, 96123)
 
     def test_no_public_high_never_uses_naver_price(self):
