@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95536,
+  "last_scanned_id": 95537,
   "pending": [
     {
       "id": 95533,
@@ -37,6 +37,15 @@
       "posted_at_utc": "2026-11-10T01:01:03+00:00",
       "title": "☆특가 2,990원",
       "sale_price_krw": 2990
+    },
+    {
+      "id": 95537,
+      "source_post_url": "https://t.me/jirum/95537",
+      "original_purchase_url": "https://link.coupang.com/a/iymGNmAn4S",
+      "source_text": "☆특가 10,930원\n스카치브라이트 올뉴 재활용 PET 사용 정전기 청소포 표준형 200p, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iymGNmAn4S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T01:10:13+00:00",
+      "title": "☆특가 10,930원",
+      "sale_price_krw": 10930
     }
   ],
   "in_flight": null,
