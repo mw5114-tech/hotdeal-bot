@@ -3,16 +3,6 @@
   "last_scanned_id": 95537,
   "pending": [
     {
-      "id": 95536,
-      "source_message_id": 95536,
-      "source_post_url": "https://t.me/jirum/95536",
-      "original_purchase_url": "https://link.coupang.com/a/iyl2aDuRvo",
-      "title": "☆특가 2,990원",
-      "source_text": "☆특가 2,990원\n홈스타 맥스프레쉬 뿌리는 곰팡이 싹 세정제, 900ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyl2aDuRvo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2990,
-      "posted_at_utc": "2026-11-10T01:01:03+00:00"
-    },
-    {
       "id": 95537,
       "source_message_id": 95537,
       "source_post_url": "https://t.me/jirum/95537",
@@ -89,6 +79,10 @@
     "95535": {
       "url": "https://blog.naver.com/mw5114/224471308233",
       "at": "2026-11-10T01:11:56.958410+00:00"
+    },
+    "95536": {
+      "url": "https://blog.naver.com/mw5114/224471357925",
+      "at": "2026-11-10T01:47:52.158447+00:00"
     }
   },
   "skipped": {
@@ -135,12 +129,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95536,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42738146324",
-    "at": "2026-11-10T01:47:08.625882+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
