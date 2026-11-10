@@ -754,13 +754,15 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         proof = row.get("fallcent_high_lookup", {})
         ids = row.get("product_identity", {})
         source = urlsplit(proof.get("source_url") or "")
-        from gh_only.default_deal_format import same_named_option
+        from gh_only.fallcent_high_reference import exact_item_title_compatible
         verified = (
             proof.get("status") in ("HIGH_FOUND", "FALLCENT_HIGH_NOT_VISIBLE")
             and proof.get("product_id") == ids.get("product_id")
             and proof.get("item_id") == ids.get("item_id")
-            and same_named_option(row.get("caption", {}).get("product_name"),
-                                  proof.get("source_title"))
+            and exact_item_title_compatible(
+                row.get("caption", {}).get("product_name"),
+                proof.get("source_title")
+            )
             and source.scheme == "https"
             and source.hostname in ("fallcent.com", "www.fallcent.com")
             and source.path.startswith("/product/")
