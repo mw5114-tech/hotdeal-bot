@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95564,
-  "pending": [
-    {
-      "id": 95562,
-      "source_message_id": 95562,
-      "source_post_url": "https://t.me/jirum/95562",
-      "original_purchase_url": "https://link.coupang.com/a/iyJu4srFAG",
-      "title": "BRAUN 시리즈 9 PRO+ 전기면도기 + 파워 케이스",
-      "source_text": "❤️초대박 205,190원 (41.4% 할인)\nBRAUN 시리즈 9 PRO+ 전기면도기 + 파워 케이스\n📌 가격 현황\n- 정상가: 350,000원\n- 할인: 144,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyJu4srFAG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 205190,
-      "posted_at_utc": "2026-11-10T06:29:25+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -163,6 +152,10 @@
     "95561": {
       "url": "https://blog.naver.com/mw5114/224471732375",
       "at": "2026-11-10T06:31:26.381338+00:00"
+    },
+    "95562": {
+      "url": "https://blog.naver.com/mw5114/224471745908",
+      "at": "2026-11-10T06:41:25.866260+00:00"
     }
   },
   "skipped": {
@@ -209,12 +202,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95562,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42770068634",
-    "at": "2026-11-10T06:40:42.871542+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
