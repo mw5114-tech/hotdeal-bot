@@ -97,6 +97,72 @@ def process(folder: Path, high, *, naver=None, history=None):
 
 
 class FallcentHighTests(unittest.TestCase):
+    def test_visible_fallcent_average_and_displayed_discount_are_distinct(self):
+        # The site's displayed rate is not automatically the same as the
+        # Telegram-sale-to-average rate at a different observation time.
+        html = BASE.replace(
+            "</section>", "<div>평균가 22,000원</div>"
+            "<div>할인율 -46%</div></section>"
+        )
+        record = parse_visible_high(html, TITLE)
+        self.assertEqual(record["observed_average_krw"], 22000)
+        self.assertEqual(record["average_basis"],
+                         "fallcent_public_visible_observed_average")
+        self.assertEqual(record["displayed_discount_pct"], 46)
+
+    def test_visible_average_has_priority_over_high_and_midpoint(self):
+        record = {
+            **high_record(),
+            "observed_average_krw": 22000,
+            "average_basis": "fallcent_public_visible_observed_average",
+            "observed_low_krw": 10500,
+            "low_basis": "fallcent_public_visible_historical_low",
+            "displayed_discount_pct": 46,
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            result = process(folder, record,
+                             naver=lambda title: self.fail("Naver must not be used"))
+            caption = result["caption"]
+            self.assertEqual(result["comparison_price_source"],
+                             "fallcent_observed_average")
+            self.assertEqual(caption["comparison_reference_price_krw"], 22000)
+            self.assertEqual(caption["fallcent_observed_average_krw"], 22000)
+            self.assertEqual(caption["approx_discount_vs_reference_pct"], 45)
+            self.assertIn("쿠팡 평소 판매가(폴센트 관측 평균) : 약 22,000원",
+                          caption["caption"])
+            self.assertIn("[45%할인]", caption["caption"])
+            self.assertNotIn("[46%할인]", caption["caption"])
+            (folder / "drafts.json").write_text(json.dumps({
+                "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
+                "drafts": [result]}, ensure_ascii=False), "utf-8")
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE": "lowchart",
+                "COUPANG_PARTNER_LPTAG": "AF9668915",
+            }):
+                article = validate_draft(folder,96123)
+            self.assertIn("쿠팡 평소 판매가(폴센트 관측 평균)",article["body"])
+
+    def test_fallcent_discount_badge_without_average_cannot_invent_normal_price(self):
+        record = {
+            "status": "FALLCENT_HIGH_NOT_VISIBLE",
+            "observed_high_krw": None,
+            "observed_current_krw": 12000,
+            "current_basis": "fallcent_public_visible_current",
+            "displayed_discount_pct": 64,
+            "source_title": TITLE,
+            "source_url": "https://www.fallcent.com/product/testHash/",
+            "product_id": IDENTITY["product_id"],
+            "item_id": IDENTITY["item_id"],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            result = process(Path(tmp), record,
+                             naver=lambda title: self.fail("Naver must not run"))
+        self.assertIsNone(result["comparison_price_source"])
+        self.assertIsNone(result["caption"]["comparison_reference_price_krw"])
+        self.assertIsNone(result["caption"]["approx_discount_vs_reference_pct"])
+        self.assertNotIn("쿠팡 평소 판매가 : 약",result["caption"]["caption"])
+
     def test_visible_high_ignored_fake_script_and_footer(self):
         result = parse_visible_high(BASE, TITLE)
         self.assertEqual(result["status"], "HIGH_FOUND")
@@ -213,9 +279,9 @@ class FallcentHighTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             row = process(Path(tmp),current,
                           naver=lambda title:self.fail("Naver"))
-        self.assertEqual(row["comparison_price_source"],"fallcent_observed_current")
-        self.assertIn("폴센트 관측 현재가 : 약 12,000원",row["caption"]["caption"])
-        self.assertNotIn("[5%할인]",row["caption"]["caption"])
+        self.assertIsNone(row["comparison_price_source"])
+        self.assertNotIn("폴센트 관측 현재가",row["caption"]["caption"])
+        self.assertIsNone(row["caption"]["approx_discount_vs_reference_pct"])
 
     def test_visible_exact_item_current_low_without_high(self):
         doc = BASE.replace(
