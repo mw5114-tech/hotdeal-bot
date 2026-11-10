@@ -253,12 +253,12 @@ def enrich_deal(deal: dict, output_dir: Path,
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
 
-    # Lowchart historical average is preferred when available. Missing history
-    # may be replaced with a *confirmed* Fallcent observed high only when the
-    # Fallcent photo was selected, otherwise existing Naver comparison fallback.
+    # STRICT price priority: exact-item Lowchart observed average -> exact-item
+    # Fallcent public snapshot. Naver shopping comparison is NEVER used.
+    # Fallcent prices must be explicitly visible on the product's verified ID
+    # page, not inferred from a sale-percent badge or representative search image.
     comparison_price = average
     comparison_source = "lowchart_public_history"
-    naver_price = {"status": "NOT_ATTEMPTED", "price_krw": None}
     fallcent_high = {"status": "NOT_ATTEMPTED", "observed_high_krw": None}
     image_source = og.get(
         "image_source",
@@ -335,50 +335,77 @@ def enrich_deal(deal: dict, output_dir: Path,
         and provider_photo.get("image_match_basis") ==
             "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
     )
-    # Only an actual downloaded Fallcent representative photo enables
-    # Fallcent historical-high lookup. It is a historical observed MAXIMUM,
-    # never an average or Coupang's ordinary/list price.
+    # Fallcent price is a SEPARATE exact-ID lookup, independent of the
+    # representative photo's provenance. A photo search result alone can
+    # NEVER certify an item's price. Lowchart average always wins.
     if (using_public_lowchart and average is None
-            and representative_fallcent_image
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and type(sale) is int and 0 < sale <= 100_000_000):
         try:
             if fallcent_high_lookup is None:
                 from gh_only.fallcent_high_reference import fetch_exact_fallcent_high
                 fallcent_high_lookup = fetch_exact_fallcent_high
             fallcent_high = fallcent_high_lookup(identity, fallback_title or title)
+            from gh_only.default_deal_format import same_named_option
+            source_page = urlsplit(fallcent_high.get("source_url") or "")
+            verified = (
+                fallcent_high.get("status") in (
+                    "HIGH_FOUND", "FALLCENT_HIGH_NOT_VISIBLE"
+                )
+                and fallcent_high.get("product_id") == p
+                and fallcent_high.get("item_id") == i
+                and same_named_option(
+                    fallback_title or title,
+                    fallcent_high.get("source_title")
+                )
+                and source_page.scheme == "https"
+                and source_page.hostname in ("fallcent.com", "www.fallcent.com")
+                and source_page.path.startswith("/product/")
+            )
             high = fallcent_high.get("observed_high_krw")
-            if (fallcent_high.get("status") == "HIGH_FOUND"
-                    and type(high) is int and sale < high <= 100_000_000
-                    and fallcent_high.get("product_id") == p
-                    and fallcent_high.get("item_id") == i
-                    and fallcent_high.get("price_basis") ==
-                        "fallcent_public_visible_historical_high"):
+            low = fallcent_high.get("observed_low_krw")
+            current = fallcent_high.get("observed_current_krw")
+            high_ok = (
+                verified and fallcent_high.get("status") == "HIGH_FOUND"
+                and type(high) is int and 100 <= high <= 100_000_000
+                and fallcent_high.get("price_basis") ==
+                    "fallcent_public_visible_historical_high"
+            )
+            low_ok = (
+                verified and type(low) is int and 100 <= low <= 100_000_000
+                and fallcent_high.get("low_basis") ==
+                    "fallcent_public_visible_historical_low"
+            )
+            current_ok = (
+                verified and type(current) is int
+                and 100 <= current <= 100_000_000
+                and fallcent_high.get("current_basis") ==
+                    "fallcent_public_visible_current"
+            )
+            if high_ok and low_ok and high >= low:
+                # Fallcent defines its midpoint as (period high + low)/2.
+                # Call it a MIDPOINT, never an official normal/list price.
+                comparison_price = (high + low) // 2
+                comparison_source = "fallcent_high_low_midpoint"
+            elif high_ok:
                 comparison_price = high
                 comparison_source = "fallcent_observed_high"
+            elif current_ok:
+                comparison_price = current
+                comparison_source = "fallcent_observed_current"
+            elif low_ok:
+                comparison_price = low
+                comparison_source = "fallcent_observed_low"
+            # If no verifiable price is public, leave comparison blank.
+            # Never substitute a Naver product card or infer a historical high.
         except Exception as exc:
-            fallcent_high = {"status": "FALLCENT_HIGH_QUERY_ERROR",
+            fallcent_high = {"status": "FALLCENT_PRICE_QUERY_ERROR",
                              "observed_high_krw": None,
+                             "observed_current_krw": None,
+                             "observed_low_krw": None,
                              "error_type": type(exc).__name__}
-
-    # Naver is third priority for a comparison price, never treated as
-    # a historical high or an exact-variant reference.
-    if (using_public_lowchart
-            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
-            and comparison_price is None and type(sale) is int and sale > 0
-            and os.getenv("JIRUM_ENABLE_NAVER_PRICE_FALLBACK") == "true"):
-        try:
-            if naver_price_lookup is None:
-                from gh_only.naver_web_product_price import fetch_first_naver_product_price
-                naver_price_lookup = fetch_first_naver_product_price
-            naver_price = naver_price_lookup(fallback_title or title)
-            quote = naver_price.get("price_krw")
-            if (naver_price.get("status") == "PRICE_FOUND"
-                    and type(quote) is int and 100 <= quote <= 100_000_000):
-                comparison_price = quote
-                comparison_source = "naver_general_search_first_shopping_card"
-        except Exception as exc:
-            naver_price = {"status": "NAVER_PRICE_QUERY_ERROR",
-                           "price_krw": None, "error_type": type(exc).__name__}
+    naver_price = {"status": "DISABLED_BY_USER_PRICE_SOURCE_POLICY",
+                   "price_krw": None}
     caption = create_default_preview(
         sale, title, comparison_price, source_id,
         reference_source=comparison_source)
