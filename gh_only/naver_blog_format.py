@@ -14,6 +14,7 @@ from gh_only.naver_blog_jirum import DISCLOSURE
 
 SOURCES = {
     "lowchart_public_history": ("로우차트 관측 평균", "로우차트 평균 대비"),
+    "fallcent_observed_average": ("폴센트 관측 평균", "폴센트 평균 대비"),
     "fallcent_observed_high": ("폴센트 관측 최고가", "폴센트 최고가 대비"),
     "fallcent_high_low_midpoint": (
         "폴센트 최고·최저 중간값", "폴센트 최고·최저 중간값 대비"
@@ -78,6 +79,11 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     if comparison is not None and basis == "lowchart_public_history":
         blocks.append(_block(
             f"💸 쿠팡 평소 판매가(로우차트 관측 평균) : {price_line(comparison)}",
+            label="💸 쿠팡 평소 판매가", kind="reference"
+        ))
+    elif comparison is not None and basis == "fallcent_observed_average":
+        blocks.append(_block(
+            f"💸 쿠팡 평소 판매가(폴센트 관측 평균) : {price_line(comparison)}",
             label="💸 쿠팡 평소 판매가", kind="reference"
         ))
     elif comparison is not None and basis == "fallcent_observed_high":
