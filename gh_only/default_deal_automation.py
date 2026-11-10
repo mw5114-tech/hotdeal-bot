@@ -271,8 +271,9 @@ def enrich_deal(deal: dict, output_dir: Path,
     elif image_source == "lowchart_exact_item_public_page":
         eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
     else:
-        from gh_only.kakao_og_authenticated_probe import image_is_cdn
-        eligible_cdn = image_is_cdn(og.get("og_image") or "")
+        # A legacy diagnostic OG photo must not require Playwright at import
+        # time; the same strict Coupang CDN allowlist is already available.
+        eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
     # Photo order: Lowchart exact item -> Fallcent search -> Naver search.
