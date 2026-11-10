@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95531,
-  "pending": [
-    {
-      "id": 95531,
-      "source_message_id": 95531,
-      "source_post_url": "https://t.me/jirum/95531",
-      "original_purchase_url": "https://link.coupang.com/a/iyhGAlKPoO",
-      "title": "Apple 아이폰 Air 자급제",
-      "source_text": "👍대박 1,074,000원 (31.0% 할인)\nApple 아이폰 Air 자급제\n📌 가격 현황\n- 정상가: 1,556,522원\n- 할인: 482,522원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyhGAlKPoO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 1074000,
-      "posted_at_utc": "2026-11-10T00:00:12+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -63,6 +52,10 @@
     "95527": {
       "url": "https://blog.naver.com/mw5114/224471226540",
       "at": "2026-11-10T00:03:18.332791+00:00"
+    },
+    "95531": {
+      "url": "https://blog.naver.com/mw5114/224471227884",
+      "at": "2026-11-10T00:04:40.160045+00:00"
     }
   },
   "skipped": {
@@ -109,12 +102,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95531,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42725216183",
-    "at": "2026-11-10T00:03:58.207153+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
