@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95577,
-  "pending": [],
+  "last_scanned_id": 95579,
+  "pending": [
+    {
+      "id": 95579,
+      "source_message_id": 95579,
+      "source_post_url": "https://t.me/jirum/95579",
+      "original_purchase_url": "https://link.coupang.com/a/iy0VkhJmTs",
+      "title": "마즈 믹스드 패밀리팩 870g",
+      "source_text": "👍대박 11,600원 (39.0% 할인)\n마즈 믹스드 패밀리팩 870g\n📌 가격 현황\n- 정상가: 19,016원\n- 할인: 7,416원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iy0VkhJmTs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11600,
+      "posted_at_utc": "2026-11-10T10:33:14+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
