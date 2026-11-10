@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95541,
-  "pending": [],
+  "last_scanned_id": 95545,
+  "pending": [
+    {
+      "id": 95544,
+      "source_message_id": 95544,
+      "source_post_url": "https://t.me/jirum/95544",
+      "original_purchase_url": "https://link.coupang.com/a/iytIk8BAGW",
+      "title": "Apple 정품 애플워치 스포츠 밴드 40mm*M/L*1개 앵커블루",
+      "source_text": "🔥🔥🔥무지성 14,700원 (63.2% 할인)🔥🔥🔥\nApple 정품 애플워치 스포츠 밴드 40mm*M/L*1개 앵커블루\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,300원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iytIk8BAGW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 14700,
+      "posted_at_utc": "2026-11-10T02:48:31+00:00"
+    },
+    {
+      "id": 95545,
+      "source_message_id": 95545,
+      "source_post_url": "https://t.me/jirum/95545",
+      "original_purchase_url": "https://link.coupang.com/a/iytIpvGvUy",
+      "title": "Apple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로",
+      "source_text": "🔥🔥🔥무지성 14,250원 (64.4% 할인)🔥🔥🔥\nApple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,750원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iytIpvGvUy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 14250,
+      "posted_at_utc": "2026-11-10T02:48:32+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
