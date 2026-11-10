@@ -7,3 +7,4 @@ NO_PUBLISH: revised real-time heading, reference first, sale with discount, imme
 2026-11-10 price-source migration NON-PUBLISHING: Lowchart average first, exact-item Fallcent high-low midpoint or high/current/low second. Naver price lookup disabled; validate offline + editor preview.
 2026-11-10 price source validation pass 2: fix source-reference discount validator, optional Playwright imports and exact-item Fallcent family-title proof. NO PUBLISH.
 2026-11-10 third nonpublishing price-source check: all Fallcent evidence/formatting regression expectations aligned.
+2026-11-10 12:13 KST: owner requests Fallcent observed average as usual price, not current price. Validate explicit average, discount calculation, no fabricated ordinary price, and Naver editor preview WITHOUT PUBLISH.
