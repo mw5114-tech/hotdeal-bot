@@ -1,7 +1,58 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95600,
-  "pending": [],
+  "last_scanned_id": 95608,
+  "pending": [
+    {
+      "id": 95601,
+      "source_message_id": 95601,
+      "source_post_url": "https://t.me/jirum/95601",
+      "original_purchase_url": "https://link.coupang.com/a/izTk2PblDg",
+      "title": "케라시스 두피 클리닉 단백질 샴푸",
+      "source_text": "❤️초대박 3,600원 (42.0% 할인)\n케라시스 두피 클리닉 단백질 샴푸\n📌 가격 현황\n- 정상가: 6,207원\n- 할인: 2,607원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izTk2PblDg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3600,
+      "posted_at_utc": "2026-11-10T23:14:42+00:00"
+    },
+    {
+      "id": 95603,
+      "source_message_id": 95603,
+      "source_post_url": "https://t.me/jirum/95603",
+      "original_purchase_url": "https://link.coupang.com/a/izTIW6DHhs",
+      "title": "HONOR CHOlCE Earbuds X7e TWS 무선 이어폰 ANC 블루투스 5.3",
+      "source_text": "🔥🔥🔥무지성 4,220원 (56.0% 할인)🔥🔥🔥\nHONOR CHOlCE Earbuds X7e TWS 무선 이어폰 ANC 블루투스 5.3\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 9,591원\n- 할인: 5,371원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izTIW6DHhs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4220,
+      "posted_at_utc": "2026-11-10T23:20:06+00:00"
+    },
+    {
+      "id": 95606,
+      "source_message_id": 95606,
+      "source_post_url": "https://t.me/jirum/95606",
+      "original_purchase_url": "https://link.coupang.com/a/izWfIsx9cO",
+      "title": "☆특가 18,120원",
+      "source_text": "☆특가 18,120원\n햇반 백미밥 작은공기, 130g, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWfIsx9cO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 18120,
+      "posted_at_utc": "2026-11-10T23:55:29+00:00"
+    },
+    {
+      "id": 95607,
+      "source_message_id": 95607,
+      "source_post_url": "https://t.me/jirum/95607",
+      "original_purchase_url": "https://link.coupang.com/a/izWfTWGviC",
+      "title": "르샤트라1802 인퓨전 초고농축 섬유유연제 피오니부케향 5.7L",
+      "source_text": "👍대박 12,830원 (38.0% 할인)\n르샤트라1802 인퓨전 초고농축 섬유유연제 피오니부케향 5.7L\n📌 가격 현황\n- 정상가: 20,694원\n- 할인: 7,864원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWfTWGviC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 12830,
+      "posted_at_utc": "2026-11-10T23:55:31+00:00"
+    },
+    {
+      "id": 95608,
+      "source_message_id": 95608,
+      "source_post_url": "https://t.me/jirum/95608",
+      "original_purchase_url": "https://link.coupang.com/a/izWf5OZYHY",
+      "title": "순샘 베이킹소다 피톤치드향 주방세제 리필 1.4L",
+      "source_text": "❤️초대박 2,030원 (40.0% 할인)\n순샘 베이킹소다 피톤치드향 주방세제 리필 1.4L\n📌 가격 현황\n- 정상가: 3,383원\n- 할인: 1,353원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWf5OZYHY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2030,
+      "posted_at_utc": "2026-11-10T23:55:34+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
