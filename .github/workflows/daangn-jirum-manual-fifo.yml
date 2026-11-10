@@ -178,11 +178,27 @@ jobs:
       - name: Scan fresh Telegram items into separate Naver queue
         id: naver_scan
         run: python -m gh_only.naver_blog_jirum scan
-      - name: Install browser only for a verified eligible Naver item
+      - name: Install headless Chromium quickly (recover only if required)
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
         run: |
+          # The publisher launches playwright.chromium with headless=True,
+          # so the full headed Chromium binary and optional fonts are unnecessary.
+          # On ubuntu-24.04, --with-deps previously downloaded 21 MB of fonts
+          # and cost roughly 95 seconds per eligible post.
           python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
-          python -m playwright install --with-deps chromium
+          python -m playwright install --only-shell chromium
+
+          # No Naver login or publish here: just a local browser launch probe.
+          # Preserve the original complete dependency install as a fail-safe
+          # if the runner image ever changes or has missing shared libraries.
+          if python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+            echo "NAVER_BROWSER_FASTPATH_READY"
+          else
+            echo "NAVER_BROWSER_MISSING_DEPS_USING_SAFE_FALLBACK"
+            python -m playwright install --with-deps --only-shell chromium
+            python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'
+            echo "NAVER_BROWSER_FALLBACK_READY"
+          fi
       - name: Publish max one eligible Naver Blog post
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
         run: python -m gh_only.naver_blog_jirum post
