@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95545,
+  "last_scanned_id": 95546,
   "pending": [
-    {
-      "id": 95539,
-      "source_post_url": "https://t.me/jirum/95539",
-      "original_purchase_url": "https://link.coupang.com/a/iypLzssV2a",
-      "source_text": "👍대박 8,410원 (39.9% 할인)\n오뚜기 고소한 참기름, 500ml, 1개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 5,590원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iypLzssV2a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T01:53:16+00:00",
-      "title": "오뚜기 고소한 참기름, 500ml, 1개",
-      "sale_price_krw": 8410
-    },
     {
       "id": 95540,
       "source_post_url": "https://t.me/jirum/95540",
@@ -46,6 +37,15 @@
       "posted_at_utc": "2026-11-10T02:48:32+00:00",
       "title": "Apple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로",
       "sale_price_krw": 14250
+    },
+    {
+      "id": 95546,
+      "source_post_url": "https://t.me/jirum/95546",
+      "original_purchase_url": "https://link.coupang.com/a/iyuUoUsN7k",
+      "source_text": "🔥🔥🔥무지성 12,590원 (47.5% 할인)🔥🔥🔥\nApple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 11,410원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyuUoUsN7k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T03:05:14+00:00",
+      "title": "Apple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max",
+      "sale_price_krw": 12590
     }
   ],
   "in_flight": null,
@@ -5100,6 +5100,13 @@
       "source_title": "상도푸드 갓성비 달콤한 닭강정 (냉동), 700g, 2개",
       "posted_at_utc": "2026-11-10T01:47:25+00:00",
       "at": "2026-11-10T02:49:21.237539+00:00"
+    },
+    "95539": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95539",
+      "source_title": "오뚜기 고소한 참기름, 500ml, 1개",
+      "posted_at_utc": "2026-11-10T01:53:16+00:00",
+      "at": "2026-11-10T03:06:01.779041+00:00"
     }
   },
   "skipped_unverifiable": {
