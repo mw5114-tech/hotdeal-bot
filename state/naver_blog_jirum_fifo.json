@@ -3,16 +3,6 @@
   "last_scanned_id": 95577,
   "pending": [
     {
-      "id": 95576,
-      "source_message_id": 95576,
-      "source_post_url": "https://t.me/jirum/95576",
-      "original_purchase_url": "https://link.coupang.com/a/iyXiQOMdVc",
-      "title": "☆특가 14,450원",
-      "source_text": "☆특가 14,450원\n베이비본죽 한우 70% 토핑 볶은 한우 1단계 6개입, 120g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyXiQOMdVc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14450,
-      "posted_at_utc": "2026-11-10T09:42:34+00:00"
-    },
-    {
       "id": 95577,
       "source_message_id": 95577,
       "source_post_url": "https://t.me/jirum/95577",
@@ -205,6 +195,10 @@
     "95575": {
       "url": "https://blog.naver.com/mw5114/224471976513",
       "at": "2026-11-10T09:44:23.339913+00:00"
+    },
+    "95576": {
+      "url": "https://blog.naver.com/mw5114/224471979778",
+      "at": "2026-11-10T09:47:41.614103+00:00"
     }
   },
   "skipped": {
@@ -255,12 +249,7 @@
       "at": "2026-11-10T07:56:07.779209+00:00"
     }
   },
-  "in_flight": {
-    "id": 95576,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42793543147",
-    "at": "2026-11-10T09:46:59.502293+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
