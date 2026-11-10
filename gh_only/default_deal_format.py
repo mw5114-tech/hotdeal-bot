@@ -103,6 +103,7 @@ def create_default_preview(sale: int | None, title: str | None,
     average = average if type(average) is int and 0 < average <= 100_000_000 else None
     labels = {
         "lowchart_public_history": "💸 쿠팡 평소 판매가",
+        "fallcent_observed_average": "💸 쿠팡 평소 판매가(폴센트 관측 평균)",
         "naver_general_search_first_shopping_card": "💸 비교 기준가(네이버 검색)",
         "fallcent_observed_high": "💸 폴센트 관측 최고가",
         "fallcent_high_low_midpoint": "💸 폴센트 최고·최저 중간값",
@@ -111,7 +112,9 @@ def create_default_preview(sale: int | None, title: str | None,
     }
     if reference_source not in labels:
         raise ValueError("INVALID_REFERENCE_PRICE_SOURCE")
-    nonaverage_reference = (reference_source != "lowchart_public_history")
+    nonaverage_reference = reference_source not in (
+        "lowchart_public_history", "fallcent_observed_average"
+    )
     approx = nearest_five_discount(sale, average)
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
@@ -143,9 +146,18 @@ def create_default_preview(sale: int | None, title: str | None,
         "product_name": product,
         "sale_price_krw": sale,
         "sale_price_source": "telegram_jirum_message",
-        "observed_average_krw": None if nonaverage_reference else average,
-        "observed_average_source": ("lowchart_public_history"
-                                    if average is not None and not nonaverage_reference else None),
+        # Legacy observed_average_krw remains Lowchart-only; also expose
+        # Fallcent's separately confirmed average, never a midpoint.
+        "observed_average_krw": (
+            average if reference_source == "lowchart_public_history" else None
+        ),
+        "fallcent_observed_average_krw": (
+            average if reference_source == "fallcent_observed_average" else None
+        ),
+        "observed_average_source": (
+            reference_source if average is not None and not nonaverage_reference
+            else None
+        ),
         "comparison_reference_price_krw": average,
         "comparison_reference_source": reference_source if average is not None else None,
         "comparison_price_is_historical_average": not nonaverage_reference and average is not None,
