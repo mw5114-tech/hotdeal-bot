@@ -1,25 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95548,
+  "last_scanned_id": 95549,
   "pending": [
-    {
-      "id": 95540,
-      "source_post_url": "https://t.me/jirum/95540",
-      "original_purchase_url": "https://link.coupang.com/a/iyrJb4NpU4",
-      "source_text": "🔥🔥🔥무지성 15,000원 (62.5% 할인)🔥🔥🔥\nApple 정품 아이폰 맥세이프 투명 케이스17 PRO\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyrJb4NpU4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T02:20:43+00:00",
-      "title": "Apple 정품 아이폰 맥세이프 투명 케이스17 PRO",
-      "sale_price_krw": 15000
-    },
-    {
-      "id": 95541,
-      "source_post_url": "https://t.me/jirum/95541",
-      "original_purchase_url": "https://link.coupang.com/a/iyrLVUjzYi",
-      "source_text": "🔥🔥🔥무지성 15,000원 (62.5% 할인)🔥🔥🔥\nApple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyrLVUjzYi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T02:21:20+00:00",
-      "title": "Apple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max",
-      "sale_price_krw": 15000
-    },
     {
       "id": 95544,
       "source_post_url": "https://t.me/jirum/95544",
@@ -4382,7 +4364,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 210,
+  "skipped_non_coupang": 211,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -5125,6 +5107,20 @@
       "source_title": "오뚜기 고소한 참기름, 500ml, 1개",
       "posted_at_utc": "2026-11-10T01:53:16+00:00",
       "at": "2026-11-10T03:06:01.779041+00:00"
+    },
+    "95540": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95540",
+      "source_title": "Apple 정품 아이폰 맥세이프 투명 케이스17 PRO",
+      "posted_at_utc": "2026-11-10T02:20:43+00:00",
+      "at": "2026-11-10T03:30:07.633827+00:00"
+    },
+    "95541": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95541",
+      "source_title": "Apple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max",
+      "posted_at_utc": "2026-11-10T02:21:20+00:00",
+      "at": "2026-11-10T03:30:07.633838+00:00"
     }
   },
   "skipped_unverifiable": {
