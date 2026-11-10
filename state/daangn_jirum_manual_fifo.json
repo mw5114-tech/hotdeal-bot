@@ -1,34 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95551,
+  "last_scanned_id": 95552,
   "pending": [
-    {
-      "id": 95544,
-      "source_post_url": "https://t.me/jirum/95544",
-      "original_purchase_url": "https://link.coupang.com/a/iytIk8BAGW",
-      "source_text": "🔥🔥🔥무지성 14,700원 (63.2% 할인)🔥🔥🔥\nApple 정품 애플워치 스포츠 밴드 40mm*M/L*1개 앵커블루\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,300원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iytIk8BAGW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T02:48:31+00:00",
-      "title": "Apple 정품 애플워치 스포츠 밴드 40mm*M/L*1개 앵커블루",
-      "sale_price_krw": 14700
-    },
-    {
-      "id": 95545,
-      "source_post_url": "https://t.me/jirum/95545",
-      "original_purchase_url": "https://link.coupang.com/a/iytIpvGvUy",
-      "source_text": "🔥🔥🔥무지성 14,250원 (64.4% 할인)🔥🔥🔥\nApple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,750원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iytIpvGvUy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T02:48:32+00:00",
-      "title": "Apple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로",
-      "sale_price_krw": 14250
-    },
-    {
-      "id": 95546,
-      "source_post_url": "https://t.me/jirum/95546",
-      "original_purchase_url": "https://link.coupang.com/a/iyuUoUsN7k",
-      "source_text": "🔥🔥🔥무지성 12,590원 (47.5% 할인)🔥🔥🔥\nApple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 11,410원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyuUoUsN7k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T03:05:14+00:00",
-      "title": "Apple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max",
-      "sale_price_krw": 12590
-    },
     {
       "id": 95547,
       "source_post_url": "https://t.me/jirum/95547",
@@ -64,6 +37,15 @@
       "posted_at_utc": "2026-11-10T03:43:52+00:00",
       "title": "☆특가 11,080원",
       "sale_price_krw": 11080
+    },
+    {
+      "id": 95552,
+      "source_post_url": "https://t.me/jirum/95552",
+      "original_purchase_url": "https://link.coupang.com/a/iyztlBZYvQ",
+      "source_text": "☆특가 32,140원 (27.8% 할인)\n폴스 팜하우스 골드 밀크, 1L, 12개\n📌 가격 현황\n- 정상가: 44,520원\n- 할인: 12,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyztlBZYvQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T04:09:06+00:00",
+      "title": "폴스 팜하우스 골드 밀크, 1L, 12개",
+      "sale_price_krw": 32140
     }
   ],
   "in_flight": null,
@@ -5139,6 +5121,27 @@
       "source_title": "Apple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max",
       "posted_at_utc": "2026-11-10T02:21:20+00:00",
       "at": "2026-11-10T03:30:07.633838+00:00"
+    },
+    "95544": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95544",
+      "source_title": "Apple 정품 애플워치 스포츠 밴드 40mm*M/L*1개 앵커블루",
+      "posted_at_utc": "2026-11-10T02:48:31+00:00",
+      "at": "2026-11-10T04:10:10.365842+00:00"
+    },
+    "95545": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95545",
+      "source_title": "Apple 정품 애플워치 스포츠 밴드 46mm*M/L*1개 네온옐로",
+      "posted_at_utc": "2026-11-10T02:48:32+00:00",
+      "at": "2026-11-10T04:10:10.365851+00:00"
+    },
+    "95546": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95546",
+      "source_title": "Apple 정품 아이폰 카메라 컨트롤 지원 맥세이프형 Beats 케이스 17 Pro Max",
+      "posted_at_utc": "2026-11-10T03:05:14+00:00",
+      "at": "2026-11-10T04:10:10.365855+00:00"
     }
   },
   "skipped_unverifiable": {
