@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95541,
-  "pending": [
-    {
-      "id": 95541,
-      "source_message_id": 95541,
-      "source_post_url": "https://t.me/jirum/95541",
-      "original_purchase_url": "https://link.coupang.com/a/iyrLVUjzYi",
-      "title": "Apple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max",
-      "source_text": "🔥🔥🔥무지성 15,000원 (62.5% 할인)🔥🔥🔥\nApple 정품 아이폰 맥세이프 투명 케이스 17 Pro Max\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 40,000원\n- 할인: 25,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyrLVUjzYi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15000,
-      "posted_at_utc": "2026-11-10T02:21:20+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -99,6 +88,10 @@
     "95540": {
       "url": "https://blog.naver.com/mw5114/224471409309",
       "at": "2026-11-10T02:23:06.846955+00:00"
+    },
+    "95541": {
+      "url": "https://blog.naver.com/mw5114/224471411689",
+      "at": "2026-11-10T02:24:45.932643+00:00"
     }
   },
   "skipped": {
@@ -145,12 +138,7 @@
       "at": "2026-11-10T00:02:05.360956+00:00"
     }
   },
-  "in_flight": {
-    "id": 95541,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42742311465",
-    "at": "2026-11-10T02:24:02.802850+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
