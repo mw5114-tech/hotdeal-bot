@@ -347,7 +347,7 @@ def enrich_deal(deal: dict, output_dir: Path,
                 from gh_only.fallcent_high_reference import fetch_exact_fallcent_high
                 fallcent_high_lookup = fetch_exact_fallcent_high
             fallcent_high = fallcent_high_lookup(identity, fallback_title or title)
-            from gh_only.default_deal_format import same_named_option
+            from gh_only.fallcent_high_reference import exact_item_title_compatible
             source_page = urlsplit(fallcent_high.get("source_url") or "")
             verified = (
                 fallcent_high.get("status") in (
@@ -355,7 +355,7 @@ def enrich_deal(deal: dict, output_dir: Path,
                 )
                 and fallcent_high.get("product_id") == p
                 and fallcent_high.get("item_id") == i
-                and same_named_option(
+                and exact_item_title_compatible(
                     fallback_title or title,
                     fallcent_high.get("source_title")
                 )
