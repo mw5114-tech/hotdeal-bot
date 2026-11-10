@@ -35,7 +35,7 @@ jobs:
       - name: Validate separate Naver FIFO with no network access
         run: |
           python -m py_compile gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
-          python -m unittest -v gh_only.test_naver_blog_jirum gh_only.test_naver_blog_format test_naver_blog_one_shot
+          python -m unittest -v gh_only.test_naver_blog_jirum gh_only.test_naver_blog_format gh_only.test_fallcent_high_reference gh_only.test_default_deal_format gh_only.test_default_deal_automation test_naver_blog_one_shot
 
   preview:
     if: github.event_name == 'push' || inputs.mode == 'preview'
@@ -47,7 +47,7 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
-      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
@@ -105,7 +105,7 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
-      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
