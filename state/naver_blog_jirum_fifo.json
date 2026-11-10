@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95570,
-  "pending": [
-    {
-      "id": 95570,
-      "source_message_id": 95570,
-      "source_post_url": "https://t.me/jirum/95570",
-      "original_purchase_url": "https://link.coupang.com/a/iyQyCZKP00",
-      "title": "☆특가 11,600원",
-      "source_text": "☆특가 11,600원\n코코팜 망고코넛 340ml × 24캔\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyQyCZKP00\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11600,
-      "posted_at_utc": "2026-11-10T08:08:11+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -179,6 +168,10 @@
     "95567": {
       "url": "https://blog.naver.com/mw5114/224471757641",
       "at": "2026-11-10T06:49:59.207082+00:00"
+    },
+    "95570": {
+      "url": "https://blog.naver.com/mw5114/224471866022",
+      "at": "2026-11-10T08:09:53.522546+00:00"
     }
   },
   "skipped": {
@@ -229,12 +222,7 @@
       "at": "2026-11-10T07:56:07.779209+00:00"
     }
   },
-  "in_flight": {
-    "id": 95570,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42780349698",
-    "at": "2026-11-10T08:09:11.398100+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
