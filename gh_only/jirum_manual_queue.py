@@ -739,29 +739,68 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         or "🛒 쿠팡에서 상품정보 더보기 : " + article["candidate_url"] not in article["body"]
         or article["body"].count(article["candidate_url"]) != 1):
         raise RuntimeError("POST_EVIDENCE_NOT_READY")
-    # A Fallcent historical maximum must be backed by a same-item public
-    # price observation, not merely the search-result representative photo.
+    # All Fallcent comparison prices MUST come from the exact product/item
+    # detail with visible labelled evidence. A representative search image is
+    # NOT acceptable price proof and must never be substituted for one.
     caption = row.get("caption", {})
-    if caption.get("comparison_reference_source") == "fallcent_observed_high":
+    basis = caption.get("comparison_reference_source")
+    fallcent_basis = {
+        "fallcent_observed_high", "fallcent_high_low_midpoint",
+        "fallcent_observed_current", "fallcent_observed_low",
+    }
+    if basis == "naver_general_search_first_shopping_card":
+        raise RuntimeError("NAVER_PRICE_FALLBACK_DISABLED")
+    if basis in fallcent_basis:
         proof = row.get("fallcent_high_lookup", {})
         ids = row.get("product_identity", {})
-        amount = proof.get("observed_high_krw")
         source = urlsplit(proof.get("source_url") or "")
-        if (row.get("image_source") != "fallcent_search_representative"
-                or row.get("representative_fallcent_image") is not True
-                or proof.get("status") != "HIGH_FOUND"
-                or proof.get("price_basis") !=
-                    "fallcent_public_visible_historical_high"
-                or proof.get("product_id") != ids.get("product_id")
-                or proof.get("item_id") != ids.get("item_id")
-                or type(amount) is not int or amount <= caption.get("sale_price_krw", 0)
-                or caption.get("comparison_reference_price_krw") != amount
-                or caption.get("observed_average_krw") is not None
-                or source.scheme != "https"
-                or source.hostname not in ("fallcent.com", "www.fallcent.com")
-                or not source.path.startswith("/product/")
-                or f"💸 폴센트 관측 최고가 : 약 {amount:,}원" not in article["body"]):
-            raise RuntimeError("FALLCENT_HIGH_EVIDENCE_MISMATCH")
+        from gh_only.default_deal_format import same_named_option
+        verified = (
+            proof.get("status") in ("HIGH_FOUND", "FALLCENT_HIGH_NOT_VISIBLE")
+            and proof.get("product_id") == ids.get("product_id")
+            and proof.get("item_id") == ids.get("item_id")
+            and same_named_option(row.get("caption", {}).get("product_name"),
+                                  proof.get("source_title"))
+            and source.scheme == "https"
+            and source.hostname in ("fallcent.com", "www.fallcent.com")
+            and source.path.startswith("/product/")
+        )
+        sale = caption.get("sale_price_krw")
+        price = caption.get("comparison_reference_price_krw")
+        high, low, current = (proof.get("observed_high_krw"),
+                              proof.get("observed_low_krw"),
+                              proof.get("observed_current_krw"))
+        high_ok = (proof.get("status") == "HIGH_FOUND"
+                   and proof.get("price_basis") ==
+                       "fallcent_public_visible_historical_high"
+                   and type(high) is int and 100 <= high <= 100_000_000)
+        low_ok = (proof.get("low_basis") ==
+                      "fallcent_public_visible_historical_low"
+                  and type(low) is int and 100 <= low <= 100_000_000)
+        current_ok = (proof.get("current_basis") ==
+                          "fallcent_public_visible_current"
+                      and type(current) is int and 100 <= current <= 100_000_000)
+        expected = {
+            "fallcent_observed_high": (
+                high if high_ok else None, "💸 폴센트 관측 최고가"
+            ),
+            "fallcent_high_low_midpoint": (
+                (high + low) // 2 if high_ok and low_ok and high >= low
+                else None, "💸 폴센트 최고·최저 중간값"
+            ),
+            "fallcent_observed_current": (
+                current if current_ok else None, "💸 폴센트 관측 현재가"
+            ),
+            "fallcent_observed_low": (
+                low if low_ok else None, "💸 폴센트 관측 최저가"
+            ),
+        }
+        value, display_label = expected[basis]
+        if (not verified or type(price) is not int or type(sale) is not int
+                or price != value or
+                f"{display_label} : 약 {price:,}원" not in article["body"]
+                or caption.get("observed_average_krw") is not None):
+            raise RuntimeError("FALLCENT_PRICE_EVIDENCE_MISMATCH")
     from urllib.parse import parse_qs
     link = urlsplit(article["candidate_url"])
     qs = parse_qs(link.query)
