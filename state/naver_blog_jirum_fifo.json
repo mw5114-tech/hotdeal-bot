@@ -3,16 +3,6 @@
   "last_scanned_id": 95510,
   "pending": [
     {
-      "id": 95508,
-      "source_message_id": 95508,
-      "source_post_url": "https://t.me/jirum/95508",
-      "original_purchase_url": "https://link.coupang.com/a/iya25F3abR",
-      "title": "테팔 인덕션 매직핸즈 스테인리스 컬렉션 트라이미 프라이팬세트 3개 22cm + 프라이팬 26cm + 매직핸즈 분리형 손잡이*1세트",
-      "source_text": "👍대박 49,880원 (30.7% 할인)\n테팔 인덕션 매직핸즈 스테인리스 컬렉션 트라이미 프라이팬세트 3개 22cm + 프라이팬 26cm + 매직핸즈 분리형 손잡이*1세트\n📌 가격 현황\n- 정상가: 72,000원\n- 할인: 22,120원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iya25F3abR\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 49880,
-      "posted_at_utc": "2026-11-09T22:27:19+00:00"
-    },
-    {
       "id": 95509,
       "source_message_id": 95509,
       "source_post_url": "https://t.me/jirum/95509",
@@ -81,13 +71,19 @@
       "at": "2026-11-09T22:29:22.369989+00:00"
     }
   },
-  "skipped": {},
-  "in_flight": {
-    "id": 95508,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42712155025",
-    "at": "2026-11-09T22:30:02.830586+00:00"
+  "skipped": {
+    "95508": {
+      "reason": "DEFINITE_TITLE_VALIDATION_FAILED_BEFORE_PUBLISH",
+      "source_post_url": "https://t.me/jirum/95508",
+      "failed_run_id": "42712155025",
+      "failed_job_id": "129484847620",
+      "error": "NAVER_TITLE_NOT_APPLIED",
+      "verified_pre_submit": true,
+      "note": "Job log shows failure before any body composition or publish click; no auto replay",
+      "at": "2026-11-10T00:00:00+00:00"
+    }
   },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
