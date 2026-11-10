@@ -1,7 +1,7 @@
 """Readable, truthful Naver SmartEditor hotdeal copy.
 
-Price labels preserve each reference's provenance. Fallcent observed HIGH
-is never described as a typical/normal price; Naver search is a comparison.
+Price labels preserve each reference's provenance. Fallcent high, midpoint,
+current and low are never described as official list/normal prices.
 Blocks are structured so SmartEditor can apply native bold and spacing.
 """
 from __future__ import annotations
@@ -15,9 +15,11 @@ from gh_only.naver_blog_jirum import DISCLOSURE
 SOURCES = {
     "lowchart_public_history": ("로우차트 관측 평균", "로우차트 평균 대비"),
     "fallcent_observed_high": ("폴센트 관측 최고가", "폴센트 최고가 대비"),
-    "naver_general_search_first_shopping_card": (
-        "네이버 쇼핑 검색 비교가", "네이버 검색 비교가 대비"
+    "fallcent_high_low_midpoint": (
+        "폴센트 최고·최저 중간값", "폴센트 최고·최저 중간값 대비"
     ),
+    "fallcent_observed_current": ("폴센트 관측 현재가", "폴센트 관측 현재가 대비"),
+    "fallcent_observed_low": ("폴센트 관측 최저가", "폴센트 관측 최저가 대비"),
 }
 
 
@@ -83,11 +85,25 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             f"💸 폴센트 관측 최고가 : {price_line(comparison)}",
             label="💸 폴센트 관측 최고가", kind="reference"
         ))
-    elif comparison is not None and basis == "naver_general_search_first_shopping_card":
+    elif comparison is not None and basis == "fallcent_high_low_midpoint":
         blocks.append(_block(
-            f"💸 네이버 쇼핑 검색 비교가 : {price_line(comparison)}",
-            label="💸 네이버 쇼핑 검색 비교가", kind="reference"
+            f"💸 폴센트 최고·최저 중간값 : {price_line(comparison)}",
+            label="💸 폴센트 최고·최저 중간값", kind="reference"
         ))
+    elif comparison is not None and basis == "fallcent_observed_current":
+        blocks.append(_block(
+            f"💸 폴센트 관측 현재가 : {price_line(comparison)}",
+            label="💸 폴센트 관측 현재가", kind="reference"
+        ))
+    elif comparison is not None and basis == "fallcent_observed_low":
+        blocks.append(_block(
+            f"💸 폴센트 관측 최저가 : {price_line(comparison)}",
+            label="💸 폴센트 관측 최저가", kind="reference"
+        ))
+    elif comparison is not None and basis == "naver_general_search_first_shopping_card":
+        # Old drafts may contain this source; never publish one after owner
+        # explicitly restricted comparisons to Lowchart then Fallcent only.
+        raise ValueError("NAVER_PRICE_REFERENCE_DISABLED")
     else:
         blocks.append(_block(
             "💸 평소 판매가 : 확인되지 않음", label="💸 평소 판매가",
