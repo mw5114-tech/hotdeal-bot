@@ -1,16 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95534,
+  "last_scanned_id": 95535,
   "pending": [
-    {
-      "id": 95531,
-      "source_post_url": "https://t.me/jirum/95531",
-      "original_purchase_url": "https://link.coupang.com/a/iyhGAlKPoO",
-      "source_text": "👍대박 1,074,000원 (31.0% 할인)\nApple 아이폰 Air 자급제\n📌 가격 현황\n- 정상가: 1,556,522원\n- 할인: 482,522원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyhGAlKPoO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-10T00:00:12+00:00",
-      "title": "Apple 아이폰 Air 자급제",
-      "sale_price_krw": 1074000
-    },
     {
       "id": 95533,
       "source_post_url": "https://t.me/jirum/95533",
@@ -28,6 +19,15 @@
       "posted_at_utc": "2026-11-10T00:54:24+00:00",
       "title": "크린스킨 마스터 니트릴장갑, 블랙, 소, 3개",
       "sale_price_krw": 26110
+    },
+    {
+      "id": 95535,
+      "source_post_url": "https://t.me/jirum/95535",
+      "original_purchase_url": "https://link.coupang.com/a/iylZin1AvA",
+      "source_text": "☆특가 1,990원\n랩신 컬러체인징 포밍 핸드워시 용기, 1개, 250ml 250ml*1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iylZin1AvA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T01:00:24+00:00",
+      "title": "☆특가 1,990원",
+      "sale_price_krw": 1990
     }
   ],
   "in_flight": null,
@@ -5033,6 +5033,13 @@
       "source_title": "잇츠스킨 파워10 포뮬라 와이이 이펙터 톤결보정 에센스, 30ml, 1개",
       "posted_at_utc": "2026-11-09T23:34:53+00:00",
       "at": "2026-11-10T00:38:20.392558+00:00"
+    },
+    "95531": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95531",
+      "source_title": "Apple 아이폰 Air 자급제",
+      "posted_at_utc": "2026-11-10T00:00:12+00:00",
+      "at": "2026-11-10T01:01:19.626550+00:00"
     }
   },
   "skipped_unverifiable": {
