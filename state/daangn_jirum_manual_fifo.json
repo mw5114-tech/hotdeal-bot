@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95550,
+  "last_scanned_id": 95551,
   "pending": [
     {
       "id": 95544,
@@ -55,6 +55,15 @@
       "posted_at_utc": "2026-11-10T03:38:47+00:00",
       "title": "☆특가 3,530원",
       "sale_price_krw": 3530
+    },
+    {
+      "id": 95551,
+      "source_post_url": "https://t.me/jirum/95551",
+      "original_purchase_url": "https://link.coupang.com/a/iyxFAOBgQu",
+      "source_text": "☆특가 11,080원\n새싹보리, 340ml, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyxFAOBgQu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T03:43:52+00:00",
+      "title": "☆특가 11,080원",
+      "sale_price_krw": 11080
     }
   ],
   "in_flight": null,
