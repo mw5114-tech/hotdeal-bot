@@ -132,9 +132,12 @@ def read_one_draft(folder: Path) -> dict:
     if not isinstance(original, str) or not original.startswith("https://t.me/jirum/"):
         raise ValueError("DRAFT_SOURCE_UNEXPECTED")
     title_line = body.splitlines()[0].strip()
-    discount = caption.get("approx_discount_vs_historical_mean_pct")
-    # A verified discount is a 5-point rounded percentage; unavailable
-    # historical data is explicitly labelled, not estimated from Telegram.
+    # The on-page discount refers to the explicitly labelled comparison
+    # source (Lowchart average OR Fallcent midpoint/high/current/low). Its
+    # source-specific historical-mean metric stays None for non-mean sources.
+    discount = caption.get("approx_discount_vs_reference_pct")
+    # A source-verified discount is rounded to 5 points; never use a Telegram
+    # merchant's unaudited reference price to invent a percentage.
     known_discount = type(discount) is int and discount in range(5, 100, 5)
     body_prefix = (f"[{discount}%할인] " if known_discount
                    else "[할인율 확인 중] ")
