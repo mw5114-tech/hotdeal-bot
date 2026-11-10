@@ -3,16 +3,6 @@
   "last_scanned_id": 95575,
   "pending": [
     {
-      "id": 95574,
-      "source_message_id": 95574,
-      "source_post_url": "https://t.me/jirum/95574",
-      "original_purchase_url": "https://link.coupang.com/a/iyUFVFB46C",
-      "title": "☆특가 3,740원",
-      "source_text": "☆특가 3,740원\n풀무원 동물복지 인증 에그샐러드, 350g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyUFVFB46C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3740,
-      "posted_at_utc": "2026-11-10T09:05:48+00:00"
-    },
-    {
       "id": 95575,
       "source_message_id": 95575,
       "source_post_url": "https://t.me/jirum/95575",
@@ -197,6 +187,10 @@
     "95571": {
       "url": "https://blog.naver.com/mw5114/224471893037",
       "at": "2026-11-10T08:30:23.770515+00:00"
+    },
+    "95574": {
+      "url": "https://blog.naver.com/mw5114/224471946770",
+      "at": "2026-11-10T09:15:21.304769+00:00"
     }
   },
   "skipped": {
@@ -247,12 +241,7 @@
       "at": "2026-11-10T07:56:07.779209+00:00"
     }
   },
-  "in_flight": {
-    "id": 95574,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42788997506",
-    "at": "2026-11-10T09:14:39.164387+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
