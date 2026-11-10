@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95588,
-  "pending": [],
+  "last_scanned_id": 95589,
+  "pending": [
+    {
+      "id": 95589,
+      "source_message_id": 95589,
+      "source_post_url": "https://t.me/jirum/95589",
+      "original_purchase_url": "https://link.coupang.com/a/izNPO8R95w",
+      "title": "짜파게티 범벅 컵라면 70g",
+      "source_text": "☆특가 3,690원 (27.0% 할인)\n짜파게티 범벅 컵라면 70g\n📌 가격 현황\n- 정상가: 5,055원\n- 할인: 1,365원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izNPO8R95w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3690,
+      "posted_at_utc": "2026-11-10T21:57:41+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
