@@ -68,6 +68,15 @@ class FormattingTests(unittest.TestCase):
         self.assertNotIn("%", sale)
         self.assertIn("평소 판매가 : 확인되지 않음", plain_body(blocks))
 
+    def test_fallcent_observed_average_shows_usual_price_and_sale_discount(self):
+        _, body = self.format("fallcent_observed_average")
+        self.assertIn(
+            "💸 쿠팡 평소 판매가(폴센트 관측 평균) : 약 19,900원", body
+        )
+        self.assertIn("🔥 오늘 특가 : 약 14,530원 [약 25% 할인]", body)
+        self.assertIn("가격 비교 기준 : 폴센트 관측 평균", body)
+        self.assertNotIn("폴센트 관측 현재가", body)
+
     def test_fallcent_max_not_mislabeled_typical(self):
         _, body = self.format("fallcent_observed_high")
         self.assertIn("폴센트 관측 최고가", body)
