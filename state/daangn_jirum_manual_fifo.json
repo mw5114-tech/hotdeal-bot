@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95552,
+  "last_scanned_id": 95553,
   "pending": [
     {
       "id": 95550,
@@ -28,6 +28,15 @@
       "posted_at_utc": "2026-11-10T04:09:06+00:00",
       "title": "폴스 팜하우스 골드 밀크, 1L, 12개",
       "sale_price_krw": 32140
+    },
+    {
+      "id": 95553,
+      "source_post_url": "https://t.me/jirum/95553",
+      "original_purchase_url": "https://link.coupang.com/a/iyzQZaoxga",
+      "source_text": "☆특가 5,710원\n라라스윗 미니생초코 바닐라빈 아이스크림 38ml × 10개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyzQZaoxga\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T04:14:26+00:00",
+      "title": "☆특가 5,710원",
+      "sale_price_krw": 5710
     }
   ],
   "in_flight": null,
