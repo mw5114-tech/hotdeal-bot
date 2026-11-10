@@ -62,7 +62,7 @@ jobs:
       JIRUM_IMAGE_SOURCE: lowchart
       # Price: Lowchart observed mean -> verified Fallcent visible high (only with Fallcent photo)
       # -> Naver general search comparison if no reliable historical observation.
-      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       # Photo priority: exact Lowchart -> Fallcent product search -> Naver image search.
       JIRUM_REQUIRE_FRESH_POST: 'true'
       # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
@@ -164,7 +164,7 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
-      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
