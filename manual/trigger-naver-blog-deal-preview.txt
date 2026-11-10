@@ -4,3 +4,4 @@ NO_PUBLISH: revised real-time heading, reference first, sale with discount, imme
 
 2026-11-10T08:54+09:00 production audit: regress long title UTF-16, quarantine stalled pre-submit claim, non-publish Naver editor smoke.
 2026-11-10 10:55 KST: NONPUBLISHING regression: GitHub 409 rebase scan/claim/checkpoint; workflow serial ordering and Naver editor preview.
+2026-11-10 price-source migration NON-PUBLISHING: Lowchart average first, exact-item Fallcent high-low midpoint or high/current/low second. Naver price lookup disabled; validate offline + editor preview.
