@@ -29,6 +29,19 @@ PRICE_CURRENT_RE = re.compile(
     r"(?<![가-힣])현재\s*가\s*[:：]?\s*"
     r"((?:[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d{2,8}))\s*원\b"
 )
+# Some older public exact-item pages expose an explicit average, separately
+# from current price and a displayed percentage. That is the appropriate
+# historical comparison for the requested "평소 판매가" wording.
+PRICE_AVERAGE_RE = re.compile(
+    r"(?:평균\s*가|평균\s*가격)\s*[:：]?\s*"
+    r"((?:[1-9]\d{0,2}(?:,\d{3})+|[1-9]\d{2,8}))\s*원\b"
+)
+# A Fallcent percent badge may use a different denominator or a different
+# observation timestamp. Keep it for diagnosis only, not as a formula to
+# invent a normal price or override Telegram's actual sale price.
+DISPLAYED_DISCOUNT_RE = re.compile(
+    r"할인율\s*[:：]?\s*[-−▼]?\s*([1-9]\d?)\s*%"
+)
 VALID_ID = re.compile(r"\d{5,18}")
 
 
@@ -103,7 +116,8 @@ def parse_visible_high(html: str, requested_title: str) -> dict:
     """
     out = {"status": "FALLCENT_HIGH_NOT_VISIBLE",
            "observed_high_krw": None, "observed_current_krw": None,
-           "observed_low_krw": None}
+           "observed_low_krw": None, "observed_average_krw": None,
+           "displayed_discount_pct": None}
     if not isinstance(html, str) or not isinstance(requested_title, str):
         return {**out, "status": "INVALID_PRICE_SOURCE_INPUT"}
     parser = VisibleText()
@@ -116,11 +130,17 @@ def parse_visible_high(html: str, requested_title: str) -> dict:
     high, bad_high = _single_visible_price(text, PRICE_HIGH_RE)
     current, bad_current = _single_visible_price(text, PRICE_CURRENT_RE)
     low, bad_low = _single_visible_price(text, PRICE_LOW_RE)
-    if bad_high or bad_current or bad_low:
+    average, bad_average = _single_visible_price(text, PRICE_AVERAGE_RE)
+    display_rates = set(int(m.group(1)) for m in
+                        DISPLAYED_DISCOUNT_RE.finditer(text))
+    displayed_discount = next(iter(display_rates)) if len(display_rates) == 1 else None
+    if bad_high or bad_current or bad_low or bad_average:
         return {**out, "status": (
             "FALLCENT_HIGH_AMBIGUOUS" if bad_high else "FALLCENT_PRICES_AMBIGUOUS"
         ), "source_title": heading[:180]}
-    if high is not None and low is not None and high < low:
+    if (high is not None and low is not None and high < low
+            or average is not None and high is not None and average > high
+            or average is not None and low is not None and average < low):
         return {**out, "status": "FALLCENT_PRICES_INCONSISTENT",
                 "source_title": heading[:180]}
     return {
@@ -129,7 +149,11 @@ def parse_visible_high(html: str, requested_title: str) -> dict:
         "observed_high_krw": high,
         "observed_current_krw": current,
         "observed_low_krw": low,
+        "observed_average_krw": average,
+        "displayed_discount_pct": displayed_discount,
         "source_title": heading[:180],
+        "average_basis": ("fallcent_public_visible_observed_average"
+                          if average is not None else None),
         "price_basis": ("fallcent_public_visible_historical_high"
                         if high is not None else None),
         "current_basis": ("fallcent_public_visible_current"
