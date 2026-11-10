@@ -364,8 +364,6 @@ def enrich_deal(deal: dict, output_dir: Path,
                 and source_page.path.startswith("/product/")
             )
             high = fallcent_high.get("observed_high_krw")
-            low = fallcent_high.get("observed_low_krw")
-            current = fallcent_high.get("observed_current_krw")
             fallcent_average = fallcent_high.get("observed_average_krw")
             average_ok = (
                 verified and type(fallcent_average) is int
@@ -379,29 +377,16 @@ def enrich_deal(deal: dict, output_dir: Path,
                 and fallcent_high.get("price_basis") ==
                     "fallcent_public_visible_historical_high"
             )
-            low_ok = (
-                verified and type(low) is int and 100 <= low <= 100_000_000
-                and fallcent_high.get("low_basis") ==
-                    "fallcent_public_visible_historical_low"
-            )
-            current_ok = (
-                verified and type(current) is int
-                and 100 <= current <= 100_000_000
-                and fallcent_high.get("current_basis") ==
-                    "fallcent_public_visible_current"
-            )
-            if average_ok:
-                # The actual labelled Fallcent observed average, NEVER the
-                # current price or a price reversed from a percent badge.
-                comparison_price = fallcent_average
-                comparison_source = "fallcent_observed_average"
-            elif high_ok and low_ok and high >= low:
-                # A computed high/low MIDPOINT is not the site's average.
-                comparison_price = (high + low) // 2
-                comparison_source = "fallcent_high_low_midpoint"
-            elif high_ok:
+            # User-selected fallback order after verified Lowchart average:
+            # Fallcent's *visible, verified historical HIGH* takes precedence
+            # over its average. Never call it a typical/normal selling price.
+            if high_ok:
                 comparison_price = high
                 comparison_source = "fallcent_observed_high"
+            elif average_ok:
+                # Only when the exact-item high is not visible/verified.
+                comparison_price = fallcent_average
+                comparison_source = "fallcent_observed_average"
             # Do not fall back to Fallcent's CURRENT or LOW price: the user
             # wants a comparison to an observed historical reference.
             # The site's displayed percent alone cannot establish a genuine

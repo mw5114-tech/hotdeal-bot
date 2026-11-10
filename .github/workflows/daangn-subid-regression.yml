@@ -6,6 +6,10 @@ on:
     paths:
       - 'gh_only/affsdp_candidate.py'
       - 'gh_only/default_deal_automation.py'
+      - 'gh_only/fallcent_high_reference.py'
+      - 'gh_only/naver_blog_format.py'
+      - 'gh_only/test_fallcent_high_reference.py'
+      - 'gh_only/test_naver_blog_format.py'
       - 'gh_only/jirum_manual_queue.py'
       - 'gh_only/test_affsdp_candidate.py'
       - 'gh_only/test_default_deal_automation.py'
@@ -31,8 +35,9 @@ jobs:
         run: python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
       - name: Compile modified Python modules
         run: python -m py_compile gh_only/affsdp_candidate.py gh_only/default_deal_automation.py gh_only/jirum_manual_queue.py gh_only/test_affsdp_candidate.py gh_only/test_default_deal_automation.py
-      - name: Run link-generation and draft tests without publishing
-        run: python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation
+      - name: Run link-generation, photo/price, and Naver display tests (offline)
+        run: |
+          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_format
       - name: Verify production environment uses own lptag and dedicated SubID
         run: |
           python - <<'PY'

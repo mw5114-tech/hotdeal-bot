@@ -110,7 +110,7 @@ class FallcentHighTests(unittest.TestCase):
                          "fallcent_public_visible_observed_average")
         self.assertEqual(record["displayed_discount_pct"], 46)
 
-    def test_visible_average_has_priority_over_high_and_midpoint(self):
+    def test_verified_fallcent_high_has_priority_over_average_and_midpoint(self):
         record = {
             **high_record(),
             "observed_average_krw": 22000,
@@ -125,13 +125,13 @@ class FallcentHighTests(unittest.TestCase):
                              naver=lambda title: self.fail("Naver must not be used"))
             caption = result["caption"]
             self.assertEqual(result["comparison_price_source"],
-                             "fallcent_observed_average")
-            self.assertEqual(caption["comparison_reference_price_krw"], 22000)
-            self.assertEqual(caption["fallcent_observed_average_krw"], 22000)
-            self.assertEqual(caption["approx_discount_vs_reference_pct"], 45)
-            self.assertIn("쿠팡 평소 판매가(폴센트 관측 평균) : 약 22,000원",
+                             "fallcent_observed_high")
+            self.assertEqual(caption["comparison_reference_price_krw"], 27000)
+            self.assertIsNone(caption["fallcent_observed_average_krw"])
+            self.assertEqual(caption["approx_discount_vs_reference_pct"], 55)
+            self.assertIn("폴센트 관측 최고가 : 약 27,000원",
                           caption["caption"])
-            self.assertIn("[45%할인]", caption["caption"])
+            self.assertIn("[55%할인]", caption["caption"])
             self.assertNotIn("[46%할인]", caption["caption"])
             (folder / "drafts.json").write_text(json.dumps({
                 "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
@@ -141,7 +141,27 @@ class FallcentHighTests(unittest.TestCase):
                 "COUPANG_PARTNER_LPTAG": "AF9668915",
             }):
                 article = validate_draft(folder,96123)
-            self.assertIn("쿠팡 평소 판매가(폴센트 관측 평균)",article["body"])
+            self.assertIn("폴센트 관측 최고가", article["body"])
+            self.assertNotIn("쿠팡 평소 판매가", article["body"])
+
+    def test_verified_fallcent_average_is_fallback_when_high_unavailable(self):
+        record = {
+            **high_record(),
+            "status": "FALLCENT_HIGH_NOT_VISIBLE",
+            "observed_high_krw": None,
+            "price_basis": None,
+            "observed_average_krw": 22000,
+            "average_basis": "fallcent_public_visible_observed_average",
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            result = process(Path(tmp), record,
+                             naver=lambda title: self.fail("Naver must not run"))
+        self.assertEqual(result["comparison_price_source"],
+                         "fallcent_observed_average")
+        self.assertEqual(result["caption"]["comparison_reference_price_krw"], 22000)
+        self.assertEqual(result["caption"]["approx_discount_vs_reference_pct"], 45)
+        self.assertIn("쿠팡 평소 판매가(폴센트 관측 평균) : 약 22,000원",
+                      result["caption"]["caption"])
 
     def test_fallcent_discount_badge_without_average_cannot_invent_normal_price(self):
         record = {
@@ -248,7 +268,7 @@ class FallcentHighTests(unittest.TestCase):
         self.assertIn("확인 중", row["caption"]["caption"])
         self.assertNotIn("네이버", row["caption"]["caption"])
 
-    def test_public_exact_item_high_low_yields_labelled_midpoint(self):
+    def test_public_exact_item_high_low_uses_verified_high_not_midpoint(self):
         high = {**high_record(),
                 "observed_low_krw":10500,
                 "low_basis":"fallcent_public_visible_historical_low"}
@@ -256,9 +276,10 @@ class FallcentHighTests(unittest.TestCase):
             folder = Path(tmp)
             row = process(folder, high, naver=lambda title: self.fail("Naver"))
             self.assertEqual(row["comparison_price_source"],
-                             "fallcent_high_low_midpoint")
-            self.assertEqual(row["caption"]["comparison_reference_price_krw"],18750)
-            self.assertIn("폴센트 최고·최저 중간값 : 약 18,750원",row["caption"]["caption"])
+                             "fallcent_observed_high")
+            self.assertEqual(row["caption"]["comparison_reference_price_krw"],27000)
+            self.assertIn("폴센트 관측 최고가 : 약 27,000원",row["caption"]["caption"])
+            self.assertNotIn("최고·최저 중간값", row["caption"]["caption"])
             self.assertIsNone(row["caption"]["observed_average_krw"])
             (folder / "drafts.json").write_text(json.dumps({
                 "schema":"github-jirum-default-price-photo-affsdp-draft-v2",
