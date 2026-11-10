@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95570,
-  "pending": [],
+  "last_scanned_id": 95571,
+  "pending": [
+    {
+      "id": 95571,
+      "source_message_id": 95571,
+      "source_post_url": "https://t.me/jirum/95571",
+      "original_purchase_url": "https://link.coupang.com/a/iyR1ZOcKxo",
+      "title": "(재입고)ECOVACS 디봇 X8 프로 옴니 로봇청소기 직배수형",
+      "source_text": "❤️초대박 473,240원 (40.8% 할인)\n(재입고)ECOVACS 디봇 X8 프로 옴니 로봇청소기 직배수형\n📌 가격 현황\n- 정상가: 800,000원\n- 할인: 326,760원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyR1ZOcKxo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 473240,
+      "posted_at_utc": "2026-11-10T08:28:48+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
