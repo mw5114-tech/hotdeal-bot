@@ -86,7 +86,7 @@ on:
       - 'gh_only/daangn_photo_upload_probe.py'
       - '.github/workflows/daangn-photo-upload-probe.yml'
       - '.github/workflows/daangn-post-readonly-audit.yml'
-      - '.github/workflows/daangn-jirum-manual-fifo.yml'
+      - 'archive/daangn/daangn-fifo-paused.yml'
       - '.github/workflows/daangn-jirum-fifo-tests.yml'
 
 permissions:
@@ -128,7 +128,7 @@ jobs:
           python -m py_compile gh_only/lowchart_product_photo.py gh_only/default_deal_automation.py gh_only/pipeline.py jirum_forward.py
           python - <<'PY'
           from pathlib import Path
-          yaml_text = Path(".github/workflows/daangn-jirum-manual-fifo.yml").read_text()
+          yaml_text = Path("archive/daangn/daangn-fifo-paused.yml").read_text()
           assert "cron: '17,47 * * * *'" in yaml_text
           assert "workflow_dispatch:" in yaml_text
           assert "JIRUM_IMAGE_SOURCE: lowchart" in yaml_text

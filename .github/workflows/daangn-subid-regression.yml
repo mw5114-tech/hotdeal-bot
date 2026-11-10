@@ -1,4 +1,4 @@
-name: Tests | Daangn affiliate SubID (offline)
+name: Tests | Archived Daangn + Naver split (offline)
 
 on:
   push:
@@ -9,6 +9,8 @@ on:
       - 'gh_only/jirum_manual_queue.py'
       - 'gh_only/test_affsdp_candidate.py'
       - 'gh_only/test_default_deal_automation.py'
+      - 'archive/daangn/daangn-fifo-paused.yml'
+      - '.github/workflows/naver-blog-auto-main.yml'
       - '.github/workflows/daangn-jirum-manual-fifo.yml'
       - '.github/workflows/daangn-subid-regression.yml'
   workflow_dispatch:
@@ -35,9 +37,19 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
-          s = Path('.github/workflows/daangn-jirum-manual-fifo.yml').read_text()
-          assert 'COUPANG_PARTNER_LPTAG: AF9668915' in s
-          assert 'COUPANG_PARTNER_SUBID: daangncafe' in s
-          assert 'COUPANG_PARTNER_LPTAG: AF4625512' not in s
-          print('SUBID_CONFIG_VALID')
+          archived = Path('archive/daangn/daangn-fifo-paused.yml').read_text()
+          main = Path('.github/workflows/naver-blog-auto-main.yml').read_text()
+          legacy = Path('.github/workflows/daangn-jirum-manual-fifo.yml').read_text()
+          assert 'COUPANG_PARTNER_LPTAG: AF9668915' in archived
+          assert 'COUPANG_PARTNER_SUBID: daangncafe' in archived
+          assert "DAANGN_PUBLISH_PAUSED: 'true'" in archived
+          assert 'COUPANG_PARTNER_LPTAG: AF4625512' not in archived
+          assert 'COUPANG_PARTNER_LPTAG: AF9668915' in main
+          assert 'COUPANG_PARTNER_SUBID: naverblog' in main
+          assert 'python -m gh_only.naver_blog_jirum post' in main
+          assert 'python -m gh_only.jirum_manual_queue drain' not in main
+          assert 'needs: drain-backlog' not in main
+          assert 'uses: ./.github/workflows/naver-blog-auto-main.yml' in legacy
+          assert 'python -m gh_only.jirum_manual_queue drain' not in legacy
+          print('ARCHIVED_DAANGN_AND_NAVER_ONLY_MAIN_CONFIG_VALID')
           PY

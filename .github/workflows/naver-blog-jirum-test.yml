@@ -121,4 +121,4 @@ jobs:
       - run: python -m gh_only.naver_blog_jirum post
 
 # No cron or automatic publishing in this test workflow.
-# Existing Oracle-triggered workflow gets a separate Naver job.
+# Production Naver-only job now lives in .github/workflows/naver-blog-auto-main.yml.
