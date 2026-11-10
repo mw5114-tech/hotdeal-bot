@@ -1,0 +1,116 @@
+name: NAVER BLOG | MAIN - Telegram to Blog (Oracle + 30min backup)
+
+on:
+  # Oracle's event bridge is the primary trigger.
+  workflow_dispatch:
+    inputs:
+      source_post_id:
+        description: 'Oracle Telegram event post ID (optional)'
+        required: false
+        default: ''
+        type: string
+      smoke_test:
+        description: 'Safe dispatch test: no scan, claim, photo upload or publish'
+        required: false
+        default: false
+        type: boolean
+  # Restore a missed event without launching any Daangn job.
+  schedule:
+    - cron: '17,47 * * * *'
+  # The old Oracle deployment may still dispatch to the legacy filename.
+  # Its compatibility entrypoint calls this one with the SAME safety flags.
+  workflow_call:
+    inputs:
+      source_post_id:
+        required: false
+        type: string
+        default: ''
+      smoke_test:
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  smoke-dispatch-only:
+    if: github.ref == 'refs/heads/main' && inputs.smoke_test == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - name: Confirm no-publish dispatch path
+        run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
+
+  naver-blog-fifo:
+    # Independent Naver-only FIFO, with its own job-level serialization.
+    # No Daangn scan, state, browser, or publish job runs before this.
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && inputs.smoke_test != true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: naver-blog-jirum-state-and-publisher
+      cancel-in-progress: false
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      # Owner approved live Naver Blog publishing on 2026-11-09.
+      # One fresh eligible Jirum item per run; never posts to Daangn.
+      # Owner-authorized auto publish resumed after short-link deduplication
+      # passed a real SmartEditor editor check and a live one-shot publish.
+      # Naver live auto-post is enabled; owner-requested updated price order
+      # verified in GitHub run 42643396146 and published source 95500.
+      NAVER_BLOG_PUBLISH_ENABLED: 'true'
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: naverblog
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scan fresh Telegram items into separate Naver queue
+        id: naver_scan
+        run: python -m gh_only.naver_blog_jirum scan
+      - name: Install headless Chromium quickly (recover only if required)
+        if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        run: |
+          # The publisher launches playwright.chromium with headless=True,
+          # so the full headed Chromium binary and optional fonts are unnecessary.
+          # On ubuntu-24.04, --with-deps previously downloaded 21 MB of fonts
+          # and cost roughly 95 seconds per eligible post.
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+
+          # No Naver login or publish here: just a local browser launch probe.
+          # Preserve the original complete dependency install as a fail-safe
+          # if the runner image ever changes or has missing shared libraries.
+          if python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+            echo "NAVER_BROWSER_FASTPATH_READY"
+          else
+            echo "NAVER_BROWSER_MISSING_DEPS_USING_SAFE_FALLBACK"
+            python -m playwright install --with-deps --only-shell chromium
+            python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'
+            echo "NAVER_BROWSER_FALLBACK_READY"
+          fi
+      - name: Publish max one eligible Naver Blog post
+        if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        run: python -m gh_only.naver_blog_jirum post
+      - name: Keep public-only Naver draft receipt if available
+        if: always() && steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: naver-blog-fifo-${{ github.run_id }}
+          path: naver-blog-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore

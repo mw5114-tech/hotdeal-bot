@@ -1,5 +1,12 @@
 # Oracle 뽐질 RAW_MODE 감시 서버 → GitHub Actions 이벤트 발행
 
+## 현재 GitHub 워크플로 분리 (2026-11-10)
+
+- **네이버 메인**: `.github/workflows/naver-blog-auto-main.yml`
+- **기존 오라클 파일명 호환**: `.github/workflows/daangn-jirum-manual-fifo.yml` (네이버로 전달만 함)
+- **당근 발행 보관**: `archive/daangn/daangn-fifo-paused.yml` (실행되지 않음)
+- GitHub 코드의 새 워크플로명은 오라클 실행 서버에 자동 배포되지 않으므로 호환 파일을 유지한다.
+
 ## 실제 운영 진입점 — 중요
 
 `RAW_MODE.md` 및 `raw-deploy/hotdeal-live.service` 기준 **실제 운영 진입점은 `watcher.py → raw_runtime.py`** 이다.
@@ -12,9 +19,9 @@
 - 20초 내 몰린 이벤트는 1회 실행으로 묶고 성공 요청 사이 최소 75초 간격
 - GitHub가 명시적으로 거절한 HTTP 4xx(408 제외)는 원본 메시지 ID 신호를 SQLite에 보존하고 3분 후 재시도
 - 요청 전에 `github_dispatch_inflight_post`를 영구 저장한다. 응답 유실·시간 초과·5xx·전송 중 프로세스 종료는 접수 여부가 불확실하므로 재시작 후에도 자동 재요청하지 않는다. `GITHUB_DISPATCH_UNCERTAIN` 또는 남아 있는 inflight 기록은 GitHub 실행 이력과 FIFO 상태를 대조한 뒤 수동 검토해야 한다. 새 이벤트도 이 검토가 끝날 때까지 보류된다.
-- GitHub가 HTTP 204를 반환하면 '요청 접수'로 기록. **카페 발행 성공을 뜻하지는 않는다.**
-- 실행된 기존 FIFO workflow가 뽐질 채널을 재검사 → GitHub 저장 상태 기반 순차 발행
-- 기존 GitHub 5분 예약은 **서버 실전 작동이 확인될 때까지 유지**
+- GitHub가 HTTP 204를 반환하면 '요청 접수'로 기록. **네이버 블로그 발행 성공을 뜻하지는 않는다.**
+- 네이버 전용 워크플로가 뽐질 채널을 재검사 → 독립된 네이버 FIFO 상태 기반으로 1건 발행
+- 네이버 메인 워크플로에 30분 간격(UTC :17/:47) 백업 예약 유지
 - `JIRUM_GITHUB_DISPATCH_ENABLED` 기본 비활성. GitHub 병합만으로 운영 서버가 자동 업데이트되지는 않음.
 
 ## 1. 서버 운영 경로 확인
@@ -68,16 +75,18 @@ sudo journalctl -u hotdeal-live --since '10 minutes ago' --no-pager
 `GITHUB_DISPATCH_ARMED`와 `runtime=raw`를 확인한다.
 원문 전달이 정상 동작하는지 확인하고 신규 쿠팡 메시지가 도착하면:
 `SOURCE_EVENT` → `GITHUB_EVENT_QUEUED` → `GITHUB_DISPATCH_ACCEPTED`.
-실행 이력의 `event=workflow_dispatch`, 게시물 `POST_PUBLISHED_AND_FORMAT_VERIFIED` 및 FIFO 상태를 별도 확인한다.
+실행 이력의 `event=workflow_dispatch`, 네이버 `NAVER_BLOG_PUBLISHED` 및 `state/naver_blog_jirum_fifo.json`을 별도 확인한다.
 
 ## 4. 실전 API 연결 테스트 — 글을 쓰지 않는 방법
 
-`.github/workflows/daangn-jirum-manual-fifo.yml`은 `workflow_dispatch` 입력
-`smoke_test=true`로 실행하면 **scan/claim/upload/post를 전혀 하지 않는 별도 Job**만 실행한다.
+`.github/workflows/naver-blog-auto-main.yml`은 `workflow_dispatch` 입력
+`smoke_test=true`로 실행하면 **scan/claim/upload/post 없이 별도 Job**만 실행한다.
+기존 오라클이 옛 파일명을 호출해도 `.github/workflows/daangn-jirum-manual-fifo.yml`
+호환 전달기가 같은 `smoke_test`를 네이버 메인으로 넘긴다.
 
 GitHub Actions의 `Jirum | GitHub dispatch smoke (NO CAFE POST)` 워크플로를 한 번 실행하면
 GitHub Token으로 **공식 REST API를 실제 호출**하고 HTTP 204 접수 여부를 검사한다.
-성공한 뒤 연결된 원본 FIFO 워크플로의 `smoke-dispatch-only` 작업 로그에서
+성공한 뒤 네이버 메인 워크플로의 `smoke-dispatch-only` 작업 로그에서
 `JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST`를 확인한다.
 
 *이 검증은 GitHub 쪽 REST API 수신과 Actions 실행만 증명한다.*
@@ -85,10 +94,10 @@ Oracle 서버의 PAT·Telethon 실시간 이벤트는 위 3단계에서 별도 �
 
 ## 5. 전환/장애
 
-서버 이벤트 기반 발행을 실제로 확인한 뒤에만 5분 예약을 끄거나 저빈도 복구용으로 낮춘다.
+서버 이벤트 기반 발행이 지연될 때는 네이버 메인의 30분 백업 예약으로 복구한다.
 자동화에 장애가 나면 `/etc/hotdeal-live.env`의
 `JIRUM_GITHUB_DISPATCH_ENABLED=false`로 변경 후 서비스를 재시작해
 **원본 텔레그램 재전송은 그대로 유지**할 수 있다.
-당근카페 게시 결과가 불확실하면 **게시 상태/FIFO 잠금을 먼저 확인**하고 중복 실행하지 않는다.
+네이버 블로그 게시 결과가 불확실하면 **네이버 상태/FIFO 잠금을 먼저 확인**하고 중복 실행하지 않는다. 당근 발행은 `archive/daangn/`에 보관 중이다.
 
 이 GitHub 연결만으로는 Oracle 서버의 파일 수정, PAT 설정, 프로세스 재시작을 수행할 수 없다.

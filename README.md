@@ -1,3 +1,12 @@
+# 현재 핫딜 발행 자동화 (2026-11-10)
+
+- **메인 / 활성**: [NAVER BLOG | MAIN - Telegram to Blog](.github/workflows/naver-blog-auto-main.yml) — 오라클 이벤트 트리거와 30분 백업 예약으로 네이버 블로그 자동 발행.
+- **당근 / 보관**: [archive/daangn/README.md](archive/daangn/README.md) — 자동 실행 경로에서 완전 분리, 나중에 복원 가능하도록 코드/상태는 유지.
+- **구버전 오라클 연결용**: `.github/workflows/daangn-jirum-manual-fifo.yml` (파일명만 옛 이름인 **네이버 전용 전달기**, 당근 기능 없음).
+- **저장 상태**: `state/naver_blog_jirum_fifo.json`과 `state/daangn_jirum_manual_fifo.json` 모두 기존 기록 보존.
+
+---
+
 # 딜스팟 + 네이버 카페 신규 등록 텔레그램 알림 봇
 
 한 번의 GitHub Actions 예약 실행으로 **딜스팟과 네이버 카페를 각각 감시**합니다. PC가 꺼져 있어도 동작합니다.

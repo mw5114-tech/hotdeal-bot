@@ -1,0 +1,133 @@
+# PAUSED ARCHIVE: This file is OUTSIDE .github/workflows and cannot run.
+# Do not move into .github/workflows without reviewing the archive README.
+name: ARCHIVED | Daangn Cafe FIFO (disabled until explicitly restored)
+
+on:
+  # Oracle's verified @jirum event bridge is primary; this is backup only.
+  # Every 30 minutes at :17 and :47, avoiding :00 congestion.
+  # GitHub can delay or skip cron triggers under high load.
+  schedule:
+    - cron: '17,47 * * * *'
+  workflow_dispatch:
+    inputs:
+      source_post_id:
+        description: 'Oracle event post ID; wait briefly for public Telegram visibility'
+        required: false
+        default: ''
+        type: string
+      smoke_test:
+        description: 'Read-only dispatch handshake (never scan or publish)'
+        required: false
+        default: false
+        type: boolean
+  # Optional user-triggered action via GitHub connector, independent of cron.
+  push:
+    branches:
+      - main
+    paths:
+      - 'manual/trigger-daangn-jirum.txt'
+      # Legacy AFFSDP-style auto-post does not depend on Muse or receipt pushes.
+
+permissions:
+  contents: write
+
+# Manual and scheduled runs share the same lock. No parallel posts.
+concurrency:
+  group: daangn-jirum-manual-fifo
+  cancel-in-progress: false
+
+jobs:
+  # Verify the actual GitHub REST dispatch endpoint without performing any
+  # scan, state write, login, image upload or post. Used by smoke caller only.
+  smoke-dispatch-only:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch' && inputs.smoke_test == true
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    timeout-minutes: 2
+    steps:
+      - name: Confirm safe dispatch handshake
+        run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
+
+  drain-backlog:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && (github.event_name != 'workflow_dispatch' || inputs.smoke_test != true)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      # TEMPORARY USER-REQUESTED PAUSE: keep Oracle dispatch and Telegram FIFO scan alive.
+      # Do not launch a browser or publish anything to Daangn until explicitly resumed.
+      DAANGN_PUBLISH_PAUSED: 'true'
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: daangncafe
+      # No Kakao credentials: public exact-item Lowchart photos only.
+      JIRUM_IMAGE_SOURCE: lowchart
+      # Price: Lowchart observed mean -> verified Fallcent visible high (only with Fallcent photo)
+      # -> Naver general search comparison if no reliable historical observation.
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
+      # Photo priority: exact Lowchart -> Fallcent product search -> Naver image search.
+      JIRUM_REQUIRE_FRESH_POST: 'true'
+      # Restore user's original /re/AFFSDP?lptag=AF...&pageKey=...&itemId=... link.
+      # This is a locally composed candidate, not an officially issued shortlink.
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+    steps:
+      - name: Checkout only required source files
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+          # Keep the existing complete checkout; one download is cheaper than
+          # extra API round trips, and the scan never installs a browser.
+
+      - name: Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # Do not repeat offline regression suite on each of ~1,440 monthly runs.
+      # The test workflow validates changes before release.
+      - name: Scan Telegram and persist FIFO cursor (stdlib only)
+        id: scan
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ github.event_name == 'workflow_dispatch' && inputs.source_post_id || '' }}
+        run: python -m gh_only.jirum_manual_queue scan
+
+      - name: Restore Playwright browser cache only for an eligible deal
+        if: steps.scan.outputs.has_deal == 'true' && env.DAANGN_PUBLISH_PAUSED != 'true'
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: daangn-playwright-chromium-v1.64.1-ubuntu2404
+
+      - name: Install Playwright only if a pending Coupang deal exists
+        if: steps.scan.outputs.has_deal == 'true' && env.DAANGN_PUBLISH_PAUSED != 'true'
+        env:
+          BROWSER_CACHE_HIT: ${{ steps.playwright-cache.outputs.cache-hit }}
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          if [ "$BROWSER_CACHE_HIT" != "true" ]; then
+            python -m playwright install --with-deps chromium
+          else
+            # Cached browser binary: avoid re-downloading ~150MB.
+            python -m playwright install chromium
+            # Missing shared libraries are repaired only if actually needed.
+            if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+              python -m playwright install --with-deps chromium
+            fi
+          fi
+
+      - name: Drain oldest Coupang posts sequentially, checkpoint every result
+        if: steps.scan.outputs.has_deal == 'true' && env.DAANGN_PUBLISH_PAUSED != 'true'
+        run: python -m gh_only.jirum_manual_queue drain
+
+      - name: Save diagnostics only when a deal was processed
+        if: always() && steps.scan.outputs.has_deal == 'true' && env.DAANGN_PUBLISH_PAUSED != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: jirum-fifo-drain-${{ github.run_id }}
+          path: jirum-manual-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore

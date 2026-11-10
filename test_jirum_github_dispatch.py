@@ -50,6 +50,8 @@ class DispatchHttpTests(unittest.TestCase):
             return Response()
         workflow_dispatch("test-token", opener=fake_opener)
         self.assertEqual(seen["url"], ENDPOINT)
+        self.assertTrue(ENDPOINT.endswith(
+            "/actions/workflows/naver-blog-auto-main.yml/dispatches"))
         self.assertEqual(seen["method"], "POST")
         self.assertEqual(seen["payload"], {"ref": "main"})
         self.assertEqual(seen["auth"], "Bearer test-token")

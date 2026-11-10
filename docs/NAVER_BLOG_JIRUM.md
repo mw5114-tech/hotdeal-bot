@@ -2,25 +2,29 @@
 
 Target: https://blog.naver.com/mw5114
 
-## Architecture
+## Current deployment (2026-11-10)
 
-- Reuse the existing Oracle event dispatch (which invokes `.github/workflows/daangn-jirum-manual-fifo.yml`).
-- Add a separate `naver-blog-fifo` job under the same event + 30-minute backup workflow.
-- Never change the Daangn published-state file, publication pause, or Telegram watcher.
-- Naver has its own checkpoint `state/naver_blog_jirum_fifo.json`, initially
-  baselined at source ID 95495. Older Telegram posts will not be backfilled.
-- Source is public `@jirum`, product/option identity and price/photo enrichment
-  are reused from the existing Daangn pipeline.
-- SubID is `naverblog` to separate commission attribution from `daangncafe`.
+- **Main**: `.github/workflows/naver-blog-auto-main.yml` (**NAVER BLOG | MAIN**).
+  Oracle `workflow_dispatch` + UTC :17/:47 backup cron + safe smoke + reusable workflow.
+- **Legacy compatibility**: `.github/workflows/daangn-jirum-manual-fifo.yml` is now
+  **forward-only**; old Oracle servers invoking its filename transparently call
+  the Naver main. No Daangn scan or publication job runs.
+- **Archived Daangn**: `archive/daangn/daangn-fifo-paused.yml`, completely outside
+  `.github/workflows`; see `archive/daangn/README.md` before restoration.
+- The GitHub copy of `jirum_github_dispatch.py` now targets the new Naver filename.
+  Oracle's currently running copy is NOT updated just by this commit, which is
+  why the legacy forwarder remains.
+- Naver state remains `state/naver_blog_jirum_fifo.json` (no reset or replay).
+  Daangn state remains `state/daangn_jirum_manual_fifo.json` (untouched).
+- Shared Telegram source and existing Lowchart/Fallcent product, price and photo
+  modules remain imported in place. Naver subid remains `naverblog`.
+- No new poller, login flow, or partner-link policy changes.
 
 ## Safety and current state
 
-- Automatic Naver publication was **enabled by owner request on 2026-11-09**
-  after a fresh Telegram deal passed SmartEditor title + body + product image
-  dry-run. The new-deal auto-publish path remains unverified by a live affiliate
-  publication until the first eligible Telegram event arrives.
-- The public test post confirmed basic login and text-only publication;
-  an image-backed affiliate post is **not yet verified**.
+- Automatic Naver publication was **enabled on 2026-11-09**. Live published
+  receipts were confirmed on 2026-11-10 (e.g. Telegram 95553 with product photo);
+  future runs still depend on login session and external site availability.
 - The link generator may produce an unissued `/re/AFFSDP` candidate.
   It has **not been verified as officially issued or commission-attributed**.
 - Disclose Coupang Partners compensation prominently at the beginning of each post.
@@ -41,10 +45,9 @@ Target: https://blog.naver.com/mw5114
 3. `scan` updates independent Naver source watermark and queue.
 4. `post` is intentionally a guarded one-item manual test requiring the
    registered channel and approval of the candidate link format.
-5. The existing Oracle-triggered job now has
-   `NAVER_BLOG_PUBLISH_ENABLED: 'true'` by owner request. The separate Daangn
-   publishing gate remains `DAANGN_PUBLISH_PAUSED: 'true'`.
-   Turn the Naver flag back to `'false'` to pause only Naver posting.
+5. The new main job has `NAVER_BLOG_PUBLISH_ENABLED: 'true'`; changing it
+   to `'false'` pauses only Naver publishing. Daangn cannot run from any
+   active publishing workflow and is archived separately.
 
 ## Failure handling
 

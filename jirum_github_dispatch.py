@@ -16,7 +16,7 @@ from urllib import error, request
 from urllib.parse import urlsplit
 
 REPO = "mw5114-tech/hotdeal-bot"
-WORKFLOW = "daangn-jirum-manual-fifo.yml"
+WORKFLOW = "naver-blog-auto-main.yml"
 ENDPOINT = (
     "https://api.github.com/repos/" + REPO +
     "/actions/workflows/" + WORKFLOW + "/dispatches"
