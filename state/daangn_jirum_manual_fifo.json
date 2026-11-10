@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95553,
+  "last_scanned_id": 95554,
   "pending": [
     {
       "id": 95551,
@@ -28,6 +28,15 @@
       "posted_at_utc": "2026-11-10T04:14:26+00:00",
       "title": "☆특가 5,710원",
       "sale_price_krw": 5710
+    },
+    {
+      "id": 95554,
+      "source_post_url": "https://t.me/jirum/95554",
+      "original_purchase_url": "https://link.coupang.com/a/iyBHZr7E1A",
+      "source_text": "☆특가 7,930원\n퍼기 어린이 7종야채 채수팩 10개입, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iyBHZr7E1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-10T04:40:23+00:00",
+      "title": "☆특가 7,930원",
+      "sale_price_krw": 7930
     }
   ],
   "in_flight": null,
