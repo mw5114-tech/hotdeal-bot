@@ -171,19 +171,67 @@ class FallcentHighTests(unittest.TestCase):
                 with self.assertRaisesRegex(RuntimeError,"FALLCENT_HIGH_EVIDENCE_MISMATCH"):
                     validate_draft(folder, 96123)
 
-    def test_no_public_high_keeps_naver_fallback_not_fake_price(self):
-        called = []
-        def naver(title):
-            called.append(title)
-            return {"status": "PRICE_FOUND", "price_krw": 19500}
+    def test_no_public_high_never_uses_naver_price(self):
         with tempfile.TemporaryDirectory() as tmp:
             row = process(Path(tmp), {"status":"FALLCENT_HIGH_NOT_VISIBLE",
-                                      "observed_high_krw":None}, naver=naver)
-        self.assertEqual(called,[TITLE])
-        self.assertEqual(row["comparison_price_source"],
-                         "naver_general_search_first_shopping_card")
-        self.assertIn("비교 기준가(네이버 검색)",row["caption"]["caption"])
-        self.assertNotIn("폴센트 관측 최고가",row["caption"]["caption"])
+                                      "observed_high_krw":None},
+                          naver=lambda title: self.fail("Naver must stay disabled"))
+        self.assertIsNone(row["comparison_price_source"])
+        self.assertEqual(row["naver_price_lookup"]["status"],
+                         "DISABLED_BY_USER_PRICE_SOURCE_POLICY")
+        self.assertIn("확인 중", row["caption"]["caption"])
+        self.assertNotIn("네이버", row["caption"]["caption"])
+
+    def test_public_exact_item_high_low_yields_labelled_midpoint(self):
+        high = {**high_record(),
+                "observed_low_krw":10500,
+                "low_basis":"fallcent_public_visible_historical_low"}
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            row = process(folder, high, naver=lambda title: self.fail("Naver"))
+            self.assertEqual(row["comparison_price_source"],
+                             "fallcent_high_low_midpoint")
+            self.assertEqual(row["caption"]["comparison_reference_price_krw"],18750)
+            self.assertIn("폴센트 최고·최저 중간값 : 약 18,750원",row["caption"]["caption"])
+            self.assertIsNone(row["caption"]["observed_average_krw"])
+            (folder / "drafts.json").write_text(json.dumps({
+                "schema":"github-jirum-default-price-photo-affsdp-draft-v2",
+                "drafts":[row]},ensure_ascii=False),"utf-8")
+            with patch.dict(os.environ,{"JIRUM_IMAGE_SOURCE":"lowchart",
+                                        "COUPANG_PARTNER_LPTAG":"AF9668915"}):
+                validate_draft(folder,96123)
+
+    def test_public_current_without_high_is_truthfully_labeled(self):
+        current = {
+            "status":"FALLCENT_HIGH_NOT_VISIBLE",
+            "observed_high_krw":None,"observed_current_krw":12000,
+            "current_basis":"fallcent_public_visible_current",
+            "source_title":TITLE,
+            "source_url":"https://www.fallcent.com/product/testHash/",
+            "product_id":IDENTITY["product_id"],"item_id":IDENTITY["item_id"],
+        }
+        with tempfile.TemporaryDirectory() as tmp:
+            row = process(Path(tmp),current,
+                          naver=lambda title:self.fail("Naver"))
+        self.assertEqual(row["comparison_price_source"],"fallcent_observed_current")
+        self.assertIn("폴센트 관측 현재가 : 약 12,000원",row["caption"]["caption"])
+        self.assertNotIn("[5%할인]",row["caption"]["caption"])
+
+    def test_visible_exact_item_current_low_without_high(self):
+        doc = BASE.replace(
+            '<div><span>▲ 역대급최고가</span><strong>27,000원</strong></div>',""
+        )
+        parsed = parse_visible_high(doc,TITLE)
+        self.assertEqual(parsed["status"],"FALLCENT_HIGH_NOT_VISIBLE")
+        self.assertEqual(parsed["observed_current_krw"],12000)
+        self.assertEqual(parsed["observed_low_krw"],10500)
+        self.assertIsNone(parsed["observed_high_krw"])
+
+    def test_visible_conflicting_current_is_rejected(self):
+        doc = BASE.replace("</section>","<div>현재가 99,999원</div></section>")
+        parsed = parse_visible_high(doc,TITLE)
+        self.assertEqual(parsed["status"],"FALLCENT_PRICES_AMBIGUOUS")
+        self.assertIsNone(parsed["observed_current_krw"])
 
     def test_untrusted_high_without_exact_proof_is_ignored(self):
         bad = {**high_record(), "product_id": "2233445566"}
