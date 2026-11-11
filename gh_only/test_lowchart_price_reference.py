@@ -67,6 +67,25 @@ class ReferenceTests(unittest.TestCase):
         self.assertFalse(result["usable_historical_reference"])
         self.assertEqual(result["reason"], "VISIBLE_HISTORY_SUMMARY_NOT_FOUND")
 
+    def test_without_mean_verified_lowchart_high_is_still_usable(self):
+        from gh_only.default_deal_format import validated_lowchart_observation
+        doc = NEW_BODY.replace("최근 3주 평균 15,460원", "최근 평균 확인 중")
+        r = parse_reference(doc, NEW_URL, NEW_PID, NEW_IID,
+                            ("토종마을", "300g", "1개"), 11350)
+        self.assertFalse(r["usable_historical_reference"])
+        self.assertTrue(r["visible_exact_item_prices_verified"])
+        self.assertEqual(r["observed_high_krw"], 15840)
+        self.assertEqual(
+            validated_lowchart_observation(r, NEW_PID, NEW_IID, NEW_NAME,
+                                           "observed_high_krw"), 15840
+        )
+        self.assertIsNone(
+            validated_lowchart_observation(r, NEW_PID, "11111111111",
+                                           NEW_NAME, "observed_high_krw"))
+        self.assertIsNone(
+            validated_lowchart_observation(r, NEW_PID, NEW_IID,
+                                           "다른 상품 2개", "observed_high_krw"))
+
     def test_current_page_without_mean_does_not_invent_a_discount(self):
         bad = NEW_BODY.replace("최근 3주 평균 15,460원", "최근 평균 확인 중")
         ref = parse_reference(bad, NEW_URL, NEW_PID, NEW_IID,

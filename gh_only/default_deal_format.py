@@ -72,14 +72,15 @@ def same_named_option(og_title: str | None, history_title: str | None) -> bool:
         return len(left) >= 3
     if len(left) < 9 or len(right) < 9:
         return False
-    if not right.startswith(left):
+    # Exact-ID validated source may have either a shorter or longer title.
+    # Keep long-prefix protection and reject contradictory package sizes.
+    if not (right.startswith(left) or left.startswith(right)):
         return False
-    # Kakao OG often only knows the product family, e.g.
-    # "Apple 아이맥 24 M4칩"; Lowchart carries actual color/RAM/storage.
-    # Permit prefix matches ONLY on exact product/item IDs verified elsewhere.
     left_specs = _option_specs(og_title or "")
     right_specs = _option_specs(history_title or "")
-    return not left_specs or all(spec in right_specs for spec in left_specs)
+    if right.startswith(left):
+        return not left_specs or all(spec in right_specs for spec in left_specs)
+    return not right_specs or all(spec in left_specs for spec in right_specs)
 
 
 def validated_history(history: dict | None, product_id: str, item_id: str,
@@ -99,6 +100,26 @@ def validated_history(history: dict | None, product_id: str, item_id: str,
     return value if type(value) is int and 0 < value <= 100_000_000 else None
 
 
+def validated_lowchart_observation(history: dict | None, product_id: str,
+                                  item_id: str, source_title: str | None,
+                                  field: str) -> int | None:
+    """Verify public exact-item high/current/low; not official normal price."""
+    if field not in ("observed_high_krw", "observed_current_krw",
+                     "observed_low_krw") or not isinstance(history, dict):
+        return None
+    if not (history.get("visible_exact_item_prices_verified") is True
+            and history.get("official_normal_price") is False
+            and history.get("source_item_identifiers_present") is True
+            and history.get("title_option_matches") is True
+            and history.get("product_id") == product_id
+            and history.get("item_id") == item_id
+            and history.get("source_url") == build_url(product_id, item_id)
+            and same_named_option(source_title, history.get("page_title"))):
+        return None
+    price = history.get(field)
+    return price if type(price) is int and 100 <= price <= 100_000_000 else None
+
+
 def create_default_preview(sale: int | None, title: str | None,
                            average: int | None, source_id: int | None = None,
                            *, reference_source: str = "lowchart_public_history") -> dict:
@@ -107,6 +128,9 @@ def create_default_preview(sale: int | None, title: str | None,
     average = average if type(average) is int and 0 < average <= 100_000_000 else None
     labels = {
         "lowchart_public_history": "💸 쿠팡 평소 판매가",
+        "lowchart_observed_high": "💸 로우차트 관측 최고가",
+        "lowchart_observed_current": "💸 로우차트 관측 현재가",
+        "lowchart_observed_low": "💸 로우차트 관측 최저가",
         "fallcent_observed_average": "💸 쿠팡 평소 판매가(폴센트 관측 평균)",
         "naver_general_search_first_shopping_card": "💸 비교 기준가(네이버 검색)",
         "fallcent_observed_high": "💸 폴센트 관측 최고가",
@@ -120,6 +144,16 @@ def create_default_preview(sale: int | None, title: str | None,
         "lowchart_public_history", "fallcent_observed_average"
     )
     approx = nearest_five_discount(sale, average)
+    # Keep 5-point rounding for larger discounts, but never lose a verified
+    # small gap merely because it is under 2.5%.
+    raw_pct = (
+        Decimal(average - sale) * 100 / Decimal(average)
+        if type(sale) is int and type(average) is int
+        and 0 < sale < average <= 100_000_000 else None
+    )
+    under_one = raw_pct is not None and raw_pct < Decimal("0.5")
+    if approx is None and raw_pct is not None and not under_one:
+        approx = int(raw_pct.quantize(Decimal(1), rounding=ROUND_HALF_UP))
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
     # Use the SAME name portion in the 150-character Daangn headline and body.
@@ -130,7 +164,9 @@ def create_default_preview(sale: int | None, title: str | None,
                else "상품명 확인 중")
     # First body line: discount FIRST, followed by Lowchart product name.
     # If Lowchart history cannot establish a discount, never invent a rate.
-    body_discount = f"[{approx}%할인]" if approx is not None else "[할인율 확인 중]"
+    body_discount = (f"[{approx}%할인]" if approx is not None
+                     else "[1% 미만 저렴]" if under_one
+                     else "[할인율 확인 중]")
     lines = [f"{body_discount} {product}"]
     if average is not None:
         lines.append(f"{labels[reference_source]} : 약 {average:,}원")
@@ -140,6 +176,8 @@ def create_default_preview(sale: int | None, title: str | None,
         price_text = f"🔥 핫딜 특가 : {sale:,}원"
         if approx is not None:
             price_text += f" (약 {approx}% 할인 / 상세페이지 참고)"
+        elif under_one:
+            price_text += " (비교 기준 대비 1% 미만 저렴 / 상세페이지 참고)"
         else:
             price_text += " (상세페이지 참고)"
     else:
@@ -167,6 +205,7 @@ def create_default_preview(sale: int | None, title: str | None,
         "comparison_price_is_historical_average": not nonaverage_reference and average is not None,
         "rounded_discount_step": DEFAULT_PERCENT_STEP,
         "approx_discount_vs_reference_pct": approx,
+        "reference_discount_under_one_pct": under_one,
         "approx_discount_vs_historical_mean_pct": (
             approx if not nonaverage_reference else None
         ),

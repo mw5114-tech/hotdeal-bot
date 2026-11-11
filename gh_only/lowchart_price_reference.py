@@ -30,7 +30,14 @@ CURRENT_VISIBLE_SUMMARY = re.compile(
     r"의\s+쿠팡\s+현재가는\s*([\d,]+)\s*원이며,?\s*"
     r"로우차트가\s+관측한\s+역대\s+최저가는\s*([\d,]+)\s*원,?\s*"
     r"최고가는\s*([\d,]+)\s*원입니다\.?\s*"
-    r"최근\s*(\d{1,2})\s*주\s*평균\s*([\d,]+)\s*원"
+    r"최근\s*(\d{1,2})\s*주\s*평균(?:\s*가격|\s*가)?\s*([\d,]+)\s*원"
+)
+# Explicit statistics scoped to the exact title even when its average is
+# absent. Never borrow a recommendation/product carousel's visible price.
+CURRENT_VISIBLE_NO_AVERAGE = re.compile(
+    r"의\s+쿠팡\s+현재가는\s*([\d,]+)\s*원이며,?\s*"
+    r"로우차트가\s+관측한\s+역대\s+최저가는\s*([\d,]+)\s*원,?\s*"
+    r"최고가는\s*([\d,]+)\s*원입니다\.?"
 )
 TITLE_PRICE_SUFFIX = re.compile(r"\s+[-–]\s+[\d,]+\s*원\s+[-–]\s+로우차트\b")
 MAX_BODY = 1_800_000
@@ -68,6 +75,7 @@ def parse_reference(html: str, source_url: str, product_id: str, item_id: str,
         "title_option_matches": all(token.lower() in title.lower()
                                     for token in expected_tokens),
         "usable_historical_reference": False,
+        "visible_exact_item_prices_verified": False,
         "official_normal_price": False,
         "reason": "UNVERIFIED",
     }
@@ -102,7 +110,28 @@ def parse_reference(html: str, source_url: str, product_id: str, item_id: str,
         # Lowchart's new 3-week mean.
         legacy = PRICE_SUMMARY.search(text)
         if not legacy:
-            result["reason"] = "VISIBLE_HISTORY_SUMMARY_NOT_FOUND"
+            item_prices = (re.search(
+                re.escape(product_name) +
+                CURRENT_VISIBLE_NO_AVERAGE.pattern, text
+            ) if product_name and product_name != title else None)
+            if item_prices is None:
+                result["reason"] = "VISIBLE_HISTORY_SUMMARY_NOT_FOUND"
+                return result
+            current, low, high = (
+                int(v.replace(",", "")) for v in item_prices.groups()
+            )
+            if not 0 < low <= current <= high < 100_000_000:
+                result["reason"] = "INVALID_OBSERVED_PRICE_ORDER"
+                return result
+            result.update({
+                "observed_current_krw": current,
+                "observed_low_krw": low,
+                "observed_high_krw": high,
+                "source_observation_type": "exact_item_visible_price_only",
+                "history_window": "historical_high_unspecified_days",
+                "visible_exact_item_prices_verified": True,
+                "reason": "EXACT_ITEM_VISIBLE_HIGH_NO_AVERAGE",
+            })
             return result
         current, low, high, avg = (
             int(value.replace(",", "")) for value in legacy.groups()[:4]
@@ -122,6 +151,7 @@ def parse_reference(html: str, source_url: str, product_id: str, item_id: str,
         "source_last_change_date": date,
         "reference_discount_vs_average_pct": round((avg-deal_price)*100/avg,1),
         "usable_historical_reference": True,
+        "visible_exact_item_prices_verified": True,
         "reason": reason,
     })
     return result

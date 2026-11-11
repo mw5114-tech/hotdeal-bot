@@ -71,6 +71,25 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertFalse(same_named_option("짜왕", title))
         self.assertIsNone(validated_history(ref, pid, "17910000283", "짜왕, 8개"))
 
+    def test_verified_tiny_rates_are_reported(self):
+        c = create_default_preview(9800, "소금 1개", 10000)
+        self.assertEqual(c["approx_discount_vs_reference_pct"], 2)
+        self.assertIn("[2%할인]", c["caption"])
+        tiny = create_default_preview(9990, "소금 1개", 10000)
+        self.assertIsNone(tiny["approx_discount_vs_reference_pct"])
+        self.assertIn("1% 미만 저렴", tiny["caption"])
+        self.assertTrue(tiny["reference_discount_under_one_pct"])
+        no = create_default_preview(11000, "소금 1개", 10000)
+        self.assertIsNone(no["approx_discount_vs_reference_pct"])
+        self.assertFalse(no["reference_discount_under_one_pct"])
+
+    def test_verified_long_prefix_match_both_directions(self):
+        self.assertTrue(same_named_option("Apple 아이맥 24 M4칩, 16GB, 256GB",
+                                          "Apple 아이맥 24 M4칩"))
+        self.assertFalse(same_named_option("Apple 아이맥 24 M4칩, 8GB",
+                                           "Apple 아이맥 24 M4칩, 16GB"))
+        self.assertTrue(same_named_option("짜왕, 8개", "짜왕, 8개"))
+
     def test_product_then_usual_price_then_hot_deal(self):
         caption = create_default_preview(12050, "휘카레 소스", 34575, 123)
         self.assertEqual(caption["caption"].split("\n\n"), [
