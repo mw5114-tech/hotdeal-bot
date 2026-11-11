@@ -65,6 +65,18 @@ class LatestOneShotTests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "SCANNED_BUT_NOT_QUEUED"):
             claim_selected_latest(s, source, "owner-test")
 
+    def test_target_exact_telegram_id_even_when_newer_exists(self):
+        rows = [self.row(95725), self.row(95728), self.row(95724)]
+        self.assertEqual(latest_coupang(rows, target_id=95725)["source_message_id"], 95725)
+        with self.assertRaisesRegex(RuntimeError, "TARGET_NOT_FOUND"):
+            latest_coupang(rows, target_id=95727)
+        with self.assertRaisesRegex(RuntimeError, "TARGET_NOT_FOUND"):
+            latest_coupang([self.row(95725, kind="other")], target_id=95725)
+        with self.assertRaisesRegex(RuntimeError, "TARGET_NOT_FOUND"):
+            latest_coupang([self.row(95725), self.row(95725)], target_id=95725)
+        with self.assertRaisesRegex(RuntimeError, "TARGET_ID_INVALID"):
+            latest_coupang(rows, target_id=-1)
+
     def test_only_one_latest(self):
         self.assertEqual(latest_coupang([self.row(10), self.row(11)])["source_message_id"], 11)
         self.assertIsNone(latest_coupang([self.row(11, kind="other")]))

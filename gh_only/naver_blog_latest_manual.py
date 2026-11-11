@@ -18,9 +18,20 @@ from gh_only.naver_blog_jirum import (DRAFT_DIR, Store, make_article, now_utc,
                                        validate_state, NaverStateConflict)
 
 
-def latest_coupang(rows: list[dict]) -> dict | None:
-    """Choose last Coupang message, not last eligible/fresh message."""
+def latest_coupang(rows: list[dict], *, target_id: int | None = None) -> dict | None:
+    """Normally choose newest Coupang; optionally pin exactly one owner ID.
+
+    Pinning avoids accidentally publishing a newer unrelated Telegram item
+    when an owner requests one known deal by name/Telegram source ID.
+    """
+    if target_id is not None and (type(target_id) is not int or target_id <= 0):
+        raise RuntimeError("MANUAL_TARGET_ID_INVALID")
     eligible = [x for x in rows if x.get("url_kind") in old.COUPANG_KINDS]
+    if target_id is not None:
+        matches = [x for x in eligible if x["source_message_id"] == target_id]
+        if len(matches) != 1:
+            raise RuntimeError("MANUAL_TARGET_NOT_FOUND_OR_AMBIGUOUS_NO_SUBMIT")
+        return matches[0]
     return max(eligible, key=lambda x: x["source_message_id"]) if eligible else None
 
 
@@ -116,8 +127,17 @@ def run_once() -> int:
     state, _ = store.read()
     if state["in_flight"]:
         raise RuntimeError("MANUAL_LATEST_PREVIOUS_SUBMIT_REVIEW_REQUIRED")
+    # Select the exact owner-requested Telegram ID, if one was supplied via
+    # a protected GitHub trigger. A newer unrelated deal must not be posted.
+    raw_target = os.getenv("NAVER_MANUAL_TARGET_ID", "").strip()
+    if raw_target and (not raw_target.isdecimal() or len(raw_target) > 12):
+        raise RuntimeError("MANUAL_TARGET_ID_INVALID")
+    target_id = int(raw_target) if raw_target else None
     # The manual newest-item test preserves existing older FIFO entries.
-    latest = latest_coupang(enrich_posts(fetch_public_html(), max_posts=100))
+    latest = latest_coupang(
+        enrich_posts(fetch_public_html(), max_posts=100),
+        target_id=target_id,
+    )
     if latest is None:
         print("MANUAL_LATEST_NO_COUPANG_MESSAGE")
         return 3

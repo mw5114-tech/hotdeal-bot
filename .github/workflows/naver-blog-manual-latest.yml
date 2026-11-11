@@ -40,6 +40,19 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Resolve user-selected Telegram ID from protected trigger file
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import os, re
+          content = Path("manual/trigger-naver-latest-one-shot.txt").read_text("utf-8")
+          candidates = re.findall(r"(?m)^target_telegram_id=([0-9]{1,12})$", content)
+          if len(candidates) != 1 or int(candidates[0]) < 1:
+              raise SystemExit("MANUAL_EXACT_TARGET_MISSING_OR_AMBIGUOUS_NO_SUBMIT")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as fh:
+              fh.write("NAVER_MANUAL_TARGET_ID=" + candidates[0] + "\n")
+          print("NAVER_MANUAL_EXACT_TARGET_SELECTED id=" + candidates[0])
+          PY
       - name: Validate one-shot source selection, time bound, unique state
         run: |
           python -m py_compile gh_only/naver_blog_latest_manual.py gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
