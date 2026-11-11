@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95758,
-  "pending": [
-    {
-      "id": 95758,
-      "source_post_url": "https://t.me/jirum/95758",
-      "original_purchase_url": "https://link.coupang.com/a/iBALv9dT9U",
-      "source_text": "👍대박 11,500원 (31.0% 할인)\n매일우유 멸균 딸기\n📌 가격 현황\n- 정상가: 16,667원\n- 할인: 5,167원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBALv9dT9U\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T23:50:00+00:00",
-      "title": "매일우유 멸균 딸기",
-      "sale_price_krw": 11500
-    }
-  ],
-  "in_flight": {
-    "id": 95758,
-    "status": "CLAIMED",
-    "run_id": "43122858239",
-    "at": "2026-11-11T23:50:56.712331+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4501,6 +4486,16 @@
       "vendor_item_id": "88378289089",
       "at": "2026-11-11T22:40:51.650152+00:00",
       "run_id": "43113590783"
+    },
+    "95758": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%A4%EC%9D%BC%EC%9A%B0%EC%9C%A0-%EB%A9%B8%EA%B7%A0-%EB%94%B8%EA%B8%B0-200ml-24%EA%B0%9C-30%ED%95%A0%EC%9D%B8-P5a6EwrP?from=write",
+      "posted_at_utc": "2026-11-11T23:50:00+00:00",
+      "product_id": "7769814651",
+      "item_id": "20972918776",
+      "vendor_item_id": "3000244428",
+      "at": "2026-11-11T23:51:12.714568+00:00",
+      "run_id": "43122858239"
     }
   },
   "skipped_non_coupang": 305,
