@@ -384,7 +384,9 @@ def make_article(source: dict, output: Path, *, tag: str,
     verified = old.validate_draft(output, source["source_message_id"])
     # Native SmartEditor blocks give real blank paragraphs, a photo directly
     # after the disclosure, and actual bold labels (not literal Markdown).
-    from gh_only.naver_blog_format import build_blocks, plain_body, validate_blocks
+    from gh_only.naver_blog_format import (
+        build_blocks, plain_body, validate_blocks, validate_price_presentation,
+    )
     url = verified["candidate_url"]
     validate_naver_link_subid(url, verified.get("official_link_receipt"))
     if verified.get("unissued_affsdp_candidate") is not False:
@@ -393,6 +395,7 @@ def make_article(source: dict, output: Path, *, tag: str,
         draft, verified, source, manual_test_replay=manual_test_replay
     )
     validate_blocks(blocks, url)
+    validate_price_presentation(blocks, draft)
     body = plain_body(blocks)
     if not verified["image"]:
         raise RuntimeError("NAVER_DRAFT_UNSAFE")

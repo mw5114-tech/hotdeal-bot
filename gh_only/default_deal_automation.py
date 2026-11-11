@@ -441,6 +441,25 @@ def enrich_deal(deal: dict, output_dir: Path,
     caption = create_default_preview(
         sale, title, comparison_price, source_id,
         reference_source=comparison_source)
+    # Log ONLY public source-price decisions, never link secrets or cookies.
+    # An operator can now tell "no price on site" apart from "photo failed"
+    # and "exact-item/title verification rejected the price".
+    print("JIRUM_PRICE_REFERENCE_DECISION " + json.dumps({
+        "source_id": source_id,
+        "product_id": p,
+        "item_id": i,
+        "lowchart_http": history.get("http_status"),
+        "lowchart_status": history.get("reason"),
+        "lowchart_average_krw": history.get("observed_average_krw"),
+        "lowchart_price_verified": history.get("visible_exact_item_prices_verified"),
+        "photo_status": og.get("status"),
+        "fallcent_status": fallcent_high.get("status"),
+        "comparison_source": (comparison_source if comparison_price is not None else None),
+        "comparison_price_krw": comparison_price,
+        "discount_pct": caption.get("approx_discount_vs_reference_pct"),
+        "under_one_pct": caption.get("reference_discount_under_one_pct"),
+        "no_external_post": True,
+    }, ensure_ascii=False))
     # The candidate is composed ONLY from the already-resolved product/item.
     # It has not been formally issued and its commission credit is unknown.
     candidate = (

@@ -1,7 +1,9 @@
 """Offline tests for truthful price labels, spacing and picture order."""
 import unittest
 from pathlib import Path
-from gh_only.naver_blog_format import build_blocks, plain_body, validate_blocks
+from gh_only.naver_blog_format import (
+    build_blocks, plain_body, validate_blocks, validate_price_presentation,
+)
 from gh_only.naver_blog_jirum import DISCLOSURE
 
 URL = "https://link.coupang.com/a/AbcDEf1234"
@@ -29,6 +31,28 @@ class FormattingTests(unittest.TestCase):
         blocks = build_blocks(*row(*a, **kw))
         validate_blocks(blocks, URL)
         return blocks, plain_body(blocks)
+
+    def test_verified_price_and_discount_must_survive_smarteditor_layout(self):
+        draft, verified, source = row(
+            "lowchart_public_history", reference=8857, discount=25
+        )
+        draft["caption"]["sale_price_krw"] = 6470
+        blocks = build_blocks(draft, verified, source)
+        validate_price_presentation(blocks, draft)
+        broken = [dict(x) for x in blocks]
+        for block in broken:
+            if block.get("kind") == "reference":
+                block["text"] = "💸 평소 판매가 : 확인되지 않음"
+        with self.assertRaisesRegex(ValueError,
+                                    "NAVER_VERIFIED_PRICE_MISSING_FROM_POST"):
+            validate_price_presentation(broken, draft)
+        no_pct = [dict(x) for x in blocks]
+        for block in no_pct:
+            if block.get("kind") == "price":
+                block["text"] = "🔥 오늘 특가 : 약 6,470원"
+        with self.assertRaisesRegex(ValueError,
+                                    "NAVER_DISCOUNT_MISSING_FROM_POST"):
+            validate_price_presentation(no_pct, draft)
 
     def test_first_disclosure_second_hero_image(self):
         blocks, body = self.format()

@@ -174,6 +174,37 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     return blocks
 
 
+def validate_price_presentation(blocks: list[dict], draft: dict) -> None:
+    """Stop before external submit if a VERIFIED source price was dropped.
+
+    No automatic promotion from arbitrary text: evidence is validated in the
+    enrichment and Daangn draft layers. This only ensures it survives layout.
+    """
+    caption = draft.get("caption") or {}
+    price = caption.get("comparison_reference_price_krw")
+    basis = caption.get("comparison_reference_source")
+    discount = caption.get("approx_discount_vs_reference_pct")
+    under_one = caption.get("reference_discount_under_one_pct") is True
+    if price is None:
+        if basis is not None or under_one:
+            raise ValueError("NAVER_PRICE_REFERENCE_INCONSISTENT")
+        return
+    if type(price) is not int or price <= 0 or basis not in SOURCES:
+        raise ValueError("NAVER_PRICE_REFERENCE_INVALID")
+    labels = [x.get("text", "") for x in blocks if x.get("kind") == "reference"]
+    if (len(labels) != 1 or SOURCES[basis][0] not in labels[0]
+            or f"{price:,}원" not in labels[0]):
+        raise ValueError("NAVER_VERIFIED_PRICE_MISSING_FROM_POST")
+    sale_lines = [x.get("text", "") for x in blocks if x.get("kind") == "price"]
+    if len(sale_lines) != 1:
+        raise ValueError("NAVER_SALE_PRICE_BLOCK_MISSING")
+    if type(discount) is int and 1 <= discount <= 95:
+        if f"[약 {discount}% 할인]" not in sale_lines[0]:
+            raise ValueError("NAVER_DISCOUNT_MISSING_FROM_POST")
+    elif under_one and "1% 미만 저렴" not in sale_lines[0]:
+        raise ValueError("NAVER_SUB_ONE_PERCENT_MISSING_FROM_POST")
+
+
 def plain_body(blocks: list[dict]) -> str:
     return "\n\n".join(
         block["text"] for block in blocks if block.get("type") == "text"
