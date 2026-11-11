@@ -35,6 +35,10 @@ MAX_BATCH_POSTS = 4
 BATCH_POST_GAP_SECONDS = 10
 BATCH_MAX_ELAPSED_SECONDS = 10 * 60
 BATCH_MIN_NEXT_POST_BUDGET_SECONDS = 120
+# GitHub Contents GET may briefly lag a successful PUT on the branch.
+# A confirmed POST receipt is never an instruction to publish again.
+BATCH_COMMIT_VISIBILITY_READS = 12
+BATCH_COMMIT_VISIBILITY_SLEEP_SECONDS = 1
 
 
 def naver_title(title: str) -> str:
@@ -432,11 +436,11 @@ def quarantine_title_failure(store: Store, source_id: int) -> None:
     raise RuntimeError("NAVER_TITLE_FAILURE_409_EXHAUSTED")
 
 
-def publish_one(store: Store):
-    """One blog submission only; 409 retries are STATE-only, not post retries."""
+def publish_one(store: Store, *, with_receipt: bool = False):
+    """Publish once. Batch callers may request the already checkpointed receipt."""
     article = prepare_next(store)
     if article is None:
-        return 0
+        return None if with_receipt else 0
     source_id = article["source_id"]
     claim_before_publish(store, source_id)
     # Any crash or uncertain confirmation leaves the claim locked. Never
@@ -456,7 +460,47 @@ def publish_one(store: Store):
         "source_id": source_id, "url": url,
         "unissued_affiliate_candidate": article["unissued_link"]
     }, ensure_ascii=False))
-    return 0
+    # Only reveal a receipt to batch after checkpoint_published succeeded.
+    return {"source_id": source_id, "url": url} if with_receipt else 0
+
+
+def wait_for_batch_checkpoint(store: Store, source_id: int, url: str, *,
+                              max_reads: int = BATCH_COMMIT_VISIBILITY_READS) -> bool:
+    """Wait for an already-committed post to become visible via GitHub GET.
+
+    This function is READ ONLY. It never clicks Naver publish and never PUTs.
+    When consistency lags beyond the bounded window, stop the current batch
+    successfully; a future trigger can scan the durable state safely.
+    """
+    from naver_blog_one_shot import publication_log_number
+    if (type(source_id) is not int or source_id <= 0
+            or publication_log_number(url) is None
+            or type(max_reads) is not int or not 1 <= max_reads <= 20):
+        raise ValueError("NAVER_BATCH_CHECKPOINT_ARGUMENT_INVALID")
+    key = str(source_id)
+    for attempt in range(max_reads):
+        observed, _ = store.read()
+        persisted = observed["published"].get(key)
+        if persisted is not None:
+            if persisted.get("url") != url:
+                raise RuntimeError("NAVER_BATCH_RECEIPT_CONFLICT_STOP")
+            if (any(p["id"] == source_id for p in observed["pending"])
+                    or observed["in_flight"] is not None):
+                raise RuntimeError("NAVER_BATCH_RECEIPT_STATE_INCONSISTENT_STOP")
+            if attempt:
+                print("NAVER_BATCH_CHECKPOINT_VISIBLE_AFTER_READS=" + str(attempt + 1))
+            return True
+        if key in observed["skipped"]:
+            raise RuntimeError("NAVER_BATCH_RECEIPT_AUDIT_CONFLICT_STOP")
+        claim = observed["in_flight"]
+        if claim is not None and claim.get("id") != source_id:
+            raise RuntimeError("NAVER_BATCH_FOREIGN_CLAIM_STOP")
+        if attempt + 1 < max_reads:
+            time.sleep(BATCH_COMMIT_VISIBILITY_SLEEP_SECONDS)
+    print("NAVER_BATCH_CHECKPOINT_VISIBILITY_DEFERRED_SAFE_STOP " +
+          json.dumps({"source_id": source_id, "reads": max_reads}))
+    return False
+
 
 def expire_unclaimed_before_next(store: Store) -> int:
     """Skip stale unclaimed sources before the next queued batch item."""
@@ -507,18 +551,30 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
             raise RuntimeError("NAVER_PREVIOUS_SUBMIT_NEEDS_MANUAL_REVIEW")
         if not state["pending"]:
             break
+        # Never reuse an older cached queue snapshot for the next article.
+        # Every previous receipt in this run must still be visible.
+        if any(str(i) not in state["published"] for i in published_ids):
+            print("NAVER_BATCH_PREVIOUS_CHECKPOINT_NOT_VISIBLE_SAFE_STOP")
+            break
         oldest_id = state["pending"][0]["id"]
         print("NAVER_BATCH_NEXT " + json.dumps({
             "source_id": oldest_id,
             "completed_in_run": len(published_ids),
             "remaining_queue_before_post": len(state["pending"]),
         }))
-        publish_one(store)
-        after, _ = store.read()
-        if (str(oldest_id) not in after["published"]
-                or after["in_flight"] is not None):
-            raise RuntimeError("NAVER_BATCH_RECEIPT_NOT_COMMITTED_STOP")
+        # publish_one has already clicked once, verified the Naver URL and
+        # obtained a successful GitHub state PUT before returning this receipt.
+        # The next GET may still show the old blob for a few seconds.
+        receipt = publish_one(store, with_receipt=True)
+        if (not isinstance(receipt, dict)
+                or receipt.get("source_id") != oldest_id
+                or not isinstance(receipt.get("url"), str)):
+            raise RuntimeError("NAVER_BATCH_POST_RETURNED_NO_COMMITTED_RECEIPT")
         published_ids.append(oldest_id)
+        if not wait_for_batch_checkpoint(store, oldest_id, receipt["url"]):
+            # Never attempt another article against an unconfirmed snapshot,
+            # and do not mark a confirmed publication as a failed job.
+            break
     latest, _ = store.read()
     print("NAVER_BATCH_COMPLETE " + json.dumps({
         "published_count": len(published_ids),

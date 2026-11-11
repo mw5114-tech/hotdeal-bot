@@ -38,6 +38,13 @@ Target: https://blog.naver.com/mw5114
   draft/photo folder. Batches stop before exceeding a 10-minute budget.
 - Items expiring while queued are skipped (never posted late). An ambiguous
   submission stops the batch and preserves its no-retry claim.
+- After a verified Naver post and successful GitHub state checkpoint, the
+  Contents GET endpoint may briefly return an older branch blob. The batch
+  waits for up to 12 read attempts (11 seconds of wait) for the *same*
+  source ID and URL to appear in persisted `published` state. If not visible,
+  it **stops successfully without posting another product** and lets the next
+  Oracle event reconcile the state; it never retries the just-submitted post.
+  A mismatched published URL or foreign claim remains a hard safety failure.
 - Source timestamp must be fresh (under 60 minutes), with available sale price,
   identified Coupang product/item and a real downloaded product photo.
 - Passwords are never stored in the repository; `NAVER_BLOG_STORAGE_STATE_JSON`

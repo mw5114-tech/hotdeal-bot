@@ -8,7 +8,7 @@ from gh_only.naver_blog_jirum import (
     ingest, validate_state, source_fresh, validate_naver_link_subid,
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
     NaverStateConflict, scan, claim_before_publish, checkpoint_published,
-    publish_batch, expire_unclaimed_before_next,
+    publish_batch, expire_unclaimed_before_next, wait_for_batch_checkpoint,
 )
 
 
@@ -61,13 +61,14 @@ class NaverQueueTests(unittest.TestCase):
         ingest(s, [deal(mid, minutes=5) for mid in range(95496, 95501)])
         store = ConflictStore(initial=s, conflicts=0)
         order = []
-        def confirmed_publish(current):
+        def confirmed_publish(current, *, with_receipt=False):
             row, _ = current.read()
             mid = row["pending"][0]["id"]
+            url = f"https://blog.naver.com/mw5114/{224472000000 + mid}"
             claim_before_publish(current, mid)
-            checkpoint_published(current, mid,
-                                 f"https://blog.naver.com/mw5114/{224472000000 + mid}")
+            checkpoint_published(current, mid, url)
             order.append(mid)
+            return {"source_id": mid, "url": url}
         with patch("gh_only.naver_blog_jirum.publish_one",
                    side_effect=confirmed_publish) as publish, patch(
                 "gh_only.naver_blog_jirum.time.sleep") as sleep:
@@ -85,13 +86,14 @@ class NaverQueueTests(unittest.TestCase):
                reference=earlier)
         store = ConflictStore(initial=s, conflicts=0)
         order = []
-        def confirmed_publish(current):
+        def confirmed_publish(current, *, with_receipt=False):
             row, _ = current.read()
             mid = row["pending"][0]["id"]
             order.append(mid)
+            url = "https://blog.naver.com/mw5114/224472999999"
             claim_before_publish(current, mid)
-            checkpoint_published(current, mid,
-                "https://blog.naver.com/mw5114/224472999999")
+            checkpoint_published(current, mid, url)
+            return {"source_id": mid, "url": url}
         with patch("gh_only.naver_blog_jirum.publish_one",
                    side_effect=confirmed_publish), patch(
                 "gh_only.naver_blog_jirum.time.sleep"):
@@ -105,7 +107,7 @@ class NaverQueueTests(unittest.TestCase):
         s = state()
         ingest(s, [deal(95496), deal(95497)])
         store = ConflictStore(initial=s, conflicts=0)
-        def uncertain(current):
+        def uncertain(current, *, with_receipt=False):
             claim_before_publish(current, 95496)
             raise RuntimeError("SUBMISSION_UNCERTAIN_DO_NOT_RETRY")
         with patch("gh_only.naver_blog_jirum.publish_one",
@@ -128,6 +130,88 @@ class NaverQueueTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "NEEDS_MANUAL_REVIEW"):
                 publish_batch(store)
         publish.assert_not_called()
+
+    def test_checkpoint_visibility_retries_stale_get_without_reposting(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        original = deepcopy(s)
+        url = "https://blog.naver.com/mw5114/224472901234"
+        done = deepcopy(s)
+        done["pending"] = []
+        done["published"]["95496"] = {"url": url,
+                                         "at": datetime.now(timezone.utc).isoformat()}
+        class LaggedStore:
+            def __init__(self):
+                self.read_count = 0
+            def read(self):
+                self.read_count += 1
+                result = original if self.read_count <= 3 else done
+                return deepcopy(result), str(self.read_count)
+        slow = LaggedStore()
+        with patch("gh_only.naver_blog_jirum.time.sleep") as sleep:
+            self.assertTrue(wait_for_batch_checkpoint(slow, 95496, url, max_reads=5))
+        self.assertEqual(slow.read_count, 4)
+        self.assertEqual(sleep.call_count, 3)
+
+    def test_checkpoint_visibility_timeout_stops_safely_without_retry(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=0)
+        url = "https://blog.naver.com/mw5114/224472901234"
+        with patch("gh_only.naver_blog_jirum.time.sleep") as sleep:
+            self.assertFalse(wait_for_batch_checkpoint(store, 95496, url, max_reads=3))
+        self.assertEqual(sleep.call_count, 2)
+        self.assertEqual([x["id"] for x in store.current["pending"]], [95496])
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_checkpoint_visibility_rejects_different_published_url(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        s["pending"] = []
+        s["published"]["95496"] = {"url": "https://blog.naver.com/mw5114/224472999999",
+                                   "at": datetime.now(timezone.utc).isoformat()}
+        store = ConflictStore(initial=s, conflicts=0)
+        with self.assertRaisesRegex(RuntimeError, "NAVER_BATCH_RECEIPT_CONFLICT_STOP"):
+            wait_for_batch_checkpoint(
+                store, 95496, "https://blog.naver.com/mw5114/224472901234")
+
+    def test_batch_defers_stale_read_without_second_publish_or_red_failure(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        original = deepcopy(s)
+        store = ConflictStore(initial=s, conflicts=0)
+        called = []
+        def confirmed_publish(current, *, with_receipt=False):
+            row, _ = current.read()
+            mid = row["pending"][0]["id"]
+            url = "https://blog.naver.com/mw5114/224472901234"
+            claim_before_publish(current, mid)
+            checkpoint_published(current, mid, url)
+            called.append(mid)
+            return {"source_id": mid, "url": url}
+        def never_visible(current, source_id, url):
+            self.assertEqual(source_id, 95496)
+            self.assertEqual(url, "https://blog.naver.com/mw5114/224472901234")
+            return False
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=confirmed_publish) as post, patch(
+                "gh_only.naver_blog_jirum.wait_for_batch_checkpoint",
+                side_effect=never_visible):
+            self.assertEqual(publish_batch(store), 0)
+        self.assertEqual(post.call_count, 1)
+        self.assertEqual(called, [95496])
+        self.assertIn("95496", store.current["published"])
+        self.assertEqual([x["id"] for x in store.current["pending"]], [95497])
+
+    def test_batch_missing_return_receipt_is_fail_closed(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        store = ConflictStore(initial=s, conflicts=0)
+        with patch("gh_only.naver_blog_jirum.publish_one", return_value=None) as post:
+            with self.assertRaisesRegex(
+                    RuntimeError, "NAVER_BATCH_POST_RETURNED_NO_COMMITTED_RECEIPT"):
+                publish_batch(store)
+        self.assertEqual(post.call_count, 1)
 
     def test_batch_limit_is_bounded(self):
         store = ConflictStore(initial=state(), conflicts=0)
