@@ -1,34 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95714,
+  "last_scanned_id": 95717,
   "pending": [
-    {
-      "id": 95707,
-      "source_post_url": "https://t.me/jirum/95707",
-      "original_purchase_url": "https://link.coupang.com/a/iAJ8d59kzd",
-      "source_text": "👍대박 4,380원 (31.6% 할인)\n풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)\n📌 가격 현황\n- 정상가: 6,400원\n- 할인: 2,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAJ8d59kzd\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T11:33:28+00:00",
-      "title": "풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)",
-      "sale_price_krw": 4380
-    },
-    {
-      "id": 95708,
-      "source_post_url": "https://t.me/jirum/95708",
-      "original_purchase_url": "https://link.coupang.com/a/iAKcx93yCG",
-      "source_text": "☆특가 2,280원\n청정원 하프칼로리 마요네즈, 290g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAKcx93yCG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T11:34:27+00:00",
-      "title": "☆특가 2,280원",
-      "sale_price_krw": 2280
-    },
-    {
-      "id": 95709,
-      "source_post_url": "https://t.me/jirum/95709",
-      "original_purchase_url": "https://link.coupang.com/a/iAKmJeLlPU",
-      "source_text": "☆특가 15,810원\n신라명과 골드바 휘낭시에, 252g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAKmJeLlPU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T11:36:44+00:00",
-      "title": "☆특가 15,810원",
-      "sale_price_krw": 15810
-    },
     {
       "id": 95712,
       "source_post_url": "https://t.me/jirum/95712",
@@ -4373,7 +4346,7 @@
       "run_id": "42544667745"
     }
   },
-  "skipped_non_coupang": 276,
+  "skipped_non_coupang": 279,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -5802,6 +5775,27 @@
       "source_title": "레몬트리 더진한 레몬주스 2개",
       "posted_at_utc": "2026-11-11T09:58:22+00:00",
       "at": "2026-11-11T12:26:41.644139+00:00"
+    },
+    "95707": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95707",
+      "source_title": "풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)",
+      "posted_at_utc": "2026-11-11T11:33:28+00:00",
+      "at": "2026-11-11T12:42:34.005908+00:00"
+    },
+    "95708": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95708",
+      "source_title": "☆특가 2,280원",
+      "posted_at_utc": "2026-11-11T11:34:27+00:00",
+      "at": "2026-11-11T12:42:34.005914+00:00"
+    },
+    "95709": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/95709",
+      "source_title": "☆특가 15,810원",
+      "posted_at_utc": "2026-11-11T11:36:44+00:00",
+      "at": "2026-11-11T12:42:34.005918+00:00"
     }
   },
   "skipped_unverifiable": {
