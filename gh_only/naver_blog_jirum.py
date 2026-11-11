@@ -30,6 +30,11 @@ DISCLOSURE = "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이�
 NAVER_BLOG_SUBID = "naverblog"
 NAVER_TITLE_MAX_UTF16_UNITS = 88
 STALE_PUBLISH_CLAIM_SECONDS = 30 * 60
+# One Oracle event can drain a bounded FIFO burst without another runner.
+MAX_BATCH_POSTS = 4
+BATCH_POST_GAP_SECONDS = 10
+BATCH_MAX_ELAPSED_SECONDS = 10 * 60
+BATCH_MIN_NEXT_POST_BUDGET_SECONDS = 120
 
 
 def naver_title(title: str) -> str:
@@ -340,7 +345,8 @@ def prepare_next(store: Store):
     tag = os.environ.get("COUPANG_PARTNER_LPTAG", "")
     if not tag:
         raise RuntimeError("NAVER_OWNER_TAG_MISSING")
-    return make_article(source, DRAFT_DIR, tag=tag)
+    # Isolate every item's draft and image in a multi-post run.
+    return make_article(source, DRAFT_DIR / str(source["id"]), tag=tag)
 
 
 def claim_before_publish(store: Store, source_id: int) -> None:
@@ -452,6 +458,76 @@ def publish_one(store: Store):
     }, ensure_ascii=False))
     return 0
 
+def expire_unclaimed_before_next(store: Store) -> int:
+    """Skip stale unclaimed sources before the next queued batch item."""
+    for attempt in range(5):
+        state, sha = store.read()
+        if state["in_flight"] is not None:
+            raise RuntimeError("NAVER_PREVIOUS_SUBMIT_NEEDS_MANUAL_REVIEW")
+        count = expire(state)
+        if not count:
+            return 0
+        try:
+            store.write(state, sha, "state: Naver batch discard expired unclaimed deals")
+            print("NAVER_BATCH_EXPIRED_NO_POST=" + str(count))
+            return count
+        except NaverStateConflict:
+            if attempt == 4:
+                raise
+            _after_known_conflict(attempt)
+    raise RuntimeError("NAVER_BATCH_EXPIRE_409_EXHAUSTED")
+
+
+def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
+    """Publish the oldest fresh Telegram deals sequentially and with a hard cap.
+
+    Reuse the existing claim/submit/receipt/checkpoint path for each item.
+    Never retry a possibly submitted source; any error aborts the whole batch.
+    """
+    if type(max_posts) is not int or not 1 <= max_posts <= MAX_BATCH_POSTS:
+        raise ValueError("NAVER_BATCH_LIMIT_INVALID")
+    started = time.monotonic()
+    published_ids = []
+    print("NAVER_BATCH_BEGIN " + json.dumps({
+        "max_posts": max_posts,
+        "gap_seconds": BATCH_POST_GAP_SECONDS,
+        "max_elapsed_seconds": BATCH_MAX_ELAPSED_SECONDS,
+    }))
+    for _ in range(max_posts):
+        elapsed = time.monotonic() - started
+        if elapsed > BATCH_MAX_ELAPSED_SECONDS - BATCH_MIN_NEXT_POST_BUDGET_SECONDS:
+            print("NAVER_BATCH_TIME_BUDGET_STOP")
+            break
+        if published_ids:
+            # Avoid burst-posting affiliate articles without a pause.
+            time.sleep(BATCH_POST_GAP_SECONDS)
+        expire_unclaimed_before_next(store)
+        state, _ = store.read()
+        if state["in_flight"] is not None:
+            raise RuntimeError("NAVER_PREVIOUS_SUBMIT_NEEDS_MANUAL_REVIEW")
+        if not state["pending"]:
+            break
+        oldest_id = state["pending"][0]["id"]
+        print("NAVER_BATCH_NEXT " + json.dumps({
+            "source_id": oldest_id,
+            "completed_in_run": len(published_ids),
+            "remaining_queue_before_post": len(state["pending"]),
+        }))
+        publish_one(store)
+        after, _ = store.read()
+        if (str(oldest_id) not in after["published"]
+                or after["in_flight"] is not None):
+            raise RuntimeError("NAVER_BATCH_RECEIPT_NOT_COMMITTED_STOP")
+        published_ids.append(oldest_id)
+    latest, _ = store.read()
+    print("NAVER_BATCH_COMPLETE " + json.dumps({
+        "published_count": len(published_ids),
+        "source_ids": published_ids,
+        "pending_remaining": len(latest["pending"]),
+    }))
+    return 0
+
+
 def preview_latest():
     """Manual non-publishing editor check of the newest recent Coupang deal.
 
@@ -484,7 +560,7 @@ def preview_latest():
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("action", choices=("preview", "scan", "post"))
+    p.add_argument("action", choices=("preview", "scan", "post", "batch"))
     args = p.parse_args()
     if args.action == "preview":
         return preview_latest()
@@ -503,6 +579,8 @@ def main():
     if os.getenv("NAVER_BLOG_PUBLISH_ENABLED") != "true":
         print("NAVER_BLOG_PUBLISH_PAUSED")
         return 0
+    if args.action == "batch":
+        return publish_batch(store)
     return publish_one(store)
 
 

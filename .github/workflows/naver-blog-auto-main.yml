@@ -59,7 +59,7 @@ jobs:
       GH_STATE_TOKEN: ${{ github.token }}
       NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
       # Owner approved live Naver Blog publishing on 2026-11-09.
-      # One fresh eligible Jirum item per run; never posts to Daangn.
+      # Up to four fresh FIFO items per run, oldest first; Daangn stays archived.
       # Owner-authorized auto publish resumed after short-link deduplication
       # passed a real SmartEditor editor check and a live one-shot publish.
       # Naver live auto-post is enabled; owner-requested updated price order
@@ -103,9 +103,9 @@ jobs:
             python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'
             echo "NAVER_BROWSER_FALLBACK_READY"
           fi
-      - name: Publish max one eligible Naver Blog post
+      - name: Publish oldest Naver FIFO items sequentially (max 4 per run)
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
-        run: python -m gh_only.naver_blog_jirum post
+        run: python -m gh_only.naver_blog_jirum batch
       - name: Keep public-only Naver draft receipt if available
         if: always() && steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
         uses: actions/upload-artifact@v4

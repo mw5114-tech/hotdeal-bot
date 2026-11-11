@@ -32,6 +32,12 @@ Target: https://blog.naver.com/mw5114
   as the activity channel before enabling live affiliate posts.
 - One FIFO source ID is handled at most once. Claim before submitting; if a
   click outcome is uncertain, stop in REVIEW_REQUIRED instead of retrying.
+- Each main workflow run scans once and publishes up to **four** eligible sources
+  **sequentially, oldest Telegram ID first**, with at least 10 seconds between
+  confirmed posts. One runner installs Chromium once; each source has its own
+  draft/photo folder. Batches stop before exceeding a 10-minute budget.
+- Items expiring while queued are skipped (never posted late). An ambiguous
+  submission stops the batch and preserves its no-retry claim.
 - Source timestamp must be fresh (under 60 minutes), with available sale price,
   identified Coupang product/item and a real downloaded product photo.
 - Passwords are never stored in the repository; `NAVER_BLOG_STORAGE_STATE_JSON`
@@ -64,6 +70,6 @@ Target: https://blog.naver.com/mw5114
   Reconcile it against actual Naver posts before editing its audit record.
 - No extra Oracle poller or scheduled task is installed; the existing dispatch
   and backup schedule are reused.
-- Do not automatically post every unreviewed Telegram item in bulk to a newly
-  created Naver Blog. Platform search/promotion policies may restrict mass
-  templated affiliate posts.
+- This is a **bounded four-item batch**, not unlimited bulk publishing.
+  Platform rules may restrict mass templated affiliate posts; review posting
+  frequency and the registered Coupang Partners channel.

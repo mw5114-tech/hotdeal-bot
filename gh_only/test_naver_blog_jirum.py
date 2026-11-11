@@ -8,6 +8,7 @@ from gh_only.naver_blog_jirum import (
     ingest, validate_state, source_fresh, validate_naver_link_subid,
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
     NaverStateConflict, scan, claim_before_publish, checkpoint_published,
+    publish_batch, expire_unclaimed_before_next,
 )
 
 
@@ -55,6 +56,99 @@ class ConflictStore:
 
 
 class NaverQueueTests(unittest.TestCase):
+    def test_batch_oldest_first_max_four_with_gap(self):
+        s = state()
+        ingest(s, [deal(mid, minutes=5) for mid in range(95496, 95501)])
+        store = ConflictStore(initial=s, conflicts=0)
+        order = []
+        def confirmed_publish(current):
+            row, _ = current.read()
+            mid = row["pending"][0]["id"]
+            claim_before_publish(current, mid)
+            checkpoint_published(current, mid,
+                                 f"https://blog.naver.com/mw5114/{224472000000 + mid}")
+            order.append(mid)
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=confirmed_publish) as publish, patch(
+                "gh_only.naver_blog_jirum.time.sleep") as sleep:
+            self.assertEqual(publish_batch(store), 0)
+        self.assertEqual(order, [95496, 95497, 95498, 95499])
+        self.assertEqual([r["id"] for r in store.current["pending"]], [95500])
+        self.assertEqual(publish.call_count, 4)
+        self.assertEqual(sleep.call_count, 3)
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_batch_skips_expired_oldest_and_posts_next(self):
+        s = state()
+        earlier = datetime.now(timezone.utc) - timedelta(minutes=2)
+        ingest(s, [deal(95496, minutes=61), deal(95497, minutes=5)],
+               reference=earlier)
+        store = ConflictStore(initial=s, conflicts=0)
+        order = []
+        def confirmed_publish(current):
+            row, _ = current.read()
+            mid = row["pending"][0]["id"]
+            order.append(mid)
+            claim_before_publish(current, mid)
+            checkpoint_published(current, mid,
+                "https://blog.naver.com/mw5114/224472999999")
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=confirmed_publish), patch(
+                "gh_only.naver_blog_jirum.time.sleep"):
+            self.assertEqual(publish_batch(store), 0)
+        self.assertEqual(order, [95497])
+        self.assertEqual(store.current["skipped"]["95496"]["reason"],
+                         "STALE_OR_UNKNOWN_TIMESTAMP")
+        self.assertEqual(store.current["pending"], [])
+
+    def test_batch_uncertain_submit_halts_without_replay(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        store = ConflictStore(initial=s, conflicts=0)
+        def uncertain(current):
+            claim_before_publish(current, 95496)
+            raise RuntimeError("SUBMISSION_UNCERTAIN_DO_NOT_RETRY")
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=uncertain) as publish:
+            with self.assertRaisesRegex(RuntimeError,
+                                        "SUBMISSION_UNCERTAIN_DO_NOT_RETRY"):
+                publish_batch(store)
+        self.assertEqual(publish.call_count, 1)
+        self.assertEqual(store.current["in_flight"]["id"], 95496)
+        self.assertEqual([r["id"] for r in store.current["pending"]],
+                         [95496, 95497])
+
+    def test_batch_does_not_publish_with_uncertain_claim(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        s["in_flight"] = {"id": 95496, "status": "REVIEW_REQUIRED",
+                          "run_id": "previous", "at": datetime.now(timezone.utc).isoformat()}
+        store = ConflictStore(initial=s, conflicts=0)
+        with patch("gh_only.naver_blog_jirum.publish_one") as publish:
+            with self.assertRaisesRegex(RuntimeError, "NEEDS_MANUAL_REVIEW"):
+                publish_batch(store)
+        publish.assert_not_called()
+
+    def test_batch_limit_is_bounded(self):
+        store = ConflictStore(initial=state(), conflicts=0)
+        for invalid in (0, 5, -1, True, "4"):
+            with self.subTest(value=invalid):
+                with self.assertRaisesRegex(ValueError, "NAVER_BATCH_LIMIT_INVALID"):
+                    publish_batch(store, max_posts=invalid)
+
+    def test_batch_expiry_handles_confirmed_409(self):
+        s = state()
+        now = datetime.now(timezone.utc)
+        ingest(s, [deal(95496, minutes=65)],
+               reference=now - timedelta(minutes=10))
+        store = ConflictStore(initial=s, conflicts=1)
+        with patch("gh_only.naver_blog_jirum.time.sleep"):
+            self.assertEqual(expire_unclaimed_before_next(store), 1)
+        self.assertEqual(store.current["pending"], [])
+        self.assertEqual(store.current["skipped"]["95496"]["reason"],
+                         "STALE_OR_UNKNOWN_TIMESTAMP")
+        self.assertIn("95490", store.current["published"])
+
     def test_known_409_scan_rebases_and_preserves_other_state(self):
         store = ConflictStore()
         with patch("gh_only.naver_blog_jirum.old.collect_since",
