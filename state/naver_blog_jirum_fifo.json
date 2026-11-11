@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95756,
-  "pending": [
-    {
-      "id": 95755,
-      "source_message_id": 95755,
-      "source_post_url": "https://t.me/jirum/95755",
-      "original_purchase_url": "https://link.coupang.com/a/iBvGZO6pie",
-      "title": "환타 제로 파인애플 탄산음료",
-      "source_text": "👍대박 9,320원 (39.0% 할인)\n환타 제로 파인애플 탄산음료\n📌 가격 현황\n- 정상가: 15,279원\n- 할인: 5,959원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBvGZO6pie\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9320,
-      "posted_at_utc": "2026-11-11T22:39:01+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -555,6 +544,10 @@
     "95754": {
       "url": "https://blog.naver.com/mw5114/224473813324",
       "at": "2026-11-11T22:19:53.803198+00:00"
+    },
+    "95755": {
+      "url": "https://blog.naver.com/mw5114/224473872048",
+      "at": "2026-11-11T23:34:45.151003+00:00"
     }
   },
   "skipped": {
@@ -624,12 +617,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95755,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43120766668",
-    "at": "2026-11-11T23:34:04.501836+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
