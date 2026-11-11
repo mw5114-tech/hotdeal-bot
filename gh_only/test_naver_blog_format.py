@@ -91,7 +91,7 @@ class FormattingTests(unittest.TestCase):
         _, body = self.format("lowchart_observed_high")
         self.assertIn("로우차트 관측 최고가 : 약 19,900원", body)
         self.assertNotIn("쿠팡 평소 판매가", body)
-        self.assertIn("로우차트 최고가 대비", body)
+        self.assertIn("가격 비교 기준 : 로우차트 관측 최고가", body)
         self.assertIn("[약 25% 할인]", body)
 
     def test_fallcent_midpoint_is_explicitly_not_typical_price(self):

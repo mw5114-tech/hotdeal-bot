@@ -316,9 +316,11 @@ class FallcentHighTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             row = process(Path(tmp),current,
                           naver=lambda title:self.fail("Naver"))
-        self.assertIsNone(row["comparison_price_source"])
-        self.assertNotIn("폴센트 관측 현재가",row["caption"]["caption"])
-        self.assertIsNone(row["caption"]["approx_discount_vs_reference_pct"])
+        self.assertEqual(row["comparison_price_source"],
+                         "fallcent_observed_current")
+        self.assertIn("폴센트 관측 현재가", row["caption"]["caption"])
+        self.assertIn("[1%할인]", row["caption"]["caption"])
+        self.assertNotIn("쿠팡 평소 판매가(폴센트", row["caption"]["caption"])
 
     def test_visible_exact_item_current_low_without_high(self):
         doc = BASE.replace(

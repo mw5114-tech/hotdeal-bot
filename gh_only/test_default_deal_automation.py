@@ -145,6 +145,69 @@ class AutomatedDefaultTests(unittest.TestCase):
         self.assertFalse(r["caption"]["auto_publish_ready"])
         self.assertFalse(r["personal_affiliate_link_created"])
 
+    def test_real_jjawang_price_survives_missing_lowchart_photo(self):
+        pid, iid = "788073", "17910000282"
+        item = {"status": "EXACT_ITEM_IDENTIFIED", "product_id": pid,
+                "item_id": iid}
+        source = {
+            "source_message_id": 95749,
+            "source_post_url": "https://t.me/jirum/95749",
+            "original_purchase_url": SOURCE,
+            "source_text": "특가 6,470원\n짜왕, 8개",
+            "title": "짜왕, 8개", "sale_price_krw": 6470
+        }
+        def doc(with_mean=True):
+            tail = ("최근 3주 평균 8,857원보다 27% 저렴합니다."
+                    if with_mean else "최근 평균 확인 중입니다.")
+            return (
+                '<html><title>짜왕, 8개 - 6,470원 - 로우차트</title><body>'
+                'productId=788073 itemId=17910000282 '
+                '짜왕, 8개의 쿠팡 현재가는 6,470원이며, '
+                '로우차트가 관측한 역대 최저가는 6,470원, '
+                '최고가는 10,600원입니다. ' + tail + '</body></html>'
+            )
+        photo = {
+            "status": "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+            "og_title": "짜왕, 8개",
+            "og_url": build_url(pid, iid),
+            "og_image": None,
+            "lowchart_title_verified": True,
+        }
+        def photo_fallback(*args):
+            return {
+                "status": "IMAGE_SAVED", "saved_name": "fallback.jpg",
+                "image_source": "fallcent_search_representative",
+                "representative_fallcent_image": True,
+                "image_match_basis": "UNVERIFIED_FALLCENT_SEARCH_RESULT",
+            }
+        for with_mean, ref, expected in (
+            (True, "lowchart_public_history", 8857),
+            (False, "lowchart_observed_high", 10600),
+        ):
+            with self.subTest(with_mean=with_mean):
+                seen = []
+                def history(p, i, tokens, price):
+                    seen.append((p, i, tokens))
+                    return parse_reference(doc(with_mean), build_url(p, i),
+                                           p, i, tokens, price)
+                with tempfile.TemporaryDirectory() as tmp:
+                    with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                               return_value=photo):
+                        out = enrich_deal(
+                            source, Path(tmp), resolver=lambda _: item,
+                            history_fetch=history,
+                            fallcent_lookup=photo_fallback,
+                            owner_tag="AF9668915"
+                        )
+                self.assertEqual(len(seen), 1)
+                self.assertEqual(out["comparison_price_source"], ref)
+                self.assertEqual(out["caption"]["comparison_reference_price_krw"],
+                                 expected)
+                self.assertEqual(out["caption"]["approx_discount_vs_reference_pct"],
+                                 25 if with_mean else 40)
+                self.assertTrue(out["price_reference_verified"])
+                self.assertTrue(out["price_lookup_attempted"])
+
     def test_kakao_vendor_conflict_blocks_history_photo(self):
         calls=[]
         def never(*args):
