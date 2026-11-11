@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95756,
-  "pending": [
-    {
-      "id": 95755,
-      "source_post_url": "https://t.me/jirum/95755",
-      "original_purchase_url": "https://link.coupang.com/a/iBvGZO6pie",
-      "source_text": "👍대박 9,320원 (39.0% 할인)\n환타 제로 파인애플 탄산음료\n📌 가격 현황\n- 정상가: 15,279원\n- 할인: 5,959원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBvGZO6pie\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T22:39:01+00:00",
-      "title": "환타 제로 파인애플 탄산음료",
-      "sale_price_krw": 9320
-    }
-  ],
-  "in_flight": {
-    "id": 95755,
-    "status": "CLAIMED",
-    "run_id": "43113590783",
-    "at": "2026-11-11T22:40:35.238174+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4491,6 +4476,16 @@
       "vendor_item_id": "86673863931",
       "at": "2026-11-11T22:03:30.725512+00:00",
       "run_id": "43108318372"
+    },
+    "95755": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%99%98%ED%83%80-%EC%A0%9C%EB%A1%9C-%ED%8C%8C%EC%9D%B8%EC%95%A0%ED%94%8C-%ED%83%84%EC%82%B0%EC%9D%8C%EB%A3%8C-350ml-24%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dZ7lMmxj?from=write",
+      "posted_at_utc": "2026-11-11T22:39:01+00:00",
+      "product_id": "7272135076",
+      "item_id": "24339294719",
+      "vendor_item_id": "88378289089",
+      "at": "2026-11-11T22:40:51.650152+00:00",
+      "run_id": "43113590783"
     }
   },
   "skipped_non_coupang": 304,
