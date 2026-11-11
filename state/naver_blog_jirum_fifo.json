@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95748,
-  "pending": [],
+  "last_scanned_id": 95750,
+  "pending": [
+    {
+      "id": 95749,
+      "source_message_id": 95749,
+      "source_post_url": "https://t.me/jirum/95749",
+      "original_purchase_url": "https://link.coupang.com/a/iA1pjqsbsq",
+      "title": "☆특가 6,470원",
+      "source_text": "☆특가 6,470원\n지금특가 * 8봉\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA1pjqsbsq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 6470,
+      "posted_at_utc": "2026-11-11T15:35:13+00:00"
+    },
+    {
+      "id": 95750,
+      "source_message_id": 95750,
+      "source_post_url": "https://t.me/jirum/95750",
+      "original_purchase_url": "https://link.coupang.com/a/iA1uHdi9F6",
+      "title": "☆특가 18,460원",
+      "source_text": "☆특가 18,460원\n지금특가 * 6P 세트  글라스락 베이비 눈금 이유식 용기 270ml 사면결착캡 3P + 스마일캡 3P\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA1uHdi9F6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 18460,
+      "posted_at_utc": "2026-11-11T15:36:26+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
