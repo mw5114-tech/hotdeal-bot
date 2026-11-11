@@ -66,6 +66,11 @@ jobs:
               "landing_path_is_exact_product": (parsed.path == "/vp/products/"+identity["product_id"])
                                                if parsed else None,
               "landing_path_is_product":parsed.path.startswith("/vp/products/") if parsed else None,
+              "landing_is_official_affsdp":parsed.path == "/re/AFFSDP" if parsed else None,
+              "landing_pagekey_present":"pageKey" in q,
+              "landing_pagekey_exact":q.get("pageKey")==[identity["product_id"]],
+              "landing_subid_present":"subid" in q,
+              "landing_subid_exact":q.get("subid")==["naverblog"],
               "landing_item_present":"itemId" in q,
               "landing_item_exact":q.get("itemId")==[identity["item_id"]],
               "landing_vendor_present":"vendorItemId" in q,
