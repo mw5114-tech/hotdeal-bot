@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95751,
-  "pending": [],
+  "last_scanned_id": 95752,
+  "pending": [
+    {
+      "id": 95752,
+      "source_message_id": 95752,
+      "source_post_url": "https://t.me/jirum/95752",
+      "original_purchase_url": "https://link.coupang.com/a/iA4ERxbkfA",
+      "title": "일리윤 세라마이드 아토 버블워시 앤 샴푸 바디워시 무향, 900ml, 2개",
+      "source_text": "👍대박 26,200원 (37.3% 할인)\n일리윤 세라마이드 아토 버블워시 앤 샴푸 바디워시 무향, 900ml, 2개\n📌 가격 현황\n- 정상가: 41,770원\n- 할인: 15,570원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA4ERxbkfA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 26200,
+      "posted_at_utc": "2026-11-11T16:20:42+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
