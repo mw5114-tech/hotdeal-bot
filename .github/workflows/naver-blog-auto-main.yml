@@ -44,6 +44,16 @@ jobs:
       - name: Confirm no-publish dispatch path
         run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
 
+  # A single Oracle dispatch forks two independent jobs. Daangn is
+  # policy-gated scan-only until clearance; failure cannot block Naver.
+  daangn-cafe-independent:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    uses: ./.github/workflows/daangn-cafe-restored.yml
+    with:
+      source_post_id: ${{ inputs.source_post_id }}
+      smoke_test: ${{ inputs.smoke_test }}
+    secrets: inherit
+
   naver-blog-fifo:
     # Independent Naver-only FIFO, with its own job-level serialization.
     # No Daangn scan, state, browser, or publish job runs before this.
