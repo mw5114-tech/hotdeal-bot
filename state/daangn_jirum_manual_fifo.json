@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95750,
-  "pending": [
-    {
-      "id": 95750,
-      "source_post_url": "https://t.me/jirum/95750",
-      "original_purchase_url": "https://link.coupang.com/a/iA1uHdi9F6",
-      "source_text": "☆특가 18,460원\n지금특가 * 6P 세트  글라스락 베이비 눈금 이유식 용기 270ml 사면결착캡 3P + 스마일캡 3P\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA1uHdi9F6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T15:36:26+00:00",
-      "title": "☆특가 18,460원",
-      "sale_price_krw": 18460
-    }
-  ],
-  "in_flight": {
-    "id": 95750,
-    "status": "CLAIMED",
-    "run_id": "43050087027",
-    "at": "2026-11-11T15:37:41.702598+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4450,6 +4435,16 @@
       "item_id": "17910000282",
       "vendor_item_id": null,
       "at": "2026-11-11T15:37:34.371640+00:00",
+      "run_id": "43050087027"
+    },
+    "95750": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B8%80%EB%9D%BC%EC%8A%A4%EB%9D%BD-%EB%B2%A0%EC%9D%B4%EB%B9%84-%EB%88%88%EA%B8%88-%EC%9D%B4%EC%9C%A0%EC%8B%9D-%EC%9A%A9%EA%B8%B0-%EC%82%AC%EB%A9%B4%EA%B2%B0%EC%B0%A9%EC%BA%A1-3p-%EC%8A%A4%EB%A7%88%EC%9D%BC%EC%BA%A1-15%ED%95%A0%EC%9D%B8-dpYoqOWj?from=write",
+      "posted_at_utc": "2026-11-11T15:36:26+00:00",
+      "product_id": "7920510139",
+      "item_id": "21758354581",
+      "vendor_item_id": null,
+      "at": "2026-11-11T15:37:58.879977+00:00",
       "run_id": "43050087027"
     }
   },
