@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95693,
-  "pending": [],
+  "last_scanned_id": 95695,
+  "pending": [
+    {
+      "id": 95695,
+      "source_message_id": 95695,
+      "source_post_url": "https://t.me/jirum/95695",
+      "original_purchase_url": "https://link.coupang.com/a/iAAGqJXJpQ",
+      "title": "☆특가 3,680원",
+      "source_text": "☆특가 3,680원\n가격더다운* 240g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAAGqJXJpQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3680,
+      "posted_at_utc": "2026-11-11T09:21:15+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
