@@ -62,22 +62,37 @@ def _input_url_ok(url: str) -> bool:
 
 
 def _landing_matches_identity(url: str, identity: dict) -> bool:
+    """Accept an exact product link or an *API-returned* Coupang tracking URL.
+
+    The official deeplink response's landingUrl can be
+    link.coupang.com/re/AFFSDP with pageKey + itemId + subid, *not* a product
+    page. This is NOT an invitation to synthesize or publish AFFSDP ourselves.
+    The separately validated shortenUrl from the same signed API response is
+    the only URL returned for publishing.
+    """
     try:
         parsed = urlsplit(url)
         qs = parse_qs(parsed.query)
-        return (
-            parsed.scheme == "https"
-            and parsed.hostname in ("www.coupang.com", "m.coupang.com")
-            and parsed.username is None and parsed.password is None
-            and parsed.port is None
-            and not parsed.fragment
-            and parsed.path == f"/vp/products/{identity['product_id']}"
-            and qs.get("itemId") == [identity["item_id"]]
-            and (
-                not identity.get("vendor_item_id")
-                or qs.get("vendorItemId") == [identity["vendor_item_id"]]
+        if (parsed.scheme != "https" or parsed.username is not None
+                or parsed.password is not None or parsed.port is not None
+                or parsed.fragment):
+            return False
+        vendor = identity.get("vendor_item_id")
+        if parsed.hostname in ("www.coupang.com", "m.coupang.com"):
+            return (
+                parsed.path == f"/vp/products/{identity['product_id']}"
+                and qs.get("itemId") == [identity["item_id"]]
+                and (not vendor or qs.get("vendorItemId") == [vendor])
             )
-        )
+        if parsed.hostname == "link.coupang.com" and parsed.path == "/re/AFFSDP":
+            return (
+                qs.get("pageKey") == [identity["product_id"]]
+                and qs.get("itemId") == [identity["item_id"]]
+                and (not vendor or "vendorItemId" not in qs
+                     or qs.get("vendorItemId") == [vendor])
+                and ("subid" not in qs or qs.get("subid") == [SUBID])
+            )
+        return False
     except (KeyError, TypeError, ValueError):
         return False
 

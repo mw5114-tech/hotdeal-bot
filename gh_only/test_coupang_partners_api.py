@@ -111,6 +111,33 @@ class OfficialApiTests(unittest.TestCase):
                                   CANONICAL, IDENTITY)
         self.assertEqual(link, OFFICIAL)
 
+    def test_real_official_landing_affsdp_has_exact_item_and_subid(self):
+        # Observed from the owner's own signed, secret-backed no-post API probe.
+        api_landing = (
+            "https://link.coupang.com/re/AFFSDP?"
+            "lptag=AF9668915&pageKey=12345678&itemId=45678901&subid=naverblog"
+        )
+        self.assertEqual(_validate_response(success(landing=api_landing),
+                                            CANONICAL, IDENTITY), OFFICIAL)
+
+    def test_official_landing_rejects_wrong_item_product_or_subid(self):
+        good = (
+            "https://link.coupang.com/re/AFFSDP?"
+            "lptag=AF9668915&pageKey=12345678&itemId=45678901&subid=naverblog"
+        )
+        for bad in (
+            good.replace("pageKey=12345678", "pageKey=99999999"),
+            good.replace("itemId=45678901", "itemId=99999999"),
+            good.replace("subid=naverblog", "subid=daangncafe"),
+            good + "&vendorItemId=99999999",
+            good.replace("link.coupang.com", "evil.example"),
+            good.replace("/re/AFFSDP", "/other"),
+        ):
+            with self.subTest(bad=bad):
+                with self.assertRaisesRegex(CoupangPartnersError,
+                                             "LANDING_ITEM_MISMATCH"):
+                    _validate_response(success(landing=bad), CANONICAL, IDENTITY)
+
     def test_nonzero_error_and_missing_link_fail_closed(self):
         with self.assertRaisesRegex(CoupangPartnersError, "NON_SUCCESS"):
             _validate_response({"rCode": "403", "data": []}, CANONICAL, IDENTITY)

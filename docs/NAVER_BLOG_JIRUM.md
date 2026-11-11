@@ -24,6 +24,11 @@ Target: https://blog.naver.com/mw5114
   official HMAC-SHA256 Deep Link API with `subId=naverblog`. The exact
   `shortenUrl` response is published as a single native Naver hyperlink.
   Neither API keys nor signatures are committed or logged.
+  The real response's `landingUrl` may be a Coupang-owned `/re/AFFSDP`
+  tracking URL, **but the publisher must still use only its API-issued
+  `shortenUrl`**. Verify the landing tracking URL's `pageKey`, `itemId`
+  and `subid` against the exact product and `naverblog`; reject any
+  explicit mismatches.
 - There is **no synthetic AFFSDP fallback** in the Naver publication path.
   API unavailability, missing secrets, wrong option, or unexpected returned
   link prevents publication; the queued item stays unclaimed for the next
