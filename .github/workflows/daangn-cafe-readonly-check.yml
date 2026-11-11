@@ -50,13 +50,16 @@ jobs:
                       page.wait_for_timeout(1600)
                       selections=page.locator("select")
                       board=False
+                      boards=[]
                       if selections.count()==1:
-                          board="🔥 오늘의 핫딜" in selections.locator("option").all_inner_texts()
+                          boards=[x.strip()[:65] for x in selections.locator("option").all_inner_texts()[:20]]
+                          board="🔥 오늘의 핫딜" in boards
                       print("DAANGN_NEW_CAFE_READONLY "+json.dumps({
                           "http_status":response.status if response else None,
                           "correct_cafe_editor":urlsplit(page.url).path=="/kupang-teuggaye/posts/new",
                           "host_correct":urlsplit(page.url).hostname=="cafe.daangn.com",
                           "board_hotdeal_exists":board,
+                          "board_options_public_labels":boards,
                           "editable_body_visible":page.locator("div.ProseMirror[contenteditable=true]").count()==1,
                           "no_post_submitted":True,
                       }))
