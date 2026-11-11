@@ -69,12 +69,16 @@ class ManualQueueTests(unittest.TestCase):
     def test_github_409_from_other_file_retries_only_same_blob_sha(self):
         """Naver moving main must not permanently fail Daangn's FIFO PUT."""
         st = baseline()
+        original = copy.deepcopy(st)
+        # The desired state MUST differ from the on-disk snapshot.
+        # Otherwise the write correctly concludes it was already committed.
+        st["last_scanned_id"] += 1
         gh = object.__new__(GithubState)
         put_conflict = error.HTTPError("https://api.github.com/test", 409,
                                        "Conflict", None, None)
         with patch.object(gh, "api", side_effect=[
             put_conflict, {"commit": {"sha": "safe-new-commit"}}
-        ]) as api, patch.object(gh, "read", return_value=(copy.deepcopy(st), "old-sha")) as read, \
+        ]) as api, patch.object(gh, "read", return_value=(original, "old-sha")) as read, \
                 patch("gh_only.jirum_manual_queue.time.sleep") as sleep:
             gh.write(st, "old-sha", "state: test safe 409")
         self.assertEqual(api.call_count, 2)
