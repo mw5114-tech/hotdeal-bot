@@ -9,6 +9,7 @@ from gh_only.naver_blog_jirum import (
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
     NaverStateConflict, scan, claim_before_publish, checkpoint_published,
     publish_batch, expire_unclaimed_before_next, wait_for_batch_checkpoint,
+    apply_official_api_link,
 )
 
 
@@ -377,16 +378,69 @@ class NaverQueueTests(unittest.TestCase):
     def test_timestamp_not_inferred(self):
         self.assertFalse(source_fresh({"posted_at_utc": None}))
 
-    def test_naverblog_subid_is_required(self):
-        good = ("https://link.coupang.com/re/AFFSDP?"
-                "lptag=AF9668915&subid=naverblog&pageKey=123&itemId=456")
-        self.assertIsNone(validate_naver_link_subid(good))
-        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
-            validate_naver_link_subid(good.replace("subid=naverblog", "subid=daangncafe"))
-        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
-            validate_naver_link_subid(good.replace("subid=naverblog", "subid=naverblog2"))
-        with self.assertRaisesRegex(ValueError, "NAVER_BLOG_SUBID_NOT_NAVERBLOG"):
-            validate_naver_link_subid(good.replace("subid=naverblog&", ""))
+    def test_naverblog_requires_api_issued_link_and_matching_subid_receipt(self):
+        good = "https://link.coupang.com/a/AbcDEf1234"
+        receipt = {
+            "issued_by": "COUPANG_PARTNERS_API", "status": "LINK_READY",
+            "partners_link": good, "subid_requested": "naverblog",
+        }
+        self.assertIsNone(validate_naver_link_subid(good, receipt))
+        self.assertIsNone(validate_naver_link_subid(
+            "https://coupa.ng/AbcDEf1234",
+            {**receipt, "partners_link": "https://coupa.ng/AbcDEf1234"}))
+        old = ("https://link.coupang.com/re/AFFSDP?"
+               "lptag=AF9668915&subid=naverblog&pageKey=123&itemId=456")
+        for link, evidence in (
+            (old, receipt), (good, None), (good, {**receipt, "subid_requested": "daangncafe"}),
+            (good, {**receipt, "partners_link": "https://link.coupang.com/a/OtherLink999"}),
+            (good, {**receipt, "issued_by": "HAND_COMPOSED"}),
+            (good, {**receipt, "status": "NOT_READY"}),
+        ):
+            with self.subTest(link=link, evidence=evidence):
+                with self.assertRaisesRegex(ValueError, "NAVER_BLOG_OFFICIAL_LINK_OR_SUBID_INVALID"):
+                    validate_naver_link_subid(link, evidence)
+
+    def test_official_link_replaces_unissued_candidate_exactly_once(self):
+        old = ("https://link.coupang.com/re/AFFSDP?"
+               "lptag=AF9668915&subid=naverblog&pageKey=12345678&itemId=45678901")
+        identity = {"status": "EXACT_ITEM_IDENTIFIED",
+                    "product_id": "12345678", "item_id": "45678901",
+                    "vendor_item_id": "90123456"}
+        draft = {"product_identity": identity, "composed_affiliate_url": old,
+                 "caption": {"caption": "🛒 쿠팡에서 상품정보 더보기 : " + old},
+                 "affsdp": {"status": "UNISSUED_AFFSDP_CANDIDATE"}}
+        issued = "https://link.coupang.com/a/AbcDEf1234"
+        with patch("gh_only.coupang_partners_api.create_product_deeplink",
+                   return_value={"partners_link": issued, "product_id": "12345678",
+                                 "item_id": "45678901", "vendor_item_id": "90123456",
+                                 "subid_requested": "naverblog"}) as called:
+            result = apply_official_api_link(draft, 95496)
+        called.assert_called_once_with(identity)
+        self.assertEqual(result["composed_affiliate_url"], issued)
+        self.assertEqual(result["caption"]["caption"].count(issued), 1)
+        self.assertNotIn("AFFSDP", result["caption"]["caption"])
+        self.assertEqual(result["official_link_receipt"]["telegram_message_id"], 95496)
+        self.assertFalse(result["affsdp"]["commission_attribution_verified"])
+        self.assertTrue(result["affsdp"]["official_link_issued"])
+        self.assertIsNone(validate_naver_link_subid(
+            issued, result["official_link_receipt"]))
+
+    def test_official_link_failure_never_uses_unissued_url(self):
+        from gh_only.coupang_partners_api import CoupangPartnersError
+        old = "https://link.coupang.com/re/AFFSDP?lptag=AF9668915"
+        draft = {"product_identity": {
+                    "status": "EXACT_ITEM_IDENTIFIED", "product_id": "12345678",
+                    "item_id": "45678901", "vendor_item_id": None},
+                 "composed_affiliate_url": old,
+                 "caption": {"caption": "🛒 쿠팡에서 상품정보 더보기 : " + old}}
+        with patch("gh_only.coupang_partners_api.create_product_deeplink",
+                   side_effect=CoupangPartnersError("COUPANG_API_HTTP_403")):
+            with self.assertRaisesRegex(CoupangPartnersError, "COUPANG_API_HTTP_403"):
+                apply_official_api_link(draft, 95496)
+        self.assertEqual(draft["composed_affiliate_url"], old)
+        self.assertNotIn("official_link_receipt", draft)
+        with self.assertRaises(ValueError):
+            validate_naver_link_subid(old)
 
     def test_separate_state_schema(self):
         s = state()

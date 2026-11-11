@@ -18,6 +18,16 @@ Target: https://blog.naver.com/mw5114
   Daangn state remains `state/daangn_jirum_manual_fifo.json` (untouched).
 - Shared Telegram source and existing Lowchart/Fallcent product, price and photo
   modules remain imported in place. Naver subid remains `naverblog`.
+- **2026-11-11 official API migration**: `COUPANG_PARTNERS_ACCESS_KEY` and
+  `COUPANG_PARTNERS_SECRET_KEY` are GitHub Actions Secrets, only passed to
+  the Naver job. Verified exact Coupang item/option URLs are submitted to
+  official HMAC-SHA256 Deep Link API with `subId=naverblog`. The exact
+  `shortenUrl` response is published as a single native Naver hyperlink.
+  Neither API keys nor signatures are committed or logged.
+- There is **no synthetic AFFSDP fallback** in the Naver publication path.
+  API unavailability, missing secrets, wrong option, or unexpected returned
+  link prevents publication; the queued item stays unclaimed for the next
+  eligible trigger rather than publishing an unissued URL.
 - No new poller, login flow, or partner-link policy changes.
 
 ## Safety and current state
@@ -25,8 +35,11 @@ Target: https://blog.naver.com/mw5114
 - Automatic Naver publication was **enabled on 2026-11-09**. Live published
   receipts were confirmed on 2026-11-10 (e.g. Telegram 95553 with product photo);
   future runs still depend on login session and external site availability.
-- The link generator may produce an unissued `/re/AFFSDP` candidate.
-  It has **not been verified as officially issued or commission-attributed**.
+- Legacy enrichment may still prepare an internal unissued `/re/AFFSDP`
+  candidate, but it is validated, replaced with an **API-issued link**, and
+  explicitly rejected before posting if the API step did not succeed.
+  An API-issued link does not itself prove commission attribution; use
+  the actual Coupang Partners reports to confirm earnings.
 - Disclose Coupang Partners compensation prominently at the beginning of each post.
 - Confirm `https://blog.naver.com/mw5114` is registered in Coupang Partners
   as the activity channel before enabling live affiliate posts.
@@ -65,6 +78,10 @@ Target: https://blog.naver.com/mw5114
 ## Failure handling
 
 - Absence of photo, title, price, source timestamp, or session: no blind submit.
+- Signed API integration was separately tested in a **no-blog-post** GitHub
+  workflow before enabling this Naver link-only migration. If the API fails,
+  stop before a Naver pre-submit claim; do not log raw API responses or
+  reinsert a manually constructed affiliate URL.
 - After the single final publish click, poll the editor tab, frames and any new
   tab for a verified URL belonging to `mw5114` for up to 15 seconds.
   Never click submit twice; a missing or ambiguous receipt is NOT proof of

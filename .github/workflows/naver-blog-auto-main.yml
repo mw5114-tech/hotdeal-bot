@@ -58,8 +58,12 @@ jobs:
     env:
       GH_STATE_TOKEN: ${{ github.token }}
       NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       # Owner approved live Naver Blog publishing on 2026-11-09.
       # Up to four fresh FIFO items per run, oldest first; Daangn stays archived.
+      # Every Naver link is now issued by official signed Coupang Partners API;
+      # no fallback to an unissued synthetic AFFSDP link if API fails.
       # Owner-authorized auto publish resumed after short-link deduplication
       # passed a real SmartEditor editor check and a live one-shot publish.
       # Naver live auto-post is enabled; owner-requested updated price order

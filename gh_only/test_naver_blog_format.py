@@ -4,7 +4,7 @@ from pathlib import Path
 from gh_only.naver_blog_format import build_blocks, plain_body, validate_blocks
 from gh_only.naver_blog_jirum import DISCLOSURE
 
-URL = "https://link.coupang.com/re/AFFSDP?lptag=AF9668915&subid=naverblog&pageKey=123&itemId=456"
+URL = "https://link.coupang.com/a/AbcDEf1234"
 
 def row(source="lowchart_public_history", reference=19900, discount=25):
     draft = {
@@ -17,7 +17,10 @@ def row(source="lowchart_public_history", reference=19900, discount=25):
         },
         "image_source": "lowchart_exact_item_public_page",
     }
-    verified = {"candidate_url": URL, "image": Path("jirum_123_lowchart_photo.png")}
+    verified = {"candidate_url": URL, "image": Path("jirum_123_lowchart_photo.png"),
+                "official_link_receipt": {
+                    "issued_by": "COUPANG_PARTNERS_API", "partners_link": URL,
+                    "subid_requested": "naverblog", "status": "LINK_READY"}}
     source_row = {"source_post_url": "https://t.me/jirum/123"}
     return draft, verified, source_row
 
@@ -127,7 +130,7 @@ class FormattingTests(unittest.TestCase):
         self.assertNotIn("AFFSDP", body)
         self.assertNotIn("subid=naverblog", body)
         broken = [dict(x) for x in blocks]
-        broken[-1]["link_url"] = URL.replace("subid=naverblog", "subid=daangncafe")
+        broken[-1]["link_url"] = "https://link.coupang.com/a/OtherLink999"
         with self.assertRaisesRegex(ValueError, "LINK_TARGET"):
             validate_blocks(broken, URL)
 

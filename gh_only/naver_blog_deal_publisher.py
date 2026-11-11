@@ -526,6 +526,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
 
 def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None:
     from playwright.sync_api import sync_playwright
+    from gh_only.coupang_partners_api import issued_link_url
 
     state = safely_parse_state(session_json)
     if not isinstance(article.get("title"), str) or not (
@@ -542,7 +543,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             or "https://link.coupang.com/" in body
             or body.count("📦 쿠팡에서 상품정보 더보기") != 1
             or not isinstance(article.get("link"), str)
-            or not article["link"].startswith("https://link.coupang.com/re/AFFSDP?")
+            or not issued_link_url(article.get("link"))
             or not isinstance(article.get("blocks"), list)):
         raise RuntimeError("NAVER_DISCLOSURE_OR_LINK_INVALID")
     image = article.get("image")

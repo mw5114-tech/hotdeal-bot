@@ -8,8 +8,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from urllib.parse import urlsplit
-
+from gh_only.coupang_partners_api import issued_link_url
 from gh_only.naver_blog_jirum import DISCLOSURE
 
 SOURCES = {
@@ -46,10 +45,8 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     if type(sale) is not int or sale <= 0:
         raise ValueError("NAVER_FORMAT_SOURCE_PRICE_UNVERIFIED")
     link = verified.get("candidate_url")
-    parsed = urlsplit(link if isinstance(link, str) else "")
-    if (parsed.scheme != "https" or parsed.hostname != "link.coupang.com"
-            or parsed.path != "/re/AFFSDP"):
-        raise ValueError("NAVER_FORMAT_AFFILIATE_LINK_INVALID")
+    if not issued_link_url(link):
+        raise ValueError("NAVER_FORMAT_OFFICIAL_AFFILIATE_LINK_INVALID")
     telegram = source.get("source_post_url", "")
     if not isinstance(telegram, str) or not re.fullmatch(
         r"https://t\.me/jirum/[0-9]+", telegram

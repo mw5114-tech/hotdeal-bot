@@ -106,15 +106,19 @@ def archive_stale_claim(state: dict, *, reference: datetime | None = None) -> bo
     return True
 
 
-def validate_naver_link_subid(url: str) -> None:
-    """Prevent Daangn tracking labels leaking into Naver Blog posts."""
-    parsed = urlsplit(url)
-    query = parse_qs(parsed.query)
-    if (parsed.scheme != "https"
-            or parsed.hostname != "link.coupang.com"
-            or parsed.path != "/re/AFFSDP"
-            or query.get("subid") != [NAVER_BLOG_SUBID]):
-        raise ValueError("NAVER_BLOG_SUBID_NOT_NAVERBLOG")
+def validate_naver_link_subid(url: str, receipt: dict | None = None) -> None:
+    """Only accept an API-issued URL with a recorded Naver SUBID request.
+
+    A shortened URL cannot reveal its subId; the API request+receipt, not the
+    opaque output string, is the binding. Legacy composed AFFSDP is rejected.
+    """
+    from gh_only.coupang_partners_api import issued_link_url
+    if (not issued_link_url(url) or not isinstance(receipt, dict)
+            or receipt.get("issued_by") != "COUPANG_PARTNERS_API"
+            or receipt.get("status") != "LINK_READY"
+            or receipt.get("subid_requested") != NAVER_BLOG_SUBID
+            or receipt.get("partners_link") != url):
+        raise ValueError("NAVER_BLOG_OFFICIAL_LINK_OR_SUBID_INVALID")
 
 
 
@@ -291,6 +295,60 @@ def scan(store: Store):
     raise RuntimeError("NAVER_SCAN_CONFLICT_RETRY_EXHAUSTED")
 
 
+def apply_official_api_link(draft: dict, source_id: int) -> dict:
+    """Replace exactly one unissued draft link with the API-issued URL.
+
+    Called only for the Naver pipeline. The Daangn archived pipeline and its
+    AFFSDP diagnostic tests are not changed or reactivated.
+    """
+    from gh_only.coupang_partners_api import create_product_deeplink, issued_link_url
+    identity = draft.get("product_identity")
+    old_link = draft.get("composed_affiliate_url")
+    caption = draft.get("caption")
+    if (type(source_id) is not int or source_id <= 0
+            or not isinstance(identity, dict)
+            or identity.get("status") != "EXACT_ITEM_IDENTIFIED"
+            or not isinstance(old_link, str)
+            or not old_link.startswith("https://link.coupang.com/re/AFFSDP?")
+            or not isinstance(caption, dict)
+            or not isinstance(caption.get("caption"), str)
+            or caption["caption"].count(old_link) != 1):
+        raise RuntimeError("NAVER_OFFICIAL_LINK_REPLACE_PRECONDITION_FAILED")
+    official = create_product_deeplink(identity)
+    issued = official["partners_link"]
+    if (not issued_link_url(issued)
+            or official["product_id"] != identity.get("product_id")
+            or official["item_id"] != identity.get("item_id")
+            or official.get("vendor_item_id") != identity.get("vendor_item_id")
+            or official.get("subid_requested") != NAVER_BLOG_SUBID):
+        raise RuntimeError("NAVER_OFFICIAL_LINK_ISSUE_IDENTITY_OR_SUBID_MISMATCH")
+    draft["caption"]["caption"] = caption["caption"].replace(old_link, issued, 1)
+    draft["composed_affiliate_url"] = issued
+    draft["official_link_receipt"] = {
+        "status": "LINK_READY",
+        "issued_by": "COUPANG_PARTNERS_API",
+        "telegram_message_id": source_id,
+        "partners_link": issued,
+        "product_id": identity["product_id"],
+        "item_id": identity["item_id"],
+        "vendor_item_id": identity.get("vendor_item_id"),
+        "subid_requested": NAVER_BLOG_SUBID,
+    }
+    draft["affsdp"] = {
+        "status": "OFFICIAL_PARTNERS_LINK_RECEIPT",
+        "official_link_issued": True,
+        "commission_attribution_verified": False,
+    }
+    # An API-issued URL has an auditable origin, but revenue credit is only
+    # established by Coupang's separate reports.
+    draft["personal_affiliate_link_created"] = True
+    print("NAVER_COUPANG_OFFICIAL_API_LINK_READY " + json.dumps({
+        "source_id": source_id, "subid_requested": NAVER_BLOG_SUBID,
+        "link_host": urlsplit(issued).hostname
+    }))
+    return draft
+
+
 def make_article(source: dict, output: Path, *, tag: str,
                  manual_test_replay: bool = False):
     """Reuse the tested Daangn price/photo/link pipeline, change only blog copy.
@@ -309,18 +367,28 @@ def make_article(source: dict, output: Path, *, tag: str,
         raise RuntimeError("SOURCE_EXPIRED_OR_UNTIMED")
     output.mkdir(parents=True, exist_ok=True)
     draft = enrich_deal(source, output, owner_tag=tag)
-    (output / "drafts.json").write_text(json.dumps({
-        "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
-        "drafts": [draft]
-    }, ensure_ascii=False), encoding="utf-8")
-    # The Daangn validator enforces exact item identifiers, image provenance,
-    # one matching owner link, safe discount claims, and local image presence.
+    # Validate photo, identity, title, source timestamp, and price before
+    # consuming a rate-limited API request. This first draft is NEVER posted.
+    def save_draft():
+        (output / "drafts.json").write_text(json.dumps({
+            "schema": "github-jirum-default-price-photo-affsdp-draft-v2",
+            "drafts": [draft]
+        }, ensure_ascii=False), encoding="utf-8")
+    save_draft()
+    old.validate_draft(output, source["source_message_id"])
+    # Fail closed: if the API returns an error, never fall back to the
+    # synthetic AFFSDP draft. No claim/click occurs until the API link passes.
+    apply_official_api_link(draft, source["source_message_id"])
+    save_draft()
+    # Validate the replaced API-issued URL and exact item a second time.
     verified = old.validate_draft(output, source["source_message_id"])
     # Native SmartEditor blocks give real blank paragraphs, a photo directly
     # after the disclosure, and actual bold labels (not literal Markdown).
     from gh_only.naver_blog_format import build_blocks, plain_body, validate_blocks
     url = verified["candidate_url"]
-    validate_naver_link_subid(url)
+    validate_naver_link_subid(url, verified.get("official_link_receipt"))
+    if verified.get("unissued_affsdp_candidate") is not False:
+        raise RuntimeError("NAVER_UNISSUED_AFFILIATE_LINK_BLOCKED")
     blocks = build_blocks(
         draft, verified, source, manual_test_replay=manual_test_replay
     )

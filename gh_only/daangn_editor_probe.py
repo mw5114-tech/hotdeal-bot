@@ -100,8 +100,16 @@ def read_one_draft(folder: Path) -> dict:
     receipt = row.get("official_link_receipt")
     if receipt is not None:
         from gh_only.official_link_receipts import official_url
+        # Only the Naver path can create this API-backed receipt; do not
+        # loosen validation of existing Muse /a/ receipts for Daangn.
+        if isinstance(receipt, dict) and receipt.get("issued_by") == "COUPANG_PARTNERS_API":
+            from gh_only.coupang_partners_api import issued_link_url
+            valid_issued = (issued_link_url(url)
+                            and receipt.get("subid_requested") == "naverblog")
+        else:
+            valid_issued = official_url(url)
         if (not isinstance(receipt, dict)
-                or not official_url(url)
+                or not valid_issued
                 or receipt.get("partners_link") != url):
             raise ValueError("DRAFT_OFFICIAL_LINK_INVALID")
         if (not isinstance(aff, dict)
