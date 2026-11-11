@@ -3,16 +3,6 @@
   "last_scanned_id": 95610,
   "pending": [
     {
-      "id": 95608,
-      "source_message_id": 95608,
-      "source_post_url": "https://t.me/jirum/95608",
-      "original_purchase_url": "https://link.coupang.com/a/izWf5OZYHY",
-      "title": "순샘 베이킹소다 피톤치드향 주방세제 리필 1.4L",
-      "source_text": "❤️초대박 2,030원 (40.0% 할인)\n순샘 베이킹소다 피톤치드향 주방세제 리필 1.4L\n📌 가격 현황\n- 정상가: 3,383원\n- 할인: 1,353원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWf5OZYHY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2030,
-      "posted_at_utc": "2026-11-10T23:55:34+00:00"
-    },
-    {
       "id": 95610,
       "source_message_id": 95610,
       "source_post_url": "https://t.me/jirum/95610",
@@ -269,6 +259,10 @@
     "95607": {
       "url": "https://blog.naver.com/mw5114/224472581918",
       "at": "2026-11-11T00:08:49.391016+00:00"
+    },
+    "95608": {
+      "url": "https://blog.naver.com/mw5114/224472582912",
+      "at": "2026-11-11T00:09:44.715756+00:00"
     }
   },
   "skipped": {
@@ -338,12 +332,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95608,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42928536617",
-    "at": "2026-11-11T00:09:04.271332+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
