@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95657,
-  "pending": [],
+  "last_scanned_id": 95658,
+  "pending": [
+    {
+      "id": 95658,
+      "source_message_id": 95658,
+      "source_post_url": "https://t.me/jirum/95658",
+      "original_purchase_url": "https://link.coupang.com/a/iAhsFmhbIy",
+      "title": "청정원 프리미엄 굴소스, 260g, 1개",
+      "source_text": "👍대박 2,690원 (32.8% 할인)\n청정원 프리미엄 굴소스, 260g, 1개\n📌 가격 현황\n- 정상가: 4,000원\n- 할인: 1,310원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAhsFmhbIy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2690,
+      "posted_at_utc": "2026-11-11T04:52:16+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
