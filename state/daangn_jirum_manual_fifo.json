@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95711,
+  "last_scanned_id": 95712,
   "pending": [
     {
       "id": 95707,
@@ -28,6 +28,15 @@
       "posted_at_utc": "2026-11-11T11:36:44+00:00",
       "title": "☆특가 15,810원",
       "sale_price_krw": 15810
+    },
+    {
+      "id": 95712,
+      "source_post_url": "https://t.me/jirum/95712",
+      "original_purchase_url": "https://link.coupang.com/a/iAN48T6pSE",
+      "source_text": "☆특가 6,900원\n댕댕이특가 * 300g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAN48T6pSE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-11T12:28:45+00:00",
+      "title": "☆특가 6,900원",
+      "sale_price_krw": 6900
     }
   ],
   "in_flight": null,
