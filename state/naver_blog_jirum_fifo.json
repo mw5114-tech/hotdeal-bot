@@ -3,16 +3,6 @@
   "last_scanned_id": 95610,
   "pending": [
     {
-      "id": 95606,
-      "source_message_id": 95606,
-      "source_post_url": "https://t.me/jirum/95606",
-      "original_purchase_url": "https://link.coupang.com/a/izWfIsx9cO",
-      "title": "☆특가 18,120원",
-      "source_text": "☆특가 18,120원\n햇반 백미밥 작은공기, 130g, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWfIsx9cO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 18120,
-      "posted_at_utc": "2026-11-10T23:55:29+00:00"
-    },
-    {
       "id": 95607,
       "source_message_id": 95607,
       "source_post_url": "https://t.me/jirum/95607",
@@ -281,6 +271,10 @@
     "95603": {
       "url": "https://blog.naver.com/mw5114/224472580083",
       "at": "2026-11-11T00:07:00.140198+00:00"
+    },
+    "95606": {
+      "url": "https://blog.naver.com/mw5114/224472580998",
+      "at": "2026-11-11T00:07:53.747011+00:00"
     }
   },
   "skipped": {
@@ -350,12 +344,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95606,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42928536617",
-    "at": "2026-11-11T00:07:14.029439+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
