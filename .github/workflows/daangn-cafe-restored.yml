@@ -74,8 +74,8 @@ jobs:
         with:
           python-version: '3.11'
       # Owner attests cafe ownership and operator exemption. Start with a
-      # one-post live rollout, and only switch to draining after verifying
-      # real photo, official API shortlink and the saved post receipt.
+      # First live item #95712 was published with verified photo, original
+      # formatting, official API link and GitHub checkpoint; drain now resumes.
       - name: Confirm cafe path and policy gate
         run: |
           python - <<'PY'
@@ -104,13 +104,13 @@ jobs:
           if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
             python -m playwright install --with-deps --only-shell chromium
           fi
-      - name: Publish ONE fresh Daangn item first (live rollout)
+      - name: Drain fresh Daangn FIFO oldest-first (checkpoint every verified post)
         if: >-
           steps.scan.outputs.has_deal == 'true' &&
           env.DAANGN_PUBLISH_PAUSED == 'false' &&
           env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
           env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
-        run: python -m gh_only.jirum_manual_queue publish
+        run: python -m gh_only.jirum_manual_queue drain
       - name: Save safe outcome receipts after permitted publishing
         if: >-
           always() &&

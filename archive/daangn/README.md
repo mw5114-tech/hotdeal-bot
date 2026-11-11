@@ -1,6 +1,6 @@
 # 당근카페 발행 자동화 — 보관 / 비활성
 
-**기존 발행기: ARCHIVED. 새 카페의 독립 FIFO 스캔은 활성화, 제휴글 공개 발행은 정책 확인 전 잠금.**
+**기존 발행기: ARCHIVED. 새 카페의 독립 FIFO 스캔 및 실제 제휴글 자동발행 활성화.**
 
 - 보관된 워크플로: `archive/daangn/daangn-fifo-paused.yml` (기존 Daangn 스캔·FIFO·브라우저 발행 단계 복사본; 발행 설정은 `DAANGN_PUBLISH_PAUSED: 'true'` 유지)
 - 당근 원본 상태: `state/daangn_jirum_manual_fifo.json` (원위치 보존, 네이버 자동화가 쓰지 않음)
@@ -35,3 +35,11 @@
 - 쿠팡파트너스에 새 카페 URL 등록 가능/활동 허용 여부를 먼저 서면 확인. 도메인이 같아 이전 반려 사유가 남아 있을 수 있음.
 - 허가 확인 후에만 해당 공개발행 설정을 별도 승인에 따라 변경하고, 공식 API `shortenUrl`을 `daangncafe`로 발급해 사용. 직접 만든 `AFFSDP` 링크로 자동발행하지 않음.
 - 참고: 스캔 성공은 네이버·당근 실제 게시 성공과 다름. 당근 새 카페에는 이 복구 과정에서 글을 게시하지 않았음.
+
+## 소유주 허용 예외 확인 후 실전 전환 (2026-11-11)
+
+- 사용자가 새 카페의 소유주/운영자임을 확인하고, 쿠팡파트너스 활동 금지 사이트의 운영진 예외 조항을 검토했다고 명시함. 현재 쿠팡 공식 공지의 최신 내용은 별도 확인 대상이며, 이 구성은 소유주 자격에 의존함.
+- GitHub 실행 `43022655752`에서 텔레그램 `#95712` 1건을 쿠팡 공식 API 링크 `subId=daangncafe`로 발급하고, **새 카페에 사진·정확한 본문·광고 표시 포함 게시 성공**. URL과 `PUBLISHED_VERIFIED` 상태 기록 확인.
+- 별도의 Daangn 워크플로는 이제 `DAANGN_PUBLISH_PAUSED=false`, `DAANGN_CAFE_PUBLISH_ENABLED=true`, `DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED=true`로 작동하며, 연속 처리용 `drain` 명령을 사용함.
+- 같은 오라클 알림으로 네이버와 당근은 각각 별도 job, 별도 FIFO, 별도 lock, 별도 SUBID로 진행함. 네이버 기능은 그대로 둠.
+- 만료한 60분 초과 핫딜은 제외, 실패/불확실한 발행 결과는 자동 재게시하지 않음. 손상된 공식 링크를 자체 AFFSDP로 대체하지 않음.

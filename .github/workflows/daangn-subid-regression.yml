@@ -80,7 +80,7 @@ jobs:
           assert "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'true'" in restored
           assert 'COUPANG_PARTNER_SUBID: daangncafe' in restored
           assert 'python -m gh_only.jirum_manual_queue scan' in restored
-          assert 'python -m gh_only.jirum_manual_queue publish' in restored
+          assert 'python -m gh_only.jirum_manual_queue drain' in restored
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
           assert 'daangn-cafe-independent:' in main
           assert 'secrets: inherit' in main
