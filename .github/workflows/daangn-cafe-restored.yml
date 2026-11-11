@@ -50,6 +50,7 @@ jobs:
       GH_STATE_TOKEN: ${{ github.token }}
       DAANGN_CAFE_RESTORED: 'true'
       DAANGN_CAFE_TARGET_URL: https://cafe.daangn.com/kupang-teuggaye
+      DAANGN_CAFE_BOARD_LABEL: '🔥 오늘의핫딜'
       DAANGN_PUBLISH_PAUSED: 'true'
       DAANGN_CAFE_PUBLISH_ENABLED: 'false'
       DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'false'
