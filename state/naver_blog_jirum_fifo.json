@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95608,
+  "last_scanned_id": 95610,
   "pending": [
     {
       "id": 95603,
@@ -41,6 +41,16 @@
       "source_text": "❤️초대박 2,030원 (40.0% 할인)\n순샘 베이킹소다 피톤치드향 주방세제 리필 1.4L\n📌 가격 현황\n- 정상가: 3,383원\n- 할인: 1,353원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWf5OZYHY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 2030,
       "posted_at_utc": "2026-11-10T23:55:34+00:00"
+    },
+    {
+      "id": 95610,
+      "source_message_id": 95610,
+      "source_post_url": "https://t.me/jirum/95610",
+      "original_purchase_url": "https://link.coupang.com/a/izWRkd7HBA",
+      "title": "-가격·혜택은 게시 당시 기준이며 실시간 변경될 수 있습니다.",
+      "source_text": "❤️초대박 3,600원 (40.0% 할인)\n-가격·혜택은 게시 당시 기준이며 실시간 변경될 수 있습니다.\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 2,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izWRkd7HBA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3600,
+      "posted_at_utc": "2026-11-11T00:03:58+00:00"
     }
   ],
   "published": {
