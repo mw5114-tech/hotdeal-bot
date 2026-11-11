@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95693,
-  "pending": [
-    {
-      "id": 95693,
-      "source_message_id": 95693,
-      "source_post_url": "https://t.me/jirum/95693",
-      "original_purchase_url": "https://link.coupang.com/a/iAy2X308Xc",
-      "title": "☆특가 2,280원",
-      "source_text": "☆특가 2,280원\n매일바이오 백도 요거트, 340g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAy2X308Xc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2280,
-      "posted_at_utc": "2026-11-11T08:58:21+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -447,6 +436,10 @@
     "95692": {
       "url": "https://blog.naver.com/mw5114/224473237706",
       "at": "2026-11-11T08:59:12.360536+00:00"
+    },
+    "95693": {
+      "url": "https://blog.naver.com/mw5114/224473239187",
+      "at": "2026-11-11T09:00:32.228612+00:00"
     }
   },
   "skipped": {
@@ -516,12 +509,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95693,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42991361482",
-    "at": "2026-11-11T08:59:51.108415+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
