@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95745,
+  "last_scanned_id": 95746,
   "pending": [
     {
       "id": 95745,
@@ -10,6 +10,15 @@
       "posted_at_utc": "2026-11-11T15:17:06+00:00",
       "title": "☆특가 5,820원",
       "sale_price_krw": 5820
+    },
+    {
+      "id": 95746,
+      "source_post_url": "https://t.me/jirum/95746",
+      "original_purchase_url": "https://link.coupang.com/a/iA0rvBDXSS",
+      "source_text": "☆특가 9,980원 (24.8% 할인)\n라운드랩 1025 독도 클렌징 티슈, 30매입, 178g, 4개\n📌 가격 현황\n- 정상가: 13,270원\n- 할인: 3,290원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA0rvBDXSS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-11T15:21:43+00:00",
+      "title": "라운드랩 1025 독도 클렌징 티슈, 30매입, 178g, 4개",
+      "sale_price_krw": 9980
     }
   ],
   "in_flight": null,
