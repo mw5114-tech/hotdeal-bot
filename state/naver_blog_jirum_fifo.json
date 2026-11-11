@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95744,
-  "pending": [
-    {
-      "id": 95744,
-      "source_message_id": 95744,
-      "source_post_url": "https://t.me/jirum/95744",
-      "original_purchase_url": "https://link.coupang.com/a/iAZYe3ADEO",
-      "title": "☆특가 5,800원",
-      "source_text": "☆특가 5,800원\n추천특가 * 플라워백  가죽끈 캔버스백 34×35cm\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAZYe3ADEO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5800,
-      "posted_at_utc": "2026-11-11T15:15:07+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -515,6 +504,10 @@
     "95726": {
       "url": "https://blog.naver.com/mw5114/224473575361",
       "at": "2026-11-11T14:22:34.441224+00:00"
+    },
+    "95744": {
+      "url": "https://blog.naver.com/mw5114/224473629013",
+      "at": "2026-11-11T15:16:53.183501+00:00"
     }
   },
   "skipped": {
@@ -584,12 +577,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95744,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43046572712",
-    "at": "2026-11-11T15:16:11.723178+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
