@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95725,
-  "pending": [
-    {
-      "id": 95725,
-      "source_message_id": 95725,
-      "source_post_url": "https://t.me/jirum/95725",
-      "original_purchase_url": "https://link.coupang.com/a/iAU1XdTaq4",
-      "source_text": "👍대박 9,900원 (32.0% 할인)\n피지오겔 콜라겐 에센스 수딩 마스크 팩\n📌 가격 현황\n- 정상가: 14,559원\n- 할인: 4,659원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAU1XdTaq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "title": "피지오겔 콜라겐 에센스 수딩 마스크 팩",
-      "sale_price_krw": 9900,
-      "posted_at_utc": "2026-11-11T14:05:59+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -505,6 +494,12 @@
     "95719": {
       "url": "https://blog.naver.com/mw5114/224473469389",
       "at": "2026-11-11T12:47:28.952795+00:00"
+    },
+    "95725": {
+      "url": "https://blog.naver.com/mw5114/224473570535",
+      "at": "2026-11-11T14:18:03.535061+00:00",
+      "manual_test_replay": true,
+      "source_post_url": "https://t.me/jirum/95725"
     }
   },
   "skipped": {
@@ -574,13 +569,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95725,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43036966713",
-    "at": "2026-11-11T14:17:19.006813+00:00",
-    "reason": "OWNER_AUTHORIZED_MANUAL_LATEST_ONE_SHOT"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
