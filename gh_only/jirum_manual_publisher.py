@@ -33,6 +33,17 @@ def target_for_cafe(base_url: str) -> tuple[str, str]:
     return "https://cafe.daangn.com" + prefix + "new", prefix
 
 
+def restored_board_label() -> str:
+    """Exact board label observed on user's new cafe in a no-post probe."""
+    import os
+    if os.getenv("DAANGN_CAFE_RESTORED") == "true":
+        label = os.getenv("DAANGN_CAFE_BOARD_LABEL")
+        if label != "🔥 오늘의핫딜":
+            raise RuntimeError("DAANGN_CAFE_BOARD_LABEL_UNVERIFIED")
+        return label
+    return BOARD
+
+
 def restored_live_gate() -> bool:
     """Require explicit channel approval and live enabled, never implicit."""
     import os
@@ -152,6 +163,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
         os.getenv("DAANGN_CAFE_TARGET_URL",
                   "https://cafe.daangn.com/i-gagyeog-mos-c")
     )
+    board_label = restored_board_label()
     result = {
         "status": "NOT_STARTED",
         "source_id": article["source_id"],
@@ -188,8 +200,8 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 board = page.locator("select")
                 if board.count() != 1:
                     raise RuntimeError("BOARD_NOT_UNIQUE")
-                board.select_option(label=BOARD)
-                if board.locator("option:checked").inner_text().strip() != BOARD:
+                board.select_option(label=board_label)
+                if board.locator("option:checked").inner_text().strip() != board_label:
                     raise RuntimeError("WRONG_BOARD")
                 result["failure_stage"] = "FIND_EDITOR"
                 editor = page.locator("div.ProseMirror[contenteditable=true]")
@@ -308,7 +320,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     editor, article["body"], article["candidate_url"], image
                 ):
                     raise RuntimeError("EDITOR_CONTENT_OR_FULL_URL_NOT_VERIFIED")
-                if board.locator("option:checked").inner_text().strip() != BOARD:
+                if board.locator("option:checked").inner_text().strip() != board_label:
                     raise RuntimeError("BOARD_RESET")
                 result["failure_stage"] = "LOCATE_SUBMIT_BUTTON"
                 # Do not depend solely on the brittle Tailwind w-full class.
@@ -431,7 +443,7 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     DISCLOSURE,
                 ))
                 title_ok = post_title in content
-                board_ok = "오늘의 핫딜" in content
+                board_ok = "오늘의핫딜" in norm(content)
                 result.update({
                     "affiliate_href_full": same_link,
                     "photo_visible": photo_visible,
