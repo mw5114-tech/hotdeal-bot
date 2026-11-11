@@ -44,10 +44,14 @@ jobs:
       - name: Confirm no-publish dispatch path
         run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
 
-  # A single Oracle dispatch forks two independent jobs. Daangn is
-  # policy-gated scan-only until clearance; failure cannot block Naver.
+  # An Oracle/legacy dispatch forks two independent channel jobs.
+  # Scheduled Naver backup must NOT call a nested Daangn workflow:
+  # Daangn already has its own :26/:56 backup and invoking nested jobs
+  # on schedule caused a 2026-11-11 22:29 KST ghost run failure while
+  # the Naver scan itself was green. This prevents duplicate scans and
+  # isolates the two backup schedules.
   daangn-cafe-independent:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule'
     uses: ./.github/workflows/daangn-cafe-restored.yml
     with:
       source_post_id: ${{ inputs.source_post_id }}
@@ -71,7 +75,8 @@ jobs:
       COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
       COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       # Owner approved live Naver Blog publishing on 2026-11-09.
-      # Up to four fresh FIFO items per run, oldest first; Daangn stays archived.
+      # Up to four fresh FIFO items per run, oldest first. New Daangn
+      # cafe runs in its independent workflow; legacy cafe stays archived.
       # Every Naver link is now issued by official signed Coupang Partners API;
       # no fallback to an unissued synthetic AFFSDP link if API fails.
       # Owner-authorized auto publish resumed after short-link deduplication
