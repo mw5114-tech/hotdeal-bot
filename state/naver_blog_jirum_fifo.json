@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95754,
-  "pending": [
-    {
-      "id": 95754,
-      "source_message_id": 95754,
-      "source_post_url": "https://t.me/jirum/95754",
-      "original_purchase_url": "https://link.coupang.com/a/iBs3nn34KW",
-      "title": "그래놀라하우스 그래놀라 애플시나몬, 300g, 2개",
-      "source_text": "☆특가 16,150원 (25.9% 할인)\n그래놀라하우스 그래놀라 애플시나몬, 300g, 2개\n📌 가격 현황\n- 정상가: 21,800원\n- 할인: 5,650원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBs3nn34KW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 16150,
-      "posted_at_utc": "2026-11-11T22:02:05+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -551,6 +540,10 @@
     "95752": {
       "url": "https://blog.naver.com/mw5114/224473673711",
       "at": "2026-11-11T16:22:12.269079+00:00"
+    },
+    "95754": {
+      "url": "https://blog.naver.com/mw5114/224473813324",
+      "at": "2026-11-11T22:19:53.803198+00:00"
     }
   },
   "skipped": {
@@ -620,12 +613,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95754,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43110699935",
-    "at": "2026-11-11T22:19:11.765657+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
