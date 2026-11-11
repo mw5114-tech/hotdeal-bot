@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95712,
+  "last_scanned_id": 95713,
   "pending": [
     {
       "id": 95707,
@@ -37,6 +37,15 @@
       "posted_at_utc": "2026-11-11T12:28:45+00:00",
       "title": "☆특가 6,900원",
       "sale_price_krw": 6900
+    },
+    {
+      "id": 95713,
+      "source_post_url": "https://t.me/jirum/95713",
+      "original_purchase_url": "https://link.coupang.com/a/iAN6UL6Zsy",
+      "source_text": "☆특가 7,400원\n지금특가 * 200ml × 24팩\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAN6UL6Zsy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-11T12:29:09+00:00",
+      "title": "☆특가 7,400원",
+      "sale_price_krw": 7400
     }
   ],
   "in_flight": null,
