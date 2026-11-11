@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95688,
-  "pending": [
-    {
-      "id": 95688,
-      "source_message_id": 95688,
-      "source_post_url": "https://t.me/jirum/95688",
-      "original_purchase_url": "https://link.coupang.com/a/iAv5rRrEdg",
-      "title": "농심 김치 사발면 86g 6개",
-      "source_text": "👍대박 3,780원 (36.0% 할인)\n농심 김치 사발면 86g 6개\n📌 가격 현황\n- 정상가: 5,906원\n- 할인: 2,126원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAv5rRrEdg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3780,
-      "posted_at_utc": "2026-11-11T08:16:56+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -435,6 +424,10 @@
     "95679": {
       "url": "https://blog.naver.com/mw5114/224473096975",
       "at": "2026-11-11T07:07:05.472315+00:00"
+    },
+    "95688": {
+      "url": "https://blog.naver.com/mw5114/224473190057",
+      "at": "2026-11-11T08:18:26.587811+00:00"
     }
   },
   "skipped": {
@@ -504,12 +497,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95688,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42985849991",
-    "at": "2026-11-11T08:17:46.771565+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
