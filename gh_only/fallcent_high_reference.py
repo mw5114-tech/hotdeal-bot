@@ -76,6 +76,11 @@ class VisibleText(HTMLParser):
 
 def _same_product_family(requested: str, heading: str) -> bool:
     a, b = normalized_product_name(requested), normalized_product_name(heading)
+    # Exact short names can be verified because the caller also ties the
+    # returned page to the same product_id + item_id. Short PREFIX matches
+    # still cannot identify a product safely.
+    if a == b:
+        return len(a) >= 3
     return bool(len(a) >= 9 and len(b) >= 9 and
                 (a.startswith(b) or b.startswith(a)))
 

@@ -45,6 +45,32 @@ class DefaultFormatTests(unittest.TestCase):
         self.assertFalse(same_named_option(OG, LOW_TITLE.replace("230g", "300g")))
         self.assertFalse(same_named_option(None, LOW_TITLE))
 
+    def test_jjawang_8_short_exact_name_lowchart_observed_average_is_kept(self):
+        # The 2026-11-11 real source #95749 was incorrectly discarded
+        # because "짜왕8개" has only four normalized characters.
+        pid, iid = "788073", "17910000282"
+        title = "짜왕, 8개 - 6,470원 - 로우차트 - 쿠팡 가격 변동 추적"
+        html = (f'<html><head><title>{title}</title></head><body>'
+                f'<div data-product-id="{pid}" data-item-id="{iid}"></div>'
+                '<p>짜왕, 8개의 쿠팡 현재가는 6,470원이며, '
+                '로우차트가 관측한 역대 최저가는 6,470원, '
+                '최고가는 10,600원입니다. '
+                '최근 3주 평균 8,857원보다 27% 저렴합니다.</p>'
+                '</body></html>')
+        ref = parse_reference(html, build_url(pid, iid), pid, iid,
+                              ("짜왕", "8개"), 6470)
+        self.assertTrue(ref["usable_historical_reference"])
+        self.assertEqual(ref["observed_average_krw"], 8857)
+        self.assertEqual(validated_history(ref, pid, iid, "짜왕, 8개"), 8857)
+        self.assertEqual(nearest_five_discount(6470, 8857), 25)
+        self.assertIn("평소 판매가 : 약 8,857원",
+                      create_default_preview(6470, "짜왕, 8개", 8857)["caption"])
+        # Different short option, even on a superficially similar page:
+        self.assertFalse(same_named_option("짜왕, 16개", title))
+        self.assertFalse(same_named_option("8개", title))
+        self.assertFalse(same_named_option("짜왕", title))
+        self.assertIsNone(validated_history(ref, pid, "17910000283", "짜왕, 8개"))
+
     def test_product_then_usual_price_then_hot_deal(self):
         caption = create_default_preview(12050, "휘카레 소스", 34575, 123)
         self.assertEqual(caption["caption"].split("\n\n"), [

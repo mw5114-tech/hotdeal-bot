@@ -64,10 +64,14 @@ def same_named_option(og_title: str | None, history_title: str | None) -> bool:
     validated_history(). Do not accept conflicting sizes/capacities.
     """
     left, right = normalized_product_name(og_title), normalized_product_name(history_title)
+    # Exact short product names like "짜왕, 8개" are safe when the caller
+    # ALSO verifies the exact product_id + item_id + route. Reject only
+    # meaningless 1-2 character titles, and keep the stricter threshold for
+    # potentially ambiguous prefix/family matches.
+    if left == right:
+        return len(left) >= 3
     if len(left) < 9 or len(right) < 9:
         return False
-    if left == right:
-        return True
     if not right.startswith(left):
         return False
     # Kakao OG often only knows the product family, e.g.

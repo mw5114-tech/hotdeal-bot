@@ -195,6 +195,20 @@ class FallcentHighTests(unittest.TestCase):
         self.assertEqual(result["status"], "FALLCENT_HIGH_NOT_VISIBLE")
         self.assertIsNone(result["observed_high_krw"])
 
+    def test_short_exact_jjawang_title_passes_but_short_prefix_does_not(self):
+        title = "짜왕, 8개"
+        doc = ('<html><body><h1>' + title + '</h1>'
+               '<div>역대급최고가 10,600원</div>'
+               '<div>현재가 6,470원</div></body></html>')
+        record = parse_visible_high(doc, title)
+        self.assertEqual(record["status"], "HIGH_FOUND")
+        self.assertEqual(record["observed_high_krw"], 10600)
+        # Short family-only match must not license another pack size.
+        self.assertEqual(parse_visible_high(doc, "짜왕, 16개")["status"],
+                         "FALLCENT_PRODUCT_TITLE_MISMATCH")
+        self.assertEqual(parse_visible_high(doc, "짜왕")["status"],
+                         "FALLCENT_PRODUCT_TITLE_MISMATCH")
+
     def test_wrong_product_title_is_blocked(self):
         out = parse_visible_high(BASE, "삼성전자 85인치 TV")
         self.assertEqual(out["status"], "FALLCENT_PRODUCT_TITLE_MISMATCH")
