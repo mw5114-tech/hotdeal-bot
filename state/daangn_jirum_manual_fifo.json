@@ -3,15 +3,6 @@
   "last_scanned_id": 95750,
   "pending": [
     {
-      "id": 95749,
-      "source_post_url": "https://t.me/jirum/95749",
-      "original_purchase_url": "https://link.coupang.com/a/iA1pjqsbsq",
-      "source_text": "☆특가 6,470원\n지금특가 * 8봉\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA1pjqsbsq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T15:35:13+00:00",
-      "title": "☆특가 6,470원",
-      "sale_price_krw": 6470
-    },
-    {
       "id": 95750,
       "source_post_url": "https://t.me/jirum/95750",
       "original_purchase_url": "https://link.coupang.com/a/iA1uHdi9F6",
@@ -21,12 +12,7 @@
       "sale_price_krw": 18460
     }
   ],
-  "in_flight": {
-    "id": 95749,
-    "status": "CLAIMED",
-    "run_id": "43050087027",
-    "at": "2026-11-11T15:37:17.445647+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4450,6 +4436,16 @@
       "vendor_item_id": "71958410549",
       "at": "2026-11-11T15:36:07.021195+00:00",
       "run_id": "43049872623"
+    },
+    "95749": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A7%9C%EC%99%95-8%EA%B0%9C-Pk90DM3j?from=write",
+      "posted_at_utc": "2026-11-11T15:35:13+00:00",
+      "product_id": "788073",
+      "item_id": "17910000282",
+      "vendor_item_id": null,
+      "at": "2026-11-11T15:37:34.371640+00:00",
+      "run_id": "43050087027"
     }
   },
   "skipped_non_coupang": 302,
