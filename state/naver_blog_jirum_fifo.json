@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95643,
-  "pending": [],
+  "last_scanned_id": 95648,
+  "pending": [
+    {
+      "id": 95644,
+      "source_message_id": 95644,
+      "source_post_url": "https://t.me/jirum/95644",
+      "original_purchase_url": "https://link.coupang.com/a/iz9IVt7tfg",
+      "title": "☆특가 10,460원",
+      "source_text": "☆특가 10,460원\n지금특가 * 85g × 8캔\n📦 특가 바로가기\nhttps://link.coupang.com/a/iz9IVt7tfg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10460,
+      "posted_at_utc": "2026-11-11T03:03:59+00:00"
+    },
+    {
+      "id": 95648,
+      "source_message_id": 95648,
+      "source_post_url": "https://t.me/jirum/95648",
+      "original_purchase_url": "https://link.coupang.com/a/iz92YLnvPw",
+      "title": "☆특가 2,980원",
+      "source_text": "☆특가 2,980원\n지금특가 * 70g 1팩\n📦 특가 바로가기\nhttps://link.coupang.com/a/iz92YLnvPw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2980,
+      "posted_at_utc": "2026-11-11T03:08:31+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
