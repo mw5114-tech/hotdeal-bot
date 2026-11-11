@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95725,
-  "pending": [
-    {
-      "id": 95725,
-      "source_post_url": "https://t.me/jirum/95725",
-      "original_purchase_url": "https://link.coupang.com/a/iAU1XdTaq4",
-      "source_text": "👍대박 9,900원 (32.0% 할인)\n피지오겔 콜라겐 에센스 수딩 마스크 팩\n📌 가격 현황\n- 정상가: 14,559원\n- 할인: 4,659원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAU1XdTaq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T14:05:59+00:00",
-      "title": "피지오겔 콜라겐 에센스 수딩 마스크 팩",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 95725,
-    "status": "CLAIMED",
-    "run_id": "43035279710",
-    "at": "2026-11-11T14:07:15.473050+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4371,6 +4356,16 @@
       "vendor_item_id": null,
       "at": "2026-11-11T12:46:40.904169+00:00",
       "run_id": "43023088722"
+    },
+    "95725": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%BC%EC%A7%80%EC%98%A4%EA%B2%94-%EC%BD%9C%EB%9D%BC%EA%B2%90-%EC%97%90%EC%84%BC%EC%8A%A4-%EC%88%98%EB%94%A9-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%8C%A9-10%EA%B0%9C%EC%9E%85-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-AO3kKZnA?from=write",
+      "posted_at_utc": "2026-11-11T14:05:59+00:00",
+      "product_id": "8844778961",
+      "item_id": "25780713091",
+      "vendor_item_id": "92768623821",
+      "at": "2026-11-11T14:07:31.503856+00:00",
+      "run_id": "43035279710"
     }
   },
   "skipped_non_coupang": 285,
