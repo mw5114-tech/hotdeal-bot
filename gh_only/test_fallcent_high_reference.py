@@ -178,9 +178,11 @@ class FallcentHighTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             result = process(Path(tmp), record,
                              naver=lambda title: self.fail("Naver must not run"))
-        self.assertIsNone(result["comparison_price_source"])
-        self.assertIsNone(result["caption"]["comparison_reference_price_krw"])
-        self.assertIsNone(result["caption"]["approx_discount_vs_reference_pct"])
+        self.assertEqual(result["comparison_price_source"],
+                         "fallcent_observed_current")
+        self.assertEqual(result["caption"]["comparison_reference_price_krw"], 12000)
+        self.assertEqual(result["caption"]["approx_discount_vs_reference_pct"], 1)
+        self.assertIn("폴센트 관측 현재가", result["caption"]["caption"])
         self.assertNotIn("쿠팡 평소 판매가 : 약",result["caption"]["caption"])
 
     def test_visible_high_ignored_fake_script_and_footer(self):

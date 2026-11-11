@@ -21,7 +21,8 @@ from gh_only.daangn_draft import normalized_title
 from gh_only.shortlink_probe import one_hop, StopRedirect
 from gh_only.lowchart_price_reference import fetch_one, build_url
 from gh_only.default_deal_format import (
-    create_default_preview, validated_history, normalized_product_name,
+    create_default_preview, validated_history,
+    validated_lowchart_observation, normalized_product_name,
 )
 from gh_only.affsdp_candidate import compose_affsdp_candidate
 from gh_only.lowchart_product_photo import (
@@ -245,10 +246,24 @@ def enrich_deal(deal: dict, output_dir: Path,
     )
     history = {"reason": "LINK_OR_OG_NOT_VERIFIED", "usable_historical_reference": False}
     average = None
-    if matching and isinstance(sale, int) and sale > 0:
+    # Independent price query: photo failure cannot suppress an otherwise
+    # verifiable exact productId/itemId price history.
+    price_title = (og_title if matching or lowchart_title_verified else
+                   fallback_title if using_public_lowchart else None)
+    price_lookup_allowed = (
+        identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+        and type(sale) is int and 0 < sale <= 100_000_000
+        and isinstance(price_title, str) and bool(price_title.strip())
+        and (using_public_lowchart or matching)
+    )
+    if price_lookup_allowed:
         try:
-            history = history_fetch(p, i, get_title_tokens(og_title), sale)
-            average = validated_history(history, p, i, og_title)
+            history = history_fetch(p, i, get_title_tokens(price_title), sale)
+            average = validated_history(history, p, i, price_title)
+            history["comparison_verification"] = (
+                "EXACT_ITEM_AVERAGE_VERIFIED" if average is not None
+                else "NO_VERIFIED_EXACT_ITEM_AVERAGE"
+            )
         except Exception as exc:
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
@@ -259,6 +274,19 @@ def enrich_deal(deal: dict, output_dir: Path,
     # page, not inferred from a sale-percent badge or representative search image.
     comparison_price = average
     comparison_source = "lowchart_public_history"
+    if using_public_lowchart and average is None and price_lookup_allowed:
+        for field, label in (
+            ("observed_high_krw", "lowchart_observed_high"),
+            ("observed_current_krw", "lowchart_observed_current"),
+            ("observed_low_krw", "lowchart_observed_low"),
+        ):
+            value = validated_lowchart_observation(
+                history, p, i, price_title, field
+            )
+            if value is not None:
+                comparison_price = value
+                comparison_source = label
+                break
     fallcent_high = {"status": "NOT_ATTEMPTED", "observed_high_krw": None}
     image_source = og.get(
         "image_source",
@@ -339,7 +367,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     # Fallcent price is a SEPARATE exact-ID lookup, independent of the
     # representative photo's provenance. A photo search result alone can
     # NEVER certify an item's price. Lowchart average always wins.
-    if (using_public_lowchart and average is None
+    if (using_public_lowchart and comparison_price is None
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and type(sale) is int and 0 < sale <= 100_000_000):
         try:
@@ -387,12 +415,20 @@ def enrich_deal(deal: dict, output_dir: Path,
                 # Only when the exact-item high is not visible/verified.
                 comparison_price = fallcent_average
                 comparison_source = "fallcent_observed_average"
-            # Do not fall back to Fallcent's CURRENT or LOW price: the user
-            # wants a comparison to an observed historical reference.
-            # The site's displayed percent alone cannot establish a genuine
-            # ordinary price, and Telegram's sale might have a different
-            # observation time. No invented historical reference.
-            # If unavailable, no discount can be claimed.
+            elif (verified and
+                  fallcent_high.get("current_basis") ==
+                  "fallcent_public_visible_current" and
+                  type(fallcent_high.get("observed_current_krw")) is int):
+                comparison_price = fallcent_high["observed_current_krw"]
+                comparison_source = "fallcent_observed_current"
+            elif (verified and
+                  fallcent_high.get("low_basis") ==
+                  "fallcent_public_visible_historical_low" and
+                  type(fallcent_high.get("observed_low_krw")) is int):
+                comparison_price = fallcent_high["observed_low_krw"]
+                comparison_source = "fallcent_observed_low"
+            # Current and low remain explicitly labelled, NEVER 'usual price'
+            # or merchant list price. Fallcent's percent badge is diagnostic.
         except Exception as exc:
             fallcent_high = {"status": "FALLCENT_PRICE_QUERY_ERROR",
                              "observed_high_krw": None,
@@ -470,6 +506,14 @@ def enrich_deal(deal: dict, output_dir: Path,
         "photo": photo,
         "history": history,
         "history_avg_accepted": average is not None,
+        "price_lookup_attempted": bool(price_lookup_allowed),
+        "price_reference_verified": comparison_price is not None,
+        "price_reference_missing_reason": (
+            None if comparison_price is not None
+            else (fallcent_high.get("status")
+                  if fallcent_high.get("status") != "NOT_ATTEMPTED"
+                  else history.get("reason"))
+        ),
         "naver_price_lookup": naver_price,
         "fallcent_high_lookup": fallcent_high,
         "comparison_price_source": (comparison_source if comparison_price is not None else None),

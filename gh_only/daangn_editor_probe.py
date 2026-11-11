@@ -151,8 +151,10 @@ def read_one_draft(folder: Path) -> dict:
     discount = caption.get("approx_discount_vs_reference_pct")
     # A source-verified discount is rounded to 5 points; never use a Telegram
     # merchant's unaudited reference price to invent a percentage.
-    known_discount = type(discount) is int and discount in range(5, 100, 5)
+    known_discount = type(discount) is int and 1 <= discount <= 95
+    under_one = caption.get("reference_discount_under_one_pct") is True
     body_prefix = (f"[{discount}%할인] " if known_discount
+                   else "[1% 미만 저렴] " if under_one
                    else "[할인율 확인 중] ")
     if not title_line.startswith(body_prefix):
         raise ValueError("DRAFT_DISCOUNT_PREFIX_MISSING_OR_MISMATCHED")

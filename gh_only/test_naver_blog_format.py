@@ -87,6 +87,13 @@ class FormattingTests(unittest.TestCase):
         self.assertIn("가격 비교 기준 : 폴센트 관측 최고가", body)
         self.assertIn("[약 25% 할인]", body)
 
+    def test_lowchart_visible_high_not_mislabeled_as_average(self):
+        _, body = self.format("lowchart_observed_high")
+        self.assertIn("로우차트 관측 최고가 : 약 19,900원", body)
+        self.assertNotIn("쿠팡 평소 판매가", body)
+        self.assertIn("로우차트 최고가 대비", body)
+        self.assertIn("[약 25% 할인]", body)
+
     def test_fallcent_midpoint_is_explicitly_not_typical_price(self):
         _, body = self.format("fallcent_high_low_midpoint")
         self.assertIn("폴센트 최고·최저 중간값 : 약 19,900원", body)

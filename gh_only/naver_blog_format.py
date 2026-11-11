@@ -13,6 +13,9 @@ from gh_only.naver_blog_jirum import DISCLOSURE
 
 SOURCES = {
     "lowchart_public_history": ("로우차트 관측 평균", "로우차트 평균 대비"),
+    "lowchart_observed_high": ("로우차트 관측 최고가", "로우차트 최고가 대비"),
+    "lowchart_observed_current": ("로우차트 관측 현재가", "로우차트 현재가 대비"),
+    "lowchart_observed_low": ("로우차트 관측 최저가", "로우차트 최저가 대비"),
     "fallcent_observed_average": ("폴센트 관측 평균", "폴센트 평균 대비"),
     "fallcent_observed_high": ("폴센트 관측 최고가", "폴센트 최고가 대비"),
     "fallcent_high_low_midpoint": (
@@ -78,6 +81,15 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             f"💸 쿠팡 평소 판매가(로우차트 관측 평균) : {price_line(comparison)}",
             label="💸 쿠팡 평소 판매가", kind="reference"
         ))
+    elif comparison is not None and basis in (
+        "lowchart_observed_high", "lowchart_observed_current",
+        "lowchart_observed_low",
+    ):
+        label = SOURCES[basis][0]
+        blocks.append(_block(
+            f"💸 {label} : {price_line(comparison)}",
+            label=f"💸 {label}", kind="reference"
+        ))
     elif comparison is not None and basis == "fallcent_observed_average":
         blocks.append(_block(
             f"💸 쿠팡 평소 판매가(폴센트 관측 평균) : {price_line(comparison)}",
@@ -124,6 +136,8 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     sale_line = f"🔥 오늘 특가 : {price_line(sale)}"
     if has_discount:
         sale_line += f" [약 {discount}% 할인]"
+    elif draft.get("caption", {}).get("reference_discount_under_one_pct") is True:
+        sale_line += " [비교 기준 대비 1% 미만 저렴]"
     blocks.append(_block(sale_line, label="🔥 오늘 특가", kind="price"))
     blocks.append(_block(
         "※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.",

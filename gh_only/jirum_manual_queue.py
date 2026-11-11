@@ -782,6 +782,24 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     # NOT acceptable price proof and must never be substituted for one.
     caption = row.get("caption", {})
     basis = caption.get("comparison_reference_source")
+    lowchart_other_basis = {
+        "lowchart_observed_high": ("observed_high_krw", "💸 로우차트 관측 최고가"),
+        "lowchart_observed_current": ("observed_current_krw", "💸 로우차트 관측 현재가"),
+        "lowchart_observed_low": ("observed_low_krw", "💸 로우차트 관측 최저가"),
+    }
+    if basis in lowchart_other_basis:
+        from gh_only.default_deal_format import validated_lowchart_observation
+        field, label = lowchart_other_basis[basis]
+        ids = row.get("product_identity", {})
+        price = validated_lowchart_observation(
+            row.get("history"), ids.get("product_id"), ids.get("item_id"),
+            row.get("lowchart_product_title") or
+            row.get("caption", {}).get("product_name"), field
+        )
+        if (type(price) is not int
+                or price != caption.get("comparison_reference_price_krw")
+                or f"{label} : 약 {price:,}원" not in article["body"]):
+            raise RuntimeError("LOWCHART_VISIBLE_PRICE_EVIDENCE_MISMATCH")
     fallcent_basis = {
         "fallcent_observed_average", "fallcent_observed_high",
         "fallcent_high_low_midpoint", "fallcent_observed_current",
