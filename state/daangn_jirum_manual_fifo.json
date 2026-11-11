@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95744,
-  "pending": [
-    {
-      "id": 95744,
-      "source_post_url": "https://t.me/jirum/95744",
-      "original_purchase_url": "https://link.coupang.com/a/iAZYe3ADEO",
-      "source_text": "☆특가 5,800원\n추천특가 * 플라워백  가죽끈 캔버스백 34×35cm\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAZYe3ADEO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T15:15:07+00:00",
-      "title": "☆특가 5,800원",
-      "sale_price_krw": 5800
-    }
-  ],
-  "in_flight": {
-    "id": 95744,
-    "status": "CLAIMED",
-    "run_id": "43046572712",
-    "at": "2026-11-11T15:16:24.484679+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4391,6 +4376,16 @@
       "vendor_item_id": "4126199740",
       "at": "2026-11-11T14:22:07.704627+00:00",
       "run_id": "43037675637"
+    },
+    "95744": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B6%94%EC%B2%9C%ED%8A%B9%EA%B0%80-%ED%94%8C%EB%9D%BC%EC%9B%8C%EB%B0%B1-%EA%B0%80%EC%A3%BD%EB%81%88-%EC%BA%94%EB%B2%84%EC%8A%A4%EB%B0%B1-3435cm-AqqOXg5A?from=write",
+      "posted_at_utc": "2026-11-11T15:15:07+00:00",
+      "product_id": "8795837489",
+      "item_id": "25606737493",
+      "vendor_item_id": null,
+      "at": "2026-11-11T15:16:40.801145+00:00",
+      "run_id": "43046572712"
     }
   },
   "skipped_non_coupang": 302,
