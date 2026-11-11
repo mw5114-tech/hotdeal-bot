@@ -1,6 +1,6 @@
-Owner-authorized live Daangn Cafe rollout; cafe owner confirmed own channel's affiliate rules.
+Owner-authorized ongoing Daangn Cafe auto-publishing, 2026-11-11.
 Target: https://cafe.daangn.com/kupang-teuggaye
-Action: scan Telegram and attempt exactly ONE fresh verified post with the official Coupang Partners API shortenUrl.
-Tracking SUBID: daangncafe. Preserve Naver independent queue and links.
-Safety: no already-published or expired source, verify new cafe hotdeal board and photo, never retry an uncertain submit.
-Rollout reference: 2026-11-11 owner confirmation after reading owner/operator exemption.
+Activation: confirmed real post #95712 at GitHub Actions run 43022655752.
+Action: scan Telegram then drain ALL still-fresh pending items sequentially, checkpoint each verified post.
+Official signed Coupang API deeplink, distinct SUBID=daangncafe. Existing Naver job remains independent.
+Do not repost handled/expired/uncertain items. No manually composed AFFSDP links.
