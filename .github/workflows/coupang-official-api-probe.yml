@@ -1,0 +1,39 @@
+name: Tests | Coupang Partners Official Deep Link API (no blog publishing)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'gh_only/coupang_partners_api.py'
+      - 'gh_only/test_coupang_partners_api.py'
+      - '.github/workflows/coupang-official-api-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-and-safe-api-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    env:
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify official API client syntax and response contracts (no network)
+        run: |
+          python -m py_compile gh_only/coupang_partners_api.py gh_only/test_coupang_partners_api.py
+          python -m unittest -v gh_only.test_coupang_partners_api
+      - name: Check GitHub API key secrets are configured (do not print keys)
+        run: |
+          test -n "$COUPANG_PARTNERS_ACCESS_KEY" || { echo 'COUPANG_PARTNERS_ACCESS_KEY_MISSING'; exit 1; }
+          test -n "$COUPANG_PARTNERS_SECRET_KEY" || { echo 'COUPANG_PARTNERS_SECRET_KEY_MISSING'; exit 1; }
+      - name: Real signed Coupang deeplink API probe - no blog or state write
+        run: python -m gh_only.coupang_partners_api
