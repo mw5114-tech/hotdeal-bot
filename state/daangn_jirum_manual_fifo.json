@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95746,
-  "pending": [
-    {
-      "id": 95746,
-      "source_post_url": "https://t.me/jirum/95746",
-      "original_purchase_url": "https://link.coupang.com/a/iA0rvBDXSS",
-      "source_text": "☆특가 9,980원 (24.8% 할인)\n라운드랩 1025 독도 클렌징 티슈, 30매입, 178g, 4개\n📌 가격 현황\n- 정상가: 13,270원\n- 할인: 3,290원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA0rvBDXSS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T15:21:43+00:00",
-      "title": "라운드랩 1025 독도 클렌징 티슈, 30매입, 178g, 4개",
-      "sale_price_krw": 9980
-    }
-  ],
-  "in_flight": {
-    "id": 95746,
-    "status": "CLAIMED",
-    "run_id": "43049399905",
-    "at": "2026-11-11T15:32:59.645043+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4411,6 +4396,16 @@
       "vendor_item_id": null,
       "at": "2026-11-11T15:23:05.415603+00:00",
       "run_id": "43047711684"
+    },
+    "95746": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%9E%A9-1025-%EB%8F%85%EB%8F%84-%ED%81%B4%EB%A0%8C%EC%A7%95-%ED%8B%B0%EC%8A%88-30%EB%A7%A4%EC%9E%85-178g-4-25%ED%95%A0%EC%9D%B8-P5a6ZayP?from=write",
+      "posted_at_utc": "2026-11-11T15:21:43+00:00",
+      "product_id": "5659313196",
+      "item_id": "19168442872",
+      "vendor_item_id": "86286733320",
+      "at": "2026-11-11T15:33:17.422877+00:00",
+      "run_id": "43049399905"
     }
   },
   "skipped_non_coupang": 302,
