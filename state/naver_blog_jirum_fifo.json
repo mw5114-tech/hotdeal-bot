@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95627,
-  "pending": [],
+  "last_scanned_id": 95628,
+  "pending": [
+    {
+      "id": 95628,
+      "source_message_id": 95628,
+      "source_post_url": "https://t.me/jirum/95628",
+      "original_purchase_url": "https://link.coupang.com/a/iz3y9FOseW",
+      "title": "☆특가 1,640원",
+      "source_text": "☆특가 1,640원\n청정원 클래식 돈카츠 소스, 400g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iz3y9FOseW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1640,
+      "posted_at_utc": "2026-11-11T01:37:49+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
