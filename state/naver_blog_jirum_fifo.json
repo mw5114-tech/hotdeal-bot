@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95659,
-  "pending": [
-    {
-      "id": 95659,
-      "source_message_id": 95659,
-      "source_post_url": "https://t.me/jirum/95659",
-      "original_purchase_url": "https://link.coupang.com/a/iAhEsqsh0C",
-      "title": "비비고 김치왕교자 (냉동), 420g, 2개입",
-      "source_text": "☆특가 6,460원 (28.2% 할인)\n비비고 김치왕교자 (냉동), 420g, 2개입\n📌 가격 현황\n- 정상가: 9,000원\n- 할인: 2,540원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAhEsqsh0C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6460,
-      "posted_at_utc": "2026-11-11T04:54:56+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -375,6 +364,10 @@
     "95658": {
       "url": "https://blog.naver.com/mw5114/224472920095",
       "at": "2026-11-11T04:53:49.494145+00:00"
+    },
+    "95659": {
+      "url": "https://blog.naver.com/mw5114/224472923368",
+      "at": "2026-11-11T04:56:26.820274+00:00"
     }
   },
   "skipped": {
@@ -444,12 +437,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95659,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42962340558",
-    "at": "2026-11-11T04:55:45.497077+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
