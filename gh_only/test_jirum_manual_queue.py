@@ -16,7 +16,7 @@ from gh_only.jirum_manual_queue import (
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
     freshness_status, expire_pending, scan_with_source_wait,
     archive_abandoned_claim, GithubState, STALE_CLAIM_SECONDS,
-    await_published_checkpoint,
+    await_published_checkpoint, verify_lowchart_mean_in_article,
     TIMESTAMP_RETRY_GRACE_SECONDS, awaiting_source_timestamp,
     matching_source_timestamp, fetch_exact_source_post,
 )
@@ -66,6 +66,29 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_lowchart_mean_must_survive_final_daangn_draft(self):
+        caption = {
+            "comparison_reference_source": "lowchart_public_history",
+            "comparison_reference_price_krw": 8857,
+        }
+        verify_lowchart_mean_in_article(
+            caption, "짜왕 8개\n💸 쿠팡 평소 판매가 : 약 8,857원\n"
+        )
+        with self.assertRaisesRegex(
+            RuntimeError, "LOWCHART_AVERAGE_DROPPED_FROM_POST_NO_SUBMIT"
+        ):
+            verify_lowchart_mean_in_article(
+                caption, "짜왕 8개\n💸 쿠팡 평소 판매가 : 확인 중\n"
+            )
+        with self.assertRaisesRegex(
+            RuntimeError, "LOWCHART_AVERAGE_DROPPED_FROM_POST_NO_SUBMIT"
+        ):
+            verify_lowchart_mean_in_article(
+                {**caption, "comparison_reference_price_krw": None},
+                "짜왕 8개"
+            )
+
+
     def test_github_409_from_other_file_retries_only_same_blob_sha(self):
         """Naver moving main must not permanently fail Daangn's FIFO PUT."""
         st = baseline()

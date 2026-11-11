@@ -712,6 +712,16 @@ def scan(store: GithubState, latest_fetch=fetch_public_html,
     return result
 
 
+def verify_lowchart_mean_in_article(caption: dict, article_body: str) -> None:
+    """Never publish an accepted exact-item mean without its actual price."""
+    if caption.get("comparison_reference_source") != "lowchart_public_history":
+        return
+    price = caption.get("comparison_reference_price_krw")
+    if (type(price) is not int or price <= 0
+            or f"💸 쿠팡 평소 판매가 : 약 {price:,}원" not in article_body):
+        raise RuntimeError("LOWCHART_AVERAGE_DROPPED_FROM_POST_NO_SUBMIT")
+
+
 def validate_draft(folder: Path, expected_id: int) -> dict:
     report = json.loads((folder / "drafts.json").read_text("utf-8"))
     rows = report.get("drafts", [])
@@ -782,6 +792,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
     # NOT acceptable price proof and must never be substituted for one.
     caption = row.get("caption", {})
     basis = caption.get("comparison_reference_source")
+    verify_lowchart_mean_in_article(caption, article["body"])
     lowchart_other_basis = {
         "lowchart_observed_high": ("observed_high_krw", "💸 로우차트 관측 최고가"),
         "lowchart_observed_current": ("observed_current_krw", "💸 로우차트 관측 현재가"),
