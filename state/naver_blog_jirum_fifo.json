@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95648,
-  "pending": [],
+  "last_scanned_id": 95650,
+  "pending": [
+    {
+      "id": 95649,
+      "source_message_id": 95649,
+      "source_post_url": "https://t.me/jirum/95649",
+      "original_purchase_url": "https://link.coupang.com/a/iAffdXZjiu",
+      "title": "☆특가 2,350원",
+      "source_text": "☆특가 2,350원\n상하목장 베이비 유기농 요거트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAffdXZjiu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2350,
+      "posted_at_utc": "2026-11-11T04:21:15+00:00"
+    },
+    {
+      "id": 95650,
+      "source_message_id": 95650,
+      "source_post_url": "https://t.me/jirum/95650",
+      "original_purchase_url": "https://link.coupang.com/a/iAfxslwrpA",
+      "title": "풀무원 실의 힘 매일아침 순생나또 8개입",
+      "source_text": "👍대박 4,960원 (34.7% 할인)\n풀무원 실의 힘 매일아침 순생나또 8개입\n📌 가격 현황\n- 정상가: 7,600원\n- 할인: 2,640원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAfxslwrpA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4960,
+      "posted_at_utc": "2026-11-11T04:25:22+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
