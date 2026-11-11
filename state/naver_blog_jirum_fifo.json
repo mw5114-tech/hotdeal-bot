@@ -552,7 +552,13 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 95709,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "43015927650",
+    "at": "2026-11-11T11:55:42.869433+00:00",
+    "reason": "OWNER_AUTHORIZED_MANUAL_LATEST_ONE_SHOT"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
