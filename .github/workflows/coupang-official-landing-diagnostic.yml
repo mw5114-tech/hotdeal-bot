@@ -1,0 +1,76 @@
+name: Tests | Coupang official deeplink landing shape (no post)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/coupang-official-landing-diagnostic.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-api-response-structure:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Diagnose one pending canonical product landing safely - no browser or blog
+        run: |
+          python - <<'PY'
+          import json, os
+          from datetime import datetime, timezone
+          from urllib import request
+          from urllib.parse import urlsplit, parse_qs
+          from gh_only.default_deal_automation import resolve_identity
+          from gh_only.direct_product_links import regular_product_url
+          from gh_only.coupang_partners_api import HOST, PATH, SUBID, authorization
+          queue = json.loads(open("state/naver_blog_jirum_fifo.json", encoding="utf-8").read())
+          pending = queue.get("pending") or []
+          if not pending:
+              print("COUPANG_DIAGNOSTIC_NO_PENDING_NO_POST")
+              raise SystemExit(0)
+          source = pending[0]
+          identity = resolve_identity(source.get("original_purchase_url",""))
+          canonical = regular_product_url(identity)
+          signed_date = datetime.now(timezone.utc).strftime("%y%m%dT%H%M%SZ")
+          body = json.dumps({"coupangUrls":[canonical],"subId":SUBID}).encode()
+          req = request.Request(HOST+PATH, data=body, method="POST", headers={
+              "Authorization":authorization(os.environ["COUPANG_PARTNERS_ACCESS_KEY"],
+                                             os.environ["COUPANG_PARTNERS_SECRET_KEY"],signed_date),
+              "Content-Type":"application/json","Accept":"application/json"
+          })
+          with request.urlopen(req, timeout=18) as result:
+              payload = json.loads(result.read(16384))
+          rows = payload.get("data") if isinstance(payload,dict) else None
+          if not isinstance(rows,list) or len(rows)!=1:
+              print("COUPANG_DIAGNOSTIC_RESPONSE_STRUCTURE_UNEXPECTED_NO_POST")
+              raise SystemExit(0)
+          d=rows[0]; landing=d.get("landingUrl")
+          parsed=urlsplit(landing) if isinstance(landing,str) else None
+          q=parse_qs(parsed.query) if parsed else {}
+          print("COUPANG_DIAGNOSTIC_SAFE "+json.dumps({
+              "response_ok": str(payload.get("rCode"))=="0",
+              "source_id": source["id"],
+              "original_echo_exact":d.get("originalUrl")==canonical,
+              "shortlink_host": urlsplit(d.get("shortenUrl","")).hostname,
+              "landing_present":bool(landing),
+              "landing_host": parsed.hostname if parsed else None,
+              "landing_path_is_exact_product": (parsed.path == "/vp/products/"+identity["product_id"])
+                                               if parsed else None,
+              "landing_path_is_product":parsed.path.startswith("/vp/products/") if parsed else None,
+              "landing_item_present":"itemId" in q,
+              "landing_item_exact":q.get("itemId")==[identity["item_id"]],
+              "landing_vendor_present":"vendorItemId" in q,
+              "landing_vendor_exact":q.get("vendorItemId")==[identity.get("vendor_item_id")],
+              "landing_has_fragment":bool(parsed.fragment) if parsed else None,
+          }))
+          print("COUPANG_DIAGNOSTIC_NO_BLOG_POST_OR_STATE_WRITE")
+          PY
