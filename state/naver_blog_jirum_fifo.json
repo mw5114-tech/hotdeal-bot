@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95612,
-  "pending": [],
+  "last_scanned_id": 95615,
+  "pending": [
+    {
+      "id": 95613,
+      "source_message_id": 95613,
+      "source_post_url": "https://t.me/jirum/95613",
+      "original_purchase_url": "https://link.coupang.com/a/izZEkhWd64",
+      "title": "☆특가 7,100원",
+      "source_text": "☆특가 7,100원\n앱솔루트 프리미엄 명작 스틱분유 2단계\n📦 특가 바로가기\nhttps://link.coupang.com/a/izZEkhWd64\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7100,
+      "posted_at_utc": "2026-11-11T00:43:01+00:00"
+    },
+    {
+      "id": 95614,
+      "source_message_id": 95614,
+      "source_post_url": "https://t.me/jirum/95614",
+      "original_purchase_url": "https://link.coupang.com/a/izZEvIlJEi",
+      "title": "-가격·혜택은 게시 당시 기준이며 실시간 변경될 수 있습니다.",
+      "source_text": "❤️초대박 3,600원 (40.0% 할인)\n-가격·혜택은 게시 당시 기준이며 실시간 변경될 수 있습니다.\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 2,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izZEvIlJEi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3600,
+      "posted_at_utc": "2026-11-11T00:43:03+00:00"
+    },
+    {
+      "id": 95615,
+      "source_message_id": 95615,
+      "source_post_url": "https://t.me/jirum/95615",
+      "original_purchase_url": "https://link.coupang.com/a/izZHK3UWHc",
+      "title": "가그린 어린이용 구강세정제 딸기향",
+      "source_text": "❤️초대박 1,720원 (42.7% 할인)\n가그린 어린이용 구강세정제 딸기향\n📌 가격 현황\n- 정상가: 3,000원\n- 할인: 1,280원\n📦 특가 바로가기\nhttps://link.coupang.com/a/izZHK3UWHc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1720,
+      "posted_at_utc": "2026-11-11T00:43:47+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
