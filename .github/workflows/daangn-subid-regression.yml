@@ -25,6 +25,10 @@ on:
       - 'gh_only/test_affsdp_candidate.py'
       - 'gh_only/test_default_deal_automation.py'
       - 'archive/daangn/daangn-fifo-paused.yml'
+      - '.github/workflows/daangn-cafe-restored.yml'
+      - 'gh_only/jirum_manual_queue.py'
+      - 'gh_only/jirum_manual_publisher.py'
+      - 'gh_only/test_jirum_manual_publisher.py'
       - '.github/workflows/naver-blog-auto-main.yml'
       - '.github/workflows/daangn-jirum-manual-fifo.yml'
       - '.github/workflows/daangn-subid-regression.yml'
@@ -48,7 +52,7 @@ jobs:
         run: python -m py_compile gh_only/affsdp_candidate.py gh_only/default_deal_automation.py gh_only/jirum_manual_queue.py gh_only/naver_blog_jirum.py gh_only/test_naver_blog_jirum.py naver_blog_one_shot.py test_naver_blog_one_shot.py gh_only/test_affsdp_candidate.py gh_only/test_default_deal_automation.py
       - name: Run link-generation, photo/price, and Naver display tests (offline)
         run: |
-          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum gh_only.test_coupang_partners_api gh_only.test_naver_blog_latest_manual test_naver_blog_one_shot
+          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum gh_only.test_coupang_partners_api gh_only.test_jirum_manual_publisher gh_only.test_naver_blog_latest_manual test_naver_blog_one_shot
       - name: Verify production environment uses own lptag and dedicated SubID
         run: |
           python - <<'PY'
@@ -69,6 +73,19 @@ jobs:
           assert 'apply_official_api_link' in Path('gh_only/naver_blog_jirum.py').read_text()
           assert 'python -m gh_only.naver_blog_jirum batch' in main
           assert 'MAX_BATCH_POSTS = 4' in Path('gh_only/naver_blog_jirum.py').read_text()
+          restored = Path('.github/workflows/daangn-cafe-restored.yml').read_text()
+          assert 'https://cafe.daangn.com/kupang-teuggaye' in restored
+          assert "DAANGN_PUBLISH_PAUSED: 'true'" in restored
+          assert "DAANGN_CAFE_PUBLISH_ENABLED: 'false'" in restored
+          assert "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'false'" in restored
+          assert 'COUPANG_PARTNER_SUBID: daangncafe' in restored
+          assert 'python -m gh_only.jirum_manual_queue scan' in restored
+          assert 'python -m gh_only.jirum_manual_queue drain' in restored
+          assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
+          assert 'daangn-cafe-independent:' in main
+          assert 'secrets: inherit' in main
+          assert 'DAANGN_POLICY_GATE_CLOSED_SCAN_ONLY' in restored
+          assert "DAANGN_PUBLISH_PAUSED" not in main
           assert 'python -m gh_only.jirum_manual_queue drain' not in main
           assert 'needs: drain-backlog' not in main
           assert 'uses: ./.github/workflows/naver-blog-auto-main.yml' in legacy
