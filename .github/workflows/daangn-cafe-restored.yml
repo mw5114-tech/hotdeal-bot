@@ -1,0 +1,122 @@
+name: DAANGN CAFE | Independent FIFO (policy-gated)
+on:
+  workflow_call:
+    inputs:
+      source_post_id:
+        required: false
+        type: string
+        default: ''
+      smoke_test:
+        required: false
+        type: boolean
+        default: false
+  workflow_dispatch:
+    inputs:
+      source_post_id:
+        required: false
+        default: ''
+        type: string
+      smoke_test:
+        required: false
+        default: false
+        type: boolean
+  schedule:
+    - cron: '26,56 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-daangn-restored-scan.txt'
+permissions:
+  contents: write
+jobs:
+  smoke:
+    if: github.ref == 'refs/heads/main' && inputs.smoke_test == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    permissions:
+      contents: read
+    steps:
+      - run: echo 'DAANGN_RESTORED_SMOKE_NO_SCAN_NO_POST'
+  daangn-independent:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && inputs.smoke_test != true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    concurrency:
+      group: daangn-restored-fifo
+      cancel-in-progress: false
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      DAANGN_CAFE_RESTORED: 'true'
+      DAANGN_CAFE_TARGET_URL: https://cafe.daangn.com/kupang-teuggaye
+      DAANGN_PUBLISH_PAUSED: 'true'
+      DAANGN_CAFE_PUBLISH_ENABLED: 'false'
+      DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'false'
+      DAANGN_OFFICIAL_API_LINK_ENABLED: 'true'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: daangncafe
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
+      JIRUM_REQUIRE_FRESH_POST: 'true'
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Confirm cafe path and policy gate
+        run: |
+          python - <<'PY'
+          import os
+          from gh_only.jirum_manual_publisher import target_for_cafe, restored_live_gate
+          url,path=target_for_cafe(os.environ["DAANGN_CAFE_TARGET_URL"])
+          assert url=="https://cafe.daangn.com/kupang-teuggaye/posts/new"
+          assert path=="/kupang-teuggaye/posts/"
+          print("DAANGN_LIVE_GATE_OPEN" if restored_live_gate()
+                else "DAANGN_POLICY_GATE_CLOSED_SCAN_ONLY")
+          PY
+      - name: Scan public Telegram into independent Daangn FIFO
+        id: scan
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ inputs.source_post_id }}
+        run: python -m gh_only.jirum_manual_queue scan
+      - name: Install browser only if posting approved
+        if: >-
+          steps.scan.outputs.has_deal == 'true' &&
+          env.DAANGN_PUBLISH_PAUSED == 'false' &&
+          env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
+          env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+          if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+            python -m playwright install --with-deps --only-shell chromium
+          fi
+      - name: Publish only after explicit policy clearance
+        if: >-
+          steps.scan.outputs.has_deal == 'true' &&
+          env.DAANGN_PUBLISH_PAUSED == 'false' &&
+          env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
+          env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
+        run: python -m gh_only.jirum_manual_queue drain
+      - name: Save safe outcome receipts after permitted publishing
+        if: >-
+          always() &&
+          steps.scan.outputs.has_deal == 'true' &&
+          env.DAANGN_PUBLISH_PAUSED == 'false' &&
+          env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
+          env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daangn-restored-${{ github.run_id }}
+          path: jirum-manual-one-draft/
+          retention-days: 1
+          if-no-files-found: ignore
