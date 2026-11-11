@@ -51,9 +51,9 @@ jobs:
       DAANGN_CAFE_RESTORED: 'true'
       DAANGN_CAFE_TARGET_URL: https://cafe.daangn.com/kupang-teuggaye
       DAANGN_CAFE_BOARD_LABEL: '🔥 오늘의핫딜'
-      DAANGN_PUBLISH_PAUSED: 'true'
-      DAANGN_CAFE_PUBLISH_ENABLED: 'false'
-      DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'false'
+      DAANGN_PUBLISH_PAUSED: 'false'
+      DAANGN_CAFE_PUBLISH_ENABLED: 'true'
+      DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'true'
       DAANGN_OFFICIAL_API_LINK_ENABLED: 'true'
       COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
       COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
@@ -73,6 +73,9 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      # Owner attests cafe ownership and operator exemption. Start with a
+      # one-post live rollout, and only switch to draining after verifying
+      # real photo, official API shortlink and the saved post receipt.
       - name: Confirm cafe path and policy gate
         run: |
           python - <<'PY'
@@ -101,13 +104,13 @@ jobs:
           if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
             python -m playwright install --with-deps --only-shell chromium
           fi
-      - name: Publish only after explicit policy clearance
+      - name: Publish ONE fresh Daangn item first (live rollout)
         if: >-
           steps.scan.outputs.has_deal == 'true' &&
           env.DAANGN_PUBLISH_PAUSED == 'false' &&
           env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
           env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
-        run: python -m gh_only.jirum_manual_queue drain
+        run: python -m gh_only.jirum_manual_queue publish
       - name: Save safe outcome receipts after permitted publishing
         if: >-
           always() &&
