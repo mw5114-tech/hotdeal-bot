@@ -43,3 +43,7 @@
 - 별도의 Daangn 워크플로는 이제 `DAANGN_PUBLISH_PAUSED=false`, `DAANGN_CAFE_PUBLISH_ENABLED=true`, `DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED=true`로 작동하며, 연속 처리용 `drain` 명령을 사용함.
 - 같은 오라클 알림으로 네이버와 당근은 각각 별도 job, 별도 FIFO, 별도 lock, 별도 SUBID로 진행함. 네이버 기능은 그대로 둠.
 - 만료한 60분 초과 핫딜은 제외, 실패/불확실한 발행 결과는 자동 재게시하지 않음. 손상된 공식 링크를 자체 AFFSDP로 대체하지 않음.
+
+## 2026-11-11 SUBID 이름 변경
+
+사용자 요청으로 **앞으로 신규 당근 글의 쿠팡 공식 API `subId`는 `daangncafe`에서 `cafe`로 변경**했다. GitHub 설정, API 허용값, 발행 후 검증, 테스트를 함께 바꿨다. 네이버는 여전히 `naverblog`. 과거 게시한 당근 글의 URL은 수정하지 않으며, 이전 로그의 `daangncafe`는 당시 이력으로 남는다. 새 API 발급 시 과거 `daangncafe` 값은 거부한다.

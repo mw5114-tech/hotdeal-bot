@@ -106,7 +106,7 @@ def read_one_draft(folder: Path) -> dict:
             from gh_only.coupang_partners_api import issued_link_url
             expected_subid = os.getenv("COUPANG_PARTNER_SUBID", "naverblog")
             valid_issued = (
-                expected_subid in ("naverblog", "daangncafe")
+                expected_subid in ("naverblog", "cafe")
                 and issued_link_url(url)
                 and receipt.get("subid_requested") == expected_subid
                 and receipt.get("status") == "LINK_READY"

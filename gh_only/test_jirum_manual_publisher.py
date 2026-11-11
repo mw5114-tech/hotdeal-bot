@@ -54,7 +54,7 @@ class RestoredCafeTests(unittest.TestCase):
             "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED":"true",
             "DAANGN_PUBLISH_PAUSED":"false",
             "DAANGN_OFFICIAL_API_LINK_ENABLED":"true",
-            "COUPANG_PARTNER_SUBID":"daangncafe",
+            "COUPANG_PARTNER_SUBID":"cafe",
         }
         with patch.dict(os.environ, base):
             self.assertTrue(restored_live_gate())

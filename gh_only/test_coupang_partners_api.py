@@ -87,23 +87,29 @@ class OfficialApiTests(unittest.TestCase):
             payload["body"] = json.loads(req.data)
             return Response(success(
                 landing="https://link.coupang.com/re/AFFSDP?"
-                        "pageKey=12345678&itemId=45678901&subid=daangncafe"
+                        "pageKey=12345678&itemId=45678901&subid=cafe"
             ))
         with patch.dict("os.environ", {
             "COUPANG_PARTNERS_ACCESS_KEY":"access",
             "COUPANG_PARTNERS_SECRET_KEY":"secret",
         }), patch("gh_only.coupang_partners_api.request.urlopen",
                   side_effect=fake_call):
-            got = create_product_deeplink(IDENTITY, subid="daangncafe")
-        self.assertEqual(payload["body"]["subId"], "daangncafe")
-        self.assertEqual(got["subid_requested"], "daangncafe")
+            got = create_product_deeplink(IDENTITY, subid="cafe")
+        self.assertEqual(payload["body"]["subId"], "cafe")
+        self.assertEqual(got["subid_requested"], "cafe")
 
     def test_daangn_subid_rejects_cross_channel_landing(self):
         with self.assertRaisesRegex(CoupangPartnersError, "LANDING_ITEM_MISMATCH"):
             _validate_response(success(
                 landing="https://link.coupang.com/re/AFFSDP?"
                         "pageKey=12345678&itemId=45678901&subid=naverblog"
-            ), CANONICAL, IDENTITY, subid="daangncafe")
+            ), CANONICAL, IDENTITY, subid="cafe")
+
+    def test_old_daangncafe_subid_is_retired_without_network_call(self):
+        with patch("gh_only.coupang_partners_api.request.urlopen") as send:
+            with self.assertRaisesRegex(CoupangPartnersError, "SUBID_NOT_ALLOWED"):
+                request_deeplink(CANONICAL, subid="daangncafe")
+        send.assert_not_called()
 
     def test_missing_keys_never_calls_api(self):
         with patch.dict("os.environ", {

@@ -903,8 +903,8 @@ def build_next(s: dict) -> dict:
                 or not isinstance(caption, str) or caption.count(prior) != 1
                 or identity.get("status") != "EXACT_ITEM_IDENTIFIED"):
             raise RuntimeError("DAANGN_OFFICIAL_API_PRECONDITION_FAILED")
-        issued = create_product_deeplink(identity, subid="daangncafe")
-        if (issued.get("subid_requested") != "daangncafe"
+        issued = create_product_deeplink(identity, subid="cafe")
+        if (issued.get("subid_requested") != "cafe"
                 or issued.get("item_id") != identity.get("item_id")
                 or issued.get("product_id") != identity.get("product_id")):
             raise RuntimeError("DAANGN_OFFICIAL_API_ITEM_MISMATCH")
@@ -915,7 +915,7 @@ def build_next(s: dict) -> dict:
             "product_id": identity["product_id"],
             "item_id": identity["item_id"],
             "vendor_item_id": identity.get("vendor_item_id"),
-            "subid_requested": "daangncafe",
+            "subid_requested": "cafe",
         }
     if receipt is not None:
         identity = candidate.get("product_identity", {})

@@ -78,7 +78,7 @@ jobs:
           assert "DAANGN_PUBLISH_PAUSED: 'false'" in restored
           assert "DAANGN_CAFE_PUBLISH_ENABLED: 'true'" in restored
           assert "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: 'true'" in restored
-          assert 'COUPANG_PARTNER_SUBID: daangncafe' in restored
+          assert 'COUPANG_PARTNER_SUBID: cafe' in restored
           assert 'python -m gh_only.jirum_manual_queue scan' in restored
           assert 'python -m gh_only.jirum_manual_queue drain' in restored
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main

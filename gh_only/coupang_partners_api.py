@@ -135,7 +135,7 @@ def _validate_response(payload: object, original: str,
 def request_deeplink(url: str, *, identity: dict | None = None,
                      subid: str = SUBID) -> str:
     """A single POST only; each approved channel gets its own SUBID."""
-    if subid not in (SUBID, "daangncafe"):
+    if subid not in (SUBID, "cafe"):
         raise CoupangPartnersError("COUPANG_API_SUBID_NOT_ALLOWED")
     if not isinstance(url, str) or len(url) > 512 or not _input_url_ok(url):
         raise CoupangPartnersError("COUPANG_API_INPUT_URL_INVALID")

@@ -37,6 +37,18 @@ jobs:
           test -n "$COUPANG_PARTNERS_SECRET_KEY" || { echo 'COUPANG_PARTNERS_SECRET_KEY_MISSING'; exit 1; }
       - name: Real signed Coupang deeplink API probe - no blog or state write
         run: python -m gh_only.coupang_partners_api
+      - name: Verify live official Coupang API for new cafe SUBID (NO PUBLISH)
+        run: |
+          python - <<'PY'
+          from urllib.parse import urlsplit
+          from gh_only.coupang_partners_api import request_deeplink, issued_link_url
+          sample = "https://www.coupang.com/np/search?q=test"
+          url = request_deeplink(sample, subid="cafe")
+          assert issued_link_url(url)
+          print("COUPANG_CAFE_SUBID_PROBE_OK host=" +
+                str(urlsplit(url).hostname) +
+                " subid_requested=cafe no_blog_or_cafe_post=true")
+          PY
       - name: Verify one fresh Naver product draft end-to-end (no Naver browser or publish)
         env:
           COUPANG_PARTNER_LPTAG: AF9668915
