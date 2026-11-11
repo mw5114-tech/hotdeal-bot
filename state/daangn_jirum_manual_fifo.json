@@ -3,15 +3,6 @@
   "last_scanned_id": 95719,
   "pending": [
     {
-      "id": 95714,
-      "source_post_url": "https://t.me/jirum/95714",
-      "original_purchase_url": "https://link.coupang.com/a/iAObZDpnRQ",
-      "source_text": "☆특가 1,560원\n지금특가 * 130g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAObZDpnRQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T12:30:18+00:00",
-      "title": "☆특가 1,560원",
-      "sale_price_krw": 1560
-    },
-    {
       "id": 95719,
       "source_post_url": "https://t.me/jirum/95719",
       "original_purchase_url": "https://link.coupang.com/a/iAPg5CHqHQ",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6080
     }
   ],
-  "in_flight": {
-    "id": 95714,
-    "status": "CLAIMED",
-    "run_id": "43023088722",
-    "at": "2026-11-11T12:46:04.798860+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4359,6 +4345,16 @@
       "item_id": "23357867452",
       "vendor_item_id": null,
       "at": "2026-11-11T12:46:01.584535+00:00",
+      "run_id": "43023088722"
+    },
+    "95714": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EB%8B%B4%EB%B0%B1%ED%95%9C-%EB%B2%A0%EC%9D%B4%EC%BB%A8-130g-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pk90Z1Gj?from=write",
+      "posted_at_utc": "2026-11-11T12:30:18+00:00",
+      "product_id": "4550031580",
+      "item_id": "20214789456",
+      "vendor_item_id": null,
+      "at": "2026-11-11T12:46:21.547717+00:00",
       "run_id": "43023088722"
     }
   },
