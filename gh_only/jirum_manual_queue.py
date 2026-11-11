@@ -45,6 +45,13 @@ MAX_DIRECT_TIMESTAMP_LOOKUPS = 3
 STALE_CLAIM_SECONDS = 25 * 60
 TRANSIENT_GITHUB_HTTP_CODES = frozenset((429, 500, 502, 503, 504))
 GITHUB_READ_ATTEMPTS = 4
+# GitHub can reject a Daangn state PUT with 409 if Naver committed a
+# different file to the same branch at the same instant. Retry the PUT only
+# if a fresh GET proves that THIS exact Daangn state blob is unchanged.
+GITHUB_SAFE_409_ATTEMPTS = 7
+# GitHub's Contents API can briefly return the previous blob immediately
+# after a successful PUT. Poll state only; never resubmit an external post.
+PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS = 12
 
 
 
@@ -514,27 +521,58 @@ class GithubState:
         raw = json.dumps(state, ensure_ascii=False, indent=2) + "\n"
         if len(raw.encode("utf-8")) > MAX_STATE_BYTES:
             raise RuntimeError("PERSISTED_STATE_TOO_LARGE")
-        # GitHub verifies previous blob SHA; conflicting writes must fail.
-        try:
-            result = self.api("PUT", {
-                "message": message + " [skip ci]",
-                "content": base64.b64encode(raw.encode("utf-8")).decode("ascii"),
-                "sha": expected_sha, "branch": "main",
-            })
-        except (error.HTTPError, error.URLError, TimeoutError) as exc:
-            # PUT may have succeeded despite a lost response. Read it back;
-            # do not repeat ambiguous state writes with a possibly old SHA.
-            transient = (exc.code in TRANSIENT_GITHUB_HTTP_CODES
-                         if isinstance(exc, error.HTTPError) else True)
-            if not transient:
-                raise
-            confirmed_state, _ = self.read()
-            if confirmed_state == state:
-                print("JIRUM_GITHUB_WRITE_CONFIRMED_AFTER_RESPONSE_ERROR")
-                return
-            raise RuntimeError("STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY") from exc
-        if not result.get("commit", {}).get("sha"):
-            raise RuntimeError("STATE_COMMIT_NOT_CONFIRMED")
+        payload = {
+            "message": message + " [skip ci]",
+            "content": base64.b64encode(raw.encode("utf-8")).decode("ascii"),
+            "sha": expected_sha, "branch": "main",
+        }
+        for attempt in range(GITHUB_SAFE_409_ATTEMPTS):
+            try:
+                result = self.api("PUT", payload)
+            except error.HTTPError as exc:
+                if exc.code == 409:
+                    # HTTP 409 is an explicit rejected write, not a timeout.
+                    # A concurrent Naver commit can move main without changing
+                    # THIS file's blob SHA. Never overwrite a changed FIFO.
+                    latest, latest_sha = self.read()
+                    if latest == state:
+                        print("JIRUM_GITHUB_409_ALREADY_COMMITTED")
+                        return
+                    if latest_sha != expected_sha:
+                        raise RuntimeError(
+                            "DAANGN_STATE_FILE_CHANGED_NO_BLIND_REBASE"
+                        ) from exc
+                    if attempt + 1 == GITHUB_SAFE_409_ATTEMPTS:
+                        raise RuntimeError(
+                            "DAANGN_GITHUB_409_SAFE_RETRIES_EXHAUSTED"
+                        ) from exc
+                    print("JIRUM_GITHUB_409_RETRY_UNCHANGED_STATE attempt=" +
+                          str(attempt + 1))
+                    time.sleep(min(0.35 * (attempt + 1), 1.4))
+                    continue
+                if exc.code not in TRANSIENT_GITHUB_HTTP_CODES:
+                    raise
+                # A 5xx/429 or transport exception may occur AFTER commit;
+                # never retry a write unless a later human review approves.
+                latest, _ = self.read()
+                if latest == state:
+                    print("JIRUM_GITHUB_WRITE_CONFIRMED_AFTER_RESPONSE_ERROR")
+                    return
+                raise RuntimeError(
+                    "STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY"
+                ) from exc
+            except (error.URLError, TimeoutError) as exc:
+                latest, _ = self.read()
+                if latest == state:
+                    print("JIRUM_GITHUB_WRITE_CONFIRMED_AFTER_RESPONSE_ERROR")
+                    return
+                raise RuntimeError(
+                    "STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY"
+                ) from exc
+            if not result.get("commit", {}).get("sha"):
+                raise RuntimeError("STATE_COMMIT_NOT_CONFIRMED")
+            return
+        raise RuntimeError("DAANGN_GITHUB_409_SAFE_RETRIES_EXHAUSTED")
 
 
 def archive_abandoned_claim(store, *, reference: datetime | None = None) -> bool:
@@ -995,6 +1033,39 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
     store.write(state, sha, f"state: finalize Jirum {source_id} without repeat")
 
 
+def await_published_checkpoint(store, source_id: int, run_id: str,
+                               expected_url: str, *, sleeper=None) -> None:
+    """Wait for the verified persisted receipt; do not click Publish again.
+
+    A successful GitHub PUT may not immediately appear in Contents GET.
+    While the old pre-submit claim is still visible, retry READ ONLY.
+    Never treat an unrelated/contradictory claim as a normal propagation lag.
+    """
+    if type(source_id) is not int or not run_id or not isinstance(expected_url, str):
+        raise ValueError("PUBLISHED_CHECKPOINT_EXPECTATION_INVALID")
+    sleeper = sleeper or time.sleep
+    for attempt in range(PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS):
+        state, _ = store.read()
+        published = state["published"].get(str(source_id))
+        flight = state["in_flight"]
+        if published is not None:
+            if (published.get("post_url") == expected_url
+                    and published.get("run_id") == run_id
+                    and flight is None
+                    and all(row["id"] != source_id for row in state["pending"])):
+                print("JIRUM_PUBLISHED_CHECKPOINT_VISIBLE source_id=" + str(source_id))
+                return
+            raise RuntimeError("DAANGN_PUBLISHED_RECEIPT_CONFLICT_NO_REPOST")
+        if flight is None or (flight.get("id") != source_id
+                              or flight.get("run_id") != run_id):
+            raise RuntimeError("DAANGN_CLAIM_CHANGED_NO_REPOST")
+        if attempt + 1 < PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS:
+            print("JIRUM_CHECKPOINT_READ_VISIBILITY_WAIT source_id=" +
+                  str(source_id) + " attempt=" + str(attempt + 1))
+            sleeper(1)
+    raise RuntimeError("DAANGN_CHECKPOINT_NOT_YET_VISIBLE_NO_REPOST")
+
+
 def check_run_trigger() -> None:
     if (os.getenv("GITHUB_ACTIONS") != "true"
         or os.getenv("GITHUB_REF") != "refs/heads/main"
@@ -1121,6 +1192,11 @@ def publish_pending(store: GithubState, *, drain: bool = False,
         # If checkpoint is still unconfirmed, the claim is quarantined later,
         # never replayed. Do not click the submit button twice.
         finish(store, source_id, run_id, outcome)
+        if (outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED"
+                and outcome.get("post_url")):
+            await_published_checkpoint(
+                store, source_id, run_id, outcome["post_url"]
+            )
         print("JIRUM_MANUAL_PUBLISH " + json.dumps({
             "source_id": source_id, "status": outcome.get("status"),
             "post_url": outcome.get("post_url"),

@@ -16,6 +16,7 @@ from gh_only.jirum_manual_queue import (
     publish_pending, scan, validate_state, kakao_secret_fingerprint,
     freshness_status, expire_pending, scan_with_source_wait,
     archive_abandoned_claim, GithubState, STALE_CLAIM_SECONDS,
+    await_published_checkpoint,
     TIMESTAMP_RETRY_GRACE_SECONDS, awaiting_source_timestamp,
     matching_source_timestamp, fetch_exact_source_post,
 )
@@ -65,6 +66,103 @@ class FakeStore:
 
 
 class ManualQueueTests(unittest.TestCase):
+    def test_github_409_from_other_file_retries_only_same_blob_sha(self):
+        """Naver moving main must not permanently fail Daangn's FIFO PUT."""
+        st = baseline()
+        gh = object.__new__(GithubState)
+        put_conflict = error.HTTPError("https://api.github.com/test", 409,
+                                       "Conflict", None, None)
+        with patch.object(gh, "api", side_effect=[
+            put_conflict, {"commit": {"sha": "safe-new-commit"}}
+        ]) as api, patch.object(gh, "read", return_value=(copy.deepcopy(st), "old-sha")) as read, \
+                patch("gh_only.jirum_manual_queue.time.sleep") as sleep:
+            gh.write(st, "old-sha", "state: test safe 409")
+        self.assertEqual(api.call_count, 2)
+        self.assertEqual(read.call_count, 1)
+        sleep.assert_called_once()
+
+    def test_github_409_never_overwrites_changed_daangn_fifo(self):
+        st = baseline()
+        other = copy.deepcopy(st)
+        other["last_scanned_id"] += 1
+        gh = object.__new__(GithubState)
+        conflict = error.HTTPError("https://api.github.com/test", 409,
+                                   "Conflict", None, None)
+        with patch.object(gh, "api", side_effect=conflict) as api, \
+             patch.object(gh, "read", return_value=(other, "new-sha")):
+            with self.assertRaisesRegex(RuntimeError,
+                                       "DAANGN_STATE_FILE_CHANGED_NO_BLIND_REBASE"):
+                gh.write(st, "old-sha", "state: test changed file")
+        api.assert_called_once()
+
+    def test_github_409_confirmed_existing_commit_never_retries_put(self):
+        st = baseline()
+        gh = object.__new__(GithubState)
+        conflict = error.HTTPError("https://api.github.com/test", 409,
+                                   "Conflict", None, None)
+        with patch.object(gh, "api", side_effect=conflict) as api, \
+             patch.object(gh, "read", return_value=(copy.deepcopy(st), "another-sha")):
+            gh.write(st, "old-sha", "state: test already committed")
+        api.assert_called_once()
+
+    def test_unknown_5xx_commit_never_blindly_retries(self):
+        st = baseline()
+        different = copy.deepcopy(st)
+        different["last_scanned_id"] += 1
+        gh = object.__new__(GithubState)
+        exc = error.HTTPError("https://api.github.com/test", 502,
+                              "Bad Gateway", None, None)
+        with patch.object(gh, "api", side_effect=exc) as api, \
+             patch.object(gh, "read", return_value=(different, "other-sha")):
+            with self.assertRaisesRegex(RuntimeError,
+                                       "STATE_COMMIT_UNCERTAIN_NO_BLIND_RETRY"):
+                gh.write(st, "old-sha", "state: uncertain")
+        api.assert_called_once()
+
+    def test_published_checkpoint_waits_for_visible_receipt_no_repost(self):
+        before, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        before["in_flight"] = {
+            "id": 94744, "status": "CLAIMED",
+            "run_id": "real-run", "at": datetime.now(timezone.utc).isoformat()
+        }
+        after = copy.deepcopy(before)
+        after["pending"].pop(0)
+        after["in_flight"] = None
+        url = "https://cafe.daangn.com/kupang-teuggaye/posts/one"
+        after["published"]["94744"] = {
+            "status": "PUBLISHED_VERIFIED", "post_url": url,
+            "run_id": "real-run"
+        }
+        class DelayedStore:
+            def __init__(self): self.n = 0
+            def read(self):
+                self.n += 1
+                return copy.deepcopy(before if self.n <= 2 else after), "sha"
+        store = DelayedStore()
+        sleeps = []
+        await_published_checkpoint(store, 94744, "real-run", url,
+                                   sleeper=lambda n: sleeps.append(n))
+        self.assertEqual(store.n, 3)
+        self.assertEqual(sleeps, [1, 1])
+
+    def test_checkpoint_receipt_mismatch_stops_without_reposting(self):
+        st, _, _ = ingest(baseline(), [deal(94744)])
+        st["in_flight"] = None
+        st["pending"] = []
+        st["published"]["94744"] = {
+            "status": "PUBLISHED_VERIFIED",
+            "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/different",
+            "run_id": "other-run"
+        }
+        store = FakeStore(st)
+        with self.assertRaisesRegex(RuntimeError,
+                                   "DAANGN_PUBLISHED_RECEIPT_CONFLICT_NO_REPOST"):
+            await_published_checkpoint(
+                store, 94744, "this-run",
+                "https://cafe.daangn.com/kupang-teuggaye/posts/expected",
+                sleeper=lambda _: None
+            )
+
     def test_exact_source_timestamp_recovers_new_untimed_coupang_deal(self):
         now = datetime.now(timezone.utc)
         source = deal(94744)
