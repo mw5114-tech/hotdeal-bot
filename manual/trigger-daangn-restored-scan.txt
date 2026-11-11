@@ -1,6 +1,8 @@
-Owner-authorized ongoing Daangn Cafe auto-publishing, 2026-11-11.
-Target: https://cafe.daangn.com/kupang-teuggaye
-Activation: confirmed real post #95712 at GitHub Actions run 43022655752.
-Action: scan Telegram then drain ALL still-fresh pending items sequentially, checkpoint each verified post.
-Official signed Coupang API deeplink, distinct SUBID=daangncafe. Existing Naver job remains independent.
-Do not repost handled/expired/uncertain items. No manually composed AFFSDP links.
+Owner-authorized recovery verification after two failed Daangn jobs.
+Source: https://t.me/jirum/95746
+Action: scan current public Telegram and drain eligible NEW/FRESH Daangn FIFO once.
+Fix under test: GitHub HTTP 409 safe retry on unchanged Daangn blob, and
+read-only wait for post checkpoint propagation after confirmed publication.
+Source #95745 already published, DO NOT REPOST. Never replay a submitted
+or unverified post. Naver remains independently active and unchanged.
+Recovery verification request: 2026-11-12 00:32 KST.
