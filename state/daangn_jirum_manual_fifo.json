@@ -3,15 +3,6 @@
   "last_scanned_id": 95719,
   "pending": [
     {
-      "id": 95713,
-      "source_post_url": "https://t.me/jirum/95713",
-      "original_purchase_url": "https://link.coupang.com/a/iAN6UL6Zsy",
-      "source_text": "☆특가 7,400원\n지금특가 * 200ml × 24팩\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAN6UL6Zsy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-11T12:29:09+00:00",
-      "title": "☆특가 7,400원",
-      "sale_price_krw": 7400
-    },
-    {
       "id": 95714,
       "source_post_url": "https://t.me/jirum/95714",
       "original_purchase_url": "https://link.coupang.com/a/iAObZDpnRQ",
@@ -30,12 +21,7 @@
       "sale_price_krw": 6080
     }
   ],
-  "in_flight": {
-    "id": 95713,
-    "status": "CLAIMED",
-    "run_id": "43023088722",
-    "at": "2026-11-11T12:45:44.971713+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4359,6 +4345,16 @@
       "vendor_item_id": null,
       "at": "2026-11-11T12:43:06.199966+00:00",
       "run_id": "43022655752"
+    },
+    "95713": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%BC%ED%81%AC%EB%8B%89-%EC%A0%9C%EB%A1%9C-%EC%82%AC%EA%B3%BC-200ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-A0nNBYVd?from=write",
+      "posted_at_utc": "2026-11-11T12:29:09+00:00",
+      "product_id": "8174361304",
+      "item_id": "23357867452",
+      "vendor_item_id": null,
+      "at": "2026-11-11T12:46:01.584535+00:00",
+      "run_id": "43023088722"
     }
   },
   "skipped_non_coupang": 280,
