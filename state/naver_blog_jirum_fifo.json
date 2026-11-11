@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95654,
-  "pending": [
-    {
-      "id": 95654,
-      "source_message_id": 95654,
-      "source_post_url": "https://t.me/jirum/95654",
-      "original_purchase_url": "https://link.coupang.com/a/iAf9Hyo0gm",
-      "title": "대상 종가 석박지",
-      "source_text": "☆특가 7,400원 (26.0% 할인)\n대상 종가 석박지\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 2,600원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAf9Hyo0gm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7400,
-      "posted_at_utc": "2026-11-11T04:34:00+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -363,6 +352,10 @@
     "95653": {
       "url": "https://blog.naver.com/mw5114/224472896111",
       "at": "2026-11-11T04:34:26.035452+00:00"
+    },
+    "95654": {
+      "url": "https://blog.naver.com/mw5114/224472897825",
+      "at": "2026-11-11T04:35:47.570827+00:00"
     }
   },
   "skipped": {
@@ -432,12 +425,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95654,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42960149587",
-    "at": "2026-11-11T04:35:08.050520+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
