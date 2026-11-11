@@ -1,5 +1,6 @@
-User-authorized Daangn Cafe independent scan-only restoration.
+Owner-authorized live Daangn Cafe rollout; cafe owner confirmed own channel's affiliate rules.
 Target: https://cafe.daangn.com/kupang-teuggaye
-2026-11-11: scan public Telegram, checkpoint independent FIFO, do NOT publish.
-Coupang Partners: prior Daangn platform rejection; affiliate posts locked pending verified allowance.
-Naver Blog remains independent and fully enabled.
+Action: scan Telegram and attempt exactly ONE fresh verified post with the official Coupang Partners API shortenUrl.
+Tracking SUBID: daangncafe. Preserve Naver independent queue and links.
+Safety: no already-published or expired source, verify new cafe hotdeal board and photo, never retry an uncertain submit.
+Rollout reference: 2026-11-11 owner confirmation after reading owner/operator exemption.
