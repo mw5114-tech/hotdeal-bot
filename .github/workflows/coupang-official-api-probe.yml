@@ -37,3 +37,42 @@ jobs:
           test -n "$COUPANG_PARTNERS_SECRET_KEY" || { echo 'COUPANG_PARTNERS_SECRET_KEY_MISSING'; exit 1; }
       - name: Real signed Coupang deeplink API probe - no blog or state write
         run: python -m gh_only.coupang_partners_api
+      - name: Verify one fresh Naver product draft end-to-end (no Naver browser or publish)
+        env:
+          COUPANG_PARTNER_LPTAG: AF9668915
+          COUPANG_PARTNER_SUBID: naverblog
+          JIRUM_IMAGE_SOURCE: lowchart
+          JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
+          JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
+          JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python - <<'PY'
+          import json, tempfile
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from gh_only.naver_blog_jirum import make_article, source_fresh
+          from gh_only.coupang_partners_api import issued_link_url
+          state=json.loads(Path("state/naver_blog_jirum_fifo.json").read_text("utf-8"))
+          eligible=[s for s in (state.get("pending") or []) if source_fresh(s)]
+          if not eligible:
+              print("COUPANG_OFFICIAL_NAVER_DRAFT_NO_FRESH_SOURCE_NO_POST")
+          else:
+              src=eligible[0]
+              with tempfile.TemporaryDirectory(prefix="official-naver-draft-") as tmp:
+                  article=make_article(src,Path(tmp),tag="AF9668915")
+                  assert article["source_id"] == src["source_message_id"]
+                  assert issued_link_url(article["link"])
+                  assert article["unissued_link"] is False
+                  assert article["body"].startswith(
+                      "이 포스팅은 쿠팡 파트너스 활동의 일환으로")
+                  assert any(block.get("kind")=="affiliate_link"
+                             and block.get("link_url")==article["link"]
+                             for block in article["blocks"])
+                  print("COUPANG_OFFICIAL_NAVER_DRAFT_OK "+json.dumps({
+                      "source_id":article["source_id"],
+                      "host":urlsplit(article["link"]).hostname,
+                      "subid_requested":"naverblog",
+                      "no_naver_login_or_post":True,
+                  }))
+          PY
