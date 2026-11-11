@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95706,
-  "pending": [],
+  "last_scanned_id": 95708,
+  "pending": [
+    {
+      "id": 95707,
+      "source_message_id": 95707,
+      "source_post_url": "https://t.me/jirum/95707",
+      "original_purchase_url": "https://link.coupang.com/a/iAJ8d59kzd",
+      "title": "풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)",
+      "source_text": "👍대박 4,380원 (31.6% 할인)\n풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)\n📌 가격 현황\n- 정상가: 6,400원\n- 할인: 2,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAJ8d59kzd\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4380,
+      "posted_at_utc": "2026-11-11T11:33:28+00:00"
+    },
+    {
+      "id": 95708,
+      "source_message_id": 95708,
+      "source_post_url": "https://t.me/jirum/95708",
+      "original_purchase_url": "https://link.coupang.com/a/iAKcx93yCG",
+      "title": "☆특가 2,280원",
+      "source_text": "☆특가 2,280원\n청정원 하프칼로리 마요네즈, 290g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAKcx93yCG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2280,
+      "posted_at_utc": "2026-11-11T11:34:27+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
