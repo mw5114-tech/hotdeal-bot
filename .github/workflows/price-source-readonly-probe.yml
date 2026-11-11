@@ -1,0 +1,91 @@
+name: Tests | Live Lowchart exact-item comparison (READ ONLY)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/price-source-readonly-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Probe genuine Lowchart data for #95749 without publishing
+        run: |
+          python - <<'PY'
+          import tempfile, json
+          from pathlib import Path
+          from unittest.mock import patch
+          from gh_only.default_deal_automation import enrich_deal
+          p, i = "788073", "17910000282"
+          identity = {"status": "EXACT_ITEM_IDENTIFIED",
+                      "product_id": p, "item_id": i}
+          deal = {
+              "source_message_id": 95749,
+              "source_post_url": "https://t.me/jirum/95749",
+              "original_purchase_url": "https://www.coupang.com/vp/products/788073?itemId=17910000282",
+              "source_text": "특가 6,470원\n짜왕, 8개",
+              "title": "짜왕, 8개",
+              "sale_price_krw": 6470,
+          }
+          # Simulate Lowchart product image missing while keeping its valid
+          # exact item title. This used to wrongly suppress PRICE lookup.
+          fake_og = {
+              "status": "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+              "og_title": "짜왕, 8개",
+              "og_url": "https://www.lowchart.com/788073-17910000282",
+              "og_image": None,
+              "lowchart_title_verified": True,
+          }
+          def safe_fake_photo(*args):
+              return {
+                  "status": "IMAGE_SAVED",
+                  "image_source": "fallcent_search_representative",
+                  "saved_name": "NO_REAL_PHOTO_READONLY_PROBE.jpg",
+                  "representative_fallcent_image": True,
+                  "image_match_basis": "UNVERIFIED_FALLCENT_SEARCH_RESULT",
+              }
+          with tempfile.TemporaryDirectory() as tmp:
+              with patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                         return_value=fake_og):
+                  result = enrich_deal(
+                      deal, Path(tmp), resolver=lambda _url: identity,
+                      fallcent_lookup=safe_fake_photo, owner_tag=""
+                  )
+          history = result.get("history", {})
+          caption = result.get("caption", {})
+          report = {
+              "source_id": 95749,
+              "photo_failure_simulated": True,
+              "posts_published": 0,
+              "official_api_called": False,
+              "lowchart_http_status": history.get("http_status"),
+              "lowchart_reason": history.get("reason"),
+              "lowchart_observed_average": history.get("observed_average_krw"),
+              "history_verified": history.get("usable_historical_reference"),
+              "comparison_source": result.get("comparison_price_source"),
+              "comparison_price": caption.get("comparison_reference_price_krw"),
+              "discount_percent": caption.get("approx_discount_vs_reference_pct"),
+          }
+          print("LIVE_EXACT_ITEM_PRICE_READONLY " +
+                json.dumps(report, ensure_ascii=False))
+          if (report["lowchart_http_status"] != 200
+                  or report["history_verified"] is not True
+                  or report["comparison_source"] != "lowchart_public_history"
+                  or type(report["comparison_price"]) is not int
+                  or report["comparison_price"] <= 6470
+                  or type(report["discount_percent"]) is not int):
+              raise SystemExit("LIVE_EXACT_ITEM_PRICE_NOT_VERIFIED_NO_PUBLISH")
+          PY
