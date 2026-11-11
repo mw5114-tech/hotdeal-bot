@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95653,
-  "pending": [
-    {
-      "id": 95653,
-      "source_message_id": 95653,
-      "source_post_url": "https://t.me/jirum/95653",
-      "original_purchase_url": "https://link.coupang.com/a/iAf48ktBoO",
-      "title": "비비고 우리아이 한입 썰은김치",
-      "source_text": "👍대박 2,560원 (36.0% 할인)\n비비고 우리아이 한입 썰은김치\n📌 가격 현황\n- 정상가: 4,000원\n- 할인: 1,440원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAf48ktBoO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2560,
-      "posted_at_utc": "2026-11-11T04:32:58+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -359,6 +348,10 @@
     "95652": {
       "url": "https://blog.naver.com/mw5114/224472893669",
       "at": "2026-11-11T04:32:28.076727+00:00"
+    },
+    "95653": {
+      "url": "https://blog.naver.com/mw5114/224472896111",
+      "at": "2026-11-11T04:34:26.035452+00:00"
     }
   },
   "skipped": {
@@ -428,12 +421,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95653,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "42959998015",
-    "at": "2026-11-11T04:33:44.998924+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
