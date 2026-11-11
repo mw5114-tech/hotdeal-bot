@@ -1,11 +1,12 @@
-Owner-authorized single live Naver Blog test publish
-Date: 2026-11-09
-Source: newest visible Coupang message in public @jirum
-One latest message only. A previously posted/claimed source ID is never repeated.
-Allow at most 24 hours since Telegram source timestamp for this manual test.
-No retries after uncertain submit; normal Oracle publishing remains unchanged.
-
-Owner request: live publish exactly one latest Coupang Telegram post.
-Requested local time: 2026-11-11T20:48:00+09:00
-Action: one-shot Naver Blog with official Partners API shortenUrl.
-Safety: retain older FIFO; no duplicate/repeat publication; no mass batch.
+Owner-authorized EXACT one-shot Naver Blog publication.
+Date: 2026-11-11
+target_telegram_id=95725
+Product: 피지오겔 콜라겐 에센스 수딩 마스크 팩 10개입, 1개
+Product ID: 8844778961
+Item ID: 25780713091
+Vendor Item ID: 92768623821
+Source: https://t.me/jirum/95725
+Purpose: Post this exact Daangn-published product to Naver blog, not any other newer deals.
+Use officially issued Coupang Partners API link with subId=naverblog.
+If already published or if source cannot be resolved identically, do not submit.
+Keep both channel queues, old posts and Oracle recurring jobs intact.
