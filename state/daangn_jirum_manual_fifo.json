@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95750,
-  "pending": [],
+  "last_scanned_id": 95751,
+  "pending": [
+    {
+      "id": 95751,
+      "source_post_url": "https://t.me/jirum/95751",
+      "original_purchase_url": "https://link.coupang.com/a/iA2Y0G9fKC",
+      "source_text": "👍대박 11,680원 (35.4% 할인)\n고구마공장 아이스 군고구마 (냉동), 80g, 10개\n📌 가격 현황\n- 정상가: 18,080원\n- 할인: 6,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iA2Y0G9fKC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-11T15:57:16+00:00",
+      "title": "고구마공장 아이스 군고구마 (냉동), 80g, 10개",
+      "sale_price_krw": 11680
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
