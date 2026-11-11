@@ -3,16 +3,6 @@
   "last_scanned_id": 95708,
   "pending": [
     {
-      "id": 95707,
-      "source_message_id": 95707,
-      "source_post_url": "https://t.me/jirum/95707",
-      "original_purchase_url": "https://link.coupang.com/a/iAJ8d59kzd",
-      "title": "풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)",
-      "source_text": "👍대박 4,380원 (31.6% 할인)\n풀무원 짜먹는 나또 상큼레몬간장맛 (냉동)\n📌 가격 현황\n- 정상가: 6,400원\n- 할인: 2,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iAJ8d59kzd\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4380,
-      "posted_at_utc": "2026-11-11T11:33:28+00:00"
-    },
-    {
       "id": 95708,
       "source_message_id": 95708,
       "source_post_url": "https://t.me/jirum/95708",
@@ -485,6 +475,10 @@
     "95703": {
       "url": "https://blog.naver.com/mw5114/224473300830",
       "at": "2026-11-11T10:00:27.561085+00:00"
+    },
+    "95707": {
+      "url": "https://blog.naver.com/mw5114/224473394020",
+      "at": "2026-11-11T11:35:26.276978+00:00"
     }
   },
   "skipped": {
@@ -554,12 +548,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95707,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43013050885",
-    "at": "2026-11-11T11:34:45.255544+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
