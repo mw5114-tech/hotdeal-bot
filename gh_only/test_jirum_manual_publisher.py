@@ -44,7 +44,8 @@ class RestoredCafeTests(unittest.TestCase):
             self.assertTrue(restored_live_gate())
         for missing in base:
             with self.subTest(missing=missing):
-                with patch.dict(os.environ, {**base,missing:"false"}):
+                blocked = "true" if missing == "DAANGN_PUBLISH_PAUSED" else "false"
+                with patch.dict(os.environ, {**base, missing: blocked}):
                     self.assertFalse(restored_live_gate())
 
 
