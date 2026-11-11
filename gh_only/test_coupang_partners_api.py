@@ -81,6 +81,30 @@ class OfficialApiTests(unittest.TestCase):
         self.assertEqual(send.call_count, 1)
         self.assertIn("CEA algorithm=HmacSHA256", captured["headers"]["Authorization"])
 
+    def test_daangn_subid_issues_distinct_tracking_parameter(self):
+        payload = {}
+        def fake_call(req, timeout):
+            payload["body"] = json.loads(req.data)
+            return Response(success(
+                landing="https://link.coupang.com/re/AFFSDP?"
+                        "pageKey=12345678&itemId=45678901&subid=daangncafe"
+            ))
+        with patch.dict("os.environ", {
+            "COUPANG_PARTNERS_ACCESS_KEY":"access",
+            "COUPANG_PARTNERS_SECRET_KEY":"secret",
+        }), patch("gh_only.coupang_partners_api.request.urlopen",
+                  side_effect=fake_call):
+            got = create_product_deeplink(IDENTITY, subid="daangncafe")
+        self.assertEqual(payload["body"]["subId"], "daangncafe")
+        self.assertEqual(got["subid_requested"], "daangncafe")
+
+    def test_daangn_subid_rejects_cross_channel_landing(self):
+        with self.assertRaisesRegex(CoupangPartnersError, "LANDING_ITEM_MISMATCH"):
+            _validate_response(success(
+                landing="https://link.coupang.com/re/AFFSDP?"
+                        "pageKey=12345678&itemId=45678901&subid=naverblog"
+            ), CANONICAL, IDENTITY, subid="daangncafe")
+
     def test_missing_keys_never_calls_api(self):
         with patch.dict("os.environ", {
             "COUPANG_PARTNERS_ACCESS_KEY": "",

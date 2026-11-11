@@ -888,6 +888,35 @@ def build_next(s: dict) -> dict:
             "official_link_issued": False,
             "commission_attribution_verified": False,
         }
+    if os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true":
+        # This path is used only by the restored Daangn workflow. Never
+        # publish locally fabricated AFFSDP links; the signed API must issue
+        # the exact final URL using this cafe's dedicated tracking SUBID.
+        from gh_only.coupang_partners_api import create_product_deeplink
+        if receipt is not None or muse_postedit_mode():
+            raise RuntimeError("DAANGN_OFFICIAL_API_MODE_CONFLICT")
+        identity = candidate.get("product_identity", {})
+        prior = candidate.get("composed_affiliate_url")
+        caption = candidate.get("caption", {}).get("caption")
+        if (not isinstance(prior, str)
+                or not prior.startswith("https://link.coupang.com/re/AFFSDP?")
+                or not isinstance(caption, str) or caption.count(prior) != 1
+                or identity.get("status") != "EXACT_ITEM_IDENTIFIED"):
+            raise RuntimeError("DAANGN_OFFICIAL_API_PRECONDITION_FAILED")
+        issued = create_product_deeplink(identity, subid="daangncafe")
+        if (issued.get("subid_requested") != "daangncafe"
+                or issued.get("item_id") != identity.get("item_id")
+                or issued.get("product_id") != identity.get("product_id")):
+            raise RuntimeError("DAANGN_OFFICIAL_API_ITEM_MISMATCH")
+        receipt = {
+            "issued_by": "COUPANG_PARTNERS_API", "status": "LINK_READY",
+            "telegram_message_id": row["id"],
+            "partners_link": issued["partners_link"],
+            "product_id": identity["product_id"],
+            "item_id": identity["item_id"],
+            "vendor_item_id": identity.get("vendor_item_id"),
+            "subid_requested": "daangncafe",
+        }
     if receipt is not None:
         identity = candidate.get("product_identity", {})
         if (identity.get("status") != "EXACT_ITEM_IDENTIFIED"

@@ -7,8 +7,45 @@ from datetime import datetime, timedelta, timezone
 
 from gh_only.jirum_manual_publisher import (
     choose_editor_submit_index, fit_title_to_limit, leading_image_ui_prefix,
-    deal_expired_before_submit,
+    deal_expired_before_submit, target_for_cafe, restored_live_gate,
 )
+
+
+class RestoredCafeTests(unittest.TestCase):
+    def test_new_cafe_editor_target(self):
+        self.assertEqual(
+            target_for_cafe("https://cafe.daangn.com/kupang-teuggaye"),
+            ("https://cafe.daangn.com/kupang-teuggaye/posts/new",
+             "/kupang-teuggaye/posts/")
+        )
+        for target in (
+            "https://evil.example/kupang-teuggaye",
+            "http://cafe.daangn.com/kupang-teuggaye",
+            "https://cafe.daangn.com/kupang-teuggaye/posts/new",
+            "https://cafe.daangn.com/kupang-teuggaye?redirect=evil",
+            "https://cafe.daangn.com/another-cafe",
+        ):
+            with self.subTest(target=target):
+                with self.assertRaisesRegex(RuntimeError, "TARGET_NOT_APPROVED"):
+                    target_for_cafe(target)
+
+    def test_publish_guard_requires_every_condition(self):
+        import os
+        from unittest.mock import patch
+        base = {
+            "DAANGN_CAFE_RESTORED":"true",
+            "DAANGN_CAFE_PUBLISH_ENABLED":"true",
+            "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED":"true",
+            "DAANGN_PUBLISH_PAUSED":"false",
+            "DAANGN_OFFICIAL_API_LINK_ENABLED":"true",
+            "COUPANG_PARTNER_SUBID":"daangncafe",
+        }
+        with patch.dict(os.environ, base):
+            self.assertTrue(restored_live_gate())
+        for missing in base:
+            with self.subTest(missing=missing):
+                with patch.dict(os.environ, {**base,missing:"false"}):
+                    self.assertFalse(restored_live_gate())
 
 
 class SubmitAgeReplayTests(unittest.TestCase):

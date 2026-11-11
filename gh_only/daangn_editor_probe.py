@@ -104,8 +104,13 @@ def read_one_draft(folder: Path) -> dict:
         # loosen validation of existing Muse /a/ receipts for Daangn.
         if isinstance(receipt, dict) and receipt.get("issued_by") == "COUPANG_PARTNERS_API":
             from gh_only.coupang_partners_api import issued_link_url
-            valid_issued = (issued_link_url(url)
-                            and receipt.get("subid_requested") == "naverblog")
+            expected_subid = os.getenv("COUPANG_PARTNER_SUBID", "naverblog")
+            valid_issued = (
+                expected_subid in ("naverblog", "daangncafe")
+                and issued_link_url(url)
+                and receipt.get("subid_requested") == expected_subid
+                and receipt.get("status") == "LINK_READY"
+            )
         else:
             valid_issued = official_url(url)
         if (not isinstance(receipt, dict)

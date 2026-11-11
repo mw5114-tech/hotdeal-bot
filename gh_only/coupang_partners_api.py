@@ -61,7 +61,7 @@ def _input_url_ok(url: str) -> bool:
         return False
 
 
-def _landing_matches_identity(url: str, identity: dict) -> bool:
+def _landing_matches_identity(url: str, identity: dict, *, subid: str = SUBID) -> bool:
     """Accept an exact product link or an *API-returned* Coupang tracking URL.
 
     The official deeplink response's landingUrl can be
@@ -90,7 +90,7 @@ def _landing_matches_identity(url: str, identity: dict) -> bool:
                 and qs.get("itemId") == [identity["item_id"]]
                 and (not vendor or "vendorItemId" not in qs
                      or qs.get("vendorItemId") == [vendor])
-                and ("subid" not in qs or qs.get("subid") == [SUBID])
+                and ("subid" not in qs or qs.get("subid") == [subid])
             )
         return False
     except (KeyError, TypeError, ValueError):
@@ -113,7 +113,7 @@ def authorization(access: str, secret: str, signed_date: str) -> str:
 
 
 def _validate_response(payload: object, original: str,
-                       identity: dict | None) -> str:
+                       identity: dict | None, *, subid: str = SUBID) -> str:
     if not isinstance(payload, dict) or str(payload.get("rCode")) != "0":
         raise CoupangPartnersError("COUPANG_API_NON_SUCCESS")
     data = payload.get("data")
@@ -127,13 +127,16 @@ def _validate_response(payload: object, original: str,
         raise CoupangPartnersError("COUPANG_API_ISSUED_URL_INVALID")
     landing = first.get("landingUrl")
     if identity is not None and landing is not None:
-        if not isinstance(landing, str) or not _landing_matches_identity(landing, identity):
+        if not isinstance(landing, str) or not _landing_matches_identity(landing, identity, subid=subid):
             raise CoupangPartnersError("COUPANG_API_LANDING_ITEM_MISMATCH")
     return issued
 
 
-def request_deeplink(url: str, *, identity: dict | None = None) -> str:
-    """A single POST only, no redirect-following and no blind network retry."""
+def request_deeplink(url: str, *, identity: dict | None = None,
+                     subid: str = SUBID) -> str:
+    """A single POST only; each approved channel gets its own SUBID."""
+    if subid not in (SUBID, "daangncafe"):
+        raise CoupangPartnersError("COUPANG_API_SUBID_NOT_ALLOWED")
     if not isinstance(url, str) or len(url) > 512 or not _input_url_ok(url):
         raise CoupangPartnersError("COUPANG_API_INPUT_URL_INVALID")
     access = os.getenv("COUPANG_PARTNERS_ACCESS_KEY", "").strip()
@@ -142,7 +145,7 @@ def request_deeplink(url: str, *, identity: dict | None = None) -> str:
         raise CoupangPartnersError("COUPANG_API_KEYS_MISSING")
     signed_date = datetime.now(timezone.utc).strftime("%y%m%dT%H%M%SZ")
     header = authorization(access, secret, signed_date)
-    body = json.dumps({"coupangUrls": [url], "subId": SUBID},
+    body = json.dumps({"coupangUrls": [url], "subId": subid},
                       separators=(",", ":")).encode("utf-8")
     req = request.Request(
         HOST + PATH, data=body, method="POST",
@@ -169,23 +172,23 @@ def request_deeplink(url: str, *, identity: dict | None = None) -> str:
         response = json.loads(raw)
     except (UnicodeError, json.JSONDecodeError):
         raise CoupangPartnersError("COUPANG_API_RESPONSE_NOT_JSON") from None
-    return _validate_response(response, url, identity)
+    return _validate_response(response, url, identity, subid=subid)
 
 
-def create_product_deeplink(identity: dict) -> dict:
+def create_product_deeplink(identity: dict, *, subid: str = SUBID) -> dict:
     """Issue an official link for a verified exact product/item/option."""
     try:
         ordinary = regular_product_url(identity)
     except (ValueError, TypeError):
         raise CoupangPartnersError("COUPANG_API_PRODUCT_IDENTITY_INVALID") from None
-    issued = request_deeplink(ordinary, identity=identity)
+    issued = request_deeplink(ordinary, identity=identity, subid=subid)
     return {
         "status": "OFFICIAL_COUPANG_PARTNERS_API",
         "partners_link": issued,
         "product_id": identity["product_id"],
         "item_id": identity["item_id"],
         "vendor_item_id": identity.get("vendor_item_id"),
-        "subid_requested": SUBID,
+        "subid_requested": subid,
         "official_link_issued": True,
         "commission_attribution_verified": False,
     }

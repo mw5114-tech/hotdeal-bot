@@ -16,6 +16,35 @@ TARGET = "https://cafe.daangn.com/i-gagyeog-mos-c/posts/new"
 PREFIX = "/i-gagyeog-mos-c/posts/"
 BOARD = "🔥 오늘의 핫딜"
 
+# The restored workflow overrides the archived cafe; no old posts are moved.
+RESTORED_CAFE = "https://cafe.daangn.com/kupang-teuggaye"
+
+def target_for_cafe(base_url: str) -> tuple[str, str]:
+    """Use a fixed, known Daangn-owned cafe; never allow arbitrary destinations."""
+    parsed = urlsplit(base_url)
+    if (parsed.scheme != "https" or parsed.hostname != "cafe.daangn.com"
+            or parsed.port is not None or parsed.username is not None
+            or parsed.password is not None or parsed.query or parsed.fragment
+            or parsed.path.rstrip("/") not in (
+                "/i-gagyeog-mos-c", "/kupang-teuggaye"
+            )):
+        raise RuntimeError("DAANGN_CAFE_TARGET_NOT_APPROVED")
+    prefix = parsed.path.rstrip("/") + "/posts/"
+    return "https://cafe.daangn.com" + prefix + "new", prefix
+
+
+def restored_live_gate() -> bool:
+    """Require explicit channel approval and live enabled, never implicit."""
+    import os
+    return all((
+        os.getenv("DAANGN_CAFE_RESTORED") == "true",
+        os.getenv("DAANGN_CAFE_PUBLISH_ENABLED") == "true",
+        os.getenv("DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED") == "true",
+        os.getenv("DAANGN_PUBLISH_PAUSED") == "false",
+        os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true",
+        os.getenv("COUPANG_PARTNER_SUBID") == "daangncafe",
+    ))
+
 
 def deal_expired_before_submit(article: dict, reference=None) -> bool:
     """Keep 60-minute gate except explicitly user-replayed 94986-94990."""
@@ -106,6 +135,23 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
     import os
     from playwright.sync_api import sync_playwright
 
+    if os.getenv("DAANGN_CAFE_RESTORED") == "true":
+        if not restored_live_gate():
+            raise RuntimeError("DAANGN_CAFE_PARTNERS_PERMISSION_NOT_CONFIRMED")
+        if os.getenv("DAANGN_CAFE_TARGET_URL") != RESTORED_CAFE:
+            raise RuntimeError("DAANGN_CAFE_RESTORED_TARGET_MISMATCH")
+        from gh_only.coupang_partners_api import issued_link_url
+        receipt = article.get("official_link_receipt")
+        if (not isinstance(receipt, dict)
+                or receipt.get("issued_by") != "COUPANG_PARTNERS_API"
+                or receipt.get("subid_requested") != "daangncafe"
+                or receipt.get("partners_link") != article.get("candidate_url")
+                or not issued_link_url(article.get("candidate_url"))):
+            raise RuntimeError("DAANGN_CAFE_OFFICIAL_API_LINK_REQUIRED")
+    target, prefix = target_for_cafe(
+        os.getenv("DAANGN_CAFE_TARGET_URL",
+                  "https://cafe.daangn.com/i-gagyeog-mos-c")
+    )
     result = {
         "status": "NOT_STARTED",
         "source_id": article["source_id"],
@@ -130,13 +176,13 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     viewport={"width": 1366, "height": 950},
                 )
                 page = ctx.new_page()
-                resp = page.goto(TARGET, wait_until="domcontentloaded", timeout=30000)
+                resp = page.goto(target, wait_until="domcontentloaded", timeout=30000)
                 page.wait_for_timeout(1800)
                 result["http_status"] = resp.status if resp else None
                 result["page_path"] = urlsplit(page.url).path
                 if (not resp or resp.status != 200
                     or urlsplit(page.url).hostname != "cafe.daangn.com"
-                    or urlsplit(page.url).path != PREFIX + "new"):
+                    or urlsplit(page.url).path != prefix + "new"):
                     raise RuntimeError("EXPECTED_EDITOR_NOT_REACHED")
                 result["failure_stage"] = "SELECT_BOARD"
                 board = page.locator("select")
@@ -350,8 +396,8 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 result["post_url"] = page.url if (
                     dest.scheme == "https"
                     and dest.hostname == "cafe.daangn.com"
-                    and dest.path.startswith(PREFIX)
-                    and dest.path != PREFIX + "new"
+                    and dest.path.startswith(prefix)
+                    and dest.path != prefix + "new"
                 ) else None
                 if not result["post_url"]:
                     result["status"] = "PUBLISH_UNCERTAIN_DO_NOT_RETRY"
