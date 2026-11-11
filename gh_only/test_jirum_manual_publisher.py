@@ -8,6 +8,7 @@ from datetime import datetime, timedelta, timezone
 from gh_only.jirum_manual_publisher import (
     choose_editor_submit_index, fit_title_to_limit, leading_image_ui_prefix,
     deal_expired_before_submit, target_for_cafe, restored_live_gate,
+    restored_board_label,
 )
 
 
@@ -28,6 +29,21 @@ class RestoredCafeTests(unittest.TestCase):
             with self.subTest(target=target):
                 with self.assertRaisesRegex(RuntimeError, "TARGET_NOT_APPROVED"):
                     target_for_cafe(target)
+
+    def test_restored_board_requires_exact_live_label(self):
+        import os
+        from unittest.mock import patch
+        with patch.dict(os.environ, {
+            "DAANGN_CAFE_RESTORED":"true",
+            "DAANGN_CAFE_BOARD_LABEL":"🔥 오늘의핫딜",
+        }):
+            self.assertEqual(restored_board_label(), "🔥 오늘의핫딜")
+        with patch.dict(os.environ, {
+            "DAANGN_CAFE_RESTORED":"true",
+            "DAANGN_CAFE_BOARD_LABEL":"🔥 오늘의 핫딜",
+        }):
+            with self.assertRaisesRegex(RuntimeError,"BOARD_LABEL_UNVERIFIED"):
+                restored_board_label()
 
     def test_publish_guard_requires_every_condition(self):
         import os
