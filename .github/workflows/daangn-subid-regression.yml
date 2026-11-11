@@ -16,6 +16,9 @@ on:
       - 'gh_only/coupang_partners_api.py'
       - 'gh_only/test_coupang_partners_api.py'
       - 'gh_only/test_naver_blog_jirum.py'
+      - 'gh_only/naver_blog_latest_manual.py'
+      - 'gh_only/test_naver_blog_latest_manual.py'
+      - '.github/workflows/naver-blog-manual-latest.yml'
       - 'naver_blog_one_shot.py'
       - 'test_naver_blog_one_shot.py'
       - 'gh_only/jirum_manual_queue.py'
@@ -45,7 +48,7 @@ jobs:
         run: python -m py_compile gh_only/affsdp_candidate.py gh_only/default_deal_automation.py gh_only/jirum_manual_queue.py gh_only/naver_blog_jirum.py gh_only/test_naver_blog_jirum.py naver_blog_one_shot.py test_naver_blog_one_shot.py gh_only/test_affsdp_candidate.py gh_only/test_default_deal_automation.py
       - name: Run link-generation, photo/price, and Naver display tests (offline)
         run: |
-          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum gh_only.test_coupang_partners_api test_naver_blog_one_shot
+          python -m unittest -v gh_only.test_affsdp_candidate gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_format gh_only.test_naver_blog_jirum gh_only.test_coupang_partners_api gh_only.test_naver_blog_latest_manual test_naver_blog_one_shot
       - name: Verify production environment uses own lptag and dedicated SubID
         run: |
           python - <<'PY'

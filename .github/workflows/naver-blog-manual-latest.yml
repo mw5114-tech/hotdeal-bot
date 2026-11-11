@@ -23,11 +23,13 @@ jobs:
     env:
       NAVER_MANUAL_LATEST_ONE_SHOT: 'true'
       NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       GH_STATE_TOKEN: ${{ github.token }}
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
-      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'true'
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
@@ -41,11 +43,14 @@ jobs:
       - name: Validate one-shot source selection, time bound, unique state
         run: |
           python -m py_compile gh_only/naver_blog_latest_manual.py gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py
-          python -m unittest -v gh_only.test_naver_blog_latest_manual gh_only.test_naver_blog_jirum
+          python -m unittest -v gh_only.test_naver_blog_latest_manual gh_only.test_naver_blog_jirum gh_only.test_coupang_partners_api
       - name: Install browser for exactly one authorized test post
         run: |
           python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
-          python -m playwright install --with-deps chromium
+          python -m playwright install --only-shell chromium
+          python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()' ||
+          { python -m playwright install --with-deps --only-shell chromium &&
+            python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; }
       - name: Submit latest Coupang Telegram deal once and checkpoint
         run: python -m gh_only.naver_blog_latest_manual
       - name: Save non-sensitive source/photo diagnostics on failure

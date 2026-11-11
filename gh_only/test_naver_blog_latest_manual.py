@@ -1,7 +1,11 @@
 """Offline checks: latest means newest Coupang post, not newest *eligible* post."""
 import unittest
 from datetime import datetime, timedelta, timezone
-from gh_only.naver_blog_latest_manual import latest_coupang, manual_source
+from gh_only.naver_blog_latest_manual import (
+    latest_coupang, manual_source, claim_selected_latest, commit_selected_latest
+)
+from gh_only.test_naver_blog_jirum import state, deal
+from gh_only.naver_blog_jirum import ingest, validate_state
 
 
 class LatestOneShotTests(unittest.TestCase):
@@ -27,6 +31,39 @@ class LatestOneShotTests(unittest.TestCase):
         self.assertEqual(latest_coupang(rows)["source_message_id"], 101)
         with self.assertRaisesRegex(RuntimeError, "PRICE_MISSING"):
             manual_source(latest_coupang(rows))
+
+    def test_latest_claim_can_complete_newest_without_removing_oldest(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        newer = dict(s["pending"][1])
+        claim_selected_latest(s, newer, "owner-test")
+        self.assertEqual([x["id"] for x in s["pending"]], [95496, 95497])
+        self.assertEqual(s["in_flight"]["id"], 95497)
+        commit_selected_latest(s, newer, "https://blog.naver.com/mw5114/224474999999")
+        self.assertEqual([x["id"] for x in s["pending"]], [95496])
+        self.assertIn("95497", s["published"])
+        self.assertIsNone(s["in_flight"])
+        validate_state(s)
+
+    def test_latest_claim_rejects_replay_and_source_mismatch(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        source = dict(s["pending"][0])
+        bad = {**source, "sale_price_krw": source["sale_price_krw"]+10}
+        with self.assertRaisesRegex(RuntimeError, "QUEUE_MISMATCH"):
+            claim_selected_latest(s, bad, "owner-test")
+        self.assertIsNone(s["in_flight"])
+        claim_selected_latest(s, source, "owner-test")
+        commit_selected_latest(s, source, "https://blog.naver.com/mw5114/224474999999")
+        with self.assertRaisesRegex(RuntimeError, "ALREADY_HANDLED"):
+            claim_selected_latest(s, source, "owner-test")
+
+    def test_latest_claim_cannot_replay_scanned_missing(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        source = {**s["pending"][0], "id": 95495, "source_message_id": 95495}
+        with self.assertRaisesRegex(RuntimeError, "SCANNED_BUT_NOT_QUEUED"):
+            claim_selected_latest(s, source, "owner-test")
 
     def test_only_one_latest(self):
         self.assertEqual(latest_coupang([self.row(10), self.row(11)])["source_message_id"], 11)

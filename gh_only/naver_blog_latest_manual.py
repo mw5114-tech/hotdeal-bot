@@ -10,10 +10,12 @@ from __future__ import annotations
 from datetime import datetime, timezone
 import json
 import os
+import time
 
 from gh_only import jirum_manual_queue as old
 from gh_only.pipeline import enrich_posts, fetch_public_html
-from gh_only.naver_blog_jirum import DRAFT_DIR, Store, make_article, now_utc
+from gh_only.naver_blog_jirum import (DRAFT_DIR, Store, make_article, now_utc,
+                                       validate_state, NaverStateConflict)
 
 
 def latest_coupang(rows: list[dict]) -> dict | None:
@@ -50,6 +52,56 @@ def manual_source(article: dict) -> dict:
     }
 
 
+def claim_selected_latest(state: dict, source: dict, run_id: str) -> dict:
+    """Claim latest without deleting/reordering older FIFO entries."""
+    validate_state(state)
+    mid = source["id"]
+    if state["in_flight"] is not None:
+        raise RuntimeError("MANUAL_LATEST_PREVIOUS_SUBMIT_REVIEW_REQUIRED")
+    if str(mid) in state["published"] or str(mid) in state["skipped"]:
+        raise RuntimeError("MANUAL_LATEST_ALREADY_HANDLED_NO_REPLAY")
+    prior = next((r for r in state["pending"] if r["id"] == mid), None)
+    if prior is not None:
+        if any(prior.get(k) != source.get(k) for k in (
+            "id", "source_post_url", "original_purchase_url",
+            "sale_price_krw", "posted_at_utc"
+        )):
+            raise RuntimeError("MANUAL_LATEST_QUEUE_MISMATCH_NO_SUBMIT")
+    else:
+        if mid <= state["last_scanned_id"]:
+            raise RuntimeError("MANUAL_LATEST_SCANNED_BUT_NOT_QUEUED_NO_REPLAY")
+        state["pending"].append(source)
+        state["pending"].sort(key=lambda row: row["id"])
+        state["last_scanned_id"] = mid
+    state["in_flight"] = {
+        "id": mid, "status": "REVIEW_REQUIRED", "run_id": run_id,
+        "at": now_utc(), "reason": "OWNER_AUTHORIZED_MANUAL_LATEST_ONE_SHOT"
+    }
+    validate_state(state)
+    return state
+
+
+def commit_selected_latest(state: dict, source: dict, url: str) -> dict:
+    """Checkpoint only the manually selected ID after Naver verifies URL."""
+    validate_state(state)
+    mid = source["id"]
+    if (state["in_flight"] is None
+            or state["in_flight"].get("id") != mid
+            or str(mid) in state["published"] or str(mid) in state["skipped"]):
+        raise RuntimeError("MANUAL_LATEST_CLAIM_LOST_NO_REPOST")
+    positions = [idx for idx, r in enumerate(state["pending"]) if r["id"] == mid]
+    if len(positions) != 1:
+        raise RuntimeError("MANUAL_LATEST_PENDING_NOT_FOUND_NO_REPOST")
+    state["pending"].pop(positions[0])
+    state["in_flight"] = None
+    state["published"][str(mid)] = {
+        "url": url, "at": now_utc(), "manual_test_replay": True,
+        "source_post_url": source["source_post_url"]
+    }
+    validate_state(state)
+    return state
+
+
 def run_once() -> int:
     if (os.getenv("GITHUB_ACTIONS") != "true"
             or os.getenv("GITHUB_REF") != "refs/heads/main"
@@ -64,9 +116,7 @@ def run_once() -> int:
     state, _ = store.read()
     if state["in_flight"]:
         raise RuntimeError("MANUAL_LATEST_PREVIOUS_SUBMIT_REVIEW_REQUIRED")
-    if state["pending"]:
-        raise RuntimeError("MANUAL_LATEST_PENDING_AUTOMATIC_QUEUE_REVIEW_FIRST")
-
+    # The manual newest-item test preserves existing older FIFO entries.
     latest = latest_coupang(enrich_posts(fetch_public_html(), max_posts=100))
     if latest is None:
         print("MANUAL_LATEST_NO_COUPANG_MESSAGE")
@@ -106,16 +156,10 @@ def run_once() -> int:
 
     # Pre-publish checkpoint. Never retry on uncertain network response.
     newest, sha = store.read()
-    if (newest["in_flight"] or newest["pending"]
-            or str(mid) in newest["published"] or str(mid) in newest["skipped"]):
+    if (newest["in_flight"] or str(mid) in newest["published"]
+            or str(mid) in newest["skipped"]):
         raise RuntimeError("MANUAL_LATEST_STATE_CHANGED_NO_SUBMIT")
-    newest["last_scanned_id"] = max(newest["last_scanned_id"], mid)
-    newest["pending"].append(source)
-    newest["in_flight"] = {
-        "id": mid, "status": "REVIEW_REQUIRED",
-        "run_id": os.getenv("GITHUB_RUN_ID", "unknown"), "at": now_utc(),
-        "reason": "OWNER_AUTHORIZED_MANUAL_LATEST_ONE_SHOT"
-    }
+    claim_selected_latest(newest, source, os.getenv("GITHUB_RUN_ID", "unknown"))
     store.write(newest, sha, "state: claim owner-authorized latest Telegram test")
 
     # Write attempt starts here. A failure leaves an in-flight review lock;
@@ -124,20 +168,31 @@ def run_once() -> int:
     url = submit_one(article, os.environ.get("NAVER_BLOG_STORAGE_STATE_JSON", ""),
                      publish=True)
 
-    committed, sha = store.read()
-    if (not committed["in_flight"]
-            or committed["in_flight"]["id"] != mid
-            or not committed["pending"]
-            or committed["pending"][0]["id"] != mid):
-        raise RuntimeError("MANUAL_LATEST_CLAIM_LOST_NO_REPOST")
-    committed["pending"].pop(0)
-    committed["in_flight"] = None
-    committed["published"][str(mid)] = {
-        "url": url, "at": now_utc(),
-        "manual_test_replay": True,
-        "source_post_url": source["source_post_url"]
-    }
-    store.write(committed, sha, "state: verify one Naver Blog Telegram manual test published")
+    # Read-after-write consistency on GitHub Contents can lag a successful
+    # claim. Retry state reads and known 409 writes ONLY, never Naver submit.
+    for attempt in range(12):
+        committed, sha = store.read()
+        prior = committed["published"].get(str(mid))
+        if prior is not None:
+            if prior.get("url") == url and committed["in_flight"] is None:
+                break
+            raise RuntimeError("MANUAL_LATEST_RECEIPT_CONFLICT_NO_REPOST")
+        if committed["in_flight"] is None:
+            if attempt == 11:
+                raise RuntimeError("MANUAL_LATEST_CLAIM_NOT_VISIBLE_NO_REPOST")
+            time.sleep(1)
+            continue
+        commit_selected_latest(committed, source, url)
+        try:
+            store.write(committed, sha,
+                        "state: verify one Naver Blog Telegram manual test published")
+            break
+        except NaverStateConflict:
+            if attempt == 11:
+                raise
+            time.sleep(1)
+    else:
+        raise RuntimeError("MANUAL_LATEST_CHECKPOINT_UNCONFIRMED_NO_REPOST")
     print("MANUAL_LATEST_PUBLISHED " + json.dumps({
         "source_id": mid, "post_url": url,
     }, ensure_ascii=False))
