@@ -4,3 +4,8 @@ Source: newest visible Coupang message in public @jirum
 One latest message only. A previously posted/claimed source ID is never repeated.
 Allow at most 24 hours since Telegram source timestamp for this manual test.
 No retries after uncertain submit; normal Oracle publishing remains unchanged.
+
+Owner request: live publish exactly one latest Coupang Telegram post.
+Requested local time: 2026-11-11T20:48:00+09:00
+Action: one-shot Naver Blog with official Partners API shortenUrl.
+Safety: retain older FIFO; no duplicate/repeat publication; no mass batch.
