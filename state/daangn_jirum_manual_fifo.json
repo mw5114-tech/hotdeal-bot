@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95813,
-  "pending": [
-    {
-      "id": 95813,
-      "source_post_url": "https://t.me/jirum/95813",
-      "original_purchase_url": "https://link.coupang.com/a/iB8Ces9TkO",
-      "source_text": "❤️초대박 3,900원 (41.0% 할인)\n히말라야립밤 10g 2개\n📌 가격 현황\n- 정상가: 6,610원\n- 할인: 2,710원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iB8Ces9TkO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T07:43:42+00:00",
-      "title": "히말라야립밤 10g 2개",
-      "sale_price_krw": 3900
-    }
-  ],
-  "in_flight": {
-    "id": 95813,
-    "status": "CLAIMED",
-    "run_id": "43177492692",
-    "at": "2026-11-12T07:44:51.242881+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4701,6 +4686,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T07:41:09.972661+00:00",
       "run_id": "43177004099"
+    },
+    "95813": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9E%88%EB%A7%90%EB%9D%BC%EC%95%BC-%EB%A6%BD-%EB%B0%A4-%EB%AC%B4%EC%83%89-10g-2%EA%B0%9C-40%ED%95%A0%EC%9D%B8-jbE6M2Dd?from=write",
+      "posted_at_utc": "2026-11-12T07:43:42+00:00",
+      "product_id": "120680",
+      "item_id": "8040718",
+      "vendor_item_id": "3011049552",
+      "at": "2026-11-12T07:45:07.560678+00:00",
+      "run_id": "43177492692"
     }
   },
   "skipped_non_coupang": 340,
