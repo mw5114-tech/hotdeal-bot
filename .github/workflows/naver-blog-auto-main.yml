@@ -1,4 +1,4 @@
-name: NAVER BLOG | MAIN - Telegram to Blog (Oracle + 30min backup)
+name: NAVER BLOG | MAIN - Telegram to Blog (Oracle + 6h backup)
 
 on:
   # Oracle's event bridge is the primary trigger.
@@ -14,9 +14,11 @@ on:
         required: false
         default: false
         type: boolean
-  # Restore a missed event without launching any Daangn job.
+  # The Oracle event bridge remains real-time. Under low Actions budget,
+  # run a low-frequency emergency sweep instead of 48 paid empty scans/day.
+  # Freshness checks remain unchanged: this is NOT a 6-hour replay of old deals.
   schedule:
-    - cron: '17,47 * * * *'
+    - cron: '17 */6 * * *'
   # The old Oracle deployment may still dispatch to the legacy filename.
   # Its compatibility entrypoint calls this one with the SAME safety flags.
   workflow_call:

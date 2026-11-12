@@ -20,8 +20,11 @@ on:
         required: false
         default: false
         type: boolean
+  # Oracle event dispatch runs both channels immediately. Save billed runner
+  # minutes by retaining only 4 daily emergency sweeps instead of 48.
+  # Expired deals still fail closed rather than posting an old price.
   schedule:
-    - cron: '26,56 * * * *'
+    - cron: '47 */6 * * *'
   push:
     branches: [main]
     paths:

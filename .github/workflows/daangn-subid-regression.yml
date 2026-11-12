@@ -44,7 +44,9 @@ permissions:
 
 jobs:
   offline-subid-regression:
-    runs-on: ubuntu-24.04
+    # 1-vCPU runner charges one-third of the standard Linux per-minute rate.
+    # Offline suite only: no Chromium launcher/editor/live publisher here.
+    runs-on: ubuntu-slim
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
@@ -89,8 +91,11 @@ jobs:
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
           assert 'daangn-cafe-independent:' in main
           assert "github.event_name != 'schedule'" in main
-          assert "cron: '17,47 * * * *'" in main
-          assert "cron: '26,56 * * * *'" in restored
+          assert "cron: '17 */6 * * *'" in main
+          assert "cron: '47 */6 * * *'" in restored
+          assert "runs-on: ubuntu-slim" in Path('.github/workflows/daangn-subid-regression.yml').read_text()
+          assert "runs-on: ubuntu-24.04" in main
+          assert "runs-on: ubuntu-24.04" in restored
           assert 'secrets: inherit' in main
           assert 'DAANGN_POLICY_GATE_CLOSED_SCAN_ONLY' in restored
           assert "DAANGN_PUBLISH_PAUSED" not in main
