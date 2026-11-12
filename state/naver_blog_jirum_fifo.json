@@ -3,16 +3,6 @@
   "last_scanned_id": 95830,
   "pending": [
     {
-      "id": 95827,
-      "source_message_id": 95827,
-      "source_post_url": "https://t.me/jirum/95827",
-      "original_purchase_url": "https://link.coupang.com/a/iCiZE8Mboi",
-      "title": "☆특가 5,400원",
-      "source_text": "☆특가 5,400원\n에코맘의 산골이유식 산골쌀참, 25g,4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCiZE8Mboi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5400,
-      "posted_at_utc": "2026-11-12T10:08:55+00:00"
-    },
-    {
       "id": 95830,
       "source_message_id": 95830,
       "source_post_url": "https://t.me/jirum/95830",
@@ -681,6 +671,10 @@
     "95823": {
       "url": "https://blog.naver.com/mw5114/224474671158",
       "at": "2026-11-12T10:13:33.845081+00:00"
+    },
+    "95827": {
+      "url": "https://blog.naver.com/mw5114/224474706499",
+      "at": "2026-11-12T10:51:37.831954+00:00"
     }
   },
   "skipped": {
@@ -761,12 +755,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95827,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43203908055",
-    "at": "2026-11-12T10:50:57.445242+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
