@@ -1,0 +1,24 @@
+name: Security | public repository credential audit
+
+# A separate read-only check: never touches publishing, queues, or schedules.
+# Run manually at any time; weekly check catches accidentally committed secrets.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 3 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    if: github.repository == 'mw5114-tech/hotdeal-bot'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - name: Checkout source without persisting credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Scan tracked public files (never echo secret values)
+        run: python3 security/check_public_repo.py
