@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95865,
-  "pending": [],
+  "last_scanned_id": 95866,
+  "pending": [
+    {
+      "id": 95866,
+      "source_post_url": "https://t.me/jirum/95866",
+      "original_purchase_url": "https://link.coupang.com/a/iC73IM9QhU",
+      "source_text": "👍대박 6,950원 (39.0% 할인)\n스너글 섬유유연제 그린스파클 플러스 본품 2L\n📌 가격 현황\n- 정상가: 11,393원\n- 할인: 4,443원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iC73IM9QhU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T22:03:31+00:00",
+      "title": "스너글 섬유유연제 그린스파클 플러스 본품 2L",
+      "sale_price_krw": 6950
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
