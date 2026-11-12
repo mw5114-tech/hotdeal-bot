@@ -1,16 +1,56 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95819,
+  "last_scanned_id": 95827,
   "pending": [
     {
-      "id": 95819,
-      "source_message_id": 95819,
-      "source_post_url": "https://t.me/jirum/95819",
-      "original_purchase_url": "https://link.coupang.com/a/iCfKVZuetM",
-      "title": "☆특가 21,640원",
-      "source_text": "☆특가 21,640원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCfKVZuetM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 21640,
-      "posted_at_utc": "2026-11-12T09:23:37+00:00"
+      "id": 95820,
+      "source_message_id": 95820,
+      "source_post_url": "https://t.me/jirum/95820",
+      "original_purchase_url": "https://link.coupang.com/a/iCgwlLMMeW",
+      "title": "☆특가 8,450원",
+      "source_text": "☆특가 8,450원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCgwlLMMeW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8450,
+      "posted_at_utc": "2026-11-12T09:34:19+00:00"
+    },
+    {
+      "id": 95821,
+      "source_message_id": 95821,
+      "source_post_url": "https://t.me/jirum/95821",
+      "original_purchase_url": "https://link.coupang.com/a/iCgLeI5pg4",
+      "title": "오타후쿠 야키소바 소스 300g",
+      "source_text": "🔥🔥🔥무지성 2,240원 (64.0% 할인)🔥🔥🔥\n오타후쿠 야키소바 소스 300g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 6,222원\n- 할인: 3,982원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCgLeI5pg4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2240,
+      "posted_at_utc": "2026-11-12T09:37:40+00:00"
+    },
+    {
+      "id": 95822,
+      "source_message_id": 95822,
+      "source_post_url": "https://t.me/jirum/95822",
+      "original_purchase_url": "https://link.coupang.com/a/iCg4bF3pBI",
+      "title": "프로쉬 다목적 키친클리너 300ml",
+      "source_text": "❤️초대박 7,560원 (42.0% 할인)\n프로쉬 다목적 키친클리너 300ml\n📌 가격 현황\n- 정상가: 13,034원\n- 할인: 5,474원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCg4bF3pBI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7560,
+      "posted_at_utc": "2026-11-12T09:41:57+00:00"
+    },
+    {
+      "id": 95823,
+      "source_message_id": 95823,
+      "source_post_url": "https://t.me/jirum/95823",
+      "original_purchase_url": "https://link.coupang.com/a/iChmVBEaWa",
+      "title": "☆특가 26,569원",
+      "source_text": "☆특가 26,569원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iChmVBEaWa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 26569,
+      "posted_at_utc": "2026-11-12T09:46:11+00:00"
+    },
+    {
+      "id": 95827,
+      "source_message_id": 95827,
+      "source_post_url": "https://t.me/jirum/95827",
+      "original_purchase_url": "https://link.coupang.com/a/iCiZE8Mboi",
+      "title": "☆특가 5,400원",
+      "source_text": "☆특가 5,400원\n에코맘의 산골이유식 산골쌀참, 25g,4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCiZE8Mboi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5400,
+      "posted_at_utc": "2026-11-12T10:08:55+00:00"
     }
   ],
   "published": {
@@ -726,14 +766,16 @@
     "95790": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-12T04:59:29.621454+00:00"
+    },
+    "95819": {
+      "reason": "PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY",
+      "claimed_run_id": "43191137179",
+      "claimed_at": "2026-11-12T09:24:35.825553+00:00",
+      "source_post_url": "https://t.me/jirum/95819",
+      "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95819,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43191137179",
-    "at": "2026-11-12T09:24:35.825553+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
