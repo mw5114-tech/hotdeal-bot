@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95833,
-  "pending": [
-    {
-      "id": 95833,
-      "source_post_url": "https://t.me/jirum/95833",
-      "original_purchase_url": "https://link.coupang.com/a/iCozM4V6VU",
-      "source_text": "☆특가 7,700원\n코멧 국내생산 심플한 팬트리 정리함\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCozM4V6VU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T11:27:02+00:00",
-      "title": "☆특가 7,700원",
-      "sale_price_krw": 7700
-    }
-  ],
-  "in_flight": {
-    "id": 95833,
-    "status": "CLAIMED",
-    "run_id": "43209328888",
-    "at": "2026-11-12T11:27:54.415606+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4831,6 +4816,16 @@
       "vendor_item_id": "82114351049",
       "at": "2026-11-12T11:24:13.052405+00:00",
       "run_id": "43208754423"
+    },
+    "95833": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EB%A9%A7-%EA%B5%AD%EB%82%B4%EC%83%9D%EC%82%B0-%EC%8B%AC%ED%94%8C%ED%95%9C-%ED%8C%AC%ED%8A%B8%EB%A6%AC-%EC%A0%95%EB%A6%AC%ED%95%A8-%ED%99%94%EC%9D%B4%ED%8A%B8-4%EA%B0%9C-15%ED%95%A0%EC%9D%B8-AqqOb34A?from=write",
+      "posted_at_utc": "2026-11-12T11:27:02+00:00",
+      "product_id": "8691189421",
+      "item_id": "25233668964",
+      "vendor_item_id": null,
+      "at": "2026-11-12T11:28:09.988096+00:00",
+      "run_id": "43209328888"
     }
   },
   "skipped_non_coupang": 347,
