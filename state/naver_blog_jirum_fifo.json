@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95775,
-  "pending": [
-    {
-      "id": 95775,
-      "source_message_id": 95775,
-      "source_post_url": "https://t.me/jirum/95775",
-      "original_purchase_url": "https://link.coupang.com/a/iBJtgLciiW",
-      "title": "☆특가 8,800원",
-      "source_text": "☆특가 8,800원\n아우라 초고농축 섬유유연제 윌유메리미 리필, 1.7L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBJtgLciiW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8800,
-      "posted_at_utc": "2026-11-12T01:51:50+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -583,6 +572,10 @@
     "95774": {
       "url": "https://blog.naver.com/mw5114/224474048425",
       "at": "2026-11-12T01:53:40.337283+00:00"
+    },
+    "95775": {
+      "url": "https://blog.naver.com/mw5114/224474049828",
+      "at": "2026-11-12T01:54:38.586027+00:00"
     }
   },
   "skipped": {
@@ -652,12 +645,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95775,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43137475473",
-    "at": "2026-11-12T01:53:56.247721+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
