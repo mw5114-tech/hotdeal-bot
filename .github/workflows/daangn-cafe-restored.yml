@@ -101,6 +101,7 @@ jobs:
           env.DAANGN_PUBLISH_PAUSED == 'false' &&
           env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
           env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
+        continue-on-error: true
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright

@@ -107,6 +107,7 @@ jobs:
       # still performs the normal safety probe before SmartEditor opens.
       - name: Restore reusable Chromium binary (no publishing)
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        continue-on-error: true
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright

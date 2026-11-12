@@ -100,6 +100,8 @@ jobs:
           assert 'headless-shell-linux-x64-playwright-1.64.1-v1' in restored
           assert 'uses: actions/cache@v4' in main
           assert 'uses: actions/cache@v4' in restored
+          assert 'continue-on-error: true' in main
+          assert 'continue-on-error: true' in restored
           assert 'secrets: inherit' in main
           assert 'DAANGN_POLICY_GATE_CLOSED_SCAN_ONLY' in restored
           assert "DAANGN_PUBLISH_PAUSED" not in main
