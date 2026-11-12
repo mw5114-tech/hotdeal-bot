@@ -3,16 +3,6 @@
   "last_scanned_id": 95775,
   "pending": [
     {
-      "id": 95774,
-      "source_message_id": 95774,
-      "source_post_url": "https://t.me/jirum/95774",
-      "original_purchase_url": "https://link.coupang.com/a/iBJj9iuMfZ",
-      "title": "[로켓프레시] 품애복 5무 훈제오리 바비큐 슬라이스",
-      "source_text": "👍대박 7,680원 (38.0% 할인)\n[로켓프레시] 품애복 5무 훈제오리 바비큐 슬라이스\n📌 가격 현황\n- 정상가: 12,387원\n- 할인: 4,707원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBJj9iuMfZ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7680,
-      "posted_at_utc": "2026-11-12T01:49:46+00:00"
-    },
-    {
       "id": 95775,
       "source_message_id": 95775,
       "source_post_url": "https://t.me/jirum/95775",
@@ -589,6 +579,10 @@
     "95773": {
       "url": "https://blog.naver.com/mw5114/224474029598",
       "at": "2026-11-12T01:41:08.277544+00:00"
+    },
+    "95774": {
+      "url": "https://blog.naver.com/mw5114/224474048425",
+      "at": "2026-11-12T01:53:40.337283+00:00"
     }
   },
   "skipped": {
@@ -658,12 +652,7 @@
       "recovery_note": "Owner-requested safe quarantine after completed failed run; publication not proven absent"
     }
   },
-  "in_flight": {
-    "id": 95774,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43137475473",
-    "at": "2026-11-12T01:52:58.253799+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
