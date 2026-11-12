@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95827,
-  "pending": [
-    {
-      "id": 95827,
-      "source_post_url": "https://t.me/jirum/95827",
-      "original_purchase_url": "https://link.coupang.com/a/iCiZE8Mboi",
-      "source_text": "☆특가 5,400원\n에코맘의 산골이유식 산골쌀참, 25g,4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCiZE8Mboi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T10:08:55+00:00",
-      "title": "☆특가 5,400원",
-      "sale_price_krw": 5400
-    }
-  ],
-  "in_flight": {
-    "id": 95827,
-    "status": "CLAIMED",
-    "run_id": "43197848837",
-    "at": "2026-11-12T10:09:57.166784+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4801,6 +4786,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T09:47:10.077429+00:00",
       "run_id": "43194445295"
+    },
+    "95827": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EC%BD%94%EB%A7%98%EC%9D%98%EC%82%B0%EA%B3%A8%EC%9D%B4%EC%9C%A0%EC%8B%9D-%EC%82%B0%EA%B3%A8%EC%8C%80%EC%B0%B8-%ED%98%BC%ED%95%A9%EB%A7%9B%EC%82%AC%EA%B3%BC%EB%8B%B9%EA%B7%BC-25g-4-40%ED%95%A0%EC%9D%B8-jbE65Jwd?from=write",
+      "posted_at_utc": "2026-11-12T10:08:55+00:00",
+      "product_id": "8750531427",
+      "item_id": "23722282829",
+      "vendor_item_id": null,
+      "at": "2026-11-12T10:10:14.569966+00:00",
+      "run_id": "43197848837"
     }
   },
   "skipped_non_coupang": 344,
