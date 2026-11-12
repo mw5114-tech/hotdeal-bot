@@ -238,3 +238,23 @@ live-data/
 *.session-journal
 .env
 .env.*
+
+# Public repository safety: never commit local credentials or browser auth data.
+# Additive ignore rules only; intentionally do NOT ignore tracked FIFO state/*.json.
+**/.auth/
+**/playwright-report/
+**/test-results/
+**/storage_state.json
+**/storage-state.json
+**/cookies.json
+**/auth.json
+**/credentials.json
+**/service-account*.json
+**/*.secrets.json
+**/*.har
+**/*.trace.zip
+**/trace.zip
+**/id_rsa
+**/id_ed25519
+**/*.p12
+**/*.pfx
