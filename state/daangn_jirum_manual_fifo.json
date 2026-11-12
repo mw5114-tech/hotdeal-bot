@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95865,
-  "pending": [
-    {
-      "id": 95865,
-      "source_post_url": "https://t.me/jirum/95865",
-      "original_purchase_url": "https://link.coupang.com/a/iC72rA8SOa",
-      "source_text": "👍대박 5,090원 (32.0% 할인)\n청우식품 초코파이찰떡 2개\n📌 가격 현황\n- 정상가: 7,485원\n- 할인: 2,395원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iC72rA8SOa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T22:03:13+00:00",
-      "title": "청우식품 초코파이찰떡 2개",
-      "sale_price_krw": 5090
-    }
-  ],
-  "in_flight": {
-    "id": 95865,
-    "status": "CLAIMED",
-    "run_id": "43316300470",
-    "at": "2026-11-12T22:04:01.631005+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4891,6 +4876,16 @@
       "vendor_item_id": "70209963883",
       "at": "2026-11-12T17:15:30.618336+00:00",
       "run_id": "43267327670"
+    },
+    "95865": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B2%AD%EC%9A%B0%EC%8B%9D%ED%92%88-%EC%B4%88%EC%BD%94%ED%8C%8C%EC%9D%B4%EC%B0%B0%EB%96%A1-215g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PmvZpaed?from=write",
+      "posted_at_utc": "2026-11-12T22:03:13+00:00",
+      "product_id": "5722403141",
+      "item_id": "490230165",
+      "vendor_item_id": "85129877224",
+      "at": "2026-11-12T22:04:17.897775+00:00",
+      "run_id": "43316300470"
     }
   },
   "skipped_non_coupang": 373,
