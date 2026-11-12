@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95822,
-  "pending": [
-    {
-      "id": 95822,
-      "source_post_url": "https://t.me/jirum/95822",
-      "original_purchase_url": "https://link.coupang.com/a/iCg4bF3pBI",
-      "source_text": "❤️초대박 7,560원 (42.0% 할인)\n프로쉬 다목적 키친클리너 300ml\n📌 가격 현황\n- 정상가: 13,034원\n- 할인: 5,474원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCg4bF3pBI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T09:41:57+00:00",
-      "title": "프로쉬 다목적 키친클리너 300ml",
-      "sale_price_krw": 7560
-    }
-  ],
-  "in_flight": {
-    "id": 95822,
-    "status": "CLAIMED",
-    "run_id": "43193852888",
-    "at": "2026-11-12T09:43:38.506623+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4781,6 +4766,16 @@
       "vendor_item_id": "3000938578",
       "at": "2026-11-12T09:39:04.177719+00:00",
       "run_id": "43193180373"
+    },
+    "95822": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%84%EB%A1%9C%EC%89%AC-%EB%8B%A4%EB%AA%A9%EC%A0%81-%ED%82%A4%EC%B9%9C%ED%81%B4%EB%A6%AC%EB%84%88-300ml-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PwnM2XyA?from=write",
+      "posted_at_utc": "2026-11-12T09:41:57+00:00",
+      "product_id": "8230435072",
+      "item_id": "28617381755",
+      "vendor_item_id": "92531041802",
+      "at": "2026-11-12T09:43:54.295668+00:00",
+      "run_id": "43193852888"
     }
   },
   "skipped_non_coupang": 341,
