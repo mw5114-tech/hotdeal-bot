@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95815,
-  "pending": [
-    {
-      "id": 95815,
-      "source_post_url": "https://t.me/jirum/95815",
-      "original_purchase_url": "https://link.coupang.com/a/iCbwxXLSIm",
-      "source_text": "☆특가 5,750원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCbwxXLSIm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T08:24:23+00:00",
-      "title": "☆특가 5,750원",
-      "sale_price_krw": 5750
-    }
-  ],
-  "in_flight": {
-    "id": 95815,
-    "status": "CLAIMED",
-    "run_id": "43182823766",
-    "at": "2026-11-12T08:25:49.510772+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4721,6 +4706,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T08:01:10.813141+00:00",
       "run_id": "43179468915"
+    },
+    "95815": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-GAP-%EB%8B%B9%EB%8F%84%EC%84%A0%EB%B3%84-%EC%A0%9C%EC%A3%BC%EA%B0%90%EA%B7%A4-%EB%A1%9C%EC%96%84%EA%B3%BC-15kg%EB%A1%9C%EC%96%84%EA%B3%BC-1%EB%B0%95%EC%8A%A4-60%ED%95%A0%EC%9D%B8-dpYoNrWj?from=write",
+      "posted_at_utc": "2026-11-12T08:24:23+00:00",
+      "product_id": "6810165618",
+      "item_id": "16107487920",
+      "vendor_item_id": null,
+      "at": "2026-11-12T08:26:07.189853+00:00",
+      "run_id": "43182823766"
     }
   },
   "skipped_non_coupang": 340,
