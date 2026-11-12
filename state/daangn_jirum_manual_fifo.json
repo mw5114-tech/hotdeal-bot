@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95762,
-  "pending": [],
+  "last_scanned_id": 95772,
+  "pending": [
+    {
+      "id": 95772,
+      "source_post_url": "https://t.me/jirum/95772",
+      "original_purchase_url": "https://link.coupang.com/a/iBGQkKt4a4",
+      "source_text": "☆특가 481,670원\nLG전자 코드제로 B5 로봇청소기 585WKA\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBGQkKt4a4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T01:15:03+00:00",
+      "title": "☆특가 481,670원",
+      "sale_price_krw": 481670
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4518,7 +4528,7 @@
       "run_id": "43129747297"
     }
   },
-  "skipped_non_coupang": 307,
+  "skipped_non_coupang": 316,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
