@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95788,
-  "pending": [
-    {
-      "id": 95788,
-      "source_post_url": "https://t.me/jirum/95788",
-      "original_purchase_url": "https://link.coupang.com/a/iBQGUEyIHA",
-      "source_text": "☆특가 9,700원 (29.0% 할인)\n띵크유어도그티 강아지 딩고껌 대용량 500g\n📌 가격 현황\n- 정상가: 13,662원\n- 할인: 3,962원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBQGUEyIHA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T03:32:52+00:00",
-      "title": "띵크유어도그티 강아지 딩고껌 대용량 500g",
-      "sale_price_krw": 9700
-    }
-  ],
-  "in_flight": {
-    "id": 95788,
-    "status": "CLAIMED",
-    "run_id": "43149043803",
-    "at": "2026-11-12T03:34:13.844709+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4611,6 +4596,16 @@
       "vendor_item_id": "85322181985",
       "at": "2026-11-12T03:33:10.035940+00:00",
       "run_id": "43148893842"
+    },
+    "95788": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%B5%ED%81%AC%EC%9C%A0%EC%96%B4%EB%8F%84%EA%B7%B8%ED%8B%B0-%EA%B0%95%EC%95%84%EC%A7%80-%EB%94%A9%EA%B3%A0%EA%BB%8C-%EB%8C%80%EC%9A%A9%EB%9F%89-%EC%86%8C%EA%B3%A0%EA%B8%B0-%EB%B3%B8-500g-30%ED%95%A0%EC%9D%B8-j8ay6vvA?from=write",
+      "posted_at_utc": "2026-11-12T03:32:52+00:00",
+      "product_id": "8595710754",
+      "item_id": "781092731",
+      "vendor_item_id": "4977334971",
+      "at": "2026-11-12T03:34:31.083946+00:00",
+      "run_id": "43149043803"
     }
   },
   "skipped_non_coupang": 324,
