@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95777,
-  "pending": [
-    {
-      "id": 95777,
-      "source_post_url": "https://t.me/jirum/95777",
-      "original_purchase_url": "https://link.coupang.com/a/iBL1gEU0WG",
-      "source_text": "☆특가 9,900원\n3M 쓰리엠 원터치 테이프 커터 12mm/18mm 핑크\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBL1gEU0WG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T02:27:29+00:00",
-      "title": "☆특가 9,900원",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 95777,
-    "status": "CLAIMED",
-    "run_id": "43141612335",
-    "at": "2026-11-12T02:28:29.088423+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4571,6 +4556,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T01:53:13.865001+00:00",
       "run_id": "43137475473"
+    },
+    "95777": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%93%B0%EB%A6%AC%EC%97%A0-%EC%9B%90%ED%84%B0%EC%B9%98-%ED%85%8C%EC%9D%B4%ED%94%84-%EC%BB%A4%ED%84%B0-12mm18mm-%ED%95%91%ED%81%AC-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-Pk90ROxj?from=write",
+      "posted_at_utc": "2026-11-12T02:27:29+00:00",
+      "product_id": "201018970",
+      "item_id": "585458969",
+      "vendor_item_id": null,
+      "at": "2026-11-12T02:28:44.808489+00:00",
+      "run_id": "43141612335"
     }
   },
   "skipped_non_coupang": 317,
