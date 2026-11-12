@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95803,
-  "pending": [
-    {
-      "id": 95803,
-      "source_post_url": "https://t.me/jirum/95803",
-      "original_purchase_url": "https://link.coupang.com/a/iB3rlF8CeO",
-      "source_text": "☆특가 7,420원 (12.2% 할인)\n파워오투 오렌지레몬, 500ml, 6개\n📌 가격 현황\n- 정상가: 8,450원\n- 할인: 1,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iB3rlF8CeO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T06:31:16+00:00",
-      "title": "파워오투 오렌지레몬, 500ml, 6개",
-      "sale_price_krw": 7420
-    }
-  ],
-  "in_flight": {
-    "id": 95803,
-    "status": "CLAIMED",
-    "run_id": "43168855460",
-    "at": "2026-11-12T06:32:51.974405+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4681,6 +4666,16 @@
       "vendor_item_id": "84146435125",
       "at": "2026-11-12T05:41:26.336926+00:00",
       "run_id": "43162941881"
+    },
+    "95803": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%8C%EC%9B%8C%EC%98%A4%ED%88%AC-%EC%98%A4%EB%A0%8C%EC%A7%80%EB%A0%88%EB%AA%AC-500ml-6%EA%B0%9C-15%ED%95%A0%EC%9D%B8-daD7rlQP?from=write",
+      "posted_at_utc": "2026-11-12T06:31:16+00:00",
+      "product_id": "8144847783",
+      "item_id": "19643291517",
+      "vendor_item_id": null,
+      "at": "2026-11-12T06:33:08.746811+00:00",
+      "run_id": "43168855460"
     }
   },
   "skipped_non_coupang": 332,
