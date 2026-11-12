@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95816,
-  "pending": [
-    {
-      "id": 95816,
-      "source_post_url": "https://t.me/jirum/95816",
-      "original_purchase_url": "https://link.coupang.com/a/iCcaukyBQi",
-      "source_text": "☆특가 10,400원\n팔도 뽀로로 제로 딸기맛, 235ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCcaukyBQi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T08:33:24+00:00",
-      "title": "☆특가 10,400원",
-      "sale_price_krw": 10400
-    }
-  ],
-  "in_flight": {
-    "id": 95816,
-    "status": "CLAIMED",
-    "run_id": "43184071182",
-    "at": "2026-11-12T08:34:51.941535+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4731,6 +4716,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T08:26:07.189853+00:00",
       "run_id": "43182823766"
+    },
+    "95816": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%94%EB%8F%84-%EB%BD%80%EB%A1%9C%EB%A1%9C-%EC%A0%9C%EB%A1%9C-%EB%94%B8%EA%B8%B0%EB%A7%9B-235ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PwnMxgvA?from=write",
+      "posted_at_utc": "2026-11-12T08:33:24+00:00",
+      "product_id": "9245950111",
+      "item_id": "25588047785",
+      "vendor_item_id": null,
+      "at": "2026-11-12T08:35:08.801697+00:00",
+      "run_id": "43184071182"
     }
   },
   "skipped_non_coupang": 340,
