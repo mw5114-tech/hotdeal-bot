@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95830,
-  "pending": [
-    {
-      "id": 95830,
-      "source_message_id": 95830,
-      "source_post_url": "https://t.me/jirum/95830",
-      "original_purchase_url": "https://link.coupang.com/a/iClWceZOwK",
-      "title": "덴프스 덴마크 유산균이야기, 30정, 3개",
-      "source_text": "☆특가 31,350원 (28.2% 할인)\n덴프스 덴마크 유산균이야기, 30정, 3개\n📌 가격 현황\n- 정상가: 43,650원\n- 할인: 12,300원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iClWceZOwK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 31350,
-      "posted_at_utc": "2026-11-12T10:50:07+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -675,6 +664,10 @@
     "95827": {
       "url": "https://blog.naver.com/mw5114/224474706499",
       "at": "2026-11-12T10:51:37.831954+00:00"
+    },
+    "95830": {
+      "url": "https://blog.naver.com/mw5114/224474707282",
+      "at": "2026-11-12T10:52:32.746133+00:00"
     }
   },
   "skipped": {
@@ -755,12 +748,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95830,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43203908055",
-    "at": "2026-11-12T10:51:52.769686+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
