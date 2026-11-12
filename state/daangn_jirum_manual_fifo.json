@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95759,
-  "pending": [
-    {
-      "id": 95759,
-      "source_post_url": "https://t.me/jirum/95759",
-      "original_purchase_url": "https://link.coupang.com/a/iBBBU6bjWK",
-      "source_text": "☆특가 11,400원\n칠성사이다 제로 무라벨 300ml × 20병\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBBBU6bjWK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T00:01:50+00:00",
-      "title": "☆특가 11,400원",
-      "sale_price_krw": 11400
-    }
-  ],
-  "in_flight": {
-    "id": 95759,
-    "status": "CLAIMED",
-    "run_id": "43124303946",
-    "at": "2026-11-12T00:02:48.407166+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4511,6 +4496,16 @@
       "vendor_item_id": "3000244428",
       "at": "2026-11-11T23:51:12.714568+00:00",
       "run_id": "43122858239"
+    },
+    "95759": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B9%A0%EC%84%B1%EC%82%AC%EC%9D%B4%EB%8B%A4-%EC%A0%9C%EB%A1%9C-ECO-%EB%AC%B4%EB%9D%BC%EB%B2%A8-20%EA%B0%9C-300ml-10%ED%95%A0%EC%9D%B8-dQz9EMgj?from=write",
+      "posted_at_utc": "2026-11-12T00:01:50+00:00",
+      "product_id": "6444392996",
+      "item_id": "13961740507",
+      "vendor_item_id": null,
+      "at": "2026-11-12T00:03:04.600860+00:00",
+      "run_id": "43124303946"
     }
   },
   "skipped_non_coupang": 305,
