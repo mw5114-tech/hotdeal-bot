@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95866,
-  "pending": [],
+  "last_scanned_id": 95868,
+  "pending": [
+    {
+      "id": 95868,
+      "source_post_url": "https://t.me/jirum/95868",
+      "original_purchase_url": "https://link.coupang.com/a/iC9NfMnPtQ",
+      "source_text": "🔥🔥🔥무지성 11,000원 (47.0% 할인)🔥🔥🔥\n유니레버 썬 식기세척기용 타블렛 세제 레몬 50개입 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 20,755원\n- 할인: 9,755원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iC9NfMnPtQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T22:27:47+00:00",
+      "title": "유니레버 썬 식기세척기용 타블렛 세제 레몬 50개입 2개",
+      "sale_price_krw": 11000
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -4898,7 +4908,7 @@
       "run_id": "43316506877"
     }
   },
-  "skipped_non_coupang": 373,
+  "skipped_non_coupang": 374,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
