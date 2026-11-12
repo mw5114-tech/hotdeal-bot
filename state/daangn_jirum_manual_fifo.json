@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95798,
-  "pending": [],
+  "last_scanned_id": 95800,
+  "pending": [
+    {
+      "id": 95799,
+      "source_post_url": "https://t.me/jirum/95799",
+      "original_purchase_url": "https://link.coupang.com/a/iBZLGSkpFs",
+      "source_text": "👍대박 5,680원 (37.0% 할인)\n큐원 우리아이 영양쿠키믹스 2개\n📌 가격 현황\n- 정상가: 9,016원\n- 할인: 3,336원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBZLGSkpFs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T05:39:53+00:00",
+      "title": "큐원 우리아이 영양쿠키믹스 2개",
+      "sale_price_krw": 5680
+    },
+    {
+      "id": 95800,
+      "source_post_url": "https://t.me/jirum/95800",
+      "original_purchase_url": "https://link.coupang.com/a/iBZOxbLy2e",
+      "source_text": "👍대박 17,400원 (31.0% 할인)\n마이비데 클린케어 화장실용 물티슈 캡형, 80매, 8개\n📌 가격 현황\n- 정상가: 25,217원\n- 할인: 7,817원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBZOxbLy2e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T05:40:32+00:00",
+      "title": "마이비데 클린케어 화장실용 물티슈 캡형, 80매, 8개",
+      "sale_price_krw": 17400
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
