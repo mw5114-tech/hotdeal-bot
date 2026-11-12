@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95865,
-  "pending": [
-    {
-      "id": 95865,
-      "source_message_id": 95865,
-      "source_post_url": "https://t.me/jirum/95865",
-      "original_purchase_url": "https://link.coupang.com/a/iC72rA8SOa",
-      "title": "청우식품 초코파이찰떡 2개",
-      "source_text": "👍대박 5,090원 (32.0% 할인)\n청우식품 초코파이찰떡 2개\n📌 가격 현황\n- 정상가: 7,485원\n- 할인: 2,395원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iC72rA8SOa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5090,
-      "posted_at_utc": "2026-11-12T22:03:13+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -707,6 +696,10 @@
     "95864": {
       "url": "https://blog.naver.com/mw5114/224475068665",
       "at": "2026-11-12T17:15:48.128247+00:00"
+    },
+    "95865": {
+      "url": "https://blog.naver.com/mw5114/224475179990",
+      "at": "2026-11-12T22:04:51.849174+00:00"
     }
   },
   "skipped": {
@@ -787,12 +780,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95865,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43316300470",
-    "at": "2026-11-12T22:04:12.468866+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
