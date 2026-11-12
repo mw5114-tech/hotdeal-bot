@@ -1,0 +1,48 @@
+name: Tests | Cheap slim runner Playwright launch (NO PUBLISH)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/runner-slim-browser-probe.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  slim-browser-no-publish:
+    runs-on: ubuntu-slim
+    timeout-minutes: 8
+    steps:
+      - name: Measure low-cost worker environment
+        run: |
+          echo "SLIM_PROBE_STARTED"
+          cat /etc/os-release | head -n 5
+          echo "CPU=$(nproc)"
+          free -m
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install exact production Playwright and shell Chromium
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+          python - <<'PY'
+          import time
+          from playwright.sync_api import sync_playwright
+          start=time.monotonic()
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              try:
+                  ctx=browser.new_context(locale="ko-KR")
+                  page=ctx.new_page()
+                  page.set_content("<html><body><h1 id='ok'>SLIM LOCAL PROBE ONLY</h1></body></html>")
+                  assert page.locator("#ok").inner_text()=="SLIM LOCAL PROBE ONLY"
+                  print("SLIM_BROWSER_HEADLESS_READY seconds="+str(round(time.monotonic()-start, 2)))
+              finally:
+                  browser.close()
+          PY
