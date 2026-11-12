@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95789,
-  "pending": [
-    {
-      "id": 95789,
-      "source_post_url": "https://t.me/jirum/95789",
-      "original_purchase_url": "https://link.coupang.com/a/iBQMkNgG1Q",
-      "source_text": "👍대박 1,980원 (34.0% 할인)\n큐원 홈메이드 팬케익 믹스 2개\n📌 가격 현황\n- 정상가: 3,000원\n- 할인: 1,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBQMkNgG1Q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T03:34:05+00:00",
-      "title": "큐원 홈메이드 팬케익 믹스 2개",
-      "sale_price_krw": 1980
-    }
-  ],
-  "in_flight": {
-    "id": 95789,
-    "status": "CLAIMED",
-    "run_id": "43149190515",
-    "at": "2026-11-12T03:35:29.155540+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4621,6 +4606,16 @@
       "vendor_item_id": "4977334971",
       "at": "2026-11-12T03:34:31.083946+00:00",
       "run_id": "43149043803"
+    },
+    "95789": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%90%EC%9B%90-%ED%99%88%EB%A9%94%EC%9D%B4%EB%93%9C-%ED%8C%AC%EC%BC%80%EC%9D%B5-%EB%AF%B9%EC%8A%A4-100g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dQz94bpj?from=write",
+      "posted_at_utc": "2026-11-12T03:34:05+00:00",
+      "product_id": "6945361986",
+      "item_id": "18173105765",
+      "vendor_item_id": "85322385703",
+      "at": "2026-11-12T03:35:45.326447+00:00",
+      "run_id": "43149190515"
     }
   },
   "skipped_non_coupang": 324,
