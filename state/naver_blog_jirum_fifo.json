@@ -3,16 +3,6 @@
   "last_scanned_id": 95827,
   "pending": [
     {
-      "id": 95821,
-      "source_message_id": 95821,
-      "source_post_url": "https://t.me/jirum/95821",
-      "original_purchase_url": "https://link.coupang.com/a/iCgLeI5pg4",
-      "title": "오타후쿠 야키소바 소스 300g",
-      "source_text": "🔥🔥🔥무지성 2,240원 (64.0% 할인)🔥🔥🔥\n오타후쿠 야키소바 소스 300g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 6,222원\n- 할인: 3,982원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCgLeI5pg4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2240,
-      "posted_at_utc": "2026-11-12T09:37:40+00:00"
-    },
-    {
       "id": 95822,
       "source_message_id": 95822,
       "source_post_url": "https://t.me/jirum/95822",
@@ -689,6 +679,10 @@
     "95820": {
       "url": "https://blog.naver.com/mw5114/224474668481",
       "at": "2026-11-12T10:10:41.189530+00:00"
+    },
+    "95821": {
+      "url": "https://blog.naver.com/mw5114/224474669366",
+      "at": "2026-11-12T10:11:39.185176+00:00"
     }
   },
   "skipped": {
@@ -769,12 +763,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95821,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43197848837",
-    "at": "2026-11-12T10:10:57.955316+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
