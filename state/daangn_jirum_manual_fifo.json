@@ -3,15 +3,6 @@
   "last_scanned_id": 95800,
   "pending": [
     {
-      "id": 95799,
-      "source_post_url": "https://t.me/jirum/95799",
-      "original_purchase_url": "https://link.coupang.com/a/iBZLGSkpFs",
-      "source_text": "👍대박 5,680원 (37.0% 할인)\n큐원 우리아이 영양쿠키믹스 2개\n📌 가격 현황\n- 정상가: 9,016원\n- 할인: 3,336원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBZLGSkpFs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T05:39:53+00:00",
-      "title": "큐원 우리아이 영양쿠키믹스 2개",
-      "sale_price_krw": 5680
-    },
-    {
       "id": 95800,
       "source_post_url": "https://t.me/jirum/95800",
       "original_purchase_url": "https://link.coupang.com/a/iBZOxbLy2e",
@@ -21,12 +12,7 @@
       "sale_price_krw": 17400
     }
   ],
-  "in_flight": {
-    "id": 95799,
-    "status": "CLAIMED",
-    "run_id": "43162941881",
-    "at": "2026-11-12T05:40:47.987366+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4670,6 +4656,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T05:30:06.838958+00:00",
       "run_id": "43161711333"
+    },
+    "95799": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%90%EC%9B%90-%EC%9A%B0%EB%A6%AC%EC%95%84%EC%9D%B4-%EC%98%81%EC%96%91%EC%BF%A0%ED%82%A4%EB%AF%B9%EC%8A%A4-250g-2%EA%B0%9C-45%ED%95%A0%EC%9D%B8-A3orwRyA?from=write",
+      "posted_at_utc": "2026-11-12T05:39:53+00:00",
+      "product_id": "7373195965",
+      "item_id": "17912011094",
+      "vendor_item_id": "3010626308",
+      "at": "2026-11-12T05:41:04.090406+00:00",
+      "run_id": "43162941881"
     }
   },
   "skipped_non_coupang": 330,
