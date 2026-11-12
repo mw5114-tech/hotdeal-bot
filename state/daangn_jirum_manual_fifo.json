@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95869,
-  "pending": [
-    {
-      "id": 95869,
-      "source_post_url": "https://t.me/jirum/95869",
-      "original_purchase_url": "https://link.coupang.com/a/iC9SxRg0u4",
-      "source_text": "🔥🔥🔥무지성 5,250원 (45.0% 할인)🔥🔥🔥\n옥시크린 큐 바르는 얼룩제거제\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 9,545원\n- 할인: 4,295원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iC9SxRg0u4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T22:28:58+00:00",
-      "title": "옥시크린 큐 바르는 얼룩제거제",
-      "sale_price_krw": 5250
-    }
-  ],
-  "in_flight": {
-    "id": 95869,
-    "status": "CLAIMED",
-    "run_id": "43320396556",
-    "at": "2026-11-12T22:29:59.653374+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4921,6 +4906,16 @@
       "vendor_item_id": "91116197259",
       "at": "2026-11-12T22:28:55.611485+00:00",
       "run_id": "43320177756"
+    },
+    "95869": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A5%EC%8B%9C%ED%81%AC%EB%A6%B0-%ED%81%90-%EB%B0%94%EB%A5%B4%EB%8A%94-%EC%96%BC%EB%A3%A9%EC%A0%9C%EA%B1%B0%EC%A0%9C-2%EA%B0%9C-220ml-50%ED%95%A0%EC%9D%B8-P2nQ29ZP?from=write",
+      "posted_at_utc": "2026-11-12T22:28:58+00:00",
+      "product_id": "9286262714",
+      "item_id": "27534751832",
+      "vendor_item_id": "94499316787",
+      "at": "2026-11-12T22:30:15.999509+00:00",
+      "run_id": "43320396556"
     }
   },
   "skipped_non_coupang": 374,
