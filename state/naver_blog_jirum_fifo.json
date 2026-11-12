@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95803,
-  "pending": [],
+  "last_scanned_id": 95812,
+  "pending": [
+    {
+      "id": 95812,
+      "source_message_id": 95812,
+      "source_post_url": "https://t.me/jirum/95812",
+      "original_purchase_url": "https://link.coupang.com/a/iB8jI9uMUu",
+      "title": "☆특가 7,950원",
+      "source_text": "☆특가 7,950원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iB8jI9uMUu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7950,
+      "posted_at_utc": "2026-11-12T07:39:31+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
