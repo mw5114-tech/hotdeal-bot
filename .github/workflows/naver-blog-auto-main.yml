@@ -103,6 +103,14 @@ jobs:
       - name: Scan fresh Telegram items into separate Naver queue
         id: naver_scan
         run: python -m gh_only.naver_blog_jirum scan
+      # Cache only the pinned browser binaries; every fresh eligible deal
+      # still performs the normal safety probe before SmartEditor opens.
+      - name: Restore reusable Chromium binary (no publishing)
+        if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: headless-shell-linux-x64-playwright-1.64.1-v1
       - name: Install headless Chromium quickly (recover only if required)
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
         run: |

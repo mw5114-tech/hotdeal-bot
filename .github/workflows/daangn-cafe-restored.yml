@@ -95,6 +95,16 @@ jobs:
         env:
           JIRUM_EXPECTED_SOURCE_ID: ${{ inputs.source_post_id }}
         run: python -m gh_only.jirum_manual_queue scan
+      - name: Restore reusable Chromium binary (no publishing)
+        if: >-
+          steps.scan.outputs.has_deal == 'true' &&
+          env.DAANGN_PUBLISH_PAUSED == 'false' &&
+          env.DAANGN_CAFE_PUBLISH_ENABLED == 'true' &&
+          env.DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: headless-shell-linux-x64-playwright-1.64.1-v1
       - name: Install browser only if posting approved
         if: >-
           steps.scan.outputs.has_deal == 'true' &&

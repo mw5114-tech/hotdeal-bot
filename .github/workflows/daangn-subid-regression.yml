@@ -96,6 +96,10 @@ jobs:
           assert "runs-on: ubuntu-slim" in Path('.github/workflows/daangn-subid-regression.yml').read_text()
           assert "runs-on: ubuntu-24.04" in main
           assert "runs-on: ubuntu-24.04" in restored
+          assert 'headless-shell-linux-x64-playwright-1.64.1-v1' in main
+          assert 'headless-shell-linux-x64-playwright-1.64.1-v1' in restored
+          assert 'uses: actions/cache@v4' in main
+          assert 'uses: actions/cache@v4' in restored
           assert 'secrets: inherit' in main
           assert 'DAANGN_POLICY_GATE_CLOSED_SCAN_ONLY' in restored
           assert "DAANGN_PUBLISH_PAUSED" not in main
