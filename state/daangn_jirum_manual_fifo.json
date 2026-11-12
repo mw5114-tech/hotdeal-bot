@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95864,
-  "pending": [
-    {
-      "id": 95864,
-      "source_post_url": "https://t.me/jirum/95864",
-      "original_purchase_url": "https://link.coupang.com/a/iCNlaD8YPA",
-      "source_text": "👍대박 8,450원 (37.0% 할인)\n벤앤제리스 청키몽키 아이스크림 (냉동), 473ml, 1개입, 1개\n📌 가격 현황\n- 정상가: 13,410원\n- 할인: 4,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCNlaD8YPA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T17:13:35+00:00",
-      "title": "벤앤제리스 청키몽키 아이스크림 (냉동), 473ml, 1개입, 1개",
-      "sale_price_krw": 8450
-    }
-  ],
-  "in_flight": {
-    "id": 95864,
-    "status": "CLAIMED",
-    "run_id": "43267327670",
-    "at": "2026-11-12T17:15:13.401195+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4881,6 +4866,16 @@
       "vendor_item_id": null,
       "at": "2026-11-12T13:33:12.874390+00:00",
       "run_id": "43228288865"
+    },
+    "95864": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B2%A4%EC%95%A4%EC%A0%9C%EB%A6%AC%EC%8A%A4-%EC%B2%AD%ED%82%A4%EB%AA%BD%ED%82%A4-%EC%95%84%EC%9D%B4%EC%8A%A4%ED%81%AC%EB%A6%BC-%EB%83%89%EB%8F%99-473ml-1%EA%B0%9C%EC%9E%85-40%ED%95%A0%EC%9D%B8-dQzqzx9j?from=write",
+      "posted_at_utc": "2026-11-12T17:13:35+00:00",
+      "product_id": "1221280407",
+      "item_id": "2212176327",
+      "vendor_item_id": "70209963883",
+      "at": "2026-11-12T17:15:30.618336+00:00",
+      "run_id": "43267327670"
     }
   },
   "skipped_non_coupang": 373,
