@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95772,
-  "pending": [],
+  "last_scanned_id": 95773,
+  "pending": [
+    {
+      "id": 95773,
+      "source_message_id": 95773,
+      "source_post_url": "https://t.me/jirum/95773",
+      "original_purchase_url": "https://link.coupang.com/a/iBIAD5tJ4m",
+      "title": "마니커에프앤지 통살 케이준 치킨텐더 (냉동), 400g, 6개",
+      "source_text": "☆특가 18,700원 (28.1% 할인)\n마니커에프앤지 통살 케이준 치킨텐더 (냉동), 400g, 6개\n📌 가격 현황\n- 정상가: 26,020원\n- 할인: 7,320원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBIAD5tJ4m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 18700,
+      "posted_at_utc": "2026-11-12T01:39:30+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
