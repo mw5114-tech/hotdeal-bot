@@ -4,6 +4,11 @@ name: Security | public repository credential audit
 # Run manually at any time; weekly check catches accidentally committed secrets.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'security/**'
+      - '.github/workflows/security-public-repo-audit.yml'
   schedule:
     - cron: '41 3 * * 1'
 
