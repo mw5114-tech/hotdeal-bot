@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95803,
-  "pending": [
-    {
-      "id": 95803,
-      "source_message_id": 95803,
-      "source_post_url": "https://t.me/jirum/95803",
-      "original_purchase_url": "https://link.coupang.com/a/iB3rlF8CeO",
-      "title": "파워오투 오렌지레몬, 500ml, 6개",
-      "source_text": "☆특가 7,420원 (12.2% 할인)\n파워오투 오렌지레몬, 500ml, 6개\n📌 가격 현황\n- 정상가: 8,450원\n- 할인: 1,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iB3rlF8CeO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7420,
-      "posted_at_utc": "2026-11-12T06:31:16+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -627,6 +616,10 @@
     "95800": {
       "url": "https://blog.naver.com/mw5114/224474339642",
       "at": "2026-11-12T05:42:21.741957+00:00"
+    },
+    "95803": {
+      "url": "https://blog.naver.com/mw5114/224474408664",
+      "at": "2026-11-12T06:33:30.006520+00:00"
     }
   },
   "skipped": {
@@ -700,12 +693,7 @@
       "at": "2026-11-12T04:59:29.621454+00:00"
     }
   },
-  "in_flight": {
-    "id": 95803,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43168855460",
-    "at": "2026-11-12T06:32:49.732552+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
