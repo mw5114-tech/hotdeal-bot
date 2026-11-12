@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95775,
-  "pending": [
-    {
-      "id": 95775,
-      "source_post_url": "https://t.me/jirum/95775",
-      "original_purchase_url": "https://link.coupang.com/a/iBJtgLciiW",
-      "source_text": "☆특가 8,800원\n아우라 초고농축 섬유유연제 윌유메리미 리필, 1.7L, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBJtgLciiW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T01:51:50+00:00",
-      "title": "☆특가 8,800원",
-      "sale_price_krw": 8800
-    }
-  ],
-  "in_flight": {
-    "id": 95775,
-    "status": "CLAIMED",
-    "run_id": "43137475473",
-    "at": "2026-11-12T01:52:55.925899+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4561,6 +4546,16 @@
       "vendor_item_id": "87684943080",
       "at": "2026-11-12T01:51:32.968849+00:00",
       "run_id": "43137253247"
+    },
+    "95775": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%9A%B0%EB%9D%BC-%EC%B4%88%EA%B3%A0%EB%86%8D%EC%B6%95-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EC%9C%8C%EC%9C%A0%EB%A9%94%EB%A6%AC%EB%AF%B8-%EB%A6%AC%ED%95%84-17L-1%EA%B0%9C%EC%9E%85-20%ED%95%A0%EC%9D%B8-daD7yYlP?from=write",
+      "posted_at_utc": "2026-11-12T01:51:50+00:00",
+      "product_id": "8414505637",
+      "item_id": "11184948413",
+      "vendor_item_id": null,
+      "at": "2026-11-12T01:53:13.865001+00:00",
+      "run_id": "43137475473"
     }
   },
   "skipped_non_coupang": 316,
