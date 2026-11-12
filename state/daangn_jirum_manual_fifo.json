@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95800,
-  "pending": [
-    {
-      "id": 95800,
-      "source_post_url": "https://t.me/jirum/95800",
-      "original_purchase_url": "https://link.coupang.com/a/iBZOxbLy2e",
-      "source_text": "👍대박 17,400원 (31.0% 할인)\n마이비데 클린케어 화장실용 물티슈 캡형, 80매, 8개\n📌 가격 현황\n- 정상가: 25,217원\n- 할인: 7,817원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iBZOxbLy2e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-12T05:40:32+00:00",
-      "title": "마이비데 클린케어 화장실용 물티슈 캡형, 80매, 8개",
-      "sale_price_krw": 17400
-    }
-  ],
-  "in_flight": {
-    "id": 95800,
-    "status": "CLAIMED",
-    "run_id": "43162941881",
-    "at": "2026-11-12T05:41:09.986441+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4670,6 +4655,16 @@
       "item_id": "17912011094",
       "vendor_item_id": "3010626308",
       "at": "2026-11-12T05:41:04.090406+00:00",
+      "run_id": "43162941881"
+    },
+    "95800": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EC%9D%B4%EB%B9%84%EB%8D%B0-%ED%81%B4%EB%A6%B0%EC%BC%80%EC%96%B4-%ED%99%94%EC%9E%A5%EC%8B%A4%EC%9A%A9-%EB%AC%BC%ED%8B%B0%EC%8A%88-%EC%BA%A1%ED%98%95-80%EB%A7%A4-8%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PovwZ2XA?from=write",
+      "posted_at_utc": "2026-11-12T05:40:32+00:00",
+      "product_id": "6964996972",
+      "item_id": "16969608474",
+      "vendor_item_id": "84146435125",
+      "at": "2026-11-12T05:41:26.336926+00:00",
       "run_id": "43162941881"
     }
   },
