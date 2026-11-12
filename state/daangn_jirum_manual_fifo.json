@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95838,
-  "pending": [],
+  "last_scanned_id": 95839,
+  "pending": [
+    {
+      "id": 95839,
+      "source_post_url": "https://t.me/jirum/95839",
+      "original_purchase_url": "https://link.coupang.com/a/iCtIoKAAKW",
+      "source_text": "☆특가 1,105,810원 (8.3% 할인)\nLG전자 디오스 AI 오브제컬렉션 832L 양문형 냉장고 방문설치, 클레이 민트, 베이지, S836MTE032\n📌 가격 현황\n- 정상가: 1,205,980원\n- 할인: 100,170원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iCtIoKAAKW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-12T12:38:57+00:00",
+      "title": "LG전자 디오스 AI 오브제컬렉션 832L 양문형 냉장고 방문설치, 클레이 민트, 베이지, S836MTE032",
+      "sale_price_krw": 1105810
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
