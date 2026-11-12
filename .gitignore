@@ -258,3 +258,10 @@ live-data/
 **/id_ed25519
 **/*.p12
 **/*.pfx
+
+# Generated publishing drafts / local browser diagnostics must not be committed.
+# GitHub Actions can still read/upload these folders during its normal runs.
+naver-blog-one-draft/
+jirum-manual-one-draft/
+dummy-state/
+coupang-login-form-diagnostic/
