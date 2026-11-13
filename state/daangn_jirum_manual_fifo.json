@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95909,
-  "pending": [
-    {
-      "id": 95909,
-      "source_post_url": "https://t.me/jirum/95909",
-      "original_purchase_url": "https://link.coupang.com/a/iDxm7OEqTQ",
-      "source_text": "❤️초대박 11,960원 (42.0% 할인)\n[로켓프레시] 풀무원 꼬마 돈까스 (냉동) 400g 4개\n📌 가격 현황\n- 정상가: 20,621원\n- 할인: 8,661원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDxm7OEqTQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T03:57:44+00:00",
-      "title": "[로켓프레시] 풀무원 꼬마 돈까스 (냉동) 400g 4개",
-      "sale_price_krw": 11960
-    }
-  ],
-  "in_flight": {
-    "id": 95909,
-    "status": "CLAIMED",
-    "run_id": "43362456424",
-    "at": "2026-11-13T03:59:21.930004+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5011,6 +4996,16 @@
       "vendor_item_id": "85628431060",
       "at": "2026-11-13T02:13:13.390112+00:00",
       "run_id": "43350501801"
+    },
+    "95909": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EA%BC%AC%EB%A7%88-%EB%8F%88%EA%B9%8C%EC%8A%A4-%EB%83%89%EB%8F%99-400g-4%EA%B0%9C-45%ED%95%A0%EC%9D%B8-dXn7yeEA?from=write",
+      "posted_at_utc": "2026-11-13T03:57:44+00:00",
+      "product_id": "7345082002",
+      "item_id": "19790002743",
+      "vendor_item_id": "86892632625",
+      "at": "2026-11-13T03:59:37.532376+00:00",
+      "run_id": "43362456424"
     }
   },
   "skipped_non_coupang": 405,
