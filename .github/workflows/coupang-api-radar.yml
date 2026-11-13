@@ -82,16 +82,13 @@ jobs:
       - name: Check required authentication exists without exposing values
         id: ready
         env:
-          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
-          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
           NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
         run: |
           python - <<'PY'
           import os
-          keys = ("NAVER_API_HUB_KEY_ID","NAVER_API_HUB_KEY",
-                  "NAVER_BLOG_STORAGE_STATE_JSON","COUPANG_PARTNERS_ACCESS_KEY",
+          keys = ("NAVER_BLOG_STORAGE_STATE_JSON","COUPANG_PARTNERS_ACCESS_KEY",
                   "COUPANG_PARTNERS_SECRET_KEY")
           ready = all(bool(os.getenv(key)) for key in keys)
           with open(os.environ["GITHUB_OUTPUT"], "a") as out:
@@ -111,12 +108,11 @@ jobs:
         env:
           API_RADAR_PUBLISH_ENABLED: 'true'
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
-          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
-          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+          API_RADAR_TREND_MODE: 'curated'
           NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
         run: python -m api_radar.publisher
-      - name: Skip safely if required external keys are not set
+      - name: Skip safely if required existing credentials are not set
         if: steps.ready.outputs.ready != 'true'
-        run: echo 'API_RADAR_POST_SKIPPED_MISSING_NCP_OR_SESSION_CREDENTIALS'
+        run: echo 'API_RADAR_POST_SKIPPED_MISSING_SESSION_OR_PARTNERS_KEYS'
