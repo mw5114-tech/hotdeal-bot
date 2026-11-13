@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95916,
-  "pending": [
-    {
-      "id": 95916,
-      "source_message_id": 95916,
-      "source_post_url": "https://t.me/jirum/95916",
-      "original_purchase_url": "https://link.coupang.com/a/iDJdEX753s",
-      "title": "스카치브라이트 이지클린 막대걸레 + 정전기청소포 10매 + 물걸레청소포 1매",
-      "source_text": "👍대박 14,790원 (38.0% 할인)\n스카치브라이트 이지클린 막대걸레 + 정전기청소포 10매 + 물걸레청소포 1매\n📌 가격 현황\n- 정상가: 23,855원\n- 할인: 9,065원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDJdEX753s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14790,
-      "posted_at_utc": "2026-11-13T06:43:31+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -775,6 +764,10 @@
     "95915": {
       "url": "https://blog.naver.com/mw5114/224475772122",
       "at": "2026-11-13T06:42:37.551216+00:00"
+    },
+    "95916": {
+      "url": "https://blog.naver.com/mw5114/224475775425",
+      "at": "2026-11-13T06:45:04.371380+00:00"
     }
   },
   "skipped": {
@@ -859,12 +852,7 @@
       "at": "2026-11-13T05:41:46.933614+00:00"
     }
   },
-  "in_flight": {
-    "id": 95916,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43380742873",
-    "at": "2026-11-13T06:44:23.099784+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
