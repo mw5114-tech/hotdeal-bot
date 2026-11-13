@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95891,
-  "pending": [
-    {
-      "id": 95891,
-      "source_post_url": "https://t.me/jirum/95891",
-      "original_purchase_url": "https://link.coupang.com/a/iDoAJjJmDY",
-      "source_text": "☆특가 11,100원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDoAJjJmDY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T01:54:52+00:00",
-      "title": "☆특가 11,100원",
-      "sale_price_krw": 11100
-    }
-  ],
-  "in_flight": {
-    "id": 95891,
-    "status": "CLAIMED",
-    "run_id": "43348439174",
-    "at": "2026-11-13T01:55:59.321527+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4981,6 +4966,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T01:27:38.988025+00:00",
       "run_id": "43344950428"
+    },
+    "95891": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%93%80%EC%9D%B4%ED%8A%B8%EB%A6%AC-%ED%95%98%EC%9D%B4-%EC%95%84%EB%AF%B8%EB%85%B8-%EC%98%AC-%ED%81%B4%EB%A0%8C%EC%A7%95-%EB%B0%80%ED%81%AC-400ml-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PmvZ4z7d?from=write",
+      "posted_at_utc": "2026-11-13T01:54:52+00:00",
+      "product_id": "7397036159",
+      "item_id": "21229008067",
+      "vendor_item_id": null,
+      "at": "2026-11-13T01:56:16.678687+00:00",
+      "run_id": "43348439174"
     }
   },
   "skipped_non_coupang": 390,
