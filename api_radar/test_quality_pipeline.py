@@ -86,8 +86,10 @@ class QualityTests(TestCase):
 
     def test_cdn_restrictions(self):
         self.assertTrue(quality.safe_url("https://image15.coupangcdn.com/x.jpg", image=True))
-        self.assertTrue(quality.safe_url("https://ads-partners.coupang.com/openapi/image/abcd1234", image=True))
-        self.assertFalse(quality.safe_url("https://ads-partners.coupang.com/openapi/impression/abcd1234", image=True))
+        self.assertTrue(quality.safe_url("https://ads-partners.coupang.com/300w_300h/abcd1234.jpg", image=True))
+        self.assertFalse(quality.safe_url("https://ads-partners.coupang.com/openapi/image/abcd1234", image=True))
+        self.assertFalse(quality.safe_url("https://ads-partners.coupang.com/t/p", image=True))
+        self.assertFalse(quality.safe_url("https://ads-partners.coupang.com/300w_300h/abcd1234.jpg?token=opaque", image=True))
         self.assertFalse(quality.safe_url("http://image15.coupangcdn.com/x.jpg", image=True))
         self.assertFalse(quality.safe_url("https://evil.example/x.jpg", image=True))
 
