@@ -15,7 +15,7 @@ on:
     - cron: '20 9 * * *'
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: coupang-api-radar-independent
@@ -38,18 +38,20 @@ jobs:
         with:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
-        run: python -m unittest -v api_radar.test_collector
-      - name: Check real Goldbox response (one API request, no posting)
-        if: github.event_name == 'push'
-        run: python -m api_radar.collector --probe
-      - name: Scheduled isolated product discovery (max two API requests)
-        if: github.event_name != 'push'
+        run: python -m unittest -v api_radar.test_collector api_radar.test_state_store
+      - name: Independent product discovery (max two API requests, no publish)
         run: python -m api_radar.collector
+      - name: Persist public product observations on separate data branch
+        env:
+          API_RADAR_GITHUB_TOKEN: ${{ github.token }}
+        run: python -m api_radar.state_store
       - name: Keep public-product summary only (not session or credentials)
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: api-radar-${{ github.run_id }}
-          path: api-radar-output/summary.json
+          path: |
+            api-radar-output/summary.json
+            api-radar-output/ranked.json
           if-no-files-found: ignore
           retention-days: 2
