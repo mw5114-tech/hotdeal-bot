@@ -123,9 +123,16 @@ def safe_url(value: str, *, image=False) -> bool:
     if image:
         cdn = (re.fullmatch(r"(?:thumbnail\d*|image\d*|img\d{1,2}[a-z]|t\d{1,2}[a-z])\.coupangcdn\.com", u.hostname) is not None
                and not u.path.endswith(".svg"))
+        # The authenticated product SEARCH API returns image URLs under
+        # ads-partners.coupang.com with two opaque path segments, unlike the
+        # CDN URLs returned by Goldbox. The caller must still verify the
+        # response is an actual bounded JPEG/PNG/WebP with no redirects.
+        opaque_parts = u.path.strip("/").split("/")
         official_proxy = (u.hostname == "ads-partners.coupang.com"
-                          and u.path.startswith("/openapi/image/")
-                          and len(u.path) <= 1100 and not u.query)
+                          and not u.query and len(u.path) <= 1100
+                          and len(opaque_parts) == 2
+                          and all(re.fullmatch(r"[A-Za-z0-9._%~-]{2,500}", part)
+                                  for part in opaque_parts))
         return cdn or official_proxy
     return (u.hostname in ("link.coupang.com", "coupa.ng", "www.coupang.com", "m.coupang.com")
             and u.path.startswith(("/a/", "/re/", "/vp/products/", "/np/")))
