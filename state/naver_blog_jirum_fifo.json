@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95889,
-  "pending": [
-    {
-      "id": 95889,
-      "source_message_id": 95889,
-      "source_post_url": "https://t.me/jirum/95889",
-      "original_purchase_url": "https://link.coupang.com/a/iDmxKimIvc",
-      "title": "☆특가 8,290원",
-      "source_text": "☆특가 8,290원\n에디슨 유아 실리콘 스푼 포크 케이스 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDmxKimIvc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8290,
-      "posted_at_utc": "2026-11-13T01:26:12+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -739,6 +728,10 @@
     "95876": {
       "url": "https://blog.naver.com/mw5114/224475298507",
       "at": "2026-11-13T00:28:24.781720+00:00"
+    },
+    "95889": {
+      "url": "https://blog.naver.com/mw5114/224475373603",
+      "at": "2026-11-13T01:29:58.283202+00:00"
     }
   },
   "skipped": {
@@ -819,12 +812,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95889,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43345232020",
-    "at": "2026-11-13T01:29:16.350015+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
