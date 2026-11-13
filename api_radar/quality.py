@@ -63,6 +63,10 @@ def resolve_exact_identity(product: dict, *, opener=None) -> dict:
         identity = extract_exact_identity(current, pid)
         if identity:
             return identity
+        # An opaque affiliate tracking URL may count every automated GET as
+        # a click. Never visit it merely to discover an option/item identity.
+        if parse.urlsplit(current).hostname in ("link.coupang.com", "coupa.ng"):
+            raise QualityError("OPAQUE_TRACKING_LINK_NOT_VISITED")
         try:
             response = get(request.Request(current, method="GET",
                          headers={"User-Agent": "AffiliateExactItemCheck/1.0"}),
