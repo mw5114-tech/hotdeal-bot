@@ -79,7 +79,11 @@ def select_candidates(state: dict, now: datetime) -> list[dict]:
                    "url": url, "image": image, "topic": topic,
                    "source": obj.get("last_source"), "checked_at": raw_ts}
         results.append(product)
+    from api_radar.quality import extract_exact_identity
+    # Prefer offers with exact productId+itemId already visible in the
+    # official API URL. Never resolve opaque referral links by clicking them.
     results.sort(key=lambda p: (
+        extract_exact_identity(p["url"], p["id"]) is None,
         p["source"] != "goldbox", abs(p["price"] - 65000), p["id"]))
     return results[:CANDIDATE_LIMIT]
 
