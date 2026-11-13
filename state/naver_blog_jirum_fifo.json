@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95908,
+  "last_scanned_id": 95910,
   "pending": [],
   "published": {
     "95495": {
@@ -822,6 +822,10 @@
       "claimed_at": "2026-11-12T09:24:35.825553+00:00",
       "source_post_url": "https://t.me/jirum/95819",
       "at": "2026-11-12T10:09:48.583220+00:00"
+    },
+    "95909": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-13T05:41:46.933614+00:00"
     }
   },
   "in_flight": null,
