@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95972,
-  "pending": [
-    {
-      "id": 95972,
-      "source_post_url": "https://t.me/jirum/95972",
-      "original_purchase_url": "https://link.coupang.com/a/iEQiMWNZ2y",
-      "source_text": "👍대박 11,940원 (38.0% 할인)\n이디야커피연구소 아이스 아메리카노 1L 6개\n📌 가격 현황\n- 정상가: 19,258원\n- 할인: 7,318원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iEQiMWNZ2y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T22:50:14+00:00",
-      "title": "이디야커피연구소 아이스 아메리카노 1L 6개",
-      "sale_price_krw": 11940
-    }
-  ],
-  "in_flight": {
-    "id": 95972,
-    "status": "CLAIMED",
-    "run_id": "43522449648",
-    "at": "2026-11-13T22:51:20.727691+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5240,6 +5225,16 @@
       "item_id": "19850394440",
       "vendor_item_id": "86951604309",
       "at": "2026-11-13T22:51:14.593779+00:00",
+      "run_id": "43522449648"
+    },
+    "95972": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EB%94%94%EC%95%BC%EC%BB%A4%ED%94%BC%EC%97%B0%EA%B5%AC%EC%86%8C-%EC%95%84%EC%9D%B4%EC%8A%A4-%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B4%EB%85%B8-1L-6%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dDWLGeVP?from=write",
+      "posted_at_utc": "2026-11-13T22:50:14+00:00",
+      "product_id": "9009839092",
+      "item_id": "26408817012",
+      "vendor_item_id": "93384906936",
+      "at": "2026-11-13T22:51:37.456057+00:00",
       "run_id": "43522449648"
     }
   },
