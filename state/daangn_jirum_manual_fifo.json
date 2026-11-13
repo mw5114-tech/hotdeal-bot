@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95949,
-  "pending": [
-    {
-      "id": 95949,
-      "source_post_url": "https://t.me/jirum/95949",
-      "original_purchase_url": "https://link.coupang.com/a/iD5LVmhd36",
-      "source_text": "☆특가 16,530원 (29.0% 할인)\n한돈 삼겹살 구이용 (냉장) 1kg\n📌 가격 현황\n- 정상가: 23,282원\n- 할인: 6,752원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iD5LVmhd36\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T11:59:07+00:00",
-      "title": "한돈 삼겹살 구이용 (냉장) 1kg",
-      "sale_price_krw": 16530
-    }
-  ],
-  "in_flight": {
-    "id": 95949,
-    "status": "CLAIMED",
-    "run_id": "43421469485",
-    "at": "2026-11-13T12:00:08.256789+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5201,6 +5186,16 @@
       "vendor_item_id": "93503471331",
       "at": "2026-11-13T11:51:47.343204+00:00",
       "run_id": "43420243918"
+    },
+    "95949": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EB%8F%88-%EC%82%BC%EA%B2%B9%EC%82%B4-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PN2RlQKP?from=write",
+      "posted_at_utc": "2026-11-13T11:59:07+00:00",
+      "product_id": "4399008896",
+      "item_id": "5222929033",
+      "vendor_item_id": "72532026516",
+      "at": "2026-11-13T12:00:24.516342+00:00",
+      "run_id": "43421469485"
     }
   },
   "skipped_non_coupang": 425,
