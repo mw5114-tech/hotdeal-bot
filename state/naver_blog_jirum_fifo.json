@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95919,
-  "pending": [
-    {
-      "id": 95919,
-      "source_message_id": 95919,
-      "source_post_url": "https://t.me/jirum/95919",
-      "original_purchase_url": "https://link.coupang.com/a/iDMIpEM8WG",
-      "title": "티아시아키친 치킨 마크니 커리 170g + 게살 푸팟퐁 커리 170g + 비프 마살라 커리 170g + 스파이시 비프 마살라 커리 170g 세트",
-      "source_text": "👍대박 5,480원 (34.0% 할인)\n티아시아키친 치킨 마크니 커리 170g + 게살 푸팟퐁 커리 170g + 비프 마살라 커리 170g + 스파이시 비프 마살라 커리 170g 세트\n📌 가격 현황\n- 정상가: 8,303원\n- 할인: 2,823원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDMIpEM8WG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5480,
-      "posted_at_utc": "2026-11-13T07:32:26+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -783,6 +772,10 @@
     "95917": {
       "url": "https://blog.naver.com/mw5114/224475786094",
       "at": "2026-11-13T06:52:59.526629+00:00"
+    },
+    "95919": {
+      "url": "https://blog.naver.com/mw5114/224475841579",
+      "at": "2026-11-13T07:33:56.764143+00:00"
     }
   },
   "skipped": {
@@ -867,12 +860,7 @@
       "at": "2026-11-13T05:41:46.933614+00:00"
     }
   },
-  "in_flight": {
-    "id": 95919,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43386517214",
-    "at": "2026-11-13T07:33:13.078106+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
