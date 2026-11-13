@@ -37,6 +37,17 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store
+      - name: One-time signed-search API smoke probe (no post)
+        if: github.event_name == 'push' && github.event.head_commit.message == 'probe: validate corrected Coupang search HMAC once'
+        env:
+          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+        run: |
+          python - <<'PY'
+          from api_radar.collector import get_api, SEARCH, extract_rows
+          rows = extract_rows(get_api(SEARCH, {"keyword": "가습기", "limit": 10}))
+          print("COUPANG_SEARCH_SMOKE_OK result_count=" + str(len(rows)) + " posts=0")
+          PY
       - name: Independent product discovery (Goldbox only, no publish)
         if: github.event_name != 'push'
         env:
