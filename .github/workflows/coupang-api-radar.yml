@@ -37,6 +37,21 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
+      - name: One-time optional publisher credential readiness check
+        if: >-
+          github.event_name == 'push' &&
+          github.event.head_commit.message == 'diag: check radar credential readiness once'
+        env:
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+          NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+        run: |
+          python - <<'PY'
+          import os
+          print("RADAR_SECRET_READINESS", "NAVER_HUB_ID=" + str(bool(os.getenv("NAVER_API_HUB_KEY_ID"))).lower(),
+                "NAVER_HUB_KEY=" + str(bool(os.getenv("NAVER_API_HUB_KEY"))).lower(),
+                "NAVER_BLOG_SESSION=" + str(bool(os.getenv("NAVER_BLOG_STORAGE_STATE_JSON"))).lower())
+          PY
       - name: Independent product discovery (Goldbox + one search, no publish)
         if: >-
           github.event_name != 'push' ||
