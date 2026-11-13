@@ -4,8 +4,8 @@ Completely independent from Telegram, Daangn and the existing Naver FIFO.
 One post at most per KST day. A durable claim is written BEFORE any submit;
 uncertain failures are quarantined and never auto-retried.
 
-Publishing requires: official Naver HUB demand trend + an API product that
-resolves to an exact productId/itemId + Lowchart same-item verified price
+Publishing requires: a curated purchase-oriented product keyword + an API
+product resolving to an exact productId/itemId + Lowchart verified same-item price
 history + a safe product image + an API-issued naverblog affiliate deeplink +
 the existing authenticated SmartEditor session.
 
@@ -84,13 +84,13 @@ def select_candidates(state: dict, now: datetime) -> list[dict]:
     return results[:CANDIDATE_LIMIT]
 
 
-def compose_article(product: dict, history: dict, trend: dict,
+def compose_article(product: dict, history: dict, trend: dict | None,
                     image: Path, issued: str) -> dict:
     from gh_only.naver_blog_jirum import DISCLOSURE, naver_title
     from gh_only.naver_blog_format import plain_body, validate_blocks
     from gh_only.coupang_partners_api import issued_link_url
     if not (history.get("exact_product_item_verified") is True
-            and trend.get("verified") is True and trend.get("demand_uptrend") is True
+            and (trend is None or (trend.get("verified") is True and trend.get("demand_uptrend") is True))
             and isinstance(image, Path) and image.is_file()
             and issued_link_url(issued)):
         raise QualityError("ARTICLE_GATES_NOT_VERIFIED")
@@ -115,9 +115,10 @@ def compose_article(product: dict, history: dict, trend: dict,
          "bold_prefix": "🔥 오늘 특가", "kind": "price"},
         {"type": "text", "text": "📊 가격 비교는 로우차트 동일 상품·옵션 관측값 기준이며 쿠팡 공식 정가가 아닙니다.",
          "bold_prefix": "📊 가격 비교", "kind": "source_basis"},
-        {"type": "text", "text": f"🔎 네이버쇼핑에서 '{trend['keyword']}' 관련 클릭지수의 최근 7일 평균은 "
-         f"{trend['recent_seven_day_mean']:.1f}입니다. 이는 상대 지수이며 검색량이나 판매량이 아닙니다.",
-         "bold_prefix": "🔎 네이버쇼핑", "kind": "search_context"},
+        *([{"type": "text", "text": f"🔎 네이버쇼핑에서 '{trend['keyword']}' 관련 클릭지수의 최근 7일 평균은 "
+             f"{trend['recent_seven_day_mean']:.1f}입니다. 이는 상대 지수이며 검색량이나 판매량이 아닙니다.",
+             "bold_prefix": "🔎 네이버쇼핑", "kind": "search_context"}]
+          if trend is not None else []),
         {"type": "text", "text": "※ 상품 가격·배송조건은 확인 시점에 따라 변할 수 있으며, "
          "할인·품절 여부는 구매 직전 상품 페이지에서 다시 확인해 주세요.",
          "bold_prefix": "", "kind": "note"},
@@ -169,7 +170,11 @@ def run(*, preview=False, now=None) -> int:
     # No implicit self-activation from an environment shared with other jobs.
     if os.getenv(BLOG_PUBLICATION_ENABLED, "false").lower() != "true":
         return safe_stop("OWNER_PUBLISH_SWITCH_DISABLED")
-    if not os.getenv("NAVER_API_HUB_KEY_ID") or not os.getenv("NAVER_API_HUB_KEY"):
+    trend_mode = os.getenv("API_RADAR_TREND_MODE", "curated").lower()
+    if trend_mode not in ("curated", "hub"):
+        return safe_stop("INVALID_TREND_MODE")
+    if trend_mode == "hub" and (
+            not os.getenv("NAVER_API_HUB_KEY_ID") or not os.getenv("NAVER_API_HUB_KEY")):
         return safe_stop("NAVER_SHOPPING_INSIGHT_KEYS_NOT_CONFIGURED")
     if not os.getenv("NAVER_BLOG_STORAGE_STATE_JSON"):
         return safe_stop("NAVER_LOGIN_SESSION_NOT_CONFIGURED")
@@ -180,24 +185,27 @@ def run(*, preview=False, now=None) -> int:
     candidates = select_candidates(state, now)
     if not candidates:
         return safe_stop("NO_FRESH_UNPOSTED_TOPIC_CANDIDATES")
-    # Bounded: at most one NAVER trend request, one item redirect check, and
-    # one Lowchart lookup per run. Never attempt alternate candidates after
-    # an uncertain failure, nor publish a second product.
+    # Bounded: in HUB mode at most one trend request, one redirect resolution,
+    # and one exact-item historical price lookup. No alternate candidate after
+    # uncertainty and never a second blog post. Curated mode does not claim
+    # actual Naver search traffic or click volumes.
     product = candidates[0]
     keyword, category = product["topic"]
-    try:
-        trend = fetch_topic_trend(keyword, category, now=now)
-    except TrendError as exc:
-        return safe_stop("TREND_" + str(exc))
-    if not trend["demand_uptrend"]:
-        return safe_stop("NO_VERIFIED_TOPIC_DEMAND_UPTREND")
+    trend = None
+    if trend_mode == "hub":
+        try:
+            trend = fetch_topic_trend(keyword, category, now=now)
+        except TrendError as exc:
+            return safe_stop("TREND_" + str(exc))
+        if not trend["demand_uptrend"]:
+            return safe_stop("NO_VERIFIED_TOPIC_DEMAND_UPTREND")
     try:
         identity = resolve_exact_identity(product)
         history = check_exact_history(product, identity)
     except QualityError as exc:
         return safe_stop(str(exc))
     if preview:
-        print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend=true price=true")
+        print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend_mode=" + trend_mode + " price=true")
         return 0
     try:
         path = download_verified_image(product["image"], WORK_DIR, product["id"])
