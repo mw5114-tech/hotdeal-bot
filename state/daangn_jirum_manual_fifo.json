@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95941,
-  "pending": [],
+  "last_scanned_id": 95942,
+  "pending": [
+    {
+      "id": 95942,
+      "source_post_url": "https://t.me/jirum/95942",
+      "original_purchase_url": "https://link.coupang.com/a/iDY6NJDazk",
+      "source_text": "👍대박 18,320원 (35.0% 할인)\n[로켓프레시] 드시모네 유아용 프로바이오틱스 베이비스텝1 30포\n📌 가격 현황\n- 정상가: 28,185원\n- 할인: 9,865원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDY6NJDazk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-13T10:25:52+00:00",
+      "title": "[로켓프레시] 드시모네 유아용 프로바이오틱스 베이비스텝1 30포",
+      "sale_price_krw": 18320
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
