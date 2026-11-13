@@ -1,0 +1,55 @@
+name: Coupang API Radar | isolated product discovery
+
+# Independent from Telegram, Oracle, Naver blog publishing and their FIFO states.
+# This rollout discovers/ranks candidates only. No automatic blog posting.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api_radar/**'
+      - '.github/workflows/coupang-api-radar.yml'
+  workflow_dispatch:
+  schedule:
+    # 08:05 and 18:20 Asia/Seoul: daily featured products and one rotated search.
+    - cron: '5 23 * * *'
+    - cron: '20 9 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: coupang-api-radar-independent
+  cancel-in-progress: false
+
+jobs:
+  discover:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Offline unit tests - no network, no publishing
+        run: python -m unittest -v api_radar.test_collector
+      - name: Check real Goldbox response (one API request, no posting)
+        if: github.event_name == 'push'
+        run: python -m api_radar.collector --probe
+      - name: Scheduled isolated product discovery (max two API requests)
+        if: github.event_name != 'push'
+        run: python -m api_radar.collector
+      - name: Keep public-product summary only (not session or credentials)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-radar-${{ github.run_id }}
+          path: api-radar-output/summary.json
+          if-no-files-found: ignore
+          retention-days: 2
