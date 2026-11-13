@@ -245,8 +245,10 @@ def scan(*, probe=False, outdir=Path("api-radar-output")) -> int:
         errors.append(str(exc))
         if str(exc) == "API_RATE_LIMIT_STOP":
             return write_report(outdir, now, [], errors, probe)
-    # Probe uses exactly 1 call; regular scans use at most 2 calls.
-    if not probe and not errors:
+    # Search returned HTTP 401 for this account; do not retry it on schedule
+    # until its permission/signature has been resolved separately.
+    search_enabled = os.getenv("API_RADAR_SEARCH_ENABLED", "false").lower() == "true"
+    if not probe and not errors and search_enabled:
         keyword = KEYWORDS[(now.toordinal() + now.hour // 12) % len(KEYWORDS)]
         try:
             sources.extend((row, "search") for row in extract_rows(
@@ -271,11 +273,12 @@ def scan(*, probe=False, outdir=Path("api-radar-output")) -> int:
                                       float(row.get("productPrice")).is_integer() for row in raw_rows),
             "id_types": sorted({type(row.get("productId")).__name__ for row in raw_rows}),
         }))
-    return write_report(outdir, now, unique_products(normalized), errors, probe)
+    return write_report(outdir, now, unique_products(normalized), errors, probe,
+                        api_calls_max=2 if search_enabled and not probe else 1)
 
 
 def write_report(outdir: Path, now: datetime, products: list[dict],
-                 errors: list[str], probe: bool) -> int:
+                 errors: list[str], probe: bool, api_calls_max: int = 1) -> int:
     # Sanitized public-product report only. Never writes Actions Secrets,
     # session data, raw API JSON, or any personal account info.
     payload = {
@@ -283,7 +286,7 @@ def write_report(outdir: Path, now: datetime, products: list[dict],
         "checked_at_utc": now.isoformat(),
         "mode": "probe" if probe else "scan",
         "posting_enabled": False,
-        "api_calls_max": 1 if probe else 2,
+        "api_calls_max": api_calls_max,
         "normalized_count": len(products),
         "all_observations": [{k: p[k] for k in ("id", "name", "price", "source",
                                               "is_rocket", "free_shipping")}
@@ -293,7 +296,8 @@ def write_report(outdir: Path, now: datetime, products: list[dict],
                        for p in products[:MAX_RESULTS]],
         "errors": errors,
         "notes": ["No blog posting, no price-history discount claim, no generated reviews.",
-                  "ProductId does not establish option-level price identity."],
+                  "ProductId does not establish option-level price identity.",
+                  "Search API is disabled until HTTP 401 is resolved."],
     }
     (outdir / "summary.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n")
     print("API_RADAR", json.dumps({"mode": payload["mode"], "count": len(products),
