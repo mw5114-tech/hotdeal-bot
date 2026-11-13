@@ -10,7 +10,7 @@ public product/price history and this radar's own publish status.
 - Workflow: `.github/workflows/coupang-api-radar.yml`
 - Coupang collector: `api_radar/collector.py`
 - Public product-state persistence: `api_radar/state_store.py`
-- Official Naver shopping-click trend: `api_radar/trend.py`
+- Optional official Naver shopping-click trend: `api_radar/trend.py`
 - Exact product/option + Lowchart + official image validation: `api_radar/quality.py`
 - Gated one-post Naver publisher: `api_radar/publisher.py`
 - Tests: `api_radar/test_collector.py`, `test_state_store.py`,
@@ -51,7 +51,7 @@ SmartEditor session, but maintains its own durable state and receipts.
 
 It ONLY publishes when ALL are true:
 
-1. The owner has stored official NAVER API HUB secrets (below).
+1. A curated purchase-oriented product keyword is matched. Optional NAVER API HUB mode can verify rising shopping-click trends, but the default free mode makes no demand/traffic claims.
 2. A recent candidate matches a curated keyword/category and the official
    Shopping Insight **relative shopping-click trend** is rising.
 3. The API product URL resolves exclusively through allowlisted Coupang
@@ -82,8 +82,8 @@ JSON files.** Use GitHub Settings -> Secrets and variables -> Actions:
 - `COUPANG_PARTNERS_ACCESS_KEY`: already used by the existing collector.
 - `COUPANG_PARTNERS_SECRET_KEY`: already used by the existing collector.
 - `NAVER_BLOG_STORAGE_STATE_JSON`: existing encrypted browser session secret.
-- `NAVER_API_HUB_KEY_ID`: NEW, official Naver Cloud NAVER API HUB Client ID.
-- `NAVER_API_HUB_KEY`: NEW, corresponding NAVER API HUB Client Secret.
+- `NAVER_API_HUB_KEY_ID`: OPTIONAL; required only if switching `API_RADAR_TREND_MODE` to `hub`.
+- `NAVER_API_HUB_KEY`: OPTIONAL; required only when using optional paid/cloud shopping trends.
 
 Naver API HUB keys are **not** the same as a Naver account password or
 the old developers.naver.com API keys. Register and enable the Shopping
@@ -92,10 +92,13 @@ Insight API through Naver Cloud Platform before setting the new secrets.
 Official endpoint:
 `POST https://naverapihub.apigw.ntruss.com/shopping/v1/category/keywords`
 
-Until both NAVER API HUB secrets are configured, the publish job skips the
-browser and makes **zero blog posts**, while Coupang discovery and
-price-history tracking continue normally. Once they are configured,
-guarded publishing may activate automatically under these restrictions.
+The default `API_RADAR_TREND_MODE: curated` DOES NOT need either NAVER
+API HUB secret, cloud account or payment method. It uses curated purchase-intent
+keywords plus strict option-matched Lowchart historical price verification.
+It does not claim measured NAVER search trend/click index. The independent
+publisher can attempt at most one post per KST day if all other gates pass.
+Set `API_RADAR_TREND_MODE: hub` only after registering both Naver API HUB
+Secrets to enable the stricter search-click trend requirement.
 
 ## Operations
 
@@ -115,7 +118,8 @@ operational while producing zero posts because the quality gates are strict.
 
 ## Known limits / next optimization
 
-- Search trends are topic-level, not product-specific traffic forecasts.
+- Curated keyword matches are heuristics, NOT verified NAVER search demand.
+- Optional Naver API HUB trends are topic-level, not product-specific traffic forecasts.
 - ProductId snapshots alone do not establish option-level price history.
 - Cross-source duplicate detection with existing Telegram posts is not
   guaranteed; this publisher deduplicates within the independent radar.
