@@ -128,9 +128,13 @@ def safe_url(value: str, *, image=False) -> bool:
 
 
 def normalize(row: dict, source: str) -> dict | None:
-    pid = str(row.get("productId", ""))
+    raw_id = row.get("productId")
+    if type(raw_id) is float and raw_id.is_integer():
+        raw_id = int(raw_id)
+    pid = str(raw_id)
     name = row.get("productName")
-    price = row.get("productPrice")
+    raw_price = row.get("productPrice")
+    price = int(raw_price) if type(raw_price) is float and raw_price.is_integer() else raw_price
     image = row.get("productImage")
     url = row.get("productUrl")
     if not (re.fullmatch(r"\d{5,18}", pid) and isinstance(name, str)
@@ -259,10 +263,13 @@ def scan(*, probe=False, outdir=Path("api-radar-output")) -> int:
             "normalized_rows": len(normalized),
             "field_names": sorted(str(k) for k in first.keys())[:24],
             "price_type": type(first.get("productPrice")).__name__,
+            "image_hosts": sorted({parse.urlsplit(str(row.get("productImage", ""))).hostname
+                                   for row in raw_rows if str(row.get("productImage", "")).startswith("https://")}),
             "image_url_allowed_count": sum(safe_url(row.get("productImage"), image=True) for row in raw_rows),
             "product_url_allowed_count": sum(safe_url(row.get("productUrl")) for row in raw_rows),
-            "numeric_price_count": sum(type(row.get("productPrice")) is int for row in raw_rows),
-            "numeric_id_count": sum(bool(re.fullmatch(r"\\d{5,18}", str(row.get("productId", "")))) for row in raw_rows),
+            "numeric_price_count": sum(type(row.get("productPrice")) in (int, float) and
+                                      float(row.get("productPrice")).is_integer() for row in raw_rows),
+            "id_types": sorted({type(row.get("productId")).__name__ for row in raw_rows}),
         }))
     return write_report(outdir, now, unique_products(normalized), errors, probe)
 
