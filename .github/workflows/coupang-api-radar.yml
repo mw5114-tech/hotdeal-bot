@@ -1,7 +1,7 @@
 name: Coupang API Radar | isolated product discovery
 
 # Independent from Telegram, Oracle, Naver blog publishing and their FIFO states.
-# This rollout discovers/ranks candidates only. No automatic blog posting.
+# Discovery and price tracking are independent; conditional gated publish is separate.
 on:
   push:
     branches: [main]
@@ -37,25 +37,6 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
-      - name: One-time verify official search normalization after padding fix
-        if: >-
-          github.event_name == 'push' &&
-          github.event.head_commit.message == 'probe: confirm true boolean search image validation once'
-        env:
-          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
-          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
-        run: |
-          python - <<'PY'
-          from api_radar.collector import SEARCH, get_api, extract_rows, normalize, safe_url
-          rows=extract_rows(get_api(SEARCH, {"keyword":"가습기","limit":10}))
-          normalized=[p for row in rows if (p:=normalize(row,"search")) is not None]
-          images=sum(safe_url(row.get("productImage"),image=True) for row in rows)
-          print("API_RADAR_SEARCH_NORMALIZED raw="+str(len(rows))+
-                " image_allowed="+str(images)+" normalized="+str(len(normalized))+
-                " posts=0")
-          if rows and not normalized:
-              raise SystemExit("SEARCH_IMAGE_NORMALIZATION_NOT_READY")
-          PY
       - name: Independent product discovery (Goldbox + one search, no publish)
         if: github.event_name != 'push'
         env:
