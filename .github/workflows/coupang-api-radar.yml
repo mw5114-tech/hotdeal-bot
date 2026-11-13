@@ -36,7 +36,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
-        run: python -m unittest -v api_radar.test_collector api_radar.test_state_store
+        run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
       - name: Independent product discovery (Goldbox + one search, no publish)
         if: github.event_name != 'push'
         env:
@@ -59,3 +59,64 @@ jobs:
             api-radar-output/ranked.json
           if-no-files-found: ignore
           retention-days: 2
+
+  publish:
+    # The discovery job never opens a browser. Only this independent job can
+    # publish, under the SAME Naver browser mutex as the Telegram publisher.
+    needs: discover
+    if: github.ref == 'refs/heads/main' && github.event_name != 'push'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    permissions:
+      contents: write
+    concurrency:
+      group: naver-blog-jirum-state-and-publisher
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check required authentication exists without exposing values
+        id: ready
+        env:
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+          NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+        run: |
+          python - <<'PY'
+          import os
+          keys = ("NAVER_API_HUB_KEY_ID","NAVER_API_HUB_KEY",
+                  "NAVER_BLOG_STORAGE_STATE_JSON","COUPANG_PARTNERS_ACCESS_KEY",
+                  "COUPANG_PARTNERS_SECRET_KEY")
+          ready = all(bool(os.getenv(key)) for key in keys)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write("ready=" + str(ready).lower() + "\n")
+          print("API_RADAR_PUBLISH_CREDENTIALS_READY=" + str(ready).lower())
+          PY
+      - name: Install Naver editor browser only when all required keys exist
+        if: steps.ready.outputs.ready == 'true'
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+          if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+            python -m playwright install --with-deps --only-shell chromium
+          fi
+      - name: Publish at most one fully verified API offer per KST day
+        if: steps.ready.outputs.ready == 'true'
+        env:
+          API_RADAR_PUBLISH_ENABLED: 'true'
+          API_RADAR_GITHUB_TOKEN: ${{ github.token }}
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+          NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+        run: python -m api_radar.publisher
+      - name: Skip safely if required external keys are not set
+        if: steps.ready.outputs.ready != 'true'
+        run: echo 'API_RADAR_POST_SKIPPED_MISSING_NCP_OR_SESSION_CREDENTIALS'
