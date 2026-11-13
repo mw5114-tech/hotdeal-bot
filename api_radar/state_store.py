@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 from urllib import error, parse, request
 
-from api_radar.collector import MAX_PRODUCTS, check_state, empty_state, update_state
+from api_radar.collector import MAX_PRODUCTS, check_state, empty_state, update_state, safe_url
 
 REPOSITORY = "mw5114-tech/hotdeal-bot"
 STATE_BRANCH = "api-radar-data"
@@ -115,8 +115,29 @@ def persist_report(outdir: Path = Path("api-radar-output")) -> None:
                 or type(p["price"]) is not int
                 or not 1000 <= p["price"] <= 4_000_000):
             raise RadarStateError("RADAR_UNSAFE_OBSERVATION")
+    metadata = summary.get("product_metadata", [])
+    if not isinstance(metadata, list) or len(metadata) > MAX_PRODUCTS:
+        raise RadarStateError("RADAR_METADATA_INVALID")
+    validated = {}
+    for row in metadata:
+        if (not isinstance(row, dict) or set(row) != {"id", "url", "image", "category", "price"}
+                or not isinstance(row["id"], str) or not row["id"].isdigit()
+                or type(row["price"]) is not int
+                or not safe_url(row["url"]) or not safe_url(row["image"], image=True)
+                or not isinstance(row["category"], str) or len(row["category"]) > 60):
+            raise RadarStateError("RADAR_METADATA_UNSAFE")
+        validated[row["id"]] = row
     state, sha = load_state()
     updated, top = update_state(state, observations, datetime.now(timezone.utc))
+    for row in observations:
+        meta = validated.get(row["id"])
+        if meta and meta["price"] == row["price"] and row["id"] in updated["products"]:
+            updated["products"][row["id"]].update({
+                "last_product_url": meta["url"],
+                "last_image_url": meta["image"],
+                "category": meta["category"],
+                "last_checked_at_utc": summary.get("checked_at_utc"),
+            })
     # No blog publish, no claim, no Naver browser even if a price drops a lot.
     safe_top = [{key: p[key] for key in (
         "id", "name", "price", "source", "score",
