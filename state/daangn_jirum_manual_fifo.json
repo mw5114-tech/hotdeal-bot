@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95915,
-  "pending": [
-    {
-      "id": 95915,
-      "source_post_url": "https://t.me/jirum/95915",
-      "original_purchase_url": "https://link.coupang.com/a/iDI1Z0KWjs",
-      "source_text": "❤️초대박 13,200원 (42.0% 할인)\n위칙 멀티플 주방세제 3개\n📌 가격 현황\n- 정상가: 22,759원\n- 할인: 9,559원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDI1Z0KWjs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T06:40:53+00:00",
-      "title": "위칙 멀티플 주방세제 3개",
-      "sale_price_krw": 13200
-    }
-  ],
-  "in_flight": {
-    "id": 95915,
-    "status": "CLAIMED",
-    "run_id": "43380465699",
-    "at": "2026-11-13T06:42:01.728180+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5061,6 +5046,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T06:06:16.457366+00:00",
       "run_id": "43376300378"
+    },
+    "95915": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%84%EC%B9%99-%EB%A9%80%ED%8B%B0%ED%94%8C-%EC%A3%BC%EB%B0%A9%EC%84%B8%EC%A0%9C-500ml-3%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PxqE7mzd?from=write",
+      "posted_at_utc": "2026-11-13T06:40:53+00:00",
+      "product_id": "8019568599",
+      "item_id": "22407612031",
+      "vendor_item_id": "89452476238",
+      "at": "2026-11-13T06:42:18.993161+00:00",
+      "run_id": "43380465699"
     }
   },
   "skipped_non_coupang": 406,
