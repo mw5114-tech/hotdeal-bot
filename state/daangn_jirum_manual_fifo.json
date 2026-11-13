@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95930,
-  "pending": [
-    {
-      "id": 95930,
-      "source_post_url": "https://t.me/jirum/95930",
-      "original_purchase_url": "https://link.coupang.com/a/iDO1DvHAFU",
-      "source_text": "☆특가 8,410원\n원래가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDO1DvHAFU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T08:04:46+00:00",
-      "title": "☆특가 8,410원",
-      "sale_price_krw": 8410
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6698,6 +6688,12 @@
       "source_post_url": "https://t.me/jirum/95384",
       "source_title": "☆특가 13,900원",
       "at": "2026-11-08T07:35:43.997798+00:00"
+    },
+    "95930": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/95930",
+      "source_title": "☆특가 8,410원",
+      "at": "2026-11-13T08:06:16.325721+00:00"
     }
   },
   "single_test_repost_20261103": {
