@@ -288,6 +288,8 @@ def write_report(outdir: Path, now: datetime, products: list[dict],
         "posting_enabled": False,
         "api_calls_max": api_calls_max,
         "normalized_count": len(products),
+        "product_metadata": [{k: p[k] for k in ("id", "url", "image", "category", "price")}
+                             for p in products[:MAX_PRODUCTS]],
         "all_observations": [{k: p[k] for k in ("id", "name", "price", "source",
                                               "is_rocket", "free_shipping")}
                              for p in products[:MAX_PRODUCTS]],
