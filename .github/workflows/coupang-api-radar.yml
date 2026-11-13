@@ -40,7 +40,7 @@ jobs:
       - name: One-time verify official search normalization after padding fix
         if: >-
           github.event_name == 'push' &&
-          github.event.head_commit.message == 'probe: verify official image padding correction once'
+          github.event.head_commit.message == 'probe: confirm true boolean search image validation once'
         env:
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
