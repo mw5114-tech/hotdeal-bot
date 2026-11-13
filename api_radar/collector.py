@@ -121,8 +121,12 @@ def safe_url(value: str, *, image=False) -> bool:
             or u.port is not None or u.fragment):
         return False
     if image:
-        return (re.fullmatch(r"(?:thumbnail\d*|image\d*|img\d{1,2}[a-z]|t\d{1,2}[a-z])\.coupangcdn\.com", u.hostname) is not None
-                and not u.path.endswith(".svg"))
+        cdn = (re.fullmatch(r"(?:thumbnail\d*|image\d*|img\d{1,2}[a-z]|t\d{1,2}[a-z])\.coupangcdn\.com", u.hostname) is not None
+               and not u.path.endswith(".svg"))
+        official_proxy = (u.hostname == "ads-partners.coupang.com"
+                          and u.path.startswith("/openapi/image/")
+                          and len(u.path) <= 1100 and not u.query)
+        return cdn or official_proxy
     return (u.hostname in ("link.coupang.com", "coupa.ng", "www.coupang.com", "m.coupang.com")
             and u.path.startswith(("/a/", "/re/", "/vp/products/", "/np/")))
 
