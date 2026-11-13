@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95972,
-  "pending": [],
+  "last_scanned_id": 95978,
+  "pending": [
+    {
+      "id": 95977,
+      "source_post_url": "https://t.me/jirum/95977",
+      "original_purchase_url": "https://link.coupang.com/a/iESZTnfy1c",
+      "source_text": "☆특가 10,440원\nEZn이지엔 슬라이더 지퍼백, 중(M), 75개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iESZTnfy1c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-13T23:27:57+00:00",
+      "title": "☆특가 10,440원",
+      "sale_price_krw": 10440
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -5238,7 +5248,7 @@
       "run_id": "43522449648"
     }
   },
-  "skipped_non_coupang": 444,
+  "skipped_non_coupang": 449,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
