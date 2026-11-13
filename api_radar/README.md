@@ -26,9 +26,10 @@ public product/price history and this radar's own publish status.
   with API error count 0. Product history written successfully to the
   `api-radar-data` branch.
 - Unit tests: 28 offline tests passed at initial publisher integration.
-- Product searches may provide images at
-  `ads-partners.coupang.com/openapi/image/...`; the allowlist also supports
-  Coupang's vetted image CDN host patterns. No arbitrary image URL is fetched.
+- Product searches may return images at `ads-partners.coupang.com` with
+  two opaque URL path segments (including base64 `=` padding). The allowlist
+  accepts only exact official host/path shapes, and download verifies image
+  MIME, file magic and size with redirects disabled.
 
 ## Schedule and API limits
 
@@ -51,8 +52,10 @@ SmartEditor session, but maintains its own durable state and receipts.
 
 It ONLY publishes when ALL are true:
 
-1. A curated purchase-oriented product keyword is matched. Optional NAVER API HUB mode can verify rising shopping-click trends, but the default free mode makes no demand/traffic claims.
-2. A recent candidate matches a curated keyword/category and the official
+1. A recent candidate matches a curated purchase keyword, or in free
+   curated mode an official Goldbox category from the vetted shopping-category
+   allowlist. These are heuristics, not verified NAVER keyword popularity.
+2. The official
    Shopping Insight **relative shopping-click trend** is rising.
 3. The API product URL resolves exclusively through allowlisted Coupang
    domains to an exact productId and itemId (same-option identity).
@@ -93,8 +96,9 @@ Official endpoint:
 `POST https://naverapihub.apigw.ntruss.com/shopping/v1/category/keywords`
 
 The default `API_RADAR_TREND_MODE: curated` DOES NOT need either NAVER
-API HUB secret, cloud account or payment method. It uses curated purchase-intent
-keywords plus strict option-matched Lowchart historical price verification.
+API HUB secret, cloud account or payment method. It uses curated product-name
+keywords or vetted official shopping categories, then checks up to four
+recent candidates for strict exact-item Lowchart historical price evidence.
 It does not claim measured NAVER search trend/click index. The independent
 publisher can attempt at most one post per KST day if all other gates pass.
 Set `API_RADAR_TREND_MODE: hub` only after registering both Naver API HUB
