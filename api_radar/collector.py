@@ -7,7 +7,7 @@ Never logs credentials, raw API responses, customer data, or cookies.
 from __future__ import annotations
 
 import argparse
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import hashlib
 import hmac
 import json
@@ -209,7 +209,7 @@ def assess(product: dict, history: list[dict], today: str) -> dict:
 
 def update_state(state: dict, products: list[dict], now: datetime) -> tuple[dict, list[dict]]:
     state = check_state(state)
-    today = now.astimezone(timezone.utc).date().isoformat()
+    today = now.astimezone(timezone(timedelta(hours=9))).date().isoformat()
     rows = state["products"]
     results = []
     for p in unique_products(products):
@@ -218,7 +218,7 @@ def update_state(state: dict, products: list[dict], now: datetime) -> tuple[dict
         history = [x for x in history if isinstance(x, dict)
                    and isinstance(x.get("date"), str) and type(x.get("price")) is int
                    and x["date"] < today and
-                   (now.date() - datetime.fromisoformat(x["date"]).date()).days <= MAX_AGE_DAYS]
+                   (datetime.fromisoformat(today).date() - datetime.fromisoformat(x["date"]).date()).days <= MAX_AGE_DAYS]
         result = assess(p, history, today)
         results.append(result)
         history.append({"date": today, "price": p["price"]})
@@ -285,6 +285,9 @@ def write_report(outdir: Path, now: datetime, products: list[dict],
         "posting_enabled": False,
         "api_calls_max": 1 if probe else 2,
         "normalized_count": len(products),
+        "all_observations": [{k: p[k] for k in ("id", "name", "price", "source",
+                                              "is_rocket", "free_shipping")}
+                             for p in products[:MAX_PRODUCTS]],
         "candidates": [{k: p[k] for k in ("id", "name", "price", "source",
                                          "is_rocket", "free_shipping", "category")}
                        for p in products[:MAX_RESULTS]],
