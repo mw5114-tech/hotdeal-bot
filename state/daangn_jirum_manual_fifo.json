@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95931,
-  "pending": [
-    {
-      "id": 95931,
-      "source_post_url": "https://t.me/jirum/95931",
-      "original_purchase_url": "https://link.coupang.com/a/iDRzRtD2gn",
-      "source_text": "👍대박 2,800원 (33.0% 할인)\n코멧 뽑아쓰는 천연펄프 3겹 키친타올 100매 3개\n📌 가격 현황\n- 정상가: 4,179원\n- 할인: 1,379원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDRzRtD2gn\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T08:40:29+00:00",
-      "title": "코멧 뽑아쓰는 천연펄프 3겹 키친타올 100매 3개",
-      "sale_price_krw": 2800
-    }
-  ],
-  "in_flight": {
-    "id": 95931,
-    "status": "CLAIMED",
-    "run_id": "43395113379",
-    "at": "2026-11-13T08:41:23.297347+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5131,6 +5116,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T07:39:07.803712+00:00",
       "run_id": "43387120881"
+    },
+    "95931": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EB%A9%A7-%EB%BD%91%EC%95%84%EC%93%B0%EB%8A%94-%EC%B2%9C%EC%97%B0%ED%8E%84%ED%94%84-3%EA%B2%B9-%ED%82%A4%EC%B9%9C%ED%83%80%EC%98%AC-100%EB%A7%A4-3%EA%B0%9C%EC%9E%85-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PN2RxbzP?from=write",
+      "posted_at_utc": "2026-11-13T08:40:29+00:00",
+      "product_id": "7365893104",
+      "item_id": "18988612014",
+      "vendor_item_id": "86113858371",
+      "at": "2026-11-13T08:41:39.400582+00:00",
+      "run_id": "43395113379"
     }
   },
   "skipped_non_coupang": 414,
