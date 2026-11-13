@@ -114,6 +114,56 @@ class PublisherTests(TestCase):
         state["api_publish_claims"]["12345678"] = {"status": "review"}
         self.assertEqual(publisher.select_candidates(state, t), [])
 
+    def test_real_goldbox_style_category_fallback_not_fake_search_data(self):
+        t = datetime(2026, 11, 13, 10, 14, tzinfo=timezone.utc)
+        sample = {"name": "탐사 강아지 사료 연어 레시피",
+                  "category": "반려/애완용품", "last_price": 30990,
+                  "last_source": "goldbox",
+                  "last_product_url": "https://link.coupang.com/re/AFFSDP?pageKey=12345678&itemId=98765432",
+                  "last_image_url": "https://image15.coupangcdn.com/x.jpg",
+                  "last_checked_at_utc": t.isoformat()}
+        state = {"products": {"12345678": sample}, "published": {},
+                 "api_publish_claims": {}}
+        picked = publisher.select_candidates(state, t + timedelta(minutes=5))
+        self.assertEqual(len(picked), 1)
+        self.assertEqual(picked[0]["topic"], ("반려/애완용품", None))
+        self.assertTrue(picked[0]["category_fallback"])
+        self.assertEqual(publisher.select_candidates(state, t, trend_mode="hub"), [])
+        sample["category"] = "국내투어"
+        self.assertEqual(publisher.select_candidates(state, t), [])
+
+    def test_curated_mode_checks_next_candidate_when_price_unverified(self):
+        t = datetime(2026, 11, 13, 10, 14, tzinfo=timezone.utc)
+        def product(pid, category, name):
+            return {"name": name, "category": category,
+                    "last_price": 30000, "last_source": "goldbox",
+                    "last_product_url": "https://link.coupang.com/re/AFFSDP?pageKey="
+                                       + pid + "&itemId=98765432",
+                    "last_image_url": "https://image15.coupangcdn.com/x.jpg",
+                    "last_checked_at_utc": t.isoformat()}
+        state = {"products": {
+            "12345678": product("12345678", "생활용품", "샤워기헤드 필터 수압"),
+            "22345678": product("22345678", "식품", "코카콜라 오리지널 무라벨")},
+            "published": {}, "api_publish_claims": {}}
+        env = {"API_RADAR_PUBLISH_ENABLED": "true",
+               "API_RADAR_TREND_MODE": "curated",
+               "NAVER_BLOG_STORAGE_STATE_JSON": "fake",
+               "COUPANG_PARTNERS_ACCESS_KEY": "fake",
+               "COUPANG_PARTNERS_SECRET_KEY": "fake"}
+        good = {"exact_product_item_verified": True, "reference_price": 40000,
+                "discount_pct": 25, "history_window": "recent_3_weeks"}
+        with patch.dict(os.environ, env, clear=True), \
+             patch("api_radar.publisher.load_state", return_value=(state, "sha")), \
+             patch("api_radar.publisher.resolve_exact_identity",
+                   return_value={"product_id": "12345678", "item_id": "98765432"}) as resolve, \
+             patch("api_radar.publisher.check_exact_history",
+                   side_effect=[quality.QualityError("EXACT_OPTION_HISTORY_UNVERIFIED"), good]) as check, \
+             patch("api_radar.publisher.download_verified_image") as download:
+            self.assertEqual(publisher.run(preview=True, now=t + timedelta(minutes=5)), 0)
+            self.assertEqual(resolve.call_count, 2)
+            self.assertEqual(check.call_count, 2)
+            download.assert_not_called()
+
     def test_claim_before_submit_and_checkpoint(self):
         now = datetime(2026, 11, 13, 5, tzinfo=timezone.utc)
         source = {"price": 30000, "checked_at": now.isoformat()}
