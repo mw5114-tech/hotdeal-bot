@@ -37,24 +37,47 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
-      - name: One-time official search normalization probe (no publish)
+      - name: One-time aggregate search filter diagnosis (no publish)
         if: >-
           github.event_name == 'push' &&
-          github.event.head_commit.message == 'probe: confirm real search images normalize once'
+          github.event.head_commit.message == 'probe: diagnose search normalization predicates once'
         env:
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
         run: |
           python - <<'PY'
-          from api_radar.collector import SEARCH, get_api, extract_rows, normalize
-          rows=extract_rows(get_api(SEARCH, {"keyword": "가습기", "limit": 10}))
-          normalized=[v for row in rows if (v:=normalize(row,"search")) is not None]
-          print("API_RADAR_SEARCH_NORMALIZATION raw="+str(len(rows))+
-                " valid="+str(len(normalized))+
-                " with_image="+str(sum(bool(x["image"]) for x in normalized))+
-                " posts=0")
-          if rows and not normalized:
-              raise SystemExit("SEARCH_NORMALIZATION_STILL_BLOCKED")
+          from collections import Counter
+          from urllib.parse import urlsplit
+          from api_radar.collector import SEARCH, get_api, extract_rows, normalize, safe_url, BLACKLIST
+          import re, json
+          rows=extract_rows(get_api(SEARCH, {"keyword":"가습기","limit":10}))
+          counts=Counter()
+          for row in rows:
+              name=row.get("productName")
+              price=row.get("productPrice")
+              pid=row.get("productId")
+              image=row.get("productImage")
+              url=row.get("productUrl")
+              checks={
+                  "name": isinstance(name,str) and 6<=len(name.strip())<=160,
+                  "price": type(price) in (int,float) and 1000<=price<=4_000_000 and float(price).is_integer(),
+                  "pid": bool(re.fullmatch(r"\d{5,18}",str(pid))),
+                  "image": safe_url(image,image=True),
+                  "link": safe_url(url),
+                  "no_blacklist": isinstance(name,str) and not any(bad in name for bad in BLACKLIST),
+              }
+              counts.update({"pass_"+k:int(v) for k,v in checks.items()})
+              if isinstance(image,str):
+                  u=urlsplit(image)
+                  segs=u.path.strip("/").split("/")
+                  counts.update({"image_segment_count_"+str(len(segs)):1,
+                                 "image_seg_1_len_"+str(len(segs[0])):1})
+                  counts.update({"image_has_"+ch:1 for ch in sorted({q for q in u.path
+                               if not q.isalnum() and q not in "/._-~%"})})
+                  counts["image_query_present"]+=bool(u.query)
+              counts["valid"]+=normalize(row,"search") is not None
+          print("API_RADAR_SEARCH_FILTER_COUNTS "+json.dumps(dict(counts),sort_keys=True))
+          print("API_RADAR_SEARCH_DIAGNOSTIC_COMPLETE posts=0")
           PY
       - name: Independent product discovery (Goldbox + one search, no publish)
         if: github.event_name != 'push'
