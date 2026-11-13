@@ -129,6 +129,32 @@ class PublisherTests(TestCase):
         self.assertIn("12345678", state["published"])
         self.assertNotIn("12345678", state["api_publish_claims"])
 
+    def test_article_without_naver_hub_does_not_claim_clicks(self):
+        with tempfile.TemporaryDirectory() as td:
+            photo = Path(td) / "photo.jpg"
+            photo.write_bytes(b"\xff\xd8\xff" + b"0" * 1200)
+            product = {"name": "오뚜기 참기름 1개", "price": 30000}
+            history = {"exact_product_item_verified": True,
+                       "reference_price": 40000, "discount_pct": 25.0,
+                       "history_window": "recent_3_weeks"}
+            article = publisher.compose_article(
+                product, history, None, photo,
+                "https://link.coupang.com/a/Abcd12345")
+            self.assertIn("쿠팡 파트너스 활동", article["body"])
+            self.assertNotIn("클릭지수", article["body"])
+            self.assertNotIn("검색량", article["body"])
+            self.assertNotIn("실사용 후기", article["body"])
+
+    def test_curated_mode_does_not_require_naver_hub_keys(self):
+        with patch.dict(os.environ, {"API_RADAR_PUBLISH_ENABLED": "true",
+                                     "API_RADAR_TREND_MODE": "curated",
+                                     "NAVER_BLOG_STORAGE_STATE_JSON": "fake-session",
+                                     "COUPANG_PARTNERS_ACCESS_KEY": "fake",
+                                     "COUPANG_PARTNERS_SECRET_KEY": "fake"},
+                        clear=True), patch("api_radar.publisher.load_state",
+                        return_value=({"products": {}, "published": {}}, None)):
+            self.assertEqual(publisher.run(), 0)
+
     def test_article_contains_disclosure_and_not_false_review(self):
         with tempfile.TemporaryDirectory() as td:
             file = Path(td) / "x.jpg"
