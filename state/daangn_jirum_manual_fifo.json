@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95932,
-  "pending": [
-    {
-      "id": 95932,
-      "source_post_url": "https://t.me/jirum/95932",
-      "original_purchase_url": "https://link.coupang.com/a/iDSP488ZiK",
-      "source_text": "☆특가 219,500원 (28.0% 할인)\n[샥즈 공식 쿠팡브랜드샵 세트 국내 정품] 샥즈 (Shokz) OpenSwim Pro S710 오픈스윔 프로 블루투스 무선 오픈형 골전도 이어폰+코마캐\n📌 가격 현황\n- 정상가: 304,861원\n- 할인: 85,361원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDSP488ZiK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T08:58:08+00:00",
-      "title": "[샥즈 공식 쿠팡브랜드샵 세트 국내 정품] 샥즈 (Shokz) OpenSwim Pro S710 오픈스윔 프로 블루투스 무선 오픈형 골전도 이어폰+코마캐",
-      "sale_price_krw": 219500
-    }
-  ],
-  "in_flight": {
-    "id": 95932,
-    "status": "CLAIMED",
-    "run_id": "43397486084",
-    "at": "2026-11-13T08:59:30.508955+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5141,6 +5126,16 @@
       "vendor_item_id": "86113858371",
       "at": "2026-11-13T08:41:39.400582+00:00",
       "run_id": "43395113379"
+    },
+    "95932": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%A5%EC%A6%88-%EA%B3%B5%EC%8B%9D-%EC%BF%A0%ED%8C%A1%EB%B8%8C%EB%9E%9C%EB%93%9C%EC%83%B5-%EC%84%B8%ED%8A%B8-%EA%B5%AD%EB%82%B4-%EC%A0%95%ED%92%88-%EC%83%A5%EC%A6%88-Shokz-OpenSwi-PwnJDbEA?from=write",
+      "posted_at_utc": "2026-11-13T08:58:08+00:00",
+      "product_id": "9629086737",
+      "item_id": "28759624736",
+      "vendor_item_id": "89565668594",
+      "at": "2026-11-13T08:59:47.767617+00:00",
+      "run_id": "43397486084"
     }
   },
   "skipped_non_coupang": 414,
