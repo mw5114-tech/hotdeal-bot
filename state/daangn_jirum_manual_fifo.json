@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95981,
-  "pending": [
-    {
-      "id": 95981,
-      "source_post_url": "https://t.me/jirum/95981",
-      "original_purchase_url": "https://link.coupang.com/a/iETze4VvIO",
-      "source_text": "☆특가 3,100원\n마니커에프앤지 통살 케이준 치킨텐더 (냉동),400g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iETze4VvIO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T23:35:56+00:00",
-      "title": "☆특가 3,100원",
-      "sale_price_krw": 3100
-    }
-  ],
-  "in_flight": {
-    "id": 95981,
-    "status": "CLAIMED",
-    "run_id": "43528395451",
-    "at": "2026-11-13T23:37:03.625415+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5261,6 +5246,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T23:29:18.949123+00:00",
       "run_id": "43527392832"
+    },
+    "95981": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EB%8B%88%EC%BB%A4%EC%97%90%ED%94%84%EC%95%A4%EC%A7%80-%ED%86%B5%EC%82%B4-%EC%BC%80%EC%9D%B4%EC%A4%80-%EC%B9%98%ED%82%A8%ED%85%90%EB%8D%94-%EB%83%89%EB%8F%99-400g-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-dXn60k3A?from=write",
+      "posted_at_utc": "2026-11-13T23:35:56+00:00",
+      "product_id": "8479163070",
+      "item_id": "24536044974",
+      "vendor_item_id": null,
+      "at": "2026-11-13T23:37:21.193334+00:00",
+      "run_id": "43528395451"
     }
   },
   "skipped_non_coupang": 451,
