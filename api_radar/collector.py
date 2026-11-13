@@ -121,7 +121,7 @@ def safe_url(value: str, *, image=False) -> bool:
             or u.port is not None or u.fragment):
         return False
     if image:
-        return (re.fullmatch(r"(?:thumbnail\d*|image|t\d{1,2}[a-z])\.coupangcdn\.com", u.hostname) is not None
+        return (re.fullmatch(r"(?:thumbnail\d*|image\d*|img\d{1,2}[a-z]|t\d{1,2}[a-z])\.coupangcdn\.com", u.hostname) is not None
                 and not u.path.endswith(".svg"))
     return (u.hostname in ("link.coupang.com", "coupa.ng", "www.coupang.com", "m.coupang.com")
             and u.path.startswith(("/a/", "/re/", "/vp/products/", "/np/")))
