@@ -215,7 +215,14 @@ def run(*, preview=False, now=None) -> int:
     save_state(latest, sha)
     # IMPORTANT: never retry publication after a failed/ambiguous submit.
     from gh_only.naver_blog_deal_publisher import submit_one
-    published_url = submit_one(article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
+    try:
+        published_url = submit_one(article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
+    except Exception as exc:
+        # Playwright exceptions can embed URLs / DOM diagnostics. Public Actions
+        # logs receive ONLY the error class; the durable claim prevents retries.
+        print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
+              + type(exc).__name__)
+        return 1
     # A write failure leaves the claim for manual review; never auto-click twice.
     if not isinstance(published_url, str) or not published_url.startswith("https://blog.naver.com/mw5114/"):
         raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
