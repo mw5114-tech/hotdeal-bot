@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95948,
-  "pending": [],
+  "last_scanned_id": 95949,
+  "pending": [
+    {
+      "id": 95949,
+      "source_post_url": "https://t.me/jirum/95949",
+      "original_purchase_url": "https://link.coupang.com/a/iD5LVmhd36",
+      "source_text": "☆특가 16,530원 (29.0% 할인)\n한돈 삼겹살 구이용 (냉장) 1kg\n📌 가격 현황\n- 정상가: 23,282원\n- 할인: 6,752원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iD5LVmhd36\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-13T11:59:07+00:00",
+      "title": "한돈 삼겹살 구이용 (냉장) 1kg",
+      "sale_price_krw": 16530
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
