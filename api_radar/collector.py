@@ -47,7 +47,7 @@ def signed_header(access: str, secret: str, path_query: str, clock=None) -> str:
         raise RadarApiError("API_CREDENTIAL_INVALID_CHAR")
     signed_date = (clock or datetime.now(timezone.utc)).strftime("%y%m%dT%H%M%SZ")
     signature = hmac.new(
-        secret.encode(), (signed_date + "GET" + path_query).encode(),
+        secret.encode(), (signed_date + "GET" + path_query.replace("?", "", 1)).encode(),
         hashlib.sha256,
     ).hexdigest()
     return ("CEA algorithm=HmacSHA256, access-key=" + access +
