@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95917,
-  "pending": [
-    {
-      "id": 95917,
-      "source_message_id": 95917,
-      "source_post_url": "https://t.me/jirum/95917",
-      "original_purchase_url": "https://link.coupang.com/a/iDJNkqjL0C",
-      "title": "파스퇴르 요구하이 에이요 요구르트 8개",
-      "source_text": "👍대박 2,640원 (36.0% 할인)\n파스퇴르 요구하이 에이요 요구르트 8개\n📌 가격 현황\n- 정상가: 4,125원\n- 할인: 1,485원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDJNkqjL0C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2640,
-      "posted_at_utc": "2026-11-13T06:51:34+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -779,6 +768,10 @@
     "95916": {
       "url": "https://blog.naver.com/mw5114/224475775425",
       "at": "2026-11-13T06:45:04.371380+00:00"
+    },
+    "95917": {
+      "url": "https://blog.naver.com/mw5114/224475786094",
+      "at": "2026-11-13T06:52:59.526629+00:00"
     }
   },
   "skipped": {
@@ -863,12 +856,7 @@
       "at": "2026-11-13T05:41:46.933614+00:00"
     }
   },
-  "in_flight": {
-    "id": 95917,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43381672472",
-    "at": "2026-11-13T06:52:19.707580+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
