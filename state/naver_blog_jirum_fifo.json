@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95930,
+  "last_scanned_id": 95931,
   "pending": [
     {
       "id": 95930,
@@ -11,6 +11,16 @@
       "source_text": "☆특가 8,410원\n원래가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDO1DvHAFU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 8410,
       "posted_at_utc": "2026-11-13T08:04:46+00:00"
+    },
+    {
+      "id": 95931,
+      "source_message_id": 95931,
+      "source_post_url": "https://t.me/jirum/95931",
+      "original_purchase_url": "https://link.coupang.com/a/iDRzRtD2gn",
+      "title": "코멧 뽑아쓰는 천연펄프 3겹 키친타올 100매 3개",
+      "source_text": "👍대박 2,800원 (33.0% 할인)\n코멧 뽑아쓰는 천연펄프 3겹 키친타올 100매 3개\n📌 가격 현황\n- 정상가: 4,179원\n- 할인: 1,379원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDRzRtD2gn\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2800,
+      "posted_at_utc": "2026-11-13T08:40:29+00:00"
     }
   ],
   "published": {
