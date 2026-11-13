@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95978,
-  "pending": [
-    {
-      "id": 95977,
-      "source_message_id": 95977,
-      "source_post_url": "https://t.me/jirum/95977",
-      "original_purchase_url": "https://link.coupang.com/a/iESZTnfy1c",
-      "title": "☆특가 10,440원",
-      "source_text": "☆특가 10,440원\nEZn이지엔 슬라이더 지퍼백, 중(M), 75개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iESZTnfy1c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10440,
-      "posted_at_utc": "2026-11-13T23:27:57+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -843,6 +832,10 @@
     "95972": {
       "url": "https://blog.naver.com/mw5114/224476521469",
       "at": "2026-11-13T22:53:17.918673+00:00"
+    },
+    "95977": {
+      "url": "https://blog.naver.com/mw5114/224476544290",
+      "at": "2026-11-13T23:29:39.257831+00:00"
     }
   },
   "skipped": {
@@ -935,12 +928,7 @@
       "at": "2026-11-13T18:53:07.195222+00:00"
     }
   },
-  "in_flight": {
-    "id": 95977,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43527392832",
-    "at": "2026-11-13T23:28:59.481131+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
