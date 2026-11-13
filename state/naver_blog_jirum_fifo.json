@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95875,
-  "pending": [
-    {
-      "id": 95875,
-      "source_message_id": 95875,
-      "source_post_url": "https://t.me/jirum/95875",
-      "original_purchase_url": "https://link.coupang.com/a/iDhBoGmeGq",
-      "title": "☆특가 4,650원",
-      "source_text": "☆특가 4,650원\n립아이스 매직컬러 립밤, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDhBoGmeGq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4650,
-      "posted_at_utc": "2026-11-13T00:17:03+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -731,6 +720,10 @@
     "95873": {
       "url": "https://blog.naver.com/mw5114/224475246242",
       "at": "2026-11-12T23:39:17.962344+00:00"
+    },
+    "95875": {
+      "url": "https://blog.naver.com/mw5114/224475287429",
+      "at": "2026-11-13T00:18:51.102250+00:00"
     }
   },
   "skipped": {
@@ -811,12 +804,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95875,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43335902283",
-    "at": "2026-11-13T00:18:11.978967+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
