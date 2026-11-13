@@ -131,9 +131,9 @@ def safe_url(value: str, *, image=False) -> bool:
         official_proxy = (u.hostname == "ads-partners.coupang.com"
                           and not u.query and len(u.path) <= 1100
                           and len(opaque_parts) == 2
-                          and re.fullmatch(r"[A-Za-z0-9_-]{2,24}", opaque_parts[0])
+                          and re.fullmatch(r"[A-Za-z0-9_-]{2,24}", opaque_parts[0]) is not None
                           and re.fullmatch(r"[A-Za-z0-9._%~+=-]{4,1080}",
-                                           opaque_parts[1]))
+                                           opaque_parts[1]) is not None)
         return cdn or official_proxy
     return (u.hostname in ("link.coupang.com", "coupa.ng", "www.coupang.com", "m.coupang.com")
             and u.path.startswith(("/a/", "/re/", "/vp/products/", "/np/")))
