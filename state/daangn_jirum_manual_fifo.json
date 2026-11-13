@@ -3,15 +3,6 @@
   "last_scanned_id": 95972,
   "pending": [
     {
-      "id": 95971,
-      "source_post_url": "https://t.me/jirum/95971",
-      "original_purchase_url": "https://link.coupang.com/a/iEQfa9zE2S",
-      "source_text": "🔥🔥🔥무지성 7,160원 (48.0% 할인)🔥🔥🔥\n락앤락 무흠집 이지그립 수세미\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,769원\n- 할인: 6,609원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iEQfa9zE2S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T22:49:25+00:00",
-      "title": "락앤락 무흠집 이지그립 수세미",
-      "sale_price_krw": 7160
-    },
-    {
       "id": 95972,
       "source_post_url": "https://t.me/jirum/95972",
       "original_purchase_url": "https://link.coupang.com/a/iEQiMWNZ2y",
@@ -21,12 +12,7 @@
       "sale_price_krw": 11940
     }
   ],
-  "in_flight": {
-    "id": 95971,
-    "status": "CLAIMED",
-    "run_id": "43522449648",
-    "at": "2026-11-13T22:50:58.244859+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5240,6 +5226,16 @@
       "vendor_item_id": "86340365758",
       "at": "2026-11-13T18:53:30.423589+00:00",
       "run_id": "43486874922"
+    },
+    "95971": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9D%BD%EC%95%A4%EB%9D%BD-%EB%AC%B4%ED%9D%A0%EC%A7%91-%EC%9D%B4%EC%A7%80%EA%B7%B8%EB%A6%BD-%EC%88%98%EC%84%B8%EB%AF%B8-2%EA%B0%9C%EC%9E%85-6%EA%B0%9C-50%ED%95%A0%EC%9D%B8-A6aBEzLj?from=write",
+      "posted_at_utc": "2026-11-13T22:49:25+00:00",
+      "product_id": "304128683",
+      "item_id": "19850394440",
+      "vendor_item_id": "86951604309",
+      "at": "2026-11-13T22:51:14.593779+00:00",
+      "run_id": "43522449648"
     }
   },
   "skipped_non_coupang": 444,
