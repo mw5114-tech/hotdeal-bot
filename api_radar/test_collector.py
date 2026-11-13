@@ -41,7 +41,7 @@ class RadarTests(TestCase):
         date = datetime(2026, 11, 13, tzinfo=timezone.utc)
         path = r.SEARCH + "?keyword=ssd&limit=10"
         got = r.signed_header("a", "s", path, date)
-        expected = hmac.new(b"s", ("261113T000000ZGET" + path).encode(),
+        expected = hmac.new(b"s", ("261113T000000ZGET" + path.replace("?", "", 1)).encode(),
                             hashlib.sha256).hexdigest()
         self.assertIn("signature=" + expected, got)
         self.assertNotIn("secret-key", got)
