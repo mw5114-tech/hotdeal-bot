@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95889,
-  "pending": [
-    {
-      "id": 95889,
-      "source_post_url": "https://t.me/jirum/95889",
-      "original_purchase_url": "https://link.coupang.com/a/iDmxKimIvc",
-      "source_text": "☆특가 8,290원\n에디슨 유아 실리콘 스푼 포크 케이스 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDmxKimIvc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T01:26:12+00:00",
-      "title": "☆특가 8,290원",
-      "sale_price_krw": 8290
-    }
-  ],
-  "in_flight": {
-    "id": 95889,
-    "status": "CLAIMED",
-    "run_id": "43344950428",
-    "at": "2026-11-13T01:27:22.332714+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4971,6 +4956,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T00:28:03.038384+00:00",
       "run_id": "43337201190"
+    },
+    "95889": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%94%94%EC%8A%A8-%EC%9C%A0%EC%95%84-%EC%8B%A4%EB%A6%AC%EC%BD%98-%EC%8A%A4%ED%91%BC-%ED%8F%AC%ED%81%AC-%EC%BC%80%EC%9D%B4%EC%8A%A4-%EC%84%B8%ED%8A%B8-%EC%98%A4%EB%A6%AC%EB%AF%BC%ED%8A%B8-%EC%8A%A4%ED%91%BC-20%ED%95%A0%EC%9D%B8-daD2v77P?from=write",
+      "posted_at_utc": "2026-11-13T01:26:12+00:00",
+      "product_id": "6848334189",
+      "item_id": "16304869504",
+      "vendor_item_id": null,
+      "at": "2026-11-13T01:27:38.988025+00:00",
+      "run_id": "43344950428"
     }
   },
   "skipped_non_coupang": 389,
