@@ -26,6 +26,13 @@ from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
 
 KST = timezone(timedelta(hours=9))
 CANDIDATE_LIMIT = 4
+# Goldbox feeds often contain no exact keyword from optional shopping trends.
+# Restrict fallback to official product categories suitable for shopping
+# intent; actual search demand remains UNKNOWN without NAVER API HUB.
+CURATED_CATEGORY_PRIORITY = (
+    "가전디지털", "생활용품", "주방용품", "반려/애완용품",
+    "가구/홈인테리어", "뷰티", "식품", "로켓프레시",
+)
 FRESH_SECONDS = 2 * 3600
 MAX_PUBLISH_PER_KST_DAY = 1
 WORK_DIR = Path("api-radar-local")
@@ -41,7 +48,7 @@ def safe_stop(reason: str) -> int:
     return 0
 
 
-def select_candidates(state: dict, now: datetime) -> list[dict]:
+def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> list[dict]:
     if state.get("api_publish_claims") and not isinstance(state["api_publish_claims"], dict):
         raise RadarStateError("RADAR_CLAIM_STATE_INVALID")
     posted = state.get("published", {})
@@ -58,6 +65,13 @@ def select_candidates(state: dict, now: datetime) -> list[dict]:
         if pid in posted or pid in claims or not isinstance(obj, dict):
             continue
         topic = matching_topic(obj.get("name", ""))
+        category = obj.get("category")
+        fallback = False
+        if topic is None and trend_mode == "curated" and category in CURATED_CATEGORY_PRIORITY:
+            # Only infer a shopping CATEGORY from the official API. Never
+            # present it as measured Naver keyword demand or click volume.
+            topic = (category, None)
+            fallback = True
         raw_ts = obj.get("last_checked_at_utc")
         if not topic or not isinstance(raw_ts, str):
             continue
@@ -77,13 +91,17 @@ def select_candidates(state: dict, now: datetime) -> list[dict]:
             continue
         product = {"id": pid, "name": obj["name"], "price": price,
                    "url": url, "image": image, "topic": topic,
-                   "source": obj.get("last_source"), "checked_at": raw_ts}
+                   "source": obj.get("last_source"), "checked_at": raw_ts,
+                   "category": category, "category_fallback": fallback}
         results.append(product)
     from api_radar.quality import extract_exact_identity
     # Prefer offers with exact productId+itemId already visible in the
     # official API URL. Never resolve opaque referral links by clicking them.
     results.sort(key=lambda p: (
         extract_exact_identity(p["url"], p["id"]) is None,
+        p["category_fallback"],
+        CURATED_CATEGORY_PRIORITY.index(p["category"])
+        if p["category"] in CURATED_CATEGORY_PRIORITY else 99,
         p["source"] != "goldbox", abs(p["price"] - 65000), p["id"]))
     return results[:CANDIDATE_LIMIT]
 
@@ -186,28 +204,43 @@ def run(*, preview=False, now=None) -> int:
         return safe_stop("COUPANG_PARTNERS_API_KEYS_NOT_CONFIGURED")
     now = now or utc_now()
     state, _ = load_state()
-    candidates = select_candidates(state, now)
+    candidates = select_candidates(state, now, trend_mode=trend_mode)
     if not candidates:
-        return safe_stop("NO_FRESH_UNPOSTED_TOPIC_CANDIDATES")
-    # Bounded: in HUB mode at most one trend request, one redirect resolution,
-    # and one exact-item historical price lookup. No alternate candidate after
-    # uncertainty and never a second blog post. Curated mode does not claim
-    # actual Naver search traffic or click volumes.
-    product = candidates[0]
-    keyword, category = product["topic"]
-    trend = None
-    if trend_mode == "hub":
+        return safe_stop("NO_FRESH_UNPOSTED_PURCHASE_CANDIDATES")
+    # Curated free mode checks at most four candidates (not four posts);
+    # each still needs exact product/item identity + verified Lowchart history.
+    # Optional HUB mode uses at most one search-click trend API request.
+    # No paid trends or invented search volume in curated mode.
+    selected = None
+    rejection_codes = {}
+    for index, candidate in enumerate(candidates):
+        if trend_mode == "hub" and index > 0:
+            break
+        keyword, category = candidate["topic"]
+        trend = None
+        if trend_mode == "hub":
+            try:
+                trend = fetch_topic_trend(keyword, category, now=now)
+            except TrendError as exc:
+                return safe_stop("TREND_" + str(exc))
+            if not trend["demand_uptrend"]:
+                return safe_stop("NO_VERIFIED_TOPIC_DEMAND_UPTREND")
         try:
-            trend = fetch_topic_trend(keyword, category, now=now)
-        except TrendError as exc:
-            return safe_stop("TREND_" + str(exc))
-        if not trend["demand_uptrend"]:
-            return safe_stop("NO_VERIFIED_TOPIC_DEMAND_UPTREND")
-    try:
-        identity = resolve_exact_identity(product)
-        history = check_exact_history(product, identity)
-    except QualityError as exc:
-        return safe_stop(str(exc))
+            identity = resolve_exact_identity(candidate)
+            history = check_exact_history(candidate, identity)
+        except QualityError as exc:
+            code = str(exc)
+            rejection_codes[code] = rejection_codes.get(code, 0) + 1
+            continue
+        selected = (candidate, identity, history, trend)
+        break
+    if selected is None:
+        # Fail closed; aggregate fixed error codes are safe for public logs.
+        print("API_RADAR_NO_VERIFIED_DEAL checked=" + str(len(candidates))
+              + " rejected=" + json.dumps(rejection_codes, sort_keys=True)
+              + " posts=0")
+        return 0
+    product, identity, history, trend = selected
     if preview:
         print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend_mode=" + trend_mode + " price=true")
         return 0
