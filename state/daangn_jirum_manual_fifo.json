@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95892,
-  "pending": [
-    {
-      "id": 95892,
-      "source_post_url": "https://t.me/jirum/95892",
-      "original_purchase_url": "https://link.coupang.com/a/iDpwWPTGQS",
-      "source_text": "👍대박 9,870원 (37.9% 할인)\n하비티 간편세척 스프레이 밀대걸레 + 극세사 패드 5개 + 스크레이퍼, 38 x 11 x ..., 1세트\n📌 가격 현황\n- 정상가: 15,900원\n- 할인: 6,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDpwWPTGQS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T02:08:00+00:00",
-      "title": "하비티 간편세척 스프레이 밀대걸레 + 극세사 패드 5개 + 스크레이퍼, 38 x 11 x ..., 1세트",
-      "sale_price_krw": 9870
-    }
-  ],
-  "in_flight": {
-    "id": 95892,
-    "status": "CLAIMED",
-    "run_id": "43350013788",
-    "at": "2026-11-13T02:08:59.179178+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -4991,6 +4976,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T01:56:16.678687+00:00",
       "run_id": "43348439174"
+    },
+    "95892": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EB%B9%84%ED%8B%B0-%EA%B0%84%ED%8E%B8%EC%84%B8%EC%B2%99-%EC%8A%A4%ED%94%84%EB%A0%88%EC%9D%B4-%EB%B0%80%EB%8C%80%EA%B1%B8%EB%A0%88-%EA%B7%B9%EC%84%B8%EC%82%AC-%ED%8C%A8%EB%93%9C-5%EA%B0%9C-%EC%8A%A4%ED%81%AC-5%ED%95%A0%EC%9D%B8-d7abgl1A?from=write",
+      "posted_at_utc": "2026-11-13T02:08:00+00:00",
+      "product_id": "7787783563",
+      "item_id": "21062353897",
+      "vendor_item_id": null,
+      "at": "2026-11-13T02:09:16.018997+00:00",
+      "run_id": "43350013788"
     }
   },
   "skipped_non_coupang": 390,
