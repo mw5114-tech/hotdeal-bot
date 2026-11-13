@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95933,
-  "pending": [
-    {
-      "id": 95933,
-      "source_post_url": "https://t.me/jirum/95933",
-      "original_purchase_url": "https://link.coupang.com/a/iDUt83PYKy",
-      "source_text": "🔥🔥🔥무지성 6,000원 (51.0% 할인)🔥🔥🔥\n베베쿡 꼬소미콘칩 구운옥수수 과자 6개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,245원\n- 할인: 6,245원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDUt83PYKy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T09:21:10+00:00",
-      "title": "베베쿡 꼬소미콘칩 구운옥수수 과자 6개",
-      "sale_price_krw": 6000
-    }
-  ],
-  "in_flight": {
-    "id": 95933,
-    "status": "CLAIMED",
-    "run_id": "43400680323",
-    "at": "2026-11-13T09:22:26.179776+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5151,6 +5136,16 @@
       "vendor_item_id": "89565668594",
       "at": "2026-11-13T08:59:47.767617+00:00",
       "run_id": "43397486084"
+    },
+    "95933": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B2%A0%EB%B2%A0%EC%BF%A1-%EA%BC%AC%EC%86%8C%EB%AF%B8%EC%BD%98%EC%B9%A9-%EA%B5%AC%EC%9A%B4%EC%98%A5%EC%88%98%EC%88%98-%EA%B3%BC%EC%9E%90-%EA%B5%AC%EC%9A%B4%EC%98%A5%EC%88%98%EC%88%98%EB%A7%9B-25g-6-45%ED%95%A0%EC%9D%B8-A0nG91Bd?from=write",
+      "posted_at_utc": "2026-11-13T09:21:10+00:00",
+      "product_id": "8685833233",
+      "item_id": "25222486759",
+      "vendor_item_id": "92218829729",
+      "at": "2026-11-13T09:22:43.462398+00:00",
+      "run_id": "43400680323"
     }
   },
   "skipped_non_coupang": 414,
