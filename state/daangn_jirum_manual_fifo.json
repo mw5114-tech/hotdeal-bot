@@ -3,15 +3,6 @@
   "last_scanned_id": 95922,
   "pending": [
     {
-      "id": 95921,
-      "source_post_url": "https://t.me/jirum/95921",
-      "original_purchase_url": "https://link.coupang.com/a/iDM17zF7JI",
-      "source_text": "☆특가 8,490원\n호주산 소고기 앞다리살 국거리용 300g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDM17zF7JI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T07:36:53+00:00",
-      "title": "☆특가 8,490원",
-      "sale_price_krw": 8490
-    },
-    {
       "id": 95922,
       "source_post_url": "https://t.me/jirum/95922",
       "original_purchase_url": "https://link.coupang.com/a/iDM2cbR7m0",
@@ -21,12 +12,7 @@
       "sale_price_krw": 1640
     }
   ],
-  "in_flight": {
-    "id": 95921,
-    "status": "CLAIMED",
-    "run_id": "43387120881",
-    "at": "2026-11-13T07:38:31.050722+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5119,6 +5105,16 @@
       "item_id": "2607554557",
       "vendor_item_id": null,
       "at": "2026-11-13T07:38:26.261160+00:00",
+      "run_id": "43387120881"
+    },
+    "95921": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EB%8F%88-%EB%AA%A9%EC%8B%AC-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-65%ED%95%A0%EC%9D%B8-A0nGqJxd?from=write",
+      "posted_at_utc": "2026-11-13T07:36:53+00:00",
+      "product_id": "4399008539",
+      "item_id": "5222928336",
+      "vendor_item_id": null,
+      "at": "2026-11-13T07:38:46.802598+00:00",
       "run_id": "43387120881"
     }
   },
