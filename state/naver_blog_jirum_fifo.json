@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95910,
-  "pending": [],
+  "last_scanned_id": 95913,
+  "pending": [
+    {
+      "id": 95911,
+      "source_message_id": 95911,
+      "source_post_url": "https://t.me/jirum/95911",
+      "original_purchase_url": "https://link.coupang.com/a/iDELfkUiqW",
+      "title": "☆특가 3,170원",
+      "source_text": "☆특가 3,170원\n역대최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDELfkUiqW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3170,
+      "posted_at_utc": "2026-11-13T05:41:08+00:00"
+    },
+    {
+      "id": 95912,
+      "source_message_id": 95912,
+      "source_post_url": "https://t.me/jirum/95912",
+      "original_purchase_url": "https://link.coupang.com/a/iDF0ONNc60",
+      "title": "☆특가 3,265원",
+      "source_text": "☆특가 3,265원\n개당\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDF0ONNc60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3265,
+      "posted_at_utc": "2026-11-13T05:58:38+00:00"
+    },
+    {
+      "id": 95913,
+      "source_message_id": 95913,
+      "source_post_url": "https://t.me/jirum/95913",
+      "original_purchase_url": "https://link.coupang.com/a/iDF0UTBjeS",
+      "title": "☆특가 3,750원",
+      "source_text": "☆특가 3,750원\n개당\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDF0UTBjeS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3750,
+      "posted_at_utc": "2026-11-13T05:58:40+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
