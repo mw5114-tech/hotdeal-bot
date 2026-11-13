@@ -265,3 +265,7 @@ naver-blog-one-draft/
 jirum-manual-one-draft/
 dummy-state/
 coupang-login-form-diagnostic/
+
+# Transient verified product images only; never commit browser drafts.
+api-radar-local/
+api-radar-output/
