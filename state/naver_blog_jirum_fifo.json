@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95914,
-  "pending": [],
+  "last_scanned_id": 95915,
+  "pending": [
+    {
+      "id": 95915,
+      "source_message_id": 95915,
+      "source_post_url": "https://t.me/jirum/95915",
+      "original_purchase_url": "https://link.coupang.com/a/iDI1Z0KWjs",
+      "title": "위칙 멀티플 주방세제 3개",
+      "source_text": "❤️초대박 13,200원 (42.0% 할인)\n위칙 멀티플 주방세제 3개\n📌 가격 현황\n- 정상가: 22,759원\n- 할인: 9,559원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDI1Z0KWjs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 13200,
+      "posted_at_utc": "2026-11-13T06:40:53+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
