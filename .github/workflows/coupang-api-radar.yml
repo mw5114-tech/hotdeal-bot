@@ -27,8 +27,6 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
-      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
-      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       PYTHONDONTWRITEBYTECODE: '1'
     steps:
       - uses: actions/checkout@v4
@@ -39,9 +37,15 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store
-      - name: Independent product discovery (max two API requests, no publish)
+      - name: Independent product discovery (Goldbox only, no publish)
+        if: github.event_name != 'push'
+        env:
+          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+          API_RADAR_SEARCH_ENABLED: 'false'
         run: python -m api_radar.collector
       - name: Persist public product observations on separate data branch
+        if: github.event_name != 'push'
         env:
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
         run: python -m api_radar.state_store
