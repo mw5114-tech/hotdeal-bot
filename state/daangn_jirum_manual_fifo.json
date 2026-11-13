@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95891,
-  "pending": [],
+  "last_scanned_id": 95892,
+  "pending": [
+    {
+      "id": 95892,
+      "source_post_url": "https://t.me/jirum/95892",
+      "original_purchase_url": "https://link.coupang.com/a/iDpwWPTGQS",
+      "source_text": "👍대박 9,870원 (37.9% 할인)\n하비티 간편세척 스프레이 밀대걸레 + 극세사 패드 5개 + 스크레이퍼, 38 x 11 x ..., 1세트\n📌 가격 현황\n- 정상가: 15,900원\n- 할인: 6,030원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDpwWPTGQS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-13T02:08:00+00:00",
+      "title": "하비티 간편세척 스프레이 밀대걸레 + 극세사 패드 5개 + 스크레이퍼, 38 x 11 x ..., 1세트",
+      "sale_price_krw": 9870
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
