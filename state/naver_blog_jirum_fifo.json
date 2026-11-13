@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95972,
-  "pending": [
-    {
-      "id": 95972,
-      "source_message_id": 95972,
-      "source_post_url": "https://t.me/jirum/95972",
-      "original_purchase_url": "https://link.coupang.com/a/iEQiMWNZ2y",
-      "title": "이디야커피연구소 아이스 아메리카노 1L 6개",
-      "source_text": "👍대박 11,940원 (38.0% 할인)\n이디야커피연구소 아이스 아메리카노 1L 6개\n📌 가격 현황\n- 정상가: 19,258원\n- 할인: 7,318원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iEQiMWNZ2y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11940,
-      "posted_at_utc": "2026-11-13T22:50:14+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -839,6 +828,10 @@
     "95971": {
       "url": "https://blog.naver.com/mw5114/224476520920",
       "at": "2026-11-13T22:52:23.150405+00:00"
+    },
+    "95972": {
+      "url": "https://blog.naver.com/mw5114/224476521469",
+      "at": "2026-11-13T22:53:17.918673+00:00"
     }
   },
   "skipped": {
@@ -931,12 +924,7 @@
       "at": "2026-11-13T18:53:07.195222+00:00"
     }
   },
-  "in_flight": {
-    "id": 95972,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43522619342",
-    "at": "2026-11-13T22:52:38.197292+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
