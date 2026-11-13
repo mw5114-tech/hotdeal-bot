@@ -250,6 +250,20 @@ def scan(*, probe=False, outdir=Path("api-radar-output")) -> int:
         except RadarApiError as exc:
             errors.append(str(exc))
     normalized = [x for raw, source in sources if (x := normalize(raw, source))]
+    # Report only counts/types/field names, never raw product values or auth data.
+    if sources:
+        raw_rows = [row for row, _ in sources]
+        first = raw_rows[0]
+        print("API_RADAR_SCHEMA", json.dumps({
+            "raw_rows": len(raw_rows),
+            "normalized_rows": len(normalized),
+            "field_names": sorted(str(k) for k in first.keys())[:24],
+            "price_type": type(first.get("productPrice")).__name__,
+            "image_url_allowed_count": sum(safe_url(row.get("productImage"), image=True) for row in raw_rows),
+            "product_url_allowed_count": sum(safe_url(row.get("productUrl")) for row in raw_rows),
+            "numeric_price_count": sum(type(row.get("productPrice")) is int for row in raw_rows),
+            "numeric_id_count": sum(bool(re.fullmatch(r"\\d{5,18}", str(row.get("productId", "")))) for row in raw_rows),
+        }))
     return write_report(outdir, now, unique_products(normalized), errors, probe)
 
 
