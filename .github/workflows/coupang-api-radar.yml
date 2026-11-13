@@ -37,38 +37,24 @@ jobs:
           python-version: '3.11'
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
-      - name: One-time safe search image URL shape probe (no publishing)
+      - name: One-time official search normalization probe (no publish)
         if: >-
           github.event_name == 'push' &&
-          github.event.head_commit.message == 'probe: inspect safe search image metadata once'
+          github.event.head_commit.message == 'probe: confirm real search images normalize once'
         env:
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
         run: |
           python - <<'PY'
-          from collections import Counter
-          from urllib.parse import urlsplit, parse_qsl
-          import json, re
-          from api_radar.collector import SEARCH, get_api, extract_rows, safe_url
-          rows = extract_rows(get_api(SEARCH, {"keyword":"가습기","limit":10}))
-          image_shapes = Counter()
-          for row in rows:
-              image = row.get("productImage")
-              if not isinstance(image,str):
-                  continue
-              u=urlsplit(image)
-              parts=u.path.split("/")[1:5]
-              # Only public URL path shape; never log image/token/query values.
-              prefix="/".join(p if len(p)<=28 and
-                  re.fullmatch(r"[A-Za-z_-]+",p) else "[id]" for p in parts)
-              keys=tuple(sorted({k for k,v in parse_qsl(u.query) if len(k)<30}))
-              image_shapes[(u.hostname,prefix,keys,safe_url(image,image=True))]+=1
-          print("API_RADAR_SAFE_IMAGE_SHAPES "+json.dumps([
-              {"hostname":h,"prefix":p,"query_parameter_names":ks,
-               "previously_allowed":allowed,"rows":count}
-              for (h,p,ks,allowed),count in image_shapes.items()
-          ],ensure_ascii=False))
-          print("API_RADAR_IMAGE_PROBE_OK raw_search_rows="+str(len(rows))+" posts=0")
+          from api_radar.collector import SEARCH, get_api, extract_rows, normalize
+          rows=extract_rows(get_api(SEARCH, {"keyword": "가습기", "limit": 10}))
+          normalized=[v for row in rows if (v:=normalize(row,"search")) is not None]
+          print("API_RADAR_SEARCH_NORMALIZATION raw="+str(len(rows))+
+                " valid="+str(len(normalized))+
+                " with_image="+str(sum(bool(x["image"]) for x in normalized))+
+                " posts=0")
+          if rows and not normalized:
+              raise SystemExit("SEARCH_NORMALIZATION_STILL_BLOCKED")
           PY
       - name: Independent product discovery (Goldbox + one search, no publish)
         if: github.event_name != 'push'
