@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95948,
-  "pending": [
-    {
-      "id": 95948,
-      "source_post_url": "https://t.me/jirum/95948",
-      "original_purchase_url": "https://link.coupang.com/a/iD47xc6lxt",
-      "source_text": "❤️초대박 3,560원 (41.0% 할인)\n[로켓프레시] 남양유업 우유 듬뿍 초코에몽 6개\n📌 가격 현황\n- 정상가: 6,034원\n- 할인: 2,474원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iD47xc6lxt\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T11:50:00+00:00",
-      "title": "[로켓프레시] 남양유업 우유 듬뿍 초코에몽 6개",
-      "sale_price_krw": 3560
-    }
-  ],
-  "in_flight": {
-    "id": 95948,
-    "status": "CLAIMED",
-    "run_id": "43420243918",
-    "at": "2026-11-13T11:51:31.585701+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5191,6 +5176,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T11:26:11.441276+00:00",
       "run_id": "43416939626"
+    },
+    "95948": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%82%A8%EC%96%91%EC%9C%A0%EC%97%85-%EC%9A%B0%EC%9C%A0-%EB%93%AC%EB%BF%8D-%EC%B4%88%EC%BD%94%EC%97%90%EB%AA%BD-6%EA%B0%9C-200ml-25%ED%95%A0%EC%9D%B8-AeeJ8vNA?from=write",
+      "posted_at_utc": "2026-11-13T11:50:00+00:00",
+      "product_id": "9041732777",
+      "item_id": "26529299239",
+      "vendor_item_id": "93503471331",
+      "at": "2026-11-13T11:51:47.343204+00:00",
+      "run_id": "43420243918"
     }
   },
   "skipped_non_coupang": 425,
