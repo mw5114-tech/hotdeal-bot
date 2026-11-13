@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95947,
-  "pending": [
-    {
-      "id": 95947,
-      "source_post_url": "https://t.me/jirum/95947",
-      "original_purchase_url": "https://link.coupang.com/a/iD3ja0S2VM",
-      "source_text": "☆특가 5,670원\n미라클 샘물 무라벨, 2L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iD3ja0S2VM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-13T11:24:38+00:00",
-      "title": "☆특가 5,670원",
-      "sale_price_krw": 5670
-    }
-  ],
-  "in_flight": {
-    "id": 95947,
-    "status": "CLAIMED",
-    "run_id": "43416939626",
-    "at": "2026-11-13T11:25:50.533318+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5181,6 +5166,16 @@
       "vendor_item_id": "87222580831",
       "at": "2026-11-13T10:27:22.185394+00:00",
       "run_id": "43409049989"
+    },
+    "95947": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EB%9D%BC%ED%81%B4-%EC%83%98%EB%AC%BC-%EB%AC%B4%EB%9D%BC%EB%B2%A8-2L-12%EA%B0%9C-PW7z54mP?from=write",
+      "posted_at_utc": "2026-11-13T11:24:38+00:00",
+      "product_id": "9341601738",
+      "item_id": "27704818148",
+      "vendor_item_id": null,
+      "at": "2026-11-13T11:26:11.441276+00:00",
+      "run_id": "43416939626"
     }
   },
   "skipped_non_coupang": 425,
