@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95876,
-  "pending": [
-    {
-      "id": 95876,
-      "source_message_id": 95876,
-      "source_post_url": "https://t.me/jirum/95876",
-      "original_purchase_url": "https://link.coupang.com/a/iDigvgGokC",
-      "title": "☆특가 5,680원",
-      "source_text": "☆특가 5,680원\n큐원 우리아이 영양쿠키믹스, 250g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iDigvgGokC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5680,
-      "posted_at_utc": "2026-11-13T00:26:20+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -735,6 +724,10 @@
     "95875": {
       "url": "https://blog.naver.com/mw5114/224475287429",
       "at": "2026-11-13T00:18:51.102250+00:00"
+    },
+    "95876": {
+      "url": "https://blog.naver.com/mw5114/224475298507",
+      "at": "2026-11-13T00:28:24.781720+00:00"
     }
   },
   "skipped": {
@@ -815,12 +808,7 @@
       "at": "2026-11-12T10:09:48.583220+00:00"
     }
   },
-  "in_flight": {
-    "id": 95876,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43337201190",
-    "at": "2026-11-13T00:27:44.884556+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
