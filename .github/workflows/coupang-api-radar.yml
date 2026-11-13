@@ -38,7 +38,8 @@ jobs:
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store
       - name: One-time signed-search API smoke probe (no post)
-        if: github.event_name == 'push' && github.event.head_commit.message == 'probe: validate corrected Coupang search HMAC once'
+        if: >-
+          github.event_name == 'push' && github.event.head_commit.message == 'probe: validate corrected Coupang search HMAC once v2'
         env:
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
