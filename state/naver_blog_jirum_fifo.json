@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96009,
-  "pending": [],
+  "last_scanned_id": 96011,
+  "pending": [
+    {
+      "id": 96010,
+      "source_message_id": 96010,
+      "source_post_url": "https://t.me/jirum/96010",
+      "original_purchase_url": "https://link.coupang.com/a/iFdPRnnm56",
+      "title": "☆특가 10,500원",
+      "source_text": "☆특가 10,500원\n꾸버스 접이식 사각 차콜스타터, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFdPRnnm56\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10500,
+      "posted_at_utc": "2026-11-14T04:19:33+00:00"
+    },
+    {
+      "id": 96011,
+      "source_message_id": 96011,
+      "source_post_url": "https://t.me/jirum/96011",
+      "original_purchase_url": "https://link.coupang.com/a/iFgBq6oLAW",
+      "title": "그로비타 플레코 안시 전용사료, 115g, 1개",
+      "source_text": "🔥🔥🔥무지성 2,180원 (71.8% 할인)🔥🔥🔥\n그로비타 플레코 안시 전용사료, 115g, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,730원\n- 할인: 5,550원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFgBq6oLAW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 2180,
+      "posted_at_utc": "2026-11-14T04:58:17+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
