@@ -115,7 +115,7 @@ class PublisherTests(TestCase):
         found = publisher.select_candidates(state, t + timedelta(minutes=30))
         self.assertEqual(len(found), 1)
         self.assertEqual(found[0]["topic"][0], "무선 키보드")
-        state["api_publish_claims"]["12345678"] = {"status": "review"}
+        state["api_publish_claims"]["12345678"] = {"status": "review", "claimed_at": t.isoformat()}
         self.assertEqual(publisher.select_candidates(state, t), [])
 
     def test_real_goldbox_style_category_fallback_not_fake_search_data(self):
