@@ -16,9 +16,13 @@ on:
     - cron: '10 3 * * *'
     - cron: '25 7 * * *'
     - cron: '40 11 * * *'
-    # Drain queue without another Partners API call, hourly 09:55-22:55 KST.
-    # Per-run batch is for timeout safety, NEVER a daily post quota.
-    - cron: '55 0-13 * * *'
+    # One A/B item release per 15-minute slot, 08:30-23:45 KST.
+    # Cron can be delayed; publisher also enforces >=900s from the last
+    # confirmed or uncertain submission attempt in persisted state.
+    # 08:30/08:45 KST = 23:30/23:45 UTC (previous calendar date).
+    - cron: '30,45 23 * * *'
+    # 09:00-23:45 KST = 00:00-14:45 UTC.
+    - cron: '*/15 0-14 * * *'
 
 permissions:
   contents: write
@@ -29,7 +33,8 @@ concurrency:
 
 jobs:
   discover:
-    if: github.ref == 'refs/heads/main'
+    # Publishing-only 15m slots do not need a separate runner just for tests.
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'schedule' || (github.event.schedule != '30,45 23 * * *' && github.event.schedule != '*/15 0-14 * * *'))
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
@@ -44,7 +49,7 @@ jobs:
       - name: Offline unit tests - no network, no publishing
         run: python -m unittest -v api_radar.test_collector api_radar.test_state_store api_radar.test_quality_pipeline
       - name: Independent product discovery (Goldbox + one search, no publish)
-        if: github.event_name != 'push' && github.event.schedule != '55 0-13 * * *'
+        if: github.event_name != 'push'
         env:
           COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
           COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
@@ -70,9 +75,11 @@ jobs:
     # The discovery job never opens a browser. Only this independent job can
     # publish, under the SAME Naver browser mutex as the Telegram publisher.
     needs: discover
-    if: github.ref == 'refs/heads/main' && github.event_name != 'push'
+    # A scheduled release may run after discover is intentionally skipped.
+    # New scans only add the day's queue; never publish immediately in a burst.
+    if: always() && github.ref == 'refs/heads/main' && github.event_name == 'schedule' && needs.discover.result == 'skipped' && (github.event.schedule == '30,45 23 * * *' || github.event.schedule == '*/15 0-14 * * *')
     runs-on: ubuntu-24.04
-    timeout-minutes: 29
+    timeout-minutes: 14
     permissions:
       contents: write
     concurrency:
@@ -116,7 +123,7 @@ jobs:
           if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
             python -m playwright install --with-deps --only-shell chromium
           fi
-      - name: Drain up to four A/B-classified current-day Goldbox items per run
+      - name: Release exactly one verified A/B Goldbox item per 15-minute slot
         if: steps.ready.outputs.ready == 'true' && steps.backlog.outputs.pending == 'true'
         env:
           API_RADAR_PUBLISH_ENABLED: 'true'
