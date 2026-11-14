@@ -9,6 +9,7 @@ from unittest.mock import patch
 
 from gh_only.lowchart_chart_capture import _exact_identity, chart_bounds, capture_chart_image
 from gh_only.naver_blog_format import add_price_chart_block, validate_blocks, DISCLOSURE
+from gh_only.daangn_editor_probe import _verified_lowchart_chart_identity
 
 
 class FakePage:
@@ -25,6 +26,33 @@ class ChartUnitTests(TestCase):
         self.assertIsNone(_exact_identity({"product_id": "bad", "item_id": "24536044974"}))
         self.assertIsNone(_exact_identity({"product_id": "8479163070", "item_id": None}))
         self.assertIsNone(_exact_identity(None))
+
+    def test_price_and_chart_must_be_same_item_and_lowchart_source(self):
+        """Each next deal carries its own verified product+option, no static ID."""
+        for p, item in (
+            ("8479163070", "24536044974"),
+            ("6221369038", "12453073752"),
+        ):
+            row = {
+                "product_identity": {"product_id": p, "item_id": item},
+                "caption": {
+                    "comparison_reference_source": "lowchart_public_history",
+                    "comparison_reference_price_krw": 10000,
+                },
+                "history": {
+                    "visible_exact_item_prices_verified": True,
+                    "source_item_identifiers_present": True,
+                    "product_id": p, "item_id": item,
+                    "source_url": f"https://www.lowchart.com/{p}-{item}",
+                },
+            }
+            self.assertEqual(_verified_lowchart_chart_identity(row),
+                             {"product_id": p, "item_id": item})
+            row["caption"]["comparison_reference_source"] = "fallcent_observed_high"
+            self.assertIsNone(_verified_lowchart_chart_identity(row))
+            row["caption"]["comparison_reference_source"] = "lowchart_observed_high"
+            row["history"]["item_id"] = "98765432123"
+            self.assertIsNone(_verified_lowchart_chart_identity(row))
 
     def test_capture_off_by_default_and_does_not_open_browser(self):
         with TemporaryDirectory() as folder, patch.dict(os.environ, {
