@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96068,
-  "pending": [],
+  "last_scanned_id": 96073,
+  "pending": [
+    {
+      "id": 96073,
+      "source_post_url": "https://t.me/jirum/96073",
+      "original_purchase_url": "https://link.coupang.com/a/iGycmpq64y",
+      "source_text": "👍대박 6,090원 (35.0% 할인)\n크리오 치카부 어린이 칫솔 3단계 10개입\n📌 가격 현황\n- 정상가: 9,369원\n- 할인: 3,279원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGycmpq64y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-14T23:32:07+00:00",
+      "title": "크리오 치카부 어린이 칫솔 3단계 10개입",
+      "sale_price_krw": 6090
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -5548,7 +5558,7 @@
       "run_id": "43652197733"
     }
   },
-  "skipped_non_coupang": 509,
+  "skipped_non_coupang": 513,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
