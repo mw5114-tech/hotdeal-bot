@@ -1,7 +1,8 @@
 """A/B-tier Coupang API Radar -> Naver Blog publisher.
 
 Completely independent from Telegram, Daangn and the existing Naver FIFO.
-At most 3 verified posts per KST day. A durable claim is written BEFORE any submit;
+No daily post quota; a bounded per-run batch protects GitHub execution time.
+A durable claim is written BEFORE any submit;
 uncertain failures are quarantined and never auto-retried.
 
 A: exact product/item plus Lowchart-verified >=15% real observed discount.
@@ -25,9 +26,9 @@ from api_radar.state_store import load_state, save_state, RadarStateError
 from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
 
 KST = timezone(timedelta(hours=9))
-CANDIDATE_LIMIT = 36
-MAX_A_HISTORY_CHECKS_PER_RUN = 12
-MAX_PUBLISH_PER_RUN = 2
+CANDIDATE_LIMIT = 110
+MAX_A_HISTORY_CHECKS_PER_RUN = 110
+MAX_PUBLISH_PER_RUN = 4
 # Goldbox feeds often contain no exact keyword from optional shopping trends.
 # Restrict fallback to official product categories suitable for shopping
 # intent; actual search demand remains UNKNOWN without NAVER API HUB.
@@ -35,8 +36,8 @@ CURATED_CATEGORY_PRIORITY = (
     "가전디지털", "생활용품", "주방용품", "반려/애완용품",
     "가구/홈인테리어", "뷰티", "식품", "로켓프레시",
 )
-FRESH_SECONDS = 2 * 3600
-MAX_PUBLISH_PER_KST_DAY = 3
+FRESH_SECONDS = 12 * 3600
+# The day is the queue boundary, NOT a publication-count quota.
 WORK_DIR = Path("api-radar-local")
 BLOG_PUBLICATION_ENABLED = "API_RADAR_PUBLISH_ENABLED"
 
@@ -77,60 +78,102 @@ def daily_slot_count(state: dict, now: datetime) -> int:
     return successes + pending
 
 
+# Non-physical / travel listings have no stable physical option and should
+# not be auto-published as a tangible retail deal. Every other normalized
+# Goldbox category, including new categories, remains eligible.
+NON_RETAIL_GOLDBOX_CATEGORIES = frozenset((
+    "국내투어", "해외투어", "여행", "여행/티켓", "상품권", "기프티콘",
+))
+
+
+def source_is_current(state: dict, product: dict, now: datetime) -> bool:
+    """Prevent posting an expired day's promotion or stale option/price."""
+    pid = product.get("id")
+    day = now.astimezone(KST).date().isoformat()
+    inventory = state.get("goldbox_today")
+    if isinstance(inventory, dict):
+        if inventory.get("kst_date") != day:
+            return False
+        row = inventory.get("items", {}).get(pid)
+        return (isinstance(row, dict)
+                and row.get("source") == "goldbox"
+                and row.get("price") == product.get("price")
+                and row.get("checked_at") == product.get("checked_at")
+                and row.get("url") == product.get("url"))
+    # Backward-compatible startup: existing store predates daily Goldbox queue.
+    obj = state.get("products", {}).get(pid)
+    return (isinstance(obj, dict) and obj.get("last_source") == "goldbox"
+            and obj.get("last_price") == product.get("price")
+            and obj.get("last_checked_at_utc") == product.get("checked_at")
+            and obj.get("last_product_url") == product.get("url"))
+
+
 def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> list[dict]:
-    if state.get("api_publish_claims") and not isinstance(state["api_publish_claims"], dict):
-        raise RadarStateError("RADAR_CLAIM_STATE_INVALID")
+    """Every unpublished item in today's official Goldbox feed, without daily quota."""
     posted = state.get("published", {})
     claims = state.get("api_publish_claims", {})
     if not isinstance(posted, dict) or not isinstance(claims, dict):
         raise RadarStateError("RADAR_PUBLISH_STATE_INVALID")
-    if daily_slot_count(state, now) >= MAX_PUBLISH_PER_KST_DAY:
-        return []
+    if not isinstance(state.get("products", {}), dict):
+        raise RadarStateError("RADAR_PRODUCTS_INVALID")
+    day = now.astimezone(KST).date().isoformat()
+    daily = state.get("goldbox_today")
+    if isinstance(daily, dict):
+        if daily.get("kst_date") != day:
+            return []
+        raw_items = daily.get("items", {})
+        if not isinstance(raw_items, dict):
+            raise RadarStateError("RADAR_GOLDBOX_ITEMS_INVALID")
+        items = ((pid, {"name": obj.get("name"), "last_price": obj.get("price"),
+                        "last_source": obj.get("source"), "category": obj.get("category"),
+                        "last_product_url": obj.get("url"),
+                        "last_image_url": obj.get("image"),
+                        "last_checked_at_utc": obj.get("checked_at")})
+                 for pid, obj in raw_items.items() if isinstance(obj, dict))
+    else:
+        items = state["products"].items()
+
     results = []
-    for pid, obj in state.get("products", {}).items():
+    for pid, obj in items:
         if pid in posted or pid in claims or not isinstance(obj, dict):
             continue
-        topic = matching_topic(obj.get("name", ""))
-        category = obj.get("category")
-        fallback = False
-        if topic is None and trend_mode == "curated" and category in CURATED_CATEGORY_PRIORITY:
-            # Only infer a shopping CATEGORY from the official API. Never
-            # present it as measured Naver keyword demand or click volume.
-            topic = (category, None)
-            fallback = True
+        if obj.get("last_source") != "goldbox":
+            continue
+        category = obj.get("category", "")
+        if category in NON_RETAIL_GOLDBOX_CATEGORIES:
+            continue
         raw_ts = obj.get("last_checked_at_utc")
-        if not topic or not isinstance(raw_ts, str):
+        if not isinstance(raw_ts, str):
             continue
         try:
-            timestamp = datetime.fromisoformat(raw_ts.replace("Z", "+00:00"))
-            age = (now - timestamp).total_seconds()
+            stamp = datetime.fromisoformat(raw_ts.replace("Z", "+00:00"))
+            age = (now - stamp).total_seconds()
         except (ValueError, TypeError):
             continue
-        if timestamp.tzinfo is None or not 0 <= age <= FRESH_SECONDS:
+        if stamp.tzinfo is None or stamp.astimezone(KST).date().isoformat() != day:
+            continue
+        if not 0 <= age <= FRESH_SECONDS:
             continue
         price = obj.get("last_price")
-        url, image = obj.get("last_product_url"), obj.get("last_image_url")
-        if (type(price) is not int or not 5000 <= price <= 350000
-                or not safe_url(url) or not safe_url(image, image=True)):
+        name = obj.get("name")
+        url, img = obj.get("last_product_url"), obj.get("last_image_url")
+        if (type(price) is not int or not 1000 <= price <= 4000000
+                or not isinstance(name, str) or not name.strip()
+                or not isinstance(pid, str) or not pid.isdigit()
+                or not safe_url(url) or not safe_url(img, image=True)):
             continue
-        if not isinstance(pid, str) or not pid.isdigit():
-            continue
-        product = {"id": pid, "name": obj["name"], "price": price,
-                   "url": url, "image": image, "topic": topic,
-                   "source": obj.get("last_source"), "checked_at": raw_ts,
-                   "category": category, "category_fallback": fallback}
-        results.append(product)
+        topic = matching_topic(name)
+        results.append({"id": pid, "name": name, "price": price,
+                        "url": url, "image": img, "topic": topic,
+                        "source": "goldbox", "checked_at": raw_ts,
+                        "category": category, "category_fallback": topic is None})
     from api_radar.quality import extract_exact_identity
-    # Prefer offers with exact productId+itemId already visible in the
-    # official API URL. Never resolve opaque referral links by clicking them.
+    # Exact item URLs first, then oldest queued items. No preference for
+    # arbitrary price points or categories.
     results.sort(key=lambda p: (
         extract_exact_identity(p["url"], p["id"]) is None,
-        p["category_fallback"],
-        CURATED_CATEGORY_PRIORITY.index(p["category"])
-        if p["category"] in CURATED_CATEGORY_PRIORITY else 99,
-        p["source"] != "goldbox", abs(p["price"] - 65000), p["id"]))
+        p["checked_at"], p["id"]))
     return results[:CANDIDATE_LIMIT]
-
 
 def compose_article(product: dict, history: dict, trend: dict | None,
                     image: Path, issued: str) -> dict:
@@ -209,8 +252,7 @@ def compose_goldbox_article(product: dict, image: Path, issued: str) -> dict:
     from gh_only.coupang_partners_api import issued_link_url
     price = product.get("price")
     if (product.get("source") != "goldbox"
-            or product.get("category") not in CURATED_CATEGORY_PRIORITY
-            or type(price) is not int or not 5000 <= price <= 350000
+            or type(price) is not int or not 1000 <= price <= 4000000
             or not isinstance(image, Path) or not image.is_file()
             or not issued_link_url(issued)):
         raise QualityError("GOLDBOX_ARTICLE_GATES_UNVERIFIED")
@@ -248,13 +290,8 @@ def claim(state: dict, pid: str, source: dict, now: datetime, *, grade="A") -> d
     claims = state.setdefault("api_publish_claims", {})
     if pid in claims:
         raise RadarStateError("RADAR_CLAIM_ALREADY_EXISTS_SAFE_STOP")
-    if daily_slot_count(state, now) >= MAX_PUBLISH_PER_KST_DAY:
-        raise RadarStateError("RADAR_DAILY_POST_CAP_REACHED")
-    saved = state.get("products", {}).get(pid)
-    if not isinstance(saved, dict) or saved.get("last_price") != source["price"]:
+    if not source_is_current(state, source, now):
         raise RadarStateError("RADAR_SOURCE_CHANGED_BEFORE_PUBLISH")
-    if saved.get("last_checked_at_utc") != source["checked_at"]:
-        raise RadarStateError("RADAR_SOURCE_TIMESTAMP_CHANGED")
     if grade not in ("A", "B"):
         raise RadarStateError("RADAR_GRADE_INVALID")
     claims[pid] = {
@@ -286,10 +323,11 @@ def checkpoint(state: dict, pid: str, url: str, now: datetime, *, grade="A") -> 
 
 
 def run(*, preview=False, now=None) -> int:
-    """A first; B official Goldbox fallback; combined max 3/KST day.
+    """Drain new Goldbox SKUs; A if history proves >=15%, otherwise B.
 
-    Two bounded passes avoid false discount percentages while offering a
-    truthful listing fallback when no independently verified deal exists.
+    No per-KST-day post quota. Each job publishes at most four to fit within
+    GitHub timeout; subsequent scheduled publisher runs resume the queue.
+    Unknown outcomes remain permanently claimed until manual verification.
     """
     if os.getenv(BLOG_PUBLICATION_ENABLED, "false").lower() != "true":
         return safe_stop("OWNER_PUBLISH_SWITCH_DISABLED")
@@ -306,120 +344,114 @@ def run(*, preview=False, now=None) -> int:
 
     now = now or utc_now()
     state, _ = load_state()
-    slots_used = daily_slot_count(state, now)
-    if slots_used >= MAX_PUBLISH_PER_KST_DAY:
-        return safe_stop("KST_DAILY_VERIFIED_POST_LIMIT_REACHED")
     candidates = select_candidates(state, now, trend_mode=trend_mode)
     if not candidates:
-        return safe_stop("NO_FRESH_UNPOSTED_PURCHASE_CANDIDATES")
+        return safe_stop("NO_FRESH_UNPOSTED_GOLDBOX_CANDIDATES")
 
     posts = 0
-    a_checks = 0
-    b_checks = 0
-    rejection_codes = {}
-    posted_in_run = set()
-    max_posts = min(MAX_PUBLISH_PER_RUN, MAX_PUBLISH_PER_KST_DAY - slots_used)
-
-    for grade in ("A", "B"):
-        if posts >= max_posts:
+    checked = 0
+    a_posts = 0
+    b_posts = 0
+    rejected = {}
+    for candidate in candidates:
+        if posts >= MAX_PUBLISH_PER_RUN or checked >= MAX_A_HISTORY_CHECKS_PER_RUN:
             break
-        for candidate in candidates:
-            if posts >= max_posts:
-                break
-            if candidate["id"] in posted_in_run:
-                continue
-            if grade == "A":
-                if candidate["price"] < 15000:
-                    continue
-                if a_checks >= (1 if trend_mode == "hub" else MAX_A_HISTORY_CHECKS_PER_RUN):
-                    break
-                a_checks += 1
-            else:
-                # B may be published ONLY when the last observation comes
-                # directly from the official Goldbox API (never SEARCH).
-                if (candidate["source"] != "goldbox"
-                        or candidate["category"] not in CURATED_CATEGORY_PRIORITY):
-                    continue
-                b_checks += 1
+        checked += 1
+        pid = candidate["id"]
+        try:
+            identity = resolve_exact_identity(candidate)
+        except QualityError as exc:
+            code = "EXACT_ID_" + str(exc)
+            rejected[code] = rejected.get(code, 0) + 1
+            continue
+
+        grade = "B"
+        history, trend = None, None
+        # A requires independent exact-option Lowchart savings evidence.
+        try:
+            history = check_exact_history(candidate, identity)
+            grade = "A"
+        except QualityError as exc:
+            code = "A_HISTORY_" + str(exc)
+            rejected[code] = rejected.get(code, 0) + 1
+        if grade == "A" and trend_mode == "hub" and candidate["topic"]:
             keyword, category = candidate["topic"]
-            trend = None
-            if grade == "A" and trend_mode == "hub":
-                try:
-                    trend = fetch_topic_trend(keyword, category, now=now)
-                except TrendError as exc:
-                    return safe_stop("TREND_" + str(exc))
+            try:
+                trend = fetch_topic_trend(keyword, category, now=now)
                 if not trend["demand_uptrend"]:
-                    rejection_codes["NO_VERIFIED_TOPIC_DEMAND_UPTREND"] = (
-                        rejection_codes.get("NO_VERIFIED_TOPIC_DEMAND_UPTREND", 0) + 1)
-                    continue
-            try:
-                identity = resolve_exact_identity(candidate)
-                history = check_exact_history(candidate, identity) if grade == "A" else None
-            except QualityError as exc:
-                code = grade + "_" + str(exc)
-                rejection_codes[code] = rejection_codes.get(code, 0) + 1
-                continue
-            if preview:
-                print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 grade=" + grade
-                      + " exact_item=true history_verified=" + str(grade == "A").lower())
-                return 0
-            try:
-                path = download_verified_image(candidate["image"], WORK_DIR, candidate["id"])
-                from gh_only.coupang_partners_api import create_product_deeplink
-                receipt = create_product_deeplink(identity, subid="naverblog")
-                article = (compose_article(candidate, history, trend, path, receipt["partners_link"])
-                           if grade == "A" else
-                           compose_goldbox_article(candidate, path, receipt["partners_link"]))
-            except (QualityError, ValueError, RuntimeError) as exc:
-                code = grade + "_PREPARATION_" + type(exc).__name__
-                rejection_codes[code] = rejection_codes.get(code, 0) + 1
-                continue
+                    grade = "B"
+                    trend = None
+            except TrendError:
+                grade = "B"  # valid official Goldbox listing, no search claim
+                trend = None
+        if preview:
+            print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 grade=" + grade
+                  + " exact_item=true history_verified=" + str(grade == "A").lower())
+            return 0
 
-            latest, sha = load_state()
-            if daily_slot_count(latest, utc_now()) >= MAX_PUBLISH_PER_KST_DAY:
-                print("API_RADAR_POST_LIMIT_REACHED_WHILE_RECHECKING")
-                break
-            pid = candidate["id"]
-            if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
-                continue
-            saved = latest.get("products", {}).get(pid)
-            if (not isinstance(saved, dict)
-                    or saved.get("last_price") != candidate["price"]
-                    or saved.get("last_checked_at_utc") != candidate["checked_at"]
-                    or saved.get("last_source") != candidate["source"]):
-                rejection_codes["PRODUCT_CHANGED"] = rejection_codes.get("PRODUCT_CHANGED", 0) + 1
-                continue
-            claim(latest, pid, candidate, utc_now(), grade=grade)
-            save_state(latest, sha)  # durable claim BEFORE browser submit
+        try:
+            path = download_verified_image(candidate["image"], WORK_DIR, pid)
+            from gh_only.coupang_partners_api import create_product_deeplink
+            receipt = create_product_deeplink(identity, subid="naverblog")
+            article = (compose_article(candidate, history, trend, path, receipt["partners_link"])
+                       if grade == "A" else
+                       compose_goldbox_article(candidate, path, receipt["partners_link"]))
+        except (QualityError, ValueError, RuntimeError) as exc:
+            code = "PREP_" + type(exc).__name__
+            rejected[code] = rejected.get(code, 0) + 1
+            continue
 
-            from gh_only.naver_blog_deal_publisher import submit_one
-            try:
-                published_url = submit_one(
-                    article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
-            except Exception as exc:
-                print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
-                      + type(exc).__name__ + " posts_confirmed=" + str(posts))
-                return 1  # an uncertain Naver submit must never auto-retry
-            if (not isinstance(published_url, str)
-                    or not published_url.startswith("https://blog.naver.com/mw5114/")):
-                raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
-            final, final_sha = load_state()
-            checkpoint(final, pid, published_url, utc_now(), grade=grade)
-            save_state(final, final_sha)
-            posts += 1
-            posted_in_run.add(pid)
-            print("API_RADAR_BLOG_PUBLISHED post_id=" + pid + " grade=" + grade
-                  + " posts_confirmed_in_run=" + str(posts))
+        latest, sha = load_state()
+        # Never issue an old-day or altered-price blog article.
+        if not source_is_current(latest, candidate, utc_now()):
+            rejected["STALE_GOLDBOX_SOURCE"] = rejected.get("STALE_GOLDBOX_SOURCE", 0) + 1
+            continue
+        if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
+            continue
+        claim(latest, pid, candidate, utc_now(), grade=grade)
+        save_state(latest, sha)  # durable claim before editor interaction
 
-    print("API_RADAR_PUBLISH_BATCH_RESULT posts=" + str(posts)
-          + " a_checked=" + str(a_checks) + " b_checked=" + str(b_checks)
-          + " rejected=" + json.dumps(rejection_codes, sort_keys=True)
-          + " daily_cap=" + str(MAX_PUBLISH_PER_KST_DAY))
+        from gh_only.naver_blog_deal_publisher import submit_one
+        try:
+            url = submit_one(
+                article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
+        except Exception as exc:
+            print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
+                  + type(exc).__name__ + " confirmed_in_run=" + str(posts))
+            return 1  # no automatic retry on ambiguous publish outcome
+        if not isinstance(url, str) or not url.startswith("https://blog.naver.com/mw5114/"):
+            raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
+        final, final_sha = load_state()
+        checkpoint(final, pid, url, utc_now(), grade=grade)
+        save_state(final, final_sha)
+        posts += 1
+        a_posts += grade == "A"
+        b_posts += grade == "B"
+        print("API_RADAR_BLOG_PUBLISHED post_id=" + pid + " grade=" + grade
+              + " posts_confirmed_in_run=" + str(posts))
+    print("API_RADAR_GOLDBOX_DRAIN_RESULT published=" + str(posts)
+          + " grade_a=" + str(a_posts) + " grade_b=" + str(b_posts)
+          + " checked=" + str(checked) + " queued=" + str(len(candidates))
+          + " rejected=" + json.dumps(rejected, sort_keys=True))
     return 0
+
+
+def pending_count(now=None) -> int:
+    """Lightweight preflight; no browser install, API keys or Naver login."""
+    state, _ = load_state()
+    return len(select_candidates(state, now or utc_now()))
 
 
 if __name__ == "__main__":
     try:
+        if os.getenv("API_RADAR_PENDING_ONLY") == "true":
+            total = pending_count()
+            print("API_RADAR_PENDING_COUNT=" + str(total))
+            output = os.getenv("GITHUB_OUTPUT")
+            if output:
+                with open(output, "a", encoding="utf-8") as handle:
+                    handle.write("pending=" + str(total > 0).lower() + "\\n")
+            raise SystemExit(0)
         raise SystemExit(run(preview=os.getenv("API_RADAR_PREVIEW_ONLY") == "true"))
     except (RadarStateError, QualityError, TrendError) as exc:
         print("API_RADAR_PUBLISH_HARD_STOP " + str(exc) + " posts=0_or_unconfirmed")
