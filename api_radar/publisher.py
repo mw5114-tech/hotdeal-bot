@@ -17,6 +17,7 @@ from __future__ import annotations
 from datetime import datetime, timedelta, timezone
 import json
 import os
+import re
 from pathlib import Path
 
 from api_radar.collector import safe_url
@@ -24,6 +25,7 @@ from api_radar.quality import (QualityError, resolve_exact_identity,
                                check_exact_history, download_verified_image)
 from api_radar.state_store import load_state, save_state, RadarStateError
 from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
+from gh_only.coupang_partners_api import CoupangPartnersError
 
 KST = timezone(timedelta(hours=9))
 CANDIDATE_LIMIT = 110
@@ -396,6 +398,7 @@ def run(*, preview=False, now=None) -> int:
 
     posts = 0
     checked = 0
+    deeplink_failures = 0
     a_posts = 0
     b_posts = 0
     rejected = {}
@@ -443,8 +446,35 @@ def run(*, preview=False, now=None) -> int:
                        if grade == "A" else
                        compose_goldbox_article(candidate, path, receipt["partners_link"]))
         except (QualityError, ValueError, RuntimeError) as exc:
-            code = "PREP_" + type(exc).__name__
-            rejected[code] = rejected.get(code, 0) + 1
+            if isinstance(exc, CoupangPartnersError):
+                # These are internal, static error codes. Never print raw
+                # API bodies, credentials, product URLs or HTTP headers.
+                raw_code = str(exc)
+                code = (raw_code if re.fullmatch(r"[A-Z][A-Z0-9_]{2,96}", raw_code)
+                        else "COUPANG_API_UNKNOWN_SAFE_CODE")
+                rejected["LINK_" + code] = rejected.get("LINK_" + code, 0) + 1
+                deeplink_failures += 1
+                print("API_RADAR_LINK_REJECTED code=" + code)
+                # Authentication, API policy and integration-contract errors
+                # cannot be fixed by retrying all queued products in one run.
+                stop_codes = {
+                    "COUPANG_API_PRODUCT_IDENTITY_INVALID",
+                    "COUPANG_API_KEYS_MISSING",
+                    "COUPANG_API_CREDENTIALS_INVALID",
+                    "COUPANG_API_HTTP_401",
+                    "COUPANG_API_HTTP_403",
+                    "COUPANG_API_HTTP_429",
+                    "COUPANG_API_NETWORK_FAILURE",
+                    "COUPANG_API_RESPONSE_NOT_JSON",
+                    "COUPANG_API_ISSUED_URL_INVALID",
+                }
+                if code in stop_codes or code.startswith("COUPANG_API_HTTP_5"):
+                    print("API_RADAR_LINK_SYSTEMIC_FAILURE_ABORT code=" + code
+                          + " posts_confirmed=" + str(posts))
+                    return 1
+            else:
+                code = "PREP_" + type(exc).__name__
+                rejected[code] = rejected.get(code, 0) + 1
             continue
 
         latest, sha = load_state()
@@ -482,6 +512,10 @@ def run(*, preview=False, now=None) -> int:
           + " grade_a=" + str(a_posts) + " grade_b=" + str(b_posts)
           + " checked=" + str(checked) + " queued=" + str(len(candidates))
           + " rejected=" + json.dumps(rejected, sort_keys=True))
+    if posts == 0 and deeplink_failures:
+        print("API_RADAR_LINKS_ALL_UNISSUED safe_errors="
+              + str(deeplink_failures))
+        return 1  # fail visible to Actions, never claim success after 0 links
     return 0
 
 
