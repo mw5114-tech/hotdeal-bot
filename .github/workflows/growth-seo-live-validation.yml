@@ -1,0 +1,36 @@
+name: Test | Growth Lab SEO real API draft pipeline (NO BLOG POST)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/growth-seo-live-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: growth-seo-draft-independent
+  cancel-in-progress: false
+
+jobs:
+  validate-live-draft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Contract unit tests (no network or blog)
+        run: python -m unittest -q growth_lab.test_growth
+      - name: Search official API and store ONE nonpublished review-required draft
+        run: python -m growth_lab.seo_drafts
