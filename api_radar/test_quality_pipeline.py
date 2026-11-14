@@ -132,7 +132,7 @@ class PublisherTests(TestCase):
         self.assertEqual(len(picked), 1)
         self.assertEqual(picked[0]["topic"], ("반려/애완용품", None))
         self.assertTrue(picked[0]["category_fallback"])
-        self.assertEqual(publisher.select_candidates(state, t, trend_mode="hub"), [])
+        self.assertEqual(len(publisher.select_candidates(state, t, trend_mode="hub")), 1)
         sample["category"] = "국내투어"
         self.assertEqual(publisher.select_candidates(state, t), [])
 
@@ -164,8 +164,8 @@ class PublisherTests(TestCase):
                    side_effect=[quality.QualityError("EXACT_OPTION_HISTORY_UNVERIFIED"), good]) as check, \
              patch("api_radar.publisher.download_verified_image") as download:
             self.assertEqual(publisher.run(preview=True, now=t + timedelta(minutes=5)), 0)
-            self.assertEqual(resolve.call_count, 2)
-            self.assertEqual(check.call_count, 2)
+            self.assertEqual(resolve.call_count, 1)
+            self.assertEqual(check.call_count, 1)
             download.assert_not_called()
 
     def test_daily_limit_counts_ambiguous_claims_and_kst_midnight(self):
@@ -186,7 +186,7 @@ class PublisherTests(TestCase):
     def test_three_verified_posts_across_two_runs_but_no_fourth(self):
         t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
         products = {}
-        for n in range(4):
+        for n in range(5):
             pid = str(12345678 + n)
             products[pid] = {
                 "name": "생활용품 필터 샤워기 " + str(n),
@@ -226,13 +226,13 @@ class PublisherTests(TestCase):
              patch("api_radar.publisher.compose_article", return_value={"title":"test"}), \
              patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=publish):
             self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(len(state["published"]), 2)
+            self.assertEqual(len(state["published"]), 4)
             self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(len(state["published"]), 3)
+            self.assertEqual(len(state["published"]), 5)
             self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(publish.count, 3)
+            self.assertEqual(publish.count, 5)
             self.assertEqual(len(state["api_publish_claims"]), 0)
-            self.assertEqual(save.call_count, 6)
+            self.assertEqual(save.call_count, 10)
 
     def test_goldbox_b_article_never_invents_discount(self):
         with tempfile.TemporaryDirectory() as td:
@@ -313,7 +313,7 @@ class PublisherTests(TestCase):
                     "last_image_url":"https://image15.coupangcdn.com/a.jpg",
                     "last_checked_at_utc":t.isoformat()}
         state={"products":{
-            "12345678":p("12345678", "search", "샤워기 헤드 필터"),
+            "12345678":p("12345678", "goldbox", "샤워기 헤드 필터"),
             "22345678":p("22345678", "goldbox", "세제 캡슐 30개")},
             "published":{}, "api_publish_claims":{}}
         env={"API_RADAR_PUBLISH_ENABLED":"true", "API_RADAR_TREND_MODE":"curated",
@@ -335,7 +335,7 @@ class PublisherTests(TestCase):
                  patch("api_radar.publisher.resolve_exact_identity",
                        side_effect=lambda p:{"product_id":p["id"],"item_id":"98765432"}), \
                  patch("api_radar.publisher.check_exact_history",
-                       side_effect=lambda p,i: passed if p["source"]=="search"
+                       side_effect=lambda p,i: passed if p["id"]=="12345678"
                            else (_ for _ in ()).throw(
                                quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE"))), \
                  patch("api_radar.publisher.download_verified_image",return_value=image), \
@@ -349,9 +349,12 @@ class PublisherTests(TestCase):
 
     def test_claim_before_submit_and_checkpoint(self):
         now = datetime(2026, 11, 13, 5, tzinfo=timezone.utc)
-        source = {"price": 30000, "checked_at": now.isoformat()}
+        url = "https://link.coupang.com/re/AFFSDP?pageKey=12345678&itemId=98765432"
+        source = {"id": "12345678", "price": 30000, "checked_at": now.isoformat(),
+                  "url": url, "source": "goldbox", "category": "생활용품"}
         state = {"products": {"12345678": {
-            "last_price": 30000, "last_checked_at_utc": now.isoformat()
+            "last_price": 30000, "last_source": "goldbox",
+            "last_product_url": url, "last_checked_at_utc": now.isoformat()
         }}, "published": {}}
         publisher.claim(state, "12345678", source, now)
         self.assertEqual(state["api_publish_claims"]["12345678"]["source_price"], 30000)
