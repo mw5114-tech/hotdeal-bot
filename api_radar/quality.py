@@ -62,7 +62,11 @@ def resolve_exact_identity(product: dict, *, opener=None) -> dict:
             raise QualityError("UNTRUSTED_PRODUCT_REDIRECT")
         identity = extract_exact_identity(current, pid)
         if identity:
-            return identity
+            # Contract with gh_only.direct_product_links.regular_product_url:
+            # this status is earned ONLY after the allowlisted HTTPS URL
+            # proves that both the productId and exact itemId match.
+            # Do not grant it to an opaque shortlink or a productId-only URL.
+            return {**identity, "status": "EXACT_ITEM_IDENTIFIED"}
         # An opaque affiliate tracking URL may count every automated GET as
         # a click. Never visit it merely to discover an option/item identity.
         if parse.urlsplit(current).hostname in ("link.coupang.com", "coupa.ng"):
