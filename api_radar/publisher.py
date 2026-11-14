@@ -418,6 +418,12 @@ def run(*, preview=False, now=None) -> int:
         return safe_stop("COUPANG_PARTNERS_API_KEYS_NOT_CONFIGURED")
 
     now = now or utc_now()
+    # Owner's V2 switch: only objectively verified real price drops publish.
+    # Goldbox is still collected as a discovery source, but its unverified
+    # B-tier queue never fills the 15-minute blog slots in this mode.
+    if os.getenv("API_RADAR_VERIFIED_ONLY", "false").lower() == "true":
+        from growth_lab.drop_publisher import run_one
+        return run_one(now=now)
     state, _ = load_state()
     remaining = cooldown_remaining_seconds(state, now)
     if remaining:
@@ -606,6 +612,9 @@ def pending_count(now=None) -> int:
     if cooldown_remaining_seconds(state, current):
         print("API_RADAR_PENDING_COOLDOWN")
         return 0
+    if os.getenv("API_RADAR_VERIFIED_ONLY", "false").lower() == "true":
+        from growth_lab.drop_publisher import pending_count as pending_v2
+        return pending_v2(state, current)
     return len(select_candidates(state, current))
 
 
