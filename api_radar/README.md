@@ -12,7 +12,7 @@ public product/price history and this radar's own publish status.
 - Public product-state persistence: `api_radar/state_store.py`
 - Optional official Naver shopping-click trend: `api_radar/trend.py`
 - Exact product/option + Lowchart + official image validation: `api_radar/quality.py`
-- Gated one-post Naver publisher: `api_radar/publisher.py`
+- Gated, claim-aware (target three verified posts/day) Naver publisher: `api_radar/publisher.py`
 - Tests: `api_radar/test_collector.py`, `test_state_store.py`,
   `test_quality_pipeline.py`
 
@@ -33,7 +33,7 @@ public product/price history and this radar's own publish status.
 
 ## Schedule and API limits
 
-The independent workflow runs **08:05** and **18:20 KST**, or on manual
+The independent workflow runs **08:05, 12:10, 16:25, 20:40 KST**, or on manual
 `workflow_dispatch`. GitHub cron can be delayed. It queries Goldbox once
 and one rotating keyword search at most once per run. On 429/error it stops
 the failed source rather than hammering the endpoint. Check current Coupang
@@ -46,17 +46,22 @@ Partners quota or open the blog editor.
 ## Publication conditions (fail closed)
 
 The publisher job runs after a completed discovery job and shares the exact
-Naver concurrency group with the existing Telegram publisher. It can publish
-at most **1 verified offer per KST day** and uses the existing Naver
-SmartEditor session, but maintains its own durable state and receipts.
+Naver concurrency group with the existing Telegram publisher. It aims for
+**up to 3 independently verified offers per KST day**, checking up to **16
+fresh candidates** and submitting at most **2 posts per run**, and uses the
+existing Naver SmartEditor session. It maintains separate durable state and
+receipts. Today's confirmed posts AND uncertain in-flight claims count toward
+the daily safety cap; no uncertain submissions are retried. **Three posts are
+NOT guaranteed**: products failing verification are skipped.
 
 It ONLY publishes when ALL are true:
 
 1. A recent candidate matches a curated purchase keyword, or in free
-   curated mode an official Goldbox category from the vetted shopping-category
-   allowlist. These are heuristics, not verified NAVER keyword popularity.
-2. The official
-   Shopping Insight **relative shopping-click trend** is rising.
+   curated mode an allowed official shopping category. These are heuristics,
+   not verified NAVER keyword popularity.
+2. **Only if `API_RADAR_TREND_MODE: hub` is explicitly enabled**, the official
+   Shopping Insight relative shopping-click trend must be verified as rising.
+   The default `curated` mode makes no search-volume or click claims.
 3. The API product URL resolves exclusively through allowlisted Coupang
    domains to an exact productId and itemId (same-option identity).
 4. A live Lowchart exact-item page confirms current price within 2% of the
@@ -100,7 +105,7 @@ API HUB secret, cloud account or payment method. It uses curated product-name
 keywords or vetted official shopping categories, then checks up to four
 recent candidates for strict exact-item Lowchart historical price evidence.
 It does not claim measured NAVER search trend/click index. The independent
-publisher can attempt at most one post per KST day if all other gates pass.
+publisher can attempt up to three posts per KST day if all other gates pass.
 Set `API_RADAR_TREND_MODE: hub` only after registering both Naver API HUB
 Secrets to enable the stricter search-click trend requirement.
 
@@ -122,7 +127,12 @@ operational while producing zero posts because the quality gates are strict.
 
 ## Known limits / next optimization
 
-- Curated keyword matches are heuristics, NOT verified NAVER search demand.
+- Curated keyword/category matches are heuristics, NOT verified NAVER search demand.
+- A quota is a ceiling, not a promise of three posts. We do not invent price history
+  or discounts merely to reach a publishing target.
+- Naver's official terms restrict posting by bots without prior permission and
+  repetitive affiliate-style content may have its visibility limited; verify
+  authorization and follow applicable platform policies before scaling.
 - Optional Naver API HUB trends are topic-level, not product-specific traffic forecasts.
 - ProductId snapshots alone do not establish option-level price history.
 - Cross-source duplicate detection with existing Telegram posts is not
