@@ -1,7 +1,7 @@
 """Gated Coupang API Radar -> Naver Blog publisher.
 
 Completely independent from Telegram, Daangn and the existing Naver FIFO.
-One post at most per KST day. A durable claim is written BEFORE any submit;
+At most 3 verified posts per KST day. A durable claim is written BEFORE any submit;
 uncertain failures are quarantined and never auto-retried.
 
 Publishing requires: a curated purchase-oriented product keyword + an API
@@ -25,7 +25,8 @@ from api_radar.state_store import load_state, save_state, RadarStateError
 from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
 
 KST = timezone(timedelta(hours=9))
-CANDIDATE_LIMIT = 4
+CANDIDATE_LIMIT = 16
+MAX_PUBLISH_PER_RUN = 2
 # Goldbox feeds often contain no exact keyword from optional shopping trends.
 # Restrict fallback to official product categories suitable for shopping
 # intent; actual search demand remains UNKNOWN without NAVER API HUB.
@@ -34,7 +35,7 @@ CURATED_CATEGORY_PRIORITY = (
     "가구/홈인테리어", "뷰티", "식품", "로켓프레시",
 )
 FRESH_SECONDS = 2 * 3600
-MAX_PUBLISH_PER_KST_DAY = 1
+MAX_PUBLISH_PER_KST_DAY = 3
 WORK_DIR = Path("api-radar-local")
 BLOG_PUBLICATION_ENABLED = "API_RADAR_PUBLISH_ENABLED"
 
@@ -48,6 +49,33 @@ def safe_stop(reason: str) -> int:
     return 0
 
 
+def daily_slot_count(state: dict, now: datetime) -> int:
+    """Count confirmed posts AND uncertain attempts against the KST-day cap.
+
+    An ambiguous Naver result must consume a daily slot so the next scheduled
+    run cannot exceed the intended number of attempts.
+    """
+    today = now.astimezone(KST).date().isoformat()
+    posted = state.get("published", {})
+    claims = state.get("api_publish_claims", {})
+    if not isinstance(posted, dict) or not isinstance(claims, dict):
+        raise RadarStateError("RADAR_PUBLISH_STATE_INVALID")
+    successes = sum(1 for obj in posted.values()
+                    if isinstance(obj, dict) and obj.get("kst_date") == today)
+    pending = 0
+    for obj in claims.values():
+        if not isinstance(obj, dict) or not isinstance(obj.get("claimed_at"), str):
+            raise RadarStateError("RADAR_CLAIM_DATE_INVALID")
+        try:
+            when = datetime.fromisoformat(obj["claimed_at"].replace("Z", "+00:00"))
+            if when.tzinfo is None:
+                raise ValueError("timezone missing")
+        except (ValueError, TypeError):
+            raise RadarStateError("RADAR_CLAIM_DATE_INVALID") from None
+        pending += when.astimezone(KST).date().isoformat() == today
+    return successes + pending
+
+
 def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> list[dict]:
     if state.get("api_publish_claims") and not isinstance(state["api_publish_claims"], dict):
         raise RadarStateError("RADAR_CLAIM_STATE_INVALID")
@@ -55,10 +83,7 @@ def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> li
     claims = state.get("api_publish_claims", {})
     if not isinstance(posted, dict) or not isinstance(claims, dict):
         raise RadarStateError("RADAR_PUBLISH_STATE_INVALID")
-    today = now.astimezone(KST).date().isoformat()
-    today_posts = sum(1 for p in posted.values() if
-                      isinstance(p, dict) and p.get("kst_date") == today)
-    if today_posts >= MAX_PUBLISH_PER_KST_DAY:
+    if daily_slot_count(state, now) >= MAX_PUBLISH_PER_KST_DAY:
         return []
     results = []
     for pid, obj in state.get("products", {}).items():
@@ -161,6 +186,8 @@ def claim(state: dict, pid: str, source: dict, now: datetime) -> dict:
     claims = state.setdefault("api_publish_claims", {})
     if pid in claims:
         raise RadarStateError("RADAR_CLAIM_ALREADY_EXISTS_SAFE_STOP")
+    if daily_slot_count(state, now) >= MAX_PUBLISH_PER_KST_DAY:
+        raise RadarStateError("RADAR_DAILY_POST_CAP_REACHED")
     saved = state.get("products", {}).get(pid)
     if not isinstance(saved, dict) or saved.get("last_price") != source["price"]:
         raise RadarStateError("RADAR_SOURCE_CHANGED_BEFORE_PUBLISH")
@@ -170,6 +197,7 @@ def claim(state: dict, pid: str, source: dict, now: datetime) -> dict:
         "status": "MANUAL_REVIEW_ON_ANY_UNCERTAIN_FAILURE",
         "run_id": os.getenv("GITHUB_RUN_ID", "unknown"),
         "claimed_at": now.isoformat(), "source_price": source["price"],
+        "category": source.get("category", ""),
     }
     return state
 
@@ -183,13 +211,18 @@ def checkpoint(state: dict, pid: str, url: str, now: datetime) -> dict:
         "url": url, "at": now.isoformat(),
         "kst_date": now.astimezone(KST).date().isoformat(),
         "source": "api_radar",
+        "category": state.get("products", {}).get(pid, {}).get("category", ""),
     }
     state["api_publish_claims"].pop(pid)
     return state
 
 
 def run(*, preview=False, now=None) -> int:
-    # No implicit self-activation from an environment shared with other jobs.
+    """Up to 2 independently verified publications per run and 3/KST day.
+
+    Never promises a fixed output count. Products lacking a source-matched
+    historical reference are skipped, not mislabeled as hot deals.
+    """
     if os.getenv(BLOG_PUBLICATION_ENABLED, "false").lower() != "true":
         return safe_stop("OWNER_PUBLISH_SWITCH_DISABLED")
     trend_mode = os.getenv("API_RADAR_TREND_MODE", "curated").lower()
@@ -202,20 +235,31 @@ def run(*, preview=False, now=None) -> int:
         return safe_stop("NAVER_LOGIN_SESSION_NOT_CONFIGURED")
     if not os.getenv("COUPANG_PARTNERS_ACCESS_KEY") or not os.getenv("COUPANG_PARTNERS_SECRET_KEY"):
         return safe_stop("COUPANG_PARTNERS_API_KEYS_NOT_CONFIGURED")
+
     now = now or utc_now()
     state, _ = load_state()
+    slots_used = daily_slot_count(state, now)
+    if slots_used >= MAX_PUBLISH_PER_KST_DAY:
+        return safe_stop("KST_DAILY_VERIFIED_POST_LIMIT_REACHED")
     candidates = select_candidates(state, now, trend_mode=trend_mode)
     if not candidates:
         return safe_stop("NO_FRESH_UNPOSTED_PURCHASE_CANDIDATES")
-    # Curated free mode checks at most four candidates (not four posts);
-    # each still needs exact product/item identity + verified Lowchart history.
-    # Optional HUB mode uses at most one search-click trend API request.
-    # No paid trends or invented search volume in curated mode.
-    selected = None
+
+    attempts = 0
+    posts = 0
     rejection_codes = {}
-    for index, candidate in enumerate(candidates):
-        if trend_mode == "hub" and index > 0:
+    seen = set()
+    max_posts = min(MAX_PUBLISH_PER_RUN, MAX_PUBLISH_PER_KST_DAY - slots_used)
+    for candidate in candidates:
+        if posts >= max_posts:
             break
+        if trend_mode == "hub" and attempts >= 1:
+            break   # expensive optional HUB mode: no uncontrolled requests
+        pid = candidate["id"]
+        if pid in seen:
+            continue
+        seen.add(pid)
+        attempts += 1
         keyword, category = candidate["topic"]
         trend = None
         if trend_mode == "hub":
@@ -232,49 +276,59 @@ def run(*, preview=False, now=None) -> int:
             code = str(exc)
             rejection_codes[code] = rejection_codes.get(code, 0) + 1
             continue
-        selected = (candidate, identity, history, trend)
-        break
-    if selected is None:
-        # Fail closed; aggregate fixed error codes are safe for public logs.
-        print("API_RADAR_NO_VERIFIED_DEAL checked=" + str(len(candidates))
-              + " rejected=" + json.dumps(rejection_codes, sort_keys=True)
-              + " posts=0")
-        return 0
-    product, identity, history, trend = selected
-    if preview:
-        print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend_mode=" + trend_mode + " price=true")
-        return 0
-    try:
-        path = download_verified_image(product["image"], WORK_DIR, product["id"])
-        from gh_only.coupang_partners_api import create_product_deeplink
-        receipt = create_product_deeplink(identity, subid="naverblog")
-        article = compose_article(product, history, trend, path, receipt["partners_link"])
-    except (QualityError, ValueError, RuntimeError) as exc:
-        # Neither API key nor request/response bodies are printed.
-        return safe_stop("PUBLISH_PREPARATION_NOT_VERIFIED_" + type(exc).__name__)
-    # Reload immediately before durable claim: ensures stale state is rejected.
-    latest, sha = load_state()
-    if product["id"] in latest.get("published", {}) or product["id"] in latest.get("api_publish_claims", {}):
-        return safe_stop("ALREADY_POSTED_OR_REVIEW_CLAIMED")
-    claim(latest, product["id"], product, now)
-    save_state(latest, sha)
-    # IMPORTANT: never retry publication after a failed/ambiguous submit.
-    from gh_only.naver_blog_deal_publisher import submit_one
-    try:
-        published_url = submit_one(article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
-    except Exception as exc:
-        # Playwright exceptions can embed URLs / DOM diagnostics. Public Actions
-        # logs receive ONLY the error class; the durable claim prevents retries.
-        print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
-              + type(exc).__name__)
-        return 1
-    # A write failure leaves the claim for manual review; never auto-click twice.
-    if not isinstance(published_url, str) or not published_url.startswith("https://blog.naver.com/mw5114/"):
-        raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
-    final, final_sha = load_state()
-    checkpoint(final, product["id"], published_url, utc_now())
-    save_state(final, final_sha)
-    print("API_RADAR_BLOG_PUBLISHED post_id=" + product["id"] + " posts=1")
+        if preview:
+            print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend_mode="
+                  + trend_mode + " price=true examined=" + str(attempts))
+            return 0
+        try:
+            path = download_verified_image(candidate["image"], WORK_DIR, pid)
+            from gh_only.coupang_partners_api import create_product_deeplink
+            receipt = create_product_deeplink(identity, subid="naverblog")
+            article = compose_article(candidate, history, trend, path,
+                                      receipt["partners_link"])
+        except (QualityError, ValueError, RuntimeError) as exc:
+            code = "PREPARATION_" + type(exc).__name__
+            rejection_codes[code] = rejection_codes.get(code, 0) + 1
+            continue
+
+        # Must reload before EACH blog click, because other scans update the
+        # independent product-history branch between scheduled runs.
+        latest, sha = load_state()
+        if daily_slot_count(latest, utc_now()) >= MAX_PUBLISH_PER_KST_DAY:
+            break
+        if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
+            continue
+        saved = latest.get("products", {}).get(pid)
+        if (not isinstance(saved, dict)
+                or saved.get("last_price") != candidate["price"]
+                or saved.get("last_checked_at_utc") != candidate["checked_at"]):
+            rejection_codes["PRODUCT_CHANGED"] = rejection_codes.get("PRODUCT_CHANGED", 0) + 1
+            continue
+        claim(latest, pid, candidate, utc_now())
+        save_state(latest, sha)  # durable claim BEFORE browser submit
+
+        from gh_only.naver_blog_deal_publisher import submit_one
+        try:
+            published_url = submit_one(
+                article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
+        except Exception as exc:
+            print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
+                  + type(exc).__name__ + " posts_confirmed=" + str(posts))
+            return 1  # no retry after an uncertain Naver submission
+        if (not isinstance(published_url, str)
+                or not published_url.startswith("https://blog.naver.com/mw5114/")):
+            raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
+        final, final_sha = load_state()
+        checkpoint(final, pid, published_url, utc_now())
+        save_state(final, final_sha)
+        posts += 1
+        print("API_RADAR_BLOG_PUBLISHED post_id=" + pid
+              + " posts_confirmed_in_run=" + str(posts))
+
+    print("API_RADAR_PUBLISH_BATCH_RESULT posts=" + str(posts)
+          + " examined=" + str(attempts)
+          + " rejected=" + json.dumps(rejection_codes, sort_keys=True)
+          + " daily_cap=" + str(MAX_PUBLISH_PER_KST_DAY))
     return 0
 
 
