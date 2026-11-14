@@ -237,7 +237,7 @@ class PublisherTests(TestCase):
     def test_goldbox_b_article_never_invents_discount(self):
         with tempfile.TemporaryDirectory() as td:
             image = Path(td) / "goldbox.jpg"
-            image.write_bytes(b"\\xff\\xd8\\xff" + b"0" * 1200)
+            image.write_bytes(b"\xff\xd8\xff" + b"0" * 1200)
             p = {"name": "와우회원 골드박스 유기농 생수 24개",
                  "price": 10900, "category": "식품", "source": "goldbox"}
             article = publisher.compose_goldbox_article(
@@ -283,18 +283,18 @@ class PublisherTests(TestCase):
             return "https://blog.naver.com/mw5114/100000001"
         with tempfile.TemporaryDirectory() as td:
             image = Path(td) / "test.jpg"
-            image.write_bytes(b"\\xff\\xd8\\xff" + b"0" * 1200)
-            with patch.dict(os.environ, env, clear=True), \\
-                 patch("api_radar.publisher.utc_now", return_value=t), \\
-                 patch("api_radar.publisher.load_state", side_effect=lambda:(state,"sha")), \\
-                 patch("api_radar.publisher.save_state"), \\
+            image.write_bytes(b"\xff\xd8\xff" + b"0" * 1200)
+            with patch.dict(os.environ, env, clear=True), \
+                 patch("api_radar.publisher.utc_now", return_value=t), \
+                 patch("api_radar.publisher.load_state", side_effect=lambda:(state,"sha")), \
+                 patch("api_radar.publisher.save_state"), \
                  patch("api_radar.publisher.resolve_exact_identity",
-                       side_effect=lambda p: {"product_id":p["id"],"item_id":"98765432"}), \\
+                       side_effect=lambda p: {"product_id":p["id"],"item_id":"98765432"}), \
                  patch("api_radar.publisher.check_exact_history",
-                       side_effect=quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE")) as history, \\
-                 patch("api_radar.publisher.download_verified_image", return_value=image), \\
+                       side_effect=quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE")) as history, \
+                 patch("api_radar.publisher.download_verified_image", return_value=image), \
                  patch("gh_only.coupang_partners_api.create_product_deeplink",
-                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \\
+                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \
                  patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=submit):
                 self.assertEqual(publisher.run(now=t), 0)
                 self.assertEqual(history.call_count, 1)
@@ -327,20 +327,20 @@ class PublisherTests(TestCase):
             return "https://blog.naver.com/mw5114/" + str(100000000+len(ordered))
         with tempfile.TemporaryDirectory() as td:
             image=Path(td)/"photo.jpg"
-            image.write_bytes(b"\\xff\\xd8\\xff"+b"0"*1200)
-            with patch.dict(os.environ,env,clear=True), \\
-                 patch("api_radar.publisher.utc_now",return_value=t), \\
-                 patch("api_radar.publisher.load_state",side_effect=lambda:(state,"sha")), \\
-                 patch("api_radar.publisher.save_state"), \\
+            image.write_bytes(b"\xff\xd8\xff"+b"0"*1200)
+            with patch.dict(os.environ,env,clear=True), \
+                 patch("api_radar.publisher.utc_now",return_value=t), \
+                 patch("api_radar.publisher.load_state",side_effect=lambda:(state,"sha")), \
+                 patch("api_radar.publisher.save_state"), \
                  patch("api_radar.publisher.resolve_exact_identity",
-                       side_effect=lambda p:{"product_id":p["id"],"item_id":"98765432"}), \\
+                       side_effect=lambda p:{"product_id":p["id"],"item_id":"98765432"}), \
                  patch("api_radar.publisher.check_exact_history",
                        side_effect=lambda p,i: passed if p["source"]=="search"
                            else (_ for _ in ()).throw(
-                               quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE"))), \\
-                 patch("api_radar.publisher.download_verified_image",return_value=image), \\
+                               quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE"))), \
+                 patch("api_radar.publisher.download_verified_image",return_value=image), \
                  patch("gh_only.coupang_partners_api.create_product_deeplink",
-                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \\
+                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \
                  patch("gh_only.naver_blog_deal_publisher.submit_one",side_effect=submit):
                 self.assertEqual(publisher.run(now=t), 0)
                 self.assertEqual(ordered, ["A", "B"])
