@@ -178,7 +178,7 @@ def run(*, now: datetime | None = None) -> int:
         rows = fetch_category(category)
         offers.extend(x for r in rows if (x := candidate(r, category)))
     old, sha = load(PATH, schema=SCHEMA)
-    state = old or {"schema": SCHEMA, "items": {}, "events": {}}
+    state = old or {"schema": SCHEMA, "items": {}, "events": []}
     merged, events = merge(state, offers, now)
     save(PATH, merged, sha, schema=SCHEMA)
     # Public product prices only, no personal affiliate data.
