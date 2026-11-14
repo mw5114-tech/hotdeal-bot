@@ -1,0 +1,35 @@
+name: Test | Goldbox actual official deeplink (NO BLOG POST)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/goldbox-deeplink-live-no-post.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: single-goldbox-deeplink-no-post-probe
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Verify real resolver to real official API adapter (HTTP mocked)
+        run: python -m unittest -q api_radar.test_quality_pipeline gh_only.test_coupang_partners_api
+      - name: Goldbox GET and ONE real official deeplink POST (no browser, no blog)
+        run: python -m api_radar.probe_deeplink
