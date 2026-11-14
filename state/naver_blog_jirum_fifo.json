@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96024,
-  "pending": [],
+  "last_scanned_id": 96025,
+  "pending": [
+    {
+      "id": 96025,
+      "source_message_id": 96025,
+      "source_post_url": "https://t.me/jirum/96025",
+      "original_purchase_url": "https://link.coupang.com/a/iFx8XOJ2Q0",
+      "title": "☆특가 14,400원",
+      "source_text": "☆특가 14,400원\n아인슈타인 베이비 플러스 우유, 120ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFx8XOJ2Q0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 14400,
+      "posted_at_utc": "2026-11-14T09:03:44+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
