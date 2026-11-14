@@ -130,7 +130,7 @@ def validate_editor_copy(editor, body: str, url: str, image,
         text_paragraphs = editor.evaluate(r"""e => [...e.children]
           .filter(el => el.matches('p'))
           .map(p => p.innerText.trim()).filter(Boolean)""")
-        cleaned = "\\n".join(text_paragraphs)
+        cleaned = "\n".join(text_paragraphs)
         exact = norm(cleaned) == norm(body)
         disclosure_last = cleaned.rstrip().endswith(DISCLOSURE)
     else:
