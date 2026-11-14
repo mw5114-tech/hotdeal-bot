@@ -229,6 +229,10 @@ def read_one_draft(folder: Path) -> dict:
         "muse_rewrite_pending": row.get("muse_rewrite_pending") is True,
         "official_link_receipt": receipt,
         "candidate_url": url,
+        "chart_identity": {
+            "product_id": row.get("product_identity", {}).get("product_id"),
+            "item_id": row.get("product_identity", {}).get("item_id"),
+        },
     }
 
 
