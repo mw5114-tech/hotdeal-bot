@@ -450,7 +450,7 @@ if __name__ == "__main__":
             output = os.getenv("GITHUB_OUTPUT")
             if output:
                 with open(output, "a", encoding="utf-8") as handle:
-                    handle.write("pending=" + str(total > 0).lower() + "\\n")
+                    handle.write("pending=" + str(total > 0).lower() + "\n")
             raise SystemExit(0)
         raise SystemExit(run(preview=os.getenv("API_RADAR_PREVIEW_ONLY") == "true"))
     except (RadarStateError, QualityError, TrendError) as exc:
