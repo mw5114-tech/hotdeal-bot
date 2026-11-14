@@ -183,7 +183,7 @@ class PublisherTests(TestCase):
         with self.assertRaisesRegex(Exception, "RADAR_CLAIM_DATE_INVALID"):
             publisher.daily_slot_count(state, t)
 
-    def test_three_verified_posts_across_two_runs_but_no_fourth(self):
+    def test_five_posts_release_one_per_fifteen_minutes_without_daily_quota(self):
         t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
         products = {}
         for n in range(5):
@@ -213,8 +213,9 @@ class PublisherTests(TestCase):
             publish.count += 1
             return "https://blog.naver.com/mw5114/" + str(100000000 + publish.count)
         publish.count = 0
+        clock = {"now": t}
         with patch.dict(os.environ, env, clear=True), \
-             patch("api_radar.publisher.utc_now", return_value=t), \
+             patch("api_radar.publisher.utc_now", side_effect=lambda:clock["now"]), \
              patch("api_radar.publisher.load_state", side_effect=lambda: (state, "sha")), \
              patch("api_radar.publisher.save_state") as save, \
              patch("api_radar.publisher.resolve_exact_identity", side_effect=identity), \
@@ -225,14 +226,33 @@ class PublisherTests(TestCase):
                    side_effect=lambda *a, **kw: {"partners_link":fake_url()}), \
              patch("api_radar.publisher.compose_article", return_value={"title":"test"}), \
              patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=publish):
-            self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(len(state["published"]), 4)
-            self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(len(state["published"]), 5)
-            self.assertEqual(publisher.run(now=t), 0)
-            self.assertEqual(publish.count, 5)
+            for expected in range(1, 6):
+                self.assertEqual(publisher.run(now=clock["now"]), 0)
+                self.assertEqual(len(state["published"]), expected)
+                self.assertEqual(publish.count, expected)
+                # Same timestamp cannot cause a second immediate publication.
+                self.assertEqual(publisher.run(now=clock["now"]), 0)
+                self.assertEqual(publish.count, expected)
+                clock["now"] += timedelta(minutes=15)
+            self.assertEqual(publisher.run(now=clock["now"]), 0)
             self.assertEqual(len(state["api_publish_claims"]), 0)
             self.assertEqual(save.call_count, 10)
+
+    def test_cooldown_claims_and_receipts_enforce_fifteen_minute_minimum(self):
+        t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
+        state = {"published":{"11111111":{"at":t.isoformat()}},
+                 "api_publish_claims":{}}
+        self.assertEqual(publisher.cooldown_remaining_seconds(state, t), 900)
+        self.assertEqual(publisher.cooldown_remaining_seconds(
+            state, t+timedelta(minutes=14,seconds=59)), 1)
+        self.assertEqual(publisher.cooldown_remaining_seconds(
+            state, t+timedelta(minutes=15)), 0)
+        state["api_publish_claims"]["22222222"] = {
+            "claimed_at":(t+timedelta(minutes=10)).isoformat()}
+        self.assertEqual(publisher.cooldown_remaining_seconds(
+            state, t+timedelta(minutes=15)), 600)
+        self.assertEqual(publisher.cooldown_remaining_seconds(
+            state, t+timedelta(minutes=25)), 0)
 
     def test_goldbox_b_article_never_invents_discount(self):
         with tempfile.TemporaryDirectory() as td:
@@ -303,7 +323,7 @@ class PublisherTests(TestCase):
                 self.assertEqual(state["published"]["22345678"]["grade"], "B")
                 self.assertNotIn("12345678", state["published"])
 
-    def test_a_verified_deal_has_priority_before_b_and_shared_daily_cap(self):
+    def test_a_then_b_on_separate_fifteen_minute_slots(self):
         t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
         def p(pid, source, name):
             return {"name": name, "category": "생활용품", "last_price": 30000,
@@ -322,6 +342,7 @@ class PublisherTests(TestCase):
         passed={"exact_product_item_verified":True,"reference_price":40000,
                 "discount_pct":25, "history_window":"recent_3_weeks"}
         ordered=[]
+        clock={"now":t}
         def submit(article,*args,**kw):
             ordered.append(article["grade"])
             return "https://blog.naver.com/mw5114/" + str(100000000+len(ordered))
@@ -329,7 +350,7 @@ class PublisherTests(TestCase):
             image=Path(td)/"photo.jpg"
             image.write_bytes(b"\xff\xd8\xff"+b"0"*1200)
             with patch.dict(os.environ,env,clear=True), \
-                 patch("api_radar.publisher.utc_now",return_value=t), \
+                 patch("api_radar.publisher.utc_now",side_effect=lambda:clock["now"]), \
                  patch("api_radar.publisher.load_state",side_effect=lambda:(state,"sha")), \
                  patch("api_radar.publisher.save_state"), \
                  patch("api_radar.publisher.resolve_exact_identity",
@@ -342,10 +363,14 @@ class PublisherTests(TestCase):
                  patch("gh_only.coupang_partners_api.create_product_deeplink",
                        return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \
                  patch("gh_only.naver_blog_deal_publisher.submit_one",side_effect=submit):
-                self.assertEqual(publisher.run(now=t), 0)
+                self.assertEqual(publisher.run(now=clock["now"]), 0)
+                self.assertEqual(ordered, ["A"])
+                self.assertEqual(publisher.run(now=clock["now"]), 0)
+                self.assertEqual(ordered, ["A"])
+                clock["now"] += timedelta(minutes=15)
+                self.assertEqual(publisher.run(now=clock["now"]), 0)
                 self.assertEqual(ordered, ["A", "B"])
                 self.assertEqual({v["grade"] for v in state["published"].values()}, {"A","B"})
-                self.assertEqual(publisher.daily_slot_count(state,t),2)
 
     def test_goldbox_current_day_queue_dedup_and_no_daily_quota(self):
         t = datetime(2026, 11, 14, 3, 0, tzinfo=timezone.utc)
