@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96012,
-  "pending": [
-    {
-      "id": 96012,
-      "source_post_url": "https://t.me/jirum/96012",
-      "original_purchase_url": "https://link.coupang.com/a/iFgO9az0Bo",
-      "source_text": "☆특가 7,800원\n아이배 끝아 과일야채주스, 80ml, 10개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFgO9az0Bo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T05:01:22+00:00",
-      "title": "☆특가 7,800원",
-      "sale_price_krw": 7800
-    }
-  ],
-  "in_flight": {
-    "id": 96012,
-    "status": "CLAIMED",
-    "run_id": "43559519236",
-    "at": "2026-11-14T05:02:27.794079+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5381,6 +5366,16 @@
       "vendor_item_id": "73356580713",
       "at": "2026-11-14T04:59:38.093036+00:00",
       "run_id": "43559265549"
+    },
+    "96012": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%9D%B4%EB%B0%B0%EB%83%87-%EB%81%99%EC%95%84-%EA%B3%BC%EC%9D%BC%EC%95%BC%EC%B1%84%EC%A3%BC%EC%8A%A4-80ml-10%EA%B0%9C-40%ED%95%A0%EC%9D%B8-AO30K3OA?from=write",
+      "posted_at_utc": "2026-11-14T05:01:22+00:00",
+      "product_id": "9334975732",
+      "item_id": "20585542470",
+      "vendor_item_id": "3033506356",
+      "at": "2026-11-14T05:02:47.009171+00:00",
+      "run_id": "43559519236"
     }
   },
   "skipped_non_coupang": 470,
