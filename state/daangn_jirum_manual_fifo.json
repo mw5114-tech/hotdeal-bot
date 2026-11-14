@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95997,
-  "pending": [
-    {
-      "id": 95996,
-      "source_post_url": "https://t.me/jirum/95996",
-      "original_purchase_url": "https://link.coupang.com/a/iE4HGShpee",
-      "source_text": "☆특가 6,040원\n샤워메이트 블루밍 바디워시 로즈 앤 체리블러썸, 900g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE4HGShpee\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T02:11:46+00:00",
-      "title": "☆특가 6,040원",
-      "sale_price_krw": 6040
-    }
-  ],
-  "in_flight": {
-    "id": 95996,
-    "status": "CLAIMED",
-    "run_id": "43545029649",
-    "at": "2026-11-14T02:13:18.485163+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5321,6 +5306,16 @@
       "vendor_item_id": "88057921328",
       "at": "2026-11-14T01:57:11.458945+00:00",
       "run_id": "43543470361"
+    },
+    "95996": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%A4%EC%9B%8C%EB%A9%94%EC%9D%B4%ED%8A%B8-%EB%B8%94%EB%A3%A8%EB%B0%8D-%EB%B0%94%EB%94%94%EC%9B%8C%EC%8B%9C-%EB%A1%9C%EC%A6%88-%EC%95%A4-%EC%B2%B4%EB%A6%AC%EB%B8%94%EB%9F%AC%EC%8D%B8-900g-2-35%ED%95%A0%EC%9D%B8-PVp427pj?from=write",
+      "posted_at_utc": "2026-11-14T02:11:46+00:00",
+      "product_id": "9498961688",
+      "item_id": "26014337537",
+      "vendor_item_id": null,
+      "at": "2026-11-14T02:13:35.494030+00:00",
+      "run_id": "43545029649"
     }
   },
   "skipped_non_coupang": 461,
