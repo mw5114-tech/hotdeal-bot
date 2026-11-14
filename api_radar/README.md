@@ -7,9 +7,10 @@ exact product and option, publish A when Lowchart independently confirms
 a genuine historical-average discount of 15–70%, and otherwise publish B
 as an **official Goldbox listing without a fabricated discount percentage**.
 
-There is **no per-day post count quota**. A time-bounded batch of **four
-posts per Actions run** protects the runner and Naver editor, and frequent
-publish-only schedules resume remaining items. These are operational limits,
+There is **no per-day post count quota**. Each publish-only Actions run
+attempts **at most one** post, and a persisted **minimum 900-second gap**
+is enforced after the latest confirmed post OR uncertain Naver submission
+claim. Publish-only schedules resume remaining items every 15 minutes. These are operational limits,
 NOT a guarantee that all products will be published. Items failing identity,
 image, link, stale-price or platform checks cannot safely be posted.
 
@@ -40,9 +41,12 @@ day, the current-day inventory resets, while all **published** IDs and
 uncertain claims persist. A previously published product cannot be posted
 again merely because the Goldbox feed lists it on a later day.
 
-Publish-only runs execute **hourly 09:55–22:55 KST** without making new
-Coupang Partners product API calls. A lightweight queue preflight prevents
-browser installation if no unpublished fresh Goldbox candidate remains.
+Publish-only runs are scheduled every **15 minutes from 08:22 to 23:52 KST**
+(08:22, 08:37, 08:52, 09:07, 09:22, ...). These do **not** call the Coupang
+Partners product discovery API. A lightweight queue preflight prevents browser
+installation when the backlog is empty or the 900-second cooldown has not
+expired. GitHub cron can be delayed or dropped: do not promise exact-time
+publication or that all daily products will be published.
 The publisher checks only same-KST-day products whose most recent observed
 price is within twelve hours; expired offers are never described as today's
 current promotions.
@@ -80,8 +84,9 @@ option-level historical savings.
 
 ## Operational safeguards and limits
 
-- **No daily numeric publishing quota.** At most four publish calls per
-  invocation so individual Actions runs stay bounded.
+- **No daily numeric publishing quota.** At most one publish call per
+  15-minute invocation. A real 900-second cooldown, persisted across
+  different GitHub runs, includes uncertain submission claims.
 - Avoid duplicate publications across scans/days with global productId
   receipts and durable unknown-outcome claims.
 - Same Naver publish concurrency mutex as Telegram publisher.
