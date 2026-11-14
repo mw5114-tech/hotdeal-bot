@@ -347,6 +347,39 @@ class PublisherTests(TestCase):
                 self.assertEqual({v["grade"] for v in state["published"].values()}, {"A","B"})
                 self.assertEqual(publisher.daily_slot_count(state,t),2)
 
+    def test_goldbox_current_day_queue_dedup_and_no_daily_quota(self):
+        t = datetime(2026, 11, 14, 3, 0, tzinfo=timezone.utc)
+        def item(pid, category):
+            return {"name": "생활용품 정품 특가 " + pid,
+                    "source": "goldbox", "price": 12900,
+                    "category": category, "image": "https://image15.coupangcdn.com/x.jpg",
+                    "url": "https://link.coupang.com/re/AFFSDP?pageKey="
+                           + pid + "&itemId=98765432",
+                    "checked_at": t.isoformat()}
+        state = {"products": {}, "published": {
+            str(10000000 + n): {"kst_date": "2026-11-14"}
+            for n in range(30)},
+            "api_publish_claims": {},
+            "goldbox_today": {"kst_date": "2026-11-14",
+                              "updated_at": t.isoformat(),
+                              "items": {"12345678": item("12345678","생활용품"),
+                                        "22345678": item("22345678","생활용품"),
+                                        "32345678": item("32345678","국내투어")}}}
+        state["published"]["22345678"] = {"kst_date": "2026-11-13"}
+        picked = publisher.select_candidates(state, t + timedelta(minutes=5))
+        self.assertEqual([x["id"] for x in picked], ["12345678"])
+        self.assertEqual(publisher.daily_slot_count(state, t), 30)
+        self.assertFalse(publisher.select_candidates(state, t + timedelta(days=1)))
+        state["goldbox_today"] = {
+            "kst_date":"2026-11-15", "updated_at":(t+timedelta(days=1)).isoformat(),
+            "items":{"12345678": item("12345678","생활용품"),
+                     "42345678": item("42345678","문구/사무용품")}}
+        state["goldbox_today"]["items"]["42345678"]["checked_at"] = (t+timedelta(days=1)).isoformat()
+        state["goldbox_today"]["items"]["12345678"]["checked_at"] = (t+timedelta(days=1)).isoformat()
+        state["published"]["12345678"]={"kst_date":"2026-11-14"}
+        picked_next=publisher.select_candidates(state, t+timedelta(days=1,minutes=5))
+        self.assertEqual([x["id"] for x in picked_next],["42345678"])
+
     def test_claim_before_submit_and_checkpoint(self):
         now = datetime(2026, 11, 13, 5, tzinfo=timezone.utc)
         url = "https://link.coupang.com/re/AFFSDP?pageKey=12345678&itemId=98765432"
