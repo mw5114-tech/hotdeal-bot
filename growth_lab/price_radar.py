@@ -1,7 +1,8 @@
-"""Independent category-best option-level price-drop radar (NO blog posting).
+"""Coupang price-drop V2: same-option 6h observation + robust real drops.
 
-Two category calls/run, with conservative multi-day option price history.
-Publishes only public-product price facts to a separate state file.
+No publisher or browser here. 2 authenticated category requests/run,
+daily + intraday histories, and only fully evidenced S/A event records.
+The independent V2 publisher rechecks a CURRENT API offer before posting.
 """
 from __future__ import annotations
 
@@ -12,7 +13,7 @@ import statistics
 from urllib import error, parse, request
 
 from api_radar.collector import HOST, PREFIX, MAX_RESPONSE, RadarApiError, signed_header, extract_rows, normalize
-from api_radar.quality import extract_exact_identity
+from api_radar.quality import extract_exact_identity, title_tokens
 from growth_lab.github_store import load, save
 
 KST = timezone(timedelta(hours=9))
@@ -23,8 +24,11 @@ CATEGORIES = {
     "1013": "주방용품", "1029": "반려동물",
     "1012": "식품", "1015": "홈인테리어",
 }
-MAX_ITEMS = 900
+MAX_ITEMS = 280
 MAX_EVENTS = 150
+MAX_TICKS = 10
+MAX_HISTORY_DAYS = 38
+EVENT_FRESH_MINUTES = 120
 
 
 class PriceRadarError(RuntimeError):
@@ -71,15 +75,13 @@ def fetch_category(category_id: str, *, opener=None) -> list[dict]:
 
 
 def categories_for_run(now: datetime) -> list[str]:
-    """Rotate across six categories; 2 API calls per run, 2 runs daily."""
+    """Two official API calls every 2h; each of 6 categories ~every 6h."""
     if now.tzinfo is None:
         raise PriceRadarError("BEST_TIMEZONE_REQUIRED")
-    day = now.astimezone(KST).date().toordinal()
     hour = now.astimezone(KST).hour
-    window = 0 if hour < 15 else 1
     keys = list(CATEGORIES)
-    start = ((day * 2 + window) * 2) % len(keys)
-    return [keys[start], keys[(start + 1) % len(keys)]]
+    start = ((hour // 2) % 3) * 2
+    return [keys[start], keys[start + 1]]
 
 
 def candidate(row: dict, category_id: str) -> dict | None:
@@ -89,13 +91,19 @@ def candidate(row: dict, category_id: str) -> dict | None:
     identity = extract_exact_identity(product["url"], product["id"])
     if not identity:
         return None  # productId alone is not an option-specific price identity
+    tokens = title_tokens(product["name"])
+    if len(tokens) < 2:
+        return None
     return {"key": product["id"] + ":" + identity["item_id"],
             "id": product["id"], "item_id": identity["item_id"],
+            "vendor_item_id": identity.get("vendor_item_id"),
+            "title_signature": "|".join(t.lower() for t in tokens[:2]),
             "name": product["name"], "url": product["url"],
             "image": product["image"], "price": product["price"],
             "category": CATEGORIES[category_id],
             "category_id": category_id,
-            "rocket": product["is_rocket"]}
+            "rocket": product["is_rocket"],
+            "free_shipping": product["free_shipping"]}
 
 
 def calculate_drop(history: list[dict], price: int, today: str) -> dict | None:
@@ -120,53 +128,181 @@ def calculate_drop(history: list[dict], price: int, today: str) -> dict | None:
             "comparison_kind": "same_option_observed_daily_prior_median"}
 
 
+def classify_v2(history: list[dict], ticks: list[dict], price: int,
+                now: datetime) -> dict | None:
+    """No signal without both prior daily baseline AND a real ~24h observation.
+
+    The prior-day median prevents an inflated single MSRP from creating a
+    fake deal. Matching productId+itemId+vendor/title is checked by merge.
+    """
+    if type(price) is not int or price < 1000 or now.tzinfo is None:
+        return None
+    day = now.astimezone(KST).date().isoformat()
+    cutoff = (now.astimezone(KST).date() - timedelta(days=30)).isoformat()
+    daily = {h["day"]: h["price"] for h in history
+             if isinstance(h, dict) and type(h.get("price")) is int
+             and h["price"] > 0 and isinstance(h.get("day"), str)
+             and cutoff <= h["day"] < day}
+    dates = sorted(daily)
+    if len(dates) < 5 or (datetime.fromisoformat(dates[-1]) -
+                           datetime.fromisoformat(dates[0])).days < 7:
+        return None
+    median = int(statistics.median(daily.values()))
+    drop_30 = round(100 * (median - price) / median, 1)
+    if not 20 <= drop_30 <= 70:
+        return None
+    old = []
+    for tick in ticks:
+        if not isinstance(tick, dict) or type(tick.get("price")) is not int:
+            continue
+        stamp = tick.get("at")
+        try:
+            parsed = datetime.fromisoformat(stamp)
+        except (TypeError, ValueError):
+            continue
+        if parsed.tzinfo is None:
+            continue
+        age_hours = (now - parsed).total_seconds() / 3600
+        if 18 <= age_hours <= 31:
+            old.append((abs(age_hours - 24), parsed, tick["price"]))
+    if not old:
+        return None
+    previous = min(old, key=lambda x: (x[0], -x[1].timestamp()))[2]
+    if previous <= 0:
+        return None
+    drop_24 = round(100 * (previous - price) / previous, 1)
+    if not 15 <= drop_24 <= 70:
+        return None
+    grade = "S" if drop_24 >= 20 and drop_30 >= 25 else "A"
+    return {
+        "grade": grade, "prior_30d_median_krw": median,
+        "price_24h_ago_krw": previous,
+        "drop_vs_30d_median_pct": drop_30,
+        "drop_vs_24h_pct": drop_24,
+        "prior_daily_observation_days": len(dates),
+        "prior_span_days": (datetime.fromisoformat(dates[-1]) -
+                            datetime.fromisoformat(dates[0])).days,
+        "comparison_kind": "same_option_prior_30d_daily_median_and_24h_observed",
+    }
+
+
+def eligible_events(state: dict, now: datetime, *, published: dict | None = None,
+                    claims: dict | None = None) -> list[dict]:
+    """Read-only preflight for time-limited events; no API/browser work."""
+    if not isinstance(state, dict) or state.get("schema") != SCHEMA or now.tzinfo is None:
+        return []
+    items = state.get("items", {})
+    if not isinstance(items, dict):
+        return []
+    posted, claimed = published or {}, claims or {}
+    found = []
+    for event in state.get("events", [])[-MAX_EVENTS:]:
+        if not isinstance(event, dict) or event.get("grade") not in ("S", "A"):
+            continue
+        try:
+            stamp = datetime.fromisoformat(event["observed_at"])
+            age = (now - stamp).total_seconds()
+            if stamp.tzinfo is None or not 0 <= age <= EVENT_FRESH_MINUTES * 60:
+                continue
+        except (KeyError, TypeError, ValueError):
+            continue
+        pid, key = event.get("id"), event.get("key")
+        row = items.get(key)
+        if (not isinstance(pid, str) or pid in posted or pid in claimed
+                or not isinstance(row, dict) or row.get("last_price") != event.get("price")
+                or row.get("last_checked_at") != event.get("observed_at")
+                or row.get("category_id") != event.get("category_id")
+                or row.get("vendor_item_id") != event.get("vendor_item_id")
+                or row.get("title_signature") != event.get("title_signature")):
+            continue
+        if (type(event.get("price")) is not int or
+                not 20 <= event.get("drop_vs_30d_median_pct", -999) <= 70 or
+                not 15 <= event.get("drop_vs_24h_pct", -999) <= 70):
+            continue
+        found.append(event)
+    return sorted(found, key=lambda e: (e["grade"] != "S",
+                         -e["drop_vs_30d_median_pct"], -e["drop_vs_24h_pct"]))
+
+
 def merge(state: dict, offers: list[dict], now: datetime) -> tuple[dict, list[dict]]:
     if state.get("schema") != SCHEMA or not isinstance(state.get("items"), dict):
         raise PriceRadarError("BEST_STATE_INVALID")
+    if now.tzinfo is None:
+        raise PriceRadarError("BEST_TIMEZONE_REQUIRED")
     today = now.astimezone(KST).date().isoformat()
+    now_iso = now.isoformat()
     events = []
     for offer in offers:
         key = offer["key"]
         old = state["items"].get(key, {})
+        # An item ID alone should not silently mix seller/vendor or title
+        # variant changes into a historical comparison.
+        changed_vendor = (old.get("vendor_item_id") is not None
+                          and offer.get("vendor_item_id") is not None
+                          and old["vendor_item_id"] != offer["vendor_item_id"])
+        changed_title = (bool(old.get("title_signature"))
+                         and bool(offer.get("title_signature"))
+                         and old["title_signature"] != offer["title_signature"])
+        if changed_vendor or changed_title:
+            old = {}
         hist = old.get("history", [])
-        if not isinstance(hist, list):
+        ticks = old.get("ticks", [])
+        if not isinstance(hist, list) or not isinstance(ticks, list):
             raise PriceRadarError("BEST_ITEM_HISTORY_INVALID")
-        # Same item/option, KST calendar-day price snapshot.
-        hist = [r for r in hist if isinstance(r, dict)
-                and isinstance(r.get("day"), str) and r["day"] <= today
+        hist = [h for h in hist if isinstance(h, dict)
+                and isinstance(h.get("day"), str) and h["day"] <= today
                 and (datetime.fromisoformat(today) -
-                     datetime.fromisoformat(r["day"])).days <= 45
-                and type(r.get("price")) is int and r["price"] > 0]
-        signal = calculate_drop(hist, offer["price"], today)
-        previous = old.get("last_alert_price")
-        if signal and (type(previous) is not int or
-                       offer["price"] <= previous * .95):
-            events.append({**{k: offer[k] for k in
-                       ("key", "id", "item_id", "name", "category", "price", "url")},
-                           **signal, "day": today})
+                     datetime.fromisoformat(h["day"])).days <= MAX_HISTORY_DAYS
+                and type(h.get("price")) is int and h["price"] > 0]
+        tick_rows = []
+        for tick in ticks:
+            if not isinstance(tick, dict) or type(tick.get("price")) is not int:
+                continue
+            try:
+                d = datetime.fromisoformat(tick.get("at"))
+                age = (now - d).total_seconds()
+                if d.tzinfo is not None and 0 <= age <= 40 * 3600:
+                    tick_rows.append(tick)
+            except (TypeError, ValueError):
+                continue
+        signal = classify_v2(hist, tick_rows, offer["price"], now)
+        previous_alert = old.get("last_alert_price")
+        if (signal and (type(previous_alert) is not int
+                         or offer["price"] <= previous_alert * .95)):
+            event = {**{k: offer.get(k) for k in (
+                     "key", "id", "item_id", "vendor_item_id", "title_signature",
+                     "name", "category", "category_id", "price", "url", "image",
+                     "rocket", "free_shipping")},
+                     **signal, "day": today, "observed_at": now_iso,
+                     "source": "category_best"}
+            events.append(event)
             old["last_alert_price"] = offer["price"]
         hist = [h for h in hist if h["day"] != today]
         hist.append({"day": today, "price": offer["price"]})
-        state["items"][key] = {**old, "name": offer["name"],
-                              "category": offer["category"],
-                              "category_id": offer["category_id"],
-                              "last_price": offer["price"],
-                              "last_url": offer["url"], "last_image": offer["image"],
-                              "last_checked_at": now.isoformat(),
-                              "history": hist[-45:]}
+        tick_rows.append({"at": now_iso, "price": offer["price"]})
+        state["items"][key] = {
+            **old, "name": offer["name"], "category": offer["category"],
+            "category_id": offer["category_id"], "item_id": offer["item_id"],
+            "vendor_item_id": offer.get("vendor_item_id"),
+            "title_signature": offer.get("title_signature"),
+            "last_price": offer["price"], "last_url": offer["url"],
+            "last_image": offer["image"], "last_checked_at": now_iso,
+            "history": hist[-MAX_HISTORY_DAYS:],
+            "ticks": tick_rows[-MAX_TICKS:],
+        }
     if len(state["items"]) > MAX_ITEMS:
         keys = sorted(state["items"], key=lambda k:
                       state["items"][k].get("last_checked_at", ""), reverse=True)
-        state["items"] = {k:state["items"][k] for k in keys[:MAX_ITEMS]}
-    old_events = state.get("events", [])
-    if not isinstance(old_events, list):
+        state["items"] = {k: state["items"][k] for k in keys[:MAX_ITEMS]}
+    existing = state.get("events", [])
+    if not isinstance(existing, list):
         raise PriceRadarError("BEST_EVENTS_INVALID")
-    # Avoid duplicate event keys across retries and different windows.
-    seen = {(x.get("key"), x.get("day"), x.get("price"))
-            for x in old_events if isinstance(x, dict)}
-    fresh = [x for x in events if (x["key"], x["day"], x["price"]) not in seen]
-    state["events"] = (old_events + fresh)[-MAX_EVENTS:]
-    state["updated_at"] = now.isoformat()
+    seen = {(e.get("key"), e.get("day"), e.get("price"))
+            for e in existing if isinstance(e, dict)}
+    fresh = [e for e in events
+             if (e["key"], e["day"], e["price"]) not in seen]
+    state["events"] = (existing + fresh)[-MAX_EVENTS:]
+    state["updated_at"] = now_iso
     return state, fresh
 
 
@@ -182,9 +318,10 @@ def run(*, now: datetime | None = None) -> int:
     merged, events = merge(state, offers, now)
     save(PATH, merged, sha, schema=SCHEMA)
     # Public product prices only, no personal affiliate data.
-    print("GROWTH_PRICE_RADAR_OK categories=" + ",".join(ids) +
+    print("GROWTH_PRICE_V2_OK categories=" + ",".join(ids) +
           " exact_option_offers=" + str(len(offers)) +
-          " new_validated_drop_events=" + str(len(events)))
+          " new_validated_drop_events=" + str(len(events)) +
+          " tracked_items=" + str(len(merged["items"])))
     return 0
 
 
