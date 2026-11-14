@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95994,
-  "pending": [
-    {
-      "id": 95993,
-      "source_post_url": "https://t.me/jirum/95993",
-      "original_purchase_url": "https://link.coupang.com/a/iE3zcit58S",
-      "source_text": "🔥🔥🔥무지성 3,980원 (49.0% 할인)🔥🔥🔥\n오뚜기 찹쌀 미니도나스 믹스\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,804원\n- 할인: 3,824원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE3zcit58S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T01:55:51+00:00",
-      "title": "오뚜기 찹쌀 미니도나스 믹스",
-      "sale_price_krw": 3980
-    }
-  ],
-  "in_flight": {
-    "id": 95993,
-    "status": "CLAIMED",
-    "run_id": "43543470361",
-    "at": "2026-11-14T01:56:55.546249+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5310,6 +5295,16 @@
       "item_id": "25797867509",
       "vendor_item_id": "92785526448",
       "at": "2026-11-14T01:56:49.667602+00:00",
+      "run_id": "43543470361"
+    },
+    "95993": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%B0%B9%EC%8C%80-%EB%AF%B8%EB%8B%88%EB%8F%84%EB%82%98%EC%8A%A4-%EB%AF%B9%EC%8A%A4-250g-2%EA%B0%9C-40%ED%95%A0%EC%9D%B8-AO30DOOA?from=write",
+      "posted_at_utc": "2026-11-14T01:55:51+00:00",
+      "product_id": "8244595284",
+      "item_id": "20381840708",
+      "vendor_item_id": "88057921328",
+      "at": "2026-11-14T01:57:11.458945+00:00",
       "run_id": "43543470361"
     }
   },
