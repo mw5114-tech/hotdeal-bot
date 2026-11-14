@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95997,
-  "pending": [
-    {
-      "id": 95996,
-      "source_message_id": 95996,
-      "source_post_url": "https://t.me/jirum/95996",
-      "original_purchase_url": "https://link.coupang.com/a/iE4HGShpee",
-      "title": "☆특가 6,040원",
-      "source_text": "☆특가 6,040원\n샤워메이트 블루밍 바디워시 로즈 앤 체리블러썸, 900g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE4HGShpee\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6040,
-      "posted_at_utc": "2026-11-14T02:11:46+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -871,6 +860,10 @@
     "95993": {
       "url": "https://blog.naver.com/mw5114/224476663930",
       "at": "2026-11-14T01:58:15.481668+00:00"
+    },
+    "95996": {
+      "url": "https://blog.naver.com/mw5114/224476678449",
+      "at": "2026-11-14T02:13:57.251893+00:00"
     }
   },
   "skipped": {
@@ -963,12 +956,7 @@
       "at": "2026-11-13T18:53:07.195222+00:00"
     }
   },
-  "in_flight": {
-    "id": 95996,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43545029649",
-    "at": "2026-11-14T02:13:16.787601+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
