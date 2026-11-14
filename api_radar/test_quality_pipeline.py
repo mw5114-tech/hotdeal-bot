@@ -427,6 +427,54 @@ class PublisherTests(TestCase):
                 self.assertEqual(ordered, ["A", "B"])
                 self.assertEqual({v["grade"] for v in state["published"].values()}, {"A","B"})
 
+    def test_systemic_deeplink_api_error_aborts_before_naver_and_turns_run_red(self):
+        from gh_only.coupang_partners_api import CoupangPartnersError
+        now = datetime(2026, 11, 14, 3, 0, tzinfo=timezone.utc)
+        pid = "12345678"
+        state = {
+            "products": {pid: {
+                "name": "유기농 생활 세제",
+                "category": "생활용품", "last_price": 20000,
+                "last_source": "goldbox",
+                "last_product_url":
+                    "https://link.coupang.com/re/AFFSDP?pageKey=12345678&itemId=98765432",
+                "last_image_url": "https://image15.coupangcdn.com/x.jpg",
+                "last_checked_at_utc": now.isoformat(),
+            }},
+            "published": {}, "api_publish_claims": {}
+        }
+        env = {
+            "API_RADAR_PUBLISH_ENABLED":"true",
+            "NAVER_BLOG_STORAGE_STATE_JSON":"fake",
+            "COUPANG_PARTNERS_ACCESS_KEY":"test-access",
+            "COUPANG_PARTNERS_SECRET_KEY":"test-secret",
+        }
+        with tempfile.TemporaryDirectory() as td:
+            image = Path(td)/"test.jpg"
+            image.write_bytes(b"JPEG-" + b"0"*1200)
+            with patch.dict(os.environ, env, clear=True), \
+                 patch("api_radar.publisher.load_state", return_value=(state, "sha")), \
+                 patch("api_radar.publisher.resolve_exact_identity",
+                       return_value={"status":"EXACT_ITEM_IDENTIFIED",
+                                     "product_id":pid,"item_id":"98765432"}), \
+                 patch("api_radar.publisher.check_exact_history",
+                       side_effect=quality.QualityError("EXACT_OPTION_HISTORY_UNVERIFIED")), \
+                 patch("api_radar.publisher.download_verified_image", return_value=image), \
+                 patch("gh_only.coupang_partners_api.create_product_deeplink",
+                       side_effect=CoupangPartnersError("COUPANG_API_HTTP_403")) as deeplink, \
+                 patch("gh_only.naver_blog_deal_publisher.submit_one") as post, \
+                 patch("api_radar.publisher.save_state") as store, \
+                 patch("builtins.print") as log:
+                self.assertEqual(publisher.run(now=now), 1)
+            self.assertEqual(deeplink.call_count, 1)
+            post.assert_not_called()
+            store.assert_not_called()
+            safe_logs = " ".join(" ".join(str(x) for x in call.args)
+                                 for call in log.call_args_list)
+            self.assertIn("API_RADAR_LINK_SYSTEMIC_FAILURE_ABORT", safe_logs)
+            self.assertIn("COUPANG_API_HTTP_403", safe_logs)
+            self.assertNotIn("test-secret", safe_logs)
+
     def test_goldbox_current_day_queue_dedup_and_no_daily_quota(self):
         t = datetime(2026, 11, 14, 3, 0, tzinfo=timezone.utc)
         def item(pid, category):
