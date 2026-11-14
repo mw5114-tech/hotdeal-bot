@@ -399,7 +399,7 @@ def publish_one(article: dict, state_secret: str | None = None,
                       [...e.children].slice(0,35).map((n,i) => ({
                         index: i, tag: n.tagName, cls: (n.className||'').slice(0,55),
                         image_count:n.querySelectorAll('img').length,
-                        product:/^\\[(?:\\d+%할인|할인율 확인 중|1% 미만 저렴)/.test((n.innerText||'').trim()),
+                        product:(n.innerText||'').trim().startsWith('['),
                         price:(n.innerText||'').includes('💸 '),
                         link:(n.innerText||'').includes('🛒 쿠팡에서 상품정보'),
                         disclosure:(n.innerText||'').includes('이 포스팅은 쿠팡 파트너스'),
