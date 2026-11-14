@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 95999,
+  "last_scanned_id": 96004,
   "pending": [
     {
       "id": 95999,
@@ -10,6 +10,15 @@
       "posted_at_utc": "2026-11-14T02:17:46+00:00",
       "title": "믈레코비타 아이러브밀크 1.5% 저지방 멸균우유 1L 12개",
       "sale_price_krw": 19990
+    },
+    {
+      "id": 96004,
+      "source_post_url": "https://t.me/jirum/96004",
+      "original_purchase_url": "https://link.coupang.com/a/iE6l31i62u",
+      "source_text": "☆특가 14,120원\n블루래빗 손감각 발달토이\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE6l31i62u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-14T02:34:52+00:00",
+      "title": "☆특가 14,120원",
+      "sale_price_krw": 14120
     }
   ],
   "in_flight": null,
@@ -5328,7 +5337,7 @@
       "run_id": "43545029649"
     }
   },
-  "skipped_non_coupang": 462,
+  "skipped_non_coupang": 466,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
