@@ -64,10 +64,9 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: cafe
       JIRUM_IMAGE_SOURCE: lowchart
-      # Self-generated summary PNG from verified exact-item public price stats.
-      # Lowchart's raw date/price series is not public; never fabricate it.
-      JIRUM_LOWCHART_CHART_MODE: generated
-      # Kept for rollback compatibility; generated mode does not call capture.
+      # Publish the verified item's native Korean historical price graph.
+      # Self-generated price summary stays available for offline experiments.
+      JIRUM_LOWCHART_CHART_MODE: native_screenshot
       JIRUM_LOWCHART_CHART_IMAGE_ENABLED: 'true'
       JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_FRESH_POST: 'true'
