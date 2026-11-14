@@ -23,8 +23,8 @@ CIPHER_SCHEMA = "growth-revenue-ciphertext-v1"
 REPORT_TYPES = ("clicks", "orders", "cancels", "commission")
 FIELD_MAP = {
     "clicks": ("clickCount", "clicks", "click"),
-    "orders": ("orderCount", "orders", "order", "quantity"),
-    "cancels": ("cancelCount", "cancels", "cancel", "quantity"),
+    "orders": ("orderCount", "orders", "order"),
+    "cancels": ("cancelCount", "cancels", "cancel"),
     "commission": ("commission", "commissionAmount", "totalCommission"),
 }
 MAX_RESPONSE = 250_000
@@ -104,15 +104,25 @@ def summarize(rows_by_kind: dict[str, list[dict]], day: str) -> dict:
         rows = rows_by_kind.get(kind, [])
         sums = {}
         unknown = 0
+        seen_order_ids = set()
         for row in rows:
-            value = value_for(row, kind)
-            if value is None:
-                unknown += 1
-                continue
             dimension = (row.get("subId") or row.get("subid")
                          or row.get("categoryName") or "UNSPECIFIED")
             if not isinstance(dimension, str) or len(dimension) > 90:
                 dimension = "UNSPECIFIED"
+            order_id = row.get("orderId")
+            if (kind in ("orders", "cancels")
+                    and type(order_id) in (str, int) and str(order_id)):
+                unique_order = (dimension, str(order_id))
+                if unique_order in seen_order_ids:
+                    continue
+                seen_order_ids.add(unique_order)
+                value = 1.0  # count unique orders, NOT quantity of units
+            else:
+                value = value_for(row, kind)
+            if value is None:
+                unknown += 1
+                continue
             sums[dimension] = round(sums.get(dimension, 0.0) + value, 4)
         kinds[kind] = {"segments": sums, "rows": len(rows),
                        "unmapped_rows": unknown}
