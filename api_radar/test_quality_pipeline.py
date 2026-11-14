@@ -139,6 +139,25 @@ class QualityTests(TestCase):
         with self.assertRaisesRegex(quality.QualityError, "EXACT_OPTION_HISTORY_UNVERIFIED"):
             quality.check_exact_history(product, identity, fetch=bad)
 
+    def test_verified_b_history_includes_below_average_and_above_average(self):
+        product = {"id": "12345678", "name": "오뚜기 참기름 1개", "price": 30000}
+        identity = {"product_id": "12345678", "item_id": "98765432"}
+        def observed(avg, current=30000):
+            return lambda *args: {
+                "source_item_identifiers_present": True, "title_option_matches": True,
+                "usable_historical_reference": True,
+                "visible_exact_item_prices_verified": True,
+                "observed_current_krw": current,
+                "observed_average_krw": avg,
+                "history_window": "recent_3_weeks",
+            }
+        saving = quality.check_exact_history(product, identity, fetch=observed(33000))
+        self.assertEqual(saving["discount_pct"], 9.1)
+        expensive = quality.check_exact_history(product, identity, fetch=observed(25000))
+        self.assertEqual(expensive["discount_pct"], -20.0)
+        with self.assertRaisesRegex(quality.QualityError, "CURRENT_PRICE_MISMATCH"):
+            quality.check_exact_history(product, identity, fetch=observed(33000, 27000))
+
     def test_cdn_restrictions(self):
         self.assertTrue(quality.safe_url("https://image15.coupangcdn.com/x.jpg", image=True))
         self.assertTrue(quality.safe_url("https://ads-partners.coupang.com/image1/abcd1234.jpg==", image=True))
@@ -332,6 +351,82 @@ class PublisherTests(TestCase):
             with self.assertRaisesRegex(Exception, "GOLDBOX_ARTICLE_GATES_UNVERIFIED"):
                 publisher.compose_goldbox_article(p, image,
                     "https://link.coupang.com/a/Abcd12345")
+
+    def test_goldbox_b_shows_only_verified_average_and_honest_direction(self):
+        with tempfile.TemporaryDirectory() as td:
+            photo = Path(td) / "b.jpg"
+            photo.write_bytes(b"JPEG" + b"0" * 1200)
+            product = {"name": "검증된 세탁 세제 1개", "price": 30000,
+                       "source": "goldbox", "category": "생활용품"}
+            base = {"exact_product_item_verified": True,
+                    "reference_price": 33000, "discount_pct": 9.1,
+                    "history_window": "recent_3_weeks"}
+            cheap = publisher.compose_goldbox_article(
+                product, photo, "https://link.coupang.com/a/Abcd12345", history=base)
+            self.assertEqual(cheap["grade"], "B")
+            self.assertIn("최근 3주 관측 평균", cheap["body"])
+            self.assertIn("9.1% 저렴", cheap["body"])
+            self.assertNotIn("과거 평균가격 대비 할인율은 검증되지", cheap["body"])
+            costly = publisher.compose_goldbox_article(
+                product, photo, "https://link.coupang.com/a/Abcd12345",
+                history={**base, "reference_price": 25000, "discount_pct": -20.0})
+            self.assertIn("20.0% 비쌈", costly["body"])
+            unverified = publisher.compose_goldbox_article(
+                product, photo, "https://link.coupang.com/a/Abcd12345",
+                history={**base, "exact_product_item_verified": False})
+            self.assertNotIn("3주 관측 평균", unverified["body"])
+            self.assertIn("검증되지 않아 표시하지 않습니다", unverified["body"])
+
+    def test_goldbox_verified_a_is_released_before_earlier_b_and_audit_saved(self):
+        t = datetime(2026, 11, 14, 3, tzinfo=timezone.utc)
+        def candidate(pid):
+            return {"id": pid, "name": "세제 캡슐 세탁용 " + pid,
+                    "price": 30000, "category": "생활용품", "source": "goldbox",
+                    "url": "https://link.coupang.com/re/AFFSDP?pageKey=" + pid
+                           + "&itemId=98765432",
+                    "image": "https://image15.coupangcdn.com/a.jpg",
+                    "checked_at": t.isoformat(), "topic": None}
+        state = {"products": {}, "published": {}, "api_publish_claims": {}}
+        first_b = candidate("12345678")
+        later_a = candidate("22345678")
+        env = {"API_RADAR_PUBLISH_ENABLED": "true",
+               "NAVER_BLOG_STORAGE_STATE_JSON": "fake",
+               "COUPANG_PARTNERS_ACCESS_KEY": "fake",
+               "COUPANG_PARTNERS_SECRET_KEY": "fake"}
+        history = lambda p, i: {
+            "exact_product_item_verified": True,
+            "reference_price": 33000 if p["id"] == "12345678" else 40000,
+            "discount_pct": 9.1 if p["id"] == "12345678" else 25.0,
+            "history_window": "recent_3_weeks",
+        }
+        published = []
+        def submit(article, *args, **kwargs):
+            published.append(article["grade"])
+            return "https://blog.naver.com/mw5114/100000001"
+        with patch.dict(os.environ, env, clear=True), \
+             patch("api_radar.publisher.utc_now", return_value=t), \
+             patch("api_radar.publisher.load_state", return_value=(state, "sha")), \
+             patch("api_radar.publisher.save_state") as save, \
+             patch("api_radar.publisher.select_candidates", return_value=[first_b, later_a]), \
+             patch("api_radar.publisher.source_is_current", return_value=True), \
+             patch("api_radar.publisher.resolve_exact_identity",
+                   side_effect=lambda p: {"product_id": p["id"], "item_id": "98765432"}), \
+             patch("api_radar.publisher.check_exact_history", side_effect=history), \
+             patch("api_radar.publisher.download_verified_image",
+                   return_value=Path("/tmp/unused.jpg")), \
+             patch("api_radar.publisher.compose_article", return_value={"grade": "A"}), \
+             patch("api_radar.publisher.compose_goldbox_article", return_value={"grade": "B"}), \
+             patch("gh_only.coupang_partners_api.create_product_deeplink",
+                   return_value={"partners_link": "https://link.coupang.com/a/Abcd12345"}), \
+             patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=submit):
+            self.assertEqual(publisher.run(now=t), 0)
+        self.assertEqual(published, ["A"])
+        self.assertIn("22345678", state["published"])
+        self.assertNotIn("12345678", state["published"])
+        self.assertEqual(state["comparison_audit"]["12345678"]["reason"],
+                         "VERIFIED_SAVINGS_BELOW_15")
+        self.assertEqual(state["comparison_audit"]["22345678"]["grade"], "A")
+        self.assertEqual(save.call_count, 2)
 
     def test_a_price_verification_failure_falls_back_to_official_b(self):
         t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
