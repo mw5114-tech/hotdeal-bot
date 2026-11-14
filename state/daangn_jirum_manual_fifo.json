@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96026,
-  "pending": [
-    {
-      "id": 96026,
-      "source_post_url": "https://t.me/jirum/96026",
-      "original_purchase_url": "https://link.coupang.com/a/iFzsc90imi",
-      "source_text": "☆특가 5,600원\n에코맘의 산골이유식 산골 과일참 통째로 배칩, 10g, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFzsc90imi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T09:22:05+00:00",
-      "title": "☆특가 5,600원",
-      "sale_price_krw": 5600
-    }
-  ],
-  "in_flight": {
-    "id": 96026,
-    "status": "CLAIMED",
-    "run_id": "43580273963",
-    "at": "2026-11-14T09:23:03.524188+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5441,6 +5426,16 @@
       "vendor_item_id": null,
       "at": "2026-11-14T09:05:24.856027+00:00",
       "run_id": "43578810851"
+    },
+    "96026": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EC%BD%94%EB%A7%98%EC%9D%98%EC%82%B0%EA%B3%A8%EC%9D%B4%EC%9C%A0%EC%8B%9D-%EC%82%B0%EA%B3%A8-%EA%B3%BC%EC%9D%BC%EC%B0%B8-%ED%86%B5%EC%A7%B8%EB%A1%9C-%EB%B0%B0%EC%B9%A9-10g-4%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dZ7J1BOj?from=write",
+      "posted_at_utc": "2026-11-14T09:22:05+00:00",
+      "product_id": "9000062068",
+      "item_id": "26431628349",
+      "vendor_item_id": "93407394128",
+      "at": "2026-11-14T09:23:23.354631+00:00",
+      "run_id": "43580273963"
     }
   },
   "skipped_non_coupang": 478,
