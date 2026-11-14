@@ -1,167 +1,117 @@
-# Coupang Partners API Radar — isolated discovery and guarded Naver publisher
+# Coupang Partners API Radar — Goldbox daily A/B queue
 
-## Independent architecture
+## Goal and isolation
 
-This workflow is separate from the existing Telegram -> Oracle -> Naver Blog
-publisher. It never modifies those original workflows, archived Daangn code
-or the original Naver FIFO. A separate branch (`api-radar-data`) holds only
-public product/price history and this radar's own publish status.
+Detect each newly captured **official Coupang Goldbox** product, verify its
+exact product and option, publish A when Lowchart independently confirms
+a genuine historical-average discount of 15–70%, and otherwise publish B
+as an **official Goldbox listing without a fabricated discount percentage**.
+
+There is **no per-day post count quota**. A time-bounded batch of **four
+posts per Actions run** protects the runner and Naver editor, and frequent
+publish-only schedules resume remaining items. These are operational limits,
+NOT a guarantee that all products will be published. Items failing identity,
+image, link, stale-price or platform checks cannot safely be posted.
+
+The system is independent of the pre-existing Telegram → Oracle → Naver Blog
+FIFO and its workflows. It never modifies the original FIFO or archived
+Daangn modules. Product-price history and Goldbox daily inventory are stored
+on the public **api-radar-data** branch at
+`state/api_radar_snapshot.json`; no credentials or login sessions are stored.
+
+## Goldbox collection and day-to-day duplicates
 
 - Workflow: `.github/workflows/coupang-api-radar.yml`
-- Coupang collector: `api_radar/collector.py`
-- Public product-state persistence: `api_radar/state_store.py`
-- Optional official Naver shopping-click trend: `api_radar/trend.py`
-- Exact product/option + Lowchart + official image validation: `api_radar/quality.py`
-- Gated, claim-aware (target three verified posts/day) Naver publisher: `api_radar/publisher.py`
-- Tests: `api_radar/test_collector.py`, `test_state_store.py`,
-  `test_quality_pipeline.py`
+- Collector: `api_radar/collector.py`; Goldbox API + a separate rotating
+  keyword-search observation for price history (search-only products are
+  **NOT** posted by the Goldbox queue)
+- State writer: `api_radar/state_store.py`
+- Publisher: `api_radar/publisher.py`
+- Exact item/history/image checks: `api_radar/quality.py`
+- Current day inventory: `goldbox_today = {kst_date, updated_at, items}`
+- Per-product publish receipts: `published[productId]`
+- Pending uncertain outcomes: `api_publish_claims[productId]`
 
-## Actual verification (2026-11-14)
+Goldbox scans run **08:05 / 12:10 / 16:25 / 20:40 KST** (GitHub Actions
+cron may run late). The source's new products appear in the morning; its
+entire previous listing is NOT guaranteed to change on the same minute.
+Snapshots within a KST day merge newly observed products. On the next KST
+day, the current-day inventory resets, while all **published** IDs and
+uncertain claims persist. A previously published product cannot be posted
+again merely because the Goldbox feed lists it on a later day.
 
-- Goldbox: successful authenticated response.
-- Product search: the earlier 401 came from signing the URL's question-mark
-  delimiter. Fixed HMAC to sign path+query without the '?' character.
-  A live one-call search probe returned **10 results** without posting.
-- Isolated integration run: **34 raw products** from Goldbox + keyword search,
-  with API error count 0. Product history written successfully to the
-  `api-radar-data` branch.
-- Unit tests: **37 offline tests passed** after A/B publishing integration. Live B-type Naver publication remains unverified until a scheduled run confirms a receipt.
-- Product searches may return images at `ads-partners.coupang.com` with
-  two opaque URL path segments (including base64 `=` padding). The allowlist
-  accepts only exact official host/path shapes, and download verifies image
-  MIME, file magic and size with redirects disabled.
+Publish-only runs execute **hourly 09:55–22:55 KST** without making new
+Coupang Partners product API calls. A lightweight queue preflight prevents
+browser installation if no unpublished fresh Goldbox candidate remains.
+The publisher checks only same-KST-day products whose most recent observed
+price is within twelve hours; expired offers are never described as today's
+current promotions.
 
-## Schedule and API limits
+## Grade classification
 
-Goldbox's public promotion introduces new daily offers around **07:00 KST**
-(Coupang newsroom); this does **not** guarantee that 100% of products are
-replaced at once. The first scheduled scan follows at 08:05.
+For **each current-day official Goldbox candidate**:
 
-The independent workflow runs **08:05, 12:10, 16:25, 20:40 KST**, or on manual
-`workflow_dispatch`. GitHub cron can be delayed. It queries Goldbox once
-and one rotating keyword search at most once per run. On 429/error it stops
-the failed source rather than hammering the endpoint. Check current Coupang
-Partners quota in your partner account; older official guidance stated
-Search <= 10 calls/hour.
+1. Validate official HTTPS URL, exact productId + itemId, reasonable
+   observed price, non-duplicate product ID and verified image.
+2. Attempt exact-option Lowchart history verification. A matching observed
+   current price (within 2%) and average showing **15–70% lower than the
+   observed historical average** earns **A**. Only A may show the
+   source-backed percentage and the corresponding reference period.
+3. If historical evidence is missing, conflicts, or is less than 15%,
+   use **B** based on independently authenticated current-day Goldbox
+   membership. B shows the **observed API sale price** and prominently
+   states that its past-average discount percentage is *unverified*.
+4. In both cases, validate source image bytes, issue a real signed Coupang
+   Partners Deeplink (`subid=naverblog`), include commission disclosure,
+   and submit through the existing Naver SmartEditor session.
+5. Write an immutable GitHub claim *before* the Naver submit. Record the
+   confirmed post URL and grade only after successful submission. If the
+   outcome is unknown, **never automatically retry that product**.
 
-GitHub Actions `push` runs only offline unit tests. They do not consume
-Partners quota or open the blog editor.
+Title prefixes:
 
-## Publication conditions (fail closed)
+- A: `[쿠팡🔥핫딜]`
+- B: `[쿠팡🎁골드박스]`
 
-The publisher job runs after a completed discovery job and shares the exact
-Naver concurrency group with the existing Telegram publisher. It aims for
-**up to 3 posts combined across both grades per KST day**, examining up to
-**36 fresh candidates** (at most 12 Lowchart history checks) and submitting
-at most **2 posts per run**, and uses the
-existing Naver SmartEditor session. It maintains separate durable state and
-receipts. Today's confirmed posts AND uncertain in-flight claims count toward
-the daily safety cap; no uncertain submissions are retried. **Three posts are
-NOT guaranteed**: products failing verification are skipped.
+Non-physical travel/ticket/gift-card categories, malformed offers, missing
+exact item IDs, invalid images, or unverified affiliate URLs are skipped,
+not force-published. ProductId-level price observations alone do not establish
+option-level historical savings.
 
-### Grade A: independently verified discounted deals (first priority)
+## Operational safeguards and limits
 
-- Recent curated shopping keyword or vetted category.
-- Exact Coupang API productId+itemId.
-- Live same-option Lowchart historical **average** with within-2% current
-  price corroboration, valid title/identifiers, and **15–70%** savings relative
-  to that observed average. No fabricated MSRP or implied regular list price.
-- When optional `API_RADAR_TREND_MODE: hub` is enabled, an independently
-  verified rising relative Shopping Insight click trend is also required.
-- Title: `[쿠팡🔥핫딜]`. Only this grade publishes a sourced discount percentage.
+- **No daily numeric publishing quota.** At most four publish calls per
+  invocation so individual Actions runs stay bounded.
+- Avoid duplicate publications across scans/days with global productId
+  receipts and durable unknown-outcome claims.
+- Same Naver publish concurrency mutex as Telegram publisher.
+- No fake ratings, first-hand reviews, absolute search volume, manufacturer
+  list price or invented discount.
+- Official API requests are bounded and stop on API rate limits.
+- The public GitHub code and state may be viewed by anyone; store Keys
+  and Naver login browser JSON only in Actions Secrets.
+- The **actual Naver platform may limit repetitive or bot-generated posts**;
+  permission and platform policy must be respected. Neither search indexing
+  nor exhaustive daily posting can be promised.
 
-### Grade B: official Goldbox feed (fallback when grade A runs short)
+## Required Actions Secrets
 
-- Candidate must come from the **official authenticated Goldbox API**, never
-  merely a keyword search, and be from the latest fresh scan.
-- Only the vetted physical-shopping categories, with the observed API sale
-  price within 5,000–350,000 KRW. Exact productId+itemId is still mandatory.
-- No Lowchart reference/discount is required or claimed; the visible post says
-  `수집 당시 쿠팡 판매가` and explains that past-average savings are unverified.
-- Title: `[쿠팡🎁골드박스]`. Note that Goldbox benefits may depend on Wow
-  membership and price/stock vary.
-- Grade B is considered only AFTER the bounded grade A checks; it may use a
-  candidate that failed grade A due to insufficient verified history.
+- `COUPANG_PARTNERS_ACCESS_KEY`
+- `COUPANG_PARTNERS_SECRET_KEY`
+- `NAVER_BLOG_STORAGE_STATE_JSON`
 
-### Gates shared by both grades
+Optional (not needed in free `curated` mode): `NAVER_API_HUB_KEY_ID`,
+`NAVER_API_HUB_KEY`. Shopping Insight provides relative click indices, not
+verified absolute Naver keyword-search volumes.
 
-- Safe official Coupang product URL with exact option identity; never click
-  opaque affiliate tracking links for verification.
-- Verified official product-image bytes (size, MIME and redirects restricted).
-- Fresh official Coupang Partners Deep Link API response with `subid=naverblog`,
-  never a handcrafted affiliate URL.
-- No previous publication or pending uncertain claim for that product;
-  KST daily cap counts both confirmed posts and unresolved claims.
-- Verified disclosure and affiliate hyperlink in the post, no synthetic first-
-  hand review, duplicate product, unverified discount or false search demand.
+## Verification
 
-The publisher stores a durable claim BEFORE SmartEditor submits. An uncertain
-outcome requires manual review and is never automatically retried.
+As of 2026-11-14, public data reads, the verified Goldbox collector, exact
+source-image normalization and the offline API Radar tests have succeeded.
+The new day-based A/B queue requires **a confirmed scheduled collector and
+real publication run** before claiming end-to-end production success.
+A GitHub Actions `push` triggers offline tests only; it never calls the
+live Coupang API or opens Naver's editor.
 
-Shopping Insight, when explicitly configured, is a **relative click index**,
-not absolute search volume or a guarantee of blog visitors.
-
-The publisher stores a claim in the independent branch BEFORE clicking the
-Naver submit button. An uncertain failure leaves the claim for manual review:
-the system never automatically retries that product.
-
-## Required credentials (repository Actions Secrets)
-
-The existing repository is public. **Never commit credentials or session
-JSON files.** Use GitHub Settings -> Secrets and variables -> Actions:
-
-- `COUPANG_PARTNERS_ACCESS_KEY`: already used by the existing collector.
-- `COUPANG_PARTNERS_SECRET_KEY`: already used by the existing collector.
-- `NAVER_BLOG_STORAGE_STATE_JSON`: existing encrypted browser session secret.
-- `NAVER_API_HUB_KEY_ID`: OPTIONAL; required only if switching `API_RADAR_TREND_MODE` to `hub`.
-- `NAVER_API_HUB_KEY`: OPTIONAL; required only when using optional paid/cloud shopping trends.
-
-Naver API HUB keys are **not** the same as a Naver account password or
-the old developers.naver.com API keys. Register and enable the Shopping
-Insight API through Naver Cloud Platform before setting the new secrets.
-
-Official endpoint:
-`POST https://naverapihub.apigw.ntruss.com/shopping/v1/category/keywords`
-
-The default `API_RADAR_TREND_MODE: curated` DOES NOT need either NAVER
-API HUB secret, cloud account or payment method. It uses curated product-name
-keywords or vetted official shopping categories, then checks at most twelve
-recent grade-A candidates against exact-item Lowchart history before using
-truthfully labeled official Goldbox grade-B fallback listings.
-It does not claim measured NAVER search trend/click index. The independent
-publisher can attempt up to three posts per KST day if all other gates pass.
-Set `API_RADAR_TREND_MODE: hub` only after registering both Naver API HUB
-Secrets to enable the stricter search-click trend requirement.
-
-## Operations
-
-Results are in each run's short-lived artifact (`summary.json`,
-`ranked.json`). Long-term public product-only observations are in
-`api-radar-data/state/api_radar_snapshot.json`. These do not contain
-account passwords, private cookies, or API credentials.
-
-If a post is uncertain, inspect `api_publish_claims` on the data branch;
-**do not delete claims** until confirming the exact Naver post exists or not.
-To pause only the new radar, disable this workflow. It cannot interrupt
-or disable the existing Telegram Naver flow.
-
-A missing Naver API HUB key or weak trend is **not** evidence that the
-Coupang API integration is broken. The collector and publisher can be
-operational while producing zero posts because the quality gates are strict.
-
-## Known limits / next optimization
-
-- Curated keyword/category matches are heuristics, NOT verified NAVER search demand.
-- A quota is a ceiling, not a promise of three posts. We do not invent price history
-  or discounts merely to reach a publishing target. Grade B has no independently
-  verified discount percentage, only official Goldbox listing membership.
-- Naver's official terms restrict posting by bots without prior permission and
-  repetitive affiliate-style content may have its visibility limited; verify
-  authorization and follow applicable platform policies before scaling.
-- Optional Naver API HUB trends are topic-level, not product-specific traffic forecasts.
-- ProductId snapshots alone do not establish option-level price history.
-- Cross-source duplicate detection with existing Telegram posts is not
-  guaranteed; this publisher deduplicates within the independent radar.
-- NAVER's indexing/ranking and click-to-purchase results cannot be promised.
-- This integration does not yet include a complete affiliate revenue
-  analytics/AB-test feedback loop.
+Observe `api-radar-data/state/api_radar_snapshot.json`, workflow logs and
+the enabled hourly confirmed-post notification for actual outcomes.
