@@ -3,16 +3,6 @@
   "last_scanned_id": 96033,
   "pending": [
     {
-      "id": 96032,
-      "source_message_id": 96032,
-      "source_post_url": "https://t.me/jirum/96032",
-      "original_purchase_url": "https://link.coupang.com/a/iFKhmopeMu",
-      "title": "양반 고소한 볶음김치 80g 10개",
-      "source_text": "👍대박 8,400원 (35.0% 할인)\n양반 고소한 볶음김치 80g 10개\n📌 가격 현황\n- 정상가: 12,923원\n- 할인: 4,523원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFKhmopeMu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8400,
-      "posted_at_utc": "2026-11-14T11:53:33+00:00"
-    },
-    {
       "id": 96033,
       "source_message_id": 96033,
       "source_post_url": "https://t.me/jirum/96033",
@@ -945,6 +935,10 @@
     "96031": {
       "url": "https://blog.naver.com/mw5114/224477171714",
       "at": "2026-11-14T11:55:23.675415+00:00"
+    },
+    "96032": {
+      "url": "https://blog.naver.com/mw5114/224477191151",
+      "at": "2026-11-14T12:17:07.871735+00:00"
     }
   },
   "skipped": {
@@ -1041,12 +1035,7 @@
       "at": "2026-11-14T07:00:38.586910+00:00"
     }
   },
-  "in_flight": {
-    "id": 96032,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43593958318",
-    "at": "2026-11-14T12:16:22.475686+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
