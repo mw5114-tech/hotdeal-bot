@@ -49,10 +49,19 @@ class RevenueTests(TestCase):
         }
         s = revenue.summarize(rows, "20261113")
         self.assertEqual(s["reports"]["clicks"]["segments"]["naverblog"], 14)
-        self.assertEqual(s["reports"]["orders"]["segments"]["naverblog"], 2)
+        self.assertEqual(s["reports"]["orders"]["segments"]["naverblog"], 1)
         self.assertEqual(s["reports"]["commission"]["segments"]["naverblog"], 5200)
         self.assertEqual(s["orders_commission_by_category"]["생활용품"],6000)
         self.assertFalse(s["per_blog_post_attribution_verified"])
+
+    def test_duplicate_order_lines_not_counted_as_two_orders(self):
+        rows={"clicks":[], "orders":[
+                {"orderId":100, "quantity":1, "subId":"naverblog", "commission":10},
+                {"orderId":100, "quantity":2, "subId":"naverblog", "commission":20},
+                {"orderId":101, "quantity":1, "subId":"naverblog", "commission":30},
+                ], "cancels":[], "commission":[]}
+        s=revenue.summarize(rows, "20261113")
+        self.assertEqual(s["reports"]["orders"]["segments"]["naverblog"],2)
 
     def test_encrypt_decrypt_and_tamper_detection(self):
         env = {"COUPANG_PARTNERS_SECRET_KEY":"some-test-secret-do-not-use-in-production-12345"}
