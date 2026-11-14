@@ -163,12 +163,13 @@ def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> li
                 or not safe_url(url) or not safe_url(img, image=True)):
             continue
         topic = matching_topic(name)
-        if topic is None and category in CURATED_CATEGORY_PRIORITY:
+        category_fallback = topic is None
+        if category_fallback and category in CURATED_CATEGORY_PRIORITY:
             topic = (category, None)  # heuristic only, no NAVER search claim
         results.append({"id": pid, "name": name, "price": price,
                         "url": url, "image": img, "topic": topic,
                         "source": "goldbox", "checked_at": raw_ts,
-                        "category": category, "category_fallback": topic is None})
+                        "category": category, "category_fallback": category_fallback})
     from api_radar.quality import extract_exact_identity
     # Exact item URLs first, then oldest queued items. No preference for
     # arbitrary price points or categories.
