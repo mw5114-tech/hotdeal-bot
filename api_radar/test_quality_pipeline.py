@@ -63,6 +63,61 @@ class QualityTests(TestCase):
         ident = quality.extract_exact_identity(url, "12345678")
         self.assertEqual(ident["item_id"], "98765432")
 
+    def test_verified_goldbox_identity_can_issue_real_api_contract_without_naver(self):
+        """Use ACTUAL quality resolver and ACTUAL deeplink builder; mock only HTTP."""
+        import json
+        from gh_only.coupang_partners_api import create_product_deeplink
+        from gh_only.direct_product_links import regular_product_url
+        source = {"id": "12345678",
+                  "url": "https://link.coupang.com/re/AFFSDP?"
+                         "pageKey=12345678&itemId=98765432&vendorItemId=45678901"}
+        exact = quality.resolve_exact_identity(source)
+        self.assertEqual(exact["status"], "EXACT_ITEM_IDENTIFIED")
+        canonical = ("https://www.coupang.com/vp/products/12345678?"
+                     "itemId=98765432&vendorItemId=45678901")
+        self.assertEqual(regular_product_url(exact), canonical)
+        class ApiResponse:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *args): return None
+            def read(self, n):
+                return json.dumps({"rCode": "0", "data": [{
+                    "originalUrl": canonical,
+                    "shortenUrl": "https://link.coupang.com/a/AbcDef12345",
+                    "landingUrl": ("https://link.coupang.com/re/AFFSDP?"
+                                   "pageKey=12345678&itemId=98765432&subid=naverblog")
+                }]}).encode()[:n]
+        captured = {}
+        def fake_open(req, timeout):
+            captured["body"] = json.loads(req.data)
+            return ApiResponse()
+        with patch.dict(os.environ, {
+            "COUPANG_PARTNERS_ACCESS_KEY": "testaccess",
+            "COUPANG_PARTNERS_SECRET_KEY": "testsecret",
+        }), patch("gh_only.coupang_partners_api.request.urlopen",
+                  side_effect=fake_open) as net:
+            issued = create_product_deeplink(exact, subid="naverblog")
+        self.assertEqual(net.call_count, 1)
+        self.assertEqual(captured["body"],
+                         {"coupangUrls": [canonical], "subId": "naverblog"})
+        self.assertEqual(issued["partners_link"],
+                         "https://link.coupang.com/a/AbcDef12345")
+        self.assertTrue(issued["official_link_issued"])
+
+    def test_unverified_url_cannot_gain_deeplink_identity(self):
+        from gh_only.coupang_partners_api import create_product_deeplink, CoupangPartnersError
+        for bad in ("https://link.coupang.com/a/AbcDef12345",
+                    "https://www.coupang.com/vp/products/12345678",
+                    "https://www.coupang.com/vp/products/99999999?itemId=98765432"):
+            with self.subTest(url=bad):
+                with self.assertRaises(quality.QualityError):
+                    quality.resolve_exact_identity({"id":"12345678", "url":bad})
+        with patch("gh_only.coupang_partners_api.request.urlopen") as net:
+            with self.assertRaises(CoupangPartnersError):
+                create_product_deeplink({"product_id":"12345678",
+                                         "item_id":"98765432"}, subid="naverblog")
+        net.assert_not_called()
+
     def test_same_option_history_required(self):
         product = {"id": "12345678", "name": "오뚜기 참기름 1개", "price": 30000}
         identity = {"product_id": "12345678", "item_id": "98765432"}
