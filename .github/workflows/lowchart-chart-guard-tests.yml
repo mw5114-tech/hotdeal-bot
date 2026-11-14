@@ -28,4 +28,4 @@ jobs:
           python-version: "3.11"
       - run: python -m compileall -q gh_only/lowchart_chart_capture.py gh_only/daangn_editor_probe.py gh_only/naver_blog_deal_publisher.py gh_only/jirum_manual_publisher.py
       - name: Run guarded chart and editor unit regressions; never publish
-        run: python -m unittest gh_only.test_lowchart_chart_capture gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_naver_blog_jirum
+        run: python -m unittest gh_only.test_lowchart_chart_capture gh_only.test_lowchart_generated_price_chart gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_naver_blog_jirum
