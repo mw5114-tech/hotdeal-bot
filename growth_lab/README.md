@@ -10,7 +10,7 @@ Key**, run without browser login, and are bounded by conservative API calls.
 | # | Workflow | KST schedule | Source API | Private/public output |
 |---|---|---|---|---|
 | 1 | `growth-revenue-intelligence.yml` | Daily 16:25 | Click / order / cancel / commission reports | **AES-256-GCM encrypted** metrics |
-| 2 | `growth-category-price-radar.yml` | Daily 09:35 and 19:35 | Best-category product feed, 2 category calls/run | Public product-price observations + price-drop alerts |
+| 2 | `growth-category-price-radar.yml` | Every 2 hours at :35 KST | Best-category feed, 2 calls/run | Same-option 6h ticks, 30d median + 24h price-drop signals |
 | 3 | `growth-seo-comparison-drafts.yml` | Daily 11:42 | Keyword product search + up to 3 official deep links | **REVIEW-REQUIRED** comparison Markdown drafts, NOT posted |
 
 A separate `growth-lab-tests.yml` runs offline unit tests only on code pushes
@@ -50,29 +50,39 @@ Do NOT run this command in public GitHub Actions logs.
 No separate encryption Secret is required; it reuses the existing Partners
 Secret already stored in Actions Secrets.
 
-## 2 — Category-best price drop intelligence
+## 2 — Verified price-drop V2 (owner-approved live switch)
 
-Script: `growth_lab/price_radar.py`
+Scripts: growth_lab/price_radar.py and growth_lab/drop_publisher.py.
 
-Rotates through six Partners category-best IDs: digital, household, kitchen,
-pets, food and interior; calls 2 IDs per scheduled run.
-It stores one daily price point per **productId:itemId** rather than treating
-a productId-only average as a comparable option.
+- Discovery: 2 category-best API reads every 2 hours; all six categories
+  covered about every 6 hours; 24 category calls/day. Handles 429 safely.
+- History: per productId:itemId, a capped 38-day daily price history and
+  intraday ticks; vendorItemId or stable title-option changes reset history.
+  Capped at 280 tracked options to stay within GitHub Contents size limits.
+- Detection: >=5 distinct prior observation days spanning >=7 days within
+  the last 30 days; and a ~24h observation (18-31h) for the exact same option.
+  Current price must be >=20% below observed 30-day daily median and >=15%
+  below the price observed about 24 hours earlier. S requires >=25% and
+  >=20% respectively; other eligible drops are A. Extreme >70% drops are
+  quarantined. Neither MSRP nor alleged official discount is fabricated.
+- Storage: public product facts only, in branch api-radar-data at
+  state/growth_lab_category_prices.json. Signals expire after 120 minutes.
+- Publisher: the EXISTING Goldbox 15-minute Naver job switches to
+  API_RADAR_VERIFIED_ONLY=true and runs the V2 bridge. It re-queries the
+  same official best-category feed at publish time, requiring a fresh exact
+  product, item, vendor, title signature, and unchanged price.
+- Shared posting safeguards: 15-minute cooldown, published/claim records,
+  uncertain-claim quarantine, a single browser mutex, and official naverblog
+  affiliate links all remain in the original api_radar state. Only one
+  verified signal per slot can publish; old unverified Goldbox B products
+  no longer auto-publish. Goldbox product collection still runs.
+- Untouched modules: Telegram->Naver, Daangn, Growth Lab revenue analysis,
+  and SEO review-required drafts.
 
-An event is recorded **only if** there are at least 3 distinct earlier daily
-observations spanning at least 4 days, and the new same-option price is
-20–70% below the earlier median. Unverifiable itemId URLs are skipped.
-A previously alerted product won't repeat an event unless another >=5% price
-reduction occurs.
+Warmup is normal: no verified drop can be claimed on the first observed
+day. Category-best membership, member/coupon/checkout differences, and cron
+delays mean this radar cannot discover every online deal.
 
-Public product-only state and alerts:
-
-- `api-radar-data/state/growth_lab_category_prices.json`
-
-This is **read-only market monitoring**: it does not automatically post to
-Naver. The next stage can feed high-confidence alerts into a separately
-approved publishing or manual review queue. No duplicate blog content is
-created by this project.
 
 ## 3 — Search-intent evergreen comparison draft builder
 
