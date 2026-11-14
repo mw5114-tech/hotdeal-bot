@@ -124,13 +124,19 @@ def validate_editor_copy(editor, body: str, url: str, image,
     # title and reference. Compare actual text paragraphs, never ignore a
     # missing or changed price/link/disclosure line.
     if chart_attached:
-        text_paragraphs = editor.evaluate(r"""e => [...e.querySelectorAll('p')]
-          .filter(p => !p.querySelector('img') && p.innerText.trim())
-          .map(p => p.innerText.trim())""")
-        exact = norm("".join(text_paragraphs)) == norm(body)
+        # Product photo and chart controls can add non-body UI labels to
+        # innerText. Read ProseMirror's own top-level text paragraphs, never
+        # ignore a changed price, link, notice or disclosure.
+        text_paragraphs = editor.evaluate(r"""e => [...e.children]
+          .filter(el => el.matches('p'))
+          .map(p => p.innerText.trim()).filter(Boolean)""")
+        cleaned = "\\n".join(text_paragraphs)
+        exact = norm(cleaned) == norm(body)
+        disclosure_last = cleaned.rstrip().endswith(DISCLOSURE)
     else:
         # Existing single-product-image flow is left unchanged.
         exact = prefix is not None
+        disclosure_last = observed.rstrip().endswith(DISCLOSURE)
     url_one_node = editor.evaluate("""(e,url) => {
       const walker=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);
       let n;while((n=walker.nextNode())){
@@ -141,7 +147,7 @@ def validate_editor_copy(editor, body: str, url: str, image,
     return bool(
         exact
         and observed.count(url) == 1
-        and observed.rstrip().endswith(DISCLOSURE)
+        and disclosure_last
         and url_one_node
         and verify_link_in_one_paragraph(editor, url)
         and image.count() == (2 if chart_attached else 1)
@@ -165,7 +171,8 @@ def _chart_between_product_and_reference(editor) -> bool:
     }"""))
 
 
-def publish_one(article: dict, state_secret: str | None = None) -> dict:
+def publish_one(article: dict, state_secret: str | None = None,
+                *, dry_run: bool = False) -> dict:
     """Attempt exactly one submission. Caller already persisted claim."""
     import os
     from playwright.sync_api import sync_playwright
@@ -277,34 +284,45 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                 editor.press("ControlOrMeta+End")
                 editor.press("Enter")
                 lines = article["body"].split("\n")
+                # Finish ALL text with the existing proven single-image path
+                # BEFORE inserting a chart. Toolbar focus previously caused
+                # later price/footer text to be written outside its paragraph.
                 for i, line in enumerate(lines):
                     if line:
                         page.keyboard.insert_text(line)
                     if i < len(lines) - 1:
                         page.keyboard.press("Enter")
-                    if i == 0 and chart is not None:
-                        # Place chart after product name, before comparison
-                        # reference. Product photo remains the first image.
-                        result["failure_stage"] = "UPLOAD_OPTIONAL_PRICE_CHART"
-                        add_image = page.get_by_role("button", name="이미지 추가")
-                        if add_image.count() != 1:
-                            raise RuntimeError("CHART_IMAGE_BUTTON_NOT_UNIQUE")
-                        with page.expect_file_chooser(timeout=11000) as chooser:
-                            add_image.click(timeout=7000)
-                        chooser.value.set_files(str(chart.resolve()))
-                        page.wait_for_function("""() => {
-                          const e=document.querySelector('div.ProseMirror[contenteditable=true]');
-                          const imgs=e && [...e.querySelectorAll('img')];
-                          return imgs && imgs.length===2 && imgs.every(
-                            img=>img.complete && img.naturalWidth>0) &&
-                            !(e.innerText||'').includes('준비중');
-                        }""", timeout=35000)
-                        result["chart_upload_completed"] = True
-                        editor.click()
-                        editor.press("ControlOrMeta+End")
-                        editor.press("Enter")
-                        result["failure_stage"] = "WRITE_EDITOR_BODY"
                 page.keyboard.press("Enter")
+                if chart is not None:
+                    # Move caret to the end of the actual first text paragraph,
+                    # create an empty paragraph before the price reference,
+                    # then use the site's native image upload there.
+                    result["failure_stage"] = "POSITION_CHART_AFTER_PRODUCT"
+                    first_line = lines[0].strip()
+                    product_p = editor.locator("p").filter(has_text=first_line)
+                    if product_p.count() != 1:
+                        raise RuntimeError("DAANGN_PRODUCT_PARAGRAPH_NOT_UNIQUE")
+                    product_p.click(timeout=7000)
+                    page.keyboard.press("End")
+                    page.keyboard.press("Enter")
+                    result["failure_stage"] = "UPLOAD_OPTIONAL_PRICE_CHART"
+                    add_image = page.get_by_role("button", name="이미지 추가")
+                    if add_image.count() != 1:
+                        raise RuntimeError("CHART_IMAGE_BUTTON_NOT_UNIQUE")
+                    with page.expect_file_chooser(timeout=11000) as chooser:
+                        add_image.click(timeout=7000)
+                    chooser.value.set_files(str(chart.resolve()))
+                    page.wait_for_function("""() => {
+                      const e=document.querySelector('div.ProseMirror[contenteditable=true]');
+                      const imgs=e && [...e.querySelectorAll('img')];
+                      return imgs && imgs.length===2 && imgs.every(
+                        img=>img.complete&&img.naturalWidth>0) &&
+                        !(e.innerText||'').includes('준비중');
+                    }""", timeout=35000)
+                    result["chart_upload_completed"] = True
+                    # IMPORTANT: never click editor or Control+End again here;
+                    # all text already exists in its original correct order.
+
                 result["failure_stage"] = "WRITE_TITLE"
                 title_input = page.locator('input[placeholder="제목을 입력해주세요."]')
                 if title_input.count() != 1:
@@ -364,7 +382,11 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     "link_row_contiguous": verify_link_in_one_paragraph(
                         editor, article["candidate_url"]
                     ),
-                    "disclosure_last": observed.rstrip().endswith(DISCLOSURE),
+                    "disclosure_last": (
+                        editor.evaluate(r"""e => [...e.children].filter(x=>x.matches('p'))
+                            .map(x=>x.innerText.trim()).filter(Boolean).at(-1)""") == DISCLOSURE
+                        if chart is not None else observed.rstrip().endswith(DISCLOSURE)
+                    ),
                     "image_count": image.count(),
                     "chart_captured": chart is not None,
                     "chart_between_name_and_reference": (
@@ -457,8 +479,12 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     raise RuntimeError("PRODUCT_LINK_PARAGRAPH_SPLIT_DO_NOT_SUBMIT")
                 # The deal may have aged past 60 minutes while the image
                 # uploaded. Do not submit such a post, even if already claimed.
-                if deal_expired_before_submit(article):
+                if deal_expired_before_submit(article) and not dry_run:
                     raise RuntimeError("DEAL_EXPIRED_BEFORE_SUBMIT")
+                if dry_run:
+                    result["status"] = "EDITOR_DRY_RUN_VERIFIED_NO_SUBMIT"
+                    result["failure_stage"] = "NO_SUBMIT_TEST_COMPLETE"
+                    return result
                 # No retry under ANY condition, including timeout or navigation error.
                 result["failure_stage"] = "SUBMIT_CLICKED_OUTCOME_UNCERTAIN"
                 result["submit_attempted"] = True
