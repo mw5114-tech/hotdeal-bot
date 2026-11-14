@@ -49,11 +49,19 @@ jobs:
                   res=page.goto(url,wait_until="domcontentloaded",timeout=22000)
                   page.get_by_role("button",name="차트 퍼가기").wait_for(state="visible",timeout=9000)
                   page.wait_for_timeout(600)
-                  locator=page.locator(f'img[src*="{pid}-{iid}.png"]')
-                  if locator.count()!=1:
-                      print("LOWCHART_IMAGE_MISSING",pid,iid,locator.count())
-                      raise SystemExit(1)
-                  img=locator.first
+                  page.get_by_role("button",name="차트 퍼가기").scroll_into_view_if_needed(timeout=5000)
+                  page.wait_for_timeout(1100)
+                  imgrows=page.evaluate("""() => [...document.querySelectorAll('img')].map((e,i)=>({
+                    index:i,src:e.currentSrc||e.src,alt:e.alt||'',width:e.getBoundingClientRect().width,
+                    height:e.getBoundingClientRect().height,naturalWidth:e.naturalWidth,complete:e.complete
+                  })).filter(x=>x.width>390 || x.naturalWidth>600).slice(0,25)""")
+                  print("LOWCHART_VISIBLE_IMAGES",json.dumps({"ids":[pid,iid],"images":imgrows},ensure_ascii=False))
+                  viable=[x for x in imgrows if x["width"]>=390 and x["height"]>=170 and
+                    str(pid) in x["src"] and str(iid) in x["src"]]
+                  if len(viable)!=1:
+                      print("LOWCHART_IMAGE_MISSING",pid,iid,len(viable))
+                      continue
+                  img=page.locator('img').nth(viable[0]["index"])
                   img.wait_for(state="visible",timeout=7000)
                   data=img.evaluate("""el=>{
                     const css = n=>{const s=getComputedStyle(n);return {tag:n.tagName,
