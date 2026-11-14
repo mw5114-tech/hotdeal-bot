@@ -120,7 +120,15 @@ def check_exact_history(product: dict, identity: dict, *, fetch=None) -> dict:
             row.get("title_option_matches") is not True or
             row.get("usable_historical_reference") is not True or
             row.get("visible_exact_item_prices_verified") is not True):
-        raise QualityError("EXACT_OPTION_HISTORY_UNVERIFIED")
+        # Preserve the underlying safe Lowchart code so an absent page,
+        # option mismatch, network error and missing average are distinguishable.
+        detail = row.get("reason") if isinstance(row, dict) else None
+        if not isinstance(detail, str) or not re.fullmatch(r"[A-Z][A-Z0-9_]{2,60}", detail):
+            detail = "UNKNOWN"
+        status = row.get("http_status") if isinstance(row, dict) else None
+        if type(status) is int and status in (403, 404, 429, 500, 502, 503):
+            detail += "_HTTP_" + str(status)
+        raise QualityError("EXACT_OPTION_HISTORY_UNVERIFIED_" + detail)
     observed_current = row.get("observed_current_krw")
     average = row.get("observed_average_krw")
     # A valid exact-option average is useful for honest B-grade comparisons
