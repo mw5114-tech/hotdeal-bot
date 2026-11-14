@@ -72,6 +72,36 @@ def parse_daangn_storage_state(secret: str) -> dict:
     return {"cookies": safe_cookies, "origins": safe_origins}
 
 
+def _verified_lowchart_chart_identity(row: dict) -> dict | None:
+    """Use a chart only when the displayed comparison source is Lowchart.
+
+    The chart and published price must refer to exactly the same product
+    AND item option; never attach a Lowchart chart beside a Fallcent
+    comparison or rely on unverified product titles.
+    """
+    from gh_only.lowchart_chart_capture import _exact_identity
+    from gh_only.lowchart_price_reference import build_url
+    caption = row.get("caption") or {}
+    basis = caption.get("comparison_reference_source")
+    if basis not in (
+        "lowchart_public_history", "lowchart_observed_high",
+        "lowchart_observed_current", "lowchart_observed_low",
+    ):
+        return None
+    reference_price = caption.get("comparison_reference_price_krw")
+    identity = _exact_identity(row.get("product_identity"))
+    evidence = row.get("history") or {}
+    if (identity is None or type(reference_price) is not int
+            or reference_price <= 0 or not isinstance(evidence, dict)
+            or evidence.get("visible_exact_item_prices_verified") is not True
+            or evidence.get("source_item_identifiers_present") is not True
+            or evidence.get("product_id") != identity[0]
+            or evidence.get("item_id") != identity[1]
+            or evidence.get("source_url") != build_url(*identity)):
+        return None
+    return {"product_id": identity[0], "item_id": identity[1]}
+
+
 def read_one_draft(folder: Path) -> dict:
     """Accept only one valid product draft and only its same-source local photo."""
     try:
@@ -229,10 +259,7 @@ def read_one_draft(folder: Path) -> dict:
         "muse_rewrite_pending": row.get("muse_rewrite_pending") is True,
         "official_link_receipt": receipt,
         "candidate_url": url,
-        "chart_identity": {
-            "product_id": row.get("product_identity", {}).get("product_id"),
-            "item_id": row.get("product_identity", {}).get("item_id"),
-        },
+        "chart_identity": _verified_lowchart_chart_identity(row),
     }
 
 
