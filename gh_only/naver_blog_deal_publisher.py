@@ -50,6 +50,7 @@ def upload_image(page, frame, image: Path):
         except Exception:
             pass
         raise RuntimeError("NAVER_IMAGE_TOOLBAR_UNVERIFIED")
+    before_count = frame.locator(".se-section-image").count()
     try:
         with page.expect_file_chooser(timeout=10000) as chooser:
             image_button.click(timeout=8000)
@@ -57,13 +58,10 @@ def upload_image(page, frame, image: Path):
     except Exception:
         raise RuntimeError("NAVER_IMAGE_UPLOAD_CHOOSER_FAILED")
     page.wait_for_timeout(2600)
-    inserted = (
-        frame.locator(".se-component-image").count()
-        + frame.locator(".se-section-image").count()
-    )
-    if inserted == 0:
+    inserted = frame.locator(".se-section-image").count()
+    if inserted != before_count + 1:
         raise RuntimeError("NAVER_IMAGE_UPLOAD_NOT_VERIFIED")
-    print("NAVER_PRODUCT_PHOTO_INSERTED")
+    print("NAVER_IMAGE_INSERTED total=" + str(inserted))
 
 
 def enter_text_in_chunks(page, content: str, chunk_size: int = 20):
@@ -366,6 +364,45 @@ def _diagnose_link_toolbar(page, frame, url: str):
     print("NAVER_LINK_DIALOG_LAYERS " + str(layers))
 
 
+def _focus_text_after_last_image(page, frame) -> None:
+    """Focus only an editor-owned paragraph after its most recent photo."""
+    last = frame.locator(".se-component.se-image").last
+    if not last.count():
+        raise RuntimeError("NAVER_IMAGE_COMPONENT_NOT_FOUND")
+    next_text = last.locator(
+        "xpath=following-sibling::*[contains(concat(' ',normalize-space(@class),' '),"
+        "' se-text ')][1]//*[contains(@class,'se-text-paragraph')]"
+    )
+    if next_text.count():
+        next_text.last.click(timeout=7000)
+        return
+    section = frame.locator(".se-section-image").last
+    section.click(timeout=7000)
+    page.keyboard.press("ArrowDown")
+    page.keyboard.press("Enter")
+    page.wait_for_timeout(450)
+    next_text = last.locator(
+        "xpath=following-sibling::*[contains(concat(' ',normalize-space(@class),' '),"
+        "' se-text ')][1]//*[contains(@class,'se-text-paragraph')]"
+    )
+    if next_text.count() == 0:
+        raise RuntimeError("NAVER_TEXT_AFTER_PHOTO_NOT_FOUND")
+    next_text.last.click(timeout=7000)
+
+
+def _chart_after_price_basis(frame) -> bool:
+    return bool(frame.evaluate(r"""() => {
+      const items = [...document.querySelectorAll('.se-component.se-image')];
+      const basis = [...document.querySelectorAll('.se-text-paragraph')]
+        .find(e => (e.innerText || '').includes('가격 비교 기준'));
+      const link = [...document.querySelectorAll('.se-text-paragraph')]
+        .find(e => (e.innerText || '').includes('📦 쿠팡에서 상품정보 더보기'));
+      if (items.length !== 2 || !basis || !link) return false;
+      const follows = (a,b) => !!(a.compareDocumentPosition(b) & 4);
+      return follows(basis,items[1]) && follows(items[1],link);
+    }"""))
+
+
 def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     """Native paragraphs + bold labels + photo after disclosure, no HTML paste.
 
@@ -385,38 +422,23 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     upload_image(page, frame, article["image"])
     _editor_layout(frame, "AFTER_PHOTO")
 
-    # New SmartEditor text component after the inserted photo. Only accept a
-    # text component actually ordered after the photo, not the intro above it.
-    next_text = frame.locator(
-        ".se-component.se-image ~ .se-component.se-text .se-text-paragraph"
-    )
-    if next_text.count():
-        candidate = next_text.last
-        candidate.click(timeout=7000)
-    else:
-        # Enter on the image's trailing boundary may create the next text block.
-        image = frame.locator(".se-section-image").last
-        if not image.count():
-            raise RuntimeError("NAVER_IMAGE_COMPONENT_NOT_FOUND")
-        image.click(timeout=7000)
-        page.keyboard.press("ArrowDown")
-        page.keyboard.press("Enter")
-        page.wait_for_timeout(450)
-        next_text = frame.locator(
-            ".se-component.se-image ~ .se-component.se-text .se-text-paragraph"
-        )
-        if next_text.count() == 0:
-            raise RuntimeError("NAVER_TEXT_AFTER_PHOTO_NOT_FOUND")
-        next_text.last.click(timeout=7000)
+    _focus_text_after_last_image(page, frame)
 
     written = []
     for index, item in enumerate(blocks[2:]):
-        if item.get("type") != "text":
-            raise RuntimeError("NAVER_UNEXPECTED_BLOCK_TYPE")
         if index:
             page.keyboard.press("Enter")
             page.keyboard.press("Enter")
             page.wait_for_timeout(450)
+        if item.get("type") == "image" and item.get("kind") == "price_chart":
+            chart = article.get("chart_image")
+            if not isinstance(chart, Path) or not chart.is_file():
+                raise RuntimeError("NAVER_CHART_FILE_MISSING_BEFORE_SUBMIT")
+            upload_image(page, frame, chart)
+            _focus_text_after_last_image(page, frame)
+            continue
+        if item.get("type") != "text":
+            raise RuntimeError("NAVER_UNEXPECTED_BLOCK_TYPE")
         _write_styled_block(page, item)
         written.append(item["text"])
         page.wait_for_timeout(90)
@@ -473,6 +495,10 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
         ).count(),
         "photo_between": _photo_between_disclosure_and_price(
             frame, blocks[0]["text"], price_label),
+        "chart_order": (
+            _chart_after_price_basis(frame)
+            if article.get("chart_image") is not None else True
+        ),
     }
     print("NAVER_FORMAT_CHECK " + str(conditions))
     if conditions["bold_applied"] >= 3 and conditions["bold_segments"] < 3:
@@ -518,7 +544,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
                 conditions["cta_label_once"], conditions["full_link_once"],
                 conditions["no_duplicate_link_fragments"],
                 conditions["closing_note"],
-                conditions["photo_between"])):
+                conditions["photo_between"], conditions["chart_order"])):
         raise RuntimeError("NAVER_FORMAT_STRUCTURE_NOT_VERIFIED")
     if not conditions["affiliate_anchor"]:
         raise RuntimeError("NAVER_AFFILIATE_CTA_NOT_FULLY_CLICKABLE")
@@ -558,6 +584,17 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
         browser = playwright.chromium.launch(headless=True)
         try:
             context = browser.new_context(storage_state=state, locale="ko-KR")
+            # Read-only capture in an isolated empty-cookie context. Never
+            # alter the verified price or link if Lowchart has no chart.
+            from gh_only.lowchart_chart_capture import capture_chart_image
+            chart = capture_chart_image(
+                browser, article.get("chart_identity"), image.parent,
+                article.get("source_id"),
+            )
+            if chart is not None:
+                from gh_only.naver_blog_format import add_price_chart_block
+                if add_price_chart_block(article["blocks"]):
+                    article["chart_image"] = chart
             page = context.new_page()
             response = page.goto(BLOG_EDITOR, wait_until="domcontentloaded", timeout=35000)
             page.wait_for_timeout(3300)

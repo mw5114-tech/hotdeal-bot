@@ -64,6 +64,8 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: cafe
       JIRUM_IMAGE_SOURCE: lowchart
+      # Optional read-only Lowchart chart capture; no image = normal post.
+      JIRUM_LOWCHART_CHART_IMAGE_ENABLED: 'true'
       JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_FRESH_POST: 'true'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'

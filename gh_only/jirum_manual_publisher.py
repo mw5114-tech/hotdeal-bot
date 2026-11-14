@@ -116,13 +116,21 @@ def leading_image_ui_prefix(observed: str, body: str) -> str | None:
     return prefix if 0 < len(prefix) <= 60 else None
 
 
-def validate_editor_copy(editor, body: str, url: str, image) -> bool:
+def validate_editor_copy(editor, body: str, url: str, image,
+                         *, chart_attached: bool = False) -> bool:
     observed = editor.inner_text().strip()
     prefix = leading_image_ui_prefix(observed, body)
-    # The exact post text follows the uploaded photo. A small leading label
-    # within image UI is permitted, but the actual article stays byte-for-byte
-    # intact after whitespace normalization and keeps its exact disclosure.
-    exact = prefix is not None
+    # With two image nodes, ProseMirror can introduce image UI labels between
+    # title and reference. Compare actual text paragraphs, never ignore a
+    # missing or changed price/link/disclosure line.
+    if chart_attached:
+        text_paragraphs = editor.evaluate(r"""e => [...e.querySelectorAll('p')]
+          .filter(p => !p.querySelector('img') && p.innerText.trim())
+          .map(p => p.innerText.trim())""")
+        exact = norm("".join(text_paragraphs)) == norm(body)
+    else:
+        # Existing single-product-image flow is left unchanged.
+        exact = prefix is not None
     url_one_node = editor.evaluate("""(e,url) => {
       const walker=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);
       let n;while((n=walker.nextNode())){
@@ -136,9 +144,25 @@ def validate_editor_copy(editor, body: str, url: str, image) -> bool:
         and observed.rstrip().endswith(DISCLOSURE)
         and url_one_node
         and verify_link_in_one_paragraph(editor, url)
-        and image.count() == 1
-        and image.first.evaluate("(e)=>e.complete&&e.naturalWidth>0")
+        and image.count() == (2 if chart_attached else 1)
+        and image.evaluate_all(
+            "(nodes)=>nodes.every(e=>e.complete&&e.naturalWidth>0)"
+        )
     )
+
+
+def _chart_between_product_and_reference(editor) -> bool:
+    """Strict DOM order: first body line -> chart image -> price reference."""
+    return bool(editor.evaluate(r"""root => {
+      const imgs = [...root.querySelectorAll('img')];
+      const ps = [...root.querySelectorAll('p')];
+      const product = ps.find(p => /^\[(?:\d+%할인|1% 미만 저렴|할인율 확인 중)\]/.test(
+          (p.innerText || '').trim()));
+      const price = ps.find(p => (p.innerText || '').includes('💸 '));
+      if (imgs.length !== 2 || !product || !price) return false;
+      const follows = (a,b) => !!(a.compareDocumentPosition(b) & 4);
+      return follows(product,imgs[1]) && follows(imgs[1],price);
+    }"""))
 
 
 def publish_one(article: dict, state_secret: str | None = None) -> dict:
@@ -182,6 +206,13 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
             result["failure_stage"] = "LAUNCH_BROWSER"
             browser = p.chromium.launch(headless=True)
             try:
+                from gh_only.lowchart_chart_capture import capture_chart_image
+                chart = capture_chart_image(
+                    browser, article.get("chart_identity"), article["image"].parent,
+                    article.get("source_id"),
+                )
+                article["chart_image"] = chart
+                result["chart_captured"] = chart is not None
                 result["failure_stage"] = "OPEN_DAANGN_PAGE"
                 ctx = browser.new_context(
                     storage_state=state, locale="ko-KR",
@@ -251,6 +282,28 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                         page.keyboard.insert_text(line)
                     if i < len(lines) - 1:
                         page.keyboard.press("Enter")
+                    if i == 0 and chart is not None:
+                        # Place chart after product name, before comparison
+                        # reference. Product photo remains the first image.
+                        result["failure_stage"] = "UPLOAD_OPTIONAL_PRICE_CHART"
+                        add_image = page.get_by_role("button", name="이미지 추가")
+                        if add_image.count() != 1:
+                            raise RuntimeError("CHART_IMAGE_BUTTON_NOT_UNIQUE")
+                        with page.expect_file_chooser(timeout=11000) as chooser:
+                            add_image.click(timeout=7000)
+                        chooser.value.set_files(str(chart.resolve()))
+                        page.wait_for_function("""() => {
+                          const e=document.querySelector('div.ProseMirror[contenteditable=true]');
+                          const imgs=e && [...e.querySelectorAll('img')];
+                          return imgs && imgs.length===2 && imgs.every(
+                            img=>img.complete && img.naturalWidth>0) &&
+                            !(e.innerText||'').includes('준비중');
+                        }""", timeout=35000)
+                        result["chart_upload_completed"] = True
+                        editor.click()
+                        editor.press("ControlOrMeta+End")
+                        editor.press("Enter")
+                        result["failure_stage"] = "WRITE_EDITOR_BODY"
                 page.keyboard.press("Enter")
                 result["failure_stage"] = "WRITE_TITLE"
                 title_input = page.locator('input[placeholder="제목을 입력해주세요."]')
@@ -313,12 +366,18 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     ),
                     "disclosure_last": observed.rstrip().endswith(DISCLOSURE),
                     "image_count": image.count(),
+                    "chart_captured": chart is not None,
+                    "chart_between_name_and_reference": (
+                        _chart_between_product_and_reference(editor)
+                        if chart is not None else True
+                    ),
                     "observed_length": len(observed),
                     "expected_length": len(article["body"]),
                 }
                 if not validate_editor_copy(
-                    editor, article["body"], article["candidate_url"], image
-                ):
+                    editor, article["body"], article["candidate_url"], image,
+                    chart_attached=chart is not None
+                ) or not result["editor_checks"]["chart_between_name_and_reference"]:
                     raise RuntimeError("EDITOR_CONTENT_OR_FULL_URL_NOT_VERIFIED")
                 if board.locator("option:checked").inner_text().strip() != board_label:
                     raise RuntimeError("BOARD_RESET")
@@ -387,10 +446,11 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                     raise RuntimeError("SUBMIT_STILL_DISABLED_AFTER_UPLOAD_WAIT")
                 if not result.get("photo_upload_completed") or "준비중" in editor.inner_text():
                     raise RuntimeError("PHOTO_UPLOAD_NOT_CONFIRMED_DO_NOT_SUBMIT")
-                if image.count() != 1 or not image.first.evaluate(
-                    "(e)=>e.complete&&e.naturalWidth>0"
-                ):
-                    raise RuntimeError("PHOTO_MISSING_BEFORE_SUBMIT")
+                if (image.count() != (2 if chart is not None else 1)
+                        or not image.evaluate_all(
+                            "(nodes)=>nodes.every(e=>e.complete&&e.naturalWidth>0)"
+                        )):
+                    raise RuntimeError("PHOTO_OR_CHART_MISSING_BEFORE_SUBMIT")
                 # A React/editor rerender may split a URL after initial typing.
                 # Refuse a submit unless the full link remains one paragraph.
                 if not verify_link_in_one_paragraph(editor, article["candidate_url"]):
@@ -435,7 +495,8 @@ def publish_one(article: dict, state_secret: str | None = None) -> dict:
                                  and parse_qs(urlsplit(hrefs[0]).query).get("itemId")
                                  == [article["item_id"]])
                 photo_visible = page.locator('img[alt^="Post image"]').evaluate_all(
-                    "(nodes)=>nodes.some(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0)"
+                    "(nodes,minCount)=>nodes.filter(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0).length>=minCount",
+                    2 if chart is not None else 1,
                 )
                 footer = all(term in content for term in (
                     "※ 실시간 핫딜 특성상",

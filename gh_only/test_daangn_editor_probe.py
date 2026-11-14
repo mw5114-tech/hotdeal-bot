@@ -145,7 +145,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
             folder = Path(temp)
             report = self._make_draft(folder)
             report["drafts"][0]["observed_low_verified_for_deal"] = True
-            report["drafts"][0]["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            report["drafts"][0]["caption"]["approx_discount_vs_reference_pct"] = 65
             report["drafts"][0]["caption"]["caption"] = report["drafts"][0]["caption"]["caption"].replace(
                 "[할인율 확인 중] ", "[65%할인] ", 1)
             (folder / "drafts.json").write_text(json.dumps(report, ensure_ascii=False), encoding="utf-8")
@@ -164,7 +164,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
                 "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛",
                 "[65%할인] " + product,
             )
-            draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            draft["caption"]["approx_discount_vs_reference_pct"] = 65
             (folder / "drafts.json").write_text(
                 json.dumps(report, ensure_ascii=False), encoding="utf-8"
             )
@@ -203,7 +203,7 @@ class DaangnEditorOfflineTests(unittest.TestCase):
                 "[할인율 확인 중] 휘카레 셰프 오리지널 소스 순한맛",
                 "[65%할인] " + long_name,
             )
-            draft["caption"]["approx_discount_vs_historical_mean_pct"] = 65
+            draft["caption"]["approx_discount_vs_reference_pct"] = 65
             (folder / "drafts.json").write_text(
                 json.dumps(report, ensure_ascii=False), encoding="utf-8"
             )
