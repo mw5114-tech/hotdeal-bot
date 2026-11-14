@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96032,
-  "pending": [
-    {
-      "id": 96032,
-      "source_post_url": "https://t.me/jirum/96032",
-      "original_purchase_url": "https://link.coupang.com/a/iFKhmopeMu",
-      "source_text": "👍대박 8,400원 (35.0% 할인)\n양반 고소한 볶음김치 80g 10개\n📌 가격 현황\n- 정상가: 12,923원\n- 할인: 4,523원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFKhmopeMu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T11:53:33+00:00",
-      "title": "양반 고소한 볶음김치 80g 10개",
-      "sale_price_krw": 8400
-    }
-  ],
-  "in_flight": {
-    "id": 96032,
-    "status": "CLAIMED",
-    "run_id": "43592209567",
-    "at": "2026-11-14T11:55:02.685730+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5491,6 +5476,16 @@
       "vendor_item_id": null,
       "at": "2026-11-14T11:54:03.381082+00:00",
       "run_id": "43592112102"
+    },
+    "96032": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%96%91%EB%B0%98-%EA%B3%A0%EC%86%8C%ED%95%9C-%EB%B3%B6%EC%9D%8C%EA%B9%80%EC%B9%98-80g-10%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PwnpqOEA?from=write",
+      "posted_at_utc": "2026-11-14T11:53:33+00:00",
+      "product_id": "1684731865",
+      "item_id": "15349512147",
+      "vendor_item_id": "85192012328",
+      "at": "2026-11-14T11:55:21.232368+00:00",
+      "run_id": "43592209567"
     }
   },
   "skipped_non_coupang": 479,
