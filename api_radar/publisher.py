@@ -29,7 +29,7 @@ from gh_only.coupang_partners_api import CoupangPartnersError
 
 KST = timezone(timedelta(hours=9))
 CANDIDATE_LIMIT = 110
-MAX_A_HISTORY_CHECKS_PER_RUN = 110
+MAX_A_HISTORY_CHECKS_PER_RUN = 8  # bounded price-verification priority window
 MAX_PUBLISH_PER_RUN = 1
 MIN_PUBLISH_GAP_SECONDS = 15 * 60
 # Goldbox feeds often contain no exact keyword from optional shopping trends.
@@ -287,7 +287,39 @@ def goldbox_title(name: str) -> str:
     return prefix + trimmed.rstrip() + "…"
 
 
-def compose_goldbox_article(product: dict, image: Path, issued: str) -> dict:
+def goldbox_comparison_blocks(history: dict | None) -> list[dict]:
+    """Show historical comparison ONLY after exact-item and current-price checks."""
+    if not isinstance(history, dict):
+        return [{"type": "text",
+                 "text": "🔎 쿠팡 공식 골드박스 API에 등록된 상품으로 확인했습니다. 과거 평균가격 대비 할인율은 검증되지 않아 표시하지 않습니다.",
+                 "bold_prefix": "🔎 쿠팡 공식 골드박스", "kind": "source_basis"}]
+    average, pct, window = (history.get("reference_price"),
+                            history.get("discount_pct"),
+                            history.get("history_window", ""))
+    if (history.get("exact_product_item_verified") is not True
+            or type(average) is not int or average <= 0
+            or type(pct) not in (float, int) or not -70 <= pct <= 70
+            or not (re.fullmatch(r"recent_\d{1,2}_weeks", window)
+                    or window == "entire_tracked_history_unspecified_days")):
+        return goldbox_comparison_blocks(None)
+    basis = (f"최근 {window.split('_')[1]}주 관측 평균"
+             if window.startswith("recent_") else "관측 기간 미상 전체 평균")
+    if pct > 0:
+        diff = f"관측 평균 대비 약 {pct:.1f}% 저렴"
+    elif pct < 0:
+        diff = f"관측 평균 대비 약 {abs(pct):.1f}% 비쌈"
+    else:
+        diff = "관측 평균과 거의 동일"
+    return [
+        {"type": "text", "text": f"💸 로우차트 {basis} : 약 {average:,}원",
+         "bold_prefix": "💸 로우차트", "kind": "reference"},
+        {"type": "text", "text": f"📊 동일 상품·옵션 가격 비교 : {diff}. 로우차트 관측값이며 공식 정가나 골드박스 표시 할인율은 아닙니다.",
+         "bold_prefix": "📊 동일 상품·옵션 가격 비교", "kind": "source_basis"},
+    ]
+
+
+def compose_goldbox_article(product: dict, image: Path, issued: str,
+                            history: dict | None = None) -> dict:
     """Official Goldbox listing: verified observed API price, NEVER a fake discount."""
     from gh_only.naver_blog_jirum import DISCLOSURE
     from gh_only.naver_blog_format import plain_body, validate_blocks
@@ -306,9 +338,7 @@ def compose_goldbox_article(product: dict, image: Path, issued: str) -> dict:
         {"type": "text", "text": product["name"], "bold_prefix": "", "kind": "product"},
         {"type": "text", "text": f"💰 수집 당시 쿠팡 판매가 : 약 {price:,}원",
          "bold_prefix": "💰 수집 당시 쿠팡 판매가", "kind": "price"},
-        {"type": "text",
-         "text": "🔎 쿠팡 공식 골드박스 API에 등록된 상품으로 확인했습니다. 과거 평균가격 대비 할인율은 검증되지 않아 표시하지 않습니다.",
-         "bold_prefix": "🔎 쿠팡 공식 골드박스", "kind": "source_basis"},
+        *goldbox_comparison_blocks(history),
         {"type": "text",
          "text": "※ 골드박스 할인 혜택은 와우 멤버십 조건에 따라 달라질 수 있습니다.",
          "bold_prefix": "", "kind": "membership_note"},
