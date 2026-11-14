@@ -1,0 +1,33 @@
+name: Growth Lab 2 | Category-best option-level price drops
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 09:35 and 19:35 KST. Rotate categories, 2 API calls each run.
+    - cron: '35 0,10 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: growth-category-radar-independent
+  cancel-in-progress: false
+
+jobs:
+  scan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Update price observations and verify new drops
+        run: python -m growth_lab.price_radar
