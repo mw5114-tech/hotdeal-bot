@@ -163,6 +163,8 @@ def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> li
                 or not safe_url(url) or not safe_url(img, image=True)):
             continue
         topic = matching_topic(name)
+        if topic is None and category in CURATED_CATEGORY_PRIORITY:
+            topic = (category, None)  # heuristic only, no NAVER search claim
         results.append({"id": pid, "name": name, "price": price,
                         "url": url, "image": img, "topic": topic,
                         "source": "goldbox", "checked_at": raw_ts,
