@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96011,
-  "pending": [
-    {
-      "id": 96011,
-      "source_post_url": "https://t.me/jirum/96011",
-      "original_purchase_url": "https://link.coupang.com/a/iFgBq6oLAW",
-      "source_text": "🔥🔥🔥무지성 2,180원 (71.8% 할인)🔥🔥🔥\n그로비타 플레코 안시 전용사료, 115g, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,730원\n- 할인: 5,550원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFgBq6oLAW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T04:58:17+00:00",
-      "title": "그로비타 플레코 안시 전용사료, 115g, 1개",
-      "sale_price_krw": 2180
-    }
-  ],
-  "in_flight": {
-    "id": 96011,
-    "status": "CLAIMED",
-    "run_id": "43559265549",
-    "at": "2026-11-14T04:59:18.613220+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5371,6 +5356,16 @@
       "vendor_item_id": "88469545994",
       "at": "2026-11-14T04:20:59.839397+00:00",
       "run_id": "43556111587"
+    },
+    "96011": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B7%B8%EB%A1%9C%EB%B9%84%ED%83%80-%ED%94%8C%EB%A0%88%EC%BD%94-%EC%95%88%EC%8B%9C-%EC%A0%84%EC%9A%A9%EC%82%AC%EB%A3%8C-115g-1%EA%B0%9C-70%ED%95%A0%EC%9D%B8-AO30K8bA?from=write",
+      "posted_at_utc": "2026-11-14T04:58:17+00:00",
+      "product_id": "241340955",
+      "item_id": "767317671",
+      "vendor_item_id": "73356580713",
+      "at": "2026-11-14T04:59:38.093036+00:00",
+      "run_id": "43559265549"
     }
   },
   "skipped_non_coupang": 470,
