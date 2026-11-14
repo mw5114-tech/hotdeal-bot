@@ -23,8 +23,8 @@ CIPHER_SCHEMA = "growth-revenue-ciphertext-v1"
 REPORT_TYPES = ("clicks", "orders", "cancels", "commission")
 FIELD_MAP = {
     "clicks": ("clickCount", "clicks", "click"),
-    "orders": ("orderCount", "orders", "order"),
-    "cancels": ("cancelCount", "cancels", "cancel"),
+    "orders": ("orderCount", "orders", "order", "quantity"),
+    "cancels": ("cancelCount", "cancels", "cancel", "quantity"),
     "commission": ("commission", "commissionAmount", "totalCommission"),
 }
 MAX_RESPONSE = 250_000
@@ -77,7 +77,7 @@ def fetch_report(kind: str, day: str, page: int = 0, *, opener=None) -> list[dic
         rows = rows.get("content", rows.get("items", rows.get("reports", [])))
     if not isinstance(rows, list):
         raise RevenueError("REPORT_DATA_SHAPE_" + kind.upper())
-    if len(rows) > 500:
+    if len(rows) > 1000:
         raise RevenueError("REPORT_PAGE_TOO_LARGE")
     return [r for r in rows if isinstance(r, dict)]
 
@@ -116,7 +116,14 @@ def summarize(rows_by_kind: dict[str, list[dict]], day: str) -> dict:
             sums[dimension] = round(sums.get(dimension, 0.0) + value, 4)
         kinds[kind] = {"segments": sums, "rows": len(rows),
                        "unmapped_rows": unknown}
-    return {"date": day, "reports": kinds,
+    categories = {}
+    for row in rows_by_kind.get("orders", []):
+        category = row.get("categoryName")
+        commission = row.get("commission")
+        if (isinstance(category, str) and 1 <= len(category) <= 90
+                and type(commission) in (int, float) and 0 <= commission <= 1e12):
+            categories[category] = round(categories.get(category, 0.0) + commission, 4)
+    return {"date": day, "reports": kinds, "orders_commission_by_category": categories,
             "attribution_level": "API_returned_group_only",
             "per_blog_post_attribution_verified": False}
 
@@ -169,12 +176,12 @@ def run(*, day: str | None = None) -> int:
     fetched = {}
     for kind in REPORT_TYPES:
         rows = []
-        # Default one page. If a full 500-row page arrives, try next page.
+        # SDK documents up to 1,000 report rows/page.
         # Never silently mark an incomplete report as final.
         for page in range(4):
             part = fetch_report(kind, day, page)
             rows.extend(part)
-            if len(part) < 500:
+            if len(part) < 1000:
                 break
         else:
             raise RevenueError("REPORT_PAGINATION_NOT_COMPLETE")
@@ -191,6 +198,19 @@ def run(*, day: str | None = None) -> int:
         if date < (datetime.strptime(day, "%Y%m%d") -
                    timedelta(days=45)).strftime("%Y%m%d"):
             del previous[date]
+    # Heuristic based on API order-commission categories only; no AI fiction.
+    totals = {}
+    for date in sorted(previous)[-14:]:
+        for category, amount in previous[date].get("orders_commission_by_category", {}).items():
+            totals[category] = round(totals.get(category, 0.0) + amount, 4)
+    old["insights"] = {
+        "basis": "14_available_daily_order_report_samples",
+        "top_category_by_observed_commission": [
+            name for name,_ in sorted(totals.items(), key=lambda x:(-x[1], x[0]))[:5]
+        ],
+        "traffic_prediction_verified": False,
+        "causal_effect_of_blog_post_verified": False,
+    }
     old["updated_at"] = datetime.now(timezone.utc).isoformat()
     save(PATH, encrypt_report(old), sha, schema=CIPHER_SCHEMA)
     # Never expose actual revenue, click totals or personal order rows in
