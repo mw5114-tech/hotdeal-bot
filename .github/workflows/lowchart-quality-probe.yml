@@ -17,6 +17,10 @@ jobs:
         run: |
           python -m pip install --quiet --disable-pip-version-check playwright==1.64.1 Pillow
           python -m playwright install --only-shell chromium
+      - name: Offline guard regression (no public publishing)
+        run: |
+          python -m compileall -q gh_only/lowchart_chart_capture.py gh_only/naver_blog_deal_publisher.py gh_only/jirum_manual_publisher.py
+          python -m unittest -v gh_only.test_lowchart_chart_capture gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher
       - name: Check DOM opacity, natural source and screenshots per exact item
         run: |
           python - <<'PY'
@@ -88,6 +92,16 @@ jobs:
                   browser_png=img.screenshot(type="png",timeout=10000)
                   bounds=chart_bounds(page)
                   original_clip=page.screenshot(type="jpeg",quality=78,clip=bounds,timeout=10000)
+                  import os
+                  from gh_only.lowchart_chart_capture import capture_chart_image, _inspect_native_png
+                  os.environ["JIRUM_LOWCHART_CHART_IMAGE_ENABLED"]="true"
+                  new_path=capture_chart_image(browser,{"product_id":pid,"item_id":iid},root,
+                    95999 if pid=="7098352204" else 96004)
+                  assert new_path is not None and new_path.suffix==".png", "NEW_CAPTURE_MUST_VERIFY_NATIVE_PNG"
+                  assert new_path.read_bytes()==native, "NEW_CAPTURE_BYTES_MUST_EQUAL_ORIGINAL"
+                  assert _inspect_native_png(new_path.read_bytes()) is not None
+                  print("LOWCHART_NEW_NATIVE_CAPTURE_OK",json.dumps({"ids":[pid,iid],
+                    "output":new_path.name,"bytes":new_path.stat().st_size},ensure_ascii=False))
                   print("LOWCHART_IMAGE_COMPARE",json.dumps({"ids":[pid,iid],
                     "native":metrics(native),"browser_element":metrics(browser_png),
                     "old_jpeg":metrics(original_clip),"bounds":bounds},ensure_ascii=False))
