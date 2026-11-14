@@ -81,7 +81,10 @@ Script: `growth_lab/seo_drafts.py`
 Rotates eight practical shopping themes daily (e.g. keyboard, kettle, SSD,
 humidifier, monitor arm). Calls one official Partners search endpoint (up to
 ten hits), then validates at least three distinct product records and issues
-up to three official tracked deeplinks.
+up to three official tracked deeplinks. When a SEARCH URL hides the exact
+itemId, the draft uses an API-issued generic product-level deeplink and
+**explicitly warns that API-listed price may not match the buyer's selected
+option**. Neither itemId nor equivalent options are invented.
 
 Each independent Markdown draft has:
 - An accurate affiliate-commission disclosure.
