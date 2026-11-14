@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96047,
-  "pending": [
-    {
-      "id": 96047,
-      "source_post_url": "https://t.me/jirum/96047",
-      "original_purchase_url": "https://link.coupang.com/a/iFP8aUIMq4",
-      "source_text": "👍대박 15,250원 (34.0% 할인)\nQCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰\n📌 가격 현황\n- 정상가: 23,106원\n- 할인: 7,856원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFP8aUIMq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T13:15:27+00:00",
-      "title": "QCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰",
-      "sale_price_krw": 15250
-    }
-  ],
-  "in_flight": {
-    "id": 96047,
-    "status": "CLAIMED",
-    "run_id": "43598890255",
-    "at": "2026-11-14T13:16:42.883494+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5511,6 +5496,16 @@
       "vendor_item_id": null,
       "at": "2026-11-14T12:16:54.748697+00:00",
       "run_id": "43593958318"
+    },
+    "96047": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-QCY-%EC%97%90%EC%9D%BC%EB%A6%AC-%EB%B2%84%EC%A6%88-%ED%94%84%EB%A1%9C-%EC%84%B8%EB%AF%B8-%EC%9D%B8%EC%9D%B4%EC%96%B4-ANC-%EB%B8%94%EB%A3%A8%ED%88%AC%EC%8A%A4-%EC%9D%B4%EC%96%B4%ED%8F%B0-%EB%B8%94%EB%9E%99-HT1-PwnplLEA?from=write",
+      "posted_at_utc": "2026-11-14T13:15:27+00:00",
+      "product_id": "8068183880",
+      "item_id": "22699185786",
+      "vendor_item_id": "89734828615",
+      "at": "2026-11-14T13:16:59.308158+00:00",
+      "run_id": "43598890255"
     }
   },
   "skipped_non_coupang": 492,
