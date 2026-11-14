@@ -530,7 +530,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
 
     state = safely_parse_state(session_json)
     if not isinstance(article.get("title"), str) or not (
-        article["title"].startswith("[쿠팡🔥핫딜] ")
+        article["title"].startswith(("[쿠팡🔥핫딜] ", "[쿠팡🎁골드박스] "))
         or (not publish and article["title"] == "[자동화 테스트] 네이버 블로그 글쓰기 연결 확인")
     ):
         raise RuntimeError("NAVER_DEAL_TITLE_INVALID")
