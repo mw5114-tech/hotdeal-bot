@@ -1,0 +1,67 @@
+name: Tests | Lowchart chart capture (read only; never publish)
+
+on:
+  push:
+    branches:
+      - feature/lowchart-price-chart-images-20261114
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Syntax check
+        run: python -m compileall -q gh_only/lowchart_chart_capture.py gh_only/naver_blog_format.py gh_only/naver_blog_deal_publisher.py gh_only/jirum_manual_publisher.py gh_only/daangn_editor_probe.py gh_only/naver_blog_jirum.py
+      - name: Relevant offline regression tests, no site writes
+        run: python -m unittest gh_only.test_lowchart_chart_capture gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_naver_blog_jirum
+
+  chart-readonly-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      JIRUM_LOWCHART_CHART_IMAGE_ENABLED: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install lightweight headless Chromium
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+      - name: Read-only exact item capture, no blog or cafe login
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          from gh_only.lowchart_chart_capture import capture_chart_image
+          folder = Path("lowchart-chart-probe")
+          with sync_playwright() as p:
+              b = p.chromium.launch(headless=True)
+              try:
+                  chart = capture_chart_image(
+                      b, {"product_id": "8479163070", "item_id": "24536044974"},
+                      folder, 999999,
+                  )
+              finally:
+                  b.close()
+          if not chart:
+              raise SystemExit("READ_ONLY_CHART_CAPTURE_FAILED")
+          print("READ_ONLY_CHART_CAPTURE_OK image=" + chart.name +
+                " bytes=" + str(chart.stat().st_size))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lowchart-chart-readonly
+          path: lowchart-chart-probe/
+          retention-days: 1
+          if-no-files-found: ignore
