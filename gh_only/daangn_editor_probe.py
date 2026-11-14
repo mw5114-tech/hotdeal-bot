@@ -99,7 +99,21 @@ def _verified_lowchart_chart_identity(row: dict) -> dict | None:
             or evidence.get("item_id") != identity[1]
             or evidence.get("source_url") != build_url(*identity)):
         return None
-    return {"product_id": identity[0], "item_id": identity[1]}
+    # Carry the already-verified public price summary into the publisher.
+    # Every field comes from the same exact product+item Lowchart evidence;
+    # never invent points or reuse an unrelated item's chart.
+    return {
+        "product_id": identity[0], "item_id": identity[1],
+        "source_url": build_url(*identity), "verified_exact_item": True,
+        "comparison_reference_source": basis,
+        "comparison_reference_price_krw": reference_price,
+        "deal_price_krw": caption.get("sale_price_krw"),
+        "observed_low_krw": evidence.get("observed_low_krw"),
+        "observed_high_krw": evidence.get("observed_high_krw"),
+        "observed_current_krw": evidence.get("observed_current_krw"),
+        "observed_average_krw": evidence.get("observed_average_krw"),
+        "history_window": evidence.get("history_window"),
+    }
 
 
 def read_one_draft(folder: Path) -> dict:
