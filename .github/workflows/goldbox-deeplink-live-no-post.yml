@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/goldbox-deeplink-live-no-post.yml'
+      - 'api_radar/probe_deeplink.py'
   workflow_dispatch:
 
 permissions:
