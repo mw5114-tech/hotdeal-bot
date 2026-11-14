@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95991,
-  "pending": [
-    {
-      "id": 95991,
-      "source_message_id": 95991,
-      "source_post_url": "https://t.me/jirum/95991",
-      "original_purchase_url": "https://link.coupang.com/a/iE3sCPC0is",
-      "title": "트리오 베이킹소다를 담은 주방세제 2.1L 2개",
-      "source_text": "👍대박 6,270원 (33.0% 할인)\n트리오 베이킹소다를 담은 주방세제 2.1L 2개\n📌 가격 현황\n- 정상가: 9,358원\n- 할인: 3,088원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE3sCPC0is\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6270,
-      "posted_at_utc": "2026-11-14T01:54:22+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -859,6 +848,10 @@
     "95984": {
       "url": "https://blog.naver.com/mw5114/224476595461",
       "at": "2026-11-14T00:39:47.999382+00:00"
+    },
+    "95991": {
+      "url": "https://blog.naver.com/mw5114/224476661895",
+      "at": "2026-11-14T01:55:57.995883+00:00"
     }
   },
   "skipped": {
@@ -951,12 +944,7 @@
       "at": "2026-11-13T18:53:07.195222+00:00"
     }
   },
-  "in_flight": {
-    "id": 95991,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43543354027",
-    "at": "2026-11-14T01:55:18.052670+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
