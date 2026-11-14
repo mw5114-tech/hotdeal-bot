@@ -81,3 +81,60 @@ jobs:
               finally:
                   browser.close()
           PY
+
+  verify-generated-chart:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      JIRUM_LOWCHART_CHART_MODE: generated
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Offline syntactic and price-source tests
+        run: |
+          python -m compileall -q gh_only/lowchart_generated_price_chart.py gh_only/naver_blog_deal_publisher.py gh_only/jirum_manual_publisher.py gh_only/daangn_editor_probe.py
+          python -m unittest gh_only.test_lowchart_generated_price_chart gh_only.test_lowchart_chart_capture gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_naver_blog_jirum
+      - run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+      - name: Generate two distinct price cards using truthful public summary fixtures
+        run: |
+          python - <<'PY'
+          import copy,hashlib
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          from gh_only.test_lowchart_generated_price_chart import ROW
+          from gh_only.daangn_editor_probe import _verified_lowchart_chart_identity
+          from gh_only.lowchart_generated_price_chart import generate_price_chart_image
+          output=Path("generated-price-chart-artifacts")
+          one=copy.deepcopy(ROW)
+          two=copy.deepcopy(ROW)
+          two["product_identity"].update(product_id="1487703230",item_id="2554295884")
+          two["history"].update(product_id="1487703230",item_id="2554295884",
+            source_url="https://www.lowchart.com/1487703230-2554295884",
+            observed_low_krw=12250,observed_high_krw=28000,observed_current_krw=17880,
+            observed_average_krw=19190)
+          two["caption"].update(comparison_reference_price_krw=19190,sale_price_krw=14120)
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              try:
+                  p1=generate_price_chart_image(browser,_verified_lowchart_chart_identity(one),output,95999)
+                  p2=generate_price_chart_image(browser,_verified_lowchart_chart_identity(two),output,96004)
+              finally:
+                  browser.close()
+          assert p1 is not None and p2 is not None
+          b1=p1.read_bytes(); b2=p2.read_bytes()
+          assert b1[:8]==b'\x89PNG\r\n\x1a\n' and b2[:8]==b'\x89PNG\r\n\x1a\n'
+          assert b1!=b2
+          assert len(b1)<2_500_000 and len(b2)<2_500_000
+          print("GENERATED_CARD_LIVE_RENDER_OK",p1.name,len(b1),p2.name,len(b2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: generated-price-summaries-readonly
+          path: generated-price-chart-artifacts/
+          retention-days: 1
+          if-no-files-found: ignore
