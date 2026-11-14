@@ -1,8 +1,7 @@
-Owner-authorized recovery verification after two failed Daangn jobs.
-Source: https://t.me/jirum/95746
-Action: scan current public Telegram and drain eligible NEW/FRESH Daangn FIFO once.
-Fix under test: GitHub HTTP 409 safe retry on unchanged Daangn blob, and
-read-only wait for post checkpoint propagation after confirmed publication.
-Source #95745 already published, DO NOT REPOST. Never replay a submitted
-or unverified post. Naver remains independently active and unchanged.
-Recovery verification request: 2026-11-12 00:32 KST.
+Owner-authorized one-time Daangn recovery scan after chart editor no-submit test passed.
+Source awaiting eligible fresh publication: https://t.me/jirum/95999
+Run Daangn restored independent FIFO once on main; preserve freshness, full validation,
+pre-submit durable claim, one publish click max, and per-item receipt checkpoint.
+Never replay sources already published or with uncertain submit outcomes.
+Never modify the separate Naver blog queue or publication workflow.
+Verification reference: no-submit editor run 43547176365 succeeded 2026-11-14 UTC.
