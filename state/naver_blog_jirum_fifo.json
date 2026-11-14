@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 95991,
-  "pending": [],
+  "last_scanned_id": 95994,
+  "pending": [
+    {
+      "id": 95992,
+      "source_message_id": 95992,
+      "source_post_url": "https://t.me/jirum/95992",
+      "original_purchase_url": "https://link.coupang.com/a/iE3vGPHxAq",
+      "title": "허브마리 1848 온천수 바디로션 제주동백",
+      "source_text": "🔥🔥🔥무지성 4,130원 (53.0% 할인)🔥🔥🔥\n허브마리 1848 온천수 바디로션 제주동백\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,787원\n- 할인: 4,657원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE3vGPHxAq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4130,
+      "posted_at_utc": "2026-11-14T01:55:04+00:00"
+    },
+    {
+      "id": 95993,
+      "source_message_id": 95993,
+      "source_post_url": "https://t.me/jirum/95993",
+      "original_purchase_url": "https://link.coupang.com/a/iE3zcit58S",
+      "title": "오뚜기 찹쌀 미니도나스 믹스",
+      "source_text": "🔥🔥🔥무지성 3,980원 (49.0% 할인)🔥🔥🔥\n오뚜기 찹쌀 미니도나스 믹스\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,804원\n- 할인: 3,824원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE3zcit58S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3980,
+      "posted_at_utc": "2026-11-14T01:55:51+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
