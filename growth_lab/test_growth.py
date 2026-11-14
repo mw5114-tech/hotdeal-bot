@@ -110,21 +110,26 @@ class CategoryTests(TestCase):
         self.assertIsNone(price_radar.calculate_drop(history,47000,"2026-11-14"))
 
     def test_alert_once_and_dedupe_on_same_day(self):
-        state = {"schema":price_radar.SCHEMA,
-                 "items":{"12345678:98765432":{
-                     "history":[{"day":"2026-11-01","price":50000},
-                                {"day":"2026-11-04","price":50000},
-                                {"day":"2026-11-07","price":50000}]}},
-                 "events":[]}
+        earlier = ["2026-10-25","2026-10-28","2026-10-31",
+                   "2026-11-04","2026-11-08","2026-11-13"]
         offer = {"key":"12345678:98765432","id":"12345678",
-                 "item_id":"98765432","name":"무선 키보드", "category":"가전디지털",
+                 "item_id":"98765432","vendor_item_id":None,
+                 "title_signature":"무선|키보드",
+                 "name":"무선 키보드", "category":"가전디지털",
                  "category_id":"1016","price":35000,
                  "url":"https://www.coupang.com/vp/products/12345678?itemId=98765432",
                  "image":"https://image15.coupangcdn.com/test.jpg"}
+        state = {"schema":price_radar.SCHEMA,
+                 "items":{offer["key"]:{
+                     "history":[{"day":date,"price":50000} for date in earlier],
+                     "ticks":[{"at":(T-timedelta(hours=24)).isoformat(),
+                               "price":47000}]}},
+                 "events":[]}
         state, events = price_radar.merge(state,[offer],T)
         self.assertEqual(len(events),1)
-        state, events = price_radar.merge(state,[offer],T+timedelta(hours=1))
-        self.assertEqual(events,[])
+        self.assertEqual(events[0]["grade"],"S")
+        state, repeat = price_radar.merge(state,[offer],T+timedelta(hours=1))
+        self.assertEqual(repeat,[])
         self.assertEqual(len(state["events"]),1)
 
 
