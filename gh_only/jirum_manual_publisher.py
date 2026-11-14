@@ -124,17 +124,16 @@ def validate_editor_copy(editor, body: str, url: str, image,
     # title and reference. Compare actual text paragraphs, never ignore a
     # missing or changed price/link/disclosure line.
     if chart_attached:
-        # Product photo and chart controls can add non-body UI labels to
-        # innerText. Read ProseMirror's own top-level text paragraphs, never
-        # ignore a changed price, link, notice or disclosure.
-        text_paragraphs = editor.evaluate(r"""e => [...e.children]
-          .filter(el => el.matches('p'))
-          .map(p => p.innerText.trim()).filter(Boolean)""")
-        cleaned = "\n".join(text_paragraphs)
-        exact = norm(cleaned) == norm(body)
-        disclosure_last = cleaned.rstrip().endswith(DISCLOSURE)
+        # The editor inserts invisible spacer paragraphs around images.
+        # Preserve the original strict text-suffix check: an image UI prefix
+        # of at most 60 characters is allowed, but the COMPLETE post text
+        # must remain unchanged and in sequence. Also verify the actual
+        # image DOM position separately; never accept a chart at the end.
+        exact = prefix is not None
+        disclosure_last = editor.evaluate(r"""e =>
+          [...e.children].filter(x=>x.matches('p'))
+          .map(x=>x.innerText.trim()).filter(Boolean).at(-1)""") == DISCLOSURE
     else:
-        # Existing single-product-image flow is left unchanged.
         exact = prefix is not None
         disclosure_last = observed.rstrip().endswith(DISCLOSURE)
     url_one_node = editor.evaluate("""(e,url) => {
@@ -150,6 +149,7 @@ def validate_editor_copy(editor, body: str, url: str, image,
         and disclosure_last
         and url_one_node
         and verify_link_in_one_paragraph(editor, url)
+        and (not chart_attached or _chart_between_product_and_reference(editor))
         and image.count() == (2 if chart_attached else 1)
         and image.evaluate_all(
             "(nodes)=>nodes.every(e=>e.complete&&e.naturalWidth>0)"
