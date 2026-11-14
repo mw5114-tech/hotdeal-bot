@@ -1,0 +1,30 @@
+name: Tests | Lowchart chart exact-item and editor guards
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "gh_only/lowchart_chart_capture.py"
+      - "gh_only/daangn_editor_probe.py"
+      - "gh_only/naver_blog_deal_publisher.py"
+      - "gh_only/naver_blog_format.py"
+      - "gh_only/jirum_manual_publisher.py"
+      - "gh_only/test_lowchart_chart_capture.py"
+      - ".github/workflows/lowchart-chart-guard-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m compileall -q gh_only/lowchart_chart_capture.py gh_only/daangn_editor_probe.py gh_only/naver_blog_deal_publisher.py gh_only/jirum_manual_publisher.py
+      - name: Run guarded chart and editor unit regressions; never publish
+        run: python -m unittest gh_only.test_lowchart_chart_capture gh_only.test_naver_blog_format gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_naver_blog_jirum
