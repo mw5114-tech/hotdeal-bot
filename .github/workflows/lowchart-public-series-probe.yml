@@ -1,0 +1,72 @@
+name: Probe | Lowchart public price-series structure (read only)
+on:
+  push:
+    branches: [feature/lowchart-generated-charts-20261114]
+permissions:
+  contents: read
+jobs:
+  inspect-public-page:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+      - name: Inspect public JSON and chart DOM; no login, posts or private API calls
+        run: |
+          python - <<'PY'
+          import json,re
+          from urllib.parse import urlsplit
+          from playwright.sync_api import sync_playwright
+          ids=[("7098352204","19148341413"),("1487703230","2554295884")]
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              try:
+                  for product,item in ids:
+                      context=browser.new_context(locale="ko-KR",viewport={"width":1180,"height":950})
+                      page=context.new_page()
+                      responses=[]
+                      def capture(r):
+                          u=urlsplit(r.url)
+                          if u.hostname and u.hostname.endswith("lowchart.com"):
+                              ct=r.headers.get("content-type","").split(";")[0]
+                              if len(responses)<80:
+                                  responses.append({"path":u.path[:120],"type":ct,
+                                                    "status":r.status,"size":r.headers.get("content-length","")})
+                      page.on("response",capture)
+                      url=f"https://www.lowchart.com/{product}-{item}"
+                      response=page.goto(url,wait_until="domcontentloaded",timeout=20000)
+                      page.get_by_role("button",name="차트 퍼가기").wait_for(timeout=9000)
+                      page.wait_for_timeout(1000)
+                      info=page.evaluate("""() => {
+                        const scriptNodes=[...document.querySelectorAll('script')];
+                        const scripts=scriptNodes.map(s=>({
+                          id:s.id,typ:s.type,src:s.src?new URL(s.src).pathname:null,
+                          length:(s.textContent||'').length,
+                          matching:(s.textContent||'').match(/priceHistory|price_history|chartData|dataPoints|prices|timestamps|series|dateList|historyData/gi)?.slice(0,15)||[],
+                          dateSamples:(s.textContent||'').match(/202[0-9]-[01][0-9]-[0-3][0-9]/g)?.slice(0,8)||[]
+                        }));
+                        const headings=[...document.querySelectorAll('h1,h2,h3,h4')].filter(x=>(x.innerText||'').includes('지금 사도'));
+                        const h=headings[0];const b=[...document.querySelectorAll('button')].find(x=>(x.innerText||'').includes('차트 퍼가기'));
+                        const visuals=[...document.querySelectorAll('img,canvas,svg')].map(x=>({tag:x.tagName,
+                          src:x.tagName==='IMG'?(new URL(x.currentSrc||x.src||location.href)).pathname:null,
+                          alt:x.alt||null, w:Math.round(x.getBoundingClientRect().width),
+                          h:Math.round(x.getBoundingClientRect().height), naturalW:x.naturalWidth||null,
+                          between:!!h&&!!b&&x.getBoundingClientRect().top>h.getBoundingClientRect().bottom-20&&
+                            x.getBoundingClientRect().bottom<b.getBoundingClientRect().top+35
+                        })).filter(x=>x.between||x.w>=600).slice(0,18);
+                        return {scriptCount:scripts.length, scripts:scripts.filter(x=>x.length>0||x.matching.length),
+                          visuals, globalKeys:Object.keys(window).filter(k=>/chart|price|history|data/i.test(k)).slice(0,40),
+                          visibleChartText:document.body.innerText.includes('최근 3주 평균')};
+                      }""")
+                      print("LOWCHART_PUBLIC_PROBE "+json.dumps({"identity":[product,item],
+                        "status":response.status if response else None,
+                        "responsePaths":responses,"browserInfo":info},ensure_ascii=False))
+                      context.close()
+              finally:
+                  browser.close()
+          PY
