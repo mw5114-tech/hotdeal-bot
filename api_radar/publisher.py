@@ -1,13 +1,13 @@
-"""Gated Coupang API Radar -> Naver Blog publisher.
+"""A/B-tier Coupang API Radar -> Naver Blog publisher.
 
 Completely independent from Telegram, Daangn and the existing Naver FIFO.
 At most 3 verified posts per KST day. A durable claim is written BEFORE any submit;
 uncertain failures are quarantined and never auto-retried.
 
-Publishing requires: a curated purchase-oriented product keyword + an API
-product resolving to an exact productId/itemId + Lowchart verified same-item price
-history + a safe product image + an API-issued naverblog affiliate deeplink +
-the existing authenticated SmartEditor session.
+A: exact product/item plus Lowchart-verified >=15% real observed discount.
+B: official same-day Goldbox API product without an unverified discount claim.
+Both require an exact API product/item URL, valid product image, officially
+issued naverblog deeplink, and authenticated SmartEditor session.
 
 No false firsthand reviews; no invented discount/normal price.
 """
@@ -25,7 +25,8 @@ from api_radar.state_store import load_state, save_state, RadarStateError
 from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
 
 KST = timezone(timedelta(hours=9))
-CANDIDATE_LIMIT = 16
+CANDIDATE_LIMIT = 36
+MAX_A_HISTORY_CHECKS_PER_RUN = 12
 MAX_PUBLISH_PER_RUN = 2
 # Goldbox feeds often contain no exact keyword from optional shopping trends.
 # Restrict fallback to official product categories suitable for shopping
@@ -109,7 +110,7 @@ def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> li
             continue
         price = obj.get("last_price")
         url, image = obj.get("last_product_url"), obj.get("last_image_url")
-        if (type(price) is not int or not 15000 <= price <= 350000
+        if (type(price) is not int or not 5000 <= price <= 350000
                 or not safe_url(url) or not safe_url(image, image=True)):
             continue
         if not isinstance(pid, str) or not pid.isdigit():
@@ -176,10 +177,71 @@ def compose_article(product: dict, history: dict, trend: dict | None,
     validate_blocks(blocks, issued)
     title = naver_title("[쿠팡🔥핫딜] " + name + " 가격 비교")
     return {"title": title, "body": plain_body(blocks),
-            "blocks": blocks, "image": image, "link": issued}
+            "blocks": blocks, "image": image, "link": issued, "grade": "A"}
 
 
-def claim(state: dict, pid: str, source: dict, now: datetime) -> dict:
+def goldbox_title(name: str) -> str:
+    """Independent B-grade title fit; never re-label as a verified hot deal."""
+    from gh_only.naver_blog_jirum import NAVER_TITLE_MAX_UTF16_UNITS
+    prefix = "[쿠팡🎁골드박스] "
+    name = " ".join(name.split()) if isinstance(name, str) else ""
+    if not name:
+        raise QualityError("GOLDBOX_NAME_MISSING")
+    def units(value: str) -> int:
+        return len(value.encode("utf-16-le")) // 2
+    if units(prefix + name) <= NAVER_TITLE_MAX_UTF16_UNITS:
+        return prefix + name
+    remaining = NAVER_TITLE_MAX_UTF16_UNITS - units(prefix) - units("…")
+    trimmed = ""
+    for char in name:
+        if units(trimmed + char) > remaining:
+            break
+        trimmed += char
+    if units(trimmed.strip()) < 8:
+        raise QualityError("GOLDBOX_TITLE_TOO_LONG")
+    return prefix + trimmed.rstrip() + "…"
+
+
+def compose_goldbox_article(product: dict, image: Path, issued: str) -> dict:
+    """Official Goldbox listing: verified observed API price, NEVER a fake discount."""
+    from gh_only.naver_blog_jirum import DISCLOSURE
+    from gh_only.naver_blog_format import plain_body, validate_blocks
+    from gh_only.coupang_partners_api import issued_link_url
+    price = product.get("price")
+    if (product.get("source") != "goldbox"
+            or product.get("category") not in CURATED_CATEGORY_PRIORITY
+            or type(price) is not int or not 5000 <= price <= 350000
+            or not isinstance(image, Path) or not image.is_file()
+            or not issued_link_url(issued)):
+        raise QualityError("GOLDBOX_ARTICLE_GATES_UNVERIFIED")
+    blocks = [
+        {"type": "text", "text": DISCLOSURE, "bold_prefix": "", "kind": "disclosure"},
+        {"type": "image", "kind": "hero_photo"},
+        {"type": "text", "text": "🎁 쿠팡 공식 골드박스 특가 상품",
+         "bold_prefix": "🎁 쿠팡 공식 골드박스 특가 상품", "kind": "heading"},
+        {"type": "text", "text": product["name"], "bold_prefix": "", "kind": "product"},
+        {"type": "text", "text": f"💰 수집 당시 쿠팡 판매가 : 약 {price:,}원",
+         "bold_prefix": "💰 수집 당시 쿠팡 판매가", "kind": "price"},
+        {"type": "text",
+         "text": "🔎 쿠팡 공식 골드박스 API에 등록된 상품으로 확인했습니다. 과거 평균가격 대비 할인율은 검증되지 않아 표시하지 않습니다.",
+         "bold_prefix": "🔎 쿠팡 공식 골드박스", "kind": "source_basis"},
+        {"type": "text",
+         "text": "※ 골드박스 할인 혜택은 와우 멤버십 조건에 따라 달라질 수 있습니다.",
+         "bold_prefix": "", "kind": "membership_note"},
+        {"type": "text",
+         "text": "※ 판매가·재고·할인 적용 여부는 수시로 바뀔 수 있으니 구매 직전 상품 페이지에서 다시 확인해 주세요.",
+         "bold_prefix": "", "kind": "note"},
+        {"type": "text", "text": "📦 쿠팡에서 상품정보 더보기",
+         "bold_prefix": "📦 쿠팡에서 상품정보 더보기",
+         "kind": "affiliate_link", "link_url": issued},
+    ]
+    validate_blocks(blocks, issued)
+    return {"title": goldbox_title(product["name"]),
+            "body": plain_body(blocks), "blocks": blocks,
+            "image": image, "link": issued, "grade": "B"}
+
+
+def claim(state: dict, pid: str, source: dict, now: datetime, *, grade="A") -> dict:
     """No browser work until an immutable pre-publish claim is durable."""
     if pid in state.get("published", {}):
         raise RadarStateError("RADAR_ALREADY_PUBLISHED")
@@ -193,7 +255,10 @@ def claim(state: dict, pid: str, source: dict, now: datetime) -> dict:
         raise RadarStateError("RADAR_SOURCE_CHANGED_BEFORE_PUBLISH")
     if saved.get("last_checked_at_utc") != source["checked_at"]:
         raise RadarStateError("RADAR_SOURCE_TIMESTAMP_CHANGED")
+    if grade not in ("A", "B"):
+        raise RadarStateError("RADAR_GRADE_INVALID")
     claims[pid] = {
+        "grade": grade,
         "status": "MANUAL_REVIEW_ON_ANY_UNCERTAIN_FAILURE",
         "run_id": os.getenv("GITHUB_RUN_ID", "unknown"),
         "claimed_at": now.isoformat(), "source_price": source["price"],
@@ -202,12 +267,15 @@ def claim(state: dict, pid: str, source: dict, now: datetime) -> dict:
     return state
 
 
-def checkpoint(state: dict, pid: str, url: str, now: datetime) -> dict:
+def checkpoint(state: dict, pid: str, url: str, now: datetime, *, grade="A") -> dict:
     if pid not in state.get("api_publish_claims", {}):
         raise RadarStateError("RADAR_CLAIM_NOT_FOUND")
     if pid in state.get("published", {}):
         raise RadarStateError("RADAR_DUPLICATE_RECEIPT")
+    if grade not in ("A", "B") or state["api_publish_claims"][pid].get("grade", "A") != grade:
+        raise RadarStateError("RADAR_GRADE_RECEIPT_MISMATCH")
     state["published"][pid] = {
+        "grade": grade,
         "url": url, "at": now.isoformat(),
         "kst_date": now.astimezone(KST).date().isoformat(),
         "source": "api_radar",
@@ -218,10 +286,10 @@ def checkpoint(state: dict, pid: str, url: str, now: datetime) -> dict:
 
 
 def run(*, preview=False, now=None) -> int:
-    """Up to 2 independently verified publications per run and 3/KST day.
+    """A first; B official Goldbox fallback; combined max 3/KST day.
 
-    Never promises a fixed output count. Products lacking a source-matched
-    historical reference are skipped, not mislabeled as hot deals.
+    Two bounded passes avoid false discount percentages while offering a
+    truthful listing fallback when no independently verified deal exists.
     """
     if os.getenv(BLOG_PUBLICATION_ENABLED, "false").lower() != "true":
         return safe_stop("OWNER_PUBLISH_SWITCH_DISABLED")
@@ -245,88 +313,106 @@ def run(*, preview=False, now=None) -> int:
     if not candidates:
         return safe_stop("NO_FRESH_UNPOSTED_PURCHASE_CANDIDATES")
 
-    attempts = 0
     posts = 0
+    a_checks = 0
+    b_checks = 0
     rejection_codes = {}
-    seen = set()
+    posted_in_run = set()
     max_posts = min(MAX_PUBLISH_PER_RUN, MAX_PUBLISH_PER_KST_DAY - slots_used)
-    for candidate in candidates:
+
+    for grade in ("A", "B"):
         if posts >= max_posts:
             break
-        if trend_mode == "hub" and attempts >= 1:
-            break   # expensive optional HUB mode: no uncontrolled requests
-        pid = candidate["id"]
-        if pid in seen:
-            continue
-        seen.add(pid)
-        attempts += 1
-        keyword, category = candidate["topic"]
-        trend = None
-        if trend_mode == "hub":
+        for candidate in candidates:
+            if posts >= max_posts:
+                break
+            if candidate["id"] in posted_in_run:
+                continue
+            if grade == "A":
+                if candidate["price"] < 15000:
+                    continue
+                if a_checks >= (1 if trend_mode == "hub" else MAX_A_HISTORY_CHECKS_PER_RUN):
+                    break
+                a_checks += 1
+            else:
+                # B may be published ONLY when the last observation comes
+                # directly from the official Goldbox API (never SEARCH).
+                if (candidate["source"] != "goldbox"
+                        or candidate["category"] not in CURATED_CATEGORY_PRIORITY):
+                    continue
+                b_checks += 1
+            keyword, category = candidate["topic"]
+            trend = None
+            if grade == "A" and trend_mode == "hub":
+                try:
+                    trend = fetch_topic_trend(keyword, category, now=now)
+                except TrendError as exc:
+                    return safe_stop("TREND_" + str(exc))
+                if not trend["demand_uptrend"]:
+                    rejection_codes["NO_VERIFIED_TOPIC_DEMAND_UPTREND"] = (
+                        rejection_codes.get("NO_VERIFIED_TOPIC_DEMAND_UPTREND", 0) + 1)
+                    continue
             try:
-                trend = fetch_topic_trend(keyword, category, now=now)
-            except TrendError as exc:
-                return safe_stop("TREND_" + str(exc))
-            if not trend["demand_uptrend"]:
-                return safe_stop("NO_VERIFIED_TOPIC_DEMAND_UPTREND")
-        try:
-            identity = resolve_exact_identity(candidate)
-            history = check_exact_history(candidate, identity)
-        except QualityError as exc:
-            code = str(exc)
-            rejection_codes[code] = rejection_codes.get(code, 0) + 1
-            continue
-        if preview:
-            print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 exact_item=true trend_mode="
-                  + trend_mode + " price=true examined=" + str(attempts))
-            return 0
-        try:
-            path = download_verified_image(candidate["image"], WORK_DIR, pid)
-            from gh_only.coupang_partners_api import create_product_deeplink
-            receipt = create_product_deeplink(identity, subid="naverblog")
-            article = compose_article(candidate, history, trend, path,
-                                      receipt["partners_link"])
-        except (QualityError, ValueError, RuntimeError) as exc:
-            code = "PREPARATION_" + type(exc).__name__
-            rejection_codes[code] = rejection_codes.get(code, 0) + 1
-            continue
+                identity = resolve_exact_identity(candidate)
+                history = check_exact_history(candidate, identity) if grade == "A" else None
+            except QualityError as exc:
+                code = grade + "_" + str(exc)
+                rejection_codes[code] = rejection_codes.get(code, 0) + 1
+                continue
+            if preview:
+                print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 grade=" + grade
+                      + " exact_item=true history_verified=" + str(grade == "A").lower())
+                return 0
+            try:
+                path = download_verified_image(candidate["image"], WORK_DIR, candidate["id"])
+                from gh_only.coupang_partners_api import create_product_deeplink
+                receipt = create_product_deeplink(identity, subid="naverblog")
+                article = (compose_article(candidate, history, trend, path, receipt["partners_link"])
+                           if grade == "A" else
+                           compose_goldbox_article(candidate, path, receipt["partners_link"]))
+            except (QualityError, ValueError, RuntimeError) as exc:
+                code = grade + "_PREPARATION_" + type(exc).__name__
+                rejection_codes[code] = rejection_codes.get(code, 0) + 1
+                continue
 
-        # Must reload before EACH blog click, because other scans update the
-        # independent product-history branch between scheduled runs.
-        latest, sha = load_state()
-        if daily_slot_count(latest, utc_now()) >= MAX_PUBLISH_PER_KST_DAY:
-            break
-        if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
-            continue
-        saved = latest.get("products", {}).get(pid)
-        if (not isinstance(saved, dict)
-                or saved.get("last_price") != candidate["price"]
-                or saved.get("last_checked_at_utc") != candidate["checked_at"]):
-            rejection_codes["PRODUCT_CHANGED"] = rejection_codes.get("PRODUCT_CHANGED", 0) + 1
-            continue
-        claim(latest, pid, candidate, utc_now())
-        save_state(latest, sha)  # durable claim BEFORE browser submit
+            latest, sha = load_state()
+            if daily_slot_count(latest, utc_now()) >= MAX_PUBLISH_PER_KST_DAY:
+                print("API_RADAR_POST_LIMIT_REACHED_WHILE_RECHECKING")
+                break
+            pid = candidate["id"]
+            if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
+                continue
+            saved = latest.get("products", {}).get(pid)
+            if (not isinstance(saved, dict)
+                    or saved.get("last_price") != candidate["price"]
+                    or saved.get("last_checked_at_utc") != candidate["checked_at"]
+                    or saved.get("last_source") != candidate["source"]):
+                rejection_codes["PRODUCT_CHANGED"] = rejection_codes.get("PRODUCT_CHANGED", 0) + 1
+                continue
+            claim(latest, pid, candidate, utc_now(), grade=grade)
+            save_state(latest, sha)  # durable claim BEFORE browser submit
 
-        from gh_only.naver_blog_deal_publisher import submit_one
-        try:
-            published_url = submit_one(
-                article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
-        except Exception as exc:
-            print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
-                  + type(exc).__name__ + " posts_confirmed=" + str(posts))
-            return 1  # no retry after an uncertain Naver submission
-        if (not isinstance(published_url, str)
-                or not published_url.startswith("https://blog.naver.com/mw5114/")):
-            raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
-        final, final_sha = load_state()
-        checkpoint(final, pid, published_url, utc_now())
-        save_state(final, final_sha)
-        posts += 1
-        print("API_RADAR_BLOG_PUBLISHED post_id=" + pid
-              + " posts_confirmed_in_run=" + str(posts))
+            from gh_only.naver_blog_deal_publisher import submit_one
+            try:
+                published_url = submit_one(
+                    article, os.environ["NAVER_BLOG_STORAGE_STATE_JSON"], publish=True)
+            except Exception as exc:
+                print("API_RADAR_SUBMIT_UNCERTAIN_CLAIM_LOCKED error_type="
+                      + type(exc).__name__ + " posts_confirmed=" + str(posts))
+                return 1  # an uncertain Naver submit must never auto-retry
+            if (not isinstance(published_url, str)
+                    or not published_url.startswith("https://blog.naver.com/mw5114/")):
+                raise RadarStateError("RADAR_NAVER_RESULT_UNCONFIRMED_REVIEW_REQUIRED")
+            final, final_sha = load_state()
+            checkpoint(final, pid, published_url, utc_now(), grade=grade)
+            save_state(final, final_sha)
+            posts += 1
+            posted_in_run.add(pid)
+            print("API_RADAR_BLOG_PUBLISHED post_id=" + pid + " grade=" + grade
+                  + " posts_confirmed_in_run=" + str(posts))
 
     print("API_RADAR_PUBLISH_BATCH_RESULT posts=" + str(posts)
-          + " examined=" + str(attempts)
+          + " a_checked=" + str(a_checks) + " b_checked=" + str(b_checks)
           + " rejected=" + json.dumps(rejection_codes, sort_keys=True)
           + " daily_cap=" + str(MAX_PUBLISH_PER_KST_DAY))
     return 0
