@@ -1,7 +1,7 @@
 """A/B-tier Coupang API Radar -> Naver Blog publisher.
 
 Completely independent from Telegram, Daangn and the existing Naver FIFO.
-No daily post quota; a bounded per-run batch protects GitHub execution time.
+No daily post quota; release at most one product after a verified 15-minute gap.
 A durable claim is written BEFORE any submit;
 uncertain failures are quarantined and never auto-retried.
 
@@ -28,7 +28,8 @@ from api_radar.trend import TrendError, matching_topic, fetch_topic_trend
 KST = timezone(timedelta(hours=9))
 CANDIDATE_LIMIT = 110
 MAX_A_HISTORY_CHECKS_PER_RUN = 110
-MAX_PUBLISH_PER_RUN = 4
+MAX_PUBLISH_PER_RUN = 1
+MIN_PUBLISH_GAP_SECONDS = 15 * 60
 # Goldbox feeds often contain no exact keyword from optional shopping trends.
 # Restrict fallback to official product categories suitable for shopping
 # intent; actual search demand remains UNKNOWN without NAVER API HUB.
@@ -106,6 +107,42 @@ def source_is_current(state: dict, product: dict, now: datetime) -> bool:
             and obj.get("last_price") == product.get("price")
             and obj.get("last_checked_at_utc") == product.get("checked_at")
             and obj.get("last_product_url") == product.get("url"))
+
+
+def cooldown_remaining_seconds(state: dict, now: datetime) -> int:
+    """Minimum interval since last confirmed post OR uncertain submit attempt.
+
+    The durable claim precedes clicking the editor. Counting claims prevents
+    a failed/ambiguous submission from causing a rapid follow-up publication.
+    """
+    if not isinstance(now, datetime) or now.tzinfo is None:
+        raise RadarStateError("RADAR_COOLDOWN_NOW_INVALID")
+    published = state.get("published", {})
+    claims = state.get("api_publish_claims", {})
+    if not isinstance(published, dict) or not isinstance(claims, dict):
+        raise RadarStateError("RADAR_COOLDOWN_STATE_INVALID")
+    stamps = []
+    for records, field in ((published, "at"), (claims, "claimed_at")):
+        for item in records.values():
+            if not isinstance(item, dict):
+                raise RadarStateError("RADAR_COOLDOWN_RECORD_INVALID")
+            stamp = item.get(field)
+            if stamp is None and field == "at":
+                continue  # legacy receipts might have no timestamp
+            if not isinstance(stamp, str):
+                raise RadarStateError("RADAR_COOLDOWN_TIMESTAMP_MISSING")
+            try:
+                parsed = datetime.fromisoformat(stamp.replace("Z", "+00:00"))
+            except ValueError:
+                raise RadarStateError("RADAR_COOLDOWN_TIMESTAMP_INVALID") from None
+            if parsed.tzinfo is None:
+                raise RadarStateError("RADAR_COOLDOWN_TIMESTAMP_NAIVE")
+            stamps.append(parsed)
+    if not stamps:
+        return 0
+    from math import ceil
+    latest = max(stamps)
+    return max(0, ceil(MIN_PUBLISH_GAP_SECONDS - (now - latest).total_seconds()))
 
 
 def select_candidates(state: dict, now: datetime, *, trend_mode="curated") -> list[dict]:
@@ -295,6 +332,8 @@ def claim(state: dict, pid: str, source: dict, now: datetime, *, grade="A") -> d
         raise RadarStateError("RADAR_CLAIM_ALREADY_EXISTS_SAFE_STOP")
     if not source_is_current(state, source, now):
         raise RadarStateError("RADAR_SOURCE_CHANGED_BEFORE_PUBLISH")
+    if cooldown_remaining_seconds(state, now):
+        raise RadarStateError("RADAR_15_MINUTE_COOLDOWN_NOT_EXPIRED")
     if grade not in ("A", "B"):
         raise RadarStateError("RADAR_GRADE_INVALID")
     claims[pid] = {
@@ -328,8 +367,9 @@ def checkpoint(state: dict, pid: str, url: str, now: datetime, *, grade="A") -> 
 def run(*, preview=False, now=None) -> int:
     """Drain new Goldbox SKUs; A if history proves >=15%, otherwise B.
 
-    No per-KST-day post quota. Each job publishes at most four to fit within
-    GitHub timeout; subsequent scheduled publisher runs resume the queue.
+    No per-KST-day post quota. Each job attempts at most one confirmed post,
+    with a durable 15-minute gap since any confirmed or uncertain submit.
+    Subsequent 15-minute scheduled jobs resume the daily queue.
     Unknown outcomes remain permanently claimed until manual verification.
     """
     if os.getenv(BLOG_PUBLICATION_ENABLED, "false").lower() != "true":
@@ -347,6 +387,9 @@ def run(*, preview=False, now=None) -> int:
 
     now = now or utc_now()
     state, _ = load_state()
+    remaining = cooldown_remaining_seconds(state, now)
+    if remaining:
+        return safe_stop("MIN_15_MINUTE_PUBLISH_GAP_REMAINING_" + str(remaining))
     candidates = select_candidates(state, now, trend_mode=trend_mode)
     if not candidates:
         return safe_stop("NO_FRESH_UNPOSTED_GOLDBOX_CANDIDATES")
@@ -409,6 +452,9 @@ def run(*, preview=False, now=None) -> int:
         if not source_is_current(latest, candidate, utc_now()):
             rejected["STALE_GOLDBOX_SOURCE"] = rejected.get("STALE_GOLDBOX_SOURCE", 0) + 1
             continue
+        if cooldown_remaining_seconds(latest, utc_now()):
+            print("API_RADAR_PUBLISH_COOLDOWN_AFTER_RECHECK")
+            break
         if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
             continue
         claim(latest, pid, candidate, utc_now(), grade=grade)
@@ -442,7 +488,11 @@ def run(*, preview=False, now=None) -> int:
 def pending_count(now=None) -> int:
     """Lightweight preflight; no browser install, API keys or Naver login."""
     state, _ = load_state()
-    return len(select_candidates(state, now or utc_now()))
+    current = now or utc_now()
+    if cooldown_remaining_seconds(state, current):
+        print("API_RADAR_PENDING_COOLDOWN")
+        return 0
+    return len(select_candidates(state, current))
 
 
 if __name__ == "__main__":
