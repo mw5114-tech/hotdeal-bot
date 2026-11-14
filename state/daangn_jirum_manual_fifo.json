@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96010,
-  "pending": [
-    {
-      "id": 96010,
-      "source_post_url": "https://t.me/jirum/96010",
-      "original_purchase_url": "https://link.coupang.com/a/iFdPRnnm56",
-      "source_text": "☆특가 10,500원\n꾸버스 접이식 사각 차콜스타터, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFdPRnnm56\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T04:19:33+00:00",
-      "title": "☆특가 10,500원",
-      "sale_price_krw": 10500
-    }
-  ],
-  "in_flight": {
-    "id": 96010,
-    "status": "CLAIMED",
-    "run_id": "43556111587",
-    "at": "2026-11-14T04:20:40.682733+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5361,6 +5346,16 @@
       "vendor_item_id": null,
       "at": "2026-11-14T02:44:50.061152+00:00",
       "run_id": "43547913397"
+    },
+    "96010": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%BE%B8%EB%B2%84%EC%8A%A4-%EC%A0%91%EC%9D%B4%EC%8B%9D-%EC%82%AC%EA%B0%81-%EC%B0%A8%EC%BD%9C%EC%8A%A4%ED%83%80%ED%84%B0-1%EA%B0%9C-d7aW2xJA?from=write",
+      "posted_at_utc": "2026-11-14T04:19:33+00:00",
+      "product_id": "7853619804",
+      "item_id": "21413235796",
+      "vendor_item_id": "88469545994",
+      "at": "2026-11-14T04:20:59.839397+00:00",
+      "run_id": "43556111587"
     }
   },
   "skipped_non_coupang": 470,
