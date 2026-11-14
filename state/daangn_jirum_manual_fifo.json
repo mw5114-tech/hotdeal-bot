@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96075,
-  "pending": [
-    {
-      "id": 96075,
-      "source_post_url": "https://t.me/jirum/96075",
-      "original_purchase_url": "https://link.coupang.com/a/iGz5Q6YfIG",
-      "source_text": "☆특가 15,960원\n하이뮨 마시는 프로틴 밸런스 음료, 125ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGz5Q6YfIG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T23:58:38+00:00",
-      "title": "☆특가 15,960원",
-      "sale_price_krw": 15960
-    }
-  ],
-  "in_flight": {
-    "id": 96075,
-    "status": "CLAIMED",
-    "run_id": "43655902802",
-    "at": "2026-11-14T23:59:23.064131+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5571,6 +5556,16 @@
       "vendor_item_id": "86915270698",
       "at": "2026-11-14T23:33:50.518510+00:00",
       "run_id": "43653803395"
+    },
+    "96075": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EC%9D%B4%EB%AE%A8-%EB%A7%88%EC%8B%9C%EB%8A%94-%ED%94%84%EB%A1%9C%ED%8B%B4-%EB%B0%B8%EB%9F%B0%EC%8A%A4-%EC%9D%8C%EB%A3%8C-125ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-j8az7OWA?from=write",
+      "posted_at_utc": "2026-11-14T23:58:38+00:00",
+      "product_id": "7293623577",
+      "item_id": "22492203760",
+      "vendor_item_id": null,
+      "at": "2026-11-14T23:59:43.905713+00:00",
+      "run_id": "43655902802"
     }
   },
   "skipped_non_coupang": 514,
