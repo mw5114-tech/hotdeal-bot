@@ -24,4 +24,4 @@ jobs:
           python-version: '3.11'
       - run: python -m pip install --disable-pip-version-check --quiet 'cryptography>=43,<48'
       - name: No network or posting
-        run: python -m unittest -v growth_lab.test_growth
+        run: python -m unittest -v growth_lab.test_growth growth_lab.test_drop_v2
