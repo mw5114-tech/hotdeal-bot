@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96028,
-  "pending": [],
+  "last_scanned_id": 96029,
+  "pending": [
+    {
+      "id": 96029,
+      "source_post_url": "https://t.me/jirum/96029",
+      "original_purchase_url": "https://link.coupang.com/a/iFF7FTKaqq",
+      "source_text": "🔥🔥🔥무지성 14,500원 (45.0% 할인)🔥🔥🔥\n달바 프로페셔널 리페어링 헤어 퍼퓸 세럼 로제프리지아\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 26,364원\n- 할인: 11,864원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFF7FTKaqq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-14T10:55:24+00:00",
+      "title": "달바 프로페셔널 리페어링 헤어 퍼퓸 세럼 로제프리지아",
+      "sale_price_krw": 14500
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
