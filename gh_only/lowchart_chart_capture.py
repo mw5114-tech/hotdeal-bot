@@ -66,15 +66,26 @@ def chart_bounds(page) -> dict | None:
       const width = right - x, height = bottom - y;
       if (width < 520 || width > 1180 || height < 240 || height > 1350)
         return null;
-      // There must actually be a large visual element in the section.
-      // Do not screenshot an empty loading spinner or text-only placeholder.
-      const visual = Array.from(document.querySelectorAll('img,svg,canvas'))
-        .some(e => {
-          const r = e.getBoundingClientRect();
-          return r.width >= 390 && r.height >= 180 &&
-                 r.top > h.bottom - 20 && r.bottom < b.top + 35;
-        });
-      if (!visual) return null;
+      // Lowchart currently renders its native watermarked chart as an
+      // image. Prefer that exact graphic: surrounding HTML controls may
+      // have missing CJK fonts in a headless GitHub runner.
+      const visuals = Array.from(document.querySelectorAll('img,svg,canvas'))
+        .map(el => ({el, r: el.getBoundingClientRect()}))
+        .filter(({r}) => r.width >= 390 && r.height >= 170 &&
+                 r.top > h.bottom - 20 && r.bottom < b.top + 35);
+      if (!visuals.length) return null;
+      const nativeImages = visuals.filter(({el}) => el.tagName === 'IMG' &&
+          el.complete && el.naturalWidth >= 500 && el.naturalHeight >= 175);
+      if (nativeImages.length) {
+        nativeImages.sort((a,b) =>
+            b.r.width*b.r.height - a.r.width*a.r.height);
+        const r = nativeImages[0].r;
+        return {x: Math.max(0,Math.floor(r.left + scrollX)),
+          y: Math.max(0,Math.floor(r.top + scrollY)),
+          width: Math.ceil(r.width), height: Math.ceil(r.height)};
+      }
+      // SVG/Canvas fallback: include the heading and the public source
+      // label rather than guessing arbitrary pixel positions.
       return {x,y,width,height};
     }""")
 
@@ -93,7 +104,7 @@ def capture_chart_image(browser, identity: dict | None, folder: Path,
         folder.mkdir(parents=True, exist_ok=True)
         ctx = browser.new_context(
             locale="ko-KR", viewport={"width": 1180, "height": 950},
-            device_scale_factor=1,
+            device_scale_factor=2,
         )
         page = ctx.new_page()
         response = page.goto(url, wait_until="domcontentloaded", timeout=16000)
