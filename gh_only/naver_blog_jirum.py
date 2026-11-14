@@ -402,6 +402,7 @@ def make_article(source: dict, output: Path, *, tag: str,
     return {
         "title": naver_title(verified["title"]), "body": body, "blocks": blocks,
         "image": verified["image"],
+        "chart_identity": verified.get("chart_identity"),
         "source_id": source["source_message_id"], "link": url,
         "unissued_link": verified["unissued_affsdp_candidate"],
     }
