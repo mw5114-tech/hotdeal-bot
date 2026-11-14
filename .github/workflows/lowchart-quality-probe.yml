@@ -1,0 +1,97 @@
+name: Probe | Lowchart native image vs browser screenshot (no publishing)
+on:
+  push:
+    branches: [fix/lowchart-pale-screenshot-20261115]
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only browser and image inspection tools
+        run: |
+          python -m pip install --quiet --disable-pip-version-check playwright==1.64.1 Pillow
+          python -m playwright install --only-shell chromium
+      - name: Check DOM opacity, natural source and screenshots per exact item
+        run: |
+          python - <<'PY'
+          import io, json, math
+          from pathlib import Path
+          from urllib.parse import urlsplit
+          from PIL import Image,ImageStat
+          from playwright.sync_api import sync_playwright
+          from gh_only.lowchart_chart_capture import chart_bounds
+          root=Path("lowchart-chart-quality-probe")
+          root.mkdir(exist_ok=True)
+          def metrics(data):
+              im=Image.open(io.BytesIO(data)).convert("RGB")
+              pix=im.resize((240,80))
+              vals=list(pix.getdata())
+              lumin=[round(.2126*r+.7152*g+.0722*b) for r,g,b in vals]
+              # Average contrast and count of nearly-white pixels
+              avg=sum(lumin)/len(lumin)
+              std=(sum((v-avg)**2 for v in lumin)/len(lumin))**.5
+              return {"width":im.width,"height":im.height,"bytes":len(data),
+               "gray_mean":round(avg,1),"gray_std":round(std,1),
+               "pct_gt235":round(sum(v>235 for v in lumin)/len(lumin),3),
+               "pct_lt130":round(sum(v<130 for v in lumin)/len(lumin),3)}
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              for pid,iid in [("7098352204","19148341413"),("1487703230","2554295884")]:
+                  ctx=browser.new_context(locale="ko-KR",viewport={"width":1180,"height":950},device_scale_factor=2)
+                  page=ctx.new_page()
+                  url=f"https://www.lowchart.com/{pid}-{iid}"
+                  res=page.goto(url,wait_until="domcontentloaded",timeout=22000)
+                  page.get_by_role("button",name="차트 퍼가기").wait_for(state="visible",timeout=9000)
+                  page.wait_for_timeout(600)
+                  locator=page.locator(f'img[src*="{pid}-{iid}.png"]')
+                  if locator.count()!=1:
+                      print("LOWCHART_IMAGE_MISSING",pid,iid,locator.count())
+                      raise SystemExit(1)
+                  img=locator.first
+                  img.wait_for(state="visible",timeout=7000)
+                  data=img.evaluate("""el=>{
+                    const css = n=>{const s=getComputedStyle(n);return {tag:n.tagName,
+                      cls:String(n.className||'').slice(0,80),opacity:s.opacity,
+                      filter:s.filter,visibility:s.visibility,animation:s.animationName,
+                      transition:s.transition,background:s.backgroundColor,
+                      objectFit:s.objectFit}};
+                    let chain=[],n=el;
+                    while(n&&chain.length<7){chain.push(css(n));n=n.parentElement}
+                    return {src:el.currentSrc,naturalWidth:el.naturalWidth,
+                      naturalHeight:el.naturalHeight,complete:el.complete,
+                      bounds:el.getBoundingClientRect().toJSON(),chain};
+                  }""")
+                  print("LOWCHART_DOM",json.dumps({"productId":pid,"itemId":iid,**data},ensure_ascii=False))
+                  src=data["src"]
+                  u=urlsplit(src)
+                  if (u.hostname!="chart.lowchart.com" or
+                      u.path!=f"/{pid}-{iid}.png" or u.query):
+                      print("UNEXPECTED_CHART_SOURCE",u.hostname,u.path)
+                      raise SystemExit(1)
+                  image_response=ctx.request.get(src,timeout=18000)
+                  assert image_response.ok
+                  native=image_response.body()
+                  browser_png=img.screenshot(type="png",timeout=10000)
+                  bounds=chart_bounds(page)
+                  original_clip=page.screenshot(type="jpeg",quality=78,clip=bounds,timeout=10000)
+                  print("LOWCHART_IMAGE_COMPARE",json.dumps({"ids":[pid,iid],
+                    "native":metrics(native),"browser_element":metrics(browser_png),
+                    "old_jpeg":metrics(original_clip),"bounds":bounds},ensure_ascii=False))
+                  for kind,dat,ext in [("native",native,"png"),("browser",browser_png,"png"),("old",original_clip,"jpg")]:
+                      (root/f"{pid}-{iid}_{kind}.{ext}").write_bytes(dat)
+                  ctx.close()
+              browser.close()
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lowchart-quality-probe-samples
+          path: lowchart-chart-quality-probe/
+          if-no-files-found: ignore
+          retention-days: 1
