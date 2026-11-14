@@ -432,9 +432,12 @@ def run(*, preview=False, now=None) -> int:
     a_posts = 0
     b_posts = 0
     rejected = {}
-    for candidate in candidates:
-        if posts >= MAX_PUBLISH_PER_RUN or checked >= MAX_A_HISTORY_CHECKS_PER_RUN:
-            break
+    # Check a bounded candidate window before making the one allowed post.
+    # Verified >=15% savings get first priority; B candidates remain FIFO.
+    audits = {}
+    evaluated = []
+    pool = candidates[:1 if preview else MAX_A_HISTORY_CHECKS_PER_RUN]
+    for index, candidate in enumerate(pool):
         checked += 1
         pid = candidate["id"]
         try:
@@ -442,39 +445,78 @@ def run(*, preview=False, now=None) -> int:
         except QualityError as exc:
             code = "EXACT_ID_" + str(exc)
             rejected[code] = rejected.get(code, 0) + 1
+            audits[pid] = {"checked_at": now.isoformat(),
+                           "source_checked_at": candidate["checked_at"],
+                           "source_price": candidate["price"],
+                           "grade": "SKIP", "reason": code}
+            print("API_RADAR_COMPARISON_AUDIT product_id=" + pid
+                  + " grade=SKIP reason=" + code)
             continue
 
-        grade = "B"
-        history, trend = None, None
-        # A requires independent exact-option Lowchart savings evidence.
+        grade, reason, history, trend = "B", "LOWCHART_UNVERIFIED", None, None
         try:
             history = check_exact_history(candidate, identity)
-            grade = "A"
+            pct = history["discount_pct"]
+            if 15 <= pct <= 70:
+                grade, reason = "A", "VERIFIED_DISCOUNT_15_TO_70"
+            else:
+                reason = ("VERIFIED_SAVINGS_BELOW_15"
+                          if pct > 0 else "VERIFIED_AT_OR_ABOVE_AVERAGE")
         except QualityError as exc:
             code = "A_HISTORY_" + str(exc)
+            reason = code
             rejected[code] = rejected.get(code, 0) + 1
+
         if grade == "A" and trend_mode == "hub" and candidate["topic"]:
             keyword, category = candidate["topic"]
             try:
                 trend = fetch_topic_trend(keyword, category, now=now)
                 if not trend["demand_uptrend"]:
-                    grade = "B"
-                    trend = None
+                    grade, reason, trend = "B", "TREND_NOT_UP", None
             except TrendError:
-                grade = "B"  # valid official Goldbox listing, no search claim
-                trend = None
-        if preview:
-            print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 grade=" + grade
-                  + " exact_item=true history_verified=" + str(grade == "A").lower())
-            return 0
+                grade, reason, trend = "B", "TREND_NOT_VERIFIED", None
 
+        audits[pid] = {
+            "checked_at": now.isoformat(),
+            "source_checked_at": candidate["checked_at"],
+            "source_price": candidate["price"], "grade": grade,
+            "reason": reason,
+            "reference_price": history.get("reference_price") if history else None,
+            "discount_pct": history.get("discount_pct") if history else None,
+        }
+        print("API_RADAR_COMPARISON_AUDIT product_id=" + pid
+              + " grade=" + grade + " reason=" + reason)
+        evaluated.append({"index": index, "candidate": candidate,
+                          "identity": identity, "history": history,
+                          "trend": trend, "grade": grade,
+                          "discount": history.get("discount_pct", 0) if history else 0})
+
+    evaluated.sort(key=lambda row: (
+        0 if row["grade"] == "A" else 1,
+        -row["discount"] if row["grade"] == "A" else row["index"],
+        row["index"]))
+    if preview:
+        if evaluated:
+            print("API_RADAR_PUBLISH_PREVIEW_OK posts=0 grade=" + evaluated[0]["grade"]
+                  + " exact_item=true history_verified="
+                  + str(evaluated[0]["history"] is not None).lower())
+        return 0
+
+    for assessment in evaluated:
+        if posts >= MAX_PUBLISH_PER_RUN:
+            break
+        candidate = assessment["candidate"]
+        pid = candidate["id"]
+        identity, history, trend, grade = (
+            assessment["identity"], assessment["history"],
+            assessment["trend"], assessment["grade"])
         try:
             path = download_verified_image(candidate["image"], WORK_DIR, pid)
             from gh_only.coupang_partners_api import create_product_deeplink
             receipt = create_product_deeplink(identity, subid="naverblog")
             article = (compose_article(candidate, history, trend, path, receipt["partners_link"])
                        if grade == "A" else
-                       compose_goldbox_article(candidate, path, receipt["partners_link"]))
+                       compose_goldbox_article(candidate, path, receipt["partners_link"], history=history))
         except (QualityError, ValueError, RuntimeError) as exc:
             if isinstance(exc, CoupangPartnersError):
                 # These are internal, static error codes. Never print raw
@@ -517,6 +559,14 @@ def run(*, preview=False, now=None) -> int:
             break
         if pid in latest.get("published", {}) or pid in latest.get("api_publish_claims", {}):
             continue
+        # Persist each assessed product's safe reason with the existing
+        # durable claim. Keep the public diagnostic map bounded.
+        stored_audits = latest.setdefault("comparison_audit", {})
+        stored_audits.update(audits)
+        if len(stored_audits) > 300:
+            keys = sorted(stored_audits, key=lambda key: stored_audits[key].get("checked_at", ""),
+                          reverse=True)[:300]
+            latest["comparison_audit"] = {key: stored_audits[key] for key in keys}
         claim(latest, pid, candidate, utc_now(), grade=grade)
         save_state(latest, sha)  # durable claim before editor interaction
 
