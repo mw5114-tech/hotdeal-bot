@@ -100,7 +100,7 @@ def title_tokens(name: str) -> tuple[str, ...]:
 
 
 def check_exact_history(product: dict, identity: dict, *, fetch=None) -> dict:
-    """Require same-ID Lowchart page, matching option title/current price and mean."""
+    """Verify exact-option Lowchart average and price, including B-grade differences."""
     from gh_only.lowchart_price_reference import fetch_one
     title = product.get("name", "")
     tokens = title_tokens(title)
@@ -123,14 +123,18 @@ def check_exact_history(product: dict, identity: dict, *, fetch=None) -> dict:
         raise QualityError("EXACT_OPTION_HISTORY_UNVERIFIED")
     observed_current = row.get("observed_current_krw")
     average = row.get("observed_average_krw")
+    # A valid exact-option average is useful for honest B-grade comparisons
+    # even when the product costs MORE than its historical average.
     if not (type(observed_current) is int and type(average) is int
-            and 1000 <= observed_current <= 4_000_000
-            and average > observed_current
-            and abs(observed_current - price) / max(price, 1) <= .02):
-        raise QualityError("CURRENT_PRICE_OR_AVERAGE_MISMATCH")
+            and 1000 <= observed_current <= 4_000_000 and average > 0):
+        raise QualityError("HISTORY_AVERAGE_OR_CURRENT_INVALID")
+    if abs(observed_current - price) / max(price, 1) > .02:
+        raise QualityError("CURRENT_PRICE_MISMATCH")
     discount = round((average - price) * 100 / average, 1)
-    if not 15 <= discount <= 70:
-        raise QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE")
+    # Reject extreme/likely wrong-option observations, but do not confuse
+    # a genuine below-15% saving with an unavailable price comparison.
+    if not -70 <= discount <= 70:
+        raise QualityError("DISCOUNT_IMPLAUSIBLE")
     window = row.get("history_window", "")
     if not isinstance(window, str) or not (
         re.fullmatch(r"recent_(\d{1,2})_weeks", window)
