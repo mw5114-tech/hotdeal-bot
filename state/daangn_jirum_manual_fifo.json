@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96024,
-  "pending": [
-    {
-      "id": 96024,
-      "source_post_url": "https://t.me/jirum/96024",
-      "original_purchase_url": "https://link.coupang.com/a/iFvrcY4y4W",
-      "source_text": "🔥🔥🔥무지성 5,100원 (62.0% 할인)🔥🔥🔥\n백설 제로 칼로리 알룰로스 700g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,421원\n- 할인: 8,321원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFvrcY4y4W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T08:25:53+00:00",
-      "title": "백설 제로 칼로리 알룰로스 700g",
-      "sale_price_krw": 5100
-    }
-  ],
-  "in_flight": {
-    "id": 96024,
-    "status": "CLAIMED",
-    "run_id": "43575880263",
-    "at": "2026-11-14T08:27:24.003932+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5421,6 +5406,16 @@
       "vendor_item_id": "94364129038",
       "at": "2026-11-14T08:26:18.005601+00:00",
       "run_id": "43575781751"
+    },
+    "96024": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%B1%EC%84%A4-%EC%A0%9C%EB%A1%9C-%EC%B9%BC%EB%A1%9C%EB%A6%AC-%EC%95%8C%EB%A3%B0%EB%A1%9C%EC%8A%A4-700g-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PVp45Lvj?from=write",
+      "posted_at_utc": "2026-11-14T08:25:53+00:00",
+      "product_id": "8816275548",
+      "item_id": "25808205783",
+      "vendor_item_id": "93710087979",
+      "at": "2026-11-14T08:27:44.229795+00:00",
+      "run_id": "43575880263"
     }
   },
   "skipped_non_coupang": 478,
