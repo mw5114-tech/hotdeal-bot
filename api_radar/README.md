@@ -5,7 +5,10 @@
 Detect each newly captured **official Coupang Goldbox** product, verify its
 exact product and option, publish A when Lowchart independently confirms
 a genuine historical-average discount of 15–70%, and otherwise publish B
-as an **official Goldbox listing without a fabricated discount percentage**.
+as an **official Goldbox listing**. B includes a verified same-option Lowchart
+historical average and truthful percentage when available, including when the
+current price is higher than average; otherwise B explicitly says the
+historical comparison is unverified.
 
 There is **no per-day post count quota**. Each publish-only Actions run
 attempts **at most one** post, and a persisted **minimum 900-second gap**
@@ -32,6 +35,9 @@ on the public **api-radar-data** branch at
 - Current day inventory: `goldbox_today = {kst_date, updated_at, items}`
 - Per-product publish receipts: `published[productId]`
 - Pending uncertain outcomes: `api_publish_claims[productId]`
+- Bounded per-product comparison diagnoses: `comparison_audit[productId]`
+  (recorded with the pre-submit claim; every inspected item also receives a
+  reason code in the workflow log)
 
 Goldbox scans run **08:05 / 12:10 / 16:25 / 20:40 KST** (GitHub Actions
 cron may run late). The source's new products appear in the morning; its
@@ -61,14 +67,22 @@ For **each current-day official Goldbox candidate**:
    current price (within 2%) and average showing **15–70% lower than the
    observed historical average** earns **A**. Only A may show the
    source-backed percentage and the corresponding reference period.
-3. If historical evidence is missing, conflicts, or is less than 15%,
-   use **B** based on independently authenticated current-day Goldbox
-   membership. B shows the **observed API sale price** and prominently
-   states that its past-average discount percentage is *unverified*.
-4. In both cases, validate source image bytes, issue a real signed Coupang
+3. If evidence is valid but savings are below 15%, use **B** and show the
+   **same-option Lowchart observed average and actual difference**. If the
+   item is more expensive than the average, say so; never describe the
+   difference as a promotional discount. If evidence is absent or conflicts,
+   B shows the **observed API sale price** and states that historical
+   comparison is *unverified*.
+4. Scan at most **8** fresh eligible candidates per publish run before
+   submitting anything, rank verified A items first (higher confirmed
+   savings first), and retain FIFO order among B items. This is a bounded
+   priority window, not a guarantee of discovering an A deeper in the queue.
+   Only one item is submitted in the slot. Further candidates are picked
+   up by future slots, subject to freshness and platform limits.
+5. In both cases, validate source image bytes, issue a real signed Coupang
    Partners Deeplink (`subid=naverblog`), include commission disclosure,
    and submit through the existing Naver SmartEditor session.
-5. Write an immutable GitHub claim *before* the Naver submit. Record the
+6. Write an immutable GitHub claim *before* the Naver submit. Record the
    confirmed post URL and grade only after successful submission. If the
    outcome is unknown, **never automatically retry that product**.
 
