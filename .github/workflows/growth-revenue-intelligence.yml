@@ -1,0 +1,38 @@
+name: Growth Lab 1 | Private Coupang revenue intelligence
+
+on:
+  workflow_dispatch:
+  schedule:
+    # 16:25 KST, after the published daily reporting refresh.
+    - cron: '25 7 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: growth-revenue-independent
+  cancel-in-progress: false
+
+jobs:
+  analyze-private:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install modern authenticated encryption
+        run: python -m pip install --disable-pip-version-check --quiet 'cryptography>=43,<48'
+      - name: Fetch daily reports and save ciphertext only
+        run: python -m growth_lab.revenue
+      - name: Publicly safe summary
+        if: always()
+        run: echo 'Private financial metrics are never printed or uploaded in plaintext.'
