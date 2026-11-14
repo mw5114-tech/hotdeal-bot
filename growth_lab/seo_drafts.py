@@ -11,7 +11,7 @@ import os
 import re
 
 from api_radar.collector import SEARCH, RadarApiError, get_api, extract_rows, normalize
-from api_radar.quality import extract_exact_identity
+from api_radar.quality import extract_exact_identity, resolve_exact_identity
 from gh_only.coupang_partners_api import create_product_deeplink, request_deeplink, issued_link_url, CoupangPartnersError
 from growth_lab.github_store import load, save
 
@@ -48,7 +48,11 @@ def products_for_comparison(rows: list[dict], keyword: str) -> list[dict]:
         p = normalize(raw, "search")
         if not p or keyword.replace(" ", "").lower() not in p["name"].replace(" ", "").lower():
             continue
-        identity = extract_exact_identity(p["url"], p["id"])
+        raw_identity = extract_exact_identity(p["url"], p["id"])
+        # Only the real exact-item verifier may award EXACT_ITEM_IDENTIFIED.
+        # The official link builder rejects raw IDs even when their values
+        # look correct. Never grant that status to opaque tracking URLs.
+        identity = resolve_exact_identity(p) if raw_identity is not None else None
         if p["id"] in seen:
             continue
         # No invented itemId when SEARCH offers only a generic tracking URL.
