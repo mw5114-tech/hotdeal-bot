@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 95999,
-  "pending": [
-    {
-      "id": 95999,
-      "source_message_id": 95999,
-      "source_post_url": "https://t.me/jirum/95999",
-      "original_purchase_url": "https://link.coupang.com/a/iE48iuDicm",
-      "title": "믈레코비타 아이러브밀크 1.5% 저지방 멸균우유 1L 12개",
-      "source_text": "👍대박 19,990원 (39.0% 할인)\n믈레코비타 아이러브밀크 1.5% 저지방 멸균우유 1L 12개\n📌 가격 현황\n- 정상가: 32,770원\n- 할인: 12,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE48iuDicm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 19990,
-      "posted_at_utc": "2026-11-14T02:17:46+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -875,6 +864,10 @@
     "95996": {
       "url": "https://blog.naver.com/mw5114/224476678449",
       "at": "2026-11-14T02:13:57.251893+00:00"
+    },
+    "95999": {
+      "url": "https://blog.naver.com/mw5114/224476684544",
+      "at": "2026-11-14T02:20:11.740848+00:00"
     }
   },
   "skipped": {
@@ -967,12 +960,7 @@
       "at": "2026-11-13T18:53:07.195222+00:00"
     }
   },
-  "in_flight": {
-    "id": 95999,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43545601674",
-    "at": "2026-11-14T02:19:27.327853+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
