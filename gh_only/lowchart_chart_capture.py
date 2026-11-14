@@ -1,9 +1,10 @@
-"""Optional read-only Lowchart chart screenshot for an exact Coupang item.
+"""Read-only native Lowchart PNG for one exact Coupang product and option.
 
-Never fetch other SKUs or scrape private APIs. A failed chart is not a reason to
-drop an otherwise verified hot deal; only successfully rendered chart images
-are passed to an editor. Reuse the publisher's Chromium, but open a fresh
-context with no Naver/Daangn login cookies.
+Never use HTML screenshots, incomplete loading skeletons, other SKUs, or
+untrusted image URLs. The published chart is the exact publicly displayed PNG,
+not a recompressed or artist-redrawn substitute. An unreadable/missing image
+must never block an otherwise verified hot deal. The browser opens with no
+Naver/Daangn authentication cookies.
 """
 from __future__ import annotations
 
@@ -29,7 +30,9 @@ def _exact_identity(identity: dict | None) -> tuple[str, str] | None:
 
 
 def chart_bounds(page) -> dict | None:
-    """Clip only the chart section between its visible heading and share UI.
+    """Legacy geometry helper retained for regression tests ONLY; not published.
+
+    Clip only the chart section between its visible heading and share UI.
 
     This works for image, SVG, Canvas and HTML-rendered price charts without
     guessing a private image API, drawing invented data, or including product
