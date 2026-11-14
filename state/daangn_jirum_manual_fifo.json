@@ -3,15 +3,6 @@
   "last_scanned_id": 95994,
   "pending": [
     {
-      "id": 95992,
-      "source_post_url": "https://t.me/jirum/95992",
-      "original_purchase_url": "https://link.coupang.com/a/iE3vGPHxAq",
-      "source_text": "🔥🔥🔥무지성 4,130원 (53.0% 할인)🔥🔥🔥\n허브마리 1848 온천수 바디로션 제주동백\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,787원\n- 할인: 4,657원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE3vGPHxAq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T01:55:04+00:00",
-      "title": "허브마리 1848 온천수 바디로션 제주동백",
-      "sale_price_krw": 4130
-    },
-    {
       "id": 95993,
       "source_post_url": "https://t.me/jirum/95993",
       "original_purchase_url": "https://link.coupang.com/a/iE3zcit58S",
@@ -21,12 +12,7 @@
       "sale_price_krw": 3980
     }
   ],
-  "in_flight": {
-    "id": 95992,
-    "status": "CLAIMED",
-    "run_id": "43543470361",
-    "at": "2026-11-14T01:56:33.236831+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5310,6 +5296,16 @@
       "vendor_item_id": "91481162489",
       "at": "2026-11-14T01:55:36.708142+00:00",
       "run_id": "43543354027"
+    },
+    "95992": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%97%88%EB%B8%8C%EB%A7%88%EB%A6%AC-1848-%EC%98%A8%EC%B2%9C%EC%88%98-%EB%B0%94%EB%94%94%EB%A1%9C%EC%85%98-%EC%A0%9C%EC%A3%BC%EB%8F%99%EB%B0%B1-500ml-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-PxqaQkKd?from=write",
+      "posted_at_utc": "2026-11-14T01:55:04+00:00",
+      "product_id": "8849894219",
+      "item_id": "25797867509",
+      "vendor_item_id": "92785526448",
+      "at": "2026-11-14T01:56:49.667602+00:00",
+      "run_id": "43543470361"
     }
   },
   "skipped_non_coupang": 459,
