@@ -18,6 +18,7 @@ permissions:
 
 jobs:
   offline-only:
+    # This job needs neither browser cookies nor any external site write access.
     runs-on: ubuntu-24.04
     timeout-minutes: 4
     steps:
