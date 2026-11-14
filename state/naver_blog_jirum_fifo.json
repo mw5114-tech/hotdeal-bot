@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96067,
-  "pending": [
-    {
-      "id": 96067,
-      "source_message_id": 96067,
-      "source_post_url": "https://t.me/jirum/96067",
-      "original_purchase_url": "https://link.coupang.com/a/iGum6VGNlk",
-      "title": "뵤도 유기농 토마토 케첩 키즈",
-      "source_text": "🔥🔥🔥무지성 5,710원 (48.0% 할인)🔥🔥🔥\n뵤도 유기농 토마토 케첩 키즈\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,981원\n- 할인: 5,271원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGum6VGNlk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5710,
-      "posted_at_utc": "2026-11-14T22:38:34+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -951,6 +940,10 @@
     "96066": {
       "url": "https://blog.naver.com/mw5114/224477538447",
       "at": "2026-11-14T22:39:14.408084+00:00"
+    },
+    "96067": {
+      "url": "https://blog.naver.com/mw5114/224477539034",
+      "at": "2026-11-14T22:40:32.326704+00:00"
     }
   },
   "skipped": {
@@ -1051,12 +1044,7 @@
       "at": "2026-11-14T19:05:33.463062+00:00"
     }
   },
-  "in_flight": {
-    "id": 96067,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43649224903",
-    "at": "2026-11-14T22:39:47.817150+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
