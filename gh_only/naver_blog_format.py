@@ -205,6 +205,21 @@ def validate_price_presentation(blocks: list[dict], draft: dict) -> None:
         raise ValueError("NAVER_SUB_ONE_PERCENT_MISSING_FROM_POST")
 
 
+def add_price_chart_block(blocks: list[dict]) -> bool:
+    """Place the optional captured chart immediately below price-source label.
+
+    The chart carries no affiliate URL and does not modify existing pricing,
+    copy, photo placement or the final native Naver CTA.
+    """
+    if any(x.get("kind") == "price_chart" for x in blocks):
+        return False
+    for index, block in enumerate(blocks):
+        if block.get("kind") == "source_basis":
+            blocks.insert(index + 1, {"type": "image", "kind": "price_chart"})
+            return True
+    return False
+
+
 def plain_body(blocks: list[dict]) -> str:
     return "\n\n".join(
         block["text"] for block in blocks if block.get("type") == "text"
@@ -216,8 +231,17 @@ def validate_blocks(blocks: list[dict], expected_url: str) -> None:
         raise ValueError("NAVER_FORMAT_BLOCKS_MISSING")
     if blocks[0].get("text") != DISCLOSURE or blocks[1].get("type") != "image":
         raise ValueError("NAVER_FORMAT_DISCLOSURE_IMAGE_ORDER")
-    if sum(x.get("type") == "image" for x in blocks) != 1:
+    image_blocks = [(i, x) for i, x in enumerate(blocks)
+                    if x.get("type") == "image"]
+    if (len(image_blocks) not in (1, 2)
+            or image_blocks[0][1].get("kind") != "hero_photo"):
         raise ValueError("NAVER_FORMAT_IMAGE_COUNT")
+    if len(image_blocks) == 2:
+        chart_index, chart = image_blocks[1]
+        if (chart.get("kind") != "price_chart" or chart_index < 3
+                or blocks[chart_index - 1].get("kind") != "source_basis"
+                or chart_index >= len(blocks) - 1):
+            raise ValueError("NAVER_FORMAT_PRICE_CHART_ORDER")
     link_blocks = [x for x in blocks if x.get("kind") == "affiliate_link"]
     if len(link_blocks) != 1 or blocks[-1] is not link_blocks[0]:
         raise ValueError("NAVER_FORMAT_LINK_COUNT_OR_POSITION")
