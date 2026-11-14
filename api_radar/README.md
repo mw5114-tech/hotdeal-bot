@@ -16,7 +16,7 @@ public product/price history and this radar's own publish status.
 - Tests: `api_radar/test_collector.py`, `test_state_store.py`,
   `test_quality_pipeline.py`
 
-## Actual verification (2026-11-13)
+## Actual verification (2026-11-14)
 
 - Goldbox: successful authenticated response.
 - Product search: the earlier 401 came from signing the URL's question-mark
@@ -25,13 +25,17 @@ public product/price history and this radar's own publish status.
 - Isolated integration run: **34 raw products** from Goldbox + keyword search,
   with API error count 0. Product history written successfully to the
   `api-radar-data` branch.
-- Unit tests: 28 offline tests passed at initial publisher integration.
+- Unit tests: **37 offline tests passed** after A/B publishing integration. Live B-type Naver publication remains unverified until a scheduled run confirms a receipt.
 - Product searches may return images at `ads-partners.coupang.com` with
   two opaque URL path segments (including base64 `=` padding). The allowlist
   accepts only exact official host/path shapes, and download verifies image
   MIME, file magic and size with redirects disabled.
 
 ## Schedule and API limits
+
+Goldbox's public promotion introduces new daily offers around **07:00 KST**
+(Coupang newsroom); this does **not** guarantee that 100% of products are
+replaced at once. The first scheduled scan follows at 08:05.
 
 The independent workflow runs **08:05, 12:10, 16:25, 20:40 KST**, or on manual
 `workflow_dispatch`. GitHub cron can be delayed. It queries Goldbox once
@@ -47,36 +51,55 @@ Partners quota or open the blog editor.
 
 The publisher job runs after a completed discovery job and shares the exact
 Naver concurrency group with the existing Telegram publisher. It aims for
-**up to 3 independently verified offers per KST day**, checking up to **16
-fresh candidates** and submitting at most **2 posts per run**, and uses the
+**up to 3 posts combined across both grades per KST day**, examining up to
+**36 fresh candidates** (at most 12 Lowchart history checks) and submitting
+at most **2 posts per run**, and uses the
 existing Naver SmartEditor session. It maintains separate durable state and
 receipts. Today's confirmed posts AND uncertain in-flight claims count toward
 the daily safety cap; no uncertain submissions are retried. **Three posts are
 NOT guaranteed**: products failing verification are skipped.
 
-It ONLY publishes when ALL are true:
+### Grade A: independently verified discounted deals (first priority)
 
-1. A recent candidate matches a curated purchase keyword, or in free
-   curated mode an allowed official shopping category. These are heuristics,
-   not verified NAVER keyword popularity.
-2. **Only if `API_RADAR_TREND_MODE: hub` is explicitly enabled**, the official
-   Shopping Insight relative shopping-click trend must be verified as rising.
-   The default `curated` mode makes no search-volume or click claims.
-3. The API product URL resolves exclusively through allowlisted Coupang
-   domains to an exact productId and itemId (same-option identity).
-4. A live Lowchart exact-item page confirms current price within 2% of the
-   API quote, visible exact item identifiers/title and a historical average
-   at least 15% above the observed price.
-5. The official API product-image URL returns valid, bounded image bytes.
-6. An authorized Coupang Partners Deep Link response issues a new link
-   with `subid=naverblog`. No synthetic AFFSDP URL is accepted.
-7. The product has not been posted or permanently claimed by this radar.
+- Recent curated shopping keyword or vetted category.
+- Exact Coupang API productId+itemId.
+- Live same-option Lowchart historical **average** with within-2% current
+  price corroboration, valid title/identifiers, and **15–70%** savings relative
+  to that observed average. No fabricated MSRP or implied regular list price.
+- When optional `API_RADAR_TREND_MODE: hub` is enabled, an independently
+  verified rising relative Shopping Insight click trend is also required.
+- Title: `[쿠팡🔥핫딜]`. Only this grade publishes a sourced discount percentage.
 
-The comparison is explicitly labeled **Lowchart observed average**, not
-Coupang's official regular price, and no specific 30-day average is claimed
-without a verified time window. Shopping Insight is a **relative click index**,
-not absolute search volume or a guarantee of blog visitors. Posts identify
-the affiliate relationship and never impersonate a first-hand review.
+### Grade B: official Goldbox feed (fallback when grade A runs short)
+
+- Candidate must come from the **official authenticated Goldbox API**, never
+  merely a keyword search, and be from the latest fresh scan.
+- Only the vetted physical-shopping categories, with the observed API sale
+  price within 5,000–350,000 KRW. Exact productId+itemId is still mandatory.
+- No Lowchart reference/discount is required or claimed; the visible post says
+  `수집 당시 쿠팡 판매가` and explains that past-average savings are unverified.
+- Title: `[쿠팡🎁골드박스]`. Note that Goldbox benefits may depend on Wow
+  membership and price/stock vary.
+- Grade B is considered only AFTER the bounded grade A checks; it may use a
+  candidate that failed grade A due to insufficient verified history.
+
+### Gates shared by both grades
+
+- Safe official Coupang product URL with exact option identity; never click
+  opaque affiliate tracking links for verification.
+- Verified official product-image bytes (size, MIME and redirects restricted).
+- Fresh official Coupang Partners Deep Link API response with `subid=naverblog`,
+  never a handcrafted affiliate URL.
+- No previous publication or pending uncertain claim for that product;
+  KST daily cap counts both confirmed posts and unresolved claims.
+- Verified disclosure and affiliate hyperlink in the post, no synthetic first-
+  hand review, duplicate product, unverified discount or false search demand.
+
+The publisher stores a durable claim BEFORE SmartEditor submits. An uncertain
+outcome requires manual review and is never automatically retried.
+
+Shopping Insight, when explicitly configured, is a **relative click index**,
+not absolute search volume or a guarantee of blog visitors.
 
 The publisher stores a claim in the independent branch BEFORE clicking the
 Naver submit button. An uncertain failure leaves the claim for manual review:
@@ -102,8 +125,9 @@ Official endpoint:
 
 The default `API_RADAR_TREND_MODE: curated` DOES NOT need either NAVER
 API HUB secret, cloud account or payment method. It uses curated product-name
-keywords or vetted official shopping categories, then checks up to four
-recent candidates for strict exact-item Lowchart historical price evidence.
+keywords or vetted official shopping categories, then checks at most twelve
+recent grade-A candidates against exact-item Lowchart history before using
+truthfully labeled official Goldbox grade-B fallback listings.
 It does not claim measured NAVER search trend/click index. The independent
 publisher can attempt up to three posts per KST day if all other gates pass.
 Set `API_RADAR_TREND_MODE: hub` only after registering both Naver API HUB
@@ -129,7 +153,8 @@ operational while producing zero posts because the quality gates are strict.
 
 - Curated keyword/category matches are heuristics, NOT verified NAVER search demand.
 - A quota is a ceiling, not a promise of three posts. We do not invent price history
-  or discounts merely to reach a publishing target.
+  or discounts merely to reach a publishing target. Grade B has no independently
+  verified discount percentage, only official Goldbox listing membership.
 - Naver's official terms restrict posting by bots without prior permission and
   repetitive affiliate-style content may have its visibility limited; verify
   authorization and follow applicable platform policies before scaling.
