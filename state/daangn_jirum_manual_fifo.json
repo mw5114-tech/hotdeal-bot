@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96004,
-  "pending": [
-    {
-      "id": 96004,
-      "source_post_url": "https://t.me/jirum/96004",
-      "original_purchase_url": "https://link.coupang.com/a/iE6l31i62u",
-      "source_text": "☆특가 14,120원\n블루래빗 손감각 발달토이\n📦 특가 바로가기\nhttps://link.coupang.com/a/iE6l31i62u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T02:34:52+00:00",
-      "title": "☆특가 14,120원",
-      "sale_price_krw": 14120
-    }
-  ],
-  "in_flight": {
-    "id": 96004,
-    "status": "CLAIMED",
-    "run_id": "43547349384",
-    "at": "2026-11-14T02:38:18.038145+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5340,6 +5325,16 @@
       "item_id": "19148341413",
       "vendor_item_id": "93384073732",
       "at": "2026-11-14T02:38:13.491515+00:00",
+      "run_id": "43547349384"
+    },
+    "96004": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%86%90%EA%B0%90%EA%B0%81-%EB%B0%9C%EB%8B%AC%ED%86%A0%EC%9D%B4-%EB%B8%94%EB%A3%A8%EB%9E%98%EB%B9%97-%EC%83%81%ED%92%88%EC%83%81%EC%84%B8-%EC%84%A4%EB%AA%85-%EC%B0%B8%EC%A1%B0-25%ED%95%A0%EC%9D%B8-AO306lgA?from=write",
+      "posted_at_utc": "2026-11-14T02:34:52+00:00",
+      "product_id": "1487703230",
+      "item_id": "2554295884",
+      "vendor_item_id": null,
+      "at": "2026-11-14T02:38:36.428651+00:00",
       "run_id": "43547349384"
     }
   },
