@@ -1,0 +1,79 @@
+name: Tests | Daangn chart placement live editor NO SUBMIT
+
+on:
+  push:
+    branches:
+      - fix/daangn-chart-editor-order-20261114
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: python -m compileall -q gh_only/jirum_manual_publisher.py gh_only/lowchart_chart_capture.py gh_only/daangn_editor_probe.py
+      - run: python -m unittest gh_only.test_jirum_manual_publisher gh_only.test_daangn_editor_probe gh_only.test_lowchart_chart_capture
+  editor-no-submit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 11
+    env:
+      GH_STATE_TOKEN: ${{ github.token }}
+      DAANGN_CAFE_RESTORED: "true"
+      DAANGN_CAFE_TARGET_URL: https://cafe.daangn.com/kupang-teuggaye
+      DAANGN_CAFE_BOARD_LABEL: "🔥 오늘의핫딜"
+      DAANGN_PUBLISH_PAUSED: "false"
+      DAANGN_CAFE_PUBLISH_ENABLED: "true"
+      DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED: "true"
+      DAANGN_OFFICIAL_API_LINK_ENABLED: "true"
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
+      COUPANG_PARTNER_LPTAG: AF9668915
+      COUPANG_PARTNER_SUBID: cafe
+      JIRUM_IMAGE_SOURCE: lowchart
+      JIRUM_LOWCHART_CHART_IMAGE_ENABLED: "true"
+      JIRUM_ENABLE_NAVER_PRICE_FALLBACK: "false"
+      JIRUM_REQUIRE_FRESH_POST: "true"
+      JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: "false"
+      JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: "false"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/daangn-chart-editor-order-20261114
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+      - name: Fill real Daangn editor but NEVER click Publish or claim queue
+        run: |
+          python - <<'PY'
+          import json
+          from gh_only.jirum_manual_queue import GithubState, build_next
+          from gh_only.jirum_manual_publisher import publish_one
+          store = GithubState()
+          state, sha = store.read()
+          if state["in_flight"] is not None or not state["pending"]:
+              print("DAANGN_CHART_DRY_RUN_NO_PENDING")
+              raise SystemExit(1)
+          article = build_next(state)
+          outcome = publish_one(article, dry_run=True)
+          safe = {k: outcome.get(k) for k in (
+              "status","source_id","failure_stage","submit_attempted",
+              "error_type","error_reason","photo_upload_completed",
+              "chart_captured","chart_upload_completed","editor_checks"
+          )}
+          print("DAANGN_CHART_EDITOR_NO_SUBMIT " + json.dumps(safe, ensure_ascii=False))
+          if outcome.get("submit_attempted") is not False:
+              raise SystemExit("UNSAFE_SUBMIT_ATTEMPTED")
+          if outcome.get("status") != "EDITOR_DRY_RUN_VERIFIED_NO_SUBMIT":
+              raise SystemExit("EDITOR_DRY_RUN_FAILED")
+          PY
