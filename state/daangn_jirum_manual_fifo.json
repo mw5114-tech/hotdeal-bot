@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96064,
-  "pending": [],
+  "last_scanned_id": 96065,
+  "pending": [
+    {
+      "id": 96065,
+      "source_post_url": "https://t.me/jirum/96065",
+      "original_purchase_url": "https://link.coupang.com/a/iGi3hTpyVg",
+      "source_text": "☆특가 10,990원 (25.1% 할인)\n국내산 양상추, 2개입, 4개\n📌 가격 현황\n- 정상가: 14,670원\n- 할인: 3,680원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGi3hTpyVg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-14T20:00:10+00:00",
+      "title": "국내산 양상추, 2개입, 4개",
+      "sale_price_krw": 10990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
