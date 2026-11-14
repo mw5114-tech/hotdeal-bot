@@ -1,13 +1,15 @@
-"""Optional read-only Lowchart chart screenshot for an exact Coupang item.
+"""Read-only native Lowchart PNG for one exact Coupang product and option.
 
-Never fetch other SKUs or scrape private APIs. A failed chart is not a reason to
-drop an otherwise verified hot deal; only successfully rendered chart images
-are passed to an editor. Reuse the publisher's Chromium, but open a fresh
-context with no Naver/Daangn login cookies.
+Never use HTML screenshots, incomplete loading skeletons, other SKUs, or
+untrusted image URLs. The published chart is the exact publicly displayed PNG,
+not a recompressed or artist-redrawn substitute. An unreadable/missing image
+must never block an otherwise verified hot deal. The browser opens with no
+Naver/Daangn authentication cookies.
 """
 from __future__ import annotations
 
 import os
+from io import BytesIO
 from pathlib import Path
 import re
 
@@ -28,7 +30,9 @@ def _exact_identity(identity: dict | None) -> tuple[str, str] | None:
 
 
 def chart_bounds(page) -> dict | None:
-    """Clip only the chart section between its visible heading and share UI.
+    """Legacy geometry helper retained for regression tests ONLY; not published.
+
+    Clip only the chart section between its visible heading and share UI.
 
     This works for image, SVG, Canvas and HTML-rendered price charts without
     guessing a private image API, drawing invented data, or including product
@@ -90,8 +94,68 @@ def chart_bounds(page) -> dict | None:
     }""")
 
 
+def _native_chart_url(product_id: str, item_id: str) -> str:
+    """Only the exact chart asset displayed by the public product page."""
+    build_url(product_id, item_id)  # Validate digit-only exact item.
+    return f"https://chart.lowchart.com/{product_id}-{item_id}.png"
+
+
+def _inspect_native_png(data: bytes) -> dict | None:
+    """Reject blanks, placeholder loading art, clipped or pale renderings.
+
+    We inspect the ORIGINAL full-resolution image rather than an HTML/CSS
+    screenshot. The appearance gate intentionally fails closed if unable to
+    establish a readable price chart. Does not alter or redraw chart data.
+    """
+    if not isinstance(data, bytes) or not (
+        18000 <= len(data) <= MAX_CHART_BYTES
+    ) or not data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return None
+    try:
+        from PIL import Image, ImageStat
+        with Image.open(BytesIO(data)) as im:
+            if im.format != "PNG":
+                return None
+            width, height = im.size
+            if not (1100 <= width <= 6500 and 290 <= height <= 2200
+                    and 2.0 <= width / height <= 5.5):
+                return None
+            # A fully decoded image catches truncated/corrupt PNG streams.
+            im.load()
+            # Calculate visual contrast from uniformly downsampled pixels,
+            # rejecting skeleton/transparent/washed-out chart graphics.
+            if im.mode in ("RGBA", "LA", "P") and "transparency" in im.info:
+                rgba = im.convert("RGBA")
+                bg = Image.new("RGBA", im.size, "white")
+                bg.alpha_composite(rgba)
+                mono = bg.convert("L")
+            else:
+                mono = im.convert("L")
+            small = mono.resize((240, 75))
+            stat = ImageStat.Stat(small)
+            hist = small.histogram()
+            dark_fraction = sum(hist[:150]) / sum(hist)
+            if stat.stddev[0] < 17 or dark_fraction < 0.008:
+                return None
+            return {
+                "width": width,
+                "height": height,
+                "grayscale_std": round(stat.stddev[0], 1),
+                "dark_fraction": round(dark_fraction, 4),
+            }
+    except (OSError, ValueError, ImportError, TypeError):
+        return None
+
+
 def capture_chart_image(browser, identity: dict | None, folder: Path,
                         source_id: int) -> Path | None:
+    """Download exact-item native PNG, never screenshot page/HTML placeholders.
+
+    The public native source already contains Korean text rendered by
+    Lowchart. Browser screenshot fallbacks caused intermittent low-contrast
+    skeleton snapshots, missing Korean fonts and JPEG blur. Never downgrade
+    to HTML screenshot if the native graphic is not ready or fails quality.
+    """
     if os.getenv("JIRUM_LOWCHART_CHART_IMAGE_ENABLED") != "true":
         return None
     keys = _exact_identity(identity)
@@ -99,44 +163,67 @@ def capture_chart_image(browser, identity: dict | None, folder: Path,
         print("LOWCHART_CHART_SKIPPED_INVALID_EXACT_ITEM")
         return None
     url = build_url(*keys)
+    native_url = _native_chart_url(*keys)
     ctx = None
     try:
         folder.mkdir(parents=True, exist_ok=True)
+        path = folder / f"jirum_{source_id}_lowchart_chart.png"
+        # Never inherit a prior run's local artifact on a failed new attempt.
+        path.unlink(missing_ok=True)
         ctx = browser.new_context(
             locale="ko-KR", viewport={"width": 1180, "height": 950},
-            device_scale_factor=2,
+            device_scale_factor=1,
         )
         page = ctx.new_page()
-        response = page.goto(url, wait_until="domcontentloaded", timeout=16000)
-        if (response is None or response.status != 200
-                or page.url != url):
-            print("LOWCHART_CHART_SKIPPED_UNEXPECTED_PAGE")
+        response = page.goto(url, wait_until="domcontentloaded", timeout=19000)
+        if response is None or response.status != 200 or page.url != url:
+            print("LOWCHART_NATIVE_CHART_SKIPPED_UNEXPECTED_PAGE")
             return None
-        # Wait only for the public chart's native visible share control.
-        page.get_by_role("button", name="차트 퍼가기").wait_for(
-            state="visible", timeout=8000
-        )
-        page.wait_for_timeout(600)
-        bounds = chart_bounds(page)
-        if bounds is None:
-            print("LOWCHART_CHART_SKIPPED_NOT_RENDERED")
+        share = page.get_by_role("button", name="차트 퍼가기")
+        share.wait_for(state="visible", timeout=10000)
+        # Lazy native <img> loads on entering view. Do not capture skeleton.
+        share.scroll_into_view_if_needed(timeout=6000)
+        try:
+            page.wait_for_function(
+                """expected => [...document.images].some(img =>
+                   (img.currentSrc || img.src) === expected &&
+                   (img.alt || '').includes('가격 변동 차트') &&
+                   img.complete &&
+                   img.naturalWidth >= 1100 && img.naturalHeight >= 290
+                )""",
+                arg=native_url,
+                timeout=11000,
+            )
+        except Exception:
+            print("LOWCHART_NATIVE_CHART_SKIPPED_IMAGE_NOT_READY")
             return None
-        path = folder / f"jirum_{source_id}_lowchart_chart.jpg"
-        page.screenshot(path=str(path), type="jpeg", quality=78,
-                        clip=bounds, timeout=10000)
-        if not (6000 <= path.stat().st_size <= MAX_CHART_BYTES):
-            path.unlink(missing_ok=True)
-            print("LOWCHART_CHART_SKIPPED_IMAGE_INVALID")
+        # Public image linked on the exact-item product page only, not the
+        # recommendation grid, another option or an unrelated search result.
+        result = ctx.request.get(native_url, timeout=18000, max_redirects=0)
+        if (result.status != 200 or result.url != native_url or
+                not result.headers.get("content-type", "").lower().startswith("image/png")):
+            print("LOWCHART_NATIVE_CHART_SKIPPED_SOURCE_INVALID")
             return None
-        print("LOWCHART_CHART_CAPTURED " + str({
-            "source_id": source_id, "bytes": path.stat().st_size,
-            "width": bounds["width"], "height": bounds["height"],
-            "exact_item": True,
+        length = result.headers.get("content-length", "")
+        if length.isdecimal() and int(length) > MAX_CHART_BYTES:
+            print("LOWCHART_NATIVE_CHART_SKIPPED_TOO_LARGE")
+            return None
+        data = result.body()
+        quality = _inspect_native_png(data)
+        if quality is None:
+            print("LOWCHART_NATIVE_CHART_SKIPPED_UNREADABLE_PNG")
+            return None
+        path.write_bytes(data)
+        print("LOWCHART_NATIVE_CHART_VERIFIED " + str({
+            "source_id": source_id,
+            "product_id": keys[0], "item_id": keys[1],
+            "bytes": len(data), "exact_item": True,
+            **quality,
         }))
         return path
     except Exception as exc:
         # Never log arbitrary page text, cookie state or URL query strings.
-        print("LOWCHART_CHART_SKIPPED_" + type(exc).__name__.upper())
+        print("LOWCHART_NATIVE_CHART_SKIPPED_" + type(exc).__name__.upper())
         return None
     finally:
         if ctx is not None:
