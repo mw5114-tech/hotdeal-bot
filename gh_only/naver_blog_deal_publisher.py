@@ -141,20 +141,20 @@ def _editor_layout(frame, phase: str) -> None:
         print("NAVER_LAYOUT_" + phase + "_UNAVAILABLE")
 
 
-def _photo_between_disclosure_and_price(frame, disclosure: str) -> bool:
+def _photo_between_disclosure_and_price(frame, disclosure: str, price_label: str = "오늘 특가") -> bool:
     return frame.evaluate("""
-        (disclosure) => {
+        (args) => {
             const root = document;
             const ps = Array.from(root.querySelectorAll('.se-text-paragraph'));
-            const intro = ps.find(e => (e.innerText || '').includes(disclosure));
-            const price = ps.find(e => (e.innerText || '').includes('오늘 특가'));
+            const intro = ps.find(e => (e.innerText || '').includes(args.disclosure));
+            const price = ps.find(e => (e.innerText || '').includes(args.priceLabel));
             const img = root.querySelector('.se-component.se-image, .se-section-image');
             if (!intro || !price || !img) return false;
             const follows = (left, right) =>
                 (left.compareDocumentPosition(right) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
             return follows(intro, img) && follows(img, price);
         }
-    """, disclosure)
+    """, {"disclosure": disclosure, "priceLabel": price_label})
 
 
 def _affiliate_anchors(frame, url: str, label: str) -> dict:
@@ -426,6 +426,10 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
     # selected user-facing text. Reserve its own empty paragraph so it never
     # splits or duplicates the visible URL alongside the short CTA heading.
     cta_label = blocks[-1]["text"]
+    price_blocks = [b for b in blocks if b.get("kind") == "price"]
+    if len(price_blocks) != 1 or not price_blocks[0].get("bold_prefix"):
+        raise RuntimeError("NAVER_PRICE_LABEL_NOT_VERIFIED")
+    price_label = price_blocks[0]["bold_prefix"]
     if blocks[-1].get("kind") != "affiliate_link":
         raise RuntimeError("NAVER_AFFILIATE_CTA_NOT_LAST")
     if not _insert_clean_standalone_url(page, frame, article["link"]):
@@ -438,7 +442,7 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
             frame, article["link"], article["link"]
         )["count"] == 1,
         "disclosure": blocks[0]["text"] in section,
-        "sale": "오늘 특가" in section,
+        "sale": price_label in section,
         "cta_label_once": section.count(cta_label) == 1,
         "full_link_once": section.count(article["link"]) == 1,
         "no_duplicate_link_fragments": len([
@@ -467,7 +471,8 @@ def render_readable_blocks(page, frame, body_element, article: dict) -> None:
             ".se-section-text span[style*='font-weight: bold'], "
             ".se-section-text .se-text-format-bold"
         ).count(),
-        "photo_between": _photo_between_disclosure_and_price(frame, blocks[0]["text"]),
+        "photo_between": _photo_between_disclosure_and_price(
+            frame, blocks[0]["text"], price_label),
     }
     print("NAVER_FORMAT_CHECK " + str(conditions))
     if conditions["bold_applied"] >= 3 and conditions["bold_segments"] < 3:
