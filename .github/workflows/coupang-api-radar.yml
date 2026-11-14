@@ -10,9 +10,13 @@ on:
       - '.github/workflows/coupang-api-radar.yml'
   workflow_dispatch:
   schedule:
-    # 08:05 and 18:20 Asia/Seoul: one featured-products call and one search each run.
+    # Four KST scan windows to reach a TARGET of three independently verified posts/day.
+    # Not a guarantee: no source-verified discount => do not post.
+    # 08:05 / 12:10 / 16:25 / 20:40 Asia/Seoul (UTC below).
     - cron: '5 23 * * *'
-    - cron: '20 9 * * *'
+    - cron: '10 3 * * *'
+    - cron: '25 7 * * *'
+    - cron: '40 11 * * *'
 
 permissions:
   contents: write
@@ -66,7 +70,7 @@ jobs:
     needs: discover
     if: github.ref == 'refs/heads/main' && github.event_name != 'push'
     runs-on: ubuntu-24.04
-    timeout-minutes: 18
+    timeout-minutes: 22
     permissions:
       contents: write
     concurrency:
@@ -103,7 +107,7 @@ jobs:
           if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
             python -m playwright install --with-deps --only-shell chromium
           fi
-      - name: Publish at most one fully verified API offer per KST day
+      - name: Publish up to two source-verified offers per run and three per KST day
         if: steps.ready.outputs.ready == 'true'
         env:
           API_RADAR_PUBLISH_ENABLED: 'true'
