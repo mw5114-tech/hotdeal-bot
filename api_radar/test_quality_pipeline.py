@@ -234,6 +234,119 @@ class PublisherTests(TestCase):
             self.assertEqual(len(state["api_publish_claims"]), 0)
             self.assertEqual(save.call_count, 6)
 
+    def test_goldbox_b_article_never_invents_discount(self):
+        with tempfile.TemporaryDirectory() as td:
+            image = Path(td) / "goldbox.jpg"
+            image.write_bytes(b"\\xff\\xd8\\xff" + b"0" * 1200)
+            p = {"name": "와우회원 골드박스 유기농 생수 24개",
+                 "price": 10900, "category": "식품", "source": "goldbox"}
+            article = publisher.compose_goldbox_article(
+                p, image, "https://link.coupang.com/a/Abcd12345")
+            self.assertEqual(article["grade"], "B")
+            self.assertTrue(article["title"].startswith("[쿠팡🎁골드박스] "))
+            self.assertIn("수집 당시 쿠팡 판매가", article["body"])
+            self.assertIn("과거 평균가격 대비 할인율은 검증되지 않아 표시하지 않습니다", article["body"])
+            self.assertIn("쿠팡 파트너스 활동", article["body"])
+            self.assertNotIn("% 할인", article["body"])
+            self.assertNotIn("평소 판매가", article["body"])
+            self.assertNotIn("https://link.coupang.com/", article["body"])
+            self.assertEqual(len(article["blocks"]), 9)
+            long_title = publisher.goldbox_title("대용량 생수 한정상품 " * 15)
+            self.assertLessEqual(len(long_title.encode("utf-16-le")) // 2, 88)
+            p["source"] = "search"
+            with self.assertRaisesRegex(Exception, "GOLDBOX_ARTICLE_GATES_UNVERIFIED"):
+                publisher.compose_goldbox_article(p, image,
+                    "https://link.coupang.com/a/Abcd12345")
+
+    def test_a_price_verification_failure_falls_back_to_official_b(self):
+        t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
+        def product(pid, source, price, category, name):
+            return {"name": name, "category": category, "last_price": price,
+                    "last_source": source,
+                    "last_product_url": "https://link.coupang.com/re/AFFSDP?pageKey="
+                                      + pid + "&itemId=98765432",
+                    "last_image_url": "https://image15.coupangcdn.com/a.jpg",
+                    "last_checked_at_utc": t.isoformat()}
+        state = {"products": {
+            "12345678": product("12345678", "search", 30000, "가전디지털",
+                                "무선 키보드 저소음 블루투스"),
+            "22345678": product("22345678", "goldbox", 10000, "식품",
+                                "유기농 생수 24개 골드박스"),
+        }, "published": {}, "api_publish_claims": {}}
+        env = {"API_RADAR_PUBLISH_ENABLED": "true", "API_RADAR_TREND_MODE": "curated",
+               "NAVER_BLOG_STORAGE_STATE_JSON": "fake-session",
+               "COUPANG_PARTNERS_ACCESS_KEY": "fake",
+               "COUPANG_PARTNERS_SECRET_KEY": "fake"}
+        written = []
+        def submit(article, *_args, **_kw):
+            written.append(article)
+            return "https://blog.naver.com/mw5114/100000001"
+        with tempfile.TemporaryDirectory() as td:
+            image = Path(td) / "test.jpg"
+            image.write_bytes(b"\\xff\\xd8\\xff" + b"0" * 1200)
+            with patch.dict(os.environ, env, clear=True), \\
+                 patch("api_radar.publisher.utc_now", return_value=t), \\
+                 patch("api_radar.publisher.load_state", side_effect=lambda:(state,"sha")), \\
+                 patch("api_radar.publisher.save_state"), \\
+                 patch("api_radar.publisher.resolve_exact_identity",
+                       side_effect=lambda p: {"product_id":p["id"],"item_id":"98765432"}), \\
+                 patch("api_radar.publisher.check_exact_history",
+                       side_effect=quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE")) as history, \\
+                 patch("api_radar.publisher.download_verified_image", return_value=image), \\
+                 patch("gh_only.coupang_partners_api.create_product_deeplink",
+                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \\
+                 patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=submit):
+                self.assertEqual(publisher.run(now=t), 0)
+                self.assertEqual(history.call_count, 1)
+                self.assertEqual(len(written), 1)
+                self.assertEqual(written[0]["grade"], "B")
+                self.assertEqual(state["published"]["22345678"]["grade"], "B")
+                self.assertNotIn("12345678", state["published"])
+
+    def test_a_verified_deal_has_priority_before_b_and_shared_daily_cap(self):
+        t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
+        def p(pid, source, name):
+            return {"name": name, "category": "생활용품", "last_price": 30000,
+                    "last_source": source,
+                    "last_product_url":"https://link.coupang.com/re/AFFSDP?pageKey="
+                                       + pid + "&itemId=98765432",
+                    "last_image_url":"https://image15.coupangcdn.com/a.jpg",
+                    "last_checked_at_utc":t.isoformat()}
+        state={"products":{
+            "12345678":p("12345678", "search", "샤워기 헤드 필터"),
+            "22345678":p("22345678", "goldbox", "세제 캡슐 30개")},
+            "published":{}, "api_publish_claims":{}}
+        env={"API_RADAR_PUBLISH_ENABLED":"true", "API_RADAR_TREND_MODE":"curated",
+             "NAVER_BLOG_STORAGE_STATE_JSON":"fake",
+             "COUPANG_PARTNERS_ACCESS_KEY":"fake", "COUPANG_PARTNERS_SECRET_KEY":"fake"}
+        passed={"exact_product_item_verified":True,"reference_price":40000,
+                "discount_pct":25, "history_window":"recent_3_weeks"}
+        ordered=[]
+        def submit(article,*args,**kw):
+            ordered.append(article["grade"])
+            return "https://blog.naver.com/mw5114/" + str(100000000+len(ordered))
+        with tempfile.TemporaryDirectory() as td:
+            image=Path(td)/"photo.jpg"
+            image.write_bytes(b"\\xff\\xd8\\xff"+b"0"*1200)
+            with patch.dict(os.environ,env,clear=True), \\
+                 patch("api_radar.publisher.utc_now",return_value=t), \\
+                 patch("api_radar.publisher.load_state",side_effect=lambda:(state,"sha")), \\
+                 patch("api_radar.publisher.save_state"), \\
+                 patch("api_radar.publisher.resolve_exact_identity",
+                       side_effect=lambda p:{"product_id":p["id"],"item_id":"98765432"}), \\
+                 patch("api_radar.publisher.check_exact_history",
+                       side_effect=lambda p,i: passed if p["source"]=="search"
+                           else (_ for _ in ()).throw(
+                               quality.QualityError("DISCOUNT_BELOW_THRESHOLD_OR_IMPLAUSIBLE"))), \\
+                 patch("api_radar.publisher.download_verified_image",return_value=image), \\
+                 patch("gh_only.coupang_partners_api.create_product_deeplink",
+                       return_value={"partners_link":"https://link.coupang.com/a/Abcd12345"}), \\
+                 patch("gh_only.naver_blog_deal_publisher.submit_one",side_effect=submit):
+                self.assertEqual(publisher.run(now=t), 0)
+                self.assertEqual(ordered, ["A", "B"])
+                self.assertEqual({v["grade"] for v in state["published"].values()}, {"A","B"})
+                self.assertEqual(publisher.daily_slot_count(state,t),2)
+
     def test_claim_before_submit_and_checkpoint(self):
         now = datetime(2026, 11, 13, 5, tzinfo=timezone.utc)
         source = {"price": 30000, "checked_at": now.isoformat()}
