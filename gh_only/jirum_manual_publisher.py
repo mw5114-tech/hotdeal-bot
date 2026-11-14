@@ -284,27 +284,23 @@ def publish_one(article: dict, state_secret: str | None = None,
                 editor.press("ControlOrMeta+End")
                 editor.press("Enter")
                 lines = article["body"].split("\n")
-                # Finish ALL text with the existing proven single-image path
-                # BEFORE inserting a chart. Toolbar focus previously caused
-                # later price/footer text to be written outside its paragraph.
-                for i, line in enumerate(lines):
-                    if line:
-                        page.keyboard.insert_text(line)
-                    if i < len(lines) - 1:
-                        page.keyboard.press("Enter")
-                page.keyboard.press("Enter")
-                if chart is not None:
-                    # Move caret to the end of the actual first text paragraph,
-                    # create an empty paragraph before the price reference,
-                    # then use the site's native image upload there.
-                    result["failure_stage"] = "POSITION_CHART_AFTER_PRODUCT"
-                    first_line = lines[0].strip()
-                    product_p = editor.locator("p").filter(has_text=first_line)
-                    if product_p.count() != 1:
-                        raise RuntimeError("DAANGN_PRODUCT_PARAGRAPH_NOT_UNIQUE")
-                    product_p.click(timeout=7000)
-                    page.keyboard.press("End")
-                    page.keyboard.press("Enter")
+                # Daangn's current image toolbar APPENDS a new image at the
+                # end of ProseMirror regardless of the native caret position.
+                # Therefore type the product name first; append its chart;
+                # then focus the empty paragraph AFTER that chart and type
+                # the remaining reference/price/notice/link/footer there.
+                # Without an optional chart the original writing path remains.
+                lines = article["body"].split("\n")
+                if chart is None:
+                    for i, line in enumerate(lines):
+                        if line:
+                            page.keyboard.insert_text(line)
+                        if i < len(lines) - 1:
+                            page.keyboard.press("Enter")
+                else:
+                    if not lines or not lines[0].strip():
+                        raise RuntimeError("DAANGN_PRODUCT_NAME_LINE_MISSING")
+                    page.keyboard.insert_text(lines[0])
                     result["failure_stage"] = "UPLOAD_OPTIONAL_PRICE_CHART"
                     add_image = page.get_by_role("button", name="이미지 추가")
                     if add_image.count() != 1:
@@ -320,9 +316,26 @@ def publish_one(article: dict, state_secret: str | None = None,
                         !(e.innerText||'').includes('준비중');
                     }""", timeout=35000)
                     result["chart_upload_completed"] = True
-                    # IMPORTANT: never click editor or Control+End again here;
-                    # all text already exists in its original correct order.
-
+                    result["failure_stage"] = "FOCUS_PARAGRAPH_AFTER_CHART"
+                    trailing = editor.locator("p").last
+                    after_chart = editor.evaluate(r"""root => {
+                      const imgs = [...root.querySelectorAll('img')];
+                      const ps = [...root.querySelectorAll('p')];
+                      if(imgs.length!==2 || !ps.length) return false;
+                      const tail=ps[ps.length-1], img=imgs[1];
+                      return !!(img.compareDocumentPosition(tail) & 4)
+                        && !(tail.innerText||'').trim();
+                    }""")
+                    if not after_chart:
+                        raise RuntimeError("DAANGN_NO_EMPTY_PARAGRAPH_AFTER_CHART")
+                    trailing.click(timeout=7000)
+                    result["failure_stage"] = "WRITE_EDITOR_BODY"
+                    for index, line in enumerate(lines[1:]):
+                        if line:
+                            page.keyboard.insert_text(line)
+                        if index < len(lines[1:]) - 1:
+                            page.keyboard.press("Enter")
+                page.keyboard.press("Enter")
                 result["failure_stage"] = "WRITE_TITLE"
                 title_input = page.locator('input[placeholder="제목을 입력해주세요."]')
                 if title_input.count() != 1:
