@@ -395,6 +395,16 @@ def publish_one(article: dict, state_secret: str | None = None,
                     ),
                     "observed_length": len(observed),
                     "expected_length": len(article["body"]),
+                    "dom_structure": editor.evaluate(r"""e =>
+                      [...e.children].slice(0,35).map((n,i) => ({
+                        index: i, tag: n.tagName, cls: (n.className||'').slice(0,55),
+                        image_count:n.querySelectorAll('img').length,
+                        product:/^\\[(?:\\d+%할인|할인율 확인 중|1% 미만 저렴)/.test((n.innerText||'').trim()),
+                        price:(n.innerText||'').includes('💸 '),
+                        link:(n.innerText||'').includes('🛒 쿠팡에서 상품정보'),
+                        disclosure:(n.innerText||'').includes('이 포스팅은 쿠팡 파트너스'),
+                        text_len:(n.innerText||'').length,
+                      }))""") if dry_run else [],
                 }
                 if not validate_editor_copy(
                     editor, article["body"], article["candidate_url"], image,
