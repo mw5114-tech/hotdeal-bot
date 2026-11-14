@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 95983,
-  "pending": [
-    {
-      "id": 95983,
-      "source_post_url": "https://t.me/jirum/95983",
-      "original_purchase_url": "https://link.coupang.com/a/iEXxNe5Tb2",
-      "source_text": "☆특가 9,570원\n씨그램 플레인 무라벨, 450ml, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iEXxNe5Tb2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T00:31:35+00:00",
-      "title": "☆특가 9,570원",
-      "sale_price_krw": 9570
-    }
-  ],
-  "in_flight": {
-    "id": 95983,
-    "status": "CLAIMED",
-    "run_id": "43534907215",
-    "at": "2026-11-14T00:33:11.426356+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5271,6 +5256,16 @@
       "vendor_item_id": null,
       "at": "2026-11-13T23:37:21.193334+00:00",
       "run_id": "43528395451"
+    },
+    "95983": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%94%A8%EA%B7%B8%EB%9E%A8-%ED%94%8C%EB%A0%88%EC%9D%B8-%EB%AC%B4%EB%9D%BC%EB%B2%A8-450ml-20%EA%B0%9C-15%ED%95%A0%EC%9D%B8-PxqaEwQd?from=write",
+      "posted_at_utc": "2026-11-14T00:31:35+00:00",
+      "product_id": "8144862503",
+      "item_id": "22125252036",
+      "vendor_item_id": null,
+      "at": "2026-11-14T00:33:27.775135+00:00",
+      "run_id": "43534907215"
     }
   },
   "skipped_non_coupang": 452,
