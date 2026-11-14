@@ -2,12 +2,17 @@
 from __future__ import annotations
 
 import os
+from io import BytesIO
 from pathlib import Path
+import random
 from tempfile import TemporaryDirectory
 from unittest import TestCase, main
 from unittest.mock import patch
 
-from gh_only.lowchart_chart_capture import _exact_identity, chart_bounds, capture_chart_image
+from gh_only.lowchart_chart_capture import (
+    _exact_identity, _native_chart_url, _inspect_native_png,
+    chart_bounds, capture_chart_image,
+)
 from gh_only.naver_blog_format import add_price_chart_block, validate_blocks, DISCLOSURE
 from gh_only.daangn_editor_probe import _verified_lowchart_chart_identity
 
@@ -60,6 +65,60 @@ class ChartUnitTests(TestCase):
             row["caption"]["comparison_reference_source"] = "lowchart_observed_high"
             row["history"]["item_id"] = "98765432123"
             self.assertIsNone(_verified_lowchart_chart_identity(row))
+
+    def test_native_chart_source_must_match_exact_product_option(self):
+        self.assertEqual(
+            _native_chart_url("7098352204", "19148341413"),
+            "https://chart.lowchart.com/7098352204-19148341413.png",
+        )
+        for product, item in (("bad", "19148341413"), ("7098352204", "../../evil")):
+            with self.assertRaises(ValueError):
+                _native_chart_url(product, item)
+
+    @staticmethod
+    def synthetic_native_png(pale: bool) -> bytes:
+        from PIL import Image, ImageDraw
+        im = Image.new("RGB", (1600, 480), "white")
+        d = ImageDraw.Draw(im)
+        rng = random.Random(73)
+        if pale:
+            # Washed-out skeleton: same dimensions and a plausible PNG size,
+            # but the graph is almost invisible.
+            for _ in range(30000):
+                x = rng.randrange(1600)
+                y = rng.randrange(480)
+                shade = rng.randrange(238, 254)
+                d.point((x, y), fill=(shade, shade, shade))
+            d.line([(50, 240), (1500, 260)], fill="#E3E5E7", width=3)
+        else:
+            # Dark ink, readable price axis and jagged price movements.
+            for _ in range(30000):
+                x = rng.randrange(1600)
+                y = rng.randrange(480)
+                shade = rng.randrange(225, 255)
+                d.point((x, y), fill=(shade, shade, shade))
+            for x in range(50, 1500, 140):
+                d.line([(x, 70), (x, 420)], fill="#333333", width=8)
+            d.line([(30, 300), (250, 150), (470, 350), (750, 170),
+                    (1100, 390), (1450, 120)], fill="#111111", width=12)
+            d.text((50, 30), "PRICE 19,990 KRW", fill="black")
+        out = BytesIO()
+        im.save(out, format="PNG")
+        return out.getvalue()
+
+    def test_synthetic_readable_original_is_allowed(self):
+        data = self.synthetic_native_png(pale=False)
+        self.assertGreater(len(data), 18000)
+        stats = _inspect_native_png(data)
+        self.assertIsNotNone(stats)
+        self.assertEqual((stats["width"], stats["height"]), (1600, 480))
+
+    def test_washed_out_or_blank_native_graph_is_rejected(self):
+        pale = self.synthetic_native_png(pale=True)
+        self.assertGreater(len(pale), 18000)
+        self.assertIsNone(_inspect_native_png(pale))
+        self.assertIsNone(_inspect_native_png(b"this is not PNG"))
+        self.assertIsNone(_inspect_native_png(self.synthetic_native_png(pale=False)[:22000]))
 
     def test_capture_off_by_default_and_does_not_open_browser(self):
         with TemporaryDirectory() as folder, patch.dict(os.environ, {
