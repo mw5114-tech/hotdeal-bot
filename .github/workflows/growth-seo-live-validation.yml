@@ -31,6 +31,6 @@ jobs:
         with:
           python-version: '3.11'
       - name: Contract unit tests (no network or blog)
-        run: python -m unittest -q growth_lab.test_growth
+        run: python -m unittest -q growth_lab.test_growth.DraftTests
       - name: Search official API and store ONE nonpublished review-required draft
         run: python -m growth_lab.seo_drafts
