@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96028,
-  "pending": [
-    {
-      "id": 96028,
-      "source_message_id": 96028,
-      "source_post_url": "https://t.me/jirum/96028",
-      "original_purchase_url": "https://link.coupang.com/a/iFEZzzfDA4",
-      "title": "QCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰, 블랙, HT10",
-      "source_text": "☆특가 15,250원 (25.6% 할인)\nQCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰, 블랙, HT10\n📌 가격 현황\n- 정상가: 20,500원\n- 할인: 5,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iFEZzzfDA4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15250,
-      "posted_at_utc": "2026-11-14T10:39:34+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -919,6 +908,10 @@
     "96026": {
       "url": "https://blog.naver.com/mw5114/224477044844",
       "at": "2026-11-14T09:24:41.756030+00:00"
+    },
+    "96028": {
+      "url": "https://blog.naver.com/mw5114/224477107478",
+      "at": "2026-11-14T10:41:03.831053+00:00"
     }
   },
   "skipped": {
@@ -1015,12 +1008,7 @@
       "at": "2026-11-14T07:00:38.586910+00:00"
     }
   },
-  "in_flight": {
-    "id": 96028,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43586351620",
-    "at": "2026-11-14T10:40:21.875274+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
