@@ -128,7 +128,33 @@ def persist_report(outdir: Path = Path("api-radar-output")) -> None:
             raise RadarStateError("RADAR_METADATA_UNSAFE")
         validated[row["id"]] = row
     state, sha = load_state()
-    updated, top = update_state(state, observations, datetime.now(timezone.utc))
+    scan_now = datetime.now(timezone.utc)
+    updated, top = update_state(state, observations, scan_now)
+    # Keep a CURRENT-DAY Goldbox inventory separate from product-history rows.
+    # The generic keyword search must never overwrite a Goldbox membership
+    # and a new day's inventory must never silently republish an old product.
+    # Successful Goldbox snapshots made throughout one KST day are unioned.
+    from datetime import timedelta
+    day = scan_now.astimezone(timezone(timedelta(hours=9))).date().isoformat()
+    goldbox = updated.get("goldbox_today")
+    if not isinstance(goldbox, dict) or goldbox.get("kst_date") != day:
+        goldbox = {"kst_date": day, "updated_at": None, "items": {}}
+    if not isinstance(goldbox.get("items"), dict):
+        raise RadarStateError("GOLDBOX_QUEUE_SCHEMA_INVALID")
+    for row in observations:
+        if row["source"] != "goldbox":
+            continue
+        meta = validated.get(row["id"])
+        if not meta or meta["price"] != row["price"]:
+            continue
+        goldbox["items"][row["id"]] = {
+            "name": row["name"], "price": row["price"],
+            "category": meta["category"], "url": meta["url"],
+            "image": meta["image"], "source": "goldbox",
+            "checked_at": summary.get("checked_at_utc"),
+        }
+        goldbox["updated_at"] = summary.get("checked_at_utc")
+    updated["goldbox_today"] = goldbox
     for row in observations:
         meta = validated.get(row["id"])
         if meta and meta["price"] == row["price"] and row["id"] in updated["products"]:
