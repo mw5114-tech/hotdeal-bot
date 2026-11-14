@@ -12,7 +12,7 @@ import re
 
 from api_radar.collector import SEARCH, RadarApiError, get_api, extract_rows, normalize
 from api_radar.quality import extract_exact_identity
-from gh_only.coupang_partners_api import create_product_deeplink, issued_link_url, CoupangPartnersError
+from gh_only.coupang_partners_api import create_product_deeplink, request_deeplink, issued_link_url, CoupangPartnersError
 from growth_lab.github_store import load, save
 
 KST = timezone(timedelta(hours=9))
@@ -49,10 +49,12 @@ def products_for_comparison(rows: list[dict], keyword: str) -> list[dict]:
         if not p or keyword.replace(" ", "").lower() not in p["name"].replace(" ", "").lower():
             continue
         identity = extract_exact_identity(p["url"], p["id"])
-        if not identity or p["id"] in seen:
+        if p["id"] in seen:
             continue
+        # No invented itemId when SEARCH offers only a generic tracking URL.
         seen.add(p["id"])
-        offers.append({**p, "identity": identity})
+        offers.append({**p, "identity": identity,
+                       "option_price_verified": identity is not None})
     return sorted(offers, key=lambda x:(x["price"], x["id"]))[:5]
 
 
@@ -81,7 +83,7 @@ def build_draft(topic: tuple[str, str, str], offers: list[dict], now: datetime) 
             raise DraftError("SEO_OFFICIAL_LINK_MISSING")
         line = (
             "#### " + str(index) + ". " + item["name"] + "\n\n"
-            + "- 수집 당시 쿠팡 가격: **" + format(item["price"], ",") + "원**\n"
+            + "- 검색 API 관측가격(옵션에 따라 다름): **" + format(item["price"], ",") + "원**\n"
             + "- 로켓배송 표시: " + ("예" if item["is_rocket"] else "확인되지 않음") + "\n"
             + "- 무료배송 표시: " + ("예" if item["free_shipping"] else "확인되지 않음") + "\n"
             + "- [쿠팡에서 실제 옵션·가격 확인](" + item["affiliate_url"] + ")\n\n"
@@ -124,8 +126,15 @@ def run(*, now: datetime | None = None) -> int:
         return 0
     # Only official server-issued tracked links. This consumes <=3 link calls.
     for p in found[:3]:
-        receipt = create_product_deeplink(p["identity"], subid="naverblog")
-        p["affiliate_url"] = receipt["partners_link"]
+        if p["identity"] is not None:
+            receipt = create_product_deeplink(p["identity"], subid="naverblog")
+            p["affiliate_url"] = receipt["partners_link"]
+        else:
+            # API-issued product-level link. Displayed search price is NOT
+            # verified to match whatever option the buyer later selects.
+            canonical = "https://www.coupang.com/vp/products/" + p["id"]
+            p["affiliate_url"] = request_deeplink(canonical, identity=None,
+                                                    subid="naverblog")
     article = build_draft(topic, found, now)
     state["drafts"] = (state["drafts"] + [article])[-MAX_DRAFTS:]
     state["updated_at"] = now.isoformat()
