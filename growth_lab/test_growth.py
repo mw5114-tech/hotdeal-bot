@@ -154,6 +154,75 @@ class DraftTests(TestCase):
             seo_drafts.build_draft(seo_drafts.TOPICS[0],
                                    [self.sample(i) for i in range(2)],T)
 
+    def test_real_search_identity_contract_and_issued_deeplink_integration(self):
+        """Actual search parser + resolver + real deeplink client, mocked HTTP."""
+        from gh_only.direct_product_links import regular_product_url
+        topic = seo_drafts.topic_for_day(T)
+        keyword = topic[0]
+        def row(n):
+            pid = str(12345678 + n)
+            return {
+                "productId": int(pid), "productName": keyword + " 실속형 정품 모델 " + str(n),
+                "productPrice": 30000 + n * 1000,
+                "productUrl": ("https://link.coupang.com/re/AFFSDP?"
+                               "pageKey=" + pid + "&itemId=98765432"),
+                "productImage": "https://image15.coupangcdn.com/test.jpg",
+                "isRocket": True, "isFreeShipping": True,
+                "categoryName": "가전디지털"
+            }
+        products = [row(i) for i in range(3)]
+        parsed = seo_drafts.products_for_comparison(products, keyword)
+        self.assertEqual(len(parsed), 3)
+        self.assertTrue(all(p["identity"]["status"] == "EXACT_ITEM_IDENTIFIED"
+                            for p in parsed))
+        self.assertTrue(all("itemId=98765432" in regular_product_url(p["identity"])
+                            for p in parsed))
+        class Response:
+            status = 200
+            def __init__(self, payload): self.payload = payload
+            def __enter__(self): return self
+            def __exit__(self, *args): return None
+            def read(self, n): return json.dumps(self.payload).encode()[:n]
+        def issue(req, timeout):
+            canonical = json.loads(req.data)["coupangUrls"][0]
+            return Response({"rCode":"0","data":[{
+                "originalUrl": canonical,
+                "shortenUrl": "https://link.coupang.com/a/TestOfficial123"
+            }]})
+        sent = []
+        with patch.dict(os.environ, {
+            "COUPANG_PARTNERS_ACCESS_KEY":"dummy-access-key",
+            "COUPANG_PARTNERS_SECRET_KEY":"dummy-secret-key",
+        }, clear=True), \
+             patch("growth_lab.seo_drafts.load", return_value=(None, None)), \
+             patch("growth_lab.seo_drafts.save",
+                   side_effect=lambda path, data, sha, schema: sent.append(data)), \
+             patch("growth_lab.seo_drafts.get_api",
+                   return_value={"rCode":"0", "data":{"productData":products}}), \
+             patch("gh_only.coupang_partners_api.request.urlopen",
+                   side_effect=issue) as http:
+            self.assertEqual(seo_drafts.run(now=T), 0)
+        self.assertEqual(http.call_count, 3)
+        self.assertEqual(len(sent), 1)
+        draft = sent[0]["drafts"][0]
+        self.assertEqual(draft["status"], "DRAFT_REVIEW_REQUIRED")
+        self.assertFalse(draft["auto_published"])
+        self.assertEqual(draft["article_markdown"].count(
+            "https://link.coupang.com/a/TestOfficial123"), 3)
+
+    def test_opaque_search_url_uses_product_level_without_fabricating_option(self):
+        keyword = seo_drafts.topic_for_day(T)[0]
+        raw = [{
+            "productId":12345678, "productName":keyword + " 공식 판매 상품",
+            "productPrice": 35000,
+            "productUrl":"https://link.coupang.com/a/AbcDEF12345",
+            "productImage":"https://image15.coupangcdn.com/test.jpg"
+        }]
+        got = seo_drafts.products_for_comparison(raw, keyword)
+        self.assertEqual(len(got),1)
+        self.assertIsNone(got[0]["identity"])
+        self.assertFalse(got[0]["option_price_verified"])
+
     def test_draft_dedup_checks_before_api_call(self):
         topic=seo_drafts.topic_for_day(T)
         key=T.astimezone(seo_drafts.KST).date().isoformat()+":"+topic[0]
