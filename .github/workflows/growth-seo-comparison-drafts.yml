@@ -1,0 +1,33 @@
+name: Growth Lab 3 | Evidence-only SEO comparison drafts
+
+on:
+  workflow_dispatch:
+  schedule:
+    # Daily 11:42 KST; 1 search query, up to 3 official link calls.
+    - cron: '42 2 * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: growth-seo-draft-independent
+  cancel-in-progress: false
+
+jobs:
+  create-draft:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+      GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Query products and save a factual, review-required comparison draft
+        run: python -m growth_lab.seo_drafts
