@@ -123,7 +123,7 @@ jobs:
           # so the full headed Chromium binary and optional fonts are unnecessary.
           # On ubuntu-24.04, --with-deps previously downloaded 21 MB of fonts
           # and cost roughly 95 seconds per eligible post.
-          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1 Pillow==11.3.0
           python -m playwright install --only-shell chromium
 
           # No Naver login or publish here: just a local browser launch probe.
