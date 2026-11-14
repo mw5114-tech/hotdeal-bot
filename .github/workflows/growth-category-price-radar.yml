@@ -1,10 +1,12 @@
-name: Growth Lab 2 | Category-best option-level price drops
+name: Growth Lab 2 | Verified price drop V2
 
 on:
   workflow_dispatch:
   schedule:
-    # 09:35 and 19:35 KST. Rotate categories, 2 API calls each run.
-    - cron: '35 0,10 * * *'
+    # 12 light jobs/day, 2 API calls each; all six categories every 6h.
+    # KST 09:35,11:35,...,07:35 next day. 24 category calls/day.
+    # Stays well below documented 100-per-hour non-search affiliate limit.
+    - cron: '35 */2 * * *'
 
 permissions:
   contents: write
@@ -29,5 +31,5 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Update price observations and verify new drops
+      - name: Collect 6h option observations and verify real 24h + 30d drops
         run: python -m growth_lab.price_radar
