@@ -70,9 +70,11 @@ def fetch_report(kind: str, day: str, page: int = 0, *, opener=None) -> list[dic
         obj = json.loads(body)
     except (UnicodeError, ValueError):
         raise RevenueError("REPORT_INVALID_JSON") from None
-    if not isinstance(obj, dict) or str(obj.get("rCode", "0")) != "0":
+    if not isinstance(obj, dict) or str(obj.get("rCode")) != "0":
         raise RevenueError("REPORT_NON_SUCCESS_" + kind.upper())
     rows = obj.get("data")
+    if rows is None:
+        rows = []  # Successful report with no commissions/orders is valid.
     if isinstance(rows, dict):
         rows = rows.get("content", rows.get("items", rows.get("reports", [])))
     if not isinstance(rows, list):
