@@ -1,0 +1,27 @@
+name: Growth Lab | All three offline unit tests
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'growth_lab/**'
+      - '.github/workflows/growth-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check --quiet 'cryptography>=43,<48'
+      - name: No network or posting
+        run: python -m unittest -v growth_lab.test_growth
