@@ -168,6 +168,72 @@ class PublisherTests(TestCase):
             self.assertEqual(check.call_count, 2)
             download.assert_not_called()
 
+    def test_daily_limit_counts_ambiguous_claims_and_kst_midnight(self):
+        t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
+        state = {"products": {}, "published": {
+            "11111111": {"kst_date": "2026-11-14"},
+            "22222222": {"kst_date": "2026-11-14"}},
+            "api_publish_claims": {
+                "33333333": {"claimed_at": "2026-11-14T00:59:59+09:00"}}}
+        self.assertEqual(publisher.daily_slot_count(state, t), 3)
+        self.assertEqual(publisher.select_candidates(state, t), [])
+        state["api_publish_claims"]["33333333"]["claimed_at"] = "2026-11-13T23:59:59+09:00"
+        self.assertEqual(publisher.daily_slot_count(state, t), 2)
+        state["api_publish_claims"]["33333333"]["claimed_at"] = "unparseable"
+        with self.assertRaisesRegex(Exception, "RADAR_CLAIM_DATE_INVALID"):
+            publisher.daily_slot_count(state, t)
+
+    def test_three_verified_posts_across_two_runs_but_no_fourth(self):
+        t = datetime(2026, 11, 14, 2, 0, tzinfo=timezone.utc)
+        products = {}
+        for n in range(4):
+            pid = str(12345678 + n)
+            products[pid] = {
+                "name": "생활용품 필터 샤워기 " + str(n),
+                "category": "생활용품", "last_price": 30000,
+                "last_source": "goldbox",
+                "last_product_url": "https://link.coupang.com/re/AFFSDP?pageKey="
+                                    + pid + "&itemId=98765432",
+                "last_image_url": "https://image15.coupangcdn.com/a.jpg",
+                "last_checked_at_utc": t.isoformat()}
+        state = {"products": products, "published": {}, "api_publish_claims": {}}
+        env = {"API_RADAR_PUBLISH_ENABLED": "true",
+               "API_RADAR_TREND_MODE": "curated",
+               "NAVER_BLOG_STORAGE_STATE_JSON": "fake",
+               "COUPANG_PARTNERS_ACCESS_KEY": "fake",
+               "COUPANG_PARTNERS_SECRET_KEY": "fake"}
+        history = {"exact_product_item_verified": True, "reference_price": 45000,
+                   "discount_pct": 33.3, "history_window": "recent_3_weeks"}
+        def identity(p):
+            return {"product_id": p["id"], "item_id": "98765432",
+                    "vendor_item_id": None}
+        def fake_url(*a, **kw):
+            return "https://link.coupang.com/a/TestOfficial123"
+        def publish(*a, **kw):
+            publish.count += 1
+            return "https://blog.naver.com/mw5114/" + str(100000000 + publish.count)
+        publish.count = 0
+        with patch.dict(os.environ, env, clear=True), \
+             patch("api_radar.publisher.utc_now", return_value=t), \
+             patch("api_radar.publisher.load_state", side_effect=lambda: (state, "sha")), \
+             patch("api_radar.publisher.save_state") as save, \
+             patch("api_radar.publisher.resolve_exact_identity", side_effect=identity), \
+             patch("api_radar.publisher.check_exact_history", return_value=history), \
+             patch("api_radar.publisher.download_verified_image",
+                   return_value=Path("/tmp/placeholder.jpg")), \
+             patch("gh_only.coupang_partners_api.create_product_deeplink",
+                   side_effect=lambda *a, **kw: {"partners_link":fake_url()}), \
+             patch("api_radar.publisher.compose_article", return_value={"title":"test"}), \
+             patch("gh_only.naver_blog_deal_publisher.submit_one", side_effect=publish):
+            self.assertEqual(publisher.run(now=t), 0)
+            self.assertEqual(len(state["published"]), 2)
+            self.assertEqual(publisher.run(now=t), 0)
+            self.assertEqual(len(state["published"]), 3)
+            self.assertEqual(publisher.run(now=t), 0)
+            self.assertEqual(publish.count, 3)
+            self.assertEqual(len(state["api_publish_claims"]), 0)
+            self.assertEqual(save.call_count, 6)
+
     def test_claim_before_submit_and_checkpoint(self):
         now = datetime(2026, 11, 13, 5, tzinfo=timezone.utc)
         source = {"price": 30000, "checked_at": now.isoformat()}
