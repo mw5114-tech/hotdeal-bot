@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96067,
-  "pending": [
-    {
-      "id": 96067,
-      "source_post_url": "https://t.me/jirum/96067",
-      "original_purchase_url": "https://link.coupang.com/a/iGum6VGNlk",
-      "source_text": "🔥🔥🔥무지성 5,710원 (48.0% 할인)🔥🔥🔥\n뵤도 유기농 토마토 케첩 키즈\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,981원\n- 할인: 5,271원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGum6VGNlk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-14T22:38:34+00:00",
-      "title": "뵤도 유기농 토마토 케첩 키즈",
-      "sale_price_krw": 5710
-    }
-  ],
-  "in_flight": {
-    "id": 96067,
-    "status": "CLAIMED",
-    "run_id": "43649224903",
-    "at": "2026-11-14T22:39:44.392475+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5541,6 +5526,16 @@
       "vendor_item_id": "91532923540",
       "at": "2026-11-14T22:38:51.039656+00:00",
       "run_id": "43649116820"
+    },
+    "96067": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B5%A4%EB%8F%84-%EC%9C%A0%EA%B8%B0%EB%86%8D-%ED%86%A0%EB%A7%88%ED%86%A0-%EC%BC%80%EC%B2%A9-%ED%82%A4%EC%A6%88-300ml-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-jvOgJ0oA?from=write",
+      "posted_at_utc": "2026-11-14T22:38:34+00:00",
+      "product_id": "7567591633",
+      "item_id": "19950727516",
+      "vendor_item_id": "3867931374",
+      "at": "2026-11-14T22:40:05.139971+00:00",
+      "run_id": "43649224903"
     }
   },
   "skipped_non_coupang": 509,
