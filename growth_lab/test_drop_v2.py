@@ -140,6 +140,37 @@ class PublishV2Tests(TestCase):
             event, [api_row(vendor="55555555")]))
         self.assertIsNone(drop_publisher.validated_offer(event, []))
 
+    def test_official_deeplink_exact_identity_contract(self):
+        """Never fake an AFFSDP link: signed API must validate URL+subid."""
+        from gh_only.coupang_partners_api import create_product_deeplink
+        from gh_only.direct_product_links import regular_product_url
+        import json
+        identity = {"status":"EXACT_ITEM_IDENTIFIED", "product_id":PID,
+                    "item_id":ITEM, "vendor_item_id":VENDOR}
+        expected = regular_product_url(identity)
+        class Reply:
+            status=200
+            def __enter__(self): return self
+            def __exit__(self, *args): pass
+            def read(self, n):
+                return json.dumps({"rCode":"0", "data":[{
+                    "originalUrl":expected, "shortenUrl":ISSUED,
+                    "landingUrl":"https://link.coupang.com/re/AFFSDP?"
+                                 + "pageKey="+PID+"&itemId="+ITEM
+                                 + "&vendorItemId="+VENDOR+"&subid=naverblog"}]}).encode()[:n]
+        sent = []
+        def http(request, timeout):
+            sent.append(json.loads(request.data))
+            return Reply()
+        with patch.dict(os.environ, {
+            "COUPANG_PARTNERS_ACCESS_KEY":"test-access",
+            "COUPANG_PARTNERS_SECRET_KEY":"test-secret"
+        }, clear=True), patch("gh_only.coupang_partners_api.request.urlopen",
+                              side_effect=http):
+            receipt = create_product_deeplink(identity, subid="naverblog")
+        self.assertEqual(receipt["partners_link"], ISSUED)
+        self.assertEqual(sent, [{"coupangUrls":[expected], "subId":"naverblog"}])
+
     def test_safe_claim_before_submit_and_checkpoint(self):
         growth, event = price_state()
         global_state = radar_state()
