@@ -126,7 +126,9 @@ def run_one(*, now: datetime | None = None) -> int:
             return 0
         from api_radar.publisher import WORK_DIR
         photo = download_verified_image(offer["image"], WORK_DIR, pid)
-        identity = {"product_id":offer["id"], "item_id":offer["item_id"],
+        # Identity is earned from the fresh, allowlisted exact-option URL.
+        identity = {"status":"EXACT_ITEM_IDENTIFIED",
+                    "product_id":offer["id"], "item_id":offer["item_id"],
                     "vendor_item_id":offer.get("vendor_item_id")}
         receipt = create_product_deeplink(identity, subid="naverblog")
         article = compose_drop_article(event, offer, photo, receipt["partners_link"])
