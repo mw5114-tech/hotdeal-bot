@@ -584,10 +584,10 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
         browser = playwright.chromium.launch(headless=True)
         try:
             context = browser.new_context(storage_state=state, locale="ko-KR")
-            # Read-only capture in an isolated empty-cookie context. Never
-            # alter the verified price or link if Lowchart has no chart.
-            from gh_only.lowchart_chart_capture import capture_chart_image
-            chart = capture_chart_image(
+            # Our original verified-price graphic; NO Lowchart screenshot,
+            # copied chart or inferred time series. Safe optional second image.
+            from gh_only.lowchart_generated_price_chart import generate_price_chart_image
+            chart = generate_price_chart_image(
                 browser, article.get("chart_identity"), image.parent,
                 article.get("source_id"),
             )

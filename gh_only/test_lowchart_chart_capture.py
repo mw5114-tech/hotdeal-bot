@@ -38,16 +38,23 @@ class ChartUnitTests(TestCase):
                 "caption": {
                     "comparison_reference_source": "lowchart_public_history",
                     "comparison_reference_price_krw": 10000,
+                    "sale_price_krw": 8500,
                 },
                 "history": {
                     "visible_exact_item_prices_verified": True,
                     "source_item_identifiers_present": True,
                     "product_id": p, "item_id": item,
                     "source_url": f"https://www.lowchart.com/{p}-{item}",
+                    "observed_low_krw": 8000, "observed_high_krw": 12000,
+                    "observed_current_krw": 9000, "observed_average_krw": 10000,
+                    "history_window": "recent_3_weeks",
                 },
             }
-            self.assertEqual(_verified_lowchart_chart_identity(row),
-                             {"product_id": p, "item_id": item})
+            chart = _verified_lowchart_chart_identity(row)
+            self.assertIsNotNone(chart)
+            self.assertEqual((chart["product_id"], chart["item_id"]), (p, item))
+            self.assertEqual(chart["observed_average_krw"], 10000)
+            self.assertEqual(chart["deal_price_krw"], 8500)
             row["caption"]["comparison_reference_source"] = "fallcent_observed_high"
             self.assertIsNone(_verified_lowchart_chart_identity(row))
             row["caption"]["comparison_reference_source"] = "lowchart_observed_high"

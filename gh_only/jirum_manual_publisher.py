@@ -213,13 +213,15 @@ def publish_one(article: dict, state_secret: str | None = None,
             result["failure_stage"] = "LAUNCH_BROWSER"
             browser = p.chromium.launch(headless=True)
             try:
-                from gh_only.lowchart_chart_capture import capture_chart_image
-                chart = capture_chart_image(
+                from gh_only.lowchart_generated_price_chart import generate_price_chart_image
+                chart = generate_price_chart_image(
                     browser, article.get("chart_identity"), article["image"].parent,
                     article.get("source_id"),
                 )
                 article["chart_image"] = chart
                 result["chart_captured"] = chart is not None
+                result["chart_kind"] = ("self_generated_price_summary"
+                                        if chart is not None else None)
                 result["failure_stage"] = "OPEN_DAANGN_PAGE"
                 ctx = browser.new_context(
                     storage_state=state, locale="ko-KR",

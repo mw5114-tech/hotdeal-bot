@@ -89,7 +89,10 @@ jobs:
       COUPANG_PARTNER_LPTAG: AF9668915
       COUPANG_PARTNER_SUBID: naverblog
       JIRUM_IMAGE_SOURCE: lowchart
-      # Optional read-only Lowchart chart capture; no image = normal post.
+      # Self-generated summary PNG from verified exact-item public price stats.
+      # Lowchart's raw date/price series is not public; never fabricate it.
+      JIRUM_LOWCHART_CHART_MODE: generated
+      # Kept for rollback compatibility; generated mode does not call capture.
       JIRUM_LOWCHART_CHART_IMAGE_ENABLED: 'true'
       JIRUM_ENABLE_NAVER_PRICE_FALLBACK: 'false'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
