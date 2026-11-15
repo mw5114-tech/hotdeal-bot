@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96167,
-  "pending": [
-    {
-      "id": 96167,
-      "source_post_url": "https://t.me/jirum/96167",
-      "original_purchase_url": "https://link.coupang.com/a/iIa5AZ8ufQ",
-      "source_text": "👍대박 9,980원 (37.0% 할인)\n[로켓프레시] 오뚜기 제주담음 제주청귤 고등어구이 3미 (냉동)\n📌 가격 현황\n- 정상가: 15,841원\n- 할인: 5,861원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIa5AZ8ufQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T23:03:56+00:00",
-      "title": "[로켓프레시] 오뚜기 제주담음 제주청귤 고등어구이 3미 (냉동)",
-      "sale_price_krw": 9980
-    }
-  ],
-  "in_flight": {
-    "id": 96167,
-    "status": "CLAIMED",
-    "run_id": "43772820644",
-    "at": "2026-11-15T23:05:25.235533+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5791,6 +5776,16 @@
       "vendor_item_id": "86341964950",
       "at": "2026-11-15T14:59:16.616594+00:00",
       "run_id": "43727209066"
+    },
+    "96167": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EC%BC%93%ED%94%84%EB%A0%88%EC%8B%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%A0%9C%EC%A3%BC%EB%8B%B4%EC%9D%8C-%EC%A0%9C%EC%A3%BC%EC%B2%AD%EA%B7%A4-%EA%B3%A0%EB%93%B1%EC%96%B4%EA%B5%AC%EC%9D%B4-3%EB%AF%B8-%EB%83%89%EB%8F%99-35%ED%95%A0%EC%9D%B8-dQz5xGnj?from=write",
+      "posted_at_utc": "2026-11-15T23:03:56+00:00",
+      "product_id": "8484983229",
+      "item_id": "24557483820",
+      "vendor_item_id": "91569770149",
+      "at": "2026-11-15T23:05:42.307520+00:00",
+      "run_id": "43772820644"
     }
   },
   "skipped_non_coupang": 584,
