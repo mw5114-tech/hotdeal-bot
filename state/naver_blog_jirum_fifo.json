@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96168,
-  "pending": [],
+  "last_scanned_id": 96169,
+  "pending": [
+    {
+      "id": 96169,
+      "source_message_id": 96169,
+      "source_post_url": "https://t.me/jirum/96169",
+      "original_purchase_url": "https://link.coupang.com/a/iIcHtI3jcy",
+      "title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 벽걸이형, 방문설치",
+      "source_text": "☆특가 1,791,000원 (14.3% 할인)\n삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 벽걸이형, 방문설치\n📌 가격 현황\n- 정상가: 2,090,810원\n- 할인: 299,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIcHtI3jcy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1791000,
+      "posted_at_utc": "2026-11-15T23:26:29+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
