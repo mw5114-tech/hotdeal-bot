@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96119,
-  "pending": [
-    {
-      "id": 96119,
-      "source_post_url": "https://t.me/jirum/96119",
-      "original_purchase_url": "https://link.coupang.com/a/iG04VsRFo4",
-      "source_text": "🔥🔥🔥무지성 12,900원 (67.0% 할인)🔥🔥🔥\n에스케이지 H5 미니 다용도 어깨 마사지기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 39,091원\n- 할인: 26,191원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iG04VsRFo4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T06:16:15+00:00",
-      "title": "에스케이지 H5 미니 다용도 어깨 마사지기",
-      "sale_price_krw": 12900
-    }
-  ],
-  "in_flight": {
-    "id": 96119,
-    "status": "CLAIMED",
-    "run_id": "43684727477",
-    "at": "2026-11-15T06:17:32.097034+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5691,6 +5676,16 @@
       "vendor_item_id": "87694422069",
       "at": "2026-11-15T06:11:48.057618+00:00",
       "run_id": "43684273600"
+    },
+    "96119": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EC%8A%A4%EC%BC%80%EC%9D%B4%EC%A7%80-H5-%EB%AF%B8%EB%8B%88-%EB%8B%A4%EC%9A%A9%EB%8F%84-%EC%96%B4%EA%B9%A8-%EB%A7%88%EC%82%AC%EC%A7%80%EA%B8%B0-PnnkkgnP?from=write",
+      "posted_at_utc": "2026-11-15T06:16:15+00:00",
+      "product_id": "8750088405",
+      "item_id": "25437097244",
+      "vendor_item_id": "92430041217",
+      "at": "2026-11-15T06:17:51.479036+00:00",
+      "run_id": "43684727477"
     }
   },
   "skipped_non_coupang": 546,
