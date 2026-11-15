@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96114,
-  "pending": [],
+  "last_scanned_id": 96116,
+  "pending": [
+    {
+      "id": 96116,
+      "source_post_url": "https://t.me/jirum/96116",
+      "original_purchase_url": "https://link.coupang.com/a/iG0CGrCHUO",
+      "source_text": "🔥🔥🔥무지성 4,550원 (59.0% 할인)🔥🔥🔥\n파라스 착즙 레몬 주스 1L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 11,098원\n- 할인: 6,548원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iG0CGrCHUO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-15T06:09:52+00:00",
+      "title": "파라스 착즙 레몬 주스 1L",
+      "sale_price_krw": 4550
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -5668,7 +5678,7 @@
       "run_id": "43680329537"
     }
   },
-  "skipped_non_coupang": 543,
+  "skipped_non_coupang": 544,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
