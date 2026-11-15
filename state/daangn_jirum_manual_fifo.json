@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96130,
-  "pending": [
-    {
-      "id": 96130,
-      "source_post_url": "https://t.me/jirum/96130",
-      "original_purchase_url": "https://link.coupang.com/a/iHd8H39RVk",
-      "source_text": "☆특가 4,100원\n비비드키친 저당 닭가슴살 브리또 바비큐 (냉동), 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iHd8H39RVk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T09:19:01+00:00",
-      "title": "☆특가 4,100원",
-      "sale_price_krw": 4100
-    }
-  ],
-  "in_flight": {
-    "id": 96130,
-    "status": "CLAIMED",
-    "run_id": "43698685819",
-    "at": "2026-11-15T09:20:11.090694+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5741,6 +5726,16 @@
       "vendor_item_id": "90141922802",
       "at": "2026-11-15T09:02:29.983912+00:00",
       "run_id": "43697201437"
+    },
+    "96130": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EB%B9%84%EB%93%9C%ED%82%A4%EC%B9%9C-%EC%A0%80%EB%8B%B9-%EB%8B%AD%EA%B0%80%EC%8A%B4%EC%82%B4-%EB%B8%8C%EB%A6%AC%EB%98%90-%EB%B0%94%EB%B9%84%ED%81%90-%EB%83%89%EB%8F%99-2%EA%B0%9C-A0nYbOYd?from=write",
+      "posted_at_utc": "2026-11-15T09:19:01+00:00",
+      "product_id": "9075067809",
+      "item_id": "26655618764",
+      "vendor_item_id": null,
+      "at": "2026-11-15T09:20:27.295966+00:00",
+      "run_id": "43698685819"
     }
   },
   "skipped_non_coupang": 552,
