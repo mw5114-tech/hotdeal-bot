@@ -1,0 +1,28 @@
+name: Tests | Naver delayed Telegram event wait
+on:
+  push:
+    branches:
+      - fix/naver-telegram-public-lag-retry-20261115
+      - main
+    paths:
+      - gh_only/naver_blog_jirum.py
+      - gh_only/test_naver_blog_jirum.py
+      - .github/workflows/naver-blog-auto-main.yml
+      - .github/workflows/naver-telegram-lag-tests.yml
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Python-only browser import without logging in or publishing
+        run: python -m pip install --quiet --disable-pip-version-check playwright==1.64.1
+      - name: Run Naver exact-event and queue regressions, no external posting
+        run: |
+          python -m compileall -q gh_only/naver_blog_jirum.py gh_only/test_naver_blog_jirum.py
+          python -m unittest -v gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_coupang_partners_api
