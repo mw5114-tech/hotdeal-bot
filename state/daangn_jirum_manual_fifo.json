@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96170,
-  "pending": [
-    {
-      "id": 96170,
-      "source_post_url": "https://t.me/jirum/96170",
-      "original_purchase_url": "https://link.coupang.com/a/iIc7CB0o3M",
-      "source_text": "☆특가 7,980원\n크리넥스 빨아쓰는 위생행주 블루, 72매, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIc7CB0o3M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T23:32:23+00:00",
-      "title": "☆특가 7,980원",
-      "sale_price_krw": 7980
-    }
-  ],
-  "in_flight": {
-    "id": 96170,
-    "status": "CLAIMED",
-    "run_id": "43775411720",
-    "at": "2026-11-15T23:33:30.417776+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5821,6 +5806,16 @@
       "vendor_item_id": "92866178674",
       "at": "2026-11-15T23:27:48.718162+00:00",
       "run_id": "43774858773"
+    },
+    "96170": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%AC%EB%84%A5%EC%8A%A4-%EB%B9%A8%EC%95%84%EC%93%B0%EB%8A%94-%EC%9C%84%EC%83%9D%ED%96%89%EC%A3%BC-%EB%B8%94%EB%A3%A8-72%EB%A7%A4-6%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PnnkGW4P?from=write",
+      "posted_at_utc": "2026-11-15T23:32:23+00:00",
+      "product_id": "6885129342",
+      "item_id": "19801267760",
+      "vendor_item_id": null,
+      "at": "2026-11-15T23:33:51.665020+00:00",
+      "run_id": "43775411720"
     }
   },
   "skipped_non_coupang": 584,
