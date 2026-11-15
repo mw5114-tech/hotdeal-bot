@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96123,
-  "pending": [
-    {
-      "id": 96123,
-      "source_post_url": "https://t.me/jirum/96123",
-      "original_purchase_url": "https://link.coupang.com/a/iG4cA3ZgOG",
-      "source_text": "☆특가 15,900원\n매직브라이트 BAMBOO 도톰한 3겹 뽑아쓰는 대나무 키친타올, 10개, 100매\n📦 특가 바로가기\nhttps://link.coupang.com/a/iG4cA3ZgOG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T06:59:58+00:00",
-      "title": "☆특가 15,900원",
-      "sale_price_krw": 15900
-    }
-  ],
-  "in_flight": {
-    "id": 96123,
-    "status": "CLAIMED",
-    "run_id": "43688029810",
-    "at": "2026-11-15T07:01:33.923649+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5711,6 +5696,16 @@
       "vendor_item_id": "92083885361",
       "at": "2026-11-15T06:19:46.066701+00:00",
       "run_id": "43684875787"
+    },
+    "96123": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%A4%EC%A7%81%EB%B8%8C%EB%9D%BC%EC%9D%B4%ED%8A%B8-BAMBOO-%EB%8F%84%ED%86%B0%ED%95%9C-3%EA%B2%B9-%EB%BD%91%EC%95%84%EC%93%B0%EB%8A%94-%EB%8C%80%EB%82%98%EB%AC%B4-%ED%82%A4%EC%B9%9C%ED%83%80%EC%98%AC-%EB%B1%80%EB%B6%80-%EA%B5%AD%EC%82%B0-%EB%AC%B4-ArnNYwaA?from=write",
+      "posted_at_utc": "2026-11-15T06:59:58+00:00",
+      "product_id": "9540614367",
+      "item_id": "28458398246",
+      "vendor_item_id": null,
+      "at": "2026-11-15T07:01:50.772166+00:00",
+      "run_id": "43688029810"
     }
   },
   "skipped_non_coupang": 548,
