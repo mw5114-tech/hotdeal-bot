@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96116,
-  "pending": [
-    {
-      "id": 96116,
-      "source_post_url": "https://t.me/jirum/96116",
-      "original_purchase_url": "https://link.coupang.com/a/iG0CGrCHUO",
-      "source_text": "🔥🔥🔥무지성 4,550원 (59.0% 할인)🔥🔥🔥\n파라스 착즙 레몬 주스 1L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 11,098원\n- 할인: 6,548원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iG0CGrCHUO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T06:09:52+00:00",
-      "title": "파라스 착즙 레몬 주스 1L",
-      "sale_price_krw": 4550
-    }
-  ],
-  "in_flight": {
-    "id": 96116,
-    "status": "CLAIMED",
-    "run_id": "43684273600",
-    "at": "2026-11-15T06:11:26.568089+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5681,6 +5666,16 @@
       "vendor_item_id": null,
       "at": "2026-11-15T05:16:38.368124+00:00",
       "run_id": "43680329537"
+    },
+    "96116": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%8C%EB%9D%BC%EC%8A%A4-%EC%B0%A9%EC%A6%99-%EB%A0%88%EB%AA%AC-%EC%A3%BC%EC%8A%A4-1L-1%EA%B0%9C-55%ED%95%A0%EC%9D%B8-Pk9118Gj?from=write",
+      "posted_at_utc": "2026-11-15T06:09:52+00:00",
+      "product_id": "8288408684",
+      "item_id": "20620164172",
+      "vendor_item_id": "87694422069",
+      "at": "2026-11-15T06:11:48.057618+00:00",
+      "run_id": "43684273600"
     }
   },
   "skipped_non_coupang": 544,
