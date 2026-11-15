@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96113,
-  "pending": [
-    {
-      "id": 96113,
-      "source_message_id": 96113,
-      "source_post_url": "https://t.me/jirum/96113",
-      "original_purchase_url": "https://link.coupang.com/a/iGTmobIHdc",
-      "title": "하이뮨 마시는 프로틴 밸런스 음료 24개",
-      "source_text": "☆특가 15,960원 (27.0% 할인)\n하이뮨 마시는 프로틴 밸런스 음료 24개\n📌 가격 현황\n- 정상가: 21,863원\n- 할인: 5,903원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGTmobIHdc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15960,
-      "posted_at_utc": "2026-11-15T04:28:14+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -995,6 +984,10 @@
     "96112": {
       "url": "https://blog.naver.com/mw5114/224477801797",
       "at": "2026-11-15T04:30:50.247614+00:00"
+    },
+    "96113": {
+      "url": "https://blog.naver.com/mw5114/224477802496",
+      "at": "2026-11-15T04:31:42.762568+00:00"
     }
   },
   "skipped": {
@@ -1099,12 +1092,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96113,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43676947806",
-    "at": "2026-11-15T04:31:04.384244+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
