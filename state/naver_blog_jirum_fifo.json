@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96110,
-  "pending": [],
+  "last_scanned_id": 96113,
+  "pending": [
+    {
+      "id": 96111,
+      "source_message_id": 96111,
+      "source_post_url": "https://t.me/jirum/96111",
+      "original_purchase_url": "https://link.coupang.com/a/iGRSbLzJsW",
+      "title": "팁코 100% 착즙 ABC 주스 24개",
+      "source_text": "👍대박 19,980원 (32.0% 할인)\n팁코 100% 착즙 ABC 주스 24개\n📌 가격 현황\n- 정상가: 29,382원\n- 할인: 9,402원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGRSbLzJsW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 19980,
+      "posted_at_utc": "2026-11-15T04:07:26+00:00"
+    },
+    {
+      "id": 96112,
+      "source_message_id": 96112,
+      "source_post_url": "https://t.me/jirum/96112",
+      "original_purchase_url": "https://link.coupang.com/a/iGTlCZHZYW",
+      "title": "삼립 허니 카스테라, 620g, 1개입, 1개",
+      "source_text": "☆특가 8,750원 (27.1% 할인)\n삼립 허니 카스테라, 620g, 1개입, 1개\n📌 가격 현황\n- 정상가: 12,010원\n- 할인: 3,260원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGTlCZHZYW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8750,
+      "posted_at_utc": "2026-11-15T04:28:04+00:00"
+    },
+    {
+      "id": 96113,
+      "source_message_id": 96113,
+      "source_post_url": "https://t.me/jirum/96113",
+      "original_purchase_url": "https://link.coupang.com/a/iGTmobIHdc",
+      "title": "하이뮨 마시는 프로틴 밸런스 음료 24개",
+      "source_text": "☆특가 15,960원 (27.0% 할인)\n하이뮨 마시는 프로틴 밸런스 음료 24개\n📌 가격 현황\n- 정상가: 21,863원\n- 할인: 5,903원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGTmobIHdc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 15960,
+      "posted_at_utc": "2026-11-15T04:28:14+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
