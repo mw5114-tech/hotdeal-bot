@@ -7,7 +7,7 @@ from unittest.mock import patch
 from gh_only.naver_blog_jirum import (
     ingest, validate_state, source_fresh, validate_naver_link_subid,
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
-    NaverStateConflict, scan, claim_before_publish, checkpoint_published,
+    NaverStateConflict, scan, scan_with_source_wait, claim_before_publish, checkpoint_published,
     publish_batch, expire_unclaimed_before_next, wait_for_batch_checkpoint,
     apply_official_api_link,
 )
@@ -57,6 +57,71 @@ class ConflictStore:
 
 
 class NaverQueueTests(unittest.TestCase):
+    def test_oracle_public_lag_retries_until_exact_source_visible(self):
+        # 2026-11-15 real case: 96111 arrived in Telegram's public HTML
+        # 42 seconds after its event; Naver initially saw only 96110.
+        replies = iter((
+            {"ready": False, "last_scanned_id": 96110, "pending": 0},
+            {"ready": False, "last_scanned_id": 96110, "pending": 0},
+            {"ready": True, "last_scanned_id": 96111, "pending": 1},
+        ))
+        checks, sleeps = [], []
+        def fake_scan(store):
+            checks.append(store)
+            return next(replies)
+        result = scan_with_source_wait(
+            "fake-store", 96111, scanner=fake_scan, sleeper=sleeps.append)
+        self.assertEqual(result["last_scanned_id"], 96111)
+        self.assertTrue(result["ready"])
+        self.assertEqual(checks, ["fake-store"] * 3)
+        self.assertEqual(sleeps, [20, 20])
+
+    def test_backup_scan_without_source_id_never_waits(self):
+        seen, sleeps = [], []
+        result = scan_with_source_wait(
+            "fake-store", 0,
+            scanner=lambda store: (seen.append(store) or
+                                   {"ready": False, "last_scanned_id": 96110}),
+            sleeper=sleeps.append,
+        )
+        self.assertFalse(result["ready"])
+        self.assertEqual(len(seen), 1)
+        self.assertEqual(sleeps, [])
+
+    def test_public_lag_exhausted_does_not_advance_cursor_or_publish(self):
+        checks, sleeps = [], []
+        def no_new_post(store):
+            checks.append(store)
+            return {"ready": False, "pending": 0, "last_scanned_id": 96110}
+        result = scan_with_source_wait(
+            "fake-store", 96111, scanner=no_new_post, sleeper=sleeps.append)
+        self.assertEqual(len(checks), 4)
+        self.assertEqual(sleeps, [20, 20, 20])
+        self.assertEqual(result["last_scanned_id"], 96110)
+        self.assertFalse(result["ready"])
+
+    def test_review_or_seen_source_stops_waiting_without_duplicates(self):
+        checks, sleeps = [], []
+        result = scan_with_source_wait(
+            "fake-store", 96111,
+            scanner=lambda store: (checks.append(store) or
+                                   {"ready": False, "review": True}),
+            sleeper=sleeps.append)
+        self.assertEqual(len(checks), 1)
+        self.assertTrue(result["review"])
+        self.assertEqual(sleeps, [])
+        result = scan_with_source_wait(
+            "fake-store", 96111,
+            scanner=lambda store: {"ready": False, "last_scanned_id": 96111},
+            sleeper=sleeps.append)
+        self.assertFalse(result["ready"])
+        self.assertEqual(sleeps, [])
+
+    def test_bad_expected_source_ids_fail_closed(self):
+        for expected in (-1, True, "96111", 2**31):
+            with self.subTest(expected=expected), self.assertRaises(ValueError):
+                scan_with_source_wait("fake-store", expected, scanner=lambda s: None)
+
     def test_batch_oldest_first_max_four_with_gap(self):
         s = state()
         ingest(s, [deal(mid, minutes=5) for mid in range(95496, 95501)])
