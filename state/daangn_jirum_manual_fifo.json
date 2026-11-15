@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96120,
-  "pending": [],
+  "last_scanned_id": 96123,
+  "pending": [
+    {
+      "id": 96123,
+      "source_post_url": "https://t.me/jirum/96123",
+      "original_purchase_url": "https://link.coupang.com/a/iG4cA3ZgOG",
+      "source_text": "☆특가 15,900원\n매직브라이트 BAMBOO 도톰한 3겹 뽑아쓰는 대나무 키친타올, 10개, 100매\n📦 특가 바로가기\nhttps://link.coupang.com/a/iG4cA3ZgOG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-15T06:59:58+00:00",
+      "title": "☆특가 15,900원",
+      "sale_price_krw": 15900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -5698,7 +5708,7 @@
       "run_id": "43684875787"
     }
   },
-  "skipped_non_coupang": 546,
+  "skipped_non_coupang": 548,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
