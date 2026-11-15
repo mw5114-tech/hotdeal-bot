@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96145,
-  "pending": [
-    {
-      "id": 96145,
-      "source_post_url": "https://t.me/jirum/96145",
-      "original_purchase_url": "https://link.coupang.com/a/iHCkYwQ3dA",
-      "source_text": "👍대박 13,090원 (30.6% 할인)\n후디스 유기농 그릭요거트 플레인, 80g, 12개\n📌 가격 현황\n- 정상가: 18,860원\n- 할인: 5,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iHCkYwQ3dA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T14:57:38+00:00",
-      "title": "후디스 유기농 그릭요거트 플레인, 80g, 12개",
-      "sale_price_krw": 13090
-    }
-  ],
-  "in_flight": {
-    "id": 96145,
-    "status": "CLAIMED",
-    "run_id": "43727209066",
-    "at": "2026-11-15T14:59:00.585038+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5781,6 +5766,16 @@
       "vendor_item_id": null,
       "at": "2026-11-15T13:38:16.220504+00:00",
       "run_id": "43719943800"
+    },
+    "96145": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9B%84%EB%94%94%EC%8A%A4-%EC%9C%A0%EA%B8%B0%EB%86%8D-%EA%B7%B8%EB%A6%AD%EC%9A%94%EA%B1%B0%ED%8A%B8-%ED%94%8C%EB%A0%88%EC%9D%B8-80g-30%EA%B0%9C-Pk91R6Mj?from=write",
+      "posted_at_utc": "2026-11-15T14:57:38+00:00",
+      "product_id": "4996524776",
+      "item_id": "25779245676",
+      "vendor_item_id": "86341964950",
+      "at": "2026-11-15T14:59:16.616594+00:00",
+      "run_id": "43727209066"
     }
   },
   "skipped_non_coupang": 563,
