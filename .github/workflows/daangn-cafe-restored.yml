@@ -62,7 +62,8 @@ jobs:
       COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       DAANGN_CAFE_STORAGE_STATE_JSON: ${{ secrets.DAANGN_CAFE_STORAGE_STATE_JSON }}
       COUPANG_PARTNER_LPTAG: AF9668915
-      COUPANG_PARTNER_SUBID: cafe
+      # Do not request an optional subId; use the signed API shortlink as issued.
+      COUPANG_PARTNER_SUBID: ''
       JIRUM_IMAGE_SOURCE: lowchart
       # Publish the verified item's native Korean historical price graph.
       # Self-generated price summary stays available for offline experiments.

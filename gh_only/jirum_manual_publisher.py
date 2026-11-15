@@ -53,7 +53,7 @@ def restored_live_gate() -> bool:
         os.getenv("DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED") == "true",
         os.getenv("DAANGN_PUBLISH_PAUSED") == "false",
         os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true",
-        os.getenv("COUPANG_PARTNER_SUBID") == "cafe",
+        os.getenv("COUPANG_PARTNER_SUBID", "") == "",
     ))
 
 
@@ -186,7 +186,8 @@ def publish_one(article: dict, state_secret: str | None = None,
         receipt = article.get("official_link_receipt")
         if (not isinstance(receipt, dict)
                 or receipt.get("issued_by") != "COUPANG_PARTNERS_API"
-                or receipt.get("subid_requested") != "cafe"
+                or "subid_requested" not in receipt
+                or receipt.get("subid_requested") is not None
                 or receipt.get("partners_link") != article.get("candidate_url")
                 or not issued_link_url(article.get("candidate_url"))):
             raise RuntimeError("DAANGN_CAFE_OFFICIAL_API_LINK_REQUIRED")

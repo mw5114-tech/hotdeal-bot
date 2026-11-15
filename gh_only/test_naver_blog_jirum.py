@@ -378,11 +378,11 @@ class NaverQueueTests(unittest.TestCase):
     def test_timestamp_not_inferred(self):
         self.assertFalse(source_fresh({"posted_at_utc": None}))
 
-    def test_naverblog_requires_api_issued_link_and_matching_subid_receipt(self):
+    def test_naverblog_requires_api_issued_link_with_no_subid_receipt(self):
         good = "https://link.coupang.com/a/AbcDEf1234"
         receipt = {
             "issued_by": "COUPANG_PARTNERS_API", "status": "LINK_READY",
-            "partners_link": good, "subid_requested": "naverblog",
+            "partners_link": good, "subid_requested": None,
         }
         self.assertIsNone(validate_naver_link_subid(good, receipt))
         self.assertIsNone(validate_naver_link_subid(
@@ -391,7 +391,9 @@ class NaverQueueTests(unittest.TestCase):
         old = ("https://link.coupang.com/re/AFFSDP?"
                "lptag=AF9668915&subid=naverblog&pageKey=123&itemId=456")
         for link, evidence in (
-            (old, receipt), (good, None), (good, {**receipt, "subid_requested": "daangncafe"}),
+            (old, receipt), (good, None), (good, {**receipt, "subid_requested": "naverblog"}),
+            (good, {**receipt, "subid_requested": "cafe"}),
+            (good, {k:v for k,v in receipt.items() if k != "subid_requested"}),
             (good, {**receipt, "partners_link": "https://link.coupang.com/a/OtherLink999"}),
             (good, {**receipt, "issued_by": "HAND_COMPOSED"}),
             (good, {**receipt, "status": "NOT_READY"}),
@@ -413,7 +415,7 @@ class NaverQueueTests(unittest.TestCase):
         with patch("gh_only.coupang_partners_api.create_product_deeplink",
                    return_value={"partners_link": issued, "product_id": "12345678",
                                  "item_id": "45678901", "vendor_item_id": "90123456",
-                                 "subid_requested": "naverblog"}) as called:
+                                 "subid_requested": None}) as called:
             result = apply_official_api_link(draft, 95496)
         called.assert_called_once_with(identity)
         self.assertEqual(result["composed_affiliate_url"], issued)

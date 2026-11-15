@@ -57,7 +57,7 @@ class OfficialApiTests(unittest.TestCase):
             with self.subTest(link=link):
                 self.assertFalse(issued_link_url(link))
 
-    def test_real_api_shape_and_subid_without_leaking_secret(self):
+    def test_real_api_shape_omits_optional_subid_without_leaking_secret(self):
         captured = {}
         def call(req, timeout):
             captured["url"] = req.full_url
@@ -76,10 +76,19 @@ class OfficialApiTests(unittest.TestCase):
         self.assertFalse(result["commission_attribution_verified"])
         self.assertEqual(result["subid_requested"], SUBID)
         self.assertEqual(captured["body"],
-                         {"coupangUrls": [CANONICAL], "subId": "naverblog"})
+                         {"coupangUrls": [CANONICAL]})
         self.assertEqual(captured["url"], HOST+PATH)
         self.assertEqual(send.call_count, 1)
         self.assertIn("CEA algorithm=HmacSHA256", captured["headers"]["Authorization"])
+
+    def test_no_subid_or_empty_value_is_accepted_on_api_landing(self):
+        plain = ("https://link.coupang.com/re/AFFSDP?"
+                 "pageKey=12345678&itemId=45678901")
+        self.assertEqual(_validate_response(success(landing=plain), CANONICAL, IDENTITY), OFFICIAL)
+        for suffix in ("&subid=naverblog", "&subid=cafe", "&subid="):
+            with self.subTest(suffix=suffix):
+                with self.assertRaisesRegex(CoupangPartnersError, "LANDING_ITEM_MISMATCH"):
+                    _validate_response(success(landing=plain+suffix), CANONICAL, IDENTITY)
 
     def test_daangn_subid_issues_distinct_tracking_parameter(self):
         payload = {}
@@ -141,24 +150,26 @@ class OfficialApiTests(unittest.TestCase):
                                   CANONICAL, IDENTITY)
         self.assertEqual(link, OFFICIAL)
 
-    def test_real_official_landing_affsdp_has_exact_item_and_subid(self):
+    def test_real_official_landing_affsdp_has_exact_item_without_subid(self):
         # Observed from the owner's own signed, secret-backed no-post API probe.
         api_landing = (
             "https://link.coupang.com/re/AFFSDP?"
-            "lptag=AF9668915&pageKey=12345678&itemId=45678901&subid=naverblog"
+            "lptag=AF9668915&pageKey=12345678&itemId=45678901"
         )
         self.assertEqual(_validate_response(success(landing=api_landing),
                                             CANONICAL, IDENTITY), OFFICIAL)
 
-    def test_official_landing_rejects_wrong_item_product_or_subid(self):
+    def test_official_landing_rejects_wrong_item_product_or_injected_subid(self):
         good = (
             "https://link.coupang.com/re/AFFSDP?"
-            "lptag=AF9668915&pageKey=12345678&itemId=45678901&subid=naverblog"
+            "lptag=AF9668915&pageKey=12345678&itemId=45678901"
         )
         for bad in (
             good.replace("pageKey=12345678", "pageKey=99999999"),
             good.replace("itemId=45678901", "itemId=99999999"),
-            good.replace("subid=naverblog", "subid=daangncafe"),
+            good + "&subid=naverblog",
+            good + "&subid=cafe",
+            good + "&subid=",
             good + "&vendorItemId=99999999",
             good.replace("link.coupang.com", "evil.example"),
             good.replace("/re/AFFSDP", "/other"),

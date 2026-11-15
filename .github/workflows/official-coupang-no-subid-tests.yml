@@ -1,0 +1,70 @@
+name: Tests | Coupang official API without subId
+on:
+  push:
+    branches:
+      - fix/coupang-api-omit-subid-20261115
+      - main
+    paths:
+      - gh_only/coupang_partners_api.py
+      - gh_only/naver_blog_jirum.py
+      - gh_only/jirum_manual_queue.py
+      - gh_only/jirum_manual_publisher.py
+      - gh_only/daangn_editor_probe.py
+      - gh_only/test_coupang_partners_api.py
+      - gh_only/test_coupang_no_subid_end_to_end.py
+      - gh_only/test_naver_blog_jirum.py
+      - gh_only/test_jirum_manual_publisher.py
+      - .github/workflows/official-coupang-no-subid-tests.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline-regression:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install lightweight dependencies; no browser or posting
+        run: python -m pip install --quiet --disable-pip-version-check playwright==1.64.1
+      - name: Validate exact API calls, both channels, and legacy guards
+        run: |
+          python -m compileall -q gh_only/coupang_partners_api.py gh_only/naver_blog_jirum.py gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/daangn_editor_probe.py
+          python -m unittest -q gh_only.test_coupang_partners_api gh_only.test_coupang_no_subid_end_to_end gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_publisher gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_official_link_integration
+
+  api-no-post-probe:
+    if: github.ref == 'refs/heads/fix/coupang-api-omit-subid-20261115'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    env:
+      COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+      COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Request exactly one official Coupang link, no subId, NO POSTING TO SOCIAL MEDIA
+        run: |
+          python - <<'PY'
+          from urllib.parse import urlsplit
+          from gh_only.coupang_partners_api import create_product_deeplink, issued_link_url
+          # Exact public Coupang item from an earlier verified Telegram hot deal.
+          identity = {
+              "status": "EXACT_ITEM_IDENTIFIED",
+              "product_id": "7098352204",
+              "item_id": "19148341413",
+              "vendor_item_id": "93384073732",
+          }
+          r = create_product_deeplink(identity)
+          assert r["subid_requested"] is None
+          assert r["product_id"] == identity["product_id"]
+          assert r["item_id"] == identity["item_id"]
+          assert issued_link_url(r["partners_link"])
+          print("COUPANG_NO_SUBID_SIGNED_API_OK host=" +
+                urlsplit(r["partners_link"]).hostname + " no_social_publish=true")
+          PY

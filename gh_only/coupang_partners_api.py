@@ -1,4 +1,4 @@
-"""Official Coupang *Partners* Deep Link API client for Naver hotdeal posts.
+"""Official Coupang *Partners* Deep Link API client for Naver and Daangn posts.
 
 Only the URL explicitly returned by the API can become an affiliate URL.
 No API keys, response bodies, or authorization headers enter public logs.
@@ -18,7 +18,7 @@ from gh_only.direct_product_links import regular_product_url
 
 HOST = "https://api-gateway.coupang.com"
 PATH = "/v2/providers/affiliate_open_api/apis/openapi/v1/deeplink"
-SUBID = "naverblog"
+SUBID: str | None = None  # Default: no subId field is sent to Coupang.
 _MAX_RESPONSE_BYTES = 16_384
 _TOKEN = re.compile(r"[A-Za-z0-9_-]{5,100}\Z")
 
@@ -61,7 +61,7 @@ def _input_url_ok(url: str) -> bool:
         return False
 
 
-def _landing_matches_identity(url: str, identity: dict, *, subid: str = SUBID) -> bool:
+def _landing_matches_identity(url: str, identity: dict, *, subid: str | None = SUBID) -> bool:
     """Accept an exact product link or an *API-returned* Coupang tracking URL.
 
     The official deeplink response's landingUrl can be
@@ -72,7 +72,7 @@ def _landing_matches_identity(url: str, identity: dict, *, subid: str = SUBID) -
     """
     try:
         parsed = urlsplit(url)
-        qs = parse_qs(parsed.query)
+        qs = parse_qs(parsed.query, keep_blank_values=True)
         if (parsed.scheme != "https" or parsed.username is not None
                 or parsed.password is not None or parsed.port is not None
                 or parsed.fragment):
@@ -90,7 +90,8 @@ def _landing_matches_identity(url: str, identity: dict, *, subid: str = SUBID) -
                 and qs.get("itemId") == [identity["item_id"]]
                 and (not vendor or "vendorItemId" not in qs
                      or qs.get("vendorItemId") == [vendor])
-                and ("subid" not in qs or qs.get("subid") == [subid])
+                and (("subid" not in qs) if subid is None
+                     else ("subid" not in qs or qs.get("subid") == [subid]))
             )
         return False
     except (KeyError, TypeError, ValueError):
@@ -113,7 +114,7 @@ def authorization(access: str, secret: str, signed_date: str) -> str:
 
 
 def _validate_response(payload: object, original: str,
-                       identity: dict | None, *, subid: str = SUBID) -> str:
+                       identity: dict | None, *, subid: str | None = SUBID) -> str:
     if not isinstance(payload, dict) or str(payload.get("rCode")) != "0":
         raise CoupangPartnersError("COUPANG_API_NON_SUCCESS")
     data = payload.get("data")
@@ -133,9 +134,9 @@ def _validate_response(payload: object, original: str,
 
 
 def request_deeplink(url: str, *, identity: dict | None = None,
-                     subid: str = SUBID) -> str:
-    """A single POST only; each approved channel gets its own SUBID."""
-    if subid not in (SUBID, "cafe"):
+                     subid: str | None = SUBID) -> str:
+    """One signed POST; omit optional subId entirely unless explicitly passed."""
+    if subid not in (None, "naverblog", "cafe"):
         raise CoupangPartnersError("COUPANG_API_SUBID_NOT_ALLOWED")
     if not isinstance(url, str) or len(url) > 512 or not _input_url_ok(url):
         raise CoupangPartnersError("COUPANG_API_INPUT_URL_INVALID")
@@ -145,8 +146,10 @@ def request_deeplink(url: str, *, identity: dict | None = None,
         raise CoupangPartnersError("COUPANG_API_KEYS_MISSING")
     signed_date = datetime.now(timezone.utc).strftime("%y%m%dT%H%M%SZ")
     header = authorization(access, secret, signed_date)
-    body = json.dumps({"coupangUrls": [url], "subId": subid},
-                      separators=(",", ":")).encode("utf-8")
+    payload = {"coupangUrls": [url]}
+    if subid is not None:
+        payload["subId"] = subid  # Legacy explicit opt-in only; never post-edit an issued URL.
+    body = json.dumps(payload, separators=(",", ":")).encode("utf-8")
     req = request.Request(
         HOST + PATH, data=body, method="POST",
         headers={
@@ -175,7 +178,7 @@ def request_deeplink(url: str, *, identity: dict | None = None,
     return _validate_response(response, url, identity, subid=subid)
 
 
-def create_product_deeplink(identity: dict, *, subid: str = SUBID) -> dict:
+def create_product_deeplink(identity: dict, *, subid: str | None = SUBID) -> dict:
     """Issue an official link for a verified exact product/item/option."""
     try:
         ordinary = regular_product_url(identity)
@@ -202,7 +205,7 @@ def main() -> int:
     link = request_deeplink(sample)
     host = urlsplit(link).hostname
     print("COUPANG_OFFICIAL_API_PROBE_OK host=" + str(host) +
-          " subid_requested=" + SUBID + " no_blog_post=true")
+          " subid_requested=none no_blog_post=true")
     return 0
 
 

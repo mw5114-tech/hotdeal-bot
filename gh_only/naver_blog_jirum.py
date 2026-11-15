@@ -27,7 +27,7 @@ DRAFT_DIR = Path("naver-blog-one-draft")
 MAX_PENDING = 40
 MAX_HISTORY = 200
 DISCLOSURE = "이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다."
-NAVER_BLOG_SUBID = "naverblog"
+NAVER_BLOG_SUBID = None  # No optional subId in official API requests.
 NAVER_TITLE_MAX_UTF16_UNITS = 88
 STALE_PUBLISH_CLAIM_SECONDS = 30 * 60
 # One Oracle event can drain a bounded FIFO burst without another runner.
@@ -107,16 +107,17 @@ def archive_stale_claim(state: dict, *, reference: datetime | None = None) -> bo
 
 
 def validate_naver_link_subid(url: str, receipt: dict | None = None) -> None:
-    """Only accept an API-issued URL with a recorded Naver SUBID request.
+    """Accept only the untouched API-issued URL with no optional subId.
 
-    A shortened URL cannot reveal its subId; the API request+receipt, not the
-    opaque output string, is the binding. Legacy composed AFFSDP is rejected.
+    The opaque short URL cannot reveal tracking internals, so require a
+    receipt from our signed no-subId API request. Reject fabricated AFFSDP.
     """
     from gh_only.coupang_partners_api import issued_link_url
     if (not issued_link_url(url) or not isinstance(receipt, dict)
             or receipt.get("issued_by") != "COUPANG_PARTNERS_API"
             or receipt.get("status") != "LINK_READY"
-            or receipt.get("subid_requested") != NAVER_BLOG_SUBID
+            or "subid_requested" not in receipt
+            or receipt.get("subid_requested") is not None
             or receipt.get("partners_link") != url):
         raise ValueError("NAVER_BLOG_OFFICIAL_LINK_OR_SUBID_INVALID")
 
@@ -320,7 +321,7 @@ def apply_official_api_link(draft: dict, source_id: int) -> dict:
             or official["product_id"] != identity.get("product_id")
             or official["item_id"] != identity.get("item_id")
             or official.get("vendor_item_id") != identity.get("vendor_item_id")
-            or official.get("subid_requested") != NAVER_BLOG_SUBID):
+            or official.get("subid_requested") is not None):
         raise RuntimeError("NAVER_OFFICIAL_LINK_ISSUE_IDENTITY_OR_SUBID_MISMATCH")
     draft["caption"]["caption"] = caption["caption"].replace(old_link, issued, 1)
     draft["composed_affiliate_url"] = issued

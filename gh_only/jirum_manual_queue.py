@@ -957,8 +957,8 @@ def build_next(s: dict) -> dict:
         }
     if os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true":
         # This path is used only by the restored Daangn workflow. Never
-        # publish locally fabricated AFFSDP links; the signed API must issue
-        # the exact final URL using this cafe's dedicated tracking SUBID.
+        # publish locally fabricated AFFSDP links; issue the exact final URL
+        # with no optional subId and never modify the API-returned link.
         from gh_only.coupang_partners_api import create_product_deeplink
         if receipt is not None or muse_postedit_mode():
             raise RuntimeError("DAANGN_OFFICIAL_API_MODE_CONFLICT")
@@ -970,8 +970,8 @@ def build_next(s: dict) -> dict:
                 or not isinstance(caption, str) or caption.count(prior) != 1
                 or identity.get("status") != "EXACT_ITEM_IDENTIFIED"):
             raise RuntimeError("DAANGN_OFFICIAL_API_PRECONDITION_FAILED")
-        issued = create_product_deeplink(identity, subid="cafe")
-        if (issued.get("subid_requested") != "cafe"
+        issued = create_product_deeplink(identity)
+        if (issued.get("subid_requested") is not None
                 or issued.get("item_id") != identity.get("item_id")
                 or issued.get("product_id") != identity.get("product_id")):
             raise RuntimeError("DAANGN_OFFICIAL_API_ITEM_MISMATCH")
@@ -982,7 +982,7 @@ def build_next(s: dict) -> dict:
             "product_id": identity["product_id"],
             "item_id": identity["item_id"],
             "vendor_item_id": identity.get("vendor_item_id"),
-            "subid_requested": "cafe",
+            "subid_requested": None,
         }
     if receipt is not None:
         identity = candidate.get("product_identity", {})
