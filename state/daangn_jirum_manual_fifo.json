@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96109,
-  "pending": [
-    {
-      "id": 96109,
-      "source_post_url": "https://t.me/jirum/96109",
-      "original_purchase_url": "https://link.coupang.com/a/iGPfo3SW6K",
-      "source_text": "☆특가 23,480원\n서울우유 초코우유, 200ml, 48개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGPfo3SW6K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T03:30:41+00:00",
-      "title": "☆특가 23,480원",
-      "sale_price_krw": 23480
-    }
-  ],
-  "in_flight": {
-    "id": 96109,
-    "status": "CLAIMED",
-    "run_id": "43672718957",
-    "at": "2026-11-15T03:32:10.345660+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5621,6 +5606,16 @@
       "vendor_item_id": "85873889893",
       "at": "2026-11-15T01:47:09.806642+00:00",
       "run_id": "43664648231"
+    },
+    "96109": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%9C%EC%9A%B8%EC%9A%B0%EC%9C%A0-%EC%B4%88%EC%BD%94-%EC%9A%B0%EC%9C%A0-200ml-48%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dZ7JVzrj?from=write",
+      "posted_at_utc": "2026-11-15T03:30:41+00:00",
+      "product_id": "321025581",
+      "item_id": "18926825870",
+      "vendor_item_id": null,
+      "at": "2026-11-15T03:32:32.611515+00:00",
+      "run_id": "43672718957"
     }
   },
   "skipped_non_coupang": 543,
