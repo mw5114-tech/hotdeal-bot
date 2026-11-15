@@ -3,15 +3,6 @@
   "last_scanned_id": 96100,
   "pending": [
     {
-      "id": 96099,
-      "source_post_url": "https://t.me/jirum/96099",
-      "original_purchase_url": "https://link.coupang.com/a/iGHD0WTw04",
-      "source_text": "👍대박 10,400원 (38.0% 할인)\n팔도 뽀로로 제로 밀크맛 24개\n📌 가격 현황\n- 정상가: 16,774원\n- 할인: 6,374원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGHD0WTw04\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T01:44:18+00:00",
-      "title": "팔도 뽀로로 제로 밀크맛 24개",
-      "sale_price_krw": 10400
-    },
-    {
       "id": 96100,
       "source_post_url": "https://t.me/jirum/96100",
       "original_purchase_url": "https://link.coupang.com/a/iGHHsjZ98m",
@@ -21,12 +12,7 @@
       "sale_price_krw": 17600
     }
   ],
-  "in_flight": {
-    "id": 96099,
-    "status": "CLAIMED",
-    "run_id": "43664544981",
-    "at": "2026-11-15T01:45:28.696641+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5600,6 +5586,16 @@
       "vendor_item_id": null,
       "at": "2026-11-15T01:42:38.749973+00:00",
       "run_id": "43664273588"
+    },
+    "96099": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%94%EB%8F%84-%EB%BD%80%EB%A1%9C%EB%A1%9C-%EC%A0%9C%EB%A1%9C-%EB%B0%80%ED%81%AC%EB%A7%9B-235ml-24%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PwnpQ0EA?from=write",
+      "posted_at_utc": "2026-11-15T01:44:18+00:00",
+      "product_id": "8756181038",
+      "item_id": "25190349661",
+      "vendor_item_id": "92187104427",
+      "at": "2026-11-15T01:45:50.167034+00:00",
+      "run_id": "43664544981"
     }
   },
   "skipped_non_coupang": 536,
