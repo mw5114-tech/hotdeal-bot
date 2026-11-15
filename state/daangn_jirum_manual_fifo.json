@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96169,
-  "pending": [
-    {
-      "id": 96169,
-      "source_post_url": "https://t.me/jirum/96169",
-      "original_purchase_url": "https://link.coupang.com/a/iIcHtI3jcy",
-      "source_text": "☆특가 1,791,000원 (14.3% 할인)\n삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 벽걸이형, 방문설치\n📌 가격 현황\n- 정상가: 2,090,810원\n- 할인: 299,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIcHtI3jcy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T23:26:29+00:00",
-      "title": "삼성전자 4K UHD QLED TV, 214cm(85인치), KQ85QF6AAFXKR, 벽걸이형, 방문설치",
-      "sale_price_krw": 1791000
-    }
-  ],
-  "in_flight": {
-    "id": 96169,
-    "status": "CLAIMED",
-    "run_id": "43774858773",
-    "at": "2026-11-15T23:27:32.228593+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5811,6 +5796,16 @@
       "vendor_item_id": "91591079878",
       "at": "2026-11-15T23:06:58.408061+00:00",
       "run_id": "43772951227"
+    },
+    "96169": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90-4K-UHD-QLED-TV-214cm85%EC%9D%B8%EC%B9%98-20%ED%95%A0%EC%9D%B8-dgxDK1Xj?from=write",
+      "posted_at_utc": "2026-11-15T23:26:29+00:00",
+      "product_id": "8870769472",
+      "item_id": "25880144278",
+      "vendor_item_id": "92866178674",
+      "at": "2026-11-15T23:27:48.718162+00:00",
+      "run_id": "43774858773"
     }
   },
   "skipped_non_coupang": 584,
