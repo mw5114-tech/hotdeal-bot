@@ -63,6 +63,8 @@ def create_record(source_id: int, history: dict, title: str) -> dict | None:
         if (not isinstance(pid, str) or not isinstance(iid, str)
                 or history.get("source_url") != build_url(pid, iid)
                 or history.get("http_status") != 200
+                or history.get("visible_exact_item_prices_verified") is not True
+                or history.get("source_item_identifiers_present") is not True
                 or validated_history(history, pid, iid, title) is None):
             return None
         record = {
