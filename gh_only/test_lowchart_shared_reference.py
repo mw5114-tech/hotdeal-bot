@@ -140,5 +140,48 @@ class SharedLowchartTests(unittest.TestCase):
         self.assertEqual(r["comparison_price_source"], "lowchart_public_history")
 
 
+    def test_naver_403_can_use_daangn_verified_average_same_exact_item(self):
+        # Proves the real incident type: Naver URL fails with HTTP 403;
+        # Daangn recorded the same Telegram source+exact SKU's visible mean.
+        from urllib.error import HTTPError
+        h = {"http_status": 200, **parse_reference(
+            HIST_HTML, build_url(PID, IID), PID, IID,
+            ("휘카레", "230g", "20개"), 12050)}
+        self.assertIsNotNone(create_record(DEAL["source_message_id"], h,
+                                            H_TITLE.split(" - 31,340원")[0]))
+        representative = {
+            "status": "IMAGE_SAVED",
+            "saved_name": "representative.jpg",
+            "image_source": "fallcent_search_representative",
+            "representative_fallcent_image": True,
+            "image_match_basis": "UNVERIFIED_FALLCENT_SEARCH_RESULT",
+        }
+        with tempfile.TemporaryDirectory() as tmp, \
+             patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                   return_value={
+                       "status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                       "http_status": 403, "og_image": None,
+                   }), \
+             patch("gh_only.lowchart_price_reference.request.urlopen",
+                   side_effect=HTTPError(
+                       build_url(PID, IID), 403, "Forbidden", None, None)), \
+             patch("gh_only.lowchart_shared_reference.maybe_share_or_recover",
+                   return_value=h) as recovery, \
+             patch("gh_only.fallcent_search_photo.fetch_fallcent_product_photo",
+                   return_value=representative):
+            out = enrich_deal(
+                DEAL, Path(tmp), resolver=lambda _: IDENTITY,
+                owner_tag="AF9668915",
+                fallcent_high_lookup=lambda *args:
+                    self.fail("verified sibling average makes Fallcent unnecessary"),
+            )
+        recovery.assert_called_once()
+        self.assertEqual(out["caption"]["observed_average_krw"], 34575)
+        self.assertEqual(out["comparison_price_source"], "lowchart_public_history")
+        self.assertTrue(out["history"]["shared_from_verified_sibling"])
+        self.assertEqual(out["product_identity"]["item_id"], IID)
+        self.assertFalse(out["affsdp"]["official_link_issued"])
+
+
 if __name__ == "__main__":
     unittest.main()
