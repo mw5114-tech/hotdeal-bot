@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96168,
-  "pending": [
-    {
-      "id": 96168,
-      "source_post_url": "https://t.me/jirum/96168",
-      "original_purchase_url": "https://link.coupang.com/a/iIbaD1DGYC",
-      "source_text": "🔥🔥🔥무지성 7,240원 (57.0% 할인)🔥🔥🔥\n[로켓프레시] 오뚜기 제주담음 제주청귤 갈치구이 (냉동) 222g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 16,837원\n- 할인: 9,597원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIbaD1DGYC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T23:05:05+00:00",
-      "title": "[로켓프레시] 오뚜기 제주담음 제주청귤 갈치구이 (냉동) 222g",
-      "sale_price_krw": 7240
-    }
-  ],
-  "in_flight": {
-    "id": 96168,
-    "status": "CLAIMED",
-    "run_id": "43772951227",
-    "at": "2026-11-15T23:06:38.118048+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5801,6 +5786,16 @@
       "vendor_item_id": "91569770149",
       "at": "2026-11-15T23:05:42.307520+00:00",
       "run_id": "43772820644"
+    },
+    "96168": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-%EC%A0%9C%EC%A3%BC%EB%8B%B4%EC%9D%8C-%EC%A0%9C%EC%A3%BC%EC%B2%AD%EA%B7%A4-%EA%B0%88%EC%B9%98%EA%B5%AC%EC%9D%B4-%EB%83%89%EB%8F%99-1%EA%B0%9C-222g-55%ED%95%A0%EC%9D%B8-P5avmerP?from=write",
+      "posted_at_utc": "2026-11-15T23:05:05+00:00",
+      "product_id": "8493464009",
+      "item_id": "24579280287",
+      "vendor_item_id": "91591079878",
+      "at": "2026-11-15T23:06:58.408061+00:00",
+      "run_id": "43772951227"
     }
   },
   "skipped_non_coupang": 584,
