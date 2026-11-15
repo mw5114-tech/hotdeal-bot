@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96111,
-  "pending": [
-    {
-      "id": 96111,
-      "source_post_url": "https://t.me/jirum/96111",
-      "original_purchase_url": "https://link.coupang.com/a/iGRSbLzJsW",
-      "source_text": "👍대박 19,980원 (32.0% 할인)\n팁코 100% 착즙 ABC 주스 24개\n📌 가격 현황\n- 정상가: 29,382원\n- 할인: 9,402원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGRSbLzJsW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T04:07:26+00:00",
-      "title": "팁코 100% 착즙 ABC 주스 24개",
-      "sale_price_krw": 19980
-    }
-  ],
-  "in_flight": {
-    "id": 96111,
-    "status": "CLAIMED",
-    "run_id": "43675391468",
-    "at": "2026-11-15T04:08:57.262757+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5641,6 +5626,16 @@
       "vendor_item_id": "88849200067",
       "at": "2026-11-15T03:40:31.584924+00:00",
       "run_id": "43673364193"
+    },
+    "96111": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%81%EC%BD%94-100-%EC%B0%A9%EC%A6%99-ABC-%EC%A3%BC%EC%8A%A4-24%EA%B0%9C-PMl2qBOA?from=write",
+      "posted_at_utc": "2026-11-15T04:07:26+00:00",
+      "product_id": "6267789898",
+      "item_id": "12800453973",
+      "vendor_item_id": "80066475644",
+      "at": "2026-11-15T04:09:13.352279+00:00",
+      "run_id": "43675391468"
     }
   },
   "skipped_non_coupang": 543,
