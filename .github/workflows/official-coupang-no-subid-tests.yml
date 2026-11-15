@@ -11,6 +11,7 @@ on:
       - gh_only/jirum_manual_publisher.py
       - gh_only/daangn_editor_probe.py
       - gh_only/test_coupang_partners_api.py
+      - gh_only/test_coupang_no_subid_end_to_end.py
       - gh_only/test_naver_blog_jirum.py
       - gh_only/test_jirum_manual_publisher.py
       - .github/workflows/official-coupang-no-subid-tests.yml
@@ -33,7 +34,7 @@ jobs:
       - name: Validate exact API calls, both channels, and legacy guards
         run: |
           python -m compileall -q gh_only/coupang_partners_api.py gh_only/naver_blog_jirum.py gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/daangn_editor_probe.py
-          python -m unittest -q gh_only.test_coupang_partners_api gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_publisher gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_official_link_integration
+          python -m unittest -q gh_only.test_coupang_partners_api gh_only.test_coupang_no_subid_end_to_end gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_publisher gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_official_link_integration
 
   api-no-post-probe:
     if: github.ref == 'refs/heads/fix/coupang-api-omit-subid-20261115'
