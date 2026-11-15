@@ -1,0 +1,79 @@
+name: Probe | Lowchart public HTML stability (read only)
+on:
+  push:
+    branches: [fix/lowchart-stable-price-photo-20261115]
+permissions:
+  contents: read
+jobs:
+  public-probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --quiet --disable-pip-version-check playwright==1.64.1
+          python -m playwright install --only-shell chromium
+      - name: Compare public human-readable HTML in Python and normal headless browser, no publish
+        run: |
+          python - <<'PY'
+          import json,re
+          from urllib import request,error
+          from playwright.sync_api import sync_playwright
+          from gh_only.lowchart_price_reference import parse_reference,build_url
+          from gh_only.price_history_probe import HTMLInfo
+          cases=[
+            ("8639997495","25079965123","96120"),
+            ("9540614367","28458398246","96123"),
+            ("8288408684","20620164172","96116"),
+          ]
+          def show(kind,p,i,label,status,text):
+              parser=HTMLInfo();parser.feed(text)
+              title=parser.title.strip()
+              visible=" ".join(" ".join(parser.text_chunks).split())
+              patterns=[]
+              for pat in ["의 쿠팡 현재가는","최근 3주 평균","최근 4주 평균","평균","역대 최저","역대\\s+최저","지금 사도","최고가는"]:
+                  patterns.append((pat,len(re.findall(pat,visible))))
+              excerpts=[]
+              for needle in ["의 쿠팡 현재가는","최근 3주 평균","최근 4주 평균"]:
+                  off=visible.find(needle)
+                  if off>=0:excerpts.append(visible[max(0,off-100):off+300])
+              record=parse_reference(text,build_url(p,i),p,i,(),8500)
+              print("PUBLIC_LOWCHART_PROBE "+json.dumps({
+                "method":kind,"source_id":label,"status":status,
+                "title":title[:180],"len":len(text),"visible_len":len(visible),
+                "patterns":patterns,"excerpts":excerpts[:2],
+                "verified":record.get("visible_exact_item_prices_verified"),
+                "reason":record.get("reason"),
+                "mean":record.get("observed_average_krw"),"high":record.get("observed_high_krw"),
+              },ensure_ascii=False))
+          for p,i,label in cases:
+              url=build_url(p,i)
+              req=request.Request(url,headers={"Accept":"text/html","User-Agent":"GitHubHotdealHistoryOneShotDiagnostic/1.0"})
+              try:
+                  with request.urlopen(req,timeout=14) as resp:
+                      show("urllib",p,i,label,resp.status,resp.read(1_800_001).decode("utf-8","replace"))
+              except error.HTTPError as exc:
+                  print("PUBLIC_LOWCHART_HTTP",label,"urllib",exc.code)
+              except Exception as exc:
+                  print("PUBLIC_LOWCHART_HTTP",label,"urllib",type(exc).__name__)
+          with sync_playwright() as pw:
+              browser=pw.chromium.launch(headless=True)
+              for p,i,label in cases:
+                  ctx=browser.new_context(locale="ko-KR",viewport={"width":1180,"height":950})
+                  page=ctx.new_page()
+                  url=build_url(p,i)
+                  try:
+                      resp=page.goto(url,wait_until="domcontentloaded",timeout=16000)
+                      if resp and resp.status==200 and page.url==url:
+                          page.wait_for_timeout(550)
+                          show("browser",p,i,label,resp.status,page.content())
+                      else:print("PUBLIC_LOWCHART_HTTP",label,"browser",resp.status if resp else None)
+                  except Exception as exc:
+                      print("PUBLIC_LOWCHART_HTTP",label,"browser",type(exc).__name__)
+                  finally:
+                      ctx.close()
+              browser.close()
+          PY
