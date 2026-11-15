@@ -145,7 +145,17 @@ def lookup_exact_item_photo(identity: dict, telegram_title: str, opener=None) ->
                 "error_type": type(exc).__name__, "og_image": None}
     if len(content) > MAX_HTML_BYTES:
         return {"status": "LOWCHART_PAGE_TOO_LARGE", "og_image": None}
-    return parse_item_photo(content.decode("utf-8", "replace"), identity, telegram_title)
+    # The historical mean is displayed on this exact same public item page.
+    # Reuse the successful 200-response HTML in memory for the price reader:
+    # two independent HTTP requests previously caused 200(photo)/403(price).
+    # The HTML is NEVER copied into a post, stored in GitHub or logged.
+    html = content.decode("utf-8", "replace")
+    out = parse_item_photo(html, identity, telegram_title)
+    if (out.get("lowchart_title_verified") is True
+            and out.get("og_url") == url
+            and pid in html and iid in html):
+        out["_verified_public_item_html"] = html
+    return out
 
 
 def download_exact_photo(url: str | None, output, source_message_id: int,
