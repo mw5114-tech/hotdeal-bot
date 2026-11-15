@@ -258,7 +258,22 @@ def enrich_deal(deal: dict, output_dir: Path,
     )
     if price_lookup_allowed:
         try:
-            history = history_fetch(p, i, get_title_tokens(price_title), sale)
+            # Prefer the SAME verified product HTML already fetched for
+            # the photo. One public request per SKU instead of two reduces
+            # transient WAF/403 mismatches and saves runner/network time.
+            snapshot = og.get("_verified_public_item_html")
+            if (using_public_lowchart and history_fetch is fetch_one
+                    and lowchart_title_verified
+                    and isinstance(snapshot, str) and snapshot):
+                from gh_only.lowchart_price_reference import parse_reference
+                history = {
+                    "http_status": 200,
+                    **parse_reference(snapshot, build_url(p, i), p, i,
+                                      get_title_tokens(price_title), sale)
+                }
+                history["read_from_verified_photo_response"] = True
+            else:
+                history = history_fetch(p, i, get_title_tokens(price_title), sale)
             average = validated_history(history, p, i, price_title)
             history["comparison_verification"] = (
                 "EXACT_ITEM_AVERAGE_VERIFIED" if average is not None
@@ -481,6 +496,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_average_krw": history.get("observed_average_krw"),
         "lowchart_price_verified": history.get("visible_exact_item_prices_verified"),
         "lowchart_shared_verified_mean": history.get("shared_from_verified_sibling") is True,
+        "lowchart_shared_photo_response": history.get("read_from_verified_photo_response") is True,
         "photo_status": og.get("status"),
         "fallcent_status": fallcent_high.get("status"),
         "comparison_source": (comparison_source if comparison_price is not None else None),
