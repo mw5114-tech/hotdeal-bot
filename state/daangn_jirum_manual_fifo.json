@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96144,
-  "pending": [],
+  "last_scanned_id": 96145,
+  "pending": [
+    {
+      "id": 96145,
+      "source_post_url": "https://t.me/jirum/96145",
+      "original_purchase_url": "https://link.coupang.com/a/iHCkYwQ3dA",
+      "source_text": "👍대박 13,090원 (30.6% 할인)\n후디스 유기농 그릭요거트 플레인, 80g, 12개\n📌 가격 현황\n- 정상가: 18,860원\n- 할인: 5,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iHCkYwQ3dA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-15T14:57:38+00:00",
+      "title": "후디스 유기농 그릭요거트 플레인, 80g, 12개",
+      "sale_price_krw": 13090
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
