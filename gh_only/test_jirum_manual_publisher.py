@@ -54,13 +54,15 @@ class RestoredCafeTests(unittest.TestCase):
             "DAANGN_CAFE_PARTNERS_PERMISSION_CONFIRMED":"true",
             "DAANGN_PUBLISH_PAUSED":"false",
             "DAANGN_OFFICIAL_API_LINK_ENABLED":"true",
-            "COUPANG_PARTNER_SUBID":"cafe",
+            "COUPANG_PARTNER_SUBID":"",
         }
         with patch.dict(os.environ, base):
             self.assertTrue(restored_live_gate())
         for missing in base:
             with self.subTest(missing=missing):
-                blocked = "true" if missing == "DAANGN_PUBLISH_PAUSED" else "false"
+                blocked = ("true" if missing == "DAANGN_PUBLISH_PAUSED"
+                       else "cafe" if missing == "COUPANG_PARTNER_SUBID"
+                       else "false")
                 with patch.dict(os.environ, {**base, missing: blocked}):
                     self.assertFalse(restored_live_gate())
 
