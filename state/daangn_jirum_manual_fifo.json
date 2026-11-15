@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96132,
-  "pending": [
-    {
-      "id": 96132,
-      "source_post_url": "https://t.me/jirum/96132",
-      "original_purchase_url": "https://link.coupang.com/a/iHkgRXfHki",
-      "source_text": "☆특가 8,540원\n동원 카놀라유, 480ml, 5개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iHkgRXfHki\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T10:44:49+00:00",
-      "title": "☆특가 8,540원",
-      "sale_price_krw": 8540
-    }
-  ],
-  "in_flight": {
-    "id": 96132,
-    "status": "CLAIMED",
-    "run_id": "43705619566",
-    "at": "2026-11-15T10:46:22.586414+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5751,6 +5736,16 @@
       "vendor_item_id": null,
       "at": "2026-11-15T09:20:27.295966+00:00",
       "run_id": "43698685819"
+    },
+    "96132": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8F%99%EC%9B%90-%EC%B9%B4%EB%86%80%EB%9D%BC%EC%9C%A0-480ml-5%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PMl2rO2A?from=write",
+      "posted_at_utc": "2026-11-15T10:44:49+00:00",
+      "product_id": "8215491289",
+      "item_id": "24325496559",
+      "vendor_item_id": null,
+      "at": "2026-11-15T10:46:47.967295+00:00",
+      "run_id": "43705619566"
     }
   },
   "skipped_non_coupang": 553,
