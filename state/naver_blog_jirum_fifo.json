@@ -3,16 +3,6 @@
   "last_scanned_id": 96113,
   "pending": [
     {
-      "id": 96111,
-      "source_message_id": 96111,
-      "source_post_url": "https://t.me/jirum/96111",
-      "original_purchase_url": "https://link.coupang.com/a/iGRSbLzJsW",
-      "title": "팁코 100% 착즙 ABC 주스 24개",
-      "source_text": "👍대박 19,980원 (32.0% 할인)\n팁코 100% 착즙 ABC 주스 24개\n📌 가격 현황\n- 정상가: 29,382원\n- 할인: 9,402원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGRSbLzJsW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 19980,
-      "posted_at_utc": "2026-11-15T04:07:26+00:00"
-    },
-    {
       "id": 96112,
       "source_message_id": 96112,
       "source_post_url": "https://t.me/jirum/96112",
@@ -1007,6 +997,10 @@
     "96110": {
       "url": "https://blog.naver.com/mw5114/224477759937",
       "at": "2026-11-15T03:41:58.701437+00:00"
+    },
+    "96111": {
+      "url": "https://blog.naver.com/mw5114/224477801100",
+      "at": "2026-11-15T04:29:56.840899+00:00"
     }
   },
   "skipped": {
@@ -1111,12 +1105,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96111,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43676947806",
-    "at": "2026-11-15T04:29:19.001645+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
