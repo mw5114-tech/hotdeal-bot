@@ -178,6 +178,11 @@ class LowchartProductPhotoTests(unittest.TestCase):
             result = enrich_deal(
                 deal, Path(tmp), resolver=lambda _: ITEM,
                 history_fetch=lambda *args: {"usable_historical_reference": False},
+                # Offline test must not fetch a changing live Fallcent page.
+                fallcent_high_lookup=lambda *args: {
+                    "status": "FALLCENT_HIGH_NOT_VISIBLE",
+                    "observed_high_krw": None,
+                },
                 owner_tag="AF9668915",
             )
         self.assertEqual(result["photo"]["status"], "IMAGE_SAVED")

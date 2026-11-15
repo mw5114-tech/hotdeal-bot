@@ -258,7 +258,22 @@ def enrich_deal(deal: dict, output_dir: Path,
     )
     if price_lookup_allowed:
         try:
-            history = history_fetch(p, i, get_title_tokens(price_title), sale)
+            # Prefer the SAME verified product HTML already fetched for
+            # the photo. One public request per SKU instead of two reduces
+            # transient WAF/403 mismatches and saves runner/network time.
+            snapshot = og.get("_verified_public_item_html")
+            if (using_public_lowchart and history_fetch is fetch_one
+                    and lowchart_title_verified
+                    and isinstance(snapshot, str) and snapshot):
+                from gh_only.lowchart_price_reference import parse_reference
+                history = {
+                    "http_status": 200,
+                    **parse_reference(snapshot, build_url(p, i), p, i,
+                                      get_title_tokens(price_title), sale)
+                }
+                history["read_from_verified_photo_response"] = True
+            else:
+                history = history_fetch(p, i, get_title_tokens(price_title), sale)
             average = validated_history(history, p, i, price_title)
             history["comparison_verification"] = (
                 "EXACT_ITEM_AVERAGE_VERIFIED" if average is not None
@@ -267,6 +282,34 @@ def enrich_deal(deal: dict, output_dir: Path,
         except Exception as exc:
             history = {"reason": "HISTORY_QUERY_ERROR",
                        "error_type": type(exc).__name__}
+
+    # Both channels can hit different Lowchart GitHub runner outcomes for the
+    # same Telegram source (e.g., 96120: Naver 403; Daangn 200/10,840 KRW).
+    # Publish only locally verified public historical means, and if a runner
+    # was denied, briefly consult the OTHER runner's immutable exact-SKU
+    # receipt. Never substitute current price or another source's item.
+    if (using_public_lowchart and history_fetch is fetch_one
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and isinstance(p, str) and isinstance(i, str)
+            and type(source_id) is int):
+        from gh_only.lowchart_shared_reference import maybe_share_or_recover
+        recovered = maybe_share_or_recover(
+            source_id, p, i, history, price_title,
+        )
+        if average is None and recovered is not None:
+            from gh_only.default_deal_format import same_named_option
+            sibling_title = recovered.get("page_title")
+            if (not lowchart_title_verified or
+                    same_named_option(price_title, sibling_title)):
+                sibling_average = validated_history(
+                    recovered, p, i, sibling_title)
+                if sibling_average is not None:
+                    history = {**recovered, "shared_from_verified_sibling": True}
+                    average = sibling_average
+                    print("LOWCHART_SHARED_PRICE_USED " + json.dumps({
+                        "source_id": source_id, "product_id": p, "item_id": i,
+                        "average_krw": average,
+                    }, ensure_ascii=False))
 
     # STRICT price priority: exact-item Lowchart observed average -> exact-item
     # Fallcent public snapshot. Naver shopping comparison is NEVER used.
@@ -452,6 +495,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_status": history.get("reason"),
         "lowchart_average_krw": history.get("observed_average_krw"),
         "lowchart_price_verified": history.get("visible_exact_item_prices_verified"),
+        "lowchart_shared_verified_mean": history.get("shared_from_verified_sibling") is True,
+        "lowchart_shared_photo_response": history.get("read_from_verified_photo_response") is True,
         "photo_status": og.get("status"),
         "fallcent_status": fallcent_high.get("status"),
         "comparison_source": (comparison_source if comparison_price is not None else None),
