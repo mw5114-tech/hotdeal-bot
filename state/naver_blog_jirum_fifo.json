@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96097,
-  "pending": [],
+  "last_scanned_id": 96100,
+  "pending": [
+    {
+      "id": 96098,
+      "source_message_id": 96098,
+      "source_post_url": "https://t.me/jirum/96098",
+      "original_purchase_url": "https://link.coupang.com/a/iGHppM4UEe",
+      "title": "☆특가 10,400원",
+      "source_text": "☆특가 10,400원\n팔도 뽀로로 제로 딸기맛, 235ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGHppM4UEe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10400,
+      "posted_at_utc": "2026-11-15T01:41:00+00:00"
+    },
+    {
+      "id": 96099,
+      "source_message_id": 96099,
+      "source_post_url": "https://t.me/jirum/96099",
+      "original_purchase_url": "https://link.coupang.com/a/iGHD0WTw04",
+      "title": "팔도 뽀로로 제로 밀크맛 24개",
+      "source_text": "👍대박 10,400원 (38.0% 할인)\n팔도 뽀로로 제로 밀크맛 24개\n📌 가격 현황\n- 정상가: 16,774원\n- 할인: 6,374원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGHD0WTw04\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10400,
+      "posted_at_utc": "2026-11-15T01:44:18+00:00"
+    },
+    {
+      "id": 96100,
+      "source_message_id": 96100,
+      "source_post_url": "https://t.me/jirum/96100",
+      "original_purchase_url": "https://link.coupang.com/a/iGHHsjZ98m",
+      "title": "릴팡 더보틀 원터치 어깨끈 이중스텐 물통",
+      "source_text": "👍대박 17,600원 (38.0% 할인)\n릴팡 더보틀 원터치 어깨끈 이중스텐 물통\n📌 가격 현황\n- 정상가: 28,387원\n- 할인: 10,787원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGHHsjZ98m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 17600,
+      "posted_at_utc": "2026-11-15T01:45:04+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
