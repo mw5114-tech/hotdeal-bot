@@ -296,6 +296,35 @@ def scan(store: Store):
     raise RuntimeError("NAVER_SCAN_CONFLICT_RETRY_EXHAUSTED")
 
 
+def scan_with_source_wait(store: Store, expected_source_id: int = 0, *,
+                          scanner=None, sleeper=None) -> dict:
+    """Wait briefly for Oracle's event to reach Telegram's public listing.
+
+    Telegram MTProto can dispatch a source ID before t.me/s/jirum exposes it.
+    A single Naver scan used to miss these deals while the independent Daangn
+    job (which already waits) published them. Reuse normal durable scanner:
+    no extra dispatch, browser or post; never move the cursor speculatively.
+    No source ID (e.g., 6-hour backup) retains exactly one scan.
+    """
+    if type(expected_source_id) is not int or not 0 <= expected_source_id < 2**31:
+        raise ValueError("NAVER_INVALID_EXPECTED_SOURCE_ID")
+    scanner = scanner or scan
+    sleeper = sleeper or time.sleep
+    for attempt in range(4):
+        result = scanner(store)
+        if (not expected_source_id or result.get("review")
+                or result.get("last_scanned_id", 0) >= expected_source_id):
+            return result
+        if attempt < 3:
+            print("NAVER_WAIT_PUBLIC_SOURCE " + json.dumps({
+                "expected_source_id": expected_source_id,
+                "retry_in_seconds": 20,
+            }))
+            sleeper(20)
+    print("NAVER_PUBLIC_SOURCE_DELAY_BACKUP_REQUIRED " + str(expected_source_id))
+    return result
+
+
 def apply_official_api_link(draft: dict, source_id: int) -> dict:
     """Replace exactly one unissued draft link with the API-issued URL.
 
@@ -699,7 +728,8 @@ def main():
         raise RuntimeError("NAVER_UNSUPPORTED_RUN_CONTEXT")
     store = Store()
     if args.action == "scan":
-        result = scan(store)
+        expected = int(os.getenv("JIRUM_EXPECTED_SOURCE_ID") or "0")
+        result = scan_with_source_wait(store, expected)
         output = os.getenv("GITHUB_OUTPUT")
         if output:
             with open(output, "a", encoding="utf-8") as fh:

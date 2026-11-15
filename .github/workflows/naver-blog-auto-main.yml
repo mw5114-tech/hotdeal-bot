@@ -107,6 +107,10 @@ jobs:
           python-version: '3.11'
       - name: Scan fresh Telegram items into separate Naver queue
         id: naver_scan
+        # Oracle's event ID may arrive before the Telegram public HTML post.
+        # Unlike the six-hour fallback, wait up to 60s for this exact ID.
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ inputs.source_post_id }}
         run: python -m gh_only.naver_blog_jirum scan
       # Cache only the pinned browser binaries; every fresh eligible deal
       # still performs the normal safety probe before SmartEditor opens.
