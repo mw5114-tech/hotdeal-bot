@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96110,
-  "pending": [
-    {
-      "id": 96110,
-      "source_message_id": 96110,
-      "source_post_url": "https://t.me/jirum/96110",
-      "original_purchase_url": "https://link.coupang.com/a/iGPPIwL1Vs",
-      "title": "[로켓프레시] 차돌양지 샤브샤브 (냉동) 500g",
-      "source_text": "👍대박 9,300원 (32.0% 할인)\n[로켓프레시] 차돌양지 샤브샤브 (냉동) 500g\n📌 가격 현황\n- 정상가: 13,676원\n- 할인: 4,376원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGPPIwL1Vs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9300,
-      "posted_at_utc": "2026-11-15T03:38:53+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -983,6 +972,10 @@
     "96109": {
       "url": "https://blog.naver.com/mw5114/224477759021",
       "at": "2026-11-15T03:40:58.362907+00:00"
+    },
+    "96110": {
+      "url": "https://blog.naver.com/mw5114/224477759937",
+      "at": "2026-11-15T03:41:58.701437+00:00"
     }
   },
   "skipped": {
@@ -1087,12 +1080,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96110,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43673364193",
-    "at": "2026-11-15T03:41:13.826013+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
