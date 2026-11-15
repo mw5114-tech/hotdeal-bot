@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96110,
-  "pending": [
-    {
-      "id": 96110,
-      "source_post_url": "https://t.me/jirum/96110",
-      "original_purchase_url": "https://link.coupang.com/a/iGPPIwL1Vs",
-      "source_text": "👍대박 9,300원 (32.0% 할인)\n[로켓프레시] 차돌양지 샤브샤브 (냉동) 500g\n📌 가격 현황\n- 정상가: 13,676원\n- 할인: 4,376원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iGPPIwL1Vs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-15T03:38:53+00:00",
-      "title": "[로켓프레시] 차돌양지 샤브샤브 (냉동) 500g",
-      "sale_price_krw": 9300
-    }
-  ],
-  "in_flight": {
-    "id": 96110,
-    "status": "CLAIMED",
-    "run_id": "43673364193",
-    "at": "2026-11-15T03:40:07.724922+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5631,6 +5616,16 @@
       "vendor_item_id": null,
       "at": "2026-11-15T03:32:32.611515+00:00",
       "run_id": "43672718957"
+    },
+    "96110": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B0%A8%EB%8F%8C%EC%96%91%EC%A7%80-%EC%83%A4%EB%B8%8C%EC%83%A4%EB%B8%8C-%EB%83%89%EB%8F%99-500g-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dE3N5n8A?from=write",
+      "posted_at_utc": "2026-11-15T03:38:53+00:00",
+      "product_id": "7928220906",
+      "item_id": "21800619709",
+      "vendor_item_id": "88849200067",
+      "at": "2026-11-15T03:40:31.584924+00:00",
+      "run_id": "43673364193"
     }
   },
   "skipped_non_coupang": 543,
