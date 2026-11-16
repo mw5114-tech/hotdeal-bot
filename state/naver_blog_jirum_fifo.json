@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96202,
-  "pending": [
-    {
-      "id": 96202,
-      "source_message_id": 96202,
-      "source_post_url": "https://t.me/jirum/96202",
-      "original_purchase_url": "https://link.coupang.com/a/iIC0b5H9NY",
-      "title": "☆특가 7,460원",
-      "source_text": "☆특가 7,460원\n바겐슈타이거 샐러드 스피너 야채 탈수기\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIC0b5H9NY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7460,
-      "posted_at_utc": "2026-11-16T05:34:33+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1119,6 +1108,10 @@
     "96198": {
       "url": "https://blog.naver.com/mw5114/224479104176",
       "at": "2026-11-16T05:21:02.811928+00:00"
+    },
+    "96202": {
+      "url": "https://blog.naver.com/mw5114/224479125538",
+      "at": "2026-11-16T05:36:22.881689+00:00"
     }
   },
   "skipped": {
@@ -1223,12 +1216,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96202,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43811211054",
-    "at": "2026-11-16T05:35:38.286221+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
