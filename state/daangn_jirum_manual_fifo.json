@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96242,
-  "pending": [],
+  "last_scanned_id": 96244,
+  "pending": [
+    {
+      "id": 96244,
+      "source_post_url": "https://t.me/jirum/96244",
+      "original_purchase_url": "https://link.coupang.com/a/iJgQQatDCC",
+      "source_text": "☆특가 1,215,200원 (13.0% 할인)\nApple 2024 아이패드 mini(A17 Pro 모델), 스타라이트, 512GB, Wi-Fi\n📌 가격 현황\n- 정상가: 1,397,200원\n- 할인: 182,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJgQQatDCC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-16T14:52:11+00:00",
+      "title": "Apple 2024 아이패드 mini(A17 Pro 모델), 스타라이트, 512GB, Wi-Fi",
+      "sale_price_krw": 1215200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6128,7 +6138,7 @@
       "run_id": "43877583499"
     }
   },
-  "skipped_non_coupang": 625,
+  "skipped_non_coupang": 626,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
