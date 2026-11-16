@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96209,
-  "pending": [
-    {
-      "id": 96209,
-      "source_post_url": "https://t.me/jirum/96209",
-      "original_purchase_url": "https://link.coupang.com/a/iIPJ86v4AC",
-      "source_text": "❤️초대박 5,230원 (40.0% 할인)\n[로켓프레시] 오레아이다 하인즈 엑스트라 크리스피 패스트푸드 프라이즈 감자튀김 (냉동) 737g\n📌 가격 현황\n- 정상가: 8,717원\n- 할인: 3,487원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIPJ86v4AC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T08:32:50+00:00",
-      "title": "[로켓프레시] 오레아이다 하인즈 엑스트라 크리스피 패스트푸드 프라이즈 감자튀김 (냉동) 737g",
-      "sale_price_krw": 5230
-    }
-  ],
-  "in_flight": {
-    "id": 96209,
-    "status": "CLAIMED",
-    "run_id": "43832155313",
-    "at": "2026-11-16T08:33:51.252090+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6011,6 +5996,16 @@
       "vendor_item_id": null,
       "at": "2026-11-16T08:05:41.507311+00:00",
       "run_id": "43828415288"
+    },
+    "96209": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%9C%EC%BC%93%ED%94%84%EB%A0%88%EC%8B%9C-%EC%98%A4%EB%A0%88%EC%95%84%EC%9D%B4%EB%8B%A4-%ED%95%98%EC%9D%B8%EC%A6%88-%EC%97%91%EC%8A%A4%ED%8A%B8%EB%9D%BC-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%ED%8C%A8%EC%8A%A4%ED%8A%B8%ED%91%B8%EB%93%9C-35%ED%95%A0%EC%9D%B8-j8arK4zA?from=write",
+      "posted_at_utc": "2026-11-16T08:32:50+00:00",
+      "product_id": "8473610434",
+      "item_id": "24519133440",
+      "vendor_item_id": "91531909496",
+      "at": "2026-11-16T08:34:08.145545+00:00",
+      "run_id": "43832155313"
     }
   },
   "skipped_non_coupang": 604,
