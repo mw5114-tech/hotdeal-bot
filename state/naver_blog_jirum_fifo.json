@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96242,
-  "pending": [
-    {
-      "id": 96242,
-      "source_message_id": 96242,
-      "source_post_url": "https://t.me/jirum/96242",
-      "original_purchase_url": "https://link.coupang.com/a/iJbtpvt6yW",
-      "title": "[로켓프레시] 광천해저 짜지않은김 4g 16개",
-      "source_text": "👍대박 3,690원 (38.0% 할인)\n[로켓프레시] 광천해저 짜지않은김 4g 16개\n📌 가격 현황\n- 정상가: 5,952원\n- 할인: 2,262원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJbtpvt6yW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3690,
-      "posted_at_utc": "2026-11-16T13:36:55+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1179,6 +1168,10 @@
     "96241": {
       "url": "https://blog.naver.com/mw5114/224479721797",
       "at": "2026-11-16T13:37:53.282924+00:00"
+    },
+    "96242": {
+      "url": "https://blog.naver.com/mw5114/224479723563",
+      "at": "2026-11-16T13:39:17.528548+00:00"
     }
   },
   "skipped": {
@@ -1287,12 +1280,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96242,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43877583499",
-    "at": "2026-11-16T13:38:33.241176+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
