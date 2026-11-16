@@ -57,7 +57,7 @@ jobs:
           API_RADAR_SEARCH_ENABLED: 'true'
         run: python -m api_radar.collector
       - name: Persist public product observations on separate data branch
-        if: github.event_name != 'push' && github.event.schedule != '55 0-13 * * *'
+        if: github.event_name != 'push'
         env:
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
         run: python -m api_radar.state_store
