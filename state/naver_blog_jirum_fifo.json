@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96195,
-  "pending": [
-    {
-      "id": 96195,
-      "source_message_id": 96195,
-      "source_post_url": "https://t.me/jirum/96195",
-      "original_purchase_url": "https://link.coupang.com/a/iIygKHrMyq",
-      "title": "☆특가 3,200원",
-      "source_text": "☆특가 3,200원\n신라면 로제 큰사발면 108g, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIygKHrMyq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3200,
-      "posted_at_utc": "2026-11-16T04:28:19+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1103,6 +1092,10 @@
     "96194": {
       "url": "https://blog.naver.com/mw5114/224479019326",
       "at": "2026-11-16T04:17:25.632524+00:00"
+    },
+    "96195": {
+      "url": "https://blog.naver.com/mw5114/224479036137",
+      "at": "2026-11-16T04:30:36.663196+00:00"
     }
   },
   "skipped": {
@@ -1207,12 +1200,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96195,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43804390688",
-    "at": "2026-11-16T04:29:51.548957+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
