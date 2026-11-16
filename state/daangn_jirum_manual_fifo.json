@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96211,
-  "pending": [
-    {
-      "id": 96211,
-      "source_post_url": "https://t.me/jirum/96211",
-      "original_purchase_url": "https://link.coupang.com/a/iIRdlFDlme",
-      "source_text": "☆특가 19,730원\n널담 고단백 저당 네모바게트 크랜베리호두 (냉동), 90g, 1개입, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIRdlFDlme\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T08:53:26+00:00",
-      "title": "☆특가 19,730원",
-      "sale_price_krw": 19730
-    }
-  ],
-  "in_flight": {
-    "id": 96211,
-    "status": "CLAIMED",
-    "run_id": "43835012166",
-    "at": "2026-11-16T08:54:28.151042+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6021,6 +6006,16 @@
       "vendor_item_id": "91531909496",
       "at": "2026-11-16T08:34:08.145545+00:00",
       "run_id": "43832155313"
+    },
+    "96211": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%84%90%EB%8B%B4-%EA%B3%A0%EB%8B%A8%EB%B0%B1-%EC%A0%80%EB%8B%B9-%EB%84%A4%EB%AA%A8%EB%B0%94%EA%B2%8C%ED%8A%B8-%ED%81%AC%EB%9E%9C%EB%B2%A0%EB%A6%AC%ED%98%B8%EB%91%90-%EB%83%89%EB%8F%99-90g-40%ED%95%A0%EC%9D%B8-dZ7nxNRj?from=write",
+      "posted_at_utc": "2026-11-16T08:53:26+00:00",
+      "product_id": "8933715856",
+      "item_id": "26180289108",
+      "vendor_item_id": null,
+      "at": "2026-11-16T08:54:51.674797+00:00",
+      "run_id": "43835012166"
     }
   },
   "skipped_non_coupang": 605,
