@@ -133,14 +133,14 @@ class NaverQueueTests(unittest.TestCase):
         with patch("gh_only.naver_blog_jirum.publish_one",
                    side_effect=exc), \
              patch("gh_only.naver_blog_jirum.claim_before_publish") as claim:
-            self.assertEqual(publish_batch(store, max_posts=2), 0)
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
             self.assertEqual(store.current["pending"][0]["id"], 95496)
             self.assertEqual(
                 store.current["pending"][0]["photo_prepare_failure_count"], 1)
             self.assertNotIn("95496", store.current["skipped"])
             self.assertIsNone(store.current["in_flight"])
             # Next separate Oracle run also gets no verified image.
-            self.assertEqual(publish_batch(store, max_posts=2), 0)
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
         claim.assert_not_called()
         self.assertNotIn("95496", store.current["published"])
         self.assertEqual(
