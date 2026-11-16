@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96180,
-  "pending": [
-    {
-      "id": 96180,
-      "source_post_url": "https://t.me/jirum/96180",
-      "original_purchase_url": "https://link.coupang.com/a/iIg9B5J1OK",
-      "source_text": "👍대박 11,520원 (39.0% 할인)\n리큐 진한겔 하이브리드 플로랄향 일반용 액상세제 리필, 2.1L, 4개\n📌 가격 현황\n- 정상가: 18,885원\n- 할인: 7,365원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIg9B5J1OK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T00:28:49+00:00",
-      "title": "리큐 진한겔 하이브리드 플로랄향 일반용 액상세제 리필, 2.1L, 4개",
-      "sale_price_krw": 11520
-    }
-  ],
-  "in_flight": {
-    "id": 96180,
-    "status": "CLAIMED",
-    "run_id": "43780650334",
-    "at": "2026-11-16T00:30:01.396624+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5841,6 +5826,16 @@
       "vendor_item_id": "75332578565",
       "at": "2026-11-15T23:36:57.040566+00:00",
       "run_id": "43775708889"
+    },
+    "96180": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%ED%81%90-%EC%A7%84%ED%95%9C%EA%B2%94-%ED%95%98%EC%9D%B4%EB%B8%8C%EB%A6%AC%EB%93%9C-%ED%94%8C%EB%A1%9C%EB%9E%84%ED%96%A5-%EC%9D%BC%EB%B0%98%EC%9A%A9-%EC%95%A1%EC%83%81%EC%84%B8%EC%A0%9C-%EB%A6%AC%ED%95%84-21L-4%EA%B0%9C-jbEWMNZd?from=write",
+      "posted_at_utc": "2026-11-16T00:28:49+00:00",
+      "product_id": "6616908158",
+      "item_id": "15028216593",
+      "vendor_item_id": "3116820080",
+      "at": "2026-11-16T00:30:17.185800+00:00",
+      "run_id": "43780650334"
     }
   },
   "skipped_non_coupang": 592,
