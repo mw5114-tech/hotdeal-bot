@@ -379,6 +379,47 @@ def apply_official_api_link(draft: dict, source_id: int) -> dict:
     return draft
 
 
+class NaverPreSubmitPhotoUnavailable(RuntimeError):
+    """No valid product photo; safe to retry only BEFORE a publish claim."""
+
+    def __init__(self, source_id: int):
+        self.source_id = source_id
+        super().__init__("NAVER_PRE_SUBMIT_PHOTO_EVIDENCE_UNAVAILABLE")
+
+
+def _photo_unavailable_before_submit(folder: Path, source_id: int) -> bool:
+    """Classify only a known missing-photo draft, never arbitrary validations.
+
+    This intentionally does not excuse wrong SKU, unsafe affiliate links,
+    login issues, failed editor uploads, or anything after the submit claim.
+    """
+    try:
+        report = json.loads((folder / "drafts.json").read_text("utf-8"))
+        rows = report["drafts"]
+        if len(rows) != 1:
+            return False
+        row = rows[0]
+        ids = row.get("product_identity") or {}
+        photo = row.get("photo") or {}
+        return (
+            row.get("source_message_id") == source_id
+            and ids.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and isinstance(ids.get("product_id"), str)
+            and isinstance(ids.get("item_id"), str)
+            and photo.get("status") == "PHOTO_EVIDENCE_UNAVAILABLE"
+            and not photo.get("saved_name")
+            and row.get("image_metadata_status") in (
+                "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                "LOWCHART_ITEM_PAGE_NOT_FOUND",
+                "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+                "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
+            )
+            and isinstance(row.get("photo_provider_attempts"), list)
+        )
+    except (OSError, ValueError, KeyError, TypeError, UnicodeError):
+        return False
+
+
 def make_article(source: dict, output: Path, *, tag: str,
                  manual_test_replay: bool = False):
     """Reuse the tested Daangn price/photo/link pipeline, change only blog copy.
@@ -405,7 +446,15 @@ def make_article(source: dict, output: Path, *, tag: str,
             "drafts": [draft]
         }, ensure_ascii=False), encoding="utf-8")
     save_draft()
-    old.validate_draft(output, source["source_message_id"])
+    try:
+        old.validate_draft(output, source["source_message_id"])
+    except RuntimeError as exc:
+        if (str(exc) == "POST_EVIDENCE_NOT_READY"
+                and _photo_unavailable_before_submit(
+                    output, source["source_message_id"])):
+            raise NaverPreSubmitPhotoUnavailable(
+                source["source_message_id"]) from exc
+        raise
     # Fail closed: if the API returns an error, never fall back to the
     # synthetic AFFSDP draft. No claim/click occurs until the API link passes.
     apply_official_api_link(draft, source["source_message_id"])
@@ -538,9 +587,64 @@ def quarantine_title_failure(store: Store, source_id: int) -> None:
     raise RuntimeError("NAVER_TITLE_FAILURE_409_EXHAUSTED")
 
 
+def checkpoint_pre_submit_photo_unavailable(store: Store, source_id: int) -> str:
+    """Audit a known pre-submit photo outage without flagging a failed run.
+
+    First run defers; a second independent Oracle/backup execution may
+    recover the same source with a different runner/IP. If still missing,
+    archive safely so one broken source cannot block all newer FIFO posts.
+    There has been NO claim and NO submit/click for this source.
+    """
+    for attempt in range(5):
+        state, sha = store.read()
+        if (state["in_flight"] is not None or not state["pending"]
+                or state["pending"][0]["id"] != source_id
+                or str(source_id) in state["published"]
+                or str(source_id) in state["skipped"]):
+            raise RuntimeError("NAVER_PRE_SUBMIT_PHOTO_STATE_CHANGED_REVIEW")
+        row = state["pending"][0]
+        prior = row.get("photo_prepare_failure_count", 0)
+        if type(prior) is not int or not 0 <= prior <= 1:
+            raise RuntimeError("NAVER_INVALID_PHOTO_PREPARE_AUDIT")
+        if prior == 0:
+            row["photo_prepare_failure_count"] = 1
+            status = "DEFERRED"
+        else:
+            state["pending"].pop(0)
+            state["skipped"][str(source_id)] = {
+                "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+                "attempts": 2, "at": now_utc(),
+            }
+            status = "SKIPPED_UNVERIFIABLE"
+        try:
+            store.write(
+                state, sha, "state: Naver no verified photo before submit " + status)
+        except NaverStateConflict:
+            if attempt == 4:
+                raise
+            _after_known_conflict(attempt)
+            continue
+        print("NAVER_PHOTO_PRE_SUBMIT_" + status + " " + json.dumps({
+            "source_id": source_id,
+            "attempts": 1 if status == "DEFERRED" else 2,
+            "submit_attempted": False,
+            "reason": "NO_VERIFIED_PRODUCT_PHOTO",
+        }))
+        return status
+    raise RuntimeError("NAVER_PRE_SUBMIT_PHOTO_409_EXHAUSTED")
+
+
 def publish_one(store: Store, *, with_receipt: bool = False):
     """Publish once. Batch callers may request the already checkpointed receipt."""
-    article = prepare_next(store)
+    try:
+        article = prepare_next(store)
+    except NaverPreSubmitPhotoUnavailable:
+        # Brief second *pre-submit* preparation on this same fresh source.
+        # A different public image response may succeed; never retry once
+        # the actual Naver submit button may have been touched.
+        print("NAVER_PHOTO_PRE_SUBMIT_RETRY_AFTER_SECONDS=7")
+        time.sleep(7)
+        article = prepare_next(store)
     if article is None:
         return None if with_receipt else 0
     source_id = article["source_id"]
@@ -667,7 +771,22 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
         # publish_one has already clicked once, verified the Naver URL and
         # obtained a successful GitHub state PUT before returning this receipt.
         # The next GET may still show the old blob for a few seconds.
-        receipt = publish_one(store, with_receipt=True)
+        try:
+            receipt = publish_one(store, with_receipt=True)
+        except NaverPreSubmitPhotoUnavailable as exc:
+            if exc.source_id != oldest_id:
+                raise RuntimeError("NAVER_PRE_SUBMIT_PHOTO_SOURCE_CHANGED")
+            status = checkpoint_pre_submit_photo_unavailable(
+                store, oldest_id)
+            # Deferral is not a publish failure: preserve the fresh item
+            # for next Oracle dispatch and avoid a misleading failed email.
+            # After two independent failed runs, an audited skip unblocks
+            # newer verified items. No article with missing photo is posted.
+            if status == "DEFERRED":
+                break
+            if status == "SKIPPED_UNVERIFIABLE":
+                continue
+            raise RuntimeError("NAVER_PHOTO_PRE_SUBMIT_UNEXPECTED_AUDIT")
         if (not isinstance(receipt, dict)
                 or receipt.get("source_id") != oldest_id
                 or not isinstance(receipt.get("url"), str)):
