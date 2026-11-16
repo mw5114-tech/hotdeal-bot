@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96256,
-  "pending": [
-    {
-      "id": 96256,
-      "source_post_url": "https://t.me/jirum/96256",
-      "original_purchase_url": "https://link.coupang.com/a/iJQwB7rrAO",
-      "source_text": "☆특가 2,700원\n위드샨 60초 건조 매니큐어\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJQwB7rrAO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T23:11:23+00:00",
-      "title": "☆특가 2,700원",
-      "sale_price_krw": 2700
-    }
-  ],
-  "in_flight": {
-    "id": 96256,
-    "status": "CLAIMED",
-    "run_id": "43977233317",
-    "at": "2026-11-16T23:12:50.073431+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6151,6 +6136,16 @@
       "vendor_item_id": "91330172632",
       "at": "2026-11-16T14:53:40.284091+00:00",
       "run_id": "43890399348"
+    },
+    "96256": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%84%EB%93%9C%EC%83%A8-60%EC%B4%88-%EA%B1%B4%EC%A1%B0-%EB%A7%A4%EB%8B%88%ED%81%90%EC%96%B4-M063%EB%88%84%EB%93%9C%EC%8B%9C%EB%9F%BD-9ml-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-AeeDNVxA?from=write",
+      "posted_at_utc": "2026-11-16T23:11:23+00:00",
+      "product_id": "9075205287",
+      "item_id": "5198106362",
+      "vendor_item_id": null,
+      "at": "2026-11-16T23:13:09.546954+00:00",
+      "run_id": "43977233317"
     }
   },
   "skipped_non_coupang": 637,
