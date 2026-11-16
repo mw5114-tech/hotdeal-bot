@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96197,
-  "pending": [
-    {
-      "id": 96197,
-      "source_message_id": 96197,
-      "source_post_url": "https://t.me/jirum/96197",
-      "original_purchase_url": "https://link.coupang.com/a/iIy955IY8q",
-      "title": "롯데웰푸드 월드콘 + 구구콘 세트 (냉동) 16개",
-      "source_text": "👍대박 13,860원 (38.0% 할인)\n롯데웰푸드 월드콘 + 구구콘 세트 (냉동) 16개\n📌 가격 현황\n- 정상가: 22,355원\n- 할인: 8,495원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIy955IY8q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13860,
-      "posted_at_utc": "2026-11-16T04:40:48+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1111,6 +1100,10 @@
     "96196": {
       "url": "https://blog.naver.com/mw5114/224479050546",
       "at": "2026-11-16T04:41:47.172088+00:00"
+    },
+    "96197": {
+      "url": "https://blog.naver.com/mw5114/224479052360",
+      "at": "2026-11-16T04:43:08.102567+00:00"
     }
   },
   "skipped": {
@@ -1215,12 +1208,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96197,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43805617626",
-    "at": "2026-11-16T04:42:26.499239+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
