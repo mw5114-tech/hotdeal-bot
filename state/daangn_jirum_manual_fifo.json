@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96206,
-  "pending": [
-    {
-      "id": 96206,
-      "source_post_url": "https://t.me/jirum/96206",
-      "original_purchase_url": "https://link.coupang.com/a/iIJ3eLg56W",
-      "source_text": "☆특가 13,170원\n제티 초콕 딸기맛 스트로우 3.6g*20개입*3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIJ3eLg56W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T07:13:11+00:00",
-      "title": "☆특가 13,170원",
-      "sale_price_krw": 13170
-    }
-  ],
-  "in_flight": {
-    "id": 96206,
-    "status": "CLAIMED",
-    "run_id": "43822313683",
-    "at": "2026-11-16T07:14:39.422990+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5991,6 +5976,16 @@
       "vendor_item_id": null,
       "at": "2026-11-16T05:42:40.179103+00:00",
       "run_id": "43811927250"
+    },
+    "96206": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A0%9C%ED%8B%B0-%EC%B4%88%EC%BD%95-%EB%94%B8%EA%B8%B0%EB%A7%9B-%EC%8A%A4%ED%8A%B8%EB%A1%9C%EC%9A%B0-36g20%EA%B0%9C%EC%9E%853%EA%B0%9C-dyJm36Kj?from=write",
+      "posted_at_utc": "2026-11-16T07:13:11+00:00",
+      "product_id": "7506128605",
+      "item_id": "20162979747",
+      "vendor_item_id": null,
+      "at": "2026-11-16T07:14:56.837459+00:00",
+      "run_id": "43822313683"
     }
   },
   "skipped_non_coupang": 603,
