@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96198,
-  "pending": [
-    {
-      "id": 96198,
-      "source_post_url": "https://t.me/jirum/96198",
-      "original_purchase_url": "https://link.coupang.com/a/iIBTHoeWl2",
-      "source_text": "☆특가 5,620원\n코멧 대나무 팝업 무표백 키친타월 3겹 100매\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIBTHoeWl2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T05:19:05+00:00",
-      "title": "☆특가 5,620원",
-      "sale_price_krw": 5620
-    }
-  ],
-  "in_flight": {
-    "id": 96198,
-    "status": "CLAIMED",
-    "run_id": "43809490712",
-    "at": "2026-11-16T05:20:25.271122+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5961,6 +5946,16 @@
       "vendor_item_id": "86341240767",
       "at": "2026-11-16T04:42:41.414998+00:00",
       "run_id": "43805617626"
+    },
+    "96198": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EB%A9%A7-%EB%8C%80%EB%82%98%EB%AC%B4-%ED%8C%9D%EC%97%85-%EB%AC%B4%ED%91%9C%EB%B0%B1-%ED%82%A4%EC%B9%9C%ED%83%80%EC%9B%94-3%EA%B2%B9-100%EB%A7%A4-PW7M2mmP?from=write",
+      "posted_at_utc": "2026-11-16T05:19:05+00:00",
+      "product_id": "9533357178",
+      "item_id": "28432100480",
+      "vendor_item_id": null,
+      "at": "2026-11-16T05:20:41.151578+00:00",
+      "run_id": "43809490712"
     }
   },
   "skipped_non_coupang": 598,
