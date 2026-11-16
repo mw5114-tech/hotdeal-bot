@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96197,
-  "pending": [
-    {
-      "id": 96197,
-      "source_post_url": "https://t.me/jirum/96197",
-      "original_purchase_url": "https://link.coupang.com/a/iIy955IY8q",
-      "source_text": "👍대박 13,860원 (38.0% 할인)\n롯데웰푸드 월드콘 + 구구콘 세트 (냉동) 16개\n📌 가격 현황\n- 정상가: 22,355원\n- 할인: 8,495원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIy955IY8q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T04:40:48+00:00",
-      "title": "롯데웰푸드 월드콘 + 구구콘 세트 (냉동) 16개",
-      "sale_price_krw": 13860
-    }
-  ],
-  "in_flight": {
-    "id": 96197,
-    "status": "CLAIMED",
-    "run_id": "43805617626",
-    "at": "2026-11-16T04:42:19.276637+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5951,6 +5936,16 @@
       "vendor_item_id": "94608655277",
       "at": "2026-11-16T04:41:16.032089+00:00",
       "run_id": "43805492201"
+    },
+    "96197": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%AF%EB%8D%B0%EC%9B%B0%ED%91%B8%EB%93%9C-%EC%9B%94%EB%93%9C%EC%BD%98-%EA%B5%AC%EA%B5%AC%EC%BD%98-%EC%84%B8%ED%8A%B8-%EB%83%89%EB%8F%99-160ml-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PW7MJyxP?from=write",
+      "posted_at_utc": "2026-11-16T04:40:48+00:00",
+      "product_id": "7107434987",
+      "item_id": "19224578191",
+      "vendor_item_id": "86341240767",
+      "at": "2026-11-16T04:42:41.414998+00:00",
+      "run_id": "43805617626"
     }
   },
   "skipped_non_coupang": 598,
