@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96195,
-  "pending": [],
+  "last_scanned_id": 96196,
+  "pending": [
+    {
+      "id": 96196,
+      "source_post_url": "https://t.me/jirum/96196",
+      "original_purchase_url": "https://link.coupang.com/a/iIy4KcW81A",
+      "source_text": "👍대박 1,009,050원 (38.0% 할인)\n에이수스 2026 비보북 16 코어Ultra5 인텔 14세대\n📌 가격 현황\n- 정상가: 1,627,500원\n- 할인: 618,450원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIy4KcW81A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-16T04:39:36+00:00",
+      "title": "에이수스 2026 비보북 16 코어Ultra5 인텔 14세대",
+      "sale_price_krw": 1009050
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
