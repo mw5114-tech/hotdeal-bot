@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96254,
-  "pending": [],
+  "last_scanned_id": 96256,
+  "pending": [
+    {
+      "id": 96256,
+      "source_post_url": "https://t.me/jirum/96256",
+      "original_purchase_url": "https://link.coupang.com/a/iJQwB7rrAO",
+      "source_text": "☆특가 2,700원\n위드샨 60초 건조 매니큐어\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJQwB7rrAO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-16T23:11:23+00:00",
+      "title": "☆특가 2,700원",
+      "sale_price_krw": 2700
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6138,7 +6148,7 @@
       "run_id": "43890399348"
     }
   },
-  "skipped_non_coupang": 636,
+  "skipped_non_coupang": 637,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
