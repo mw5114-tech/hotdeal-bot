@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96207,
-  "pending": [],
+  "last_scanned_id": 96209,
+  "pending": [
+    {
+      "id": 96209,
+      "source_post_url": "https://t.me/jirum/96209",
+      "original_purchase_url": "https://link.coupang.com/a/iIPJ86v4AC",
+      "source_text": "❤️초대박 5,230원 (40.0% 할인)\n[로켓프레시] 오레아이다 하인즈 엑스트라 크리스피 패스트푸드 프라이즈 감자튀김 (냉동) 737g\n📌 가격 현황\n- 정상가: 8,717원\n- 할인: 3,487원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIPJ86v4AC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-16T08:32:50+00:00",
+      "title": "[로켓프레시] 오레아이다 하인즈 엑스트라 크리스피 패스트푸드 프라이즈 감자튀김 (냉동) 737g",
+      "sale_price_krw": 5230
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -5998,7 +6008,7 @@
       "run_id": "43828415288"
     }
   },
-  "skipped_non_coupang": 603,
+  "skipped_non_coupang": 604,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
