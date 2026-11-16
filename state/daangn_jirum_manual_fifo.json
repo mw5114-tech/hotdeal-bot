@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96191,
-  "pending": [
-    {
-      "id": 96191,
-      "source_post_url": "https://t.me/jirum/96191",
-      "original_purchase_url": "https://link.coupang.com/a/iIuRwmpNeK",
-      "source_text": "☆특가 10,710원\n하겐다즈 크리스피 샌드위치 리치 카라멜 아이스크림 (냉동)\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIuRwmpNeK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T03:40:38+00:00",
-      "title": "☆특가 10,710원",
-      "sale_price_krw": 10710
-    }
-  ],
-  "in_flight": {
-    "id": 96191,
-    "status": "CLAIMED",
-    "run_id": "43799636000",
-    "at": "2026-11-16T03:42:10.981450+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5901,6 +5886,16 @@
       "vendor_item_id": "70998399911",
       "at": "2026-11-16T03:22:40.733047+00:00",
       "run_id": "43797710400"
+    },
+    "96191": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EA%B2%90%EB%8B%A4%EC%A6%88-%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%94%BC-%EC%83%8C%EB%93%9C%EC%9C%84%EC%B9%98-%EB%A6%AC%EC%B9%98-%EC%B9%B4%EB%9D%BC%EB%A9%9C-%EC%95%84%EC%9D%B4%EC%8A%A4%ED%81%AC%EB%A6%BC-%EB%83%89%EB%8F%99-PN2DnkrP?from=write",
+      "posted_at_utc": "2026-11-16T03:40:38+00:00",
+      "product_id": "8118346195",
+      "item_id": "23019255517",
+      "vendor_item_id": null,
+      "at": "2026-11-16T03:42:27.290235+00:00",
+      "run_id": "43799636000"
     }
   },
   "skipped_non_coupang": 597,
