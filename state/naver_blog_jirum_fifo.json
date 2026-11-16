@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96194,
-  "pending": [
-    {
-      "id": 96194,
-      "source_message_id": 96194,
-      "source_post_url": "https://t.me/jirum/96194",
-      "original_purchase_url": "https://link.coupang.com/a/iIxmkLkCnQ",
-      "title": "리츠 샌드위치 크래커 초코 77g 10개",
-      "source_text": "🔥🔥🔥무지성 6,550원 (67.0% 할인)🔥🔥🔥\n리츠 샌드위치 크래커 초코 77g 10개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 19,848원\n- 할인: 13,298원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIxmkLkCnQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6550,
-      "posted_at_utc": "2026-11-16T04:15:35+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1099,6 +1088,10 @@
     "96192": {
       "url": "https://blog.naver.com/mw5114/224478997093",
       "at": "2026-11-16T03:59:24.835551+00:00"
+    },
+    "96194": {
+      "url": "https://blog.naver.com/mw5114/224479019326",
+      "at": "2026-11-16T04:17:25.632524+00:00"
     }
   },
   "skipped": {
@@ -1203,12 +1196,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96194,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43803074174",
-    "at": "2026-11-16T04:16:41.277952+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
