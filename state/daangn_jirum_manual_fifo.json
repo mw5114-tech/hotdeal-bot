@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96207,
-  "pending": [
-    {
-      "id": 96207,
-      "source_post_url": "https://t.me/jirum/96207",
-      "original_purchase_url": "https://link.coupang.com/a/iING0n8fPo",
-      "source_text": "☆특가 2,820원\n해찬들 물로만 끓여도 시원 깔끔한 바지락꽃게 된장찌개양념, 450g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iING0n8fPo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T08:04:09+00:00",
-      "title": "☆특가 2,820원",
-      "sale_price_krw": 2820
-    }
-  ],
-  "in_flight": {
-    "id": 96207,
-    "status": "CLAIMED",
-    "run_id": "43828415288",
-    "at": "2026-11-16T08:05:19.771337+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6001,6 +5986,16 @@
       "vendor_item_id": null,
       "at": "2026-11-16T07:14:56.837459+00:00",
       "run_id": "43822313683"
+    },
+    "96207": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%EC%B0%AC%EB%93%A4-%EB%AC%BC%EB%A1%9C%EB%A7%8C-%EB%81%93%EC%97%AC%EB%8F%84-%EC%8B%9C%EC%9B%90-%EA%B9%94%EB%81%94%ED%95%9C-%EB%B0%94%EC%A7%80%EB%9D%BD%EA%BD%83%EA%B2%8C-%EB%90%9C%EC%9E%A5%EC%B0%8C%EA%B0%9C%EC%96%91%EB%85%90-4-30%ED%95%A0%EC%9D%B8-Pxq8GKXd?from=write",
+      "posted_at_utc": "2026-11-16T08:04:09+00:00",
+      "product_id": "7179395215",
+      "item_id": "18112762444",
+      "vendor_item_id": null,
+      "at": "2026-11-16T08:05:41.507311+00:00",
+      "run_id": "43828415288"
     }
   },
   "skipped_non_coupang": 603,
