@@ -1,0 +1,26 @@
+name: Tests | Naver pre-submit photo outage safe recovery
+on:
+  push:
+    branches: [fix/naver-presubmit-photo-guard-20261116, main]
+    paths:
+      - gh_only/naver_blog_jirum.py
+      - gh_only/test_naver_blog_jirum.py
+      - .github/workflows/naver-photo-outage-tests.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline-no-post:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install read-only test dependencies
+        run: python -m pip install --disable-pip-version-check --quiet playwright==1.64.1 Pillow==11.3.0
+      - name: Compile publisher and run Naver/Daangn pre-submit regressions
+        run: |
+          python -m compileall -q gh_only/naver_blog_jirum.py gh_only/test_naver_blog_jirum.py
+          python -m unittest -q gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_default_deal_automation gh_only.test_lowchart_shared_reference gh_only.test_coupang_no_subid_end_to_end
