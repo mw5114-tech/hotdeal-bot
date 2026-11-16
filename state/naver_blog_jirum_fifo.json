@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96234,
-  "pending": [
-    {
-      "id": 96234,
-      "source_message_id": 96234,
-      "source_post_url": "https://t.me/jirum/96234",
-      "original_purchase_url": "https://link.coupang.com/a/iI8qIVOS5s",
-      "title": "덴티본조르노 구취케어치약, 170g, 6개",
-      "source_text": "👍대박 14,670원 (34.6% 할인)\n덴티본조르노 구취케어치약, 170g, 6개\n📌 가격 현황\n- 정상가: 22,440원\n- 할인: 7,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iI8qIVOS5s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14670,
-      "posted_at_utc": "2026-11-16T12:54:20+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1171,6 +1160,10 @@
     "96228": {
       "url": "https://blog.naver.com/mw5114/224479671142",
       "at": "2026-11-16T12:56:27.246337+00:00"
+    },
+    "96234": {
+      "url": "https://blog.naver.com/mw5114/224479672834",
+      "at": "2026-11-16T12:57:45.847405+00:00"
     }
   },
   "skipped": {
@@ -1279,12 +1272,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96234,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43870838211",
-    "at": "2026-11-16T12:57:01.050994+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
