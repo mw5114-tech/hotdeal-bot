@@ -1,8 +1,9 @@
 """Independent Jirum -> Naver Blog FIFO using the existing Oracle-triggered Actions run.
 
-Never changes the Daangn FIFO or Telegram worker. No hidden retries. A fresh
-source timestamp, photo, product/item ID and owner's AFFSDP candidate are
-required before any blog submission. Live submission is an explicit opt-in.
+Never changes the Daangn FIFO or Telegram worker. Only a bounded,
+pre-submit photo-availability retry is allowed. A fresh source timestamp,
+verified photo, exact product/item ID and API-issued owner link are required
+before any blog submission. Live submission is an explicit opt-in.
 """
 from __future__ import annotations
 
@@ -630,6 +631,11 @@ def checkpoint_pre_submit_photo_unavailable(store: Store, source_id: int) -> str
             "submit_attempted": False,
             "reason": "NO_VERIFIED_PRODUCT_PHOTO",
         }))
+        print("::warning title=Naver pre-submit photo unavailable::"
+              + "Telegram source " + str(source_id)
+              + (" deferred to next Oracle event (no publish clicked)"
+                 if status == "DEFERRED"
+                 else " archived after two separate failed runs (no publish clicked)"))
         return status
     raise RuntimeError("NAVER_PRE_SUBMIT_PHOTO_409_EXHAUSTED")
 
