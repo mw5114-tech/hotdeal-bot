@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96211,
-  "pending": [
-    {
-      "id": 96211,
-      "source_message_id": 96211,
-      "source_post_url": "https://t.me/jirum/96211",
-      "original_purchase_url": "https://link.coupang.com/a/iIRdlFDlme",
-      "title": "☆특가 19,730원",
-      "source_text": "☆특가 19,730원\n널담 고단백 저당 네모바게트 크랜베리호두 (냉동), 90g, 1개입, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIRdlFDlme\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 19730,
-      "posted_at_utc": "2026-11-16T08:53:26+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1139,6 +1128,10 @@
     "96209": {
       "url": "https://blog.naver.com/mw5114/224479378130",
       "at": "2026-11-16T08:34:24.377378+00:00"
+    },
+    "96211": {
+      "url": "https://blog.naver.com/mw5114/224479405501",
+      "at": "2026-11-16T08:55:23.133681+00:00"
     }
   },
   "skipped": {
@@ -1243,12 +1236,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96211,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43835012166",
-    "at": "2026-11-16T08:54:39.537543+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
