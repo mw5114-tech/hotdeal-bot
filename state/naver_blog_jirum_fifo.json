@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96259,
-  "pending": [],
+  "last_scanned_id": 96261,
+  "pending": [
+    {
+      "id": 96260,
+      "source_message_id": 96260,
+      "source_post_url": "https://t.me/jirum/96260",
+      "original_purchase_url": "https://link.coupang.com/a/iJSLJIrpYW",
+      "title": "☆특가 9,500원",
+      "source_text": "☆특가 9,500원\n1+1 Giilight 무선 빗고데기 미니 휴대용 음이온 스트 빗 볼륨 스트 웨이브 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJSLJIrpYW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9500,
+      "posted_at_utc": "2026-11-16T23:42:47+00:00"
+    },
+    {
+      "id": 96261,
+      "source_message_id": 96261,
+      "source_post_url": "https://t.me/jirum/96261",
+      "original_purchase_url": "https://link.coupang.com/a/iJSP8bgYFw",
+      "title": "도브 센서티브 모이스처라이징 크림 뷰티 바",
+      "source_text": "☆특가 17,040원 (29.0% 할인)\n도브 센서티브 모이스처라이징 크림 뷰티 바\n📌 가격 현황\n- 정상가: 24,000원\n- 할인: 6,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJSP8bgYFw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 17040,
+      "posted_at_utc": "2026-11-16T23:43:47+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
