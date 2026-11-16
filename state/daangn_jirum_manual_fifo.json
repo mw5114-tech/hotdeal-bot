@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96194,
-  "pending": [
-    {
-      "id": 96194,
-      "source_post_url": "https://t.me/jirum/96194",
-      "original_purchase_url": "https://link.coupang.com/a/iIxmkLkCnQ",
-      "source_text": "🔥🔥🔥무지성 6,550원 (67.0% 할인)🔥🔥🔥\n리츠 샌드위치 크래커 초코 77g 10개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 19,848원\n- 할인: 13,298원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIxmkLkCnQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T04:15:35+00:00",
-      "title": "리츠 샌드위치 크래커 초코 77g 10개",
-      "sale_price_krw": 6550
-    }
-  ],
-  "in_flight": {
-    "id": 96194,
-    "status": "CLAIMED",
-    "run_id": "43803074174",
-    "at": "2026-11-16T04:16:41.457730+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5921,6 +5906,16 @@
       "vendor_item_id": "91509869170",
       "at": "2026-11-16T03:58:57.048857+00:00",
       "run_id": "43801233983"
+    },
+    "96194": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%EC%B8%A0-%EC%83%8C%EB%93%9C%EC%9C%84%EC%B9%98-%ED%81%AC%EB%9E%98%EC%BB%A4-%EC%B4%88%EC%BD%94-77g-10%EA%B0%9C-35%ED%95%A0%EC%9D%B8-A4nQLE1d?from=write",
+      "posted_at_utc": "2026-11-16T04:15:35+00:00",
+      "product_id": "1736402795",
+      "item_id": "29196675353",
+      "vendor_item_id": "96117254239",
+      "at": "2026-11-16T04:17:02.453820+00:00",
+      "run_id": "43803074174"
     }
   },
   "skipped_non_coupang": 598,
