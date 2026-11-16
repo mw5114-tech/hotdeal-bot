@@ -3,15 +3,6 @@
   "last_scanned_id": 96261,
   "pending": [
     {
-      "id": 96260,
-      "source_post_url": "https://t.me/jirum/96260",
-      "original_purchase_url": "https://link.coupang.com/a/iJSLJIrpYW",
-      "source_text": "☆특가 9,500원\n1+1 Giilight 무선 빗고데기 미니 휴대용 음이온 스트 빗 볼륨 스트 웨이브 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJSLJIrpYW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T23:42:47+00:00",
-      "title": "☆특가 9,500원",
-      "sale_price_krw": 9500
-    },
-    {
       "id": 96261,
       "source_post_url": "https://t.me/jirum/96261",
       "original_purchase_url": "https://link.coupang.com/a/iJSP8bgYFw",
@@ -21,12 +12,7 @@
       "sale_price_krw": 17040
     }
   ],
-  "in_flight": {
-    "id": 96260,
-    "status": "CLAIMED",
-    "run_id": "43981723205",
-    "at": "2026-11-16T23:44:34.194759+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6180,6 +6166,16 @@
       "vendor_item_id": "91139501306",
       "at": "2026-11-16T23:26:14.799886+00:00",
       "run_id": "43979149863"
+    },
+    "96260": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-11-Giilight-%EB%AC%B4%EC%84%A0-%EB%B9%97%EA%B3%A0%EB%8D%B0%EA%B8%B0-%EB%AF%B8%EB%8B%88-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%9D%8C%EC%9D%B4%EC%98%A8-%EC%8A%A4%ED%8A%B8-%EB%B9%97-%EB%B3%BC%EB%A5%A8-%EC%8A%A4%ED%8A%B8-dZ7nwmej?from=write",
+      "posted_at_utc": "2026-11-16T23:42:47+00:00",
+      "product_id": "8972184906",
+      "item_id": "26260257110",
+      "vendor_item_id": null,
+      "at": "2026-11-16T23:44:50.609202+00:00",
+      "run_id": "43981723205"
     }
   },
   "skipped_non_coupang": 639,
