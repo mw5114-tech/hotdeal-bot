@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96217,
-  "pending": [
-    {
-      "id": 96216,
-      "source_post_url": "https://t.me/jirum/96216",
-      "original_purchase_url": "https://link.coupang.com/a/iIUReT4hcy",
-      "source_text": "☆특가 14,370원\n불닭 볶음탕면 145g, 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIUReT4hcy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T09:44:25+00:00",
-      "title": "☆특가 14,370원",
-      "sale_price_krw": 14370
-    }
-  ],
-  "in_flight": {
-    "id": 96216,
-    "status": "CLAIMED",
-    "run_id": "43841798975",
-    "at": "2026-11-16T09:55:10.085098+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6050,6 +6035,16 @@
       "item_id": "15279219078",
       "vendor_item_id": null,
       "at": "2026-11-16T09:55:04.805826+00:00",
+      "run_id": "43841798975"
+    },
+    "96216": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B6%88%EB%8B%AD-%EB%B3%B6%EC%9D%8C%ED%83%95%EB%A9%B4-145g-20%EA%B0%9C-35%ED%95%A0%EC%9D%B8-d9aX0xxd?from=write",
+      "posted_at_utc": "2026-11-16T09:44:25+00:00",
+      "product_id": "25502012",
+      "item_id": "19022474911",
+      "vendor_item_id": null,
+      "at": "2026-11-16T09:55:31.505982+00:00",
       "run_id": "43841798975"
     }
   },
