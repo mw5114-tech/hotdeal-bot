@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96213,
-  "pending": [
-    {
-      "id": 96213,
-      "source_post_url": "https://t.me/jirum/96213",
-      "original_purchase_url": "https://link.coupang.com/a/iISEYWF2dM",
-      "source_text": "👍대박 20,500원 (30.0% 할인)\n잠스트 JK-BAND 무릎보호대, M, 블루, 2개\n📌 가격 현황\n- 정상가: 29,290원\n- 할인: 8,790원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iISEYWF2dM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T09:13:39+00:00",
-      "title": "잠스트 JK-BAND 무릎보호대, M, 블루, 2개",
-      "sale_price_krw": 20500
-    }
-  ],
-  "in_flight": {
-    "id": 96213,
-    "status": "CLAIMED",
-    "run_id": "43837894008",
-    "at": "2026-11-16T09:14:46.762247+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6031,6 +6016,16 @@
       "vendor_item_id": null,
       "at": "2026-11-16T08:54:51.674797+00:00",
       "run_id": "43835012166"
+    },
+    "96213": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9E%A0%EC%8A%A4%ED%8A%B8-JK-BAND-%EB%AC%B4%EB%A6%8E%EB%B3%B4%ED%98%B8%EB%8C%80-2%EA%B0%9C-%EB%B8%94%EB%A3%A8-40%ED%95%A0%EC%9D%B8-dDWO44xP?from=write",
+      "posted_at_utc": "2026-11-16T09:13:39+00:00",
+      "product_id": "24406364",
+      "item_id": "23089728006",
+      "vendor_item_id": "90123174279",
+      "at": "2026-11-16T09:15:07.920911+00:00",
+      "run_id": "43837894008"
     }
   },
   "skipped_non_coupang": 606,
