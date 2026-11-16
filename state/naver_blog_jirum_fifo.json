@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96226,
-  "pending": [
-    {
-      "id": 96226,
-      "source_message_id": 96226,
-      "source_post_url": "https://t.me/jirum/96226",
-      "original_purchase_url": "https://link.coupang.com/a/iI2962kRjw",
-      "title": "☆특가 7,650원",
-      "source_text": "☆특가 7,650원\n이니스프리 유채꿀 립밤, 3.5g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iI2962kRjw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7650,
-      "posted_at_utc": "2026-11-16T11:40:37+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1163,6 +1152,10 @@
     "96221": {
       "url": "https://blog.naver.com/mw5114/224479481884",
       "at": "2026-11-16T10:04:14.753942+00:00"
+    },
+    "96226": {
+      "url": "https://blog.naver.com/mw5114/224479585066",
+      "at": "2026-11-16T11:42:35.973613+00:00"
     }
   },
   "skipped": {
@@ -1271,12 +1264,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96226,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43859942795",
-    "at": "2026-11-16T11:41:50.787490+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
