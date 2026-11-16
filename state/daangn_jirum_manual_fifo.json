@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96195,
-  "pending": [
-    {
-      "id": 96195,
-      "source_post_url": "https://t.me/jirum/96195",
-      "original_purchase_url": "https://link.coupang.com/a/iIygKHrMyq",
-      "source_text": "☆특가 3,200원\n신라면 로제 큰사발면 108g, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIygKHrMyq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T04:28:19+00:00",
-      "title": "☆특가 3,200원",
-      "sale_price_krw": 3200
-    }
-  ],
-  "in_flight": {
-    "id": 96195,
-    "status": "CLAIMED",
-    "run_id": "43804390688",
-    "at": "2026-11-16T04:29:43.980537+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5931,6 +5916,16 @@
       "vendor_item_id": "96117254239",
       "at": "2026-11-16T04:17:02.453820+00:00",
       "run_id": "43803074174"
+    },
+    "96195": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8B%A0%EB%9D%BC%EB%A9%B4-%EB%A1%9C%EC%A0%9C-%ED%81%B0%EC%82%AC%EB%B0%9C%EB%A9%B4-108g-3%EA%B0%9C-10%ED%95%A0%EC%9D%B8-A0n4Mamd?from=write",
+      "posted_at_utc": "2026-11-16T04:28:19+00:00",
+      "product_id": "9662825898",
+      "item_id": "28887826983",
+      "vendor_item_id": null,
+      "at": "2026-11-16T04:30:08.236004+00:00",
+      "run_id": "43804390688"
     }
   },
   "skipped_non_coupang": 598,
