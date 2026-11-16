@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96189,
-  "pending": [
-    {
-      "id": 96189,
-      "source_post_url": "https://t.me/jirum/96189",
-      "original_purchase_url": "https://link.coupang.com/a/iItqqOvZCu",
-      "source_text": "❤️초대박 7,860원 (43.0% 할인)\n기가 바베큐 마쉬멜로우 800g\n📌 가격 현황\n- 정상가: 13,789원\n- 할인: 5,929원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iItqqOvZCu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T03:20:32+00:00",
-      "title": "기가 바베큐 마쉬멜로우 800g",
-      "sale_price_krw": 7860
-    }
-  ],
-  "in_flight": {
-    "id": 96189,
-    "status": "CLAIMED",
-    "run_id": "43797710400",
-    "at": "2026-11-16T03:22:25.931012+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5891,6 +5876,16 @@
       "vendor_item_id": "75338910841",
       "at": "2026-11-16T03:21:26.311039+00:00",
       "run_id": "43797576582"
+    },
+    "96189": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B8%B0%EA%B0%80-%EB%B0%94%EB%B2%A0%ED%81%90-%EB%A7%88%EC%89%AC%EB%A9%9C%EB%A1%9C%EC%9A%B0-800g-dYL00z3P?from=write",
+      "posted_at_utc": "2026-11-16T03:20:32+00:00",
+      "product_id": "8515149154",
+      "item_id": "21497643189",
+      "vendor_item_id": "70998399911",
+      "at": "2026-11-16T03:22:40.733047+00:00",
+      "run_id": "43797710400"
     }
   },
   "skipped_non_coupang": 596,
