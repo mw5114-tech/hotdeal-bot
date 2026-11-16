@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96182,
-  "pending": [
-    {
-      "id": 96182,
-      "source_post_url": "https://t.me/jirum/96182",
-      "original_purchase_url": "https://link.coupang.com/a/iIiRIS3pYG",
-      "source_text": "👍대박 12,900원 (31.0% 할인)\n스너글 고농축 섬유유연제 블루 스파클 플러스 본품 4L\n📌 가격 현황\n- 정상가: 18,696원\n- 할인: 5,796원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIiRIS3pYG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T00:52:46+00:00",
-      "title": "스너글 고농축 섬유유연제 블루 스파클 플러스 본품 4L",
-      "sale_price_krw": 12900
-    }
-  ],
-  "in_flight": {
-    "id": 96182,
-    "status": "CLAIMED",
-    "run_id": "43783001220",
-    "at": "2026-11-16T00:54:12.650820+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5851,6 +5836,16 @@
       "vendor_item_id": "3116820080",
       "at": "2026-11-16T00:30:17.185800+00:00",
       "run_id": "43780650334"
+    },
+    "96182": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%EB%84%88%EA%B8%80-%EA%B3%A0%EB%86%8D%EC%B6%95-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%B8%94%EB%A3%A8-%EC%8A%A4%ED%8C%8C%ED%81%B4-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EB%B3%B8%ED%92%88-4L-25%ED%95%A0%EC%9D%B8-dpYvNwJj?from=write",
+      "posted_at_utc": "2026-11-16T00:52:46+00:00",
+      "product_id": "7518506015",
+      "item_id": "28841293622",
+      "vendor_item_id": "95775442826",
+      "at": "2026-11-16T00:54:28.877538+00:00",
+      "run_id": "43783001220"
     }
   },
   "skipped_non_coupang": 593,
