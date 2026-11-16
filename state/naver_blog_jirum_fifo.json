@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96198,
-  "pending": [
-    {
-      "id": 96198,
-      "source_message_id": 96198,
-      "source_post_url": "https://t.me/jirum/96198",
-      "original_purchase_url": "https://link.coupang.com/a/iIBTHoeWl2",
-      "title": "☆특가 5,620원",
-      "source_text": "☆특가 5,620원\n코멧 대나무 팝업 무표백 키친타월 3겹 100매\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIBTHoeWl2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5620,
-      "posted_at_utc": "2026-11-16T05:19:05+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1115,6 +1104,10 @@
     "96197": {
       "url": "https://blog.naver.com/mw5114/224479052360",
       "at": "2026-11-16T04:43:08.102567+00:00"
+    },
+    "96198": {
+      "url": "https://blog.naver.com/mw5114/224479104176",
+      "at": "2026-11-16T05:21:02.811928+00:00"
     }
   },
   "skipped": {
@@ -1219,12 +1212,7 @@
       "at": "2026-11-15T03:31:19.227865+00:00"
     }
   },
-  "in_flight": {
-    "id": 96198,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "43809490712",
-    "at": "2026-11-16T05:20:21.774196+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
