@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96183,
-  "pending": [
-    {
-      "id": 96183,
-      "source_post_url": "https://t.me/jirum/96183",
-      "original_purchase_url": "https://link.coupang.com/a/iIjgJdyihE",
-      "source_text": "❤️초대박 20,200원 (42.0% 할인)\n트라택 EVA 폼롤러 원형 + 운동법 매뉴얼 + 포스터\n📌 가격 현황\n- 정상가: 34,828원\n- 할인: 14,628원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIjgJdyihE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-16T00:58:24+00:00",
-      "title": "트라택 EVA 폼롤러 원형 + 운동법 매뉴얼 + 포스터",
-      "sale_price_krw": 20200
-    }
-  ],
-  "in_flight": {
-    "id": 96183,
-    "status": "CLAIMED",
-    "run_id": "43783556689",
-    "at": "2026-11-16T00:59:27.811527+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -5861,6 +5846,16 @@
       "vendor_item_id": "95775442826",
       "at": "2026-11-16T00:54:28.877538+00:00",
       "run_id": "43783001220"
+    },
+    "96183": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8A%B8%EB%9D%BC%ED%83%9D-EVA-%ED%8F%BC%EB%A1%A4%EB%9F%AC-%EC%9B%90%ED%98%95-%EC%9A%B4%EB%8F%99%EB%B2%95-%EB%A7%A4%EB%89%B4%EC%96%BC-%ED%8F%AC%EC%8A%A4%ED%84%B0-%EB%B8%94%EB%A3%A8-45%ED%95%A0%EC%9D%B8-dYLD17gP?from=write",
+      "posted_at_utc": "2026-11-16T00:58:24+00:00",
+      "product_id": "45079642",
+      "item_id": "161304182",
+      "vendor_item_id": "3380243040",
+      "at": "2026-11-16T00:59:49.763765+00:00",
+      "run_id": "43783556689"
     }
   },
   "skipped_non_coupang": 593,
