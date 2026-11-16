@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96191,
-  "pending": [],
+  "last_scanned_id": 96192,
+  "pending": [
+    {
+      "id": 96192,
+      "source_post_url": "https://t.me/jirum/96192",
+      "original_purchase_url": "https://link.coupang.com/a/iIv2QHLAPc",
+      "source_text": "❤️초대박 7,990원 (42.0% 할인)\n스카치브라이트 3M 버블버블 일회용 롤 수세미 28개입 2개\n📌 가격 현황\n- 정상가: 13,776원\n- 할인: 5,786원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIv2QHLAPc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-16T03:57:11+00:00",
+      "title": "스카치브라이트 3M 버블버블 일회용 롤 수세미 28개입 2개",
+      "sale_price_krw": 7990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
