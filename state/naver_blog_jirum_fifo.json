@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96179,
-  "pending": [],
+  "last_scanned_id": 96180,
+  "pending": [
+    {
+      "id": 96180,
+      "source_message_id": 96180,
+      "source_post_url": "https://t.me/jirum/96180",
+      "original_purchase_url": "https://link.coupang.com/a/iIg9B5J1OK",
+      "title": "리큐 진한겔 하이브리드 플로랄향 일반용 액상세제 리필, 2.1L, 4개",
+      "source_text": "👍대박 11,520원 (39.0% 할인)\n리큐 진한겔 하이브리드 플로랄향 일반용 액상세제 리필, 2.1L, 4개\n📌 가격 현황\n- 정상가: 18,885원\n- 할인: 7,365원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iIg9B5J1OK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11520,
+      "posted_at_utc": "2026-11-16T00:28:49+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
