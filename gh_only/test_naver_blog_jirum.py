@@ -9,7 +9,9 @@ from gh_only.naver_blog_jirum import (
     naver_title, archive_stale_claim, NAVER_TITLE_MAX_UTF16_UNITS,
     NaverStateConflict, scan, scan_with_source_wait, claim_before_publish, checkpoint_published,
     publish_batch, expire_unclaimed_before_next, wait_for_batch_checkpoint,
-    apply_official_api_link,
+    apply_official_api_link, make_article, publish_one,
+    _photo_unavailable_before_submit, NaverPreSubmitPhotoUnavailable,
+    checkpoint_pre_submit_photo_unavailable,
 )
 
 
@@ -57,6 +59,148 @@ class ConflictStore:
 
 
 class NaverQueueTests(unittest.TestCase):
+    def test_draft_missing_photo_is_precisely_classified_pre_submit(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        with TemporaryDirectory() as td:
+            folder = Path(td)
+            row = {
+                "source_message_id": 96223,
+                "product_identity": {
+                    "status": "EXACT_ITEM_IDENTIFIED",
+                    "product_id": "9378826778",
+                    "item_id": "28420179798",
+                },
+                "image_metadata_status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                "photo": {"status": "PHOTO_EVIDENCE_UNAVAILABLE",
+                          "saved_name": None},
+                "photo_provider_attempts": [
+                    {"provider": "fallcent_search",
+                     "status": "FALLCENT_NO_MATCHING_IMAGE"},
+                    {"provider": "naver_web",
+                     "status": "NAVER_SEARCH_REQUEST_FAILED"},
+                ],
+            }
+            (folder / "drafts.json").write_text(
+                json.dumps({"drafts": [row]}), encoding="utf-8")
+            self.assertTrue(_photo_unavailable_before_submit(folder, 96223))
+            self.assertFalse(_photo_unavailable_before_submit(folder, 96224))
+            row["photo"]["status"] = "IMAGE_SAVED"
+            (folder / "drafts.json").write_text(
+                json.dumps({"drafts": [row]}), encoding="utf-8")
+            self.assertFalse(_photo_unavailable_before_submit(folder, 96223))
+
+    def test_only_missing_photo_pre_submit_becomes_safe_retryable_exception(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        source = deal(96223)
+        source["source_message_id"] = 96223
+        row = {
+            "source_message_id": 96223,
+            "product_identity": {
+                "status": "EXACT_ITEM_IDENTIFIED",
+                "product_id": "9378826778",
+                "item_id": "28420179798",
+            },
+            "image_metadata_status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+            "photo": {"status": "PHOTO_EVIDENCE_UNAVAILABLE",
+                      "saved_name": None},
+            "photo_provider_attempts": [{"provider": "naver_web",
+                                          "status": "NAVER_SEARCH_REQUEST_FAILED"}],
+        }
+        with TemporaryDirectory() as td, \
+             patch("gh_only.naver_blog_jirum.enrich_deal", return_value=row), \
+             patch("gh_only.naver_blog_jirum.old.validate_draft",
+                   side_effect=RuntimeError("POST_EVIDENCE_NOT_READY")):
+            with self.assertRaises(NaverPreSubmitPhotoUnavailable) as cm:
+                make_article(source, Path(td), tag="AF9668915")
+            self.assertEqual(cm.exception.source_id, 96223)
+        # An unrelated safety failure must still be fatal, not ignored.
+        with TemporaryDirectory() as td, \
+             patch("gh_only.naver_blog_jirum.enrich_deal", return_value=row), \
+             patch("gh_only.naver_blog_jirum.old.validate_draft",
+                   side_effect=RuntimeError("WRONG_SKU_VALIDATION_FAILED")):
+            with self.assertRaisesRegex(RuntimeError, "WRONG_SKU_VALIDATION_FAILED"):
+                make_article(source, Path(td), tag="AF9668915")
+
+    def test_two_failed_runs_defer_then_archive_without_ever_claiming(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        store = ConflictStore(initial=s, conflicts=0)
+        exc = NaverPreSubmitPhotoUnavailable(95496)
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=exc), \
+             patch("gh_only.naver_blog_jirum.claim_before_publish") as claim:
+            self.assertEqual(publish_batch(store, max_posts=2), 0)
+            self.assertEqual(store.current["pending"][0]["id"], 95496)
+            self.assertEqual(
+                store.current["pending"][0]["photo_prepare_failure_count"], 1)
+            self.assertNotIn("95496", store.current["skipped"])
+            self.assertIsNone(store.current["in_flight"])
+            # Next separate Oracle run also gets no verified image.
+            self.assertEqual(publish_batch(store, max_posts=2), 0)
+        claim.assert_not_called()
+        self.assertNotIn("95496", store.current["published"])
+        self.assertEqual(
+            store.current["skipped"]["95496"]["reason"],
+            "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS")
+        self.assertEqual([x["id"] for x in store.current["pending"]], [95497])
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_pre_submit_photo_deferral_rebases_known_409_without_reposting(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=1)
+        with patch("gh_only.naver_blog_jirum.time.sleep"):
+            self.assertEqual(
+                checkpoint_pre_submit_photo_unavailable(store, 95496),
+                "DEFERRED")
+        self.assertEqual(store.write_count, 2)
+        self.assertEqual(store.current["pending"][0]["photo_prepare_failure_count"], 1)
+        self.assertIsNone(store.current["in_flight"])
+        self.assertNotIn("95496", store.current["published"])
+
+    def test_pre_submit_photo_never_excuses_inflight_claim_or_wrong_source(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=0)
+        with self.assertRaisesRegex(RuntimeError, "STATE_CHANGED"):
+            checkpoint_pre_submit_photo_unavailable(store, 95497)
+        store.current["in_flight"] = {
+            "id": 95496, "status": "REVIEW_REQUIRED",
+            "run_id": "test", "at": datetime.now(timezone.utc).isoformat()
+        }
+        with self.assertRaisesRegex(RuntimeError, "STATE_CHANGED"):
+            checkpoint_pre_submit_photo_unavailable(store, 95496)
+        self.assertEqual(store.write_count, 0)
+
+    def test_publisher_retries_photo_only_before_claim_once(self):
+        source_id = 95496
+        article = {
+            "source_id": source_id,
+            "title": "[쿠팡🔥핫딜] 샘플",
+            "image": object(), "link": "https://link.coupang.com/a/AbcDEF1",
+            "unissued_link": False,
+        }
+        store = ConflictStore(conflicts=0)
+        with patch("gh_only.naver_blog_jirum.prepare_next",
+                   side_effect=[NaverPreSubmitPhotoUnavailable(source_id),
+                                article]) as prepare, \
+             patch("gh_only.naver_blog_jirum.time.sleep") as sleep, \
+             patch("gh_only.naver_blog_jirum.claim_before_publish") as claim, \
+             patch("gh_only.naver_blog_jirum.checkpoint_published") as saved, \
+             patch("gh_only.naver_blog_deal_publisher.submit_one",
+                   return_value="https://blog.naver.com/mw5114/224477999999") as submit:
+            receipt = publish_one(store, with_receipt=True)
+        self.assertEqual(prepare.call_count, 2)
+        sleep.assert_called_once_with(7)
+        claim.assert_called_once_with(store, source_id)
+        submit.assert_called_once()
+        saved.assert_called_once()
+        self.assertEqual(receipt["source_id"], source_id)
+
     def test_oracle_public_lag_retries_until_exact_source_visible(self):
         # 2026-11-15 real case: 96111 arrived in Telegram's public HTML
         # 42 seconds after its event; Naver initially saw only 96110.
