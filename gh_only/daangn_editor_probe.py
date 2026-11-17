@@ -198,9 +198,16 @@ def read_one_draft(folder: Path) -> dict:
     # merchant's unaudited reference price to invent a percentage.
     known_discount = type(discount) is int and 1 <= discount <= 95
     under_one = caption.get("reference_discount_under_one_pct") is True
-    body_prefix = (f"[{discount}%할인] " if known_discount
-                   else "[1% 미만 저렴] " if under_one
-                   else "[할인율 확인 중] ")
+    similar_basis = caption.get("comparison_reference_source") == "fallcent_similar_search_current"
+    body_prefix = (
+        f"[유사상품가 대비 {discount}%↓] " if similar_basis
+        and known_discount else
+        "[유사상품가 대비 1% 미만↓] " if similar_basis
+        and under_one else
+        "[유사상품가 비교] " if similar_basis else
+        f"[{discount}%할인] " if known_discount else
+        "[1% 미만 저렴] " if under_one else "[할인율 확인 중] "
+    )
     if not title_line.startswith(body_prefix):
         raise ValueError("DRAFT_DISCOUNT_PREFIX_MISSING_OR_MISMATCHED")
     title = title_line[len(body_prefix):].strip()
@@ -208,7 +215,10 @@ def read_one_draft(folder: Path) -> dict:
         raise ValueError("DRAFT_PRODUCT_NAME_INVALID")
     # Retain existing Daangn POST title format: name THEN discount.
     if known_discount:
-        suffix = f" [{discount}%할인]"
+        suffix = (
+            f" [유사상품가 대비 {discount}%↓]" if similar_basis
+            else f" [{discount}%할인]"
+        )
         if not title.endswith(suffix):
             title = title[:150-len(suffix)].rstrip() + suffix
     # Keep the requested "[쿠팡🔥핫딜] 제품명 [NN%할인]" format.
@@ -217,7 +227,9 @@ def read_one_draft(folder: Path) -> dict:
     prefix = "[쿠팡🔥핫딜] "
     complete_title = prefix + title
     if len(complete_title) > 150:
-        match = re.search(r" (\[\d+%할인\])$", title)
+        match = re.search(
+            r" (\[(?:\d+%할인|유사상품가 대비 \d+%↓)\])$", title
+        )
         if match:
             end = match.group(0)
             name = title[:-len(end)]

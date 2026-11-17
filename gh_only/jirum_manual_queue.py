@@ -812,22 +812,45 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 or f"{label} : 약 {price:,}원" not in article["body"]):
             raise RuntimeError("LOWCHART_VISIBLE_PRICE_EVIDENCE_MISMATCH")
     if basis == "fallcent_similar_search_current":
-        # User explicitly allows OPTION-UNCHECKED product-family matches here.
-        # Do not claim this is the same item, a normal price, or a discount.
+        # User permits a FAMILY-level option-unchecked comparison. It is a
+        # relative price GAP only, not the actual item's discount/normal price.
         from gh_only.fallcent_similar_current import valid_search_price
+        from gh_only.default_deal_format import create_default_preview
         proof = row.get("fallcent_similar_price_lookup")
         query = row.get("fallcent_similar_query_title")
         shown = valid_search_price(proof, query)
         price = caption.get("comparison_reference_price_krw")
-        if (shown is None or price != shown
-                or caption.get("comparison_is_similar_product_only") is not True
-                or caption.get("comparison_price_is_historical_average") is not False
-                or caption.get("approx_discount_vs_reference_pct") is not None
-                or caption.get("reference_discount_under_one_pct") is not False
-                or caption.get("observed_average_krw") is not None
-                or caption.get("fallcent_observed_average_krw") is not None
+        sale = caption.get("sale_price_krw")
+        if (shown is None or price != shown or type(sale) is not int):
+            raise RuntimeError("FALLCENT_SIMILAR_SEARCH_PRICE_DISCLOSURE_MISMATCH")
+        expected = create_default_preview(
+            sale, caption.get("product_name"), shown,
+            row.get("source_message_id"),
+            reference_source="fallcent_similar_search_current",
+        )
+        guarded_fields = (
+            "approx_discount_vs_reference_pct",
+            "reference_discount_under_one_pct",
+            "similar_reference_price_gap_pct",
+            "comparison_is_similar_product_only",
+            "comparison_price_is_historical_average",
+            "actual_discount_vs_reference_pct",
+            "actual_discount_vs_historical_mean_pct",
+            "approx_discount_vs_historical_mean_pct",
+            "observed_average_krw",
+            "fallcent_observed_average_krw",
+        )
+        # Recompute against the actual selected search-card price, so a
+        # fabricated/larger gap cannot be injected into either publisher.
+        if (any(caption.get(k) != expected.get(k) for k in guarded_fields)
+                or caption.get("comparison_reference_source") !=
+                   "fallcent_similar_search_current"
                 or f"💸 폴센트 유사 상품 현재가(참고) : 약 {price:,}원"
                    not in article["body"]
+                or not all(
+                    phrase in article["body"]
+                    for phrase in expected["caption"].split("\n\n")
+                )
                 or "용량·수량·옵션 및 실제 구매가는 다를 수 있습니다."
                    not in article["body"]):
             raise RuntimeError("FALLCENT_SIMILAR_SEARCH_PRICE_DISCLOSURE_MISMATCH")

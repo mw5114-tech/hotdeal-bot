@@ -145,10 +145,9 @@ def create_default_preview(sale: int | None, title: str | None,
         "lowchart_public_history", "fallcent_observed_average"
     )
     similar_unverified_option = reference_source == "fallcent_similar_search_current"
-    # A similar listing may be for a DIFFERENT option or quantity. It is
-    # informative only and cannot be used to advertise a discount percentage.
-    approx = (None if similar_unverified_option
-              else nearest_five_discount(sale, average))
+    # Similar items may differ in quantity/variant. Compute an explicitly
+    # labelled RELATIVE price-gap percentage, never an actual-item discount.
+    approx = nearest_five_discount(sale, average)
     # Keep 5-point rounding for larger discounts, but never lose a verified
     # small gap merely because it is under 2.5%.
     raw_pct = (
@@ -156,24 +155,32 @@ def create_default_preview(sale: int | None, title: str | None,
         if type(sale) is int and type(average) is int
         and 0 < sale < average <= 100_000_000 else None
     )
-    if similar_unverified_option:
-        raw_pct = None
     under_one = raw_pct is not None and raw_pct < Decimal("0.5")
     if approx is None and raw_pct is not None and not under_one:
         approx = int(raw_pct.quantize(Decimal(1), rounding=ROUND_HALF_UP))
     # Requested three-line layout. The reference MUST remain clearly labeled
     # as Lowchart's observed historical average, not an official Coupang list price.
     # Use the SAME name portion in the 150-character Daangn headline and body.
-    suffix = f" [{approx}%할인]" if approx is not None else ""
+    suffix = (
+        f" [유사상품가 대비 {approx}%↓]" if similar_unverified_option
+        and approx is not None else
+        f" [{approx}%할인]" if approx is not None else ""
+    )
     max_product_chars = 150 - len("[쿠팡🔥핫딜] ") - len(suffix)
     product = (re.sub(r"\s+", " ", title).strip()[:max_product_chars].rstrip()
                if isinstance(title, str) and title.strip()
                else "상품명 확인 중")
     # First body line: discount FIRST, followed by Lowchart product name.
     # If Lowchart history cannot establish a discount, never invent a rate.
-    body_discount = (f"[{approx}%할인]" if approx is not None
-                     else "[1% 미만 저렴]" if under_one
-                     else "[할인율 확인 중]")
+    body_discount = (
+        f"[유사상품가 대비 {approx}%↓]" if similar_unverified_option
+        and approx is not None else
+        "[유사상품가 대비 1% 미만↓]" if similar_unverified_option
+        and under_one else
+        "[유사상품가 비교]" if similar_unverified_option else
+        f"[{approx}%할인]" if approx is not None else
+        "[1% 미만 저렴]" if under_one else "[할인율 확인 중]"
+    )
     lines = [f"{body_discount} {product}"]
     if average is not None:
         lines.append(f"{labels[reference_source]} : 약 {average:,}원")
@@ -181,7 +188,13 @@ def create_default_preview(sale: int | None, title: str | None,
         lines.append("💸 쿠팡 평소 판매가 : 확인 중")
     if sale is not None:
         price_text = f"🔥 핫딜 특가 : {sale:,}원"
-        if approx is not None:
+        if similar_unverified_option and approx is not None:
+            price_text += f" (유사 상품 표시가 대비 약 {approx}% 저렴 / 옵션 상이 가능)"
+        elif similar_unverified_option and under_one:
+            price_text += " (유사 상품 표시가 대비 1% 미만 저렴 / 옵션 상이 가능)"
+        elif similar_unverified_option:
+            price_text += " (유사 상품 표시가와 비교 / 옵션 상이 가능)"
+        elif approx is not None:
             price_text += f" (약 {approx}% 할인 / 상세페이지 참고)"
         elif under_one:
             price_text += " (비교 기준 대비 1% 미만 저렴 / 상세페이지 참고)"
@@ -219,6 +232,10 @@ def create_default_preview(sale: int | None, title: str | None,
         "rounded_discount_step": DEFAULT_PERCENT_STEP,
         "approx_discount_vs_reference_pct": approx,
         "reference_discount_under_one_pct": under_one,
+        "similar_reference_price_gap_pct": (
+            round(float(raw_pct), 1)
+            if similar_unverified_option and raw_pct is not None else None
+        ),
         "approx_discount_vs_historical_mean_pct": (
             approx if not nonaverage_reference else None
         ),
@@ -228,7 +245,7 @@ def create_default_preview(sale: int | None, title: str | None,
         ),
         "actual_discount_vs_reference_pct": (
             round((average - sale) / average * 100, 1)
-            if approx is not None else None
+            if approx is not None and not similar_unverified_option else None
         ),
         "official_normal_price_quoted": False,
         # Two Enter presses between fields: one blank paragraph on mobile.

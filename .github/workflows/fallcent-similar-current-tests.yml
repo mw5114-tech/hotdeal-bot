@@ -1,7 +1,7 @@
 name: Tests | Fallcent similar product displayed current fallback
 on:
   push:
-    branches: [feat/fallcent-similar-current-fallback-20261117, main]
+    branches: [feat/fallcent-similar-current-fallback-20261117, feat/fallcent-similar-relative-percent-20261117, main]
     paths:
       - gh_only/fallcent_similar_current.py
       - gh_only/default_deal_automation.py
