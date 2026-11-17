@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96317,
-  "pending": [
-    {
-      "id": 96317,
-      "source_post_url": "https://t.me/jirum/96317",
-      "original_purchase_url": "https://link.coupang.com/a/iKuh1OGICq",
-      "source_text": "☆특가 8,670원 (26.6% 할인)\nMYCHEF 버섯가득 소불고기전골 밀키트 2~3인분, 915g, 1개\n📌 가격 현황\n- 정상가: 11,820원\n- 할인: 3,150원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKuh1OGICq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T08:27:50+00:00",
-      "title": "MYCHEF 버섯가득 소불고기전골 밀키트 2~3인분, 915g, 1개",
-      "sale_price_krw": 8670
-    }
-  ],
-  "in_flight": {
-    "id": 96317,
-    "status": "CLAIMED",
-    "run_id": "44047008248",
-    "at": "2026-11-17T08:29:11.683025+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6421,6 +6406,16 @@
       "vendor_item_id": "84437591909",
       "at": "2026-11-17T07:44:13.915116+00:00",
       "run_id": "44040893057"
+    },
+    "96317": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-MYCHEF-%EB%B2%84%EC%84%AF%EA%B0%80%EB%93%9D-%EC%86%8C%EB%B6%88%EA%B3%A0%EA%B8%B0%EC%A0%84%EA%B3%A8-%EB%B0%80%ED%82%A4%ED%8A%B8-23%EC%9D%B8%EB%B6%84-915g-5%ED%95%A0%EC%9D%B8-AO33g2BA?from=write",
+      "posted_at_utc": "2026-11-17T08:27:50+00:00",
+      "product_id": "2239274325",
+      "item_id": "3824670244",
+      "vendor_item_id": "71809537003",
+      "at": "2026-11-17T08:29:28.018102+00:00",
+      "run_id": "44047008248"
     }
   },
   "skipped_non_coupang": 671,
