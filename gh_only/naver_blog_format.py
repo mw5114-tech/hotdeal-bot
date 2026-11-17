@@ -23,6 +23,7 @@ SOURCES = {
     ),
     "fallcent_observed_current": ("폴센트 관측 현재가", "폴센트 관측 현재가 대비"),
     "fallcent_observed_low": ("폴센트 관측 최저가", "폴센트 관측 최저가 대비"),
+    "fallcent_similar_search_current": ("폴센트 유사 상품 현재가", ""),
 }
 
 
@@ -115,6 +116,16 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             f"💸 폴센트 관측 최저가 : {price_line(comparison)}",
             label="💸 폴센트 관측 최저가", kind="reference"
         ))
+    elif comparison is not None and basis == "fallcent_similar_search_current":
+        blocks.append(_block(
+            f"💸 폴센트 유사 상품 현재가(참고) : {price_line(comparison)}",
+            label="💸 폴센트 유사 상품 현재가", kind="reference"
+        ))
+        blocks.append(_block(
+            "※ 폴센트 상품명 검색 결과입니다. 소개한 상품과 "
+            "용량·수량·옵션 및 실제 구매가가 다를 수 있습니다.",
+            kind="similar_price_notice"
+        ))
     elif comparison is not None and basis == "naver_general_search_first_shopping_card":
         # Old drafts may contain this source; never publish one after owner
         # explicitly restricted comparisons to Lowchart then Fallcent only.
@@ -129,6 +140,10 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     # reference-relative discount. Never invent a percent when history or
     # comparison price is missing. The inventory notice follows immediately.
     # Any reference-source caveat remains below the sale and notice.
+    if basis == "fallcent_similar_search_current" and (
+        discount is not None or caption.get("reference_discount_under_one_pct") is True
+    ):
+        raise ValueError("NAVER_SIMILAR_PRODUCT_DISCOUNT_PROHIBITED")
     has_discount = (
         type(discount) is int and 1 <= discount <= 95
         and comparison is not None and bool(pct_basis)
@@ -191,6 +206,11 @@ def validate_price_presentation(blocks: list[dict], draft: dict) -> None:
         return
     if type(price) is not int or price <= 0 or basis not in SOURCES:
         raise ValueError("NAVER_PRICE_REFERENCE_INVALID")
+    if basis == "fallcent_similar_search_current" and (
+        discount is not None or under_one
+        or not any(x.get("kind") == "similar_price_notice" for x in blocks)
+    ):
+        raise ValueError("NAVER_SIMILAR_PRODUCT_PRICE_DISCLOSURE_REQUIRED")
     labels = [x.get("text", "") for x in blocks if x.get("kind") == "reference"]
     if (len(labels) != 1 or SOURCES[basis][0] not in labels[0]
             or f"{price:,}원" not in labels[0]):
