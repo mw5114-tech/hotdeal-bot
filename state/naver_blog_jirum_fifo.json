@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96304,
-  "pending": [
-    {
-      "id": 96304,
-      "source_message_id": 96304,
-      "source_post_url": "https://t.me/jirum/96304",
-      "original_purchase_url": "https://link.coupang.com/a/iKeCvfVMDQ",
-      "title": "☆특가 10,300원",
-      "source_text": "☆특가 10,300원\n해태htb 갈배사이다, 355ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKeCvfVMDQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10300,
-      "posted_at_utc": "2026-11-17T04:48:34+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1263,6 +1252,10 @@
     "96303": {
       "url": "https://blog.naver.com/mw5114/224480472348",
       "at": "2026-11-17T04:36:41.159772+00:00"
+    },
+    "96304": {
+      "url": "https://blog.naver.com/mw5114/224480491238",
+      "at": "2026-11-17T04:50:27.653794+00:00"
     }
   },
   "skipped": {
@@ -1371,12 +1364,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96304,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44019794438",
-    "at": "2026-11-17T04:49:46.073372+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
