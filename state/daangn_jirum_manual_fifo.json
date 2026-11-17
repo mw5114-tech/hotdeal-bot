@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96300,
-  "pending": [],
+  "last_scanned_id": 96301,
+  "pending": [
+    {
+      "id": 96301,
+      "source_post_url": "https://t.me/jirum/96301",
+      "original_purchase_url": "https://link.coupang.com/a/iJ9gNvw5bE",
+      "source_text": "🔥🔥🔥무지성 6,630원 (53.0% 할인)🔥🔥🔥\n스킨푸드 블랙슈가 퍼펙트 엔자임 파우더 워시 30p\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 14,106원\n- 할인: 7,476원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ9gNvw5bE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T03:33:42+00:00",
+      "title": "스킨푸드 블랙슈가 퍼펙트 엔자임 파우더 워시 30p",
+      "sale_price_krw": 6630
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
