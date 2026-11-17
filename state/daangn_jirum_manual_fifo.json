@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96361,
-  "pending": [],
+  "last_scanned_id": 96362,
+  "pending": [
+    {
+      "id": 96362,
+      "source_post_url": "https://t.me/jirum/96362",
+      "original_purchase_url": "https://link.coupang.com/a/iLeTRhJt3Q",
+      "source_text": "☆특가 19,200원 (23.4% 할인)\n요거베리 스타터 플레인 요거트 파우더, 2g, 10개입, 3개\n📌 가격 현황\n- 정상가: 25,080원\n- 할인: 5,880원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLeTRhJt3Q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T19:20:05+00:00",
+      "title": "요거베리 스타터 플레인 요거트 파우더, 2g, 10개입, 3개",
+      "sale_price_krw": 19200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
