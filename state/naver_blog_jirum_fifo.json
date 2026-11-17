@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96299,
-  "pending": [
-    {
-      "id": 96298,
-      "source_message_id": 96298,
-      "source_post_url": "https://t.me/jirum/96298",
-      "original_purchase_url": "https://link.coupang.com/a/iJ7xXMzWNw",
-      "title": "엠바레 밀크 카라멜, 720g, 2개",
-      "source_text": "👍대박 8,960원 (33.6% 할인)\n엠바레 밀크 카라멜, 720g, 2개\n📌 가격 현황\n- 정상가: 13,500원\n- 할인: 4,540원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ7xXMzWNw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8960,
-      "posted_at_utc": "2026-11-17T03:09:35+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1247,6 +1236,10 @@
     "96294": {
       "url": "https://blog.naver.com/mw5114/224480338566",
       "at": "2026-11-17T02:53:09.617152+00:00"
+    },
+    "96298": {
+      "url": "https://blog.naver.com/mw5114/224480363296",
+      "at": "2026-11-17T03:11:27.087045+00:00"
     }
   },
   "skipped": {
@@ -1355,12 +1348,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96298,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44008242754",
-    "at": "2026-11-17T03:10:44.990216+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
