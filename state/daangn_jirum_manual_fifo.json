@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96294,
-  "pending": [
-    {
-      "id": 96294,
-      "source_post_url": "https://t.me/jirum/96294",
-      "original_purchase_url": "https://link.coupang.com/a/iJ6fpv03eC",
-      "source_text": "☆특가 9,900원\n롯데햄 롯데비엔나 소시지, 1kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ6fpv03eC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T02:51:24+00:00",
-      "title": "☆특가 9,900원",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 96294,
-    "status": "CLAIMED",
-    "run_id": "44006075325",
-    "at": "2026-11-17T02:52:38.474132+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6291,6 +6276,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T01:56:35.675528+00:00",
       "run_id": "43999231640"
+    },
+    "96294": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%AF%EB%8D%B0%ED%96%84-%EB%A1%AF%EB%8D%B0%EB%B9%84%EC%97%94%EB%82%98-%EC%86%8C%EC%8B%9C%EC%A7%80-1kg-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PW77zYWP?from=write",
+      "posted_at_utc": "2026-11-17T02:51:24+00:00",
+      "product_id": "8133237955",
+      "item_id": "824520014",
+      "vendor_item_id": null,
+      "at": "2026-11-17T02:52:54.395434+00:00",
+      "run_id": "44006075325"
     }
   },
   "skipped_non_coupang": 661,
