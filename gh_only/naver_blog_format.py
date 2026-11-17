@@ -121,11 +121,6 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             f"💸 폴센트 유사 상품 현재가(참고) : {price_line(comparison)}",
             label="💸 폴센트 유사 상품 현재가", kind="reference"
         ))
-        blocks.append(_block(
-            "※ 폴센트 상품명 검색 결과입니다. 소개한 상품과 "
-            "용량·수량·옵션 및 실제 구매가가 다를 수 있습니다.",
-            kind="similar_price_notice"
-        ))
     elif comparison is not None and basis == "naver_general_search_first_shopping_card":
         # Old drafts may contain this source; never publish one after owner
         # explicitly restricted comparisons to Lowchart then Fallcent only.
@@ -158,6 +153,12 @@ def build_blocks(draft: dict, verified: dict, source: dict,
         "※ 실시간 핫딜 특성상 준비된 재고가 소진되면 가격이 원래대로 인상되거나 품절될 수 있습니다.",
         kind="note"
     ))
+    if basis == "fallcent_similar_search_current" and comparison is not None:
+        blocks.append(_block(
+            "※ 폴센트 상품명 검색 결과입니다. 소개한 상품과 "
+            "용량·수량·옵션 및 실제 구매가가 다를 수 있습니다.",
+            kind="similar_price_notice"
+        ))
 
     if comparison is not None and basis in SOURCES:
         blocks.append(_block(
