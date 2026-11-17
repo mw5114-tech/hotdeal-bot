@@ -8,6 +8,8 @@ from __future__ import annotations
 import argparse
 from datetime import datetime, timezone
 import json
+import os
+import time
 from pathlib import Path
 import re
 from urllib import request, error
@@ -157,8 +159,8 @@ def parse_reference(html: str, source_url: str, product_id: str, item_id: str,
     return result
 
 
-def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
-              deal_price: int, opener=None) -> dict:
+def _fetch_one_once(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
+                    deal_price: int, opener=None) -> dict:
     url = build_url(product_id, item_id)
     fetch = opener or request.urlopen
     req = request.Request(url, headers={
@@ -182,6 +184,36 @@ def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
     return {"http_status": status,
             **parse_reference(body.decode("utf-8","replace"),url,product_id,item_id,
                               expected_tokens,deal_price)}
+
+
+def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
+              deal_price: int, opener=None, *, sleeper=None) -> dict:
+    """Bounded recovery for transient 403 from the exact public item page.
+
+    A 200 is accepted only if the existing strict parser verifies this
+    product+item ID and its historical mean. A 403 can persist indefinitely
+    for a particular runner, so do not spin, change IP, or bypass access
+    restrictions. The second channel may independently read 200 and share.
+    """
+    delays = ((0, 3, 7, 14)
+              if os.getenv("JIRUM_LOWCHART_403_RETRY_ENABLED") == "true"
+              else (0,))
+    sleeper = sleeper or time.sleep
+    result = None
+    for attempt, delay in enumerate(delays):
+        if delay:
+            sleeper(delay)
+        result = _fetch_one_once(product_id, item_id, expected_tokens,
+                                 deal_price, opener=opener)
+        if result.get("http_status") != 403:
+            return result
+        print("LOWCHART_PRICE_HTTP_403 " + json.dumps({
+            "product_id": product_id, "item_id": item_id,
+            "attempt": attempt + 1, "max_attempts": len(delays),
+        }))
+    result["http_403_attempts"] = len(delays)
+    result["retry_exhausted"] = True
+    return result
 
 
 if __name__ == "__main__":

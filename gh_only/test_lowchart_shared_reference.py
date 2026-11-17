@@ -54,8 +54,8 @@ class SharedLowchartTests(unittest.TestCase):
             )
         self.assertEqual(recovered["observed_average_krw"], 15460)
         self.assertEqual(calls, [SOURCE_ID] * 3)
-        self.assertEqual(observed_sleeps, [5, 5])
-        self.assertEqual(WAIT_SECONDS, (0, 5, 5, 5))
+        self.assertEqual(observed_sleeps, [4, 4])
+        self.assertEqual(WAIT_SECONDS, (0, 4, 4, 4, 4, 4))
 
     def test_good_observation_writes_once_and_skips_sibling_poll(self):
         data = []

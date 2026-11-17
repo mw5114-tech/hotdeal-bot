@@ -11,6 +11,8 @@ No direct Coupang product-page requests are performed.
 from __future__ import annotations
 
 from html.parser import HTMLParser
+import os
+import time
 import re
 from urllib import request, error
 from urllib.parse import urlsplit
@@ -115,7 +117,7 @@ def parse_item_photo(html: str, identity: dict, telegram_title: str) -> dict:
             "image_match_basis": "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID"}
 
 
-def lookup_exact_item_photo(identity: dict, telegram_title: str, opener=None) -> dict:
+def _lookup_exact_item_photo_once(identity: dict, telegram_title: str, opener=None) -> dict:
     pid, iid = identity.get("product_id"), identity.get("item_id")
     if identity.get("status") != "EXACT_ITEM_IDENTIFIED":
         return {"status": "LOWCHART_ITEM_UNRESOLVED", "og_image": None}
@@ -156,6 +158,29 @@ def lookup_exact_item_photo(identity: dict, telegram_title: str, opener=None) ->
             and pid in html and iid in html):
         out["_verified_public_item_html"] = html
     return out
+
+
+def lookup_exact_item_photo(identity: dict, telegram_title: str,
+                            opener=None, *, sleeper=None) -> dict:
+    """Only retry a public exact-item 403, bounded by four total attempts."""
+    delays = ((0, 3, 7, 14)
+              if os.getenv("JIRUM_LOWCHART_403_RETRY_ENABLED") == "true"
+              else (0,))
+    sleeper = sleeper or time.sleep
+    result = None
+    for attempt, delay in enumerate(delays):
+        if delay:
+            sleeper(delay)
+        result = _lookup_exact_item_photo_once(
+            identity, telegram_title, opener=opener)
+        if result.get("http_status") != 403:
+            return result
+        print("LOWCHART_PHOTO_HTTP_403 " + str({
+            "attempt": attempt + 1, "max_attempts": len(delays),
+        }))
+    result["http_403_attempts"] = len(delays)
+    result["retry_exhausted"] = True
+    return result
 
 
 def download_exact_photo(url: str | None, output, source_message_id: int,

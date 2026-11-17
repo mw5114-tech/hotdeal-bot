@@ -98,6 +98,9 @@ jobs:
       # Public Fallcent NAME search when exact Lowchart price is unavailable.
       # Similar SKU price is labelled reference only, never a discount basis.
       JIRUM_FALLCENT_SIMILAR_CURRENT_ENABLED: 'true'
+      # Retry exact Lowchart 403 only (4 attempts, 3/7/14s backoff).
+      # A verified success is separately shared through the cache branch.
+      JIRUM_LOWCHART_403_RETRY_ENABLED: 'true'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
