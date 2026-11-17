@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96275,
-  "pending": [
-    {
-      "id": 96275,
-      "source_post_url": "https://t.me/jirum/96275",
-      "original_purchase_url": "https://link.coupang.com/a/iJ2ffyfOQ8",
-      "source_text": "☆특가 9,440원\n제티 쵸코렛맛 코코아분말, 80개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ2ffyfOQ8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T01:55:23+00:00",
-      "title": "☆특가 9,440원",
-      "sale_price_krw": 9440
-    }
-  ],
-  "in_flight": {
-    "id": 96275,
-    "status": "CLAIMED",
-    "run_id": "43999231640",
-    "at": "2026-11-17T01:56:13.855088+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6281,6 +6266,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T01:42:27.331375+00:00",
       "run_id": "43997481526"
+    },
+    "96275": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A0%9C%ED%8B%B0-%EC%B5%B8%EC%BD%94%EB%A0%9B%EB%A7%9B-%EC%BD%94%EC%BD%94%EC%95%84%EB%B6%84%EB%A7%90-17g-80%EA%B0%9C%EC%9E%85-1%EA%B0%9C-15%ED%95%A0%EC%9D%B8-P2nnGEoP?from=write",
+      "posted_at_utc": "2026-11-17T01:55:23+00:00",
+      "product_id": "5191496710",
+      "item_id": "21322245341",
+      "vendor_item_id": null,
+      "at": "2026-11-17T01:56:35.675528+00:00",
+      "run_id": "43999231640"
     }
   },
   "skipped_non_coupang": 643,
