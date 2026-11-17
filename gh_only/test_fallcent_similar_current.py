@@ -16,7 +16,9 @@ from gh_only.fallcent_similar_current import (
 )
 from gh_only.default_deal_automation import enrich_deal
 from gh_only.jirum_manual_queue import validate_draft
-from gh_only.naver_blog_format import build_blocks, validate_price_presentation
+from gh_only.naver_blog_format import (
+    build_blocks, validate_price_presentation, validate_blocks,
+)
 from gh_only.test_fallcent_search_photo import (
     TITLE, SALT_ID, DEAL, IMG_URL, PNG, FakeResponse,
 )
@@ -152,6 +154,12 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
             pub = {**verified, "candidate_url": "https://link.coupang.com/a/AbcDEf1234"}
             blocks = build_blocks(row, pub, DEAL)
             validate_price_presentation(blocks, row)
+            validate_blocks(blocks, pub["candidate_url"])
+            kinds = [b.get("kind") for b in blocks]
+            self.assertLess(kinds.index("reference"), kinds.index("price"))
+            self.assertEqual(kinds.index("price"), kinds.index("reference") + 1)
+            self.assertGreater(kinds.index("similar_price_notice"),
+                               kinds.index("price"))
             display = "\n".join(b.get("text", "") for b in blocks)
             self.assertIn("폴센트 유사 상품 현재가(참고)", display)
             self.assertIn("옵션 및 실제 구매가가 다를 수 있습니다.", display)
