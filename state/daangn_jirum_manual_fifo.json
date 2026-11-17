@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96302,
-  "pending": [
-    {
-      "id": 96302,
-      "source_post_url": "https://t.me/jirum/96302",
-      "original_purchase_url": "https://link.coupang.com/a/iJ9BKfTQtw",
-      "source_text": "👍대박 13,030원 (39.0% 할인)\n스톡 웨더스 오리지널 크림 슈가프리 캔디 1kg\n📌 가격 현황\n- 정상가: 21,361원\n- 할인: 8,331원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ9BKfTQtw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T03:38:25+00:00",
-      "title": "스톡 웨더스 오리지널 크림 슈가프리 캔디 1kg",
-      "sale_price_krw": 13030
-    }
-  ],
-  "in_flight": {
-    "id": 96302,
-    "status": "CLAIMED",
-    "run_id": "44011700313",
-    "at": "2026-11-17T03:39:28.621363+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6321,6 +6306,16 @@
       "vendor_item_id": "78531086131",
       "at": "2026-11-17T03:35:17.089551+00:00",
       "run_id": "44011126248"
+    },
+    "96302": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9B%A8%EB%8D%94%EC%8A%A4%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0-%ED%81%AC%EB%A6%BC-%EC%8A%88%EA%B0%80%ED%94%84%EB%A6%AC-%EC%BA%94%EB%94%94-1kg-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-jKaaMZGP?from=write",
+      "posted_at_utc": "2026-11-17T03:38:25+00:00",
+      "product_id": "754720",
+      "item_id": "25556995564",
+      "vendor_item_id": "92548376043",
+      "at": "2026-11-17T03:39:48.921507+00:00",
+      "run_id": "44011700313"
     }
   },
   "skipped_non_coupang": 666,
