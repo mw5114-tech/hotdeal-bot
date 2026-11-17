@@ -1,0 +1,53 @@
+name: Probe | Isolated Lowchart price-cache GitHub write/read (NO POSTS)
+on:
+  push:
+    branches: [fix/lowchart-cross-run-cache-retry-20261118]
+    paths: [.github/workflows/lowchart-price-cache-write-smoke.yml]
+permissions:
+  contents: write
+jobs:
+  github-cache-permission-only:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Test write/read on isolated branch, without any product price
+        env:
+          GH_STATE_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import base64, json, os
+          from urllib import request
+          from gh_only.lowchart_shared_reference import CACHE_BRANCH
+          path = "state/verified_lowchart_price/transport-smoke-" + os.environ["RUN_ID"] + ".json"
+          url = "https://api.github.com/repos/mw5114-tech/hotdeal-bot/contents/" + path
+          payload = {"schema":"transport-only-no-product-price",
+                     "run_id": os.environ["RUN_ID"]}
+          headers = {
+              "Accept": "application/vnd.github+json",
+              "X-GitHub-Api-Version": "2022-11-28",
+              "Authorization": "Bearer " + os.environ["GH_STATE_TOKEN"],
+          }
+          write = request.Request(
+              url, method="PUT",
+              data=json.dumps({
+                  "message":"test: verify isolated Lowchart price-cache write/read [skip ci]",
+                  "content":base64.b64encode(json.dumps(payload).encode()).decode(),
+                  "branch":CACHE_BRANCH,
+              }).encode(),
+              headers={**headers,"Content-Type":"application/json"},
+          )
+          with request.urlopen(write,timeout=12) as r:
+              assert r.status in (200,201),r.status
+          read=request.Request(url+"?ref="+CACHE_BRANCH,headers=headers)
+          with request.urlopen(read,timeout=12) as r:
+              obj=json.loads(r.read(18000))
+              assert r.status == 200
+          original=json.loads(base64.b64decode(obj["content"].replace("\n","")))
+          assert original==payload and CACHE_BRANCH=="state/lowchart-verified-cache"
+          print("LOWCHART_PRICE_CACHE_WRITE_READ_SMOKE_OK branch="+CACHE_BRANCH)
+          PY
