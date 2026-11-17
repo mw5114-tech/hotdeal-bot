@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96371,
-  "pending": [
-    {
-      "id": 96371,
-      "source_post_url": "https://t.me/jirum/96371",
-      "original_purchase_url": "https://link.coupang.com/a/iLxlhWmaiq",
-      "source_text": "🔥🔥🔥무지성 3,450원 (56.0% 할인)🔥🔥🔥\n세이프 남극솔트 주방세제 유칼립투스향 480ml\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,841원\n- 할인: 4,391원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLxlhWmaiq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T23:38:10+00:00",
-      "title": "세이프 남극솔트 주방세제 유칼립투스향 480ml",
-      "sale_price_krw": 3450
-    }
-  ],
-  "in_flight": {
-    "id": 96371,
-    "status": "CLAIMED",
-    "run_id": "44201154826",
-    "at": "2026-11-17T23:40:46.878395+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6591,6 +6576,16 @@
       "vendor_item_id": "93467622224",
       "at": "2026-11-17T23:38:24.903266+00:00",
       "run_id": "44200841244"
+    },
+    "96371": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%B8%EC%9D%B4%ED%94%84-%EB%82%A8%EA%B7%B9%EC%86%94%ED%8A%B8-%EC%A3%BC%EB%B0%A9%EC%84%B8%EC%A0%9C-%EC%9C%A0%EC%B9%BC%EB%A6%BD%ED%88%AC%EC%8A%A4%ED%96%A5-480ml-dzrrx0pd?from=write",
+      "posted_at_utc": "2026-11-17T23:38:10+00:00",
+      "product_id": "9292796324",
+      "item_id": "27300360708",
+      "vendor_item_id": "94266908903",
+      "at": "2026-11-17T23:41:01.958641+00:00",
+      "run_id": "44201154826"
     }
   },
   "skipped_non_coupang": 708,
