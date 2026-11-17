@@ -203,7 +203,8 @@ def enrich_deal(deal: dict, output_dir: Path,
                 session_secret: str = "", owner_tag: str = "",
                 *, search_lookup=None, search_downloader=None,
                 naver_price_lookup=None, fallcent_lookup=None,
-                fallcent_high_lookup=None) -> dict:
+                fallcent_high_lookup=None,
+                fallcent_similar_current_lookup=None) -> dict:
     """Dependency-injected single item for deterministic offline contract tests."""
     source_id = deal.get("source_message_id")
     sale = deal.get("sale_price_krw")
@@ -407,9 +408,39 @@ def enrich_deal(deal: dict, output_dir: Path,
         and provider_photo.get("image_match_basis") ==
             "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT"
     )
-    # Fallcent price is a SEPARATE exact-ID lookup, independent of the
-    # representative photo's provenance. A photo search result alone can
-    # NEVER certify an item's price. Lowchart average always wins.
+    # Owner requested NAME-based Fallcent current-price fallback when an
+    # exact Lowchart price is unavailable. Different weights/pack counts are
+    # intentionally allowed, but the display MUST say 'similar product'.
+    # Do not compute any percentage or imply the same Coupang item/option.
+    similar_fallcent = {
+        "status": "NOT_ATTEMPTED", "observed_current_krw": None,
+    }
+    similar_query_title = fallback_title or title
+    if (using_public_lowchart and comparison_price is None
+            and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+            and type(sale) is int and 0 < sale <= 100_000_000
+            and os.getenv("JIRUM_FALLCENT_SIMILAR_CURRENT_ENABLED") == "true"):
+        try:
+            from gh_only.fallcent_similar_current import (
+                fetch_similar_current, valid_search_price,
+            )
+            query = fallcent_similar_current_lookup or fetch_similar_current
+            similar_fallcent = query(similar_query_title)
+            found_price = valid_search_price(
+                similar_fallcent, similar_query_title)
+            if found_price is not None:
+                comparison_price = found_price
+                comparison_source = "fallcent_similar_search_current"
+        except Exception as exc:
+            similar_fallcent = {
+                "status": "FALLCENT_SIMILAR_SEARCH_ERROR",
+                "observed_current_krw": None,
+                "error_type": type(exc).__name__,
+            }
+
+    # If the similar-current listing fails, keep the existing strict
+    # exact-item Fallcent evidence path as an additional fallback.
+    # A representative photo alone is never historical price proof.
     if (using_public_lowchart and comparison_price is None
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and type(sale) is int and 0 < sale <= 100_000_000):
@@ -499,6 +530,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         "lowchart_shared_photo_response": history.get("read_from_verified_photo_response") is True,
         "photo_status": og.get("status"),
         "fallcent_status": fallcent_high.get("status"),
+        "fallcent_similar_status": similar_fallcent.get("status"),
+        "fallcent_similar_reference": comparison_source == "fallcent_similar_search_current",
         "comparison_source": (comparison_source if comparison_price is not None else None),
         "comparison_price_krw": comparison_price,
         "discount_pct": caption.get("approx_discount_vs_reference_pct"),
@@ -580,6 +613,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         ),
         "naver_price_lookup": naver_price,
         "fallcent_high_lookup": fallcent_high,
+        "fallcent_similar_price_lookup": similar_fallcent,
+        "fallcent_similar_query_title": similar_query_title,
         "comparison_price_source": (comparison_source if comparison_price is not None else None),
         "observed_low_verified_for_deal": (
             average is not None
