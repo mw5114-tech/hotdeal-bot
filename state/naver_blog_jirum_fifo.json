@@ -1,16 +1,16 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96305,
+  "last_scanned_id": 96307,
   "pending": [
     {
-      "id": 96305,
-      "source_message_id": 96305,
-      "source_post_url": "https://t.me/jirum/96305",
-      "original_purchase_url": "https://link.coupang.com/a/iKe7aIAANw",
-      "title": "☆특가 23,270원",
-      "source_text": "☆특가 23,270원\n아카페라 빙그레 사이즈업 벤티 헤이즐넛아메리카노, 600ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKe7aIAANw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 23270,
-      "posted_at_utc": "2026-11-17T04:55:29+00:00"
+      "id": 96307,
+      "source_message_id": 96307,
+      "source_post_url": "https://t.me/jirum/96307",
+      "original_purchase_url": "https://link.coupang.com/a/iKhtE6CjJI",
+      "title": "☆특가 7,250원",
+      "source_text": "☆특가 7,250원\n역대급최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKhtE6CjJI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7250,
+      "posted_at_utc": "2026-11-17T05:28:33+00:00"
     }
   ],
   "published": {
@@ -1373,14 +1373,16 @@
     "96223": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-16T11:41:35.860400+00:00"
+    },
+    "96305": {
+      "reason": "PUBLISH_OUTCOME_UNCONFIRMED_NO_AUTORETRY",
+      "claimed_run_id": "44020565806",
+      "claimed_at": "2026-11-17T04:57:02.389039+00:00",
+      "source_post_url": "https://t.me/jirum/96305",
+      "at": "2026-11-17T05:29:34.059363+00:00"
     }
   },
-  "in_flight": {
-    "id": 96305,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44020565806",
-    "at": "2026-11-17T04:57:02.389039+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
