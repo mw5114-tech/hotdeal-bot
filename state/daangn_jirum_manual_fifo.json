@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96303,
-  "pending": [
-    {
-      "id": 96303,
-      "source_post_url": "https://t.me/jirum/96303",
-      "original_purchase_url": "https://link.coupang.com/a/iKdB8hcp8C",
-      "source_text": "🔥🔥🔥무지성 11,300원 (53.0% 할인)🔥🔥🔥\n데일리라이크 파스텔 스텐 머그컵 300ml x 4종 세트\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 24,043원\n- 할인: 12,743원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKdB8hcp8C\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T04:34:29+00:00",
-      "title": "데일리라이크 파스텔 스텐 머그컵 300ml x 4종 세트",
-      "sale_price_krw": 11300
-    }
-  ],
-  "in_flight": {
-    "id": 96303,
-    "status": "CLAIMED",
-    "run_id": "44018212582",
-    "at": "2026-11-17T04:36:09.343056+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6331,6 +6316,16 @@
       "vendor_item_id": "92548376043",
       "at": "2026-11-17T03:39:48.921507+00:00",
       "run_id": "44011700313"
+    },
+    "96303": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B0%EC%9D%BC%EB%A6%AC%EB%9D%BC%EC%9D%B4%ED%81%AC-%ED%8C%8C%EC%8A%A4%ED%85%94-%EC%8A%A4%ED%85%90-%EB%A8%B8%EA%B7%B8%EC%BB%B5-300ml-x-4%EC%A2%85-%EC%84%B8%ED%8A%B8-A4nnQQad?from=write",
+      "posted_at_utc": "2026-11-17T04:34:29+00:00",
+      "product_id": "7615360037",
+      "item_id": "20178062747",
+      "vendor_item_id": "87269879112",
+      "at": "2026-11-17T04:36:25.376077+00:00",
+      "run_id": "44018212582"
     }
   },
   "skipped_non_coupang": 666,
