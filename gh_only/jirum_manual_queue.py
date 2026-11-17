@@ -811,6 +811,26 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 or price != caption.get("comparison_reference_price_krw")
                 or f"{label} : 약 {price:,}원" not in article["body"]):
             raise RuntimeError("LOWCHART_VISIBLE_PRICE_EVIDENCE_MISMATCH")
+    if basis == "fallcent_similar_search_current":
+        # User explicitly allows OPTION-UNCHECKED product-family matches here.
+        # Do not claim this is the same item, a normal price, or a discount.
+        from gh_only.fallcent_similar_current import valid_search_price
+        proof = row.get("fallcent_similar_price_lookup")
+        query = row.get("fallcent_similar_query_title")
+        shown = valid_search_price(proof, query)
+        price = caption.get("comparison_reference_price_krw")
+        if (shown is None or price != shown
+                or caption.get("comparison_is_similar_product_only") is not True
+                or caption.get("comparison_price_is_historical_average") is not False
+                or caption.get("approx_discount_vs_reference_pct") is not None
+                or caption.get("reference_discount_under_one_pct") is not False
+                or caption.get("observed_average_krw") is not None
+                or caption.get("fallcent_observed_average_krw") is not None
+                or f"💸 폴센트 유사 상품 현재가(참고) : 약 {price:,}원"
+                   not in article["body"]
+                or "용량·수량·옵션 및 실제 구매가는 다를 수 있습니다."
+                   not in article["body"]):
+            raise RuntimeError("FALLCENT_SIMILAR_SEARCH_PRICE_DISCLOSURE_MISMATCH")
     fallcent_basis = {
         "fallcent_observed_average", "fallcent_observed_high",
         "fallcent_high_low_midpoint", "fallcent_observed_current",
