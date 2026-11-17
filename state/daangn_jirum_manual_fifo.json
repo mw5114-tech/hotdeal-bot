@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96313,
-  "pending": [
-    {
-      "id": 96313,
-      "source_post_url": "https://t.me/jirum/96313",
-      "original_purchase_url": "https://link.coupang.com/a/iKq4014gdE",
-      "source_text": "👍대박 3,460원 (31.0% 할인)\n삼양 우돈 사골곰탕면 110g 5개\n📌 가격 현황\n- 정상가: 5,014원\n- 할인: 1,554원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKq4014gdE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T07:42:55+00:00",
-      "title": "삼양 우돈 사골곰탕면 110g 5개",
-      "sale_price_krw": 3460
-    }
-  ],
-  "in_flight": {
-    "id": 96313,
-    "status": "CLAIMED",
-    "run_id": "44040893057",
-    "at": "2026-11-17T07:43:52.071067+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6411,6 +6396,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T06:59:32.299786+00:00",
       "run_id": "44035027133"
+    },
+    "96313": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EC%96%91-%EC%9A%B0%EB%8F%88-%EC%82%AC%EA%B3%A8%EA%B3%B0%ED%83%95%EB%A9%B4-110g-5%EA%B0%9C-25%ED%95%A0%EC%9D%B8-AL11VKyP?from=write",
+      "posted_at_utc": "2026-11-17T07:42:55+00:00",
+      "product_id": "7017045410",
+      "item_id": "17266381530",
+      "vendor_item_id": "84437591909",
+      "at": "2026-11-17T07:44:13.915116+00:00",
+      "run_id": "44040893057"
     }
   },
   "skipped_non_coupang": 668,
