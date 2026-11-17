@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96308,
-  "pending": [
-    {
-      "id": 96308,
-      "source_post_url": "https://t.me/jirum/96308",
-      "original_purchase_url": "https://link.coupang.com/a/iKhQ3sIJYO",
-      "source_text": "☆특가 11,610원\n온더바디 퓨어시카 바디로션 베이비파우더향, 730ml, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKhQ3sIJYO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T05:33:50+00:00",
-      "title": "☆특가 11,610원",
-      "sale_price_krw": 11610
-    }
-  ],
-  "in_flight": {
-    "id": 96308,
-    "status": "CLAIMED",
-    "run_id": "44025046354",
-    "at": "2026-11-17T05:35:12.760987+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6371,6 +6356,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T05:30:32.184049+00:00",
       "run_id": "44024455229"
+    },
+    "96308": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A8%EB%8D%94%EB%B0%94%EB%94%94-%ED%93%A8%EC%96%B4%EC%8B%9C%EC%B9%B4-%EB%B0%94%EB%94%94%EB%A1%9C%EC%85%98-%EB%B2%A0%EC%9D%B4%EB%B9%84%ED%8C%8C%EC%9A%B0%EB%8D%94%ED%96%A5-730ml-2%EA%B0%9C-jKaaqqoP?from=write",
+      "posted_at_utc": "2026-11-17T05:33:50+00:00",
+      "product_id": "6988798161",
+      "item_id": "21401500128",
+      "vendor_item_id": null,
+      "at": "2026-11-17T05:35:28.473187+00:00",
+      "run_id": "44025046354"
     }
   },
   "skipped_non_coupang": 667,
