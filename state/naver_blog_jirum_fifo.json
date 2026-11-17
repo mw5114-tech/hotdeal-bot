@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96307,
+  "last_scanned_id": 96308,
   "pending": [
     {
       "id": 96307,
@@ -12,6 +12,16 @@
       "sale_price_krw": 7250,
       "posted_at_utc": "2026-11-17T05:28:33+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96308,
+      "source_message_id": 96308,
+      "source_post_url": "https://t.me/jirum/96308",
+      "original_purchase_url": "https://link.coupang.com/a/iKhQ3sIJYO",
+      "title": "☆특가 11,610원",
+      "source_text": "☆특가 11,610원\n온더바디 퓨어시카 바디로션 베이비파우더향, 730ml, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKhQ3sIJYO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11610,
+      "posted_at_utc": "2026-11-17T05:33:50+00:00"
     }
   ],
   "published": {
