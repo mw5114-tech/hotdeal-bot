@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96263,
-  "pending": [
-    {
-      "id": 96263,
-      "source_post_url": "https://t.me/jirum/96263",
-      "original_purchase_url": "https://link.coupang.com/a/iJURojYi5s",
-      "source_text": "☆특가 2,960원\n홀리카홀리카 마이 페이브 피스 젤테일, 코코아 브륄레, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJURojYi5s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T00:12:03+00:00",
-      "title": "☆특가 2,960원",
-      "sale_price_krw": 2960
-    }
-  ],
-  "in_flight": {
-    "id": 96263,
-    "status": "CLAIMED",
-    "run_id": "43985732186",
-    "at": "2026-11-17T00:13:16.097756+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6191,6 +6176,16 @@
       "vendor_item_id": "91727617651",
       "at": "2026-11-16T23:45:26.600671+00:00",
       "run_id": "43981723205"
+    },
+    "96263": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%99%80%EB%A6%AC%EC%B9%B4%ED%99%80%EB%A6%AC%EC%B9%B4-%EB%A7%88%EC%9D%B4-%ED%8E%98%EC%9D%B4%EB%B8%8C-%ED%94%BC%EC%8A%A4-%EC%A0%A4%ED%85%8C%EC%9D%BC-%EC%BD%94%EC%BD%94%EC%95%84-%EB%B8%8C%EB%A5%84%EB%A0%88-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-jvOx6kYA?from=write",
+      "posted_at_utc": "2026-11-17T00:12:03+00:00",
+      "product_id": "6671363425",
+      "item_id": "27128563336",
+      "vendor_item_id": null,
+      "at": "2026-11-17T00:13:37.194495+00:00",
+      "run_id": "43985732186"
     }
   },
   "skipped_non_coupang": 640,
