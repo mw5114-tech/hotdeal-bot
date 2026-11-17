@@ -1,0 +1,35 @@
+name: Probe | Fallcent public name search current cards
+on:
+  push:
+    branches: [feat/fallcent-similar-current-fallback-20261117]
+    paths:
+      - .github/workflows/fallcent-public-name-probe.yml
+permissions:
+  contents: read
+jobs:
+  anonymous-public-search:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Public name-search only, no login, no product clicks, no posting
+        run: |
+          python - <<'PY'
+          import json
+          from gh_only.fallcent_similar_current import fetch_similar_current,STATUS
+          for title in [
+              "잔스포츠 하프 프린트 백팩 남녀 공용",
+              "태평염전 간수뺀 신안 천일염 10kg 1개",
+              "이금기 팬더 굴소스 320g 2개",
+          ]:
+              r = fetch_similar_current(title)
+              print("FALLCENT_PUBLIC_SEARCH_PROBE " + json.dumps({
+                  "query":title, "status":r.get("status"),
+                  "candidate_title":(r.get("source_title") or "")[:140],
+                  "listed_price":r.get("observed_current_krw"),
+                  "no_exact_option_claim":r.get("exact_item_verified") is False,
+              }, ensure_ascii=False))
+          PY
