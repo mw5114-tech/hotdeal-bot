@@ -73,7 +73,7 @@ def select_similar_current(html: str, query_title: str) -> dict | None:
     return {
         "status": STATUS,
         "observed_current_krw": price,
-        "source_title": title[:220],
+        "source_title": title[:600],
         "search_match_basis": "SIMILAR_PRODUCT_FAMILY_ONLY_OPTION_UNCHECKED",
         "exact_item_verified": False,
         "displayed_price_provenance": "visible_single_price_on_fallcent_search_card",
