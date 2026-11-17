@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96304,
-  "pending": [
-    {
-      "id": 96304,
-      "source_post_url": "https://t.me/jirum/96304",
-      "original_purchase_url": "https://link.coupang.com/a/iKeCvfVMDQ",
-      "source_text": "☆특가 10,300원\n해태htb 갈배사이다, 355ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKeCvfVMDQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T04:48:34+00:00",
-      "title": "☆특가 10,300원",
-      "sale_price_krw": 10300
-    }
-  ],
-  "in_flight": {
-    "id": 96304,
-    "status": "CLAIMED",
-    "run_id": "44019794438",
-    "at": "2026-11-17T04:49:38.658955+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6341,6 +6326,16 @@
       "vendor_item_id": "87269879112",
       "at": "2026-11-17T04:36:25.376077+00:00",
       "run_id": "44018212582"
+    },
+    "96304": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%83%9Chtb-%EA%B0%88%EB%B0%B0%EC%82%AC%EC%9D%B4%EB%8B%A4-355ml-24%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dQzzMm2j?from=write",
+      "posted_at_utc": "2026-11-17T04:48:34+00:00",
+      "product_id": "7412691872",
+      "item_id": "15662645181",
+      "vendor_item_id": null,
+      "at": "2026-11-17T04:49:59.062276+00:00",
+      "run_id": "44019794438"
     }
   },
   "skipped_non_coupang": 666,
