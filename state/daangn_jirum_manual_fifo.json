@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96262,
-  "pending": [],
+  "last_scanned_id": 96263,
+  "pending": [
+    {
+      "id": 96263,
+      "source_post_url": "https://t.me/jirum/96263",
+      "original_purchase_url": "https://link.coupang.com/a/iJURojYi5s",
+      "source_text": "☆특가 2,960원\n홀리카홀리카 마이 페이브 피스 젤테일, 코코아 브륄레, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJURojYi5s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T00:12:03+00:00",
+      "title": "☆특가 2,960원",
+      "sale_price_krw": 2960
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
