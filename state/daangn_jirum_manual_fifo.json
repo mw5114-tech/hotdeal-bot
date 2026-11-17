@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96332,
-  "pending": [
-    {
-      "id": 96332,
-      "source_post_url": "https://t.me/jirum/96332",
-      "original_purchase_url": "https://link.coupang.com/a/iKDC738T4m",
-      "source_text": "☆특가 7,990원\n코멧 키친 사각 밀폐용기 400ml×20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKDC738T4m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T10:38:33+00:00",
-      "title": "☆특가 7,990원",
-      "sale_price_krw": 7990
-    }
-  ],
-  "in_flight": {
-    "id": 96332,
-    "status": "CLAIMED",
-    "run_id": "44066771521",
-    "at": "2026-11-17T10:40:13.675192+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6461,6 +6446,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T10:33:41.457426+00:00",
       "run_id": "44065773023"
+    },
+    "96332": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EB%A9%A7-%ED%82%A4%EC%B9%9C-%EC%82%AC%EA%B0%81-%EB%B0%80%ED%8F%90%EC%9A%A9%EA%B8%B0-400ml20%EA%B0%9C-Pk99x97j?from=write",
+      "posted_at_utc": "2026-11-17T10:38:33+00:00",
+      "product_id": "7214511904",
+      "item_id": "18266612231",
+      "vendor_item_id": null,
+      "at": "2026-11-17T10:40:29.237304+00:00",
+      "run_id": "44066771521"
     }
   },
   "skipped_non_coupang": 682,
