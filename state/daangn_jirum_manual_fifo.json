@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96338,
-  "pending": [
-    {
-      "id": 96338,
-      "source_post_url": "https://t.me/jirum/96338",
-      "original_purchase_url": "https://link.coupang.com/a/iKLNm2SjLM",
-      "source_text": "👍대박 7,890원 (34.0% 할인)\n글래드 늘어나는 매직 지퍼백\n📌 가격 현황\n- 정상가: 11,955원\n- 할인: 4,065원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKLNm2SjLM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T12:32:48+00:00",
-      "title": "글래드 늘어나는 매직 지퍼백",
-      "sale_price_krw": 7890
-    }
-  ],
-  "in_flight": {
-    "id": 96338,
-    "status": "CLAIMED",
-    "run_id": "44084254675",
-    "at": "2026-11-17T12:34:04.995486+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6501,6 +6486,16 @@
       "vendor_item_id": "91748225140",
       "at": "2026-11-17T12:33:05.241222+00:00",
       "run_id": "44084045118"
+    },
+    "96338": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B8%80%EB%9E%98%EB%93%9C-%EB%8A%98%EC%96%B4%EB%82%98%EB%8A%94-%EB%A7%A4%EC%A7%81-%EC%A7%80%ED%8D%BC%EB%B0%B1-%EB%8C%80L-15%EA%B0%9C%EC%9E%85-2%EA%B0%9C-dQzzlZbj?from=write",
+      "posted_at_utc": "2026-11-17T12:32:48+00:00",
+      "product_id": "7396582199",
+      "item_id": "19292025475",
+      "vendor_item_id": "86406753462",
+      "at": "2026-11-17T12:34:20.868865+00:00",
+      "run_id": "44084254675"
     }
   },
   "skipped_non_coupang": 684,
