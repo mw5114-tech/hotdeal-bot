@@ -3,15 +3,6 @@
   "last_scanned_id": 96271,
   "pending": [
     {
-      "id": 96270,
-      "source_post_url": "https://t.me/jirum/96270",
-      "original_purchase_url": "https://link.coupang.com/a/iJX1Q41Yyq",
-      "source_text": "👍대박 10,390원 (33.0% 할인)\n벡셀 아이프라임 알카라인 AA건전지 40개\n📌 가격 현황\n- 정상가: 15,507원\n- 할인: 5,117원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJX1Q41Yyq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T00:56:23+00:00",
-      "title": "벡셀 아이프라임 알카라인 AA건전지 40개",
-      "sale_price_krw": 10390
-    },
-    {
       "id": 96271,
       "source_post_url": "https://t.me/jirum/96271",
       "original_purchase_url": "https://link.coupang.com/a/iJX43jEdps",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6990
     }
   ],
-  "in_flight": {
-    "id": 96270,
-    "status": "CLAIMED",
-    "run_id": "43991697772",
-    "at": "2026-11-17T00:58:47.540166+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6249,6 +6235,16 @@
       "item_id": "28441203397",
       "vendor_item_id": "94199124152",
       "at": "2026-11-17T00:58:27.759679+00:00",
+      "run_id": "43991697772"
+    },
+    "96270": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B2%A1%EC%85%80-%EC%95%84%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9E%84-%EC%95%8C%EC%B9%B4%EB%9D%BC%EC%9D%B8-AA%EA%B1%B4%EC%A0%84%EC%A7%80-40%EA%B0%9C-dlkkmkqP?from=write",
+      "posted_at_utc": "2026-11-17T00:56:23+00:00",
+      "product_id": "7370852457",
+      "item_id": "22052097472",
+      "vendor_item_id": "89099363642",
+      "at": "2026-11-17T00:59:02.674245+00:00",
       "run_id": "43991697772"
     }
   },
