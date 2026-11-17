@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96302,
-  "pending": [
-    {
-      "id": 96302,
-      "source_message_id": 96302,
-      "source_post_url": "https://t.me/jirum/96302",
-      "original_purchase_url": "https://link.coupang.com/a/iJ9BKfTQtw",
-      "title": "스톡 웨더스 오리지널 크림 슈가프리 캔디 1kg",
-      "source_text": "👍대박 13,030원 (39.0% 할인)\n스톡 웨더스 오리지널 크림 슈가프리 캔디 1kg\n📌 가격 현황\n- 정상가: 21,361원\n- 할인: 8,331원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ9BKfTQtw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13030,
-      "posted_at_utc": "2026-11-17T03:38:25+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1255,6 +1244,10 @@
     "96301": {
       "url": "https://blog.naver.com/mw5114/224480394785",
       "at": "2026-11-17T03:35:36.344632+00:00"
+    },
+    "96302": {
+      "url": "https://blog.naver.com/mw5114/224480400550",
+      "at": "2026-11-17T03:40:17.264644+00:00"
     }
   },
   "skipped": {
@@ -1363,12 +1356,7 @@
       "at": "2026-11-16T11:41:35.860400+00:00"
     }
   },
-  "in_flight": {
-    "id": 96302,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44011700313",
-    "at": "2026-11-17T03:39:30.763081+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
