@@ -3,16 +3,6 @@
   "last_scanned_id": 96317,
   "pending": [
     {
-      "id": 96313,
-      "source_message_id": 96313,
-      "source_post_url": "https://t.me/jirum/96313",
-      "original_purchase_url": "https://link.coupang.com/a/iKq4014gdE",
-      "title": "삼양 우돈 사골곰탕면 110g 5개",
-      "source_text": "👍대박 3,460원 (31.0% 할인)\n삼양 우돈 사골곰탕면 110g 5개\n📌 가격 현황\n- 정상가: 5,014원\n- 할인: 1,554원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKq4014gdE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3460,
-      "posted_at_utc": "2026-11-17T07:42:55+00:00"
-    },
-    {
       "id": 96317,
       "source_message_id": 96317,
       "source_post_url": "https://t.me/jirum/96317",
@@ -1297,6 +1287,10 @@
     "96312": {
       "url": "https://blog.naver.com/mw5114/224480678186",
       "at": "2026-11-17T07:00:15.456569+00:00"
+    },
+    "96313": {
+      "url": "https://blog.naver.com/mw5114/224480800958",
+      "at": "2026-11-17T08:29:29.275611+00:00"
     }
   },
   "skipped": {
@@ -1412,12 +1406,7 @@
       "at": "2026-11-17T05:29:34.059363+00:00"
     }
   },
-  "in_flight": {
-    "id": 96313,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44047008248",
-    "at": "2026-11-17T08:28:44.592822+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
