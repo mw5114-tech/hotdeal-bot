@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96369,
-  "pending": [
-    {
-      "id": 96369,
-      "source_post_url": "https://t.me/jirum/96369",
-      "original_purchase_url": "https://link.coupang.com/a/iLwyHG7PEq",
-      "source_text": "👍대박 11,600원 (34.0% 할인)\n바겐슈타이거 인덕션 아보리오 프라이팬 28cm\n📌 가격 현황\n- 정상가: 17,576원\n- 할인: 5,976원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLwyHG7PEq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T23:27:12+00:00",
-      "title": "바겐슈타이거 인덕션 아보리오 프라이팬 28cm",
-      "sale_price_krw": 11600
-    }
-  ],
-  "in_flight": {
-    "id": 96369,
-    "status": "CLAIMED",
-    "run_id": "44199545128",
-    "at": "2026-11-17T23:29:36.574423+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6571,6 +6556,16 @@
       "vendor_item_id": "93720099753",
       "at": "2026-11-17T23:02:18.565739+00:00",
       "run_id": "44195617856"
+    },
+    "96369": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EA%B2%90%EC%8A%88%ED%83%80%EC%9D%B4%EA%B1%B0-%EC%9D%B8%EB%8D%95%EC%85%98-%EC%95%84%EB%B3%B4%EB%A6%AC%EC%98%A4-%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC-28cm-jvOOoWnA?from=write",
+      "posted_at_utc": "2026-11-17T23:27:12+00:00",
+      "product_id": "4781566523",
+      "item_id": "6114441320",
+      "vendor_item_id": "73410778065",
+      "at": "2026-11-17T23:29:51.814009+00:00",
+      "run_id": "44199545128"
     }
   },
   "skipped_non_coupang": 708,
