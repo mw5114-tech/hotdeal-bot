@@ -202,6 +202,8 @@ def read_one_draft(folder: Path) -> dict:
                    else "[1% 미만 저렴] " if under_one
                    else "[할인율 확인 중] ")
     if not title_line.startswith(body_prefix):
+        print("TEST_PREFIX_TRACE", repr(title_line), repr(body_prefix),
+              repr(discount), repr(under_one))
         raise ValueError("DRAFT_DISCOUNT_PREFIX_MISSING_OR_MISMATCHED")
     title = title_line[len(body_prefix):].strip()
     if not (2 <= len(title) <= 150):
