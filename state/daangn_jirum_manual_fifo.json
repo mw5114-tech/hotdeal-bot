@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96310,
-  "pending": [],
+  "last_scanned_id": 96311,
+  "pending": [
+    {
+      "id": 96311,
+      "source_post_url": "https://t.me/jirum/96311",
+      "original_purchase_url": "https://link.coupang.com/a/iKnBxCuz6q",
+      "source_text": "👍대박 5,990원 (39.0% 할인)\n미정당 밀 국물떡볶이 (냉동), 580g, 2개\n📌 가격 현황\n- 정상가: 9,820원\n- 할인: 3,830원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKnBxCuz6q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T06:54:17+00:00",
+      "title": "미정당 밀 국물떡볶이 (냉동), 580g, 2개",
+      "sale_price_krw": 5990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
