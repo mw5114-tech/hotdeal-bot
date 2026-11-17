@@ -25,9 +25,13 @@ from gh_only.lowchart_price_reference import build_url
 REPOSITORY = "mw5114-tech/hotdeal-bot"
 SCHEMA = "verified-lowchart-average-for-telegram-source-v1"
 PATH_PREFIX = "state/verified_lowchart_price"
+# An isolated Git ref prevents high-frequency FIFO state writes on main
+# from making the verified-price receipt silently fail with GitHub 409.
+CACHE_BRANCH = "state/lowchart-verified-cache"
 MAX_AGE_SECONDS = 15 * 60
 MAX_PAYLOAD = 8000
-WAIT_SECONDS = (0, 5, 5, 5)  # only if history was not verified; 15s maximum
+WAIT_SECONDS = (0, 4, 4, 4, 4, 4)  # 20 seconds max for a sibling runner
+CACHE_WRITE_RETRY_SECONDS = (0, 1, 2, 3)  # bounded conflict recovery
 VISIBLE_KEYS = (
     "provider", "http_status", "source_url", "product_id", "item_id",
     "page_title", "observed_low_krw", "observed_high_krw",
@@ -131,7 +135,7 @@ def _api(source_id: int, token: str, method: str, payload=None):
     path = _path(source_id)
     url = f"https://api.github.com/repos/{REPOSITORY}/contents/{path}"
     if method == "GET":
-        url += "?ref=main"
+        url += "?ref=" + CACHE_BRANCH
     hdr = {
         "Accept": "application/vnd.github+json",
         "X-GitHub-Api-Version": "2022-11-28",
@@ -155,6 +159,7 @@ def _api(source_id: int, token: str, method: str, payload=None):
 
 def read_record(source_id: int, token: str) -> dict | None:
     if not token:
+        print("LOWCHART_SHARED_CACHE_TOKEN_MISSING")
         return None
     try:
         obj = _api(source_id, token, "GET")
@@ -165,29 +170,93 @@ def read_record(source_id: int, token: str) -> dict | None:
         if len(contents) > MAX_PAYLOAD:
             return None
         return json.loads(contents.decode("utf-8"))
-    except (error.HTTPError, error.URLError, OSError, ValueError,
-            TypeError, json.JSONDecodeError):
+    except error.HTTPError as exc:
+        # A missing per-source cache file (404) is expected while the other
+        # channel is preparing. Any other error deserves an actionable log.
+        if exc.code != 404:
+            print(f"LOWCHART_SHARED_CACHE_READ_HTTP source_id={source_id} status={exc.code}")
+        return None
+    except (error.URLError, OSError, ValueError,
+            TypeError, json.JSONDecodeError) as exc:
+        print("LOWCHART_SHARED_CACHE_READ_ERROR source_id="
+              + str(source_id) + " error_type=" + type(exc).__name__)
         return None
 
 
-def write_record(source_id: int, record: dict, token: str) -> None:
-    """Create only; never overwrite conflicting data or retry unknown writes."""
+def write_record(source_id: int, record: dict, token: str) -> bool:
+    """Immutable per-source receipt in dedicated cache branch, no main races.
+
+    After 409/422, inspect existing file and rebase creation instead of
+    clobbering a sibling. Never overwrite any existing record, even if its
+    data differs. Read time, source+SKU validation occurs in the consumer.
+    """
     if not token:
-        return
+        print("LOWCHART_SHARED_CACHE_TOKEN_MISSING")
+        return False
     try:
         data = json.dumps(record, ensure_ascii=False, sort_keys=True).encode("utf-8")
         if len(data) > MAX_PAYLOAD:
-            return
-        _api(source_id, token, "PUT", {
-            "message": f"state: verified Lowchart average for {source_id} [skip ci]",
+            return False
+        payload = {
+            "message": f"state: exact-item Lowchart observation for {source_id} [skip ci]",
             "content": base64.b64encode(data).decode("ascii"),
-            "branch": "main",
-        })
-        print("LOWCHART_SHARED_PRICE_STORED source_id=" + str(source_id))
-    except (error.HTTPError, error.URLError, OSError, ValueError, TypeError):
-        # A sibling may have won the same source path, or the write response
-        # may have been lost. Never overwrite or resubmit an uncertain PUT.
-        print("LOWCHART_SHARED_PRICE_STORE_SKIPPED source_id=" + str(source_id))
+            "branch": CACHE_BRANCH,
+        }
+        for attempt, delay in enumerate(CACHE_WRITE_RETRY_SECONDS):
+            if delay:
+                time.sleep(delay)
+            try:
+                _api(source_id, token, "PUT", payload)
+                print("LOWCHART_SHARED_PRICE_STORED "
+                      + json.dumps({"source_id": source_id,
+                                    "branch": CACHE_BRANCH,
+                                    "attempt": attempt + 1}))
+                return True
+            except error.HTTPError as exc:
+                # GitHub PUT may return 409 when sibling commits race, 422 if
+                # a concurrent writer created the same source ID first.
+                if exc.code in (409, 422):
+                    existing = read_record(source_id, token)
+                    if existing is not None:
+                        h = (record.get("history") or {})
+                        if verified_history(existing, source_id,
+                                            h.get("product_id"),
+                                            h.get("item_id")) is not None:
+                            print("LOWCHART_SHARED_PRICE_ALREADY_STORED "
+                                  + str(source_id))
+                            return True
+                        print("LOWCHART_SHARED_CACHE_IMMUTABLE_CONFLICT "
+                              + str(source_id))
+                        return False
+                    print("LOWCHART_SHARED_CACHE_RETRY_HTTP "
+                          + json.dumps({"source_id": source_id,
+                                        "status": exc.code, "attempt": attempt + 1}))
+                    continue
+                print("LOWCHART_SHARED_CACHE_WRITE_HTTP "
+                      + json.dumps({"source_id": source_id,
+                                    "status": exc.code, "attempt": attempt + 1}))
+                return False
+            except (error.URLError, OSError) as exc:
+                # Unknown write result: check for an already-created receipt
+                # before another attempt. Create-only PUT stays idempotent.
+                existing = read_record(source_id, token)
+                h = record.get("history") or {}
+                if existing is not None and verified_history(
+                        existing, source_id, h.get("product_id"),
+                        h.get("item_id")) is not None:
+                    return True
+                print("LOWCHART_SHARED_CACHE_WRITE_ERROR "
+                      + json.dumps({"source_id": source_id,
+                                    "error_type": type(exc).__name__,
+                                    "attempt": attempt + 1}))
+        print("LOWCHART_SHARED_PRICE_STORE_SKIPPED "
+              + json.dumps({"source_id": source_id,
+                            "reason": "GITHUB_CACHE_WRITE_RETRIES_EXHAUSTED"}))
+    except (OSError, ValueError, TypeError) as exc:
+        print("LOWCHART_SHARED_CACHE_WRITE_ERROR "
+              + json.dumps({"source_id": source_id,
+                            "error_type": type(exc).__name__}))
+    return False
 
 
 def maybe_share_or_recover(source_id: int, product_id: str, item_id: str,
@@ -212,8 +281,8 @@ def maybe_share_or_recover(source_id: int, product_id: str, item_id: str,
     reader = reader or read_record
     writer = writer or write_record
     sleeper = sleeper or time.sleep
-    if create_record(source_id, history, current_title or "") is not None:
-        record = create_record(source_id, history, current_title or "")
+    record = create_record(source_id, history, current_title or "")
+    if record is not None:
         try:
             writer(source_id, record, token)
         except Exception:
