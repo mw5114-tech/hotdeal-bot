@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96318,
-  "pending": [],
+  "last_scanned_id": 96321,
+  "pending": [
+    {
+      "id": 96321,
+      "source_post_url": "https://t.me/jirum/96321",
+      "original_purchase_url": "https://link.coupang.com/a/iKxaLJohUG",
+      "source_text": "🔥🔥🔥무지성 8,410원 (49.0% 할인)🔥🔥🔥\n[로켓프레시] 동원 딤섬 광동새우완탕 294g 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 16,490원\n- 할인: 8,080원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKxaLJohUG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T09:08:11+00:00",
+      "title": "[로켓프레시] 동원 딤섬 광동새우완탕 294g 3개",
+      "sale_price_krw": 8410
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6428,7 +6438,7 @@
       "run_id": "44047790848"
     }
   },
-  "skipped_non_coupang": 671,
+  "skipped_non_coupang": 673,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
