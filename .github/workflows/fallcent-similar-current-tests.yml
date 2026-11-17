@@ -8,6 +8,7 @@ on:
       - gh_only/default_deal_format.py
       - gh_only/naver_blog_format.py
       - gh_only/jirum_manual_queue.py
+      - gh_only/daangn_editor_probe.py
       - gh_only/test_fallcent_similar_current.py
       - .github/workflows/naver-blog-auto-main.yml
       - .github/workflows/daangn-cafe-restored.yml
