@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96266,
-  "pending": [
-    {
-      "id": 96266,
-      "source_post_url": "https://t.me/jirum/96266",
-      "original_purchase_url": "https://link.coupang.com/a/iJXqVLIEN2",
-      "source_text": "👍대박 7,250원 (38.0% 할인)\n제주 손질 고등어 (냉동) 4개\n📌 가격 현황\n- 정상가: 11,694원\n- 할인: 4,444원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJXqVLIEN2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T00:48:04+00:00",
-      "title": "제주 손질 고등어 (냉동) 4개",
-      "sale_price_krw": 7250
-    }
-  ],
-  "in_flight": {
-    "id": 96266,
-    "status": "CLAIMED",
-    "run_id": "43990596859",
-    "at": "2026-11-17T00:49:46.768634+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6201,6 +6186,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T00:13:37.194495+00:00",
       "run_id": "43985732186"
+    },
+    "96266": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A0%9C%EC%A3%BC-%EC%86%90%EC%A7%88-%EA%B3%A0%EB%93%B1%EC%96%B4-%EB%83%89%EB%8F%99-4%EA%B0%9C-A3o4nkrA?from=write",
+      "posted_at_utc": "2026-11-17T00:48:04+00:00",
+      "product_id": "1275095619",
+      "item_id": "2281017841",
+      "vendor_item_id": "70278139807",
+      "at": "2026-11-17T00:50:02.843642+00:00",
+      "run_id": "43990596859"
     }
   },
   "skipped_non_coupang": 642,
