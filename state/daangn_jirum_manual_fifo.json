@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96360,
-  "pending": [],
+  "last_scanned_id": 96361,
+  "pending": [
+    {
+      "id": 96361,
+      "source_post_url": "https://t.me/jirum/96361",
+      "original_purchase_url": "https://link.coupang.com/a/iLdNirqzpQ",
+      "source_text": "☆특가 30,530원 (26.5% 할인)\n이니스프리 화산송이 BHA 모공 클렌징폼 대용량, 250g, 5개\n📌 가격 현황\n- 정상가: 41,550원\n- 할인: 11,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLdNirqzpQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-17T19:04:37+00:00",
+      "title": "이니스프리 화산송이 BHA 모공 클렌징폼 대용량, 250g, 5개",
+      "sale_price_krw": 30530
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
