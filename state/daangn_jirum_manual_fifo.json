@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96273,
-  "pending": [
-    {
-      "id": 96273,
-      "source_post_url": "https://t.me/jirum/96273",
-      "original_purchase_url": "https://link.coupang.com/a/iJZF8llhpQ",
-      "source_text": "☆특가 6,930원\n롯데웰푸드 구구크러스터 스트로베리 & 크림치즈 (냉동), 1개입, 660ml, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJZF8llhpQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T01:19:29+00:00",
-      "title": "☆특가 6,930원",
-      "sale_price_krw": 6930
-    }
-  ],
-  "in_flight": {
-    "id": 96273,
-    "status": "CLAIMED",
-    "run_id": "43994738259",
-    "at": "2026-11-17T01:20:49.995303+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6261,6 +6246,16 @@
       "vendor_item_id": "71620215807",
       "at": "2026-11-17T00:59:37.483750+00:00",
       "run_id": "43991697772"
+    },
+    "96273": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A1%AF%EB%8D%B0%EC%9B%B0%ED%91%B8%EB%93%9C-%EA%B5%AC%EA%B5%AC%ED%81%AC%EB%9F%AC%EC%8A%A4%ED%84%B0-%EC%8A%A4%ED%8A%B8%EB%A1%9C%EB%B2%A0%EB%A6%AC-%ED%81%AC%EB%A6%BC%EC%B9%98%EC%A6%88-%EB%83%89%EB%8F%99-1%EA%B0%9C%EC%9E%85-660ml-AL118QBP?from=write",
+      "posted_at_utc": "2026-11-17T01:19:29+00:00",
+      "product_id": "9354863248",
+      "item_id": "27795976348",
+      "vendor_item_id": null,
+      "at": "2026-11-17T01:21:06.941461+00:00",
+      "run_id": "43994738259"
     }
   },
   "skipped_non_coupang": 643,
