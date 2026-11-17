@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96267,
-  "pending": [
-    {
-      "id": 96267,
-      "source_post_url": "https://t.me/jirum/96267",
-      "original_purchase_url": "https://link.coupang.com/a/iJXMoqF25s",
-      "source_text": "👍대박 5,920원 (39.0% 할인)\n[로켓프레시] 해슬로 가시없는 어린이 순살고등어 (냉동) 400g\n📌 가격 현황\n- 정상가: 9,705원\n- 할인: 3,785원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJXMoqF25s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T00:52:54+00:00",
-      "title": "[로켓프레시] 해슬로 가시없는 어린이 순살고등어 (냉동) 400g",
-      "sale_price_krw": 5920
-    }
-  ],
-  "in_flight": {
-    "id": 96267,
-    "status": "CLAIMED",
-    "run_id": "43991266952",
-    "at": "2026-11-17T00:53:52.682096+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6211,6 +6196,16 @@
       "vendor_item_id": "70278139807",
       "at": "2026-11-17T00:50:02.843642+00:00",
       "run_id": "43990596859"
+    },
+    "96267": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%EC%8A%AC%EB%A1%9C-%EA%B0%80%EC%8B%9C%EC%97%86%EB%8A%94-%EC%96%B4%EB%A6%B0%EC%9D%B4-%EC%88%9C%EC%82%B4%EA%B3%A0%EB%93%B1%EC%96%B4-%EB%83%89%EB%8F%99-400g-1%ED%8C%A9-40%ED%95%A0%EC%9D%B8-Pmvvr9ed?from=write",
+      "posted_at_utc": "2026-11-17T00:52:54+00:00",
+      "product_id": "7834942173",
+      "item_id": "21315290042",
+      "vendor_item_id": "88374771691",
+      "at": "2026-11-17T00:54:13.257980+00:00",
+      "run_id": "43991266952"
     }
   },
   "skipped_non_coupang": 642,
