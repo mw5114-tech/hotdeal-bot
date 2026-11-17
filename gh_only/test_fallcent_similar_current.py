@@ -145,6 +145,9 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
                             "drafts": [row]}, ensure_ascii=False),
                 encoding="utf-8",
             )
+            print("SIMILAR_TEST_BEFORE_VALIDATE", repr(row["caption"]["caption"].splitlines()[0]),
+                  "discount=", repr(row["caption"]["approx_discount_vs_reference_pct"]),
+                  "under_one=", repr(row["caption"]["reference_discount_under_one_pct"]))
             verified = validate_draft(folder, 96123)
             self.assertEqual(verified["source_id"], 96123)
             # The Naver formatter requires an API-issued URL; use only a fake
