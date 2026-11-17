@@ -134,13 +134,19 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
             self.assertEqual(row["comparison_price_source"],
                              "fallcent_similar_search_current")
             self.assertEqual(row["caption"]["comparison_reference_price_krw"], 17420)
-            self.assertIsNone(row["caption"]["approx_discount_vs_reference_pct"])
+            self.assertEqual(row["caption"]["approx_discount_vs_reference_pct"], 30)
+            self.assertEqual(row["caption"]["similar_reference_price_gap_pct"], 31.7)
+            self.assertIsNone(row["caption"]["actual_discount_vs_reference_pct"])
             self.assertTrue(row["caption"]["comparison_is_similar_product_only"])
             self.assertIn("폴센트 유사 상품 현재가(참고) : 약 17,420원",
                           row["caption"]["caption"])
             self.assertIn("옵션 및 실제 구매가는 다를 수 있습니다.",
                           row["caption"]["caption"])
-            self.assertNotIn("%할인", row["caption"]["caption"])
+            self.assertIn("[유사상품가 대비 30%↓]", row["caption"]["caption"])
+            self.assertIn(
+                "유사 상품 표시가 대비 약 30% 저렴",
+                row["caption"]["caption"])
+            self.assertNotIn("[30%할인]", row["caption"]["caption"])
             self.assertNotIn("평소 판매가 : 약 17,420원", row["caption"]["caption"])
             (folder / "drafts.json").write_text(
                 json.dumps({"schema": "github-jirum-default-price-photo-affsdp-draft-v2",
@@ -149,6 +155,8 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
             )
             verified = validate_draft(folder, 96123)
             self.assertEqual(verified["source_id"], 96123)
+            self.assertIn("[유사상품가 대비 30%↓]", verified["title"])
+            self.assertNotIn("[30%할인]", verified["title"])
             # The Naver formatter requires an API-issued URL; use only a fake
             # known-good URL (no external browser or social publishing).
             pub = {**verified, "candidate_url": "https://link.coupang.com/a/AbcDEf1234"}
@@ -163,10 +171,11 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
             display = "\n".join(b.get("text", "") for b in blocks)
             self.assertIn("폴센트 유사 상품 현재가(참고)", display)
             self.assertIn("옵션 및 실제 구매가가 다를 수 있습니다.", display)
-            self.assertNotIn("[약 ", display)
+            self.assertIn("[유사 상품가 대비 약 30% 저렴]", display)
+            self.assertNotIn("[약 30% 할인]", display)
 
             bad = copy.deepcopy(row)
-            bad["caption"]["approx_discount_vs_reference_pct"] = 30
+            bad["caption"]["approx_discount_vs_reference_pct"] = 45
             (folder / "drafts.json").write_text(
                 json.dumps({"schema": "github-jirum-default-price-photo-affsdp-draft-v2",
                             "drafts": [bad]}, ensure_ascii=False),
@@ -177,10 +186,10 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
                 # prefix before even reading the similar-price proof.
                 validate_draft(folder, 96123)
             with self.assertRaisesRegex(ValueError,
-                                         "NAVER_SIMILAR_PRODUCT_DISCOUNT_PROHIBITED"):
+                                         "NAVER_SIMILAR_PRICE_RELATIVE_GAP_MISMATCH"):
                 build_blocks(bad, pub, DEAL)
 
-    def test_formatter_does_not_misrepresent_reference_as_a_sale_discount(self):
+    def test_formatter_calculates_similar_price_gap_not_product_discount(self):
         caption = create_default_preview(
             7900, "잔스포츠 하프 프린트 백팩",
             49000, 99101,
@@ -188,10 +197,54 @@ class FallcentSimilarCurrentTests(unittest.TestCase):
         )
         self.assertIn("💸 폴센트 유사 상품 현재가(참고) : 약 49,000원",
                       caption["caption"])
-        self.assertNotIn("80%할인", caption["caption"])
+        self.assertEqual(caption["approx_discount_vs_reference_pct"], 85)
+        self.assertIn("[유사상품가 대비 85%↓]", caption["caption"])
+        self.assertIn("유사 상품 표시가 대비 약 85% 저렴", caption["caption"])
+        self.assertNotIn("[85%할인]", caption["caption"])
         self.assertIsNone(caption["actual_discount_vs_reference_pct"])
         self.assertIsNone(caption["actual_discount_vs_historical_mean_pct"])
         self.assertFalse(caption["comparison_price_is_historical_average"])
+
+
+    def test_similar_listing_not_cheaper_then_no_false_discount(self):
+        same = create_default_preview(
+            19000, "태평염전 간수뺀 신안 천일염 10kg 1개",
+            17000, reference_source="fallcent_similar_search_current",
+        )
+        self.assertIsNone(same["approx_discount_vs_reference_pct"])
+        self.assertIsNone(same["similar_reference_price_gap_pct"])
+        self.assertIn("[유사상품가 비교]", same["caption"])
+        self.assertNotIn("%할인", same["caption"])
+        self.assertNotIn("저렴]", same["caption"])
+
+    def test_similar_small_price_gap_keeps_precise_labeled_prefix(self):
+        almost = create_default_preview(
+            999, "잔스포츠 백팩",
+            1000, reference_source="fallcent_similar_search_current",
+        )
+        self.assertIsNone(almost["approx_discount_vs_reference_pct"])
+        self.assertTrue(almost["reference_discount_under_one_pct"])
+        self.assertIn("[유사상품가 대비 1% 미만↓]", almost["caption"])
+        self.assertNotIn("[1% 미만 저렴] ", almost["caption"])
+
+    def test_tampered_relative_percentage_blocked_even_if_caption_modified(self):
+        original = create_default_preview(
+            11900, "태평염전 간수뺀 신안 천일염 10kg 1개", 17420,
+            reference_source="fallcent_similar_search_current",
+        )
+        self.assertEqual(original["approx_discount_vs_reference_pct"], 30)
+        self.assertEqual(original["similar_reference_price_gap_pct"], 31.7)
+        tampered = copy.deepcopy(original)
+        tampered["approx_discount_vs_reference_pct"] = 45
+        tampered["caption"] = tampered["caption"].replace(
+            "30%↓", "45%↓").replace("30% 저렴", "45% 저렴")
+        draft = {"caption": tampered, "source_message_id": 96123}
+        source = {"source_post_url": "https://t.me/jirum/96123"}
+        verified = {"candidate_url": "https://link.coupang.com/a/AbcDEf1234",
+                    "image": Path("jirum_96123_fallcent_photo.png")}
+        with self.assertRaisesRegex(
+                ValueError, "NAVER_SIMILAR_PRICE_RELATIVE_GAP_MISMATCH"):
+            build_blocks(draft, verified, source)
 
 
 if __name__ == "__main__":
