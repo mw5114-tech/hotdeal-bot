@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96271,
-  "pending": [
-    {
-      "id": 96271,
-      "source_post_url": "https://t.me/jirum/96271",
-      "original_purchase_url": "https://link.coupang.com/a/iJX43jEdps",
-      "source_text": "☆특가 6,990원 (29.0% 할인)\n스카치브라이트 베이직 제로 스크래치 스펀지 수세미 8개\n📌 가격 현황\n- 정상가: 9,845원\n- 할인: 2,855원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJX43jEdps\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T00:57:07+00:00",
-      "title": "스카치브라이트 베이직 제로 스크래치 스펀지 수세미 8개",
-      "sale_price_krw": 6990
-    }
-  ],
-  "in_flight": {
-    "id": 96271,
-    "status": "CLAIMED",
-    "run_id": "43991697772",
-    "at": "2026-11-17T00:59:22.198319+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6250,6 +6235,16 @@
       "item_id": "22052097472",
       "vendor_item_id": "89099363642",
       "at": "2026-11-17T00:59:02.674245+00:00",
+      "run_id": "43991697772"
+    },
+    "96271": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%EC%B9%B4%EC%B9%98%EB%B8%8C%EB%9D%BC%EC%9D%B4%ED%8A%B8-%EB%B2%A0%EC%9D%B4%EC%A7%81-%EC%A0%9C%EB%A1%9C-%EC%8A%A4%ED%81%AC%EB%9E%98%EC%B9%98-%EC%8A%A4%ED%8E%80%EC%A7%80-%EC%88%98%EC%84%B8%EB%AF%B8-8%EA%B0%9C-dgxxz0Xj?from=write",
+      "posted_at_utc": "2026-11-17T00:57:07+00:00",
+      "product_id": "2140167813",
+      "item_id": "3634663228",
+      "vendor_item_id": "71620215807",
+      "at": "2026-11-17T00:59:37.483750+00:00",
       "run_id": "43991697772"
     }
   },
