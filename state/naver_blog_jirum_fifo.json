@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96368,
-  "pending": [
-    {
-      "id": 96368,
-      "source_message_id": 96368,
-      "source_post_url": "https://t.me/jirum/96368",
-      "original_purchase_url": "https://link.coupang.com/a/iLuGwo4gA9",
-      "title": "락앤락 핸디 IH 웍 28cm",
-      "source_text": "☆특가 13,300원 (27.0% 할인)\n락앤락 핸디 IH 웍 28cm\n📌 가격 현황\n- 정상가: 18,219원\n- 할인: 4,919원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLuGwo4gA9\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13300,
-      "posted_at_utc": "2026-11-17T23:00:58+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1347,6 +1336,10 @@
     "96362": {
       "url": "https://blog.naver.com/mw5114/224481382951",
       "at": "2026-11-17T19:21:43.150906+00:00"
+    },
+    "96368": {
+      "url": "https://blog.naver.com/mw5114/224481492412",
+      "at": "2026-11-17T23:02:44.139902+00:00"
     }
   },
   "skipped": {
@@ -1462,12 +1455,7 @@
       "at": "2026-11-17T05:29:34.059363+00:00"
     }
   },
-  "in_flight": {
-    "id": 96368,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44195617856",
-    "at": "2026-11-17T23:01:58.722833+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
