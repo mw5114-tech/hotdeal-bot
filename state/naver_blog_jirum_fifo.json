@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96343,
-  "pending": [],
+  "last_scanned_id": 96360,
+  "pending": [
+    {
+      "id": 96360,
+      "source_message_id": 96360,
+      "source_post_url": "https://t.me/jirum/96360",
+      "original_purchase_url": "https://link.coupang.com/a/iK2KFEJJ8e",
+      "title": "세미원푸드 왕어혈교 (냉동), 1kg, 1개",
+      "source_text": "☆특가 17,360원 (23.9% 할인)\n세미원푸드 왕어혈교 (냉동), 1kg, 1개\n📌 가격 현황\n- 정상가: 22,800원\n- 할인: 5,440원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iK2KFEJJ8e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 17360,
+      "posted_at_utc": "2026-11-17T16:30:05+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
