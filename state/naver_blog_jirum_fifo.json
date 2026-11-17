@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96339,
-  "pending": [
-    {
-      "id": 96339,
-      "source_message_id": 96339,
-      "source_post_url": "https://t.me/jirum/96339",
-      "original_purchase_url": "https://link.coupang.com/a/iKL5XlGksS",
-      "title": "잔스포츠 남녀공용 하프 파인트 백팩 JS00TDH6",
-      "source_text": "👍대박 21,280원 (31.0% 할인)\n잔스포츠 남녀공용 하프 파인트 백팩 JS00TDH6\n📌 가격 현황\n- 정상가: 30,841원\n- 할인: 9,561원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKL5XlGksS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 21280,
-      "posted_at_utc": "2026-11-17T12:37:00+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1327,6 +1316,10 @@
     "96338": {
       "url": "https://blog.naver.com/mw5114/224481076473",
       "at": "2026-11-17T12:34:51.175419+00:00"
+    },
+    "96339": {
+      "url": "https://blog.naver.com/mw5114/224481081440",
+      "at": "2026-11-17T12:38:49.059412+00:00"
     }
   },
   "skipped": {
@@ -1442,12 +1435,7 @@
       "at": "2026-11-17T05:29:34.059363+00:00"
     }
   },
-  "in_flight": {
-    "id": 96339,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44084894665",
-    "at": "2026-11-17T12:38:07.729780+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
