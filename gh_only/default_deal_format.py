@@ -137,13 +137,18 @@ def create_default_preview(sale: int | None, title: str | None,
         "fallcent_high_low_midpoint": "💸 폴센트 최고·최저 중간값",
         "fallcent_observed_current": "💸 폴센트 관측 현재가",
         "fallcent_observed_low": "💸 폴센트 관측 최저가",
+        "fallcent_similar_search_current": "💸 폴센트 유사 상품 현재가(참고)",
     }
     if reference_source not in labels:
         raise ValueError("INVALID_REFERENCE_PRICE_SOURCE")
     nonaverage_reference = reference_source not in (
         "lowchart_public_history", "fallcent_observed_average"
     )
-    approx = nearest_five_discount(sale, average)
+    similar_unverified_option = reference_source == "fallcent_similar_search_current"
+    # A similar listing may be for a DIFFERENT option or quantity. It is
+    # informative only and cannot be used to advertise a discount percentage.
+    approx = (None if similar_unverified_option
+              else nearest_five_discount(sale, average))
     # Keep 5-point rounding for larger discounts, but never lose a verified
     # small gap merely because it is under 2.5%.
     raw_pct = (
@@ -151,6 +156,8 @@ def create_default_preview(sale: int | None, title: str | None,
         if type(sale) is int and type(average) is int
         and 0 < sale < average <= 100_000_000 else None
     )
+    if similar_unverified_option:
+        raw_pct = None
     under_one = raw_pct is not None and raw_pct < Decimal("0.5")
     if approx is None and raw_pct is not None and not under_one:
         approx = int(raw_pct.quantize(Decimal(1), rounding=ROUND_HALF_UP))
@@ -183,6 +190,11 @@ def create_default_preview(sale: int | None, title: str | None,
     else:
         price_text = "🔥 핫딜 특가 : 확인 중"
     lines.append(price_text)
+    if similar_unverified_option and average is not None:
+        lines.append(
+            "※ 폴센트 상품명 검색으로 찾은 유사 제품의 표시 가격입니다. "
+            "용량·수량·옵션 및 실제 구매가는 다를 수 있습니다."
+        )
     return {
         "source_message_id": source_id,
         "product_name": product,
@@ -203,6 +215,7 @@ def create_default_preview(sale: int | None, title: str | None,
         "comparison_reference_price_krw": average,
         "comparison_reference_source": reference_source if average is not None else None,
         "comparison_price_is_historical_average": not nonaverage_reference and average is not None,
+        "comparison_is_similar_product_only": similar_unverified_option and average is not None,
         "rounded_discount_step": DEFAULT_PERCENT_STEP,
         "approx_discount_vs_reference_pct": approx,
         "reference_discount_under_one_pct": under_one,
