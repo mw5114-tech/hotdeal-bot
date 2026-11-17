@@ -135,16 +135,32 @@ def build_blocks(draft: dict, verified: dict, source: dict,
     # reference-relative discount. Never invent a percent when history or
     # comparison price is missing. The inventory notice follows immediately.
     # Any reference-source caveat remains below the sale and notice.
-    if basis == "fallcent_similar_search_current" and (
-        discount is not None or caption.get("reference_discount_under_one_pct") is True
-    ):
-        raise ValueError("NAVER_SIMILAR_PRODUCT_DISCOUNT_PROHIBITED")
+    if basis == "fallcent_similar_search_current":
+        from gh_only.default_deal_format import create_default_preview
+        expected = create_default_preview(
+            sale, product, comparison,
+            draft.get("source_message_id"),
+            reference_source="fallcent_similar_search_current",
+        )
+        if (caption.get("comparison_is_similar_product_only") is not True
+                or caption.get("approx_discount_vs_reference_pct") !=
+                   expected["approx_discount_vs_reference_pct"]
+                or caption.get("reference_discount_under_one_pct") !=
+                   expected["reference_discount_under_one_pct"]
+                or caption.get("similar_reference_price_gap_pct") !=
+                   expected["similar_reference_price_gap_pct"]):
+            raise ValueError("NAVER_SIMILAR_PRICE_RELATIVE_GAP_MISMATCH")
     has_discount = (
         type(discount) is int and 1 <= discount <= 95
         and comparison is not None and bool(pct_basis)
     )
     sale_line = f"🔥 오늘 특가 : {price_line(sale)}"
-    if has_discount:
+    if basis == "fallcent_similar_search_current" and type(discount) is int:
+        sale_line += f" [유사 상품가 대비 약 {discount}% 저렴]"
+    elif (basis == "fallcent_similar_search_current"
+          and caption.get("reference_discount_under_one_pct") is True):
+        sale_line += " [유사 상품가 대비 1% 미만 저렴]"
+    elif has_discount:
         sale_line += f" [약 {discount}% 할인]"
     elif draft.get("caption", {}).get("reference_discount_under_one_pct") is True:
         sale_line += " [비교 기준 대비 1% 미만 저렴]"
@@ -208,8 +224,12 @@ def validate_price_presentation(blocks: list[dict], draft: dict) -> None:
     if type(price) is not int or price <= 0 or basis not in SOURCES:
         raise ValueError("NAVER_PRICE_REFERENCE_INVALID")
     if basis == "fallcent_similar_search_current" and (
-        discount is not None or under_one
-        or not any(x.get("kind") == "similar_price_notice" for x in blocks)
+        not any(x.get("kind") == "similar_price_notice" for x in blocks)
+        or not any(
+            "용량·수량·옵션 및 실제 구매가가 다를 수 있습니다."
+            in x.get("text", "") for x in blocks
+            if x.get("kind") == "similar_price_notice"
+        )
     ):
         raise ValueError("NAVER_SIMILAR_PRODUCT_PRICE_DISCLOSURE_REQUIRED")
     labels = [x.get("text", "") for x in blocks if x.get("kind") == "reference"]
@@ -219,7 +239,28 @@ def validate_price_presentation(blocks: list[dict], draft: dict) -> None:
     sale_lines = [x.get("text", "") for x in blocks if x.get("kind") == "price"]
     if len(sale_lines) != 1:
         raise ValueError("NAVER_SALE_PRICE_BLOCK_MISSING")
-    if type(discount) is int and 1 <= discount <= 95:
+    if basis == "fallcent_similar_search_current":
+        from gh_only.default_deal_format import create_default_preview
+        expected = create_default_preview(
+            caption.get("sale_price_krw"), caption.get("product_name"),
+            price, draft.get("source_message_id"),
+            reference_source="fallcent_similar_search_current",
+        )
+        if (discount != expected["approx_discount_vs_reference_pct"]
+                or under_one != expected["reference_discount_under_one_pct"]
+                or caption.get("similar_reference_price_gap_pct") !=
+                   expected["similar_reference_price_gap_pct"]
+                or caption.get("comparison_is_similar_product_only") is not True):
+            raise ValueError("NAVER_SIMILAR_PRICE_PERCENT_PROOF_MISMATCH")
+        phrase = (
+            f"[유사 상품가 대비 약 {discount}% 저렴]"
+            if type(discount) is int else
+            "[유사 상품가 대비 1% 미만 저렴]" if under_one else ""
+        )
+        if (phrase and phrase not in sale_lines[0]
+                or "[약 " in sale_lines[0] and "% 할인]" in sale_lines[0]):
+            raise ValueError("NAVER_SIMILAR_PRICE_GAP_MISSING_OR_MISLABELED")
+    elif type(discount) is int and 1 <= discount <= 95:
         if f"[약 {discount}% 할인]" not in sale_lines[0]:
             raise ValueError("NAVER_DISCOUNT_MISSING_FROM_POST")
     elif under_one and "1% 미만 저렴" not in sale_lines[0]:
