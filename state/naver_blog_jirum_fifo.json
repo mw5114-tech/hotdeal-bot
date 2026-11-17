@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96372,
-  "pending": [],
+  "last_scanned_id": 96373,
+  "pending": [
+    {
+      "id": 96373,
+      "source_message_id": 96373,
+      "source_post_url": "https://t.me/jirum/96373",
+      "original_purchase_url": "https://link.coupang.com/a/iLyK9d0lO0",
+      "title": "☆특가 6,500원",
+      "source_text": "☆특가 6,500원\nAHC 바이탈 골든 콜라겐 크림 50g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLyK9d0lO0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 6500,
+      "posted_at_utc": "2026-11-17T23:57:59+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
