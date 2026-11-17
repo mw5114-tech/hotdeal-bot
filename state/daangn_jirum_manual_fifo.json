@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96305,
-  "pending": [
-    {
-      "id": 96305,
-      "source_post_url": "https://t.me/jirum/96305",
-      "original_purchase_url": "https://link.coupang.com/a/iKe7aIAANw",
-      "source_text": "☆특가 23,270원\n아카페라 빙그레 사이즈업 벤티 헤이즐넛아메리카노, 600ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iKe7aIAANw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T04:55:29+00:00",
-      "title": "☆특가 23,270원",
-      "sale_price_krw": 23270
-    }
-  ],
-  "in_flight": {
-    "id": 96305,
-    "status": "CLAIMED",
-    "run_id": "44020565806",
-    "at": "2026-11-17T04:57:05.393385+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6351,6 +6336,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T04:49:59.062276+00:00",
       "run_id": "44019794438"
+    },
+    "96305": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%B9%B4%ED%8E%98%EB%9D%BC-%EB%B9%99%EA%B7%B8%EB%A0%88-%EC%82%AC%EC%9D%B4%EC%A6%88%EC%97%85-%EB%B2%A4%ED%8B%B0-%ED%97%A4%EC%9D%B4%EC%A6%90%EB%84%9B%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B4%EB%85%B8-600ml-24%EA%B0%9C-dzrr9eMd?from=write",
+      "posted_at_utc": "2026-11-17T04:55:29+00:00",
+      "product_id": "8642440608",
+      "item_id": "25439005054",
+      "vendor_item_id": null,
+      "at": "2026-11-17T04:57:21.303861+00:00",
+      "run_id": "44020565806"
     }
   },
   "skipped_non_coupang": 666,
