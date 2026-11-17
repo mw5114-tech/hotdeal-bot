@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96370,
-  "pending": [
-    {
-      "id": 96370,
-      "source_post_url": "https://t.me/jirum/96370",
-      "original_purchase_url": "https://link.coupang.com/a/iLxawMo2Ro",
-      "source_text": "🔥🔥🔥무지성 7,150원 (53.0% 할인)🔥🔥🔥\n포켓커피 페레로 초콜릿 5p\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 15,213원\n- 할인: 8,063원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLxawMo2Ro\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T23:35:44+00:00",
-      "title": "포켓커피 페레로 초콜릿 5p",
-      "sale_price_krw": 7150
-    }
-  ],
-  "in_flight": {
-    "id": 96370,
-    "status": "CLAIMED",
-    "run_id": "44200841244",
-    "at": "2026-11-17T23:38:09.293603+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6581,6 +6566,16 @@
       "vendor_item_id": "73410778065",
       "at": "2026-11-17T23:29:51.814009+00:00",
       "run_id": "44199545128"
+    },
+    "96370": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%AC%EC%BC%93%EC%BB%A4%ED%94%BC-%ED%8E%98%EB%A0%88%EB%A1%9C-%EC%B4%88%EC%BD%9C%EB%A6%BF-5p-%EC%9C%A0%EC%82%AC%EC%83%81%ED%92%88%EA%B0%80-%EB%8C%80%EB%B9%84-65-PxqqeQXd?from=write",
+      "posted_at_utc": "2026-11-17T23:35:44+00:00",
+      "product_id": "7172651794",
+      "item_id": "26492774522",
+      "vendor_item_id": "93467622224",
+      "at": "2026-11-17T23:38:24.903266+00:00",
+      "run_id": "44200841244"
     }
   },
   "skipped_non_coupang": 708,
