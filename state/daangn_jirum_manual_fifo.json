@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96299,
-  "pending": [
-    {
-      "id": 96298,
-      "source_post_url": "https://t.me/jirum/96298",
-      "original_purchase_url": "https://link.coupang.com/a/iJ7xXMzWNw",
-      "source_text": "👍대박 8,960원 (33.6% 할인)\n엠바레 밀크 카라멜, 720g, 2개\n📌 가격 현황\n- 정상가: 13,500원\n- 할인: 4,540원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iJ7xXMzWNw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-17T03:09:35+00:00",
-      "title": "엠바레 밀크 카라멜, 720g, 2개",
-      "sale_price_krw": 8960
-    }
-  ],
-  "in_flight": {
-    "id": 96298,
-    "status": "CLAIMED",
-    "run_id": "44008242754",
-    "at": "2026-11-17T03:10:28.487343+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6301,6 +6286,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T02:52:54.395434+00:00",
       "run_id": "44006075325"
+    },
+    "96298": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%A0%EB%B0%94%EB%A0%88-%EB%B0%80%ED%81%AC-%EC%B9%B4%EB%9D%BC%EB%A9%9C-720g-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-AeeewkKA?from=write",
+      "posted_at_utc": "2026-11-17T03:09:35+00:00",
+      "product_id": "55397",
+      "item_id": "272427694",
+      "vendor_item_id": "85322097325",
+      "at": "2026-11-17T03:10:48.935755+00:00",
+      "run_id": "44008242754"
     }
   },
   "skipped_non_coupang": 665,
