@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96476,
-  "pending": [
-    {
-      "id": 96476,
-      "source_post_url": "https://t.me/jirum/96476",
-      "original_purchase_url": "https://link.coupang.com/a/iM0do08340",
-      "source_text": "☆특가 29,430원 (26.0% 할인)\n피지오겔 데일리 모이스쳐 테라피 포맨 플루이드 올인원 로션, 100ml, 2개\n📌 가격 현황\n- 정상가: 39,780원\n- 할인: 10,350원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM0do08340\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T20:49:48+00:00",
-      "title": "피지오겔 데일리 모이스쳐 테라피 포맨 플루이드 올인원 로션, 100ml, 2개",
-      "sale_price_krw": 29430
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8554,6 +8544,12 @@
       "source_post_url": "https://t.me/jirum/96463",
       "source_title": "삼호어묵 부산어묵 바른사각 1kg",
       "at": "2026-11-18T14:21:35.126932+00:00"
+    },
+    "96476": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96476",
+      "source_title": "피지오겔 데일리 모이스쳐 테라피 포맨 플루이드 올인원 로션, 100ml, 2개",
+      "at": "2026-11-18T20:53:30.826928+00:00"
     }
   },
   "single_test_repost_20261103": {
