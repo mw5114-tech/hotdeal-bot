@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96446,
-  "pending": [],
+  "last_scanned_id": 96448,
+  "pending": [
+    {
+      "id": 96447,
+      "source_post_url": "https://t.me/jirum/96447",
+      "original_purchase_url": "https://link.coupang.com/a/iMhQWk5fq0",
+      "source_text": "🔥🔥🔥무지성 15,740원 (51.0% 할인)🔥🔥🔥\n고야 슬라이스드 블랙 올리브\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 32,122원\n- 할인: 16,382원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMhQWk5fq0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T10:29:01+00:00",
+      "title": "고야 슬라이스드 블랙 올리브",
+      "sale_price_krw": 15740
+    },
+    {
+      "id": 96448,
+      "source_post_url": "https://t.me/jirum/96448",
+      "original_purchase_url": "https://link.coupang.com/a/iMhUaLqmqG",
+      "source_text": "☆특가 12,800원\n롯데웰푸드 월드콘 + 구구콘 세트 (냉동) 160ml*1개입*16개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMhUaLqmqG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T10:29:45+00:00",
+      "title": "☆특가 12,800원",
+      "sale_price_krw": 12800
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
