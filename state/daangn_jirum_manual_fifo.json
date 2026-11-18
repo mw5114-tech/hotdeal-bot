@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96482,
-  "pending": [
-    {
-      "id": 96482,
-      "source_post_url": "https://t.me/jirum/96482",
-      "original_purchase_url": "https://link.coupang.com/a/iM845q3rNI",
-      "source_text": "☆특가 11,900원 (29.0% 할인)\n해피콜 체인지 다이아몬드 IH 프라이팬\n📌 가격 현황\n- 정상가: 16,761원\n- 할인: 4,861원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM845q3rNI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T22:53:52+00:00",
-      "title": "해피콜 체인지 다이아몬드 IH 프라이팬",
-      "sale_price_krw": 11900
-    }
-  ],
-  "in_flight": {
-    "id": 96482,
-    "status": "CLAIMED",
-    "run_id": "44416016507",
-    "at": "2026-11-18T22:56:12.920966+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6941,6 +6926,16 @@
       "vendor_item_id": "85191194235",
       "at": "2026-11-18T22:48:43.996726+00:00",
       "run_id": "44414917280"
+    },
+    "96482": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%94%BC%EC%BD%9C-%EC%B2%B4%EC%9D%B8%EC%A7%80-%EB%8B%A4%EC%9D%B4%EC%95%84%EB%AA%AC%EB%93%9C-IH-%ED%94%84%EB%9D%BC%EC%9D%B4%ED%8C%AC-28cm-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PMlYkDGA?from=write",
+      "posted_at_utc": "2026-11-18T22:53:52+00:00",
+      "product_id": "8903775187",
+      "item_id": "26001944577",
+      "vendor_item_id": "92984097229",
+      "at": "2026-11-18T22:56:30.617358+00:00",
+      "run_id": "44416016507"
     }
   },
   "skipped_non_coupang": 772,
