@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96391,
-  "pending": [
-    {
-      "id": 96391,
-      "source_post_url": "https://t.me/jirum/96391",
-      "original_purchase_url": "https://link.coupang.com/a/iLGhKKf8F2",
-      "source_text": "☆특가 7,900원\n팬틴 케라틴 열보호 노워시 트리트먼트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLGhKKf8F2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T01:43:18+00:00",
-      "title": "☆특가 7,900원",
-      "sale_price_krw": 7900
-    }
-  ],
-  "in_flight": {
-    "id": 96391,
-    "status": "CLAIMED",
-    "run_id": "44218117638",
-    "at": "2026-11-18T01:44:59.447320+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6661,6 +6646,16 @@
       "vendor_item_id": "88352720751",
       "at": "2026-11-18T01:10:54.993919+00:00",
       "run_id": "44213522893"
+    },
+    "96391": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8C%AC%ED%8B%B4-%EC%BC%80%EB%9D%BC%ED%8B%B4-%EC%97%B4%EB%B3%B4%ED%98%B8-%EB%85%B8%EC%9B%8C%EC%8B%9C-%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%A8%BC%ED%8A%B8-140ml-1%EA%B0%9C-15%ED%95%A0%EC%9D%B8-dJ33QKRj?from=write",
+      "posted_at_utc": "2026-11-18T01:43:18+00:00",
+      "product_id": "8482557452",
+      "item_id": "27413840263",
+      "vendor_item_id": null,
+      "at": "2026-11-18T01:45:20.716482+00:00",
+      "run_id": "44218117638"
     }
   },
   "skipped_non_coupang": 721,
