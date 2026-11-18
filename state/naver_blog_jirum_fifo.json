@@ -3,17 +3,6 @@
   "last_scanned_id": 96406,
   "pending": [
     {
-      "id": 96401,
-      "source_message_id": 96401,
-      "source_post_url": "https://t.me/jirum/96401",
-      "original_purchase_url": "https://link.coupang.com/a/iLNTdpYYVw",
-      "title": "☆특가 19,900원",
-      "source_text": "☆특가 19,900원\n뉴에라 아동용 MLB 베이직 로고 맨투맨 LA 다저스\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLNTdpYYVw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 19900,
-      "posted_at_utc": "2026-11-18T03:29:43+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96406,
       "source_message_id": 96406,
       "source_post_url": "https://t.me/jirum/96406",
@@ -1536,6 +1525,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-18T03:33:52.174835+00:00"
+    },
+    "96401": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-18T04:09:55.436832+00:00"
     }
   },
   "in_flight": null,
