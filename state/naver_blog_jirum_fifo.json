@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96406,
-  "pending": [
-    {
-      "id": 96406,
-      "source_message_id": 96406,
-      "source_post_url": "https://t.me/jirum/96406",
-      "original_purchase_url": "https://link.coupang.com/a/iLQnrxt9u8",
-      "title": "☆특가 12,450원",
-      "source_text": "☆특가 12,450원\n[국내생산] 아이냠 실리콘 흡착식판 + 디바이더 세트 / 4구 5구 6구 호환, 옐로우, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLQnrxt9u8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12450,
-      "posted_at_utc": "2026-11-18T04:04:32+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1407,6 +1396,10 @@
     "96399": {
       "url": "https://blog.naver.com/mw5114/224481783803",
       "at": "2026-11-18T02:55:00.382445+00:00"
+    },
+    "96406": {
+      "url": "https://blog.naver.com/mw5114/224481882520",
+      "at": "2026-11-18T04:11:32.153249+00:00"
     }
   },
   "skipped": {
@@ -1532,12 +1525,7 @@
       "at": "2026-11-18T04:09:55.436832+00:00"
     }
   },
-  "in_flight": {
-    "id": 96406,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44234818326",
-    "at": "2026-11-18T04:10:47.823626+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
