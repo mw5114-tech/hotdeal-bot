@@ -587,10 +587,16 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             # Preserve Lowchart's actual Korean price-history graph, not a
             # synthetic flat summary. Capture only the exact verified item.
             from gh_only.lowchart_chart_capture import capture_chart_image
-            chart = capture_chart_image(
-                browser, article.get("chart_identity"), image.parent,
+            from gh_only.lowchart_shared_bundle import local_verified_chart
+            chart = local_verified_chart(
+                article.get("chart_identity"), image.parent,
                 article.get("source_id"),
             )
+            if chart is None:
+                chart = capture_chart_image(
+                    browser, article.get("chart_identity"), image.parent,
+                    article.get("source_id"),
+                )
             if chart is not None:
                 from gh_only.naver_blog_format import add_price_chart_block
                 if add_price_chart_block(article["blocks"]):
