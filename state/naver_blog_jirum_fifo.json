@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96475,
-  "pending": [
-    {
-      "id": 96475,
-      "source_message_id": 96475,
-      "source_post_url": "https://t.me/jirum/96475",
-      "original_purchase_url": "https://link.coupang.com/a/iMZE3Edgiq",
-      "title": "제주 손질 고등어 (냉동), 150g, 8개",
-      "source_text": "👍대박 14,060원 (32.7% 할인)\n제주 손질 고등어 (냉동), 150g, 8개\n📌 가격 현황\n- 정상가: 20,900원\n- 할인: 6,840원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMZE3Edgiq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14060,
-      "posted_at_utc": "2026-11-18T20:42:03+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1487,6 +1476,10 @@
     "96462": {
       "url": "https://blog.naver.com/mw5114/224482646825",
       "at": "2026-11-18T14:08:59.955210+00:00"
+    },
+    "96475": {
+      "url": "https://blog.naver.com/mw5114/224482871581",
+      "at": "2026-11-18T20:44:16.709662+00:00"
     }
   },
   "skipped": {
@@ -1647,12 +1640,7 @@
       "at": "2026-11-18T19:18:21.649756+00:00"
     }
   },
-  "in_flight": {
-    "id": 96475,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44393881694",
-    "at": "2026-11-18T20:43:32.790548+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
