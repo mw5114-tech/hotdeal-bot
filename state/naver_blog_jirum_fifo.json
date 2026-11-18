@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96412,
+  "last_scanned_id": 96416,
   "pending": [
-    {
-      "id": 96410,
-      "source_message_id": 96410,
-      "source_post_url": "https://t.me/jirum/96410",
-      "original_purchase_url": "https://link.coupang.com/a/iLRfPerUTk",
-      "title": "에코버 섬유유연제 뉴 치자꽃&바닐라향 본품 750ml",
-      "source_text": "❤️초대박 6,210원 (44.0% 할인)\n에코버 섬유유연제 뉴 치자꽃&바닐라향 본품 750ml\n📌 가격 현황\n- 정상가: 11,089원\n- 할인: 4,879원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLRfPerUTk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6210,
-      "posted_at_utc": "2026-11-18T04:16:48+00:00",
-      "photo_prepare_failure_count": 1
-    },
     {
       "id": 96411,
       "source_message_id": 96411,
@@ -1569,6 +1558,10 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-18T04:45:40.383681+00:00"
+    },
+    "96410": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-18T05:20:19.211514+00:00"
     }
   },
   "in_flight": null,
