@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96448,
-  "pending": [],
+  "last_scanned_id": 96449,
+  "pending": [
+    {
+      "id": 96449,
+      "source_message_id": 96449,
+      "source_post_url": "https://t.me/jirum/96449",
+      "original_purchase_url": "https://link.coupang.com/a/iMiC8Ewlzw",
+      "title": "삼성전자 갤럭시 S25 Ultra 자급제 SM-S938N, 티타늄 블랙, 512GB",
+      "source_text": "☆특가 1,370,300원 (16.5% 할인)\n삼성전자 갤럭시 S25 Ultra 자급제 SM-S938N, 티타늄 블랙, 512GB\n📌 가격 현황\n- 정상가: 1,641,250원\n- 할인: 270,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMiC8Ewlzw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1370300,
+      "posted_at_utc": "2026-11-18T10:39:54+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
