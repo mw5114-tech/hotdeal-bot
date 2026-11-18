@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96474,
-  "pending": [],
+  "last_scanned_id": 96475,
+  "pending": [
+    {
+      "id": 96475,
+      "source_post_url": "https://t.me/jirum/96475",
+      "original_purchase_url": "https://link.coupang.com/a/iMZE3Edgiq",
+      "source_text": "👍대박 14,060원 (32.7% 할인)\n제주 손질 고등어 (냉동), 150g, 8개\n📌 가격 현황\n- 정상가: 20,900원\n- 할인: 6,840원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMZE3Edgiq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T20:42:03+00:00",
+      "title": "제주 손질 고등어 (냉동), 150g, 8개",
+      "sale_price_krw": 14060
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
