@@ -206,22 +206,9 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
                     "drafts":[row],
                 }, ensure_ascii=False), encoding="utf-8",
             )
-            from gh_only.daangn_editor_probe import read_one_draft
-            article = read_one_draft(folder)
-            print("SHARED_BUNDLE_DRAFT_DIAGNOSTIC", {
-                "photo": row.get("photo"),
-                "image_source": row.get("image_source"),
-                "image_product_match": row.get("image_product_match"),
-                "lowchart_title_verified": row.get("lowchart_title_verified"),
-                "product_name_source": row.get("product_name_source"),
-                "image_exact_item_page_verified": row.get("image_exact_item_page_verified"),
-                "caption_name": row["caption"].get("product_name"),
-                "article_title": article.get("title"),
-                "article_first": article.get("body", "").splitlines()[0],
-                "caption_first": row["caption"]["caption"].splitlines()[0],
-                "article_image_exists": article.get("image").is_file() if article.get("image") else None,
-            })
-            verified = validate_draft(folder, SOURCE_ID)
+            # The production workflows use this same exact-item mode.
+            with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE":"lowchart"}):
+                verified = validate_draft(folder, SOURCE_ID)
             self.assertEqual(verified["source_id"], SOURCE_ID)
             self.assertEqual(verified["image"], recovered_photo)
             self.assertEqual(
