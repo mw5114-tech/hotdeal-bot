@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96410,
-  "pending": [
-    {
-      "id": 96410,
-      "source_post_url": "https://t.me/jirum/96410",
-      "original_purchase_url": "https://link.coupang.com/a/iLRfPerUTk",
-      "source_text": "❤️초대박 6,210원 (44.0% 할인)\n에코버 섬유유연제 뉴 치자꽃&바닐라향 본품 750ml\n📌 가격 현황\n- 정상가: 11,089원\n- 할인: 4,879원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLRfPerUTk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T04:16:48+00:00",
-      "title": "에코버 섬유유연제 뉴 치자꽃&바닐라향 본품 750ml",
-      "sale_price_krw": 6210
-    }
-  ],
-  "in_flight": {
-    "id": 96410,
-    "status": "CLAIMED",
-    "run_id": "44236314311",
-    "at": "2026-11-18T04:18:03.423147+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6731,6 +6716,16 @@
       "vendor_item_id": "84994398281",
       "at": "2026-11-18T04:11:09.485485+00:00",
       "run_id": "44235292311"
+    },
+    "96410": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EC%BD%94%EB%B2%84-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%89%B4-%EC%B9%98%EC%9E%90%EA%BD%83%EB%B0%94%EB%8B%90%EB%9D%BC%ED%96%A5-%EB%B3%B8%ED%92%88-750ml-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dDWWk1xP?from=write",
+      "posted_at_utc": "2026-11-18T04:16:48+00:00",
+      "product_id": "1915509328",
+      "item_id": "3252181107",
+      "vendor_item_id": "93227808955",
+      "at": "2026-11-18T04:18:22.363573+00:00",
+      "run_id": "44236314311"
     }
   },
   "skipped_non_coupang": 729,
