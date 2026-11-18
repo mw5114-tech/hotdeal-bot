@@ -38,7 +38,9 @@ MAX_PHOTO_BYTES = 2_500_000
 MAX_CHART_BYTES = 2_500_000
 MAX_BLOB_JSON = 3_600_000
 MAX_MANIFEST_BYTES = 12_000
-POLL_SECONDS = (0, 5, 5, 5, 5, 5, 5, 5)  # 35s at most
+# The source runner may need to launch Playwright before producing the
+# chart; allow it to finish before the 403 runner gives up on the bundle.
+POLL_SECONDS = (0,) + (5,) * 12  # capped at 60 seconds
 _WRITE_DELAYS = (0, 1, 2)
 _SHA_RE = re.compile(r"[0-9a-f]{40}\Z")
 _DIGEST_RE = re.compile(r"[0-9a-f]{64}\Z")
