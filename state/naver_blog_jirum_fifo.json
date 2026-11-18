@@ -3,17 +3,6 @@
   "last_scanned_id": 96485,
   "pending": [
     {
-      "id": 96484,
-      "source_message_id": 96484,
-      "source_post_url": "https://t.me/jirum/96484",
-      "original_purchase_url": "https://link.coupang.com/a/iM9OqGiuRg",
-      "title": "MYCHEF 이비가 짬뽕 순두부 밀키트 2인분, 1.025kg, 1개",
-      "source_text": "☆특가 8,580원 (27.9% 할인)\nMYCHEF 이비가 짬뽕 순두부 밀키트 2인분, 1.025kg, 1개\n📌 가격 현황\n- 정상가: 11,900원\n- 할인: 3,320원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM9OqGiuRg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8580,
-      "posted_at_utc": "2026-11-18T23:04:06+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96485,
       "source_message_id": 96485,
       "source_post_url": "https://t.me/jirum/96485",
@@ -1518,6 +1507,10 @@
     "96483": {
       "url": "https://blog.naver.com/mw5114/224482938284",
       "at": "2026-11-18T22:57:30.509352+00:00"
+    },
+    "96484": {
+      "url": "https://blog.naver.com/mw5114/224482965145",
+      "at": "2026-11-18T23:31:00.656502+00:00"
     }
   },
   "skipped": {
@@ -1687,12 +1680,7 @@
       "at": "2026-11-18T22:41:40.899873+00:00"
     }
   },
-  "in_flight": {
-    "id": 96484,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44421224534",
-    "at": "2026-11-18T23:30:15.966868+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
