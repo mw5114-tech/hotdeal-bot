@@ -3,17 +3,6 @@
   "last_scanned_id": 96448,
   "pending": [
     {
-      "id": 96446,
-      "source_message_id": 96446,
-      "source_post_url": "https://t.me/jirum/96446",
-      "original_purchase_url": "https://link.coupang.com/a/iMfEjnfJ1w",
-      "title": "☆특가 52,100원",
-      "source_text": "☆특가 52,100원\n신일 세라믹 히터\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMfEjnfJ1w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 52100,
-      "posted_at_utc": "2026-11-18T09:58:10+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96447,
       "source_message_id": 96447,
       "source_post_url": "https://t.me/jirum/96447",
@@ -1480,6 +1469,10 @@
     "96441": {
       "url": "https://blog.naver.com/mw5114/224482303387",
       "at": "2026-11-18T09:03:55.337188+00:00"
+    },
+    "96446": {
+      "url": "https://blog.naver.com/mw5114/224482400334",
+      "at": "2026-11-18T10:31:09.765056+00:00"
     }
   },
   "skipped": {
@@ -1632,12 +1625,7 @@
       "at": "2026-11-18T06:26:36.913652+00:00"
     }
   },
-  "in_flight": {
-    "id": 96446,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44285920300",
-    "at": "2026-11-18T10:30:25.970336+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
