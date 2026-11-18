@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96483,
-  "pending": [
-    {
-      "id": 96483,
-      "source_message_id": 96483,
-      "source_post_url": "https://t.me/jirum/96483",
-      "original_purchase_url": "https://link.coupang.com/a/iM88KlzXSS",
-      "title": "하리보 스타믹스 컵 젤리 175g 2개",
-      "source_text": "☆특가 5,400원 (26.0% 할인)\n하리보 스타믹스 컵 젤리 175g 2개\n📌 가격 현황\n- 정상가: 7,297원\n- 할인: 1,897원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM88KlzXSS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5400,
-      "posted_at_utc": "2026-11-18T22:54:42+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1503,6 +1492,10 @@
     "96482": {
       "url": "https://blog.naver.com/mw5114/224482937380",
       "at": "2026-11-18T22:56:04.300894+00:00"
+    },
+    "96483": {
+      "url": "https://blog.naver.com/mw5114/224482938284",
+      "at": "2026-11-18T22:57:30.509352+00:00"
     }
   },
   "skipped": {
@@ -1672,12 +1665,7 @@
       "at": "2026-11-18T22:41:40.899873+00:00"
     }
   },
-  "in_flight": {
-    "id": 96483,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44416210454",
-    "at": "2026-11-18T22:56:47.183361+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
