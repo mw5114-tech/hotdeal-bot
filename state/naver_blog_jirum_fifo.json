@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96482,
-  "pending": [
-    {
-      "id": 96482,
-      "source_message_id": 96482,
-      "source_post_url": "https://t.me/jirum/96482",
-      "original_purchase_url": "https://link.coupang.com/a/iM845q3rNI",
-      "title": "해피콜 체인지 다이아몬드 IH 프라이팬",
-      "source_text": "☆특가 11,900원 (29.0% 할인)\n해피콜 체인지 다이아몬드 IH 프라이팬\n📌 가격 현황\n- 정상가: 16,761원\n- 할인: 4,861원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM845q3rNI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11900,
-      "posted_at_utc": "2026-11-18T22:53:52+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1499,6 +1488,10 @@
     "96481": {
       "url": "https://blog.naver.com/mw5114/224482932787",
       "at": "2026-11-18T22:49:05.438009+00:00"
+    },
+    "96482": {
+      "url": "https://blog.naver.com/mw5114/224482937380",
+      "at": "2026-11-18T22:56:04.300894+00:00"
     }
   },
   "skipped": {
@@ -1668,12 +1661,7 @@
       "at": "2026-11-18T22:41:40.899873+00:00"
     }
   },
-  "in_flight": {
-    "id": 96482,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44416016507",
-    "at": "2026-11-18T22:55:19.797380+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
