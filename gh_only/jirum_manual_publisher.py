@@ -216,10 +216,16 @@ def publish_one(article: dict, state_secret: str | None = None,
             try:
                 # Use the actual Korean price-history graph for this exact SKU.
                 from gh_only.lowchart_chart_capture import capture_chart_image
-                chart = capture_chart_image(
-                    browser, article.get("chart_identity"), article["image"].parent,
+                from gh_only.lowchart_shared_bundle import local_verified_chart
+                chart = local_verified_chart(
+                    article.get("chart_identity"), article["image"].parent,
                     article.get("source_id"),
                 )
+                if chart is None:
+                    chart = capture_chart_image(
+                        browser, article.get("chart_identity"), article["image"].parent,
+                        article.get("source_id"),
+                    )
                 article["chart_image"] = chart
                 result["chart_captured"] = chart is not None
                 result["chart_kind"] = ("lowchart_native_history_graph"
