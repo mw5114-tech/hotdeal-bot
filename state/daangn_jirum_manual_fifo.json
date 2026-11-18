@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96461,
-  "pending": [
-    {
-      "id": 96461,
-      "source_post_url": "https://t.me/jirum/96461",
-      "original_purchase_url": "https://link.coupang.com/a/iMtOHsKH6q",
-      "source_text": "☆특가 5,400원\n풀무원 얼큰 순두부찌개 킷 2인분, 600g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMtOHsKH6q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T13:16:26+00:00",
-      "title": "☆특가 5,400원",
-      "sale_price_krw": 5400
-    }
-  ],
-  "in_flight": {
-    "id": 96461,
-    "status": "CLAIMED",
-    "run_id": "44312122036",
-    "at": "2026-11-18T13:17:25.051460+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6891,6 +6876,16 @@
       "vendor_item_id": "82499716371",
       "at": "2026-11-18T13:06:44.573066+00:00",
       "run_id": "44310096545"
+    },
+    "96461": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%96%BC%ED%81%B0-%EC%88%9C%EB%91%90%EB%B6%80%EC%B0%8C%EA%B0%9C-%ED%82%B7-2%EC%9D%B8%EB%B6%84-2%EA%B0%9C-600g-30%ED%95%A0%EC%9D%B8-dDWnNBgP?from=write",
+      "posted_at_utc": "2026-11-18T13:16:26+00:00",
+      "product_id": "6532199671",
+      "item_id": "19225554180",
+      "vendor_item_id": null,
+      "at": "2026-11-18T13:17:45.846979+00:00",
+      "run_id": "44312122036"
     }
   },
   "skipped_non_coupang": 759,
