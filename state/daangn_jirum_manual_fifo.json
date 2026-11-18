@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96441,
-  "pending": [
-    {
-      "id": 96441,
-      "source_post_url": "https://t.me/jirum/96441",
-      "original_purchase_url": "https://link.coupang.com/a/iMbCOeLijA",
-      "source_text": "☆특가 3,220원\n크래프트 아보카도 오일 마요네즈, 354ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMbCOeLijA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T09:01:52+00:00",
-      "title": "☆특가 3,220원",
-      "sale_price_krw": 3220
-    }
-  ],
-  "in_flight": {
-    "id": 96441,
-    "status": "CLAIMED",
-    "run_id": "44272195212",
-    "at": "2026-11-18T09:04:08.790130+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6841,6 +6826,16 @@
       "vendor_item_id": null,
       "at": "2026-11-18T08:51:58.986734+00:00",
       "run_id": "44270446145"
+    },
+    "96441": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%9E%98%ED%94%84%ED%8A%B8-%EC%95%84%EB%B3%B4%EC%B9%B4%EB%8F%84-%EC%98%A4%EC%9D%BC-%EB%A7%88%EC%9A%94%EB%84%A4%EC%A6%88-1%EA%B0%9C-354ml-25%ED%95%A0%EC%9D%B8-dlkxk8BP?from=write",
+      "posted_at_utc": "2026-11-18T09:01:52+00:00",
+      "product_id": "9412434217",
+      "item_id": "25848406396",
+      "vendor_item_id": null,
+      "at": "2026-11-18T09:04:26.722972+00:00",
+      "run_id": "44272195212"
     }
   },
   "skipped_non_coupang": 746,
