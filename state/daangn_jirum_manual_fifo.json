@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96485,
-  "pending": [
-    {
-      "id": 96485,
-      "source_post_url": "https://t.me/jirum/96485",
-      "original_purchase_url": "https://link.coupang.com/a/iNbAuqBLKm",
-      "source_text": "☆특가 14,540원 (24.1% 할인)\n가루비 캇파 에비센, 77g, 12개\n📌 가격 현황\n- 정상가: 19,150원\n- 할인: 4,610원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNbAuqBLKm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T23:28:57+00:00",
-      "title": "가루비 캇파 에비센, 77g, 12개",
-      "sale_price_krw": 14540
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8612,6 +8602,12 @@
       "source_post_url": "https://t.me/jirum/96484",
       "source_title": "MYCHEF 이비가 짬뽕 순두부 밀키트 2인분, 1.025kg, 1개",
       "at": "2026-11-18T23:07:38.243290+00:00"
+    },
+    "96485": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96485",
+      "source_title": "가루비 캇파 에비센, 77g, 12개",
+      "at": "2026-11-18T23:31:34.810653+00:00"
     }
   },
   "single_test_repost_20261103": {
