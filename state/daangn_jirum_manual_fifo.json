@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96374,
-  "pending": [
-    {
-      "id": 96374,
-      "source_post_url": "https://t.me/jirum/96374",
-      "original_purchase_url": "https://link.coupang.com/a/iLzaFty8Ps",
-      "source_text": "☆특가 19,840원\n코카콜라 오리지널, 490ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLzaFty8Ps\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T00:03:45+00:00",
-      "title": "☆특가 19,840원",
-      "sale_price_krw": 19840
-    }
-  ],
-  "in_flight": {
-    "id": 96374,
-    "status": "CLAIMED",
-    "run_id": "44204757105",
-    "at": "2026-11-18T00:06:07.843674+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6621,6 +6606,16 @@
       "vendor_item_id": null,
       "at": "2026-11-17T23:59:07.468022+00:00",
       "run_id": "44203927146"
+    },
+    "96374": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EC%B9%B4%EC%BD%9C%EB%9D%BC-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-490ml-24%EA%B0%9C-dQzzL92j?from=write",
+      "posted_at_utc": "2026-11-18T00:03:45+00:00",
+      "product_id": "9371774",
+      "item_id": "23358340863",
+      "vendor_item_id": null,
+      "at": "2026-11-18T00:06:23.830087+00:00",
+      "run_id": "44204757105"
     }
   },
   "skipped_non_coupang": 708,
