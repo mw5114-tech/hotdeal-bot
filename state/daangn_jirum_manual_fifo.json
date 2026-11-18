@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96449,
-  "pending": [],
+  "last_scanned_id": 96451,
+  "pending": [
+    {
+      "id": 96451,
+      "source_post_url": "https://t.me/jirum/96451",
+      "original_purchase_url": "https://link.coupang.com/a/iMk7tgskSa",
+      "source_text": "☆특가 15,920원\n올챌린지 천연펄프 3겹 화장지,30롤, 2팩\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMk7tgskSa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T11:14:43+00:00",
+      "title": "☆특가 15,920원",
+      "sale_price_krw": 15920
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6868,7 +6878,7 @@
       "run_id": "44287650996"
     }
   },
-  "skipped_non_coupang": 750,
+  "skipped_non_coupang": 751,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
