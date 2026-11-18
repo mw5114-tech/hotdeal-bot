@@ -207,7 +207,11 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
                 }, ensure_ascii=False), encoding="utf-8",
             )
             # The production workflows use this same exact-item mode.
-            with patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE":"lowchart"}):
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE":"lowchart",
+                "COUPANG_PARTNER_LPTAG":"AF9668915",
+                "COUPANG_PARTNER_SUBID":"",
+            }):
                 verified = validate_draft(folder, SOURCE_ID)
             self.assertEqual(verified["source_id"], SOURCE_ID)
             self.assertEqual(verified["image"], recovered_photo)
