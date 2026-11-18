@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96463,
-  "pending": [
-    {
-      "id": 96463,
-      "source_message_id": 96463,
-      "source_post_url": "https://t.me/jirum/96463",
-      "original_purchase_url": "https://link.coupang.com/a/iMycuEH76W",
-      "title": "삼호어묵 부산어묵 바른사각 1kg",
-      "source_text": "👍대박 3,160원 (37.0% 할인)\n삼호어묵 부산어묵 바른사각 1kg\n📌 가격 현황\n- 정상가: 5,016원\n- 할인: 1,856원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMycuEH76W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3160,
-      "posted_at_utc": "2026-11-18T14:17:47+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "last_scanned_id": 96474,
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1642,6 +1630,10 @@
     "96451": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-18T13:05:06.475506+00:00"
+    },
+    "96463": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-18T19:18:21.649756+00:00"
     }
   },
   "in_flight": null,
