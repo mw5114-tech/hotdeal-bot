@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96406,
-  "pending": [
-    {
-      "id": 96406,
-      "source_post_url": "https://t.me/jirum/96406",
-      "original_purchase_url": "https://link.coupang.com/a/iLQnrxt9u8",
-      "source_text": "☆특가 12,450원\n[국내생산] 아이냠 실리콘 흡착식판 + 디바이더 세트 / 4구 5구 6구 호환, 옐로우, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLQnrxt9u8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T04:04:32+00:00",
-      "title": "☆특가 12,450원",
-      "sale_price_krw": 12450
-    }
-  ],
-  "in_flight": {
-    "id": 96406,
-    "status": "CLAIMED",
-    "run_id": "44234818326",
-    "at": "2026-11-18T04:05:25.048216+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6711,6 +6696,16 @@
       "vendor_item_id": null,
       "at": "2026-11-18T02:54:40.395957+00:00",
       "run_id": "44226412051"
+    },
+    "96406": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B5%AD%EB%82%B4%EC%83%9D%EC%82%B0-%EC%95%84%EC%9D%B4%EB%83%A0-%EC%8B%A4%EB%A6%AC%EC%BD%98-%ED%9D%A1%EC%B0%A9%EC%8B%9D%ED%8C%90-%EB%94%94%EB%B0%94%EC%9D%B4%EB%8D%94-%EC%84%B8%ED%8A%B8-4%EA%B5%AC-50%ED%95%A0%EC%9D%B8-d9aa7bDd?from=write",
+      "posted_at_utc": "2026-11-18T04:04:32+00:00",
+      "product_id": "8631809518",
+      "item_id": "25042657280",
+      "vendor_item_id": null,
+      "at": "2026-11-18T04:05:43.563964+00:00",
+      "run_id": "44234818326"
     }
   },
   "skipped_non_coupang": 729,
