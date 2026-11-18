@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96392,
-  "pending": [
-    {
-      "id": 96392,
-      "source_post_url": "https://t.me/jirum/96392",
-      "original_purchase_url": "https://link.coupang.com/a/iLHJvzzRGS",
-      "source_text": "☆특가 13,570원\n고급진 기사식당돼지불백 2kg(500g 4개입) (냉동), 1개, 2kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLHJvzzRGS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T02:03:34+00:00",
-      "title": "☆특가 13,570원",
-      "sale_price_krw": 13570
-    }
-  ],
-  "in_flight": {
-    "id": 96392,
-    "status": "CLAIMED",
-    "run_id": "44220569065",
-    "at": "2026-11-18T02:04:58.869509+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6671,6 +6656,16 @@
       "vendor_item_id": null,
       "at": "2026-11-18T01:45:20.716482+00:00",
       "run_id": "44218117638"
+    },
+    "96392": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%A0%EA%B8%89%EC%A7%84-%EA%B8%B0%EC%82%AC%EC%8B%9D%EB%8B%B9%EB%8F%BC%EC%A7%80%EB%B6%88%EB%B0%B1-2kg500g-4%EA%B0%9C%EC%9E%85-%EB%83%89%EB%8F%99-1-35%ED%95%A0%EC%9D%B8-j8aaN7LA?from=write",
+      "posted_at_utc": "2026-11-18T02:03:34+00:00",
+      "product_id": "8401746013",
+      "item_id": "24286788126",
+      "vendor_item_id": null,
+      "at": "2026-11-18T02:05:20.845083+00:00",
+      "run_id": "44220569065"
     }
   },
   "skipped_non_coupang": 721,
