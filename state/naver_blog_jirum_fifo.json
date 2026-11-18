@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96419,
+  "last_scanned_id": 96420,
   "pending": [
     {
       "id": 96419,
@@ -12,6 +12,16 @@
       "sale_price_krw": 10020,
       "posted_at_utc": "2026-11-18T06:09:01+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96420,
+      "source_message_id": 96420,
+      "source_post_url": "https://t.me/jirum/96420",
+      "original_purchase_url": "https://link.coupang.com/a/iLZ7qTSsXQ",
+      "title": "☆특가 8,430원",
+      "source_text": "☆특가 8,430원\n브리츠 오픈형 무선 블루투스 이어폰\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLZ7qTSsXQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8430,
+      "posted_at_utc": "2026-11-18T06:20:51+00:00"
     }
   ],
   "published": {
