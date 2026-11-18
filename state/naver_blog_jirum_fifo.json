@@ -3,17 +3,6 @@
   "last_scanned_id": 96431,
   "pending": [
     {
-      "id": 96430,
-      "source_message_id": 96430,
-      "source_post_url": "https://t.me/jirum/96430",
-      "original_purchase_url": "https://link.coupang.com/a/iL30JMvXfU",
-      "title": "☆특가 68,150원",
-      "source_text": "☆특가 68,150원\n필립스 2000 시리즈 에어프라이어 4.2L\n📦 특가 바로가기\nhttps://link.coupang.com/a/iL30JMvXfU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 68150,
-      "posted_at_utc": "2026-11-18T07:15:19+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96431,
       "source_message_id": 96431,
       "source_post_url": "https://t.me/jirum/96431",
@@ -1438,6 +1427,10 @@
     "96420": {
       "url": "https://blog.naver.com/mw5114/224482078180",
       "at": "2026-11-18T06:28:11.482373+00:00"
+    },
+    "96430": {
+      "url": "https://blog.naver.com/mw5114/224482158581",
+      "at": "2026-11-18T07:23:12.329810+00:00"
     }
   },
   "skipped": {
@@ -1590,12 +1583,7 @@
       "at": "2026-11-18T06:26:36.913652+00:00"
     }
   },
-  "in_flight": {
-    "id": 96430,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44258251966",
-    "at": "2026-11-18T07:22:28.026531+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
