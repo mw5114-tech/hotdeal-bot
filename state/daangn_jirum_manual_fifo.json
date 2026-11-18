@@ -3,15 +3,6 @@
   "last_scanned_id": 96448,
   "pending": [
     {
-      "id": 96447,
-      "source_post_url": "https://t.me/jirum/96447",
-      "original_purchase_url": "https://link.coupang.com/a/iMhQWk5fq0",
-      "source_text": "🔥🔥🔥무지성 15,740원 (51.0% 할인)🔥🔥🔥\n고야 슬라이스드 블랙 올리브\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 32,122원\n- 할인: 16,382원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMhQWk5fq0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T10:29:01+00:00",
-      "title": "고야 슬라이스드 블랙 올리브",
-      "sale_price_krw": 15740
-    },
-    {
       "id": 96448,
       "source_post_url": "https://t.me/jirum/96448",
       "original_purchase_url": "https://link.coupang.com/a/iMhUaLqmqG",
@@ -21,12 +12,7 @@
       "sale_price_krw": 12800
     }
   ],
-  "in_flight": {
-    "id": 96447,
-    "status": "CLAIMED",
-    "run_id": "44285920300",
-    "at": "2026-11-18T10:30:32.630024+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6860,6 +6846,16 @@
       "vendor_item_id": null,
       "at": "2026-11-18T09:04:26.722972+00:00",
       "run_id": "44272195212"
+    },
+    "96447": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%A0%EC%95%BC-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8A%A4%EB%93%9C-%EB%B8%94%EB%9E%99-%EC%98%AC%EB%A6%AC%EB%B8%8C-900g-2%EA%B0%9C-d9a42G9d?from=write",
+      "posted_at_utc": "2026-11-18T10:29:01+00:00",
+      "product_id": "48146398",
+      "item_id": "19421896369",
+      "vendor_item_id": "86533355432",
+      "at": "2026-11-18T10:30:50.916702+00:00",
+      "run_id": "44285920300"
     }
   },
   "skipped_non_coupang": 750,
