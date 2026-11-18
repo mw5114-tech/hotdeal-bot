@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96441,
-  "pending": [
-    {
-      "id": 96441,
-      "source_message_id": 96441,
-      "source_post_url": "https://t.me/jirum/96441",
-      "original_purchase_url": "https://link.coupang.com/a/iMbCOeLijA",
-      "title": "☆특가 3,220원",
-      "source_text": "☆특가 3,220원\n크래프트 아보카도 오일 마요네즈, 354ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMbCOeLijA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3220,
-      "posted_at_utc": "2026-11-18T09:01:52+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1455,6 +1444,10 @@
     "96439": {
       "url": "https://blog.naver.com/mw5114/224482288363",
       "at": "2026-11-18T08:52:55.246990+00:00"
+    },
+    "96441": {
+      "url": "https://blog.naver.com/mw5114/224482303387",
+      "at": "2026-11-18T09:03:55.337188+00:00"
     }
   },
   "skipped": {
@@ -1607,12 +1600,7 @@
       "at": "2026-11-18T06:26:36.913652+00:00"
     }
   },
-  "in_flight": {
-    "id": 96441,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44272195212",
-    "at": "2026-11-18T09:03:12.180154+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
