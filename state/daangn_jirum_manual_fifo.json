@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96397,
-  "pending": [
-    {
-      "id": 96397,
-      "source_post_url": "https://t.me/jirum/96397",
-      "original_purchase_url": "https://link.coupang.com/a/iLJVdZJm5k",
-      "source_text": "👍대박 19,800원 (33.0% 할인)\n오아 버블 디스펜서\n📌 가격 현황\n- 정상가: 29,552원\n- 할인: 9,752원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLJVdZJm5k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T02:34:12+00:00",
-      "title": "오아 버블 디스펜서",
-      "sale_price_krw": 19800
-    }
-  ],
-  "in_flight": {
-    "id": 96397,
-    "status": "CLAIMED",
-    "run_id": "44224277551",
-    "at": "2026-11-18T02:35:59.784241+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6691,6 +6676,16 @@
       "vendor_item_id": null,
       "at": "2026-11-18T02:19:22.788231+00:00",
       "run_id": "44222171179"
+    },
+    "96397": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%95%84-%EB%B2%84%EB%B8%94-%EB%94%94%EC%8A%A4%ED%8E%9C%EC%84%9C-30%ED%95%A0%EC%9D%B8-dZ77ZN5j?from=write",
+      "posted_at_utc": "2026-11-18T02:34:12+00:00",
+      "product_id": "8924237824",
+      "item_id": "26081995005",
+      "vendor_item_id": "93098253764",
+      "at": "2026-11-18T02:36:15.039356+00:00",
+      "run_id": "44224277551"
     }
   },
   "skipped_non_coupang": 724,
