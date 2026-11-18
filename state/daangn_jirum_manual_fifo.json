@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96459,
-  "pending": [
-    {
-      "id": 96459,
-      "source_post_url": "https://t.me/jirum/96459",
-      "original_purchase_url": "https://link.coupang.com/a/iMsXokurvN",
-      "source_text": "👍대박 8,580원 (39.0% 할인)\nMYCHEF 이비가 짬뽕 순두부 밀키트 2인분\n📌 가격 현황\n- 정상가: 14,066원\n- 할인: 5,486원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iMsXokurvN\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T13:04:24+00:00",
-      "title": "MYCHEF 이비가 짬뽕 순두부 밀키트 2인분",
-      "sale_price_krw": 8580
-    }
-  ],
-  "in_flight": {
-    "id": 96459,
-    "status": "CLAIMED",
-    "run_id": "44310096545",
-    "at": "2026-11-18T13:06:23.998269+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6881,6 +6866,16 @@
       "vendor_item_id": "91592064801",
       "at": "2026-11-18T10:41:25.952524+00:00",
       "run_id": "44287650996"
+    },
+    "96459": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-MYCHEF-%EC%9D%B4%EB%B9%84%EA%B0%80-%EC%A7%AC%EB%BD%95-%EC%88%9C%EB%91%90%EB%B6%80-%EB%B0%80%ED%82%A4%ED%8A%B8-2%EC%9D%B8%EB%B6%84-1025kg-25%ED%95%A0%EC%9D%B8-d9a4ZZOd?from=write",
+      "posted_at_utc": "2026-11-18T13:04:24+00:00",
+      "product_id": "6658612350",
+      "item_id": "15279219078",
+      "vendor_item_id": "82499716371",
+      "at": "2026-11-18T13:06:44.573066+00:00",
+      "run_id": "44310096545"
     }
   },
   "skipped_non_coupang": 758,
