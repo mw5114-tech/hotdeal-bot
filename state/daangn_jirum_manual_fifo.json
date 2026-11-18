@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96481,
-  "pending": [
-    {
-      "id": 96481,
-      "source_post_url": "https://t.me/jirum/96481",
-      "original_purchase_url": "https://link.coupang.com/a/iM8BxiuOo8",
-      "source_text": "🔥🔥🔥무지성 4,650원 (50.4% 할인)🔥🔥🔥\n프릴 시크릿 오브 그린파워 알로에베라 주방세제, 1L, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 9,380원\n- 할인: 4,730원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iM8BxiuOo8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T22:47:12+00:00",
-      "title": "프릴 시크릿 오브 그린파워 알로에베라 주방세제, 1L, 2개",
-      "sale_price_krw": 4650
-    }
-  ],
-  "in_flight": {
-    "id": 96481,
-    "status": "CLAIMED",
-    "run_id": "44414917280",
-    "at": "2026-11-18T22:48:22.277893+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6931,6 +6916,16 @@
       "vendor_item_id": "85873693931",
       "at": "2026-11-18T22:37:33.161305+00:00",
       "run_id": "44413223515"
+    },
+    "96481": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%84%EB%A6%B4-%EC%8B%9C%ED%81%AC%EB%A6%BF-%EC%98%A4%EB%B8%8C-%EA%B7%B8%EB%A6%B0%ED%8C%8C%EC%9B%8C-%EC%95%8C%EB%A1%9C%EC%97%90%EB%B2%A0%EB%9D%BC-%EC%A3%BC%EB%B0%A9%EC%84%B8%EC%A0%9C-1L-2%EA%B0%9C-55%ED%95%A0%EC%9D%B8-AL1W360P?from=write",
+      "posted_at_utc": "2026-11-18T22:47:12+00:00",
+      "product_id": "6300052131",
+      "item_id": "18036767469",
+      "vendor_item_id": "85191194235",
+      "at": "2026-11-18T22:48:43.996726+00:00",
+      "run_id": "44414917280"
     }
   },
   "skipped_non_coupang": 772,
