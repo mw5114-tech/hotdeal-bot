@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96486,
-  "pending": [
-    {
-      "id": 96486,
-      "source_post_url": "https://t.me/jirum/96486",
-      "original_purchase_url": "https://link.coupang.com/a/iNclKPVYCy",
-      "source_text": "☆특가 12,900원\n카프 PTC 공기순환난방 미니 온풍기\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNclKPVYCy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T23:39:37+00:00",
-      "title": "☆특가 12,900원",
-      "sale_price_krw": 12900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8618,6 +8608,12 @@
       "source_post_url": "https://t.me/jirum/96485",
       "source_title": "가루비 캇파 에비센, 77g, 12개",
       "at": "2026-11-18T23:31:34.810653+00:00"
+    },
+    "96486": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96486",
+      "source_title": "☆특가 12,900원",
+      "at": "2026-11-18T23:43:38.472480+00:00"
     }
   },
   "single_test_repost_20261103": {
