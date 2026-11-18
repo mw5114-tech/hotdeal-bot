@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96486,
-  "pending": [],
+  "last_scanned_id": 96487,
+  "pending": [
+    {
+      "id": 96487,
+      "source_post_url": "https://t.me/jirum/96487",
+      "original_purchase_url": "https://link.coupang.com/a/iNdhijtUzc",
+      "source_text": "👍대박 7,980원 (37.0% 할인)\n켈로그 크랜베리 아몬드 그래놀라 시리얼550g, 2개\n📌 가격 현황\n- 정상가: 12,667원\n- 할인: 4,687원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNdhijtUzc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T23:52:36+00:00",
+      "title": "켈로그 크랜베리 아몬드 그래놀라 시리얼550g, 2개",
+      "sale_price_krw": 7980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
