@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96389,
-  "pending": [],
+  "last_scanned_id": 96391,
+  "pending": [
+    {
+      "id": 96391,
+      "source_post_url": "https://t.me/jirum/96391",
+      "original_purchase_url": "https://link.coupang.com/a/iLGhKKf8F2",
+      "source_text": "☆특가 7,900원\n팬틴 케라틴 열보호 노워시 트리트먼트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLGhKKf8F2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T01:43:18+00:00",
+      "title": "☆특가 7,900원",
+      "sale_price_krw": 7900
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6648,7 +6658,7 @@
       "run_id": "44213522893"
     }
   },
-  "skipped_non_coupang": 720,
+  "skipped_non_coupang": 721,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
