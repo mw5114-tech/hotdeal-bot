@@ -80,6 +80,13 @@ def _http_json(path: str, token: str, *, method: str = "GET",
         return json.loads(data)
 
 
+def _canonical_title(page_title: str | None) -> str | None:
+    """Lowchart HTML <title> appends current price and site label."""
+    if not isinstance(page_title, str):
+        return None
+    return re.split(r"\s+-\s+", page_title.strip(), maxsplit=1)[0].strip()
+
+
 def _photo_quality(data: bytes, extension: str) -> bool:
     if (extension not in _MIME or not isinstance(data, bytes)
             or not 1000 <= len(data) <= MAX_PHOTO_BYTES):
@@ -234,7 +241,7 @@ def _manifest_valid(manifest: dict, source_id: int, pid: str,
         return False
     historical = manifest.get("price_record")
     price = verified_history(historical, source_id, pid, iid, now=now)
-    if price is None or price.get("page_title") != title:
+    if price is None or _canonical_title(price.get("page_title")) != title:
         return False
     photo = manifest.get("photo")
     if (not isinstance(photo, dict) or photo.get("extension") not in _MIME
@@ -265,7 +272,7 @@ def publish_bundle(source_id: int, identity: dict,
     try:
         pid, iid = identity["product_id"], identity["item_id"]
         proof = create_record(source_id, history, title)
-        if (proof is None or title != history.get("page_title")
+        if (proof is None or title != _canonical_title(history.get("page_title"))
                 or not is_coupang_cdn_url(image_url)
                 or not isinstance(photo_path, Path)
                 or not photo_path.is_file()
