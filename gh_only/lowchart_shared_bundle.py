@@ -368,6 +368,38 @@ def recover_bundle(source_id: int, identity: dict, folder: Path,
     return None
 
 
+
+def prepare_native_chart(identity: dict, folder: Path,
+                         source_id: int) -> Path | None:
+    """Prepare original chart BEFORE final bundle publication, if enabled.
+
+    Uses the existing verified public item+native-PNG gate and an unauthenticated
+    browser. Failure is optional and never triggers an unverified screenshot.
+    """
+    if os.getenv("JIRUM_LOWCHART_CHART_IMAGE_ENABLED") != "true":
+        return None
+    try:
+        from playwright.sync_api import sync_playwright
+        from gh_only.lowchart_chart_capture import capture_chart_image
+        with sync_playwright() as pw:
+            browser = pw.chromium.launch(headless=True)
+            try:
+                return capture_chart_image(browser, {
+                    "product_id": identity["product_id"],
+                    "item_id": identity["item_id"],
+                    "verified_exact_item": True,
+                    "source_url": build_url(
+                        identity["product_id"], identity["item_id"]),
+                }, folder, source_id)
+            finally:
+                browser.close()
+    except Exception as exc:
+        print("LOWCHART_BUNDLE_CHART_PREPARE_FAILED source_id="
+              + str(source_id) + " error_type=" + type(exc).__name__)
+        return None
+
+
+
 def local_verified_chart(identity: dict | None, folder: Path,
                          source_id: int) -> Path | None:
     """Reuse a correctly named, fully verified native chart if prepared.
