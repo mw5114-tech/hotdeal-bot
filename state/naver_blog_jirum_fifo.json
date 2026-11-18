@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96432,
-  "pending": [
-    {
-      "id": 96432,
-      "source_message_id": 96432,
-      "source_post_url": "https://t.me/jirum/96432",
-      "original_purchase_url": "https://link.coupang.com/a/iL4vVxGm96",
-      "title": "핸디고 슬림 창문 로봇청소기",
-      "source_text": "❤️초대박 136,800원 (42.0% 할인)\n핸디고 슬림 창문 로봇청소기\n📌 가격 현황\n- 정상가: 235,862원\n- 할인: 99,062원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iL4vVxGm96\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 136800,
-      "posted_at_utc": "2026-11-18T07:22:21+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1435,6 +1424,10 @@
     "96431": {
       "url": "https://blog.naver.com/mw5114/224482160103",
       "at": "2026-11-18T07:24:14.106631+00:00"
+    },
+    "96432": {
+      "url": "https://blog.naver.com/mw5114/224482162187",
+      "at": "2026-11-18T07:25:34.905014+00:00"
     }
   },
   "skipped": {
@@ -1587,12 +1580,7 @@
       "at": "2026-11-18T06:26:36.913652+00:00"
     }
   },
-  "in_flight": {
-    "id": 96432,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44258443315",
-    "at": "2026-11-18T07:24:52.045530+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
