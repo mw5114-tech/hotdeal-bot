@@ -3,15 +3,6 @@
   "last_scanned_id": 96412,
   "pending": [
     {
-      "id": 96411,
-      "source_post_url": "https://t.me/jirum/96411",
-      "original_purchase_url": "https://link.coupang.com/a/iLSTO8SOWG",
-      "source_text": "🔥🔥🔥무지성 17,250원 (48.0% 할인)🔥🔥🔥\n바겐슈타이거 인덕션 로스탈 통3중 무연마 스텐316 미니팬\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 33,173원\n- 할인: 15,923원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLSTO8SOWG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T04:39:49+00:00",
-      "title": "바겐슈타이거 인덕션 로스탈 통3중 무연마 스텐316 미니팬",
-      "sale_price_krw": 17250
-    },
-    {
       "id": 96412,
       "source_post_url": "https://t.me/jirum/96412",
       "original_purchase_url": "https://link.coupang.com/a/iLSUeOiEMu",
@@ -21,12 +12,7 @@
       "sale_price_krw": 19500
     }
   ],
-  "in_flight": {
-    "id": 96411,
-    "status": "CLAIMED",
-    "run_id": "44238966737",
-    "at": "2026-11-18T04:41:02.077793+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -6750,6 +6736,16 @@
       "vendor_item_id": "93227808955",
       "at": "2026-11-18T04:18:22.363573+00:00",
       "run_id": "44236314311"
+    },
+    "96411": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EA%B2%90%EC%8A%88%ED%83%80%EC%9D%B4%EA%B1%B0-%EC%9D%B8%EB%8D%95%EC%85%98-%EB%A1%9C%EC%8A%A4%ED%83%88-%ED%86%B53%EC%A4%91-%EB%AC%B4%EC%97%B0%EB%A7%88-%EC%8A%A4%ED%85%90316-%EB%AF%B8%EB%8B%88%ED%8C%AC-45%ED%95%A0%EC%9D%B8-PovmrqVA?from=write",
+      "posted_at_utc": "2026-11-18T04:39:49+00:00",
+      "product_id": "8984704540",
+      "item_id": "26310439891",
+      "vendor_item_id": "93288011651",
+      "at": "2026-11-18T04:41:21.800803+00:00",
+      "run_id": "44238966737"
     }
   },
   "skipped_non_coupang": 729,
