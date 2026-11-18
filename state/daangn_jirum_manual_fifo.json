@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96400,
-  "pending": [
-    {
-      "id": 96400,
-      "source_post_url": "https://t.me/jirum/96400",
-      "original_purchase_url": "https://link.coupang.com/a/iLMvQlIUxw",
-      "source_text": "☆특가 7,500원\nNIUFLY 투명 냉장고 정리함 4P 다용도 대형 트레이 투명, 대형, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLMvQlIUxw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-18T03:10:27+00:00",
-      "title": "☆특가 7,500원",
-      "sale_price_krw": 7500
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8284,6 +8274,12 @@
       "source_post_url": "https://t.me/jirum/95930",
       "source_title": "☆특가 8,410원",
       "at": "2026-11-13T08:06:16.325721+00:00"
+    },
+    "96400": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96400",
+      "source_title": "☆특가 7,500원",
+      "at": "2026-11-18T03:13:21.904553+00:00"
     }
   },
   "single_test_repost_20261103": {
