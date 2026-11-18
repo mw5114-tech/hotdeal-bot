@@ -348,7 +348,92 @@ def enrich_deal(deal: dict, output_dir: Path,
         eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
     if matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
-    # Photo order: Lowchart exact item -> Fallcent search -> Naver search.
+
+    # One runner's successful exact Lowchart page is the source of truth for
+    # BOTH channels. The dedicated GitHub cache branch now transports actual
+    # image bytes and original chart PNG, not merely a price or guessed URL.
+    # Product/item/source binding and independent image integrity checks are
+    # applied on both write and read. No other product's image is accepted.
+    bundle_enabled = (
+        using_public_lowchart and
+        os.getenv("JIRUM_LOWCHART_BUNDLE_ENABLED") == "true" and
+        identity.get("status") == "EXACT_ITEM_IDENTIFIED" and
+        isinstance(p, str) and isinstance(i, str) and
+        type(source_id) is int
+    )
+    if bundle_enabled:
+        from gh_only.lowchart_shared_bundle import (
+            publish_bundle, recover_bundle, prepare_native_chart,
+        )
+        if (lowchart_title_verified and matching and average is not None
+                and image_source == "lowchart_exact_item_public_page"
+                and photo.get("status") == "IMAGE_SAVED"
+                and isinstance(photo.get("saved_name"), str)):
+            source_photo = output_dir / photo["saved_name"]
+            # Capture original chart while a runner has Lowchart access.
+            # The publisher later consumes the same verified local file.
+            native_chart = prepare_native_chart(identity, output_dir, source_id)
+            stored = publish_bundle(
+                source_id, identity, history, og_title.strip(),
+                og.get("og_image"), source_photo, native_chart,
+            )
+            print("LOWCHART_BUNDLE_PUBLISH_RESULT " + json.dumps({
+                "source_id": source_id, "stored": stored,
+                "chart_ready": native_chart is not None,
+            }))
+        else:
+            # E.g. 96396: Daangn 403 and Naver 200. Wait for the real
+            # source image/title/chart from the successful sibling.
+            shared = recover_bundle(
+                source_id, identity, output_dir,
+            )
+            if shared is not None:
+                title = shared["title"]
+                og_title = shared["title"]
+                price_title = title
+                lowchart_title_verified = True
+                og = {
+                    "status": "LOWCHART_EXACT_ITEM_IMAGE",
+                    "og_title": title,
+                    "og_url": build_url(p, i),
+                    "og_image": shared["image_url"],
+                    "lowchart_title_verified": True,
+                    "image_source": "lowchart_exact_item_public_page",
+                    "image_match_basis": "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID",
+                    "image_same_named_option": False,
+                }
+                matching = og_matches_product(og, identity)
+                image_source = "lowchart_exact_item_public_page"
+                imgpath = shared["photo_path"]
+                photo = {
+                    "status": "IMAGE_SAVED",
+                    "saved_name": imgpath.name,
+                    "bytes": imgpath.stat().st_size,
+                    "image_source": "lowchart_exact_item_public_page",
+                }
+                if average is None:
+                    recovered_history = shared["history"]
+                    sibling_average = validated_history(
+                        recovered_history, p, i, title)
+                    if sibling_average is not None:
+                        history = {**recovered_history,
+                                   "shared_from_verified_sibling": True}
+                        average = sibling_average
+                        comparison_price = sibling_average
+                        comparison_source = "lowchart_public_history"
+                print("LOWCHART_BUNDLE_EXACT_ITEM_USED " + json.dumps({
+                    "source_id": source_id, "product_id": p,
+                    "item_id": i,
+                    "image_shared": True,
+                    "chart_shared": shared["chart_path"] is not None,
+                    "name_shared": True,
+                    "mean_krw": average,
+                }, ensure_ascii=False))
+
+    # Search-result thumbnails do NOT prove product identity. When verified
+    # Lowchart media sharing is enabled, do not allow a random Naver first
+    # image or Fallcent representative photo into the publisher.
+    # Photo order: verified Lowchart original -> verified sibling.
     # Search results are representative images, not exact item/option proof.
     source_photo_verified = False
     search_result = {"status": "NOT_ATTEMPTED"}
@@ -356,7 +441,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     search_title = None
     provider_photo = {}
     photo_attempts = []
-    if (using_public_lowchart
+    if (using_public_lowchart and not bundle_enabled
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and photo.get("status") != "IMAGE_SAVED"):
         from gh_only.fallcent_search_photo import fetch_fallcent_product_photo
@@ -394,6 +479,8 @@ def enrich_deal(deal: dict, output_dir: Path,
             title = fallback_title or title
         else:
             photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
+    if bundle_enabled and photo.get("status") != "IMAGE_SAVED":
+        photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
     provider_verified = False
     representative_fallcent_image = (
         provider_photo.get("status") == "IMAGE_SAVED"

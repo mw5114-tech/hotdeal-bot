@@ -1,11 +1,17 @@
 name: Tests | Lowchart shared exact-item historical price reliability
 on:
   push:
-    branches: [fix/lowchart-stable-price-photo-20261115, fix/lowchart-cross-run-cache-retry-20261118, main]
+    branches: [fix/lowchart-stable-price-photo-20261115, fix/lowchart-cross-run-cache-retry-20261118, fix/lowchart-share-title-photo-chart-20261118, main]
     paths:
       - gh_only/lowchart_shared_reference.py
       - gh_only/lowchart_product_photo.py
       - gh_only/lowchart_price_reference.py
+      - gh_only/lowchart_shared_bundle.py
+      - gh_only/test_lowchart_shared_bundle.py
+      - gh_only/jirum_manual_publisher.py
+      - gh_only/naver_blog_deal_publisher.py
+      - .github/workflows/naver-blog-auto-main.yml
+      - .github/workflows/daangn-cafe-restored.yml
       - gh_only/test_lowchart_retry_cache.py
       - gh_only/default_deal_automation.py
       - gh_only/test_lowchart_shared_reference.py
@@ -30,4 +36,4 @@ jobs:
           python -m compileall -q gh_only/lowchart_shared_reference.py gh_only/lowchart_product_photo.py gh_only/default_deal_automation.py gh_only/test_lowchart_shared_reference.py
       - name: Regress exact-item prices, photo reuse, and both publishing queues (offline)
         run: |
-          python -m unittest -v gh_only.test_lowchart_shared_reference gh_only.test_lowchart_retry_cache gh_only.test_lowchart_price_reference gh_only.test_lowchart_product_photo gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe
+          python -m unittest -v gh_only.test_lowchart_shared_bundle gh_only.test_lowchart_shared_reference gh_only.test_lowchart_retry_cache gh_only.test_lowchart_price_reference gh_only.test_lowchart_product_photo gh_only.test_default_deal_automation gh_only.test_fallcent_high_reference gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe
