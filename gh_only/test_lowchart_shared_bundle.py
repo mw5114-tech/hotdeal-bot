@@ -102,6 +102,57 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
                      "source_url": build_url(PID, IID)},
                     Path(dest), SOURCE_ID))
 
+    def test_local_lowchart_200_publishes_both_original_assets_before_post(self):
+        og = {
+            "status": "LOWCHART_EXACT_ITEM_IMAGE",
+            "og_title": TITLE,
+            "og_url": build_url(PID, IID),
+            "og_image": CDN,
+            "lowchart_title_verified": True,
+            "image_source": "lowchart_exact_item_public_page",
+            "_verified_public_item_html": HIST_HTML,
+        }
+        submitted = []
+        def download(url, folder, mid):
+            self.assertEqual(url, CDN)
+            name = f"jirum_{mid}_lowchart_photo.jpg"
+            (folder/name).write_bytes(photo_bytes())
+            return {
+                "status": "IMAGE_SAVED", "saved_name": name,
+                "image_source": "lowchart_exact_item_public_page",
+            }
+        def capture(identity, folder, sid):
+            self.assertEqual(identity["item_id"], IID)
+            file = folder/f"jirum_{sid}_lowchart_chart.png"
+            file.write_bytes(chart_bytes())
+            return file
+        with TemporaryDirectory() as td, \
+             patch.dict(os.environ, {"JIRUM_IMAGE_SOURCE": "lowchart",
+                                     "JIRUM_LOWCHART_BUNDLE_ENABLED": "true",
+                                     "GH_STATE_TOKEN": "fake"}), \
+             patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                   return_value=og), \
+             patch("gh_only.lowchart_shared_reference.maybe_share_or_recover",
+                   return_value=None), \
+             patch("gh_only.lowchart_shared_bundle.prepare_native_chart",
+                   side_effect=capture) as chart, \
+             patch("gh_only.lowchart_shared_bundle.publish_bundle",
+                   side_effect=lambda *a, **k:
+                   submitted.append(a) or True) as share:
+            row = enrich_deal(
+                DEAL, Path(td), resolver=lambda _: IDENTITY,
+                photo_downloader=download, owner_tag="AF9668915",
+            )
+        chart.assert_called_once()
+        share.assert_called_once()
+        self.assertEqual(submitted[0][0], SOURCE_ID)
+        self.assertEqual(submitted[0][3], TITLE)
+        self.assertEqual(submitted[0][4], CDN)
+        self.assertEqual(submitted[0][5].suffix, ".jpg")
+        self.assertEqual(submitted[0][6].suffix, ".png")
+        self.assertEqual(row["caption"]["observed_average_krw"], 34575)
+        self.assertEqual(row["image_source"],"lowchart_exact_item_public_page")
+
     def test_wrong_sku_wrong_source_or_old_snapshot_refused(self):
         captured = {}
         with TemporaryDirectory() as td:
