@@ -196,6 +196,22 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
             self.assertTrue(row["image_exact_item_page_verified"])
             self.assertEqual(row["comparison_price_source"],"lowchart_public_history")
             self.assertTrue(row["history"]["shared_from_verified_sibling"])
+            # Both channel publishers use the SAME draft validator, so the
+            # recovered product title/photo must pass without fake evidence.
+            from gh_only.jirum_manual_queue import validate_draft
+            import json
+            (folder / "drafts.json").write_text(
+                json.dumps({
+                    "schema":"github-jirum-default-price-photo-affsdp-draft-v2",
+                    "drafts":[row],
+                }, ensure_ascii=False), encoding="utf-8",
+            )
+            verified = validate_draft(folder, SOURCE_ID)
+            self.assertEqual(verified["source_id"], SOURCE_ID)
+            self.assertEqual(verified["image"], recovered_photo)
+            self.assertEqual(
+                (verified["chart_identity"]["product_id"],
+                 verified["chart_identity"]["item_id"]), (PID, IID))
 
     def test_both_403_unavailable_sibling_never_uses_unverified_search_photos(self):
         with TemporaryDirectory() as td, \
