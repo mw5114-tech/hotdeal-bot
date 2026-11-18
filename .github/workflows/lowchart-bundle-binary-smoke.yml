@@ -1,0 +1,54 @@
+name: Probe | Lowchart verified photo and chart cross-run binary transport (NO POSTS)
+on:
+  push:
+    branches: [fix/lowchart-share-title-photo-chart-20261118]
+    paths: [.github/workflows/lowchart-bundle-binary-smoke.yml]
+permissions:
+  contents: write
+jobs:
+  isolated-transport:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --quiet --disable-pip-version-check Pillow==11.3.0
+      - name: No posting or login; write/read synthetic validated photo+chart Git blobs
+        env:
+          GH_STATE_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from tempfile import TemporaryDirectory
+          from gh_only.lowchart_shared_bundle import publish_bundle, recover_bundle
+          from gh_only.test_lowchart_shared_bundle import (
+              TITLE, CDN, IDENTITY, exact_history, photo_bytes, chart_bytes,
+          )
+          source = 1500000000 + (int(os.environ["RUN_ID"]) % 400000000)
+          with TemporaryDirectory() as d:
+              orig = Path(d)
+              photo = orig / "photo.jpg"
+              chart = orig / "chart.png"
+              photo.write_bytes(photo_bytes())
+              chart.write_bytes(chart_bytes())
+              assert publish_bundle(
+                  source, IDENTITY, exact_history(), TITLE, CDN,
+                  photo, chart,
+              ), "BUNDLE_PUBLISH_FAILED"
+              with TemporaryDirectory() as dest:
+                  recovered = recover_bundle(source, IDENTITY, Path(dest))
+                  assert recovered is not None, "BUNDLE_RETRIEVE_FAILED"
+                  assert recovered["title"] == TITLE
+                  assert recovered["photo_path"].read_bytes() == photo.read_bytes()
+                  assert recovered["chart_path"].read_bytes() == chart.read_bytes()
+                  print("LOWCHART_BUNDLE_REAL_TRANSPORT_OK " + json.dumps({
+                      "source_id":source,"photo_original_bytes":photo.stat().st_size,
+                      "chart_original_bytes":chart.stat().st_size,
+                      "price_krw":recovered["history"]["observed_average_krw"],
+                      "real_posts":0,
+                  }))
+          PY
