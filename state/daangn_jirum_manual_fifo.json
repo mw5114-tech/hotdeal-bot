@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96397,
-  "pending": [],
+  "last_scanned_id": 96399,
+  "pending": [
+    {
+      "id": 96399,
+      "source_post_url": "https://t.me/jirum/96399",
+      "original_purchase_url": "https://link.coupang.com/a/iLLc0sQbBI",
+      "source_text": "☆특가 10,360원\n크리오 덴티메이트 클린 티스 치약,120g, 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iLLc0sQbBI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-18T02:52:12+00:00",
+      "title": "☆특가 10,360원",
+      "sale_price_krw": 10360
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -6688,7 +6698,7 @@
       "run_id": "44224277551"
     }
   },
-  "skipped_non_coupang": 724,
+  "skipped_non_coupang": 725,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
