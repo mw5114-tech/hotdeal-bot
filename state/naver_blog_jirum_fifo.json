@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96559,
-  "pending": [
-    {
-      "id": 96559,
-      "source_message_id": 96559,
-      "source_post_url": "https://t.me/jirum/96559",
-      "original_purchase_url": "https://link.coupang.com/a/iObursAKB2",
-      "title": "데이리스타 밀쉬 저지방 멸균우유, 1L, 24개",
-      "source_text": "☆특가 51,800원 (25.1% 할인)\n데이리스타 밀쉬 저지방 멸균우유, 1L, 24개\n📌 가격 현황\n- 정상가: 69,200원\n- 할인: 17,400원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iObursAKB2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 51800,
-      "posted_at_utc": "2026-11-19T13:55:11+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1623,6 +1612,10 @@
     "96550": {
       "url": "https://blog.naver.com/mw5114/224483935310",
       "at": "2026-11-19T12:57:55.838470+00:00"
+    },
+    "96559": {
+      "url": "https://blog.naver.com/mw5114/224484003428",
+      "at": "2026-11-19T13:56:58.655840+00:00"
     }
   },
   "skipped": {
@@ -1820,12 +1813,7 @@
       "at": "2026-11-19T13:47:40.516808+00:00"
     }
   },
-  "in_flight": {
-    "id": 96559,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44538349353",
-    "at": "2026-11-19T13:56:14.856160+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
