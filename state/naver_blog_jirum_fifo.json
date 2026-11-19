@@ -3,17 +3,6 @@
   "last_scanned_id": 96525,
   "pending": [
     {
-      "id": 96524,
-      "source_message_id": 96524,
-      "source_post_url": "https://t.me/jirum/96524",
-      "original_purchase_url": "https://link.coupang.com/a/iNyLxfhXxY",
-      "title": "☆특가 6,590원",
-      "source_text": "☆특가 6,590원\n탐사수 무라벨, 2L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNyLxfhXxY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6590,
-      "posted_at_utc": "2026-11-19T04:53:17+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96525,
       "source_message_id": 96525,
       "source_post_url": "https://t.me/jirum/96525",
@@ -1562,6 +1551,10 @@
     "96523": {
       "url": "https://blog.naver.com/mw5114/224483284185",
       "at": "2026-11-19T03:48:36.196511+00:00"
+    },
+    "96524": {
+      "url": "https://blog.naver.com/mw5114/224483376299",
+      "at": "2026-11-19T05:02:11.243064+00:00"
     }
   },
   "skipped": {
@@ -1744,12 +1737,7 @@
       "at": "2026-11-19T03:46:48.987007+00:00"
     }
   },
-  "in_flight": {
-    "id": 96524,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44462172268",
-    "at": "2026-11-19T05:01:29.080559+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
