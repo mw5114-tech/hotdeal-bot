@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96558,
-  "pending": [
-    {
-      "id": 96558,
-      "source_message_id": 96558,
-      "source_post_url": "https://t.me/jirum/96558",
-      "original_purchase_url": "https://link.coupang.com/a/iOab3QgLkW",
-      "title": "스윗토 스테비아 완숙토마토, 1kg, 3팩",
-      "source_text": "☆특가 15,060원 (29.5% 할인)\n스윗토 스테비아 완숙토마토, 1kg, 3팩\n📌 가격 현황\n- 정상가: 21,350원\n- 할인: 6,290원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iOab3QgLkW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15060,
-      "posted_at_utc": "2026-11-19T13:37:03+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1814,6 +1802,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-19T06:01:28.833925+00:00"
+    },
+    "96558": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-19T13:47:40.516808+00:00"
     }
   },
   "in_flight": null,
