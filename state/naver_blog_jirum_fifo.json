@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96499,
-  "pending": [
-    {
-      "id": 96499,
-      "source_message_id": 96499,
-      "source_post_url": "https://t.me/jirum/96499",
-      "original_purchase_url": "https://link.coupang.com/a/iNii5Jj13s",
-      "title": "랩신 항균 풋샴푸 410ml",
-      "source_text": "❤️초대박 2,990원 (43.0% 할인)\n랩신 항균 풋샴푸 410ml\n📌 가격 현황\n- 정상가: 5,246원\n- 할인: 2,256원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNii5Jj13s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2990,
-      "posted_at_utc": "2026-11-19T01:02:58+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1535,6 +1524,10 @@
     "96498": {
       "url": "https://blog.naver.com/mw5114/224483050720",
       "at": "2026-11-19T00:52:24.291445+00:00"
+    },
+    "96499": {
+      "url": "https://blog.naver.com/mw5114/224483067228",
+      "at": "2026-11-19T01:05:02.520188+00:00"
     }
   },
   "skipped": {
@@ -1709,12 +1702,7 @@
       "at": "2026-11-18T23:45:55.539762+00:00"
     }
   },
-  "in_flight": {
-    "id": 96499,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44433977736",
-    "at": "2026-11-19T01:04:19.459735+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
