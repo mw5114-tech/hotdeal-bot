@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96526,
+  "last_scanned_id": 96527,
   "pending": [
     {
       "id": 96526,
@@ -12,6 +12,16 @@
       "sale_price_krw": 3330,
       "posted_at_utc": "2026-11-19T05:15:27+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96527,
+      "source_message_id": 96527,
+      "source_post_url": "https://t.me/jirum/96527",
+      "original_purchase_url": "https://link.coupang.com/a/iNCx5sNbb2",
+      "title": "쿠쿠 인덕션 3구 화이트",
+      "source_text": "👍대박 303,640원 (38.0% 할인)\n쿠쿠 인덕션 3구 화이트\n📌 가격 현황\n- 정상가: 489,742원\n- 할인: 186,102원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNCx5sNbb2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 303640,
+      "posted_at_utc": "2026-11-19T05:46:14+00:00"
     }
   ],
   "published": {
