@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96535,
-  "pending": [
-    {
-      "id": 96535,
-      "source_post_url": "https://t.me/jirum/96535",
-      "original_purchase_url": "https://link.coupang.com/a/iNIiKcuPMO",
-      "source_text": "❤️초대박 7,990원 (41.0% 할인)\n코멧 키친 밥보관 사각 밀폐용기 그린 10p + 아이보리 10p 세트\n📌 가격 현황\n- 정상가: 13,542원\n- 할인: 5,552원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNIiKcuPMO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T07:06:44+00:00",
-      "title": "코멧 키친 밥보관 사각 밀폐용기 그린 10p + 아이보리 10p 세트",
-      "sale_price_krw": 7990
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8790,6 +8780,12 @@
       "source_post_url": "https://t.me/jirum/96530",
       "source_title": "☆특가 16,550원",
       "at": "2026-11-19T06:02:55.036087+00:00"
+    },
+    "96535": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96535",
+      "source_title": "코멧 키친 밥보관 사각 밀폐용기 그린 10p + 아이보리 10p 세트",
+      "at": "2026-11-19T07:10:40.717717+00:00"
     }
   },
   "single_test_repost_20261103": {
