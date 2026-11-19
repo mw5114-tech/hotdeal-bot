@@ -1,27 +1,16 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96519,
+  "last_scanned_id": 96523,
   "pending": [
     {
-      "id": 96518,
-      "source_message_id": 96518,
-      "source_post_url": "https://t.me/jirum/96518",
-      "original_purchase_url": "https://link.coupang.com/a/iNpzw45jeS",
-      "title": "☆특가 11,150원",
-      "source_text": "☆특가 11,150원\n영양톡톡 장건강/유산균 60g×3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNpzw45jeS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11150,
-      "posted_at_utc": "2026-11-19T02:44:38+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
-      "id": 96519,
-      "source_message_id": 96519,
-      "source_post_url": "https://t.me/jirum/96519",
-      "original_purchase_url": "https://link.coupang.com/a/iNpzBhK0gm",
-      "title": "☆특가 10,650원",
-      "source_text": "☆특가 10,650원\n하루양갱 닭고기 240g×1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNpzBhK0gm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10650,
-      "posted_at_utc": "2026-11-19T02:44:39+00:00"
+      "id": 96523,
+      "source_message_id": 96523,
+      "source_post_url": "https://t.me/jirum/96523",
+      "original_purchase_url": "https://link.coupang.com/a/iNtWP6hQJw",
+      "title": "☆특가 18,420원",
+      "source_text": "☆특가 18,420원\n대패킹 진짜 정삼겹 대패삼겹살 2kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNtWP6hQJw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 18420,
+      "posted_at_utc": "2026-11-19T03:45:52+00:00"
     }
   ],
   "published": {
@@ -1730,6 +1719,14 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-18T23:45:55.539762+00:00"
+    },
+    "96518": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-19T03:46:48.987000+00:00"
+    },
+    "96519": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-19T03:46:48.987007+00:00"
     }
   },
   "in_flight": null,
