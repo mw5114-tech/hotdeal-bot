@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96560,
-  "pending": [
-    {
-      "id": 96560,
-      "source_post_url": "https://t.me/jirum/96560",
-      "original_purchase_url": "https://link.coupang.com/a/iOdoRx1cRM",
-      "source_text": "🔥🔥🔥무지성 11,350원 (47.1% 할인)🔥🔥🔥\n델몬트 필리핀산 바나나, 2kg 내외, 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 21,440원\n- 할인: 10,090원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iOdoRx1cRM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T14:21:55+00:00",
-      "title": "델몬트 필리핀산 바나나, 2kg 내외, 3개",
-      "sale_price_krw": 11350
-    }
-  ],
-  "in_flight": {
-    "id": 96560,
-    "status": "CLAIMED",
-    "run_id": "44543087165",
-    "at": "2026-11-19T14:23:17.249964+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7181,6 +7166,16 @@
       "vendor_item_id": "86773133886",
       "at": "2026-11-19T13:57:14.720242+00:00",
       "run_id": "44538349353"
+    },
+    "96560": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B8%EB%AA%AC%ED%8A%B8-%ED%95%84%EB%A6%AC%ED%95%80%EC%82%B0-%EB%B0%94%EB%82%98%EB%82%98-2kg-%EB%82%B4%EC%99%B8-3%EA%B0%9C-50%ED%95%A0%EC%9D%B8-A0n3b4yd?from=write",
+      "posted_at_utc": "2026-11-19T14:21:55+00:00",
+      "product_id": "6354913981",
+      "item_id": "19224577185",
+      "vendor_item_id": "86341240021",
+      "at": "2026-11-19T14:23:35.778023+00:00",
+      "run_id": "44543087165"
     }
   },
   "skipped_non_coupang": 812,
