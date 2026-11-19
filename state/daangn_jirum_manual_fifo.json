@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96499,
-  "pending": [
-    {
-      "id": 96499,
-      "source_post_url": "https://t.me/jirum/96499",
-      "original_purchase_url": "https://link.coupang.com/a/iNii5Jj13s",
-      "source_text": "❤️초대박 2,990원 (43.0% 할인)\n랩신 항균 풋샴푸 410ml\n📌 가격 현황\n- 정상가: 5,246원\n- 할인: 2,256원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNii5Jj13s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T01:02:58+00:00",
-      "title": "랩신 항균 풋샴푸 410ml",
-      "sale_price_krw": 2990
-    }
-  ],
-  "in_flight": {
-    "id": 96499,
-    "status": "CLAIMED",
-    "run_id": "44433977736",
-    "at": "2026-11-19T01:05:19.361982+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7011,6 +6996,16 @@
       "vendor_item_id": null,
       "at": "2026-11-19T00:53:01.524957+00:00",
       "run_id": "44432334258"
+    },
+    "96499": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%9E%A9%EC%8B%A0-%ED%95%AD%EA%B7%A0-%ED%92%8B%EC%83%B4%ED%91%B8-1%EA%B0%9C-410ml-45%ED%95%A0%EC%9D%B8-P5ab3YvP?from=write",
+      "posted_at_utc": "2026-11-19T01:02:58+00:00",
+      "product_id": "9779829620",
+      "item_id": "22863194058",
+      "vendor_item_id": "89897835122",
+      "at": "2026-11-19T01:05:36.759557+00:00",
+      "run_id": "44433977736"
     }
   },
   "skipped_non_coupang": 779,
