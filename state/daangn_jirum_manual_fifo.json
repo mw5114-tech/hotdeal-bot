@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96582,
-  "pending": [
-    {
-      "id": 96582,
-      "source_post_url": "https://t.me/jirum/96582",
-      "original_purchase_url": "https://link.coupang.com/a/iONtSEEtqK",
-      "source_text": "☆특가 6,460원\n순샘 구연산 자몽향 주방세제 리필, 1.4L, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iONtSEEtqK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T22:46:49+00:00",
-      "title": "☆특가 6,460원",
-      "sale_price_krw": 6460
-    }
-  ],
-  "in_flight": {
-    "id": 96582,
-    "status": "CLAIMED",
-    "run_id": "44631923511",
-    "at": "2026-11-19T22:48:15.415987+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7211,6 +7196,16 @@
       "vendor_item_id": "92418472634",
       "at": "2026-11-19T19:41:42.441191+00:00",
       "run_id": "44600832767"
+    },
+    "96582": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%88%9C%EC%83%98-%EA%B5%AC%EC%97%B0%EC%82%B0-%EC%9E%90%EB%AA%BD%ED%96%A5-%EC%A3%BC%EB%B0%A9%EC%84%B8%EC%A0%9C-%EB%A6%AC%ED%95%84-14L-3%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Povz4xYA?from=write",
+      "posted_at_utc": "2026-11-19T22:46:49+00:00",
+      "product_id": "8120995148",
+      "item_id": "23287621917",
+      "vendor_item_id": null,
+      "at": "2026-11-19T22:48:35.003667+00:00",
+      "run_id": "44631923511"
     }
   },
   "skipped_non_coupang": 831,
