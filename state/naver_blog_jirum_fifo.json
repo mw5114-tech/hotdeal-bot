@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96517,
-  "pending": [
-    {
-      "id": 96517,
-      "source_message_id": 96517,
-      "source_post_url": "https://t.me/jirum/96517",
-      "original_purchase_url": "https://link.coupang.com/a/iNoSceCqNU",
-      "title": "한돈 앞다리 수육용 (냉장) 1kg",
-      "source_text": "👍대박 12,380원 (31.0% 할인)\n한돈 앞다리 수육용 (냉장) 1kg\n📌 가격 현황\n- 정상가: 17,942원\n- 할인: 5,562원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNoSceCqNU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12380,
-      "posted_at_utc": "2026-11-19T02:34:51+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1543,6 +1532,10 @@
     "96516": {
       "url": "https://blog.naver.com/mw5114/224483181909",
       "at": "2026-11-19T02:27:18.817456+00:00"
+    },
+    "96517": {
+      "url": "https://blog.naver.com/mw5114/224483195517",
+      "at": "2026-11-19T02:37:00.300651+00:00"
     }
   },
   "skipped": {
@@ -1717,12 +1710,7 @@
       "at": "2026-11-18T23:45:55.539762+00:00"
     }
   },
-  "in_flight": {
-    "id": 96517,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44445423595",
-    "at": "2026-11-19T02:36:16.900667+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
