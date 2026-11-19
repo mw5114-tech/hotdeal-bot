@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96540,
-  "pending": [
-    {
-      "id": 96540,
-      "source_message_id": 96540,
-      "source_post_url": "https://t.me/jirum/96540",
-      "original_purchase_url": "https://link.coupang.com/a/iNUP3sP55w",
-      "title": "가농 단백이 오리지널 20개입, 1.28kg, 2개",
-      "source_text": "👍대박 25,000원 (31.0% 할인)\n가농 단백이 오리지널 20개입, 1.28kg, 2개\n📌 가격 현황\n- 정상가: 36,232원\n- 할인: 11,232원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNUP3sP55w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 25000,
-      "posted_at_utc": "2026-11-19T10:02:10+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1591,6 +1580,10 @@
     "96539": {
       "url": "https://blog.naver.com/mw5114/224483694474",
       "at": "2026-11-19T09:00:19.836884+00:00"
+    },
+    "96540": {
+      "url": "https://blog.naver.com/mw5114/224483762852",
+      "at": "2026-11-19T10:04:57.273883+00:00"
     }
   },
   "skipped": {
@@ -1783,12 +1776,7 @@
       "at": "2026-11-19T06:01:28.833925+00:00"
     }
   },
-  "in_flight": {
-    "id": 96540,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44501967043",
-    "at": "2026-11-19T10:04:14.222408+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
