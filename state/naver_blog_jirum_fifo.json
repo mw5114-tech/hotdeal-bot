@@ -1729,7 +1729,12 @@
       "at": "2026-11-19T03:46:48.987007+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 96523,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "44453771950",
+    "at": "2026-11-19T03:47:52.392941+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
