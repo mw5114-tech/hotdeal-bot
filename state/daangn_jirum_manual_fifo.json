@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96523,
-  "pending": [
-    {
-      "id": 96523,
-      "source_post_url": "https://t.me/jirum/96523",
-      "original_purchase_url": "https://link.coupang.com/a/iNtWP6hQJw",
-      "source_text": "☆특가 18,420원\n대패킹 진짜 정삼겹 대패삼겹살 2kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNtWP6hQJw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T03:45:52+00:00",
-      "title": "☆특가 18,420원",
-      "sale_price_krw": 18420
-    }
-  ],
-  "in_flight": {
-    "id": 96523,
-    "status": "CLAIMED",
-    "run_id": "44453771950",
-    "at": "2026-11-19T03:47:01.311381+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7041,6 +7026,16 @@
       "vendor_item_id": "75338910841",
       "at": "2026-11-19T02:36:33.802719+00:00",
       "run_id": "44445423595"
+    },
+    "96523": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8C%80%ED%8C%A8%ED%82%B9-%EC%A7%84%EC%A7%9C-%EC%A0%95%EC%82%BC%EA%B2%B9-%EB%8C%80%ED%8C%A8%EC%82%BC%EA%B2%B9%EC%82%B4-%EB%83%89%EB%8F%99-2kg-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-d9a4okWd?from=write",
+      "posted_at_utc": "2026-11-19T03:45:52+00:00",
+      "product_id": "6305684520",
+      "item_id": "13061642503",
+      "vendor_item_id": null,
+      "at": "2026-11-19T03:47:22.122194+00:00",
+      "run_id": "44453771950"
     }
   },
   "skipped_non_coupang": 798,
