@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96517,
-  "pending": [
-    {
-      "id": 96517,
-      "source_post_url": "https://t.me/jirum/96517",
-      "original_purchase_url": "https://link.coupang.com/a/iNoSceCqNU",
-      "source_text": "👍대박 12,380원 (31.0% 할인)\n한돈 앞다리 수육용 (냉장) 1kg\n📌 가격 현황\n- 정상가: 17,942원\n- 할인: 5,562원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNoSceCqNU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T02:34:51+00:00",
-      "title": "한돈 앞다리 수육용 (냉장) 1kg",
-      "sale_price_krw": 12380
-    }
-  ],
-  "in_flight": {
-    "id": 96517,
-    "status": "CLAIMED",
-    "run_id": "44445423595",
-    "at": "2026-11-19T02:36:14.387539+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7031,6 +7016,16 @@
       "vendor_item_id": "87760009438",
       "at": "2026-11-19T02:25:56.264274+00:00",
       "run_id": "44444122326"
+    },
+    "96517": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EB%8F%88-%EC%95%9E%EB%8B%A4%EB%A6%AC-%EC%88%98%EC%9C%A1%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-AO3EvbkA?from=write",
+      "posted_at_utc": "2026-11-19T02:34:51+00:00",
+      "product_id": "5393665856",
+      "item_id": "8050376211",
+      "vendor_item_id": "75338910841",
+      "at": "2026-11-19T02:36:33.802719+00:00",
+      "run_id": "44445423595"
     }
   },
   "skipped_non_coupang": 795,
