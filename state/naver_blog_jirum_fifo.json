@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96546,
-  "pending": [],
+  "last_scanned_id": 96547,
+  "pending": [
+    {
+      "id": 96547,
+      "source_message_id": 96547,
+      "source_post_url": "https://t.me/jirum/96547",
+      "original_purchase_url": "https://link.coupang.com/a/iN2BbLCI3w",
+      "title": "파파레서피 가지 클리어링 앰플, 30ml, 1개",
+      "source_text": "☆특가 11,450원 (27.5% 할인)\n파파레서피 가지 클리어링 앰플, 30ml, 1개\n📌 가격 현황\n- 정상가: 15,800원\n- 할인: 4,350원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iN2BbLCI3w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11450,
+      "posted_at_utc": "2026-11-19T11:50:46+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
