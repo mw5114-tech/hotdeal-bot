@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96582,
-  "pending": [
-    {
-      "id": 96582,
-      "source_message_id": 96582,
-      "source_post_url": "https://t.me/jirum/96582",
-      "original_purchase_url": "https://link.coupang.com/a/iONtSEEtqK",
-      "title": "☆특가 6,460원",
-      "source_text": "☆특가 6,460원\n순샘 구연산 자몽향 주방세제 리필, 1.4L, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iONtSEEtqK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6460,
-      "posted_at_utc": "2026-11-19T22:46:49+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1639,6 +1628,10 @@
     "96577": {
       "url": "https://blog.naver.com/mw5114/224484201918",
       "at": "2026-11-19T19:43:07.129188+00:00"
+    },
+    "96582": {
+      "url": "https://blog.naver.com/mw5114/224484283767",
+      "at": "2026-11-19T22:49:54.245538+00:00"
     }
   },
   "skipped": {
@@ -1836,12 +1829,7 @@
       "at": "2026-11-19T13:47:40.516808+00:00"
     }
   },
-  "in_flight": {
-    "id": 96582,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44631923511",
-    "at": "2026-11-19T22:49:11.600398+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
