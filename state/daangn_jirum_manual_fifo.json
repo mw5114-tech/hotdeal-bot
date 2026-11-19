@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96539,
-  "pending": [
-    {
-      "id": 96539,
-      "source_post_url": "https://t.me/jirum/96539",
-      "original_purchase_url": "https://link.coupang.com/a/iNQibmyV7A",
-      "source_text": "☆특가 18,980원\n풀무원 아임리얼 100 고농축 배도라지, 120ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNQibmyV7A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T08:58:33+00:00",
-      "title": "☆특가 18,980원",
-      "sale_price_krw": 18980
-    }
-  ],
-  "in_flight": {
-    "id": 96539,
-    "status": "CLAIMED",
-    "run_id": "44492268527",
-    "at": "2026-11-19T09:00:31.823447+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7101,6 +7086,16 @@
       "vendor_item_id": null,
       "at": "2026-11-19T08:55:03.696179+00:00",
       "run_id": "44491374358"
+    },
+    "96539": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%95%84%EC%9E%84%EB%A6%AC%EC%96%BC-100-%EA%B3%A0%EB%86%8D%EC%B6%95-%EB%B0%B0%EB%8F%84%EB%9D%BC%EC%A7%80-120ml-24%EA%B0%9C-2%ED%95%A0%EC%9D%B8-d9aeLred?from=write",
+      "posted_at_utc": "2026-11-19T08:58:33+00:00",
+      "product_id": "8997827025",
+      "item_id": "26375329493",
+      "vendor_item_id": null,
+      "at": "2026-11-19T09:00:50.301958+00:00",
+      "run_id": "44492268527"
     }
   },
   "skipped_non_coupang": 802,
