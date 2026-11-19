@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96560,
-  "pending": [],
+  "last_scanned_id": 96576,
+  "pending": [
+    {
+      "id": 96576,
+      "source_post_url": "https://t.me/jirum/96576",
+      "original_purchase_url": "https://link.coupang.com/a/iOqcnHal5w",
+      "source_text": "☆특가 14,990원 (24.3% 할인)\n미국산 석류 3개입, 1.3kg, 1개\n📌 가격 현황\n- 정상가: 19,800원\n- 할인: 4,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iOqcnHal5w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-19T17:21:01+00:00",
+      "title": "미국산 석류 3개입, 1.3kg, 1개",
+      "sale_price_krw": 14990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7178,7 +7188,7 @@
       "run_id": "44543087165"
     }
   },
-  "skipped_non_coupang": 812,
+  "skipped_non_coupang": 827,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
