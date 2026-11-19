@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96543,
-  "pending": [
-    {
-      "id": 96543,
-      "source_message_id": 96543,
-      "source_post_url": "https://t.me/jirum/96543",
-      "original_purchase_url": "https://link.coupang.com/a/iNVpdgc05Y",
-      "title": "하림 무항생제 인증 마늘 듬뿍 닭볶음탕 밀키트, 1.085kg, 1개",
-      "source_text": "❤️초대박 8,580원 (43.0% 할인)\n하림 무항생제 인증 마늘 듬뿍 닭볶음탕 밀키트, 1.085kg, 1개\n📌 가격 현황\n- 정상가: 15,053원\n- 할인: 6,473원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNVpdgc05Y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8580,
-      "posted_at_utc": "2026-11-19T10:10:06+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1603,6 +1592,10 @@
     "96542": {
       "url": "https://blog.naver.com/mw5114/224483766697",
       "at": "2026-11-19T10:09:01.978046+00:00"
+    },
+    "96543": {
+      "url": "https://blog.naver.com/mw5114/224483770298",
+      "at": "2026-11-19T10:12:51.642954+00:00"
     }
   },
   "skipped": {
@@ -1795,12 +1788,7 @@
       "at": "2026-11-19T06:01:28.833925+00:00"
     }
   },
-  "in_flight": {
-    "id": 96543,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44503224787",
-    "at": "2026-11-19T10:12:07.234596+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
