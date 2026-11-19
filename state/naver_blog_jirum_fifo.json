@@ -3,17 +3,6 @@
   "last_scanned_id": 96546,
   "pending": [
     {
-      "id": 96545,
-      "source_message_id": 96545,
-      "source_post_url": "https://t.me/jirum/96545",
-      "original_purchase_url": "https://link.coupang.com/a/iN1V7JLfae",
-      "title": "☆특가 3,610원",
-      "source_text": "☆특가 3,610원\n역대급최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iN1V7JLfae\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3610,
-      "posted_at_utc": "2026-11-19T11:41:30+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96546,
       "source_message_id": 96546,
       "source_post_url": "https://t.me/jirum/96546",
@@ -1618,6 +1607,10 @@
     "96543": {
       "url": "https://blog.naver.com/mw5114/224483770298",
       "at": "2026-11-19T10:12:51.642954+00:00"
+    },
+    "96545": {
+      "url": "https://blog.naver.com/mw5114/224483865507",
+      "at": "2026-11-19T11:50:42.656577+00:00"
     }
   },
   "skipped": {
@@ -1810,12 +1803,7 @@
       "at": "2026-11-19T06:01:28.833925+00:00"
     }
   },
-  "in_flight": {
-    "id": 96545,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44518239382",
-    "at": "2026-11-19T11:49:58.878689+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
