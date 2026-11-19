@@ -1763,7 +1763,12 @@
       "at": "2026-11-19T06:01:28.833925+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 96532,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "44472099332",
+    "at": "2026-11-19T06:26:35.261481+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
