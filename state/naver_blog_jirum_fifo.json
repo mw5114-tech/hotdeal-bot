@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96489,
-  "pending": [
-    {
-      "id": 96489,
-      "source_message_id": 96489,
-      "source_post_url": "https://t.me/jirum/96489",
-      "original_purchase_url": "https://link.coupang.com/a/iNfBdEXxZs",
-      "title": "쿠첸 브레인 듀얼프레셔 IH압력 전기밥솥 6인용",
-      "source_text": "☆특가 159,640원 (29.0% 할인)\n쿠첸 브레인 듀얼프레셔 IH압력 전기밥솥 6인용\n📌 가격 현황\n- 정상가: 224,845원\n- 할인: 65,205원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNfBdEXxZs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 159640,
-      "posted_at_utc": "2026-11-19T00:25:05+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1523,6 +1512,10 @@
     "96488": {
       "url": "https://blog.naver.com/mw5114/224483012829",
       "at": "2026-11-19T00:20:19.706657+00:00"
+    },
+    "96489": {
+      "url": "https://blog.naver.com/mw5114/224483021662",
+      "at": "2026-11-19T00:27:59.901755+00:00"
     }
   },
   "skipped": {
@@ -1697,12 +1690,7 @@
       "at": "2026-11-18T23:45:55.539762+00:00"
     }
   },
-  "in_flight": {
-    "id": 96489,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44428918966",
-    "at": "2026-11-19T00:27:15.500551+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
