@@ -3,16 +3,6 @@
   "last_scanned_id": 96529,
   "pending": [
     {
-      "id": 96528,
-      "source_message_id": 96528,
-      "source_post_url": "https://t.me/jirum/96528",
-      "original_purchase_url": "https://link.coupang.com/a/iNCFdHLrZA",
-      "title": "근대골목단팥빵 생크림 단팥빵 생크림 3p + 녹차 + 딸기 (냉동), 140g, 5개입, 1세트",
-      "source_text": "☆특가 11,970원 (27.9% 할인)\n근대골목단팥빵 생크림 단팥빵 생크림 3p + 녹차 + 딸기 (냉동), 140g, 5개입, 1세트\n📌 가격 현황\n- 정상가: 16,600원\n- 할인: 4,630원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNCFdHLrZA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11970,
-      "posted_at_utc": "2026-11-19T05:47:50+00:00"
-    },
-    {
       "id": 96529,
       "source_message_id": 96529,
       "source_post_url": "https://t.me/jirum/96529",
@@ -1569,6 +1559,10 @@
     "96525": {
       "url": "https://blog.naver.com/mw5114/224483377808",
       "at": "2026-11-19T05:03:14.632067+00:00"
+    },
+    "96528": {
+      "url": "https://blog.naver.com/mw5114/224483462359",
+      "at": "2026-11-19T06:03:05.509159+00:00"
     }
   },
   "skipped": {
@@ -1761,12 +1755,7 @@
       "at": "2026-11-19T06:01:28.833925+00:00"
     }
   },
-  "in_flight": {
-    "id": 96528,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44468051130",
-    "at": "2026-11-19T06:02:20.361868+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
