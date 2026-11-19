@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96526,
-  "pending": [
-    {
-      "id": 96526,
-      "source_post_url": "https://t.me/jirum/96526",
-      "original_purchase_url": "https://link.coupang.com/a/iNAlIqitNc",
-      "source_text": "☆특가 3,330원\n후디스그릭요거트 다이어트 무지방 그릭요거트, 400g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNAlIqitNc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T05:15:27+00:00",
-      "title": "☆특가 3,330원",
-      "sale_price_krw": 3330
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8742,6 +8732,12 @@
       "source_post_url": "https://t.me/jirum/96524",
       "source_title": "☆특가 6,590원",
       "at": "2026-11-19T04:56:26.676502+00:00"
+    },
+    "96526": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96526",
+      "source_title": "☆특가 3,330원",
+      "at": "2026-11-19T05:18:38.177246+00:00"
     }
   },
   "single_test_repost_20261103": {
