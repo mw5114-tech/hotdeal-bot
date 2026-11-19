@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96527,
+  "last_scanned_id": 96529,
   "pending": [
     {
       "id": 96527,
@@ -12,6 +12,26 @@
       "sale_price_krw": 303640,
       "posted_at_utc": "2026-11-19T05:46:14+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96528,
+      "source_message_id": 96528,
+      "source_post_url": "https://t.me/jirum/96528",
+      "original_purchase_url": "https://link.coupang.com/a/iNCFdHLrZA",
+      "title": "근대골목단팥빵 생크림 단팥빵 생크림 3p + 녹차 + 딸기 (냉동), 140g, 5개입, 1세트",
+      "source_text": "☆특가 11,970원 (27.9% 할인)\n근대골목단팥빵 생크림 단팥빵 생크림 3p + 녹차 + 딸기 (냉동), 140g, 5개입, 1세트\n📌 가격 현황\n- 정상가: 16,600원\n- 할인: 4,630원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNCFdHLrZA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11970,
+      "posted_at_utc": "2026-11-19T05:47:50+00:00"
+    },
+    {
+      "id": 96529,
+      "source_message_id": 96529,
+      "source_post_url": "https://t.me/jirum/96529",
+      "original_purchase_url": "https://link.coupang.com/a/iNCSwrBLie",
+      "title": "스텐락 올스텐 도마",
+      "source_text": "☆특가 10,710원 (29.0% 할인)\n스텐락 올스텐 도마\n📌 가격 현황\n- 정상가: 15,085원\n- 할인: 4,375원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNCSwrBLie\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10710,
+      "posted_at_utc": "2026-11-19T05:50:51+00:00"
     }
   ],
   "published": {
