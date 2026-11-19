@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96529,
-  "pending": [
-    {
-      "id": 96529,
-      "source_post_url": "https://t.me/jirum/96529",
-      "original_purchase_url": "https://link.coupang.com/a/iNCSwrBLie",
-      "source_text": "☆특가 10,710원 (29.0% 할인)\n스텐락 올스텐 도마\n📌 가격 현황\n- 정상가: 15,085원\n- 할인: 4,375원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iNCSwrBLie\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-19T05:50:51+00:00",
-      "title": "스텐락 올스텐 도마",
-      "sale_price_krw": 10710
-    }
-  ],
-  "in_flight": {
-    "id": 96529,
-    "status": "CLAIMED",
-    "run_id": "44468051130",
-    "at": "2026-11-19T05:52:09.220485+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7071,6 +7056,16 @@
       "vendor_item_id": "73295730614",
       "at": "2026-11-19T05:50:23.921758+00:00",
       "run_id": "44467716899"
+    },
+    "96529": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%85%90%EB%9D%BD-%EC%98%AC%EC%8A%A4%ED%85%90-%EB%8F%84%EB%A7%88-%EC%8B%A4%EB%B2%84-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Povmbq7A?from=write",
+      "posted_at_utc": "2026-11-19T05:50:51+00:00",
+      "product_id": "7897550829",
+      "item_id": "21635640711",
+      "vendor_item_id": "88686546416",
+      "at": "2026-11-19T05:52:28.603524+00:00",
+      "run_id": "44468051130"
     }
   },
   "skipped_non_coupang": 798,
