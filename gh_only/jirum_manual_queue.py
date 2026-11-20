@@ -256,6 +256,41 @@ def archive_unverifiable(store, source_id: int, reason: str) -> None:
     store.write(state, sha, "state: archive unverifiable Lowchart photo without posting")
 
 
+def defer_transient_lowchart_photo(store, source_id: int, folder: Path) -> bool:
+    """Give a pre-submit Lowchart transport outage one later runner attempt.
+
+    Only retry a transport error; wrong-item identity and ambiguous images
+    remain permanent. Keep the original FIFO row and source timestamp so the
+    normal 60-minute freshness gate still prevents late publication.
+    """
+    if os.getenv("DAANGN_LOWCHART_TRANSIENT_RETRY_ONCE") != "true":
+        return False
+    try:
+        drafts = json.loads((folder / "drafts.json").read_text("utf-8"))["drafts"]
+    except (FileNotFoundError, json.JSONDecodeError, KeyError, TypeError):
+        return False
+    if (len(drafts) != 1 or not isinstance(drafts[0], dict)
+            or drafts[0].get("image_metadata_status") != "LOWCHART_IMAGE_PAGE_REQUEST_ERROR"
+            or drafts[0].get("photo", {}).get("status") == "IMAGE_SAVED"):
+        return False
+    state, sha = store.read()
+    if (state["in_flight"] is not None or not state["pending"]
+            or state["pending"][0]["id"] != source_id):
+        raise RuntimeError("DAANGN_PHOTO_RETRY_QUEUE_CHANGED")
+    row = state["pending"][0]
+    count = row.get("photo_prepare_failure_count", 0)
+    if type(count) is not int or not 0 <= count <= 1:
+        raise RuntimeError("DAANGN_PHOTO_RETRY_BAD_COUNTER")
+    if count == 1:
+        return False
+    row["photo_prepare_failure_count"] = 1
+    store.write(state, sha, "state: defer Daangn transient Lowchart photo one run")
+    print("JIRUM_LOWCHART_PHOTO_DEFERRED " + json.dumps({
+        "source_id": source_id, "attempts": 1, "no_post_submitted": True,
+    }))
+    return True
+
+
 def kakao_operator_notice(reason: str, pending: int) -> None:
     message = (
         "Kakao Developers login expired: update GitHub Actions secret "
@@ -1204,6 +1239,12 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 permanent = permanent_lowchart_failure(DRAFT_DIR)
                 if permanent:
                     source_id = state["pending"][0]["id"]
+                    if (permanent == "PHOTO_EVIDENCE_UNAVAILABLE"
+                            and defer_transient_lowchart_photo(
+                                store, source_id, DRAFT_DIR)):
+                        # Wait for a later scheduled run / shared exact-item
+                        # bundle instead of permanently skipping on one IP 403.
+                        return 0
                     archive_unverifiable(store, source_id, permanent)
                     print("JIRUM_LOWCHART_UNVERIFIABLE_ARCHIVED " + json.dumps({
                         "source_id": source_id, "reason": permanent,
