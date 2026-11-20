@@ -1,7 +1,58 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96623,
-  "pending": [],
+  "last_scanned_id": 96632,
+  "pending": [
+    {
+      "id": 96625,
+      "source_message_id": 96625,
+      "source_post_url": "https://t.me/jirum/96625",
+      "original_purchase_url": "https://link.coupang.com/a/iPouVPi7R6",
+      "title": "☆특가 6,210원",
+      "source_text": "☆특가 6,210원\n프로그 라텍스 컴포트 고무장갑, 베이비핑크, 중(M), 6세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPouVPi7R6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 6210,
+      "posted_at_utc": "2026-11-20T07:24:49+00:00"
+    },
+    {
+      "id": 96626,
+      "source_message_id": 96626,
+      "source_post_url": "https://t.me/jirum/96626",
+      "original_purchase_url": "https://link.coupang.com/a/iPqtAOwRXM",
+      "title": "[로켓프레시] 바나나맛우유 240ml 6개",
+      "source_text": "👍대박 5,970원 (34.0% 할인)\n[로켓프레시] 바나나맛우유 240ml 6개\n📌 가격 현황\n- 정상가: 9,045원\n- 할인: 3,075원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPqtAOwRXM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5970,
+      "posted_at_utc": "2026-11-20T07:52:30+00:00"
+    },
+    {
+      "id": 96627,
+      "source_message_id": 96627,
+      "source_post_url": "https://t.me/jirum/96627",
+      "original_purchase_url": "https://link.coupang.com/a/iPq34lQWiW",
+      "title": "허먼밀러 뉴 에어론 풀 의자",
+      "source_text": "❤️초대박 1,077,900원 (43.0% 할인)\n허먼밀러 뉴 에어론 풀 의자\n📌 가격 현황\n- 정상가: 1,891,053원\n- 할인: 813,153원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPq34lQWiW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1077900,
+      "posted_at_utc": "2026-11-20T08:00:44+00:00"
+    },
+    {
+      "id": 96628,
+      "source_message_id": 96628,
+      "source_post_url": "https://t.me/jirum/96628",
+      "original_purchase_url": "https://link.coupang.com/a/iPrbNiAway",
+      "title": "모리나가 초이스 비스켓 14장 x 5상자",
+      "source_text": "👍대박 10,930원 (38.0% 할인)\n모리나가 초이스 비스켓 14장 x 5상자\n📌 가격 현황\n- 정상가: 17,629원\n- 할인: 6,699원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPrbNiAway\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10930,
+      "posted_at_utc": "2026-11-20T08:02:29+00:00"
+    },
+    {
+      "id": 96629,
+      "source_message_id": 96629,
+      "source_post_url": "https://t.me/jirum/96629",
+      "original_purchase_url": "https://link.coupang.com/a/iPrnFWW98K",
+      "title": "☆특가 4,140원",
+      "source_text": "☆특가 4,140원\n리더스 인솔루션 바세린 모이스처 마스크, 10개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPrnFWW98K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4140,
+      "posted_at_utc": "2026-11-20T08:05:10+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1943,6 +1994,10 @@
     "96618": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T07:03:13.005834+00:00"
+    },
+    "96624": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T08:20:41.822140+00:00"
     }
   },
   "in_flight": null,
