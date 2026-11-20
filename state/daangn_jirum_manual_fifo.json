@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96676,
-  "pending": [
-    {
-      "id": 96676,
-      "source_post_url": "https://t.me/jirum/96676",
-      "original_purchase_url": "https://link.coupang.com/a/iQtbSaO4vk",
-      "source_text": "🔥🔥🔥무지성 11,990원 (48.0% 할인)🔥🔥🔥\n주스용 못난이 토마토 5kg\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 23,058원\n- 할인: 11,068원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQtbSaO4vk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T22:58:05+00:00",
-      "title": "주스용 못난이 토마토 5kg",
-      "sale_price_krw": 11990
-    }
-  ],
-  "in_flight": {
-    "id": 96676,
-    "status": "CLAIMED",
-    "run_id": "44833210406",
-    "at": "2026-11-20T22:59:16.718195+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7370,6 +7355,16 @@
       "item_id": "94557369",
       "vendor_item_id": "93129154684",
       "at": "2026-11-20T22:59:07.393292+00:00",
+      "run_id": "44833210406"
+    },
+    "96676": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A3%BC%EC%8A%A4%EC%9A%A9-%EB%AA%BB%EB%82%9C%EC%9D%B4-%ED%86%A0%EB%A7%88%ED%86%A0-5kg-1%EB%B0%95%EC%8A%A4-15%ED%95%A0%EC%9D%B8-j8aboKaA?from=write",
+      "posted_at_utc": "2026-11-20T22:58:05+00:00",
+      "product_id": "6795314250",
+      "item_id": "16021705145",
+      "vendor_item_id": "83226102885",
+      "at": "2026-11-20T22:59:35.823057+00:00",
       "run_id": "44833210406"
     }
   },
