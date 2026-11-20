@@ -1,27 +1,16 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96632,
+  "last_scanned_id": 96635,
   "pending": [
     {
-      "id": 96628,
-      "source_message_id": 96628,
-      "source_post_url": "https://t.me/jirum/96628",
-      "original_purchase_url": "https://link.coupang.com/a/iPrbNiAway",
-      "title": "모리나가 초이스 비스켓 14장 x 5상자",
-      "source_text": "👍대박 10,930원 (38.0% 할인)\n모리나가 초이스 비스켓 14장 x 5상자\n📌 가격 현황\n- 정상가: 17,629원\n- 할인: 6,699원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPrbNiAway\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10930,
-      "posted_at_utc": "2026-11-20T08:02:29+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
-      "id": 96629,
-      "source_message_id": 96629,
-      "source_post_url": "https://t.me/jirum/96629",
-      "original_purchase_url": "https://link.coupang.com/a/iPrnFWW98K",
-      "title": "☆특가 4,140원",
-      "source_text": "☆특가 4,140원\n리더스 인솔루션 바세린 모이스처 마스크, 10개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPrnFWW98K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4140,
-      "posted_at_utc": "2026-11-20T08:05:10+00:00"
+      "id": 96633,
+      "source_message_id": 96633,
+      "source_post_url": "https://t.me/jirum/96633",
+      "original_purchase_url": "https://link.coupang.com/a/iPtZ6c6Dnw",
+      "title": "가루비 쟈가리코 명란버터, 52g, 12개",
+      "source_text": "☆특가 12,420원 (29.8% 할인)\n가루비 쟈가리코 명란버터, 52g, 12개\n📌 가격 현황\n- 정상가: 17,700원\n- 할인: 5,280원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPtZ6c6Dnw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 12420,
+      "posted_at_utc": "2026-11-20T08:41:49+00:00"
     }
   ],
   "published": {
@@ -1981,6 +1970,14 @@
     "96624": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T08:20:41.822140+00:00"
+    },
+    "96628": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T09:24:14.692313+00:00"
+    },
+    "96629": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T09:24:14.692322+00:00"
     }
   },
   "in_flight": null,
