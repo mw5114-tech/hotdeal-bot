@@ -3,15 +3,6 @@
   "last_scanned_id": 96623,
   "pending": [
     {
-      "id": 96620,
-      "source_post_url": "https://t.me/jirum/96620",
-      "original_purchase_url": "https://link.coupang.com/a/iPkT1Kv3K0",
-      "source_text": "☆특가 15,890원\n농심 새우탕 큰사발 115g×16개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPkT1Kv3K0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T06:34:30+00:00",
-      "title": "☆특가 15,890원",
-      "sale_price_krw": 15890
-    },
-    {
       "id": 96621,
       "source_post_url": "https://t.me/jirum/96621",
       "original_purchase_url": "https://link.coupang.com/a/iPkT58FQ3E",
@@ -30,12 +21,7 @@
       "sale_price_krw": 14940
     }
   ],
-  "in_flight": {
-    "id": 96620,
-    "status": "CLAIMED",
-    "run_id": "44692100169",
-    "at": "2026-11-20T07:04:22.455283+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7239,6 +7225,16 @@
       "vendor_item_id": null,
       "at": "2026-11-19T22:48:35.003667+00:00",
       "run_id": "44631923511"
+    },
+    "96620": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%88%EC%9A%B0%ED%83%95-%ED%81%B0%EC%82%AC%EB%B0%9C-115g-16%EA%B0%9C-2%ED%95%A0%EC%9D%B8-AO3ybxbA?from=write",
+      "posted_at_utc": "2026-11-20T06:34:30+00:00",
+      "product_id": "4015263",
+      "item_id": "22996860",
+      "vendor_item_id": "3059533778",
+      "at": "2026-11-20T07:04:42.037788+00:00",
+      "run_id": "44692100169"
     }
   },
   "skipped_non_coupang": 843,
