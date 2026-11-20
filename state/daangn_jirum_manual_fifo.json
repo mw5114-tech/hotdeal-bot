@@ -3,15 +3,6 @@
   "last_scanned_id": 96646,
   "pending": [
     {
-      "id": 96641,
-      "source_post_url": "https://t.me/jirum/96641",
-      "original_purchase_url": "https://link.coupang.com/a/iPG91xUuXY",
-      "source_text": "☆특가 24,100원 (26.0% 할인)\n센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개\n📌 가격 현황\n- 정상가: 32,568원\n- 할인: 8,468원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPG91xUuXY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T11:45:59+00:00",
-      "title": "센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개",
-      "sale_price_krw": 24100
-    },
-    {
       "id": 96642,
       "source_post_url": "https://t.me/jirum/96642",
       "original_purchase_url": "https://link.coupang.com/a/iPHxAxKe0i",
@@ -9264,6 +9255,12 @@
       "source_post_url": "https://t.me/jirum/96628",
       "source_title": "모리나가 초이스 비스켓 14장 x 5상자",
       "at": "2026-11-20T08:18:16.802648+00:00"
+    },
+    "96641": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96641",
+      "source_title": "센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개",
+      "at": "2026-11-20T12:42:44.819864+00:00"
     }
   },
   "single_test_repost_20261103": {
