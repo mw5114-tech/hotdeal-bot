@@ -3,3 +3,5 @@ Purpose: scan fresh Coupang deals in independent Naver and Daangn FIFO workflows
 Safety: no stale replay, no double-submit, exact-item verified photos only.
 
 Second recovery dispatch after direct Daangn path wiring; no stale replay.
+
+Final post-fix recovery scan: safe source-time expiry handling now enabled.
