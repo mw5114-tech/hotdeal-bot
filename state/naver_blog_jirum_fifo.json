@@ -1,17 +1,36 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96635,
+  "last_scanned_id": 96638,
   "pending": [
     {
-      "id": 96633,
-      "source_message_id": 96633,
-      "source_post_url": "https://t.me/jirum/96633",
-      "original_purchase_url": "https://link.coupang.com/a/iPtZ6c6Dnw",
-      "title": "가루비 쟈가리코 명란버터, 52g, 12개",
-      "source_text": "☆특가 12,420원 (29.8% 할인)\n가루비 쟈가리코 명란버터, 52g, 12개\n📌 가격 현황\n- 정상가: 17,700원\n- 할인: 5,280원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPtZ6c6Dnw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12420,
-      "posted_at_utc": "2026-11-20T08:41:49+00:00",
-      "photo_prepare_failure_count": 1
+      "id": 96636,
+      "source_message_id": 96636,
+      "source_post_url": "https://t.me/jirum/96636",
+      "original_purchase_url": "https://link.coupang.com/a/iPxWBAdjYy",
+      "title": "미국산 소갈비살 리테일팩(원육) (냉장)0.8kg",
+      "source_text": "🔥🔥🔥무지성 16,680원 (49.0% 할인)🔥🔥🔥\n미국산 소갈비살 리테일팩(원육) (냉장)0.8kg\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 32,706원\n- 할인: 16,026원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPxWBAdjYy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 16680,
+      "posted_at_utc": "2026-11-20T09:37:00+00:00"
+    },
+    {
+      "id": 96637,
+      "source_message_id": 96637,
+      "source_post_url": "https://t.me/jirum/96637",
+      "original_purchase_url": "https://link.coupang.com/a/iPAx1IW4EC",
+      "title": "위크위크서울 트러플 명란 페스토 소스 100g",
+      "source_text": "🔥🔥🔥무지성 8,100원 (45.0% 할인)🔥🔥🔥\n위크위크서울 트러플 명란 페스토 소스 100g\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 14,727원\n- 할인: 6,627원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPAx1IW4EC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8100,
+      "posted_at_utc": "2026-11-20T10:13:26+00:00"
+    },
+    {
+      "id": 96638,
+      "source_message_id": 96638,
+      "source_post_url": "https://t.me/jirum/96638",
+      "original_purchase_url": "https://link.coupang.com/a/iPA8dmG9xA",
+      "title": "☆특가 9,900원",
+      "source_text": "☆특가 9,900원\n역대급최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPA8dmG9xA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9900,
+      "posted_at_utc": "2026-11-20T10:21:37+00:00"
     }
   ],
   "published": {
@@ -1979,6 +1998,10 @@
     "96629": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T09:24:14.692322+00:00"
+    },
+    "96633": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T10:31:40.643765+00:00"
     }
   },
   "in_flight": null,
