@@ -812,6 +812,71 @@ class ManualQueueTests(unittest.TestCase):
         self.assertEqual(store.value["pending"], [])
         publisher.assert_called_once()
 
+    def test_lowchart_transient_photo_retry_then_archive(self):
+        state, _, _ = ingest(baseline(), [deal(94744)])
+        store = FakeStore(state)
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{
+                    "product_identity": {"status": "EXACT_ITEM_IDENTIFIED"},
+                    "image_metadata_status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                    "photo": {"status": "NO_MATCHING_PRODUCT_IMAGE"},
+                }]
+            }), encoding="utf-8")
+            with (patch.dict(os.environ, {
+                    "GITHUB_RUN_ID": "retry-photo",
+                    "JIRUM_IMAGE_SOURCE": "lowchart",
+                    "DAANGN_LOWCHART_TRANSIENT_RETRY_ONCE": "true"}),
+                  patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder),
+                  patch("gh_only.jirum_manual_queue.build_next",
+                        side_effect=RuntimeError("POST_EVIDENCE_NOT_READY"))):
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+                self.assertEqual(store.value["pending"][0]["id"], 94744)
+                self.assertEqual(store.value["pending"][0]["photo_prepare_failure_count"], 1)
+                self.assertNotIn("94744", store.value["skipped_unverifiable"])
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(store.value["pending"], [])
+        self.assertEqual(store.value["skipped_unverifiable"]["94744"]["status"],
+                         "PHOTO_EVIDENCE_UNAVAILABLE")
+        self.assertIsNone(store.value["in_flight"])
+
+    def test_lowchart_transient_photo_retry_recovers_without_duplicate(self):
+        state, _, _ = ingest(baseline(), [deal(94744)])
+        store = FakeStore(state)
+        attempts = [0]
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            (folder / "drafts.json").write_text(json.dumps({
+                "drafts": [{
+                    "product_identity": {"status": "EXACT_ITEM_IDENTIFIED"},
+                    "image_metadata_status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                    "photo": {"status": "NO_MATCHING_PRODUCT_IMAGE"},
+                }]
+            }), encoding="utf-8")
+            def prepare(_state):
+                attempts[0] += 1
+                if attempts[0] == 1:
+                    raise RuntimeError("POST_EVIDENCE_NOT_READY")
+                return {"source_id": 94744}
+            with (patch.dict(os.environ, {
+                    "GITHUB_RUN_ID": "retry-photo-recovered",
+                    "JIRUM_IMAGE_SOURCE": "lowchart",
+                    "DAANGN_LOWCHART_TRANSIENT_RETRY_ONCE": "true"}),
+                  patch("gh_only.jirum_manual_queue.DRAFT_DIR", folder),
+                  patch("gh_only.jirum_manual_queue.build_next", side_effect=prepare),
+                  patch("gh_only.jirum_manual_publisher.publish_one",
+                        return_value={"status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                      "submit_attempted": True,
+                                      "post_url": "https://cafe.daangn.com/posts/94744"}) as publisher):
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+                self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(attempts[0], 2)
+        self.assertEqual(store.value["published"]["94744"]["status"], "PUBLISHED_VERIFIED")
+        self.assertNotIn("94744", store.value["skipped_unverifiable"])
+        self.assertEqual(store.value["pending"], [])
+        publisher.assert_called_once()
+
     def test_original_photo_candidate_is_saved_with_queued_item(self):
         source = deal(94744)
         source["image_provenance"] = "telegram_attached_photo"
