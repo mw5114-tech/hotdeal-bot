@@ -3,15 +3,6 @@
   "last_scanned_id": 96676,
   "pending": [
     {
-      "id": 96675,
-      "source_post_url": "https://t.me/jirum/96675",
-      "original_purchase_url": "https://link.coupang.com/a/iQs9bioblI",
-      "source_text": "🔥🔥🔥무지성 4,370원 (46.0% 할인)🔥🔥🔥\n에뛰드하우스 립 앤 아이 리무버\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,093원\n- 할인: 3,723원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQs9bioblI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T22:57:29+00:00",
-      "title": "에뛰드하우스 립 앤 아이 리무버",
-      "sale_price_krw": 4370
-    },
-    {
       "id": 96676,
       "source_post_url": "https://t.me/jirum/96676",
       "original_purchase_url": "https://link.coupang.com/a/iQtbSaO4vk",
@@ -21,12 +12,7 @@
       "sale_price_krw": 11990
     }
   ],
-  "in_flight": {
-    "id": 96675,
-    "status": "CLAIMED",
-    "run_id": "44833210406",
-    "at": "2026-11-20T22:58:48.705956+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7370,6 +7356,16 @@
       "vendor_item_id": "79329631986",
       "at": "2026-11-20T22:49:11.887175+00:00",
       "run_id": "44831506813"
+    },
+    "96675": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%9B%B0%EB%93%9C%ED%95%98%EC%9A%B0%EC%8A%A4-%EB%A6%BD-%EC%95%A4-%EC%95%84%EC%9D%B4-%EB%A6%AC%EB%AC%B4%EB%B2%84-250ml-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-jKaZMnQP?from=write",
+      "posted_at_utc": "2026-11-20T22:57:29+00:00",
+      "product_id": "4946372",
+      "item_id": "94557369",
+      "vendor_item_id": "93129154684",
+      "at": "2026-11-20T22:59:07.393292+00:00",
+      "run_id": "44833210406"
     }
   },
   "skipped_non_coupang": 876,
