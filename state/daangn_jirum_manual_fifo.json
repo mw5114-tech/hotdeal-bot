@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96582,
-  "pending": [],
+  "last_scanned_id": 96592,
+  "pending": [
+    {
+      "id": 96591,
+      "source_post_url": "https://t.me/jirum/96591",
+      "original_purchase_url": "https://link.coupang.com/a/iOXm1c8htQ",
+      "source_text": "🔥🔥🔥무지성 2,990원 (64.0% 할인)🔥🔥🔥\n리큐 스마트워시 AI자동투입 세탁세제 1L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,306원\n- 할인: 5,316원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iOXm1c8htQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T01:05:12+00:00",
+      "title": "리큐 스마트워시 AI자동투입 세탁세제 1L",
+      "sale_price_krw": 2990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7208,7 +7218,7 @@
       "run_id": "44631923511"
     }
   },
-  "skipped_non_coupang": 831,
+  "skipped_non_coupang": 834,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -8658,6 +8668,48 @@
       "source_title": "☆특가 15,810원",
       "posted_at_utc": "2026-11-11T11:36:44+00:00",
       "at": "2026-11-11T12:42:34.005918+00:00"
+    },
+    "96583": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96583",
+      "source_title": "☆특가 17,810원",
+      "posted_at_utc": "2026-11-19T23:11:45+00:00",
+      "at": "2026-11-20T01:53:40.327746+00:00"
+    },
+    "96585": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96585",
+      "source_title": "[로켓프레시] 오뚜기 실쏙 얇은피 잎새만두 고기 (냉동) 1.5kg 2개",
+      "posted_at_utc": "2026-11-19T23:30:15+00:00",
+      "at": "2026-11-20T01:53:40.327755+00:00"
+    },
+    "96586": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96586",
+      "source_title": "☆특가 6,780원",
+      "posted_at_utc": "2026-11-19T23:43:33+00:00",
+      "at": "2026-11-20T01:53:40.327758+00:00"
+    },
+    "96587": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96587",
+      "source_title": "☆특가 5,570원",
+      "posted_at_utc": "2026-11-19T23:45:40+00:00",
+      "at": "2026-11-20T01:53:40.327761+00:00"
+    },
+    "96588": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96588",
+      "source_title": "시티델리 프랜치토스트 햄에그야채 (냉동), 175g, 3개입, 3개",
+      "posted_at_utc": "2026-11-19T23:50:58+00:00",
+      "at": "2026-11-20T01:53:40.327764+00:00"
+    },
+    "96589": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96589",
+      "source_title": "☆특가 27,110원",
+      "posted_at_utc": "2026-11-20T00:17:00+00:00",
+      "at": "2026-11-20T01:53:40.327766+00:00"
     }
   },
   "skipped_unverifiable": {
