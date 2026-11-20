@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96673,
-  "pending": [],
+  "last_scanned_id": 96676,
+  "pending": [
+    {
+      "id": 96675,
+      "source_post_url": "https://t.me/jirum/96675",
+      "original_purchase_url": "https://link.coupang.com/a/iQs9bioblI",
+      "source_text": "🔥🔥🔥무지성 4,370원 (46.0% 할인)🔥🔥🔥\n에뛰드하우스 립 앤 아이 리무버\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,093원\n- 할인: 3,723원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQs9bioblI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T22:57:29+00:00",
+      "title": "에뛰드하우스 립 앤 아이 리무버",
+      "sale_price_krw": 4370
+    },
+    {
+      "id": 96676,
+      "source_post_url": "https://t.me/jirum/96676",
+      "original_purchase_url": "https://link.coupang.com/a/iQtbSaO4vk",
+      "source_text": "🔥🔥🔥무지성 11,990원 (48.0% 할인)🔥🔥🔥\n주스용 못난이 토마토 5kg\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 23,058원\n- 할인: 11,068원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQtbSaO4vk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T22:58:05+00:00",
+      "title": "주스용 못난이 토마토 5kg",
+      "sale_price_krw": 11990
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7348,7 +7367,7 @@
       "run_id": "44831506813"
     }
   },
-  "skipped_non_coupang": 875,
+  "skipped_non_coupang": 876,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
