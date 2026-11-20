@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96673,
-  "pending": [
-    {
-      "id": 96672,
-      "source_post_url": "https://t.me/jirum/96672",
-      "original_purchase_url": "https://link.coupang.com/a/iQse1f8z9g",
-      "source_text": "☆특가 10,610원 (28.0% 할인)\n어메이징오트 오리지널 혼합음료, 190ml, 24개\n📌 가격 현황\n- 정상가: 14,736원\n- 할인: 4,126원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQse1f8z9g\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T22:44:48+00:00",
-      "title": "어메이징오트 오리지널 혼합음료, 190ml, 24개",
-      "sale_price_krw": 10610
-    }
-  ],
-  "in_flight": {
-    "id": 96672,
-    "status": "CLAIMED",
-    "run_id": "44831506813",
-    "at": "2026-11-20T22:48:53.324264+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7351,6 +7336,16 @@
       "vendor_item_id": "86341239955",
       "at": "2026-11-20T21:07:59.542217+00:00",
       "run_id": "44817391681"
+    },
+    "96672": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%96%B4%EB%A9%94%EC%9D%B4%EC%A7%95%EC%98%A4%ED%8A%B8-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%ED%98%BC%ED%95%A9%EC%9D%8C%EB%A3%8C-190ml-24%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PovM15kA?from=write",
+      "posted_at_utc": "2026-11-20T22:44:48+00:00",
+      "product_id": "6330671687",
+      "item_id": "18368002923",
+      "vendor_item_id": "79329631986",
+      "at": "2026-11-20T22:49:11.887175+00:00",
+      "run_id": "44831506813"
     }
   },
   "skipped_non_coupang": 875,
