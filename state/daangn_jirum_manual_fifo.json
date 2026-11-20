@@ -3,15 +3,6 @@
   "last_scanned_id": 96629,
   "pending": [
     {
-      "id": 96628,
-      "source_post_url": "https://t.me/jirum/96628",
-      "original_purchase_url": "https://link.coupang.com/a/iPrbNiAway",
-      "source_text": "👍대박 10,930원 (38.0% 할인)\n모리나가 초이스 비스켓 14장 x 5상자\n📌 가격 현황\n- 정상가: 17,629원\n- 할인: 6,699원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPrbNiAway\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T08:02:29+00:00",
-      "title": "모리나가 초이스 비스켓 14장 x 5상자",
-      "sale_price_krw": 10930
-    },
-    {
       "id": 96629,
       "source_post_url": "https://t.me/jirum/96629",
       "original_purchase_url": "https://link.coupang.com/a/iPrnFWW98K",
@@ -9210,6 +9201,12 @@
       "source_post_url": "https://t.me/jirum/96591",
       "source_title": "리큐 스마트워시 AI자동투입 세탁세제 1L",
       "at": "2026-11-20T01:56:09.697041+00:00"
+    },
+    "96628": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96628",
+      "source_title": "모리나가 초이스 비스켓 14장 x 5상자",
+      "at": "2026-11-20T08:18:16.802648+00:00"
     }
   },
   "single_test_repost_20261103": {
