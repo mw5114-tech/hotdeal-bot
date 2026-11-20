@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96668,
-  "pending": [
-    {
-      "id": 96668,
-      "source_post_url": "https://t.me/jirum/96668",
-      "original_purchase_url": "https://link.coupang.com/a/iQaWifChAO",
-      "source_text": "🔥🔥🔥무지성 5,620원 (47.5% 할인)🔥🔥🔥\n돌 레드 용과, 0.9kg(2입), 1팩\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,710원\n- 할인: 5,090원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQaWifChAO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T18:42:41+00:00",
-      "title": "돌 레드 용과, 0.9kg(2입), 1팩",
-      "sale_price_krw": 5620
-    }
-  ],
-  "in_flight": {
-    "id": 96668,
-    "status": "CLAIMED",
-    "run_id": "44796393606",
-    "at": "2026-11-20T18:50:00.880438+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7321,6 +7306,16 @@
       "vendor_item_id": null,
       "at": "2026-11-20T12:43:14.140648+00:00",
       "run_id": "44737747273"
+    },
+    "96668": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8F%8C-%EB%A0%88%EB%93%9C-%EC%9A%A9%EA%B3%BC-09kg2%EC%9E%85-1%ED%8C%A9-55%ED%95%A0%EC%9D%B8-d7albEXA?from=write",
+      "posted_at_utc": "2026-11-20T18:42:41+00:00",
+      "product_id": "4353031472",
+      "item_id": "5109642123",
+      "vendor_item_id": "72419175868",
+      "at": "2026-11-20T18:50:21.767626+00:00",
+      "run_id": "44796393606"
     }
   },
   "skipped_non_coupang": 874,
