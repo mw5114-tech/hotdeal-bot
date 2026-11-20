@@ -29,6 +29,7 @@ on:
     branches: [main]
     paths:
       - 'manual/trigger-daangn-restored-scan.txt'
+      - 'manual/trigger-jirum-recovery.txt'
 permissions:
   contents: write
 jobs:
