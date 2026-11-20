@@ -125,6 +125,39 @@ class NaverQueueTests(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, "WRONG_SKU_VALIDATION_FAILED"):
                 make_article(source, Path(td), tag="AF9668915")
 
+    def test_item_expiring_during_photo_prep_is_safely_archived(self):
+        s = state()
+        ingest(s, [deal(95496, minutes=10), deal(95497, minutes=5)])
+        store = ConflictStore(initial=s, conflicts=0)
+        def expire_then_raise(_store, *, with_receipt=False):
+            store.current["pending"][0]["posted_at_utc"] = (
+                datetime.now(timezone.utc) - timedelta(minutes=90)
+            ).isoformat()
+            raise RuntimeError("NAVER_OLDEST_POST_EXPIRED_RESCAN")
+        with (patch("gh_only.naver_blog_jirum.publish_one",
+                    side_effect=expire_then_raise) as publish,
+              patch("gh_only.naver_blog_jirum.claim_before_publish") as claim):
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
+        self.assertEqual(publish.call_count, 1)
+        claim.assert_not_called()
+        self.assertIsNone(store.current["in_flight"])
+        self.assertEqual(store.current["pending"][0]["id"], 95497)
+        self.assertEqual(store.current["skipped"]["95496"]["reason"],
+                         "STALE_OR_UNKNOWN_TIMESTAMP")
+        self.assertNotIn("95496", store.current["published"])
+
+    def test_non_expiry_pre_submit_error_still_fails_closed(self):
+        s = state()
+        ingest(s, [deal(95496, minutes=10)])
+        store = ConflictStore(initial=s, conflicts=0)
+        with patch("gh_only.naver_blog_jirum.publish_one",
+                   side_effect=RuntimeError("UNVERIFIED_ITEM_IDENTITY")):
+            with self.assertRaisesRegex(RuntimeError, "UNVERIFIED_ITEM_IDENTITY"):
+                publish_batch(store, max_posts=1)
+        self.assertEqual(store.current["pending"][0]["id"], 95496)
+        self.assertNotIn("95496", store.current["published"])
+        self.assertIsNone(store.current["in_flight"])
+
     def test_two_failed_runs_defer_then_archive_without_ever_claiming(self):
         s = state()
         ingest(s, [deal(95496), deal(95497)])
