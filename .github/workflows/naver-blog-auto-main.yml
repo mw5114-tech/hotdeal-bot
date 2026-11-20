@@ -1,4 +1,4 @@
-name: NAVER BLOG | MAIN - Telegram to Blog (Oracle + 6h backup)
+name: NAVER BLOG | MAIN - Telegram to Blog (Oracle + 15m backup)
 
 on:
   # Oracle's event bridge is the primary trigger.
@@ -19,7 +19,8 @@ on:
   # minutes lower GitHub schedule contention; stale deals still fail closed.
   schedule:
     - cron: '7,22,37,52 * * * *'
-  # One safe manual rescue kick starts BOTH independent channel jobs.
+  # A safe manual rescue marker triggers this Naver workflow and, via
+  # Daangn's own push path, the independent Daangn workflow as well.
   # No generic code push can publish; only this exact trigger file.
   push:
     branches: [main]
@@ -59,7 +60,7 @@ jobs:
   # the Naver scan itself was green. This prevents duplicate scans and
   # isolates the two backup schedules.
   daangn-cafe-independent:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule'
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule' && github.event_name != 'push'
     uses: ./.github/workflows/daangn-cafe-restored.yml
     with:
       source_post_id: ${{ inputs.source_post_id }}
