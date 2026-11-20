@@ -8,6 +8,8 @@ on:
       - gh_only/lowchart_price_reference.py
       - gh_only/lowchart_shared_bundle.py
       - gh_only/test_lowchart_shared_bundle.py
+      - gh_only/jirum_manual_queue.py
+      - gh_only/test_jirum_manual_queue.py
       - gh_only/jirum_manual_publisher.py
       - gh_only/naver_blog_deal_publisher.py
       - .github/workflows/naver-blog-auto-main.yml
