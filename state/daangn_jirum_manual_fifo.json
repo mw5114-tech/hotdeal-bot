@@ -3,16 +3,6 @@
   "last_scanned_id": 96673,
   "pending": [
     {
-      "id": 96671,
-      "source_post_url": "https://t.me/jirum/96671",
-      "original_purchase_url": "https://link.coupang.com/a/iQrvWFPPqu",
-      "source_text": "☆특가 12,500원 (25.0% 할인)\n유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입, 500g, 2개\n📌 가격 현황\n- 정상가: 16,660원\n- 할인: 4,160원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQrvWFPPqu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T22:34:38+00:00",
-      "title": "유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입, 500g, 2개",
-      "sale_price_krw": 12500,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96672,
       "source_post_url": "https://t.me/jirum/96672",
       "original_purchase_url": "https://link.coupang.com/a/iQse1f8z9g",
@@ -9311,6 +9301,12 @@
       "source_post_url": "https://t.me/jirum/96641",
       "source_title": "센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개",
       "at": "2026-11-20T12:42:44.819864+00:00"
+    },
+    "96671": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96671",
+      "source_title": "유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입, 500g, 2개",
+      "at": "2026-11-20T22:48:00.687559+00:00"
     }
   },
   "single_test_repost_20261103": {
