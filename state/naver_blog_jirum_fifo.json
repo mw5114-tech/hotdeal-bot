@@ -3,16 +3,6 @@
   "last_scanned_id": 96623,
   "pending": [
     {
-      "id": 96617,
-      "source_message_id": 96617,
-      "source_post_url": "https://t.me/jirum/96617",
-      "original_purchase_url": "https://link.coupang.com/a/iPilAwAQ68",
-      "title": "가루비 쟈가리코 명란버터",
-      "source_text": "🔥🔥🔥무지성 12,420원 (48.0% 할인)🔥🔥🔥\n가루비 쟈가리코 명란버터\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 23,885원\n- 할인: 11,465원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPilAwAQ68\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12420,
-      "posted_at_utc": "2026-11-20T05:58:45+00:00"
-    },
-    {
       "id": 96618,
       "source_message_id": 96618,
       "source_post_url": "https://t.me/jirum/96618",
@@ -1974,6 +1964,10 @@
     "96591": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T06:57:14.536852+00:00"
+    },
+    "96617": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T07:00:05.783872+00:00"
     }
   },
   "in_flight": null,
