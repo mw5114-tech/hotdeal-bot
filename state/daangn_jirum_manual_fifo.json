@@ -1,7 +1,44 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96592,
-  "pending": [],
+  "last_scanned_id": 96623,
+  "pending": [
+    {
+      "id": 96618,
+      "source_post_url": "https://t.me/jirum/96618",
+      "original_purchase_url": "https://link.coupang.com/a/iPiwcMCkiO",
+      "source_text": "👍대박 3,140원 (37.0% 할인)\n코디 러블리베어 천연펄프 미용티슈 2겹 230매\n📌 가격 현황\n- 정상가: 4,984원\n- 할인: 1,844원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPiwcMCkiO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T06:01:09+00:00",
+      "title": "코디 러블리베어 천연펄프 미용티슈 2겹 230매",
+      "sale_price_krw": 3140
+    },
+    {
+      "id": 96620,
+      "source_post_url": "https://t.me/jirum/96620",
+      "original_purchase_url": "https://link.coupang.com/a/iPkT1Kv3K0",
+      "source_text": "☆특가 15,890원\n농심 새우탕 큰사발 115g×16개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPkT1Kv3K0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T06:34:30+00:00",
+      "title": "☆특가 15,890원",
+      "sale_price_krw": 15890
+    },
+    {
+      "id": 96621,
+      "source_post_url": "https://t.me/jirum/96621",
+      "original_purchase_url": "https://link.coupang.com/a/iPkT58FQ3E",
+      "source_text": "☆특가 21,890원\n오뚜기 진라면 약간매운맛 큰컵 110g×24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPkT58FQ3E\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T06:34:31+00:00",
+      "title": "☆특가 21,890원",
+      "sale_price_krw": 21890
+    },
+    {
+      "id": 96622,
+      "source_post_url": "https://t.me/jirum/96622",
+      "original_purchase_url": "https://link.coupang.com/a/iPkT9vD9em",
+      "source_text": "☆특가 14,940원\n오뚜기 참깨라면 컵 110g×15개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPkT9vD9em\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-20T06:34:32+00:00",
+      "title": "☆특가 14,940원",
+      "sale_price_krw": 14940
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7208,7 +7245,7 @@
       "run_id": "44631923511"
     }
   },
-  "skipped_non_coupang": 834,
+  "skipped_non_coupang": 843,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -8700,6 +8737,132 @@
       "source_title": "☆특가 27,110원",
       "posted_at_utc": "2026-11-20T00:17:00+00:00",
       "at": "2026-11-20T01:53:40.327766+00:00"
+    },
+    "96594": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96594",
+      "source_title": "☆특가 12,110원",
+      "posted_at_utc": "2026-11-20T02:04:33+00:00",
+      "at": "2026-11-20T06:59:06.290899+00:00"
+    },
+    "96595": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96595",
+      "source_title": "☆특가 4,600원",
+      "posted_at_utc": "2026-11-20T02:15:28+00:00",
+      "at": "2026-11-20T06:59:06.290908+00:00"
+    },
+    "96596": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96596",
+      "source_title": "☆특가 17,900원",
+      "posted_at_utc": "2026-11-20T02:23:50+00:00",
+      "at": "2026-11-20T06:59:06.290914+00:00"
+    },
+    "96597": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96597",
+      "source_title": "☆특가 7,970원",
+      "posted_at_utc": "2026-11-20T02:51:18+00:00",
+      "at": "2026-11-20T06:59:06.290916+00:00"
+    },
+    "96599": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96599",
+      "source_title": "액츠 퍼펙트 딥클린 액상세제 리필, 2L, 6개",
+      "posted_at_utc": "2026-11-20T03:07:29+00:00",
+      "at": "2026-11-20T06:59:06.290918+00:00"
+    },
+    "96600": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96600",
+      "source_title": "듀이트리 하이 아미노 올 클렌징 밀크 200ml 2개",
+      "posted_at_utc": "2026-11-20T03:09:29+00:00",
+      "at": "2026-11-20T06:59:06.290921+00:00"
+    },
+    "96601": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96601",
+      "source_title": "리더스 인솔루션 바세린 모이스처 마스크 10개입",
+      "posted_at_utc": "2026-11-20T03:25:46+00:00",
+      "at": "2026-11-20T06:59:06.290924+00:00"
+    },
+    "96602": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96602",
+      "source_title": "순샘 구연산 자몽향 주방세제 리필 1.4L 3개",
+      "posted_at_utc": "2026-11-20T03:28:00+00:00",
+      "at": "2026-11-20T06:59:06.290932+00:00"
+    },
+    "96603": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96603",
+      "source_title": "미제르바 여성 경량 패딩 퀼팅 점퍼 노카라 자켓 초경량",
+      "posted_at_utc": "2026-11-20T03:29:45+00:00",
+      "at": "2026-11-20T06:59:06.290935+00:00"
+    },
+    "96606": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96606",
+      "source_title": "☆특가 11,830원",
+      "posted_at_utc": "2026-11-20T03:57:58+00:00",
+      "at": "2026-11-20T06:59:06.290938+00:00"
+    },
+    "96609": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96609",
+      "source_title": "쿠쿠 아이편한 가습기 타워 10L",
+      "posted_at_utc": "2026-11-20T04:20:43+00:00",
+      "at": "2026-11-20T06:59:06.290941+00:00"
+    },
+    "96610": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96610",
+      "source_title": "친환경 인증 토마토, 3kg, 1박스",
+      "posted_at_utc": "2026-11-20T04:39:26+00:00",
+      "at": "2026-11-20T06:59:06.290943+00:00"
+    },
+    "96612": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96612",
+      "source_title": "☆특가 7,900원",
+      "posted_at_utc": "2026-11-20T05:09:10+00:00",
+      "at": "2026-11-20T06:59:06.290945+00:00"
+    },
+    "96613": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96613",
+      "source_title": "☆특가 9,900원",
+      "posted_at_utc": "2026-11-20T05:18:55+00:00",
+      "at": "2026-11-20T06:59:06.290947+00:00"
+    },
+    "96614": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96614",
+      "source_title": "삼성전자 갤럭시 S25 Ultra 자급제 SM-S938N, 티타늄 실버블루, 512GB",
+      "posted_at_utc": "2026-11-20T05:28:25+00:00",
+      "at": "2026-11-20T06:59:06.290950+00:00"
+    },
+    "96615": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96615",
+      "source_title": "조지루시 가열식 가습기 3.1L",
+      "posted_at_utc": "2026-11-20T05:35:37+00:00",
+      "at": "2026-11-20T06:59:06.290952+00:00"
+    },
+    "96616": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96616",
+      "source_title": "엘라스틴 프로폴리테라 손상모발용 단백질 영양 컨디셔너 체리블라썸향 500ml",
+      "posted_at_utc": "2026-11-20T05:36:39+00:00",
+      "at": "2026-11-20T06:59:06.290954+00:00"
+    },
+    "96617": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96617",
+      "source_title": "가루비 쟈가리코 명란버터",
+      "posted_at_utc": "2026-11-20T05:58:45+00:00",
+      "at": "2026-11-20T06:59:06.290956+00:00"
     }
   },
   "skipped_unverifiable": {
