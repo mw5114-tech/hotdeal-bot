@@ -3,16 +3,6 @@
   "last_scanned_id": 96623,
   "pending": [
     {
-      "id": 96618,
-      "source_message_id": 96618,
-      "source_post_url": "https://t.me/jirum/96618",
-      "original_purchase_url": "https://link.coupang.com/a/iPiwcMCkiO",
-      "title": "코디 러블리베어 천연펄프 미용티슈 2겹 230매",
-      "source_text": "👍대박 3,140원 (37.0% 할인)\n코디 러블리베어 천연펄프 미용티슈 2겹 230매\n📌 가격 현황\n- 정상가: 4,984원\n- 할인: 1,844원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPiwcMCkiO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3140,
-      "posted_at_utc": "2026-11-20T06:01:09+00:00"
-    },
-    {
       "id": 96620,
       "source_message_id": 96620,
       "source_post_url": "https://t.me/jirum/96620",
@@ -1968,6 +1958,10 @@
     "96617": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T07:00:05.783872+00:00"
+    },
+    "96618": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T07:03:13.005834+00:00"
     }
   },
   "in_flight": null,
