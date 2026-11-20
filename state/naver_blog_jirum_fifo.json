@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96673,
-  "pending": [
-    {
-      "id": 96672,
-      "source_message_id": 96672,
-      "source_post_url": "https://t.me/jirum/96672",
-      "original_purchase_url": "https://link.coupang.com/a/iQse1f8z9g",
-      "title": "어메이징오트 오리지널 혼합음료, 190ml, 24개",
-      "source_text": "☆특가 10,610원 (28.0% 할인)\n어메이징오트 오리지널 혼합음료, 190ml, 24개\n📌 가격 현황\n- 정상가: 14,736원\n- 할인: 4,126원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQse1f8z9g\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10610,
-      "posted_at_utc": "2026-11-20T22:44:48+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1675,6 +1664,10 @@
     "96670": {
       "url": "https://blog.naver.com/mw5114/224485571439",
       "at": "2026-11-20T21:08:56.909346+00:00"
+    },
+    "96672": {
+      "url": "https://blog.naver.com/mw5114/224485621215",
+      "at": "2026-11-20T22:49:30.188365+00:00"
     }
   },
   "skipped": {
@@ -2025,12 +2018,7 @@
       "at": "2026-11-20T22:48:37.356879+00:00"
     }
   },
-  "in_flight": {
-    "id": 96672,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44831506813",
-    "at": "2026-11-20T22:48:46.833624+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
