@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96670,
-  "pending": [
-    {
-      "id": 96670,
-      "source_message_id": 96670,
-      "source_post_url": "https://t.me/jirum/96670",
-      "original_purchase_url": "https://link.coupang.com/a/iQlbZb9JTg",
-      "title": "델몬트 필리핀산 바나나, 2kg 내외, 2개",
-      "source_text": "🔥🔥🔥무지성 7,720원 (48.7% 할인)🔥🔥🔥\n델몬트 필리핀산 바나나, 2kg 내외, 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 15,050원\n- 할인: 7,330원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQlbZb9JTg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7720,
-      "posted_at_utc": "2026-11-20T21:06:10+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1671,6 +1660,10 @@
     "96669": {
       "url": "https://blog.naver.com/mw5114/224485540945",
       "at": "2026-11-20T19:47:28.493956+00:00"
+    },
+    "96670": {
+      "url": "https://blog.naver.com/mw5114/224485571439",
+      "at": "2026-11-20T21:08:56.909346+00:00"
     }
   },
   "skipped": {
@@ -2016,12 +2009,7 @@
       "at": "2026-11-20T19:46:23.752743+00:00"
     }
   },
-  "in_flight": {
-    "id": 96670,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44817391681",
-    "at": "2026-11-20T21:08:14.360953+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
