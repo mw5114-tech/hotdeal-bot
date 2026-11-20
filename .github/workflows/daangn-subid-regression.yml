@@ -93,8 +93,8 @@ jobs:
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
           assert 'daangn-cafe-independent:' in main
           assert "github.event_name != 'schedule'" in main
-          assert "cron: '17 */6 * * *'" in main
-          assert "cron: '47 */6 * * *'" in restored
+          assert "cron: '7,22,37,52 * * * *'" in main
+          assert "cron: '14,29,44,59 * * * *'" in restored
           assert "runs-on: ubuntu-slim" in Path('.github/workflows/daangn-subid-regression.yml').read_text()
           assert "runs-on: ubuntu-24.04" in main
           assert "runs-on: ubuntu-24.04" in restored
