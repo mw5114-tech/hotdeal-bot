@@ -834,7 +834,7 @@ class ManualQueueTests(unittest.TestCase):
                 self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
                 self.assertEqual(store.value["pending"][0]["id"], 94744)
                 self.assertEqual(store.value["pending"][0]["photo_prepare_failure_count"], 1)
-                self.assertNotIn("94744", store.value["skipped_unverifiable"])
+                self.assertNotIn("94744", store.value.get("skipped_unverifiable", {}))
                 self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
         self.assertEqual(store.value["pending"], [])
         self.assertEqual(store.value["skipped_unverifiable"]["94744"]["status"],
@@ -873,7 +873,7 @@ class ManualQueueTests(unittest.TestCase):
                 self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
         self.assertEqual(attempts[0], 2)
         self.assertEqual(store.value["published"]["94744"]["status"], "PUBLISHED_VERIFIED")
-        self.assertNotIn("94744", store.value["skipped_unverifiable"])
+        self.assertNotIn("94744", store.value.get("skipped_unverifiable", {}))
         self.assertEqual(store.value["pending"], [])
         publisher.assert_called_once()
 
