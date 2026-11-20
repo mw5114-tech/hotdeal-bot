@@ -14,11 +14,17 @@ on:
         required: false
         default: false
         type: boolean
-  # The Oracle event bridge remains real-time. Under low Actions budget,
-  # run a low-frequency emergency sweep instead of 48 paid empty scans/day.
-  # Freshness checks remain unchanged: this is NOT a 6-hour replay of old deals.
+  # Oracle events remain primary. An independent 15-minute sweep avoids
+  # multi-hour gaps when the Oracle event bridge goes silent. Off-hour
+  # minutes lower GitHub schedule contention; stale deals still fail closed.
   schedule:
-    - cron: '17 */6 * * *'
+    - cron: '7,22,37,52 * * * *'
+  # One safe manual rescue kick starts BOTH independent channel jobs.
+  # No generic code push can publish; only this exact trigger file.
+  push:
+    branches: [main]
+    paths:
+      - 'manual/trigger-jirum-recovery.txt'
   # The old Oracle deployment may still dispatch to the legacy filename.
   # Its compatibility entrypoint calls this one with the SAME safety flags.
   workflow_call:
