@@ -793,6 +793,30 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
             if status == "SKIPPED_UNVERIFIABLE":
                 continue
             raise RuntimeError("NAVER_PHOTO_PRE_SUBMIT_UNEXPECTED_AUDIT")
+        except RuntimeError as exc:
+            # A fresh item can cross the 60-minute expiry boundary during
+            # slow photo/price enrichment or the second pre-submit attempt.
+            # No claim or Naver submit exists yet: expire only the stale
+            # unclaimed row, preserving the next fresh FIFO item.
+            if str(exc) not in (
+                "NAVER_OLDEST_POST_EXPIRED_RESCAN",
+                "SOURCE_EXPIRED_OR_UNTIMED",
+            ):
+                raise
+            latest, _ = store.read()
+            if (latest["in_flight"] is not None
+                    or not latest["pending"]
+                    or latest["pending"][0]["id"] != oldest_id
+                    or source_fresh(latest["pending"][0])):
+                raise
+            count = expire_unclaimed_before_next(store)
+            if not count:
+                raise RuntimeError("NAVER_EXPIRED_PRE_SUBMIT_AUDIT_MISSING")
+            print("NAVER_EXPIRED_DURING_PREP_NO_POST " + json.dumps({
+                "source_id": oldest_id, "expired_count": count,
+                "submit_attempted": False,
+            }))
+            continue
         if (not isinstance(receipt, dict)
                 or receipt.get("source_id") != oldest_id
                 or not isinstance(receipt.get("url"), str)):
