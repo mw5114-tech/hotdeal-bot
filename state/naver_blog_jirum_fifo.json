@@ -2012,7 +2012,12 @@
       "at": "2026-11-20T19:46:23.752743+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 96669,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "44805223418",
+    "at": "2026-11-20T19:46:44.234620+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
