@@ -3,16 +3,6 @@
   "last_scanned_id": 96632,
   "pending": [
     {
-      "id": 96627,
-      "source_message_id": 96627,
-      "source_post_url": "https://t.me/jirum/96627",
-      "original_purchase_url": "https://link.coupang.com/a/iPq34lQWiW",
-      "title": "허먼밀러 뉴 에어론 풀 의자",
-      "source_text": "❤️초대박 1,077,900원 (43.0% 할인)\n허먼밀러 뉴 에어론 풀 의자\n📌 가격 현황\n- 정상가: 1,891,053원\n- 할인: 813,153원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPq34lQWiW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 1077900,
-      "posted_at_utc": "2026-11-20T08:00:44+00:00"
-    },
-    {
       "id": 96628,
       "source_message_id": 96628,
       "source_post_url": "https://t.me/jirum/96628",
@@ -1683,6 +1673,10 @@
     "96626": {
       "url": "https://blog.naver.com/mw5114/224484982715",
       "at": "2026-11-20T08:24:12.155087+00:00"
+    },
+    "96627": {
+      "url": "https://blog.naver.com/mw5114/224484984885",
+      "at": "2026-11-20T08:25:56.620026+00:00"
     }
   },
   "skipped": {
@@ -1988,12 +1982,7 @@
       "at": "2026-11-20T08:20:41.822140+00:00"
     }
   },
-  "in_flight": {
-    "id": 96627,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44701751889",
-    "at": "2026-11-20T08:25:14.007461+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
