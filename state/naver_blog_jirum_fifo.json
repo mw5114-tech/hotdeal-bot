@@ -3,16 +3,6 @@
   "last_scanned_id": 96632,
   "pending": [
     {
-      "id": 96625,
-      "source_message_id": 96625,
-      "source_post_url": "https://t.me/jirum/96625",
-      "original_purchase_url": "https://link.coupang.com/a/iPouVPi7R6",
-      "title": "☆특가 6,210원",
-      "source_text": "☆특가 6,210원\n프로그 라텍스 컴포트 고무장갑, 베이비핑크, 중(M), 6세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPouVPi7R6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6210,
-      "posted_at_utc": "2026-11-20T07:24:49+00:00"
-    },
-    {
       "id": 96626,
       "source_message_id": 96626,
       "source_post_url": "https://t.me/jirum/96626",
@@ -1695,6 +1685,10 @@
     "96622": {
       "url": "https://blog.naver.com/mw5114/224484880785",
       "at": "2026-11-20T07:06:21.454414+00:00"
+    },
+    "96625": {
+      "url": "https://blog.naver.com/mw5114/224484980507",
+      "at": "2026-11-20T08:22:26.499100+00:00"
     }
   },
   "skipped": {
@@ -2000,12 +1994,7 @@
       "at": "2026-11-20T08:20:41.822140+00:00"
     }
   },
-  "in_flight": {
-    "id": 96625,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44701751889",
-    "at": "2026-11-20T08:21:43.056161+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
