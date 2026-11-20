@@ -3,15 +3,6 @@
   "last_scanned_id": 96629,
   "pending": [
     {
-      "id": 96624,
-      "source_post_url": "https://t.me/jirum/96624",
-      "original_purchase_url": "https://link.coupang.com/a/iPn3U5lJpA",
-      "source_text": "🔥🔥🔥무지성 6,210원 (45.0% 할인)🔥🔥🔥\n프로그 라텍스 컴포트 고무장갑 6개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 11,291원\n- 할인: 5,081원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPn3U5lJpA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T07:18:43+00:00",
-      "title": "프로그 라텍스 컴포트 고무장갑 6개",
-      "sale_price_krw": 6210
-    },
-    {
       "id": 96625,
       "source_post_url": "https://t.me/jirum/96625",
       "original_purchase_url": "https://link.coupang.com/a/iPouVPi7R6",
@@ -57,12 +48,7 @@
       "sale_price_krw": 4140
     }
   ],
-  "in_flight": {
-    "id": 96624,
-    "status": "CLAIMED",
-    "run_id": "44700977836",
-    "at": "2026-11-20T08:15:03.089708+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7296,6 +7282,16 @@
       "vendor_item_id": "96220140734",
       "at": "2026-11-20T07:07:04.479839+00:00",
       "run_id": "44692100169"
+    },
+    "96624": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%84%EB%A1%9C%EA%B7%B8-%EB%9D%BC%ED%85%8D%EC%8A%A4-%EC%BB%B4%ED%8F%AC%ED%8A%B8-%EA%B3%A0%EB%AC%B4%EC%9E%A5%EA%B0%91-%EB%B2%A0%EC%9D%B4%EB%B9%84%ED%95%91%ED%81%AC-%EC%A4%91M-6%EC%84%B8%ED%8A%B8-40%ED%95%A0%EC%9D%B8-d9aevn8d?from=write",
+      "posted_at_utc": "2026-11-20T07:18:43+00:00",
+      "product_id": "6715674951",
+      "item_id": "19850402270",
+      "vendor_item_id": "86951612116",
+      "at": "2026-11-20T08:15:22.683510+00:00",
+      "run_id": "44700977836"
     }
   },
   "skipped_non_coupang": 843,
