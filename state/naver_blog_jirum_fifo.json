@@ -1,39 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96644,
-  "pending": [
-    {
-      "id": 96640,
-      "source_message_id": 96640,
-      "source_post_url": "https://t.me/jirum/96640",
-      "original_purchase_url": "https://link.coupang.com/a/iPG3PUNapw",
-      "title": "Heinz 하인즈 노슈가 토마토 케첩 369g",
-      "source_text": "👍대박 3,130원 (35.0% 할인)\nHeinz 하인즈 노슈가 토마토 케첩 369g\n📌 가격 현황\n- 정상가: 4,815원\n- 할인: 1,685원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPG3PUNapw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3130,
-      "posted_at_utc": "2026-11-20T11:44:35+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
-      "id": 96641,
-      "source_message_id": 96641,
-      "source_post_url": "https://t.me/jirum/96641",
-      "original_purchase_url": "https://link.coupang.com/a/iPG91xUuXY",
-      "title": "센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개",
-      "source_text": "☆특가 24,100원 (26.0% 할인)\n센소다인 오리지널플러스 120+40g 약국용 대용량 치약 3개\n📌 가격 현황\n- 정상가: 32,568원\n- 할인: 8,468원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPG91xUuXY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 24100,
-      "posted_at_utc": "2026-11-20T11:45:59+00:00"
-    },
-    {
-      "id": 96642,
-      "source_message_id": 96642,
-      "source_post_url": "https://t.me/jirum/96642",
-      "original_purchase_url": "https://link.coupang.com/a/iPHxAxKe0i",
-      "title": "☆특가 10,860원",
-      "source_text": "☆특가 10,860원\n피지 모락셀라 섬유탈취제 상쾌한 허브향 400ml, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPHxAxKe0i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10860,
-      "posted_at_utc": "2026-11-20T11:51:18+00:00"
-    }
-  ],
+  "last_scanned_id": 96653,
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2015,6 +1983,18 @@
     "96638": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-20T11:28:16.069553+00:00"
+    },
+    "96640": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T13:47:50.959755+00:00"
+    },
+    "96641": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T13:47:50.959765+00:00"
+    },
+    "96642": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-20T13:47:50.959770+00:00"
     }
   },
   "in_flight": null,
