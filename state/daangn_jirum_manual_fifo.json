@@ -3,15 +3,6 @@
   "last_scanned_id": 96629,
   "pending": [
     {
-      "id": 96626,
-      "source_post_url": "https://t.me/jirum/96626",
-      "original_purchase_url": "https://link.coupang.com/a/iPqtAOwRXM",
-      "source_text": "👍대박 5,970원 (34.0% 할인)\n[로켓프레시] 바나나맛우유 240ml 6개\n📌 가격 현황\n- 정상가: 9,045원\n- 할인: 3,075원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPqtAOwRXM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T07:52:30+00:00",
-      "title": "[로켓프레시] 바나나맛우유 240ml 6개",
-      "sale_price_krw": 5970
-    },
-    {
       "id": 96627,
       "source_post_url": "https://t.me/jirum/96627",
       "original_purchase_url": "https://link.coupang.com/a/iPq34lQWiW",
@@ -39,12 +30,7 @@
       "sale_price_krw": 4140
     }
   ],
-  "in_flight": {
-    "id": 96626,
-    "status": "CLAIMED",
-    "run_id": "44700977836",
-    "at": "2026-11-20T08:16:01.488833+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7297,6 +7283,16 @@
       "item_id": "16551880968",
       "vendor_item_id": null,
       "at": "2026-11-20T08:15:52.013498+00:00",
+      "run_id": "44700977836"
+    },
+    "96626": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EB%82%98%EB%82%98%EB%A7%9B%EC%9A%B0%EC%9C%A0-240ml-6%EA%B0%9C-30%ED%95%A0%EC%9D%B8-AeerKxwA?from=write",
+      "posted_at_utc": "2026-11-20T07:52:30+00:00",
+      "product_id": "309280841",
+      "item_id": "25280155233",
+      "vendor_item_id": "92275744434",
+      "at": "2026-11-20T08:16:20.150370+00:00",
       "run_id": "44700977836"
     }
   },
