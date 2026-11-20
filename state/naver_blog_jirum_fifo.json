@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96623,
-  "pending": [
-    {
-      "id": 96622,
-      "source_message_id": 96622,
-      "source_post_url": "https://t.me/jirum/96622",
-      "original_purchase_url": "https://link.coupang.com/a/iPkT9vD9em",
-      "title": "☆특가 14,940원",
-      "source_text": "☆특가 14,940원\n오뚜기 참깨라면 컵 110g×15개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iPkT9vD9em\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14940,
-      "posted_at_utc": "2026-11-20T06:34:32+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1651,6 +1640,10 @@
     "96621": {
       "url": "https://blog.naver.com/mw5114/224484879328",
       "at": "2026-11-20T07:05:17.457592+00:00"
+    },
+    "96622": {
+      "url": "https://blog.naver.com/mw5114/224484880785",
+      "at": "2026-11-20T07:06:21.454414+00:00"
     }
   },
   "skipped": {
@@ -1952,12 +1945,7 @@
       "at": "2026-11-20T07:03:13.005834+00:00"
     }
   },
-  "in_flight": {
-    "id": 96622,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44692100228",
-    "at": "2026-11-20T07:05:37.981461+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
