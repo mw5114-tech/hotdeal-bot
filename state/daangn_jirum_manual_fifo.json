@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96592,
-  "pending": [
-    {
-      "id": 96591,
-      "source_post_url": "https://t.me/jirum/96591",
-      "original_purchase_url": "https://link.coupang.com/a/iOXm1c8htQ",
-      "source_text": "🔥🔥🔥무지성 2,990원 (64.0% 할인)🔥🔥🔥\n리큐 스마트워시 AI자동투입 세탁세제 1L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 8,306원\n- 할인: 5,316원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iOXm1c8htQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-20T01:05:12+00:00",
-      "title": "리큐 스마트워시 AI자동투입 세탁세제 1L",
-      "sale_price_krw": 2990
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8992,6 +8982,12 @@
       "source_post_url": "https://t.me/jirum/96558",
       "source_title": "스윗토 스테비아 완숙토마토, 1kg, 3팩",
       "at": "2026-11-19T13:40:33.046153+00:00"
+    },
+    "96591": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96591",
+      "source_title": "리큐 스마트워시 AI자동투입 세탁세제 1L",
+      "at": "2026-11-20T01:56:09.697041+00:00"
     }
   },
   "single_test_repost_20261103": {
