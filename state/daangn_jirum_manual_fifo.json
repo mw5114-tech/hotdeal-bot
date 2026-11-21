@@ -3,15 +3,6 @@
   "last_scanned_id": 96698,
   "pending": [
     {
-      "id": 96697,
-      "source_post_url": "https://t.me/jirum/96697",
-      "original_purchase_url": "https://link.coupang.com/a/iQF0rofg04",
-      "source_text": "☆특가 38,400원\n오케이베이비 유아용 온다베이비플러스 욕조\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQF0rofg04\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T01:57:26+00:00",
-      "title": "☆특가 38,400원",
-      "sale_price_krw": 38400
-    },
-    {
       "id": 96698,
       "source_post_url": "https://t.me/jirum/96698",
       "original_purchase_url": "https://link.coupang.com/a/iQF4fI0Evs",
@@ -21,12 +12,7 @@
       "sale_price_krw": 12500
     }
   ],
-  "in_flight": {
-    "id": 96697,
-    "status": "CLAIMED",
-    "run_id": "44853188715",
-    "at": "2026-11-21T01:59:28.368024+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7440,6 +7426,16 @@
       "vendor_item_id": null,
       "at": "2026-11-21T01:19:35.710276+00:00",
       "run_id": "44849421351"
+    },
+    "96697": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%BC%80%EC%9D%B4%EB%B2%A0%EC%9D%B4%EB%B9%84-%EC%9C%A0%EC%95%84%EC%9A%A9-%EC%98%A8%EB%8B%A4%EB%B2%A0%EC%9D%B4%EB%B9%84%ED%94%8C%EB%9F%AC%EC%8A%A4-%EC%9A%95%EC%A1%B0-%EB%B0%80%ED%82%A4-%EB%A1%9C%EC%A6%88-15%ED%95%A0%EC%9D%B8-dDWyaYyP?from=write",
+      "posted_at_utc": "2026-11-21T01:57:26+00:00",
+      "product_id": "8883146598",
+      "item_id": "25720508030",
+      "vendor_item_id": null,
+      "at": "2026-11-21T01:59:47.051108+00:00",
+      "run_id": "44853188715"
     }
   },
   "skipped_non_coupang": 891,
