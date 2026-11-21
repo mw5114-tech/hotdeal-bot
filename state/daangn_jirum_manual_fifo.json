@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96737,
-  "pending": [
-    {
-      "id": 96737,
-      "source_post_url": "https://t.me/jirum/96737",
-      "original_purchase_url": "https://link.coupang.com/a/iRiyWnRU5c",
-      "source_text": "☆특가 13,530원\n코카콜라 제로 레몬라임, 350ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iRiyWnRU5c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T10:56:58+00:00",
-      "title": "☆특가 13,530원",
-      "sale_price_krw": 13530
-    }
-  ],
-  "in_flight": {
-    "id": 96737,
-    "status": "CLAIMED",
-    "run_id": "44896785654",
-    "at": "2026-11-21T10:58:17.351605+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7561,6 +7546,16 @@
       "vendor_item_id": null,
       "at": "2026-11-21T10:35:33.517247+00:00",
       "run_id": "44894942178"
+    },
+    "96737": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EC%B9%B4%EC%BD%9C%EB%9D%BC-%EC%A0%9C%EB%A1%9C-%EB%A0%88%EB%AA%AC%EB%9D%BC%EC%9E%84-24%EA%B0%9C-350ml-25%ED%95%A0%EC%9D%B8-AL1xnNVP?from=write",
+      "posted_at_utc": "2026-11-21T10:56:58+00:00",
+      "product_id": "9647697513",
+      "item_id": "28833436557",
+      "vendor_item_id": null,
+      "at": "2026-11-21T10:58:35.502155+00:00",
+      "run_id": "44896785654"
     }
   },
   "skipped_non_coupang": 915,
