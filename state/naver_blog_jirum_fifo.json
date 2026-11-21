@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96715,
-  "pending": [
-    {
-      "id": 96715,
-      "source_message_id": 96715,
-      "source_post_url": "https://t.me/jirum/96715",
-      "original_purchase_url": "https://link.coupang.com/a/iQYOtfdEFU",
-      "title": "청정원 잇츠팜 햄통조림115g, 3개",
-      "source_text": "🔥🔥🔥무지성 4,140원 (47.0% 할인)🔥🔥🔥\n청정원 잇츠팜 햄통조림115g, 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,811원\n- 할인: 3,671원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQYOtfdEFU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4140,
-      "posted_at_utc": "2026-11-21T06:20:36+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1719,6 +1708,10 @@
     "96714": {
       "url": "https://blog.naver.com/mw5114/224486024816",
       "at": "2026-11-21T06:23:18.785828+00:00"
+    },
+    "96715": {
+      "url": "https://blog.naver.com/mw5114/224486026621",
+      "at": "2026-11-21T06:25:02.700888+00:00"
     }
   },
   "skipped": {
@@ -2087,12 +2080,7 @@
       "at": "2026-11-21T05:55:32.888211+00:00"
     }
   },
-  "in_flight": {
-    "id": 96715,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44875107422",
-    "at": "2026-11-21T06:24:20.603936+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
