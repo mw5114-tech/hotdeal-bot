@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96776,
-  "pending": [
-    {
-      "id": 96776,
-      "source_post_url": "https://t.me/jirum/96776",
-      "original_purchase_url": "https://link.coupang.com/a/iSa2WJRgJw",
-      "source_text": "👍대박 9,900원 (34.0% 할인)\n티젠 애플사이다 비니거\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSa2WJRgJw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T23:39:24+00:00",
-      "title": "티젠 애플사이다 비니거",
-      "sale_price_krw": 9900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -33,6 +23,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-21T22:58:44.618263+00:00"
+    },
+    "96776": {
+      "status": "NOT_OVER_30_VERIFIED",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-21T23:40:24.562587+00:00"
     }
   }
 }
