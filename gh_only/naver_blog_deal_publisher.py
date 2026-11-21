@@ -25,6 +25,92 @@ def section_empty(frame, name: str) -> bool:
     return frame.locator(selector).count() == 1
 
 
+def _exact_editor_title(frame, expected: str) -> bool:
+    """The visible Naver title must match, not merely contain, our title."""
+    actual = frame.locator(".se-section-documentTitle").inner_text().strip()
+    return actual == expected
+
+
+def apply_verified_title(page, frame, title, expected: str) -> None:
+    """Repair an incomplete SmartEditor title strictly before any publish click.
+
+    On some new drafts, the editor accepts only the first '[' character.
+    The former fallback retried only when .se-is-empty was present, so that
+    partial content was permanently quarantined. This routine performs one
+    tightly scoped keyboard selection and one replacement, not DOM mutation.
+    """
+    if not section_empty(frame, "title") or not section_empty(frame, "body"):
+        raise NaverPreSubmitTitleError("NAVER_TITLE_PREP_EDITOR_NOT_EMPTY")
+    title.click(timeout=8000)
+    page.keyboard.insert_text(expected[:1])
+    page.wait_for_timeout(800)
+    page.keyboard.type(expected[1:], delay=35)
+    page.wait_for_timeout(900)
+    if _exact_editor_title(frame, expected):
+        print("NAVER_TITLE_VERIFIED first_attempt=True")
+        return
+
+    title_section = frame.locator(".se-section-documentTitle")
+    original = title_section.inner_text().strip()
+    initial_body = frame.locator(".se-section-text").inner_text()
+    print("NAVER_TITLE_PARTIAL " + str({
+        "expected_chars": len(expected),
+        "actual_chars": len(original),
+        "body_empty": section_empty(frame, "body"),
+    }))
+    if (not original or len(original) > len(expected) * 2
+            or not section_empty(frame, "body")):
+        raise NaverPreSubmitTitleError("NAVER_TITLE_RECOVERY_UNSAFE_EDITOR_STATE")
+
+    # The keyboard selection must be confined to the TITLE DOM subtree.
+    # Never Ctrl+A a body paragraph or select the entire editor document.
+    title.click(timeout=8000)
+    page.keyboard.press("ControlOrMeta+A")
+    selection = frame.evaluate("""() => {
+        const root = document.querySelector('.se-section-documentTitle');
+        const sel = window.getSelection();
+        return {
+            selected: sel ? sel.toString() : '',
+            inside_title: !!(root && sel && sel.anchorNode && sel.focusNode
+                && root.contains(sel.anchorNode) && root.contains(sel.focusNode))
+        };
+    }""")
+    valid_selection = (
+        isinstance(selection, dict)
+        and selection.get("inside_title") is True
+        and selection.get("selected", "").strip() == original
+    )
+    print("NAVER_TITLE_RECOVERY_SELECTION " + str({
+        "title_only": bool(selection.get("inside_title")) if isinstance(selection, dict) else False,
+        "selected_chars": len(selection.get("selected", "")) if isinstance(selection, dict) else 0,
+        "valid": valid_selection,
+    }))
+    if not valid_selection:
+        raise NaverPreSubmitTitleError("NAVER_TITLE_RECOVERY_SELECTION_UNVERIFIED")
+
+    page.keyboard.press("Backspace")
+    page.wait_for_timeout(450)
+    if (not section_empty(frame, "title")
+            or not section_empty(frame, "body")
+            or frame.locator(".se-section-text").inner_text() != initial_body):
+        raise NaverPreSubmitTitleError("NAVER_TITLE_RECOVERY_CLEAR_NOT_VERIFIED")
+
+    title.click(timeout=8000)
+    # The title section is now mounted: use native keystrokes exclusively.
+    page.keyboard.type(expected[:1], delay=35)
+    page.wait_for_timeout(400)
+    page.keyboard.type(expected[1:], delay=28)
+    page.wait_for_timeout(850)
+    if (not _exact_editor_title(frame, expected)
+            or not section_empty(frame, "body")
+            or frame.locator(".se-section-text").inner_text() != initial_body):
+        raise NaverPreSubmitTitleError("NAVER_TITLE_RECOVERY_REWRITE_NOT_VERIFIED")
+    print("NAVER_TITLE_RECOVERED_BEFORE_SUBMIT " + str({
+        "expected_chars": len(expected), "retry_attempts": 1,
+        "body_untouched": True, "submit_attempted": False,
+    }))
+
+
 def upload_image(page, frame, image: Path):
     if not image.is_file() or image.suffix.lower() not in {
         ".jpg", ".jpeg", ".png", ".webp"
@@ -646,43 +732,7 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
             frame, title, body_element = get_editor_frame(page)
             if not section_empty(frame, "title") or not section_empty(frame, "body"):
                 raise RuntimeError("NAVER_EDITOR_NOT_EMPTY")
-            title.click(timeout=8000)
-            # SmartEditor can discard the first long insertText event while
-            # activating a fresh title section. Prime it with one ASCII char,
-            # allow its selection model to settle, then type the remaining
-            # Unicode content like native keypresses (including emojis).
-            page.keyboard.insert_text(article["title"][:1])
-            page.wait_for_timeout(800)
-            page.keyboard.type(article["title"][1:], delay=35)
-            page.wait_for_timeout(900)
-            actual_title = frame.locator(".se-section-documentTitle").inner_text()
-            print("NAVER_TITLE_CHECK " + str({
-                "expected_chars": len(article["title"]),
-                "actual_chars": len(actual_title),
-                "exact": article["title"] in actual_title,
-                "product_tail": article["title"][-12:] in actual_title,
-            }))
-            if article["title"] not in actual_title:
-                # A fresh SmartEditor can discard an insertText when the title
-                # field only had the active placeholder. One alternate keypath
-                # is safe ONLY while the title module is still marked empty.
-                body_now = frame.locator(".se-section-text").inner_text()
-                print("NAVER_TITLE_FOCUS_CHECK " + str({
-                    "empty": section_empty(frame, "title"),
-                    "body_has_title": article["title"] in body_now,
-                    "body_chars": len(body_now),
-                }))
-                if section_empty(frame, "title") and article["title"] not in body_now:
-                    title.click(timeout=8000)
-                    page.keyboard.type(article["title"], delay=16)
-                    page.wait_for_timeout(900)
-                    actual_title = frame.locator(".se-section-documentTitle").inner_text()
-                    print("NAVER_TITLE_FALLBACK " + str({
-                        "actual_chars": len(actual_title),
-                        "exact": article["title"] in actual_title,
-                    }))
-                if article["title"] not in actual_title:
-                    raise NaverPreSubmitTitleError("NAVER_TITLE_NOT_APPLIED")
+            apply_verified_title(page, frame, title, article["title"])
             if article.get("blocks"):
                 render_readable_blocks(page, frame, body_element, article)
             else:
@@ -695,6 +745,10 @@ def submit_one(article: dict, session_json: str, *, publish: bool) -> str | None
                         or actual_body.count(article["link"]) != 1):
                     raise RuntimeError("NAVER_BODY_NOT_APPLIED")
                 upload_image(page, frame, image)
+            # A body upload or format toolbar may have changed editor focus.
+            # Keep the real publish boundary gated by an EXACT final title.
+            if not _exact_editor_title(frame, article["title"]):
+                raise NaverPreSubmitTitleError("NAVER_TITLE_CHANGED_BEFORE_SUBMIT")
             if not publish:
                 print("NAVER_IMAGE_AND_TEXT_DRAFT_OK_NO_PUBLISH")
                 return None
