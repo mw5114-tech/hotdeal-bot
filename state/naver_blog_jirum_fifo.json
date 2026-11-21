@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96696,
-  "pending": [],
+  "last_scanned_id": 96698,
+  "pending": [
+    {
+      "id": 96697,
+      "source_message_id": 96697,
+      "source_post_url": "https://t.me/jirum/96697",
+      "original_purchase_url": "https://link.coupang.com/a/iQF0rofg04",
+      "title": "☆특가 38,400원",
+      "source_text": "☆특가 38,400원\n오케이베이비 유아용 온다베이비플러스 욕조\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQF0rofg04\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 38400,
+      "posted_at_utc": "2026-11-21T01:57:26+00:00"
+    },
+    {
+      "id": 96698,
+      "source_message_id": 96698,
+      "source_post_url": "https://t.me/jirum/96698",
+      "original_purchase_url": "https://link.coupang.com/a/iQF4fI0Evs",
+      "title": "유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입 2개",
+      "source_text": "❤️초대박 12,500원 (40.0% 할인)\n유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입 2개\n📌 가격 현황\n- 정상가: 20,833원\n- 할인: 8,333원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQF4fI0Evs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 12500,
+      "posted_at_utc": "2026-11-21T01:58:17+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
