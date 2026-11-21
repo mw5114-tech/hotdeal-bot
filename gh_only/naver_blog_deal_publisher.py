@@ -58,9 +58,22 @@ def apply_verified_title(page, frame, title, expected: str) -> None:
         "actual_chars": len(original),
         "body_empty": section_empty(frame, "body"),
     }))
-    if (not original or len(original) > len(expected) * 2
-            or not section_empty(frame, "body")):
+    if not section_empty(frame, "body") or len(original) > len(expected) * 2:
         raise NaverPreSubmitTitleError("NAVER_TITLE_RECOVERY_UNSAFE_EDITOR_STATE")
+    if not original:
+        # No input took effect; no content needs deleting. One native retry
+        # is safe only while both editor sections still report empty.
+        if not section_empty(frame, "title"):
+            raise NaverPreSubmitTitleError("NAVER_TITLE_EMPTY_BUT_MODULE_ACTIVE")
+        title.click(timeout=8000)
+        page.keyboard.type(expected, delay=28)
+        page.wait_for_timeout(850)
+        if (not _exact_editor_title(frame, expected)
+                or not section_empty(frame, "body")
+                or frame.locator(".se-section-text").inner_text() != initial_body):
+            raise NaverPreSubmitTitleError("NAVER_TITLE_EMPTY_RETRY_NOT_VERIFIED")
+        print("NAVER_TITLE_RECOVERED_FROM_EMPTY_BEFORE_SUBMIT")
+        return
 
     # The keyboard selection must be confined to the TITLE DOM subtree.
     # Never Ctrl+A a body paragraph or select the entire editor document.
