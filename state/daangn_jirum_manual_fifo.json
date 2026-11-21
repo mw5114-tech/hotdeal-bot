@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96747,
-  "pending": [],
+  "last_scanned_id": 96748,
+  "pending": [
+    {
+      "id": 96748,
+      "source_post_url": "https://t.me/jirum/96748",
+      "original_purchase_url": "https://link.coupang.com/a/iRuq1cFhIG",
+      "source_text": "🔥🔥🔥무지성 30,740원 (52.0% 할인)🔥🔥🔥\n바겐슈타이거 코어5 헤리티지 316스텐 통5중 무연마제 피쉬팬\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 64,042원\n- 할인: 33,302원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iRuq1cFhIG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-21T13:43:06+00:00",
+      "title": "바겐슈타이거 코어5 헤리티지 316스텐 통5중 무연마제 피쉬팬",
+      "sale_price_krw": 30740
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
