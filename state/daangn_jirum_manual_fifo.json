@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96703,
-  "pending": [
-    {
-      "id": 96703,
-      "source_post_url": "https://t.me/jirum/96703",
-      "original_purchase_url": "https://link.coupang.com/a/iQMpzRnUbI",
-      "source_text": "☆특가 8,810원\n크리스마스 럭셔리 선물세트, 웨이퍼 5종, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQMpzRnUbI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T03:27:04+00:00",
-      "title": "☆특가 8,810원",
-      "sale_price_krw": 8810
-    }
-  ],
-  "in_flight": {
-    "id": 96703,
-    "status": "CLAIMED",
-    "run_id": "44861251470",
-    "at": "2026-11-21T03:29:16.394959+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7451,6 +7436,16 @@
       "vendor_item_id": "91116197924",
       "at": "2026-11-21T02:01:00.967416+00:00",
       "run_id": "44853188715"
+    },
+    "96703": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-%EB%9F%AD%EC%85%94%EB%A6%AC-%EC%84%A0%EB%AC%BC%EC%84%B8%ED%8A%B8-%EC%9B%A8%EC%9D%B4%ED%8D%BC-5%EC%A2%85-1%EC%84%B8%ED%8A%B8-PmvDXeod?from=write",
+      "posted_at_utc": "2026-11-21T03:27:04+00:00",
+      "product_id": "47019421",
+      "item_id": "166705465",
+      "vendor_item_id": null,
+      "at": "2026-11-21T03:29:34.463605+00:00",
+      "run_id": "44861251470"
     }
   },
   "skipped_non_coupang": 895,
