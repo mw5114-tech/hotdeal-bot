@@ -382,6 +382,17 @@ def validate_state(s: dict) -> None:
             or any(str(i) in skipped_unverifiable for i in ids)
             or any(k in published or k in skipped_expired for k in skipped_unverifiable)):
         raise ValueError("INVALID_UNVERIFIABLE_AUDIT")
+    secondary_skips = s.get("skipped_secondary_discount", {})
+    if (not isinstance(secondary_skips, dict)
+            or len(secondary_skips) > 10_000
+            or any(not isinstance(key, str) or not key.isdigit()
+                   or not isinstance(value, dict)
+                   or value.get("status") != "NOT_OVER_30_VERIFIED"
+                   for key, value in secondary_skips.items())
+            or any(str(i) in secondary_skips for i in ids)
+            or any(key in published or key in skipped_expired
+                   or key in skipped_unverifiable for key in secondary_skips)):
+        raise ValueError("INVALID_SECONDARY_DISCOUNT_AUDIT")
     block = s.get("kakao_auth_block")
     if block is not None and (
         not isinstance(block, dict)
