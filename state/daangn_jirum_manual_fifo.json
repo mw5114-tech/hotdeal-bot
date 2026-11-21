@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96715,
-  "pending": [
-    {
-      "id": 96715,
-      "source_post_url": "https://t.me/jirum/96715",
-      "original_purchase_url": "https://link.coupang.com/a/iQYOtfdEFU",
-      "source_text": "🔥🔥🔥무지성 4,140원 (47.0% 할인)🔥🔥🔥\n청정원 잇츠팜 햄통조림115g, 3개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,811원\n- 할인: 3,671원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQYOtfdEFU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T06:20:36+00:00",
-      "title": "청정원 잇츠팜 햄통조림115g, 3개",
-      "sale_price_krw": 4140
-    }
-  ],
-  "in_flight": {
-    "id": 96715,
-    "status": "CLAIMED",
-    "run_id": "44875107422",
-    "at": "2026-11-21T06:22:24.069104+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7480,6 +7465,16 @@
       "item_id": "27309015759",
       "vendor_item_id": "94275486942",
       "at": "2026-11-21T06:22:15.173455+00:00",
+      "run_id": "44875107422"
+    },
+    "96715": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B2%AD%EC%A0%95%EC%9B%90-%EC%9E%87%EC%B8%A0%ED%8C%9C-%ED%96%84%ED%86%B5%EC%A1%B0%EB%A6%BC-115g-3%EA%B0%9C-35%ED%95%A0%EC%9D%B8-P2nb5XXP?from=write",
+      "posted_at_utc": "2026-11-21T06:20:36+00:00",
+      "product_id": "9285365340",
+      "item_id": "18171729026",
+      "vendor_item_id": "85321070707",
+      "at": "2026-11-21T06:22:43.548647+00:00",
       "run_id": "44875107422"
     }
   },
