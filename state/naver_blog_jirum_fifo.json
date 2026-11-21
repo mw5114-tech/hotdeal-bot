@@ -3,16 +3,6 @@
   "last_scanned_id": 96715,
   "pending": [
     {
-      "id": 96714,
-      "source_message_id": 96714,
-      "source_post_url": "https://t.me/jirum/96714",
-      "original_purchase_url": "https://link.coupang.com/a/iQYLx3Kh2G",
-      "title": "쿠쿠 아이편한 복합식 스텐 가습기 7L",
-      "source_text": "🔥🔥🔥무지성 126,050원 (47.0% 할인)🔥🔥🔥\n쿠쿠 아이편한 복합식 스텐 가습기 7L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 237,830원\n- 할인: 111,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQYLx3Kh2G\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 126050,
-      "posted_at_utc": "2026-11-21T06:19:57+00:00"
-    },
-    {
       "id": 96715,
       "source_message_id": 96715,
       "source_post_url": "https://t.me/jirum/96715",
@@ -1725,6 +1715,10 @@
     "96703": {
       "url": "https://blog.naver.com/mw5114/224485859610",
       "at": "2026-11-21T03:28:54.912146+00:00"
+    },
+    "96714": {
+      "url": "https://blog.naver.com/mw5114/224486024816",
+      "at": "2026-11-21T06:23:18.785828+00:00"
     }
   },
   "skipped": {
@@ -2093,12 +2087,7 @@
       "at": "2026-11-21T05:55:32.888211+00:00"
     }
   },
-  "in_flight": {
-    "id": 96714,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44875107422",
-    "at": "2026-11-21T06:22:35.040164+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
