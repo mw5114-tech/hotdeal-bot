@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96716,
-  "pending": [
-    {
-      "id": 96716,
-      "source_message_id": 96716,
-      "source_post_url": "https://t.me/jirum/96716",
-      "original_purchase_url": "https://link.coupang.com/a/iQ3rh5J7Ke",
-      "title": "아리얼 스트레스릴리빙 퓨어풀 클렌징티슈15매입, 6개",
-      "source_text": "👍대박 2,940원 (35.0% 할인)\n아리얼 스트레스릴리빙 퓨어풀 클렌징티슈15매입, 6개\n📌 가격 현황\n- 정상가: 4,523원\n- 할인: 1,583원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQ3rh5J7Ke\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2940,
-      "posted_at_utc": "2026-11-21T07:25:20+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1723,6 +1712,10 @@
     "96715": {
       "url": "https://blog.naver.com/mw5114/224486026621",
       "at": "2026-11-21T06:25:02.700888+00:00"
+    },
+    "96716": {
+      "url": "https://blog.naver.com/mw5114/224486084579",
+      "at": "2026-11-21T07:26:58.709466+00:00"
     }
   },
   "skipped": {
@@ -2091,12 +2084,7 @@
       "at": "2026-11-21T05:55:32.888211+00:00"
     }
   },
-  "in_flight": {
-    "id": 96716,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44880217699",
-    "at": "2026-11-21T07:26:15.242096+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
