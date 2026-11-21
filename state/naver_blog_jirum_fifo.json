@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96686,
-  "pending": [],
+  "last_scanned_id": 96690,
+  "pending": [
+    {
+      "id": 96690,
+      "source_message_id": 96690,
+      "source_post_url": "https://t.me/jirum/96690",
+      "original_purchase_url": "https://link.coupang.com/a/iQyzmShcFW",
+      "title": "퀘이커 오트 그래놀라 시리얼 골든넛츠 350g",
+      "source_text": "❤️초대박 4,600원 (42.0% 할인)\n퀘이커 오트 그래놀라 시리얼 골든넛츠 350g\n📌 가격 현황\n- 정상가: 7,931원\n- 할인: 3,331원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQyzmShcFW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4600,
+      "posted_at_utc": "2026-11-21T00:13:22+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
