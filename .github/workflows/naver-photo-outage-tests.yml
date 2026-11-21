@@ -5,6 +5,8 @@ on:
     paths:
       - gh_only/naver_blog_jirum.py
       - gh_only/test_naver_blog_jirum.py
+      - gh_only/naver_blog_deal_publisher.py
+      - gh_only/test_naver_title_recovery.py
       - .github/workflows/naver-photo-outage-tests.yml
   workflow_dispatch:
 permissions:
@@ -22,5 +24,5 @@ jobs:
         run: python -m pip install --disable-pip-version-check --quiet playwright==1.64.1 Pillow==11.3.0
       - name: Compile publisher and run Naver/Daangn pre-submit regressions
         run: |
-          python -m compileall -q gh_only/naver_blog_jirum.py gh_only/test_naver_blog_jirum.py
-          python -m unittest -q gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_default_deal_automation gh_only.test_lowchart_shared_reference gh_only.test_coupang_no_subid_end_to_end
+          python -m compileall -q gh_only/naver_blog_jirum.py gh_only/naver_blog_deal_publisher.py gh_only/test_naver_blog_jirum.py gh_only/test_naver_title_recovery.py
+          python -m unittest -q gh_only.test_naver_title_recovery gh_only.test_naver_blog_jirum gh_only.test_jirum_manual_queue gh_only.test_daangn_editor_probe gh_only.test_default_deal_automation gh_only.test_lowchart_shared_reference gh_only.test_coupang_no_subid_end_to_end
