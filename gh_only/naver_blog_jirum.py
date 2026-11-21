@@ -562,30 +562,73 @@ def checkpoint_published(store: Store, source_id: int, url: str) -> None:
     raise RuntimeError("NAVER_PUBLISHED_RECEIPT_409_EXHAUSTED")
 
 
-def quarantine_title_failure(store: Store, source_id: int) -> None:
-    """A *definite* pre-publish title failure is safe to skip, not repost."""
+class NaverPreSubmitTitleDeferred(RuntimeError):
+    """A proven pre-click editor title failure was durably deferred or skipped."""
+
+    def __init__(self, source_id: int, status: str):
+        self.source_id = source_id
+        self.status = status
+        super().__init__("NAVER_PRE_SUBMIT_TITLE_" + status)
+
+
+def checkpoint_pre_submit_title_failure(store: Store, source_id: int) -> str:
+    """One fresh-run retry for a proven pre-submit SmartEditor title failure.
+
+    The NaverPreSubmitTitleError class is raised exclusively BEFORE the
+    publish button is clicked. This is the only post-claim error allowed to
+    release the claim; uncertain or other exceptions remain review-locked.
+    Never re-publish a historically skipped source.
+    """
     for attempt in range(5):
         state, sha = store.read()
-        if (not state["in_flight"]
-                or state["in_flight"]["id"] != source_id
+        claim = state.get("in_flight")
+        run_id = os.environ.get("GITHUB_RUN_ID", "unknown")
+        if (not isinstance(claim, dict)
+                or claim.get("id") != source_id
+                or claim.get("run_id") != run_id
                 or not state["pending"]
-                or state["pending"][0]["id"] != source_id):
-            raise RuntimeError("NAVER_PRE_SUBMIT_STATE_CHANGED_REVIEW_REQUIRED")
-        state["pending"].pop(0)
-        state["skipped"][str(source_id)] = {
-            "reason": "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST",
-            "claimed_run_id": os.environ.get("GITHUB_RUN_ID", "unknown"),
-            "at": now_utc(),
-        }
+                or state["pending"][0]["id"] != source_id
+                or str(source_id) in state["published"]
+                or str(source_id) in state["skipped"]):
+            raise RuntimeError("NAVER_TITLE_PRE_SUBMIT_CLAIM_CHANGED_REVIEW_REQUIRED")
+        row = state["pending"][0]
+        previous = row.get("title_prepare_failure_count", 0)
+        if type(previous) is not int or not 0 <= previous <= 1:
+            raise RuntimeError("NAVER_TITLE_PRE_SUBMIT_RETRY_AUDIT_INVALID")
+        if previous == 0 and source_fresh(row):
+            row["title_prepare_failure_count"] = 1
+            status = "DEFERRED"
+        else:
+            state["pending"].pop(0)
+            state["skipped"][str(source_id)] = {
+                "reason": "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST",
+                "attempts": previous + 1,
+                "claimed_run_id": run_id,
+                "at": now_utc(),
+            }
+            status = "SKIPPED_UNVERIFIABLE"
         state["in_flight"] = None
         try:
-            store.write(state, sha, "state: mark title validation failure before submit")
-            return
+            store.write(state, sha, "state: Naver title before submit " + status)
         except NaverStateConflict:
             if attempt == 4:
                 raise
             _after_known_conflict(attempt)
-    raise RuntimeError("NAVER_TITLE_FAILURE_409_EXHAUSTED")
+            continue
+        print("NAVER_TITLE_PRE_SUBMIT_" + status + " " + json.dumps({
+            "source_id": source_id, "attempts": previous + 1,
+            "submit_attempted": False,
+            "reason": "NAVER_TITLE_NOT_APPLIED_BEFORE_CLICK",
+        }))
+        return status
+    raise RuntimeError("NAVER_TITLE_PRE_SUBMIT_409_EXHAUSTED")
+
+
+def quarantine_title_failure(store: Store, source_id: int) -> None:
+    """Compatibility helper for the old explicit skip operation."""
+    status = checkpoint_pre_submit_title_failure(store, source_id)
+    if status != "SKIPPED_UNVERIFIABLE":
+        raise RuntimeError("NAVER_TITLE_FAILURE_DEFERRED_NOT_QUARANTINED")
 
 
 def checkpoint_pre_submit_photo_unavailable(store: Store, source_id: int) -> str:
@@ -663,10 +706,12 @@ def publish_one(store: Store, *, with_receipt: bool = False):
     try:
         url = submit_one(article, os.environ.get("NAVER_BLOG_STORAGE_STATE_JSON", ""),
                          publish=True)
-    except NaverPreSubmitTitleError:
-        quarantine_title_failure(store, source_id)
-        print("NAVER_PRE_SUBMIT_TITLE_ERROR_QUARANTINED_NO_POST")
-        raise
+    except NaverPreSubmitTitleError as exc:
+        # This exception is raised strictly before any Naver publish click.
+        # Release only this precise same-run claim; other failures stay
+        # locked for manual review to prevent a second submission.
+        status = checkpoint_pre_submit_title_failure(store, source_id)
+        raise NaverPreSubmitTitleDeferred(source_id, status) from exc
     checkpoint_published(store, source_id, url)
     print("NAVER_BLOG_PUBLISHED " + json.dumps({
         "source_id": source_id, "url": url,
@@ -793,6 +838,17 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
             if status == "SKIPPED_UNVERIFIABLE":
                 continue
             raise RuntimeError("NAVER_PHOTO_PRE_SUBMIT_UNEXPECTED_AUDIT")
+        except NaverPreSubmitTitleDeferred as exc:
+            if exc.source_id != oldest_id:
+                raise RuntimeError("NAVER_PRE_SUBMIT_TITLE_SOURCE_CHANGED")
+            if exc.status == "DEFERRED":
+                # Another runner can attempt this STILL-FRESH item exactly
+                # once. Do not retry a just-discarded editor in this run.
+                break
+            if exc.status == "SKIPPED_UNVERIFIABLE":
+                # The same broken title must not block all later FIFO work.
+                continue
+            raise RuntimeError("NAVER_TITLE_PRE_SUBMIT_UNEXPECTED_AUDIT")
         except RuntimeError as exc:
             # A fresh item can cross the 60-minute expiry boundary during
             # slow photo/price enrichment or the second pre-submit attempt.
