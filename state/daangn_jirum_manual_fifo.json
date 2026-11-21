@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96713,
-  "pending": [],
+  "last_scanned_id": 96714,
+  "pending": [
+    {
+      "id": 96714,
+      "source_post_url": "https://t.me/jirum/96714",
+      "original_purchase_url": "https://link.coupang.com/a/iQYLx3Kh2G",
+      "source_text": "🔥🔥🔥무지성 126,050원 (47.0% 할인)🔥🔥🔥\n쿠쿠 아이편한 복합식 스텐 가습기 7L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 237,830원\n- 할인: 111,780원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQYLx3Kh2G\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-21T06:19:57+00:00",
+      "title": "쿠쿠 아이편한 복합식 스텐 가습기 7L",
+      "sale_price_krw": 126050
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
