@@ -1,0 +1,2 @@
+One-time browser read-only editor and board check for geojijeol-yagje.
+NO text input; NO post or upload; NO GitHub state writes.
