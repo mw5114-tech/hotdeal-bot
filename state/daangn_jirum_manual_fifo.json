@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96776,
-  "pending": [
-    {
-      "id": 96776,
-      "source_post_url": "https://t.me/jirum/96776",
-      "original_purchase_url": "https://link.coupang.com/a/iSa2WJRgJw",
-      "source_text": "👍대박 9,900원 (34.0% 할인)\n티젠 애플사이다 비니거\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSa2WJRgJw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T23:39:24+00:00",
-      "title": "티젠 애플사이다 비니거",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 96776,
-    "status": "CLAIMED",
-    "run_id": "44962897188",
-    "at": "2026-11-21T23:41:19.106075+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7661,6 +7646,16 @@
       "vendor_item_id": "93418323317",
       "at": "2026-11-21T22:58:10.147844+00:00",
       "run_id": "44959330027"
+    },
+    "96776": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8B%B0%EC%A0%A0-%EC%95%A0%ED%94%8C%EC%82%AC%EC%9D%B4%EB%8B%A4-%EB%B9%84%EB%8B%88%EA%B1%B0-250g-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A4nlw9Od?from=write",
+      "posted_at_utc": "2026-11-21T23:39:24+00:00",
+      "product_id": "8834441083",
+      "item_id": "24758651261",
+      "vendor_item_id": "91767017884",
+      "at": "2026-11-21T23:41:39.201538+00:00",
+      "run_id": "44962897188"
     }
   },
   "skipped_non_coupang": 944,
