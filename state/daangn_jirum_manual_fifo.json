@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96725,
-  "pending": [
-    {
-      "id": 96725,
-      "source_post_url": "https://t.me/jirum/96725",
-      "original_purchase_url": "https://link.coupang.com/a/iQ7UT1zZAa",
-      "source_text": "👍대박 11,130원 (32.4% 할인)\n농협 포크빌 한돈 뒷다리살 찌개용, 500g, 3개\n📌 가격 현황\n- 정상가: 16,470원\n- 할인: 5,340원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQ7UT1zZAa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T08:28:00+00:00",
-      "title": "농협 포크빌 한돈 뒷다리살 찌개용, 500g, 3개",
-      "sale_price_krw": 11130
-    }
-  ],
-  "in_flight": {
-    "id": 96725,
-    "status": "CLAIMED",
-    "run_id": "44885057137",
-    "at": "2026-11-21T08:29:03.792847+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7511,6 +7496,16 @@
       "vendor_item_id": "4717119973",
       "at": "2026-11-21T07:30:27.206855+00:00",
       "run_id": "44880435539"
+    },
+    "96725": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%86%8D%ED%98%91-%ED%8F%AC%ED%81%AC%EB%B9%8C-%ED%95%9C%EB%8F%88-%EB%92%B7%EB%8B%A4%EB%A6%AC%EC%82%B4-%EC%B0%8C%EA%B0%9C%EC%9A%A9-500g-3%EA%B0%9C-45%ED%95%A0%EC%9D%B8-dpYgQlxj?from=write",
+      "posted_at_utc": "2026-11-21T08:28:00+00:00",
+      "product_id": "4602507887",
+      "item_id": "19296338861",
+      "vendor_item_id": "86410960560",
+      "at": "2026-11-21T08:29:25.224490+00:00",
+      "run_id": "44885057137"
     }
   },
   "skipped_non_coupang": 908,
