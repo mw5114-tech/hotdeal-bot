@@ -1,0 +1,3 @@
+Initial owner-authorized secondary cafe >30% live scan, 2026-11-22 Asia/Seoul.
+This marker triggers ONLY the independent Geojijeol Daangn cafe workflow.
+Never backfill old Telegram IDs; keep strict >30%, exact-item verification, and deduplication.
