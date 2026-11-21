@@ -67,6 +67,17 @@ jobs:
       smoke_test: ${{ inputs.smoke_test }}
     secrets: inherit
 
+  # Oracle's real-time event also fans out to the third, independent
+  # Daangn cafe. It has its OWN state file and strictly verified >30% gate.
+  # The secondary workflow's schedule provides a 15-minute backup.
+  daangn-geojijeol-over30:
+    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule' && github.event_name != 'push'
+    uses: ./.github/workflows/daangn-cafe-geojijeol-over30.yml
+    with:
+      source_post_id: ${{ inputs.source_post_id }}
+      smoke_test: ${{ inputs.smoke_test }}
+    secrets: inherit
+
   naver-blog-fifo:
     # Independent Naver-only FIFO, with its own job-level serialization.
     # No Daangn scan, state, browser, or publish job runs before this.
