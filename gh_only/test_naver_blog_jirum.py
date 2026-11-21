@@ -1,5 +1,6 @@
 """Offline regression checks for Naver queue segregation and safe source filtering."""
 from datetime import datetime, timedelta, timezone
+import os
 import unittest
 from copy import deepcopy
 from unittest.mock import patch
@@ -12,6 +13,7 @@ from gh_only.naver_blog_jirum import (
     apply_official_api_link, make_article, publish_one,
     _photo_unavailable_before_submit, NaverPreSubmitPhotoUnavailable,
     checkpoint_pre_submit_photo_unavailable,
+    checkpoint_pre_submit_title_failure, NaverPreSubmitTitleDeferred,
 )
 
 
@@ -31,6 +33,9 @@ def deal(source_id, *, price=11900, minutes=10, kind="coupang_shortlink"):
         "source_text": "샘플 가격 11,900원", "title": "샘플",
         "sale_price_krw": price, "url_kind": kind, "posted_at_utc": posted,
     }
+
+
+from gh_only.naver_blog_deal_publisher import NaverPreSubmitTitleError
 
 
 class ConflictStore:
@@ -59,6 +64,89 @@ class ConflictStore:
 
 
 class NaverQueueTests(unittest.TestCase):
+    def test_pre_submit_title_failure_deferred_then_recovers(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=0)
+        def prepared(_store):
+            item, _ = _store.read()
+            return {"source_id": item["pending"][0]["id"], "unissued_link": False}
+        url = "https://blog.naver.com/mw5114/224485999999"
+        with (patch.dict(os.environ, {"GITHUB_RUN_ID": "first-title-run"}),
+              patch("gh_only.naver_blog_jirum.prepare_next", side_effect=prepared),
+              patch("gh_only.naver_blog_deal_publisher.submit_one",
+                    side_effect=NaverPreSubmitTitleError("NAVER_TITLE_NOT_APPLIED")) as submit):
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
+            submit.assert_called_once()
+        self.assertEqual(store.current["pending"][0]["title_prepare_failure_count"], 1)
+        self.assertNotIn("95496", store.current["skipped"])
+        self.assertIsNone(store.current["in_flight"])
+        with (patch.dict(os.environ, {"GITHUB_RUN_ID": "second-title-run"}),
+              patch("gh_only.naver_blog_jirum.prepare_next", side_effect=prepared),
+              patch("gh_only.naver_blog_deal_publisher.submit_one",
+                    return_value=url) as submit):
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
+            submit.assert_called_once()
+        self.assertEqual(store.current["published"]["95496"]["url"], url)
+        self.assertEqual(store.current["pending"], [])
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_second_title_failure_skips_only_bad_item(self):
+        s = state()
+        ingest(s, [deal(95496), deal(95497)])
+        store = ConflictStore(initial=s, conflicts=0)
+        def prepared(_store):
+            item, _ = _store.read()
+            return {"source_id": item["pending"][0]["id"], "unissued_link": False}
+        with (patch.dict(os.environ, {"GITHUB_RUN_ID": "title-run-1"}),
+              patch("gh_only.naver_blog_jirum.prepare_next", side_effect=prepared),
+              patch("gh_only.naver_blog_deal_publisher.submit_one",
+                    side_effect=NaverPreSubmitTitleError("NAVER_TITLE_NOT_APPLIED"))):
+            self.assertEqual(publish_batch(store, max_posts=1), 0)
+        url = "https://blog.naver.com/mw5114/224485999998"
+        with (patch.dict(os.environ, {"GITHUB_RUN_ID": "title-run-2"}),
+              patch("gh_only.naver_blog_jirum.prepare_next", side_effect=prepared),
+              patch("gh_only.naver_blog_jirum.time.sleep"),
+              patch("gh_only.naver_blog_deal_publisher.submit_one",
+                    side_effect=[NaverPreSubmitTitleError("NAVER_TITLE_NOT_APPLIED"),
+                                 url]) as submit):
+            self.assertEqual(publish_batch(store, max_posts=2), 0)
+            self.assertEqual(submit.call_count, 2)
+        self.assertEqual(store.current["skipped"]["95496"]["reason"],
+                         "DEFINITE_PRE_SUBMIT_TITLE_REJECTED_NO_POST")
+        self.assertEqual(store.current["published"]["95497"]["url"], url)
+        self.assertEqual(store.current["pending"], [])
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_title_deferral_rejects_foreign_claim_without_write(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        s["in_flight"] = {
+            "id": 95496, "status": "REVIEW_REQUIRED",
+            "run_id": "another-run", "at": datetime.now(timezone.utc).isoformat(),
+        }
+        store = ConflictStore(initial=s, conflicts=0)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "our-run"}):
+            with self.assertRaisesRegex(RuntimeError, "CLAIM_CHANGED"):
+                checkpoint_pre_submit_title_failure(store, 95496)
+        self.assertEqual(store.write_count, 0)
+        self.assertIsNotNone(store.current["in_flight"])
+
+    def test_unknown_publisher_error_preserves_review_claim(self):
+        s = state()
+        ingest(s, [deal(95496)])
+        store = ConflictStore(initial=s, conflicts=0)
+        with (patch.dict(os.environ, {"GITHUB_RUN_ID": "unknown-post-run"}),
+              patch("gh_only.naver_blog_jirum.prepare_next",
+                    return_value={"source_id": 95496, "unissued_link": False}),
+              patch("gh_only.naver_blog_deal_publisher.submit_one",
+                    side_effect=RuntimeError("SUBMISSION_UNCERTAIN_DO_NOT_RETRY"))):
+            with self.assertRaisesRegex(RuntimeError, "SUBMISSION_UNCERTAIN"):
+                publish_batch(store, max_posts=1)
+        self.assertEqual(store.current["in_flight"]["id"], 95496)
+        self.assertEqual(store.current["pending"][0]["id"], 95496)
+        self.assertNotIn("95496", store.current["skipped"])
+
     def test_draft_missing_photo_is_precisely_classified_pre_submit(self):
         import json
         from pathlib import Path
