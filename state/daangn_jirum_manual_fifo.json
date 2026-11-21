@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96748,
-  "pending": [
-    {
-      "id": 96748,
-      "source_post_url": "https://t.me/jirum/96748",
-      "original_purchase_url": "https://link.coupang.com/a/iRuq1cFhIG",
-      "source_text": "🔥🔥🔥무지성 30,740원 (52.0% 할인)🔥🔥🔥\n바겐슈타이거 코어5 헤리티지 316스텐 통5중 무연마제 피쉬팬\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 64,042원\n- 할인: 33,302원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iRuq1cFhIG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T13:43:06+00:00",
-      "title": "바겐슈타이거 코어5 헤리티지 316스텐 통5중 무연마제 피쉬팬",
-      "sale_price_krw": 30740
-    }
-  ],
-  "in_flight": {
-    "id": 96748,
-    "status": "CLAIMED",
-    "run_id": "44910310691",
-    "at": "2026-11-21T13:44:20.393321+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7621,6 +7606,16 @@
       "vendor_item_id": null,
       "at": "2026-11-21T12:49:29.470824+00:00",
       "run_id": "44905740735"
+    },
+    "96748": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EA%B2%90%EC%8A%88%ED%83%80%EC%9D%B4%EA%B1%B0-%EC%BD%94%EC%96%B45-%ED%97%A4%EB%A6%AC%ED%8B%B0%EC%A7%80-316%EC%8A%A4%ED%85%90-%ED%86%B55%EC%A4%91-%EB%AC%B4%EC%97%B0%EB%A7%88%EC%A0%9C-%ED%94%BC%EC%89%AC%ED%8C%AC-55%ED%95%A0%EC%9D%B8-P2nbm4WP?from=write",
+      "posted_at_utc": "2026-11-21T13:43:06+00:00",
+      "product_id": "9291124217",
+      "item_id": "27517016803",
+      "vendor_item_id": "94481859400",
+      "at": "2026-11-21T13:44:40.082862+00:00",
+      "run_id": "44910310691"
     }
   },
   "skipped_non_coupang": 920,
