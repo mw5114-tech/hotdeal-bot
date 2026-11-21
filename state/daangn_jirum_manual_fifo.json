@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96698,
-  "pending": [
-    {
-      "id": 96698,
-      "source_post_url": "https://t.me/jirum/96698",
-      "original_purchase_url": "https://link.coupang.com/a/iQF4fI0Evs",
-      "source_text": "❤️초대박 12,500원 (40.0% 할인)\n유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입 2개\n📌 가격 현황\n- 정상가: 20,833원\n- 할인: 8,333원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQF4fI0Evs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T01:58:17+00:00",
-      "title": "유니레버 썬 식기세척기용 타블렛 세제 베이킹소다 앤 소금 50개입 2개",
-      "sale_price_krw": 12500
-    }
-  ],
-  "in_flight": {
-    "id": 96698,
-    "status": "CLAIMED",
-    "run_id": "44853188715",
-    "at": "2026-11-21T02:00:40.025621+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7440,6 +7425,16 @@
       "item_id": "25720508030",
       "vendor_item_id": null,
       "at": "2026-11-21T01:59:47.051108+00:00",
+      "run_id": "44853188715"
+    },
+    "96698": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%A0%EB%8B%88%EB%A0%88%EB%B2%84-%EC%8D%AC-%EC%8B%9D%EA%B8%B0%EC%84%B8%EC%B2%99%EA%B8%B0%EC%9A%A9-%ED%83%80%EB%B8%94%EB%A0%9B-%EC%84%B8%EC%A0%9C-%EB%B2%A0%EC%9D%B4%ED%82%B9%EC%86%8C%EB%8B%A4-%EC%95%A4-%EC%86%8C%EA%B8%88-50-35%ED%95%A0%EC%9D%B8-dgxY4Bpj?from=write",
+      "posted_at_utc": "2026-11-21T01:58:17+00:00",
+      "product_id": "8341650588",
+      "item_id": "24096815400",
+      "vendor_item_id": "91116197924",
+      "at": "2026-11-21T02:01:00.967416+00:00",
       "run_id": "44853188715"
     }
   },
