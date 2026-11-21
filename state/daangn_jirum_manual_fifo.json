@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96738,
-  "pending": [
-    {
-      "id": 96738,
-      "source_post_url": "https://t.me/jirum/96738",
-      "original_purchase_url": "https://link.coupang.com/a/iRlZgiZoZg",
-      "source_text": "👍대박 21,610원 (39.0% 할인)\n코코도르 고체탈취제 양재동꽃시장 3개\n📌 가격 현황\n- 정상가: 35,426원\n- 할인: 13,816원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iRlZgiZoZg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T11:44:54+00:00",
-      "title": "코코도르 고체탈취제 양재동꽃시장 3개",
-      "sale_price_krw": 21610
-    }
-  ],
-  "in_flight": {
-    "id": 96738,
-    "status": "CLAIMED",
-    "run_id": "44900607709",
-    "at": "2026-11-21T11:45:50.011228+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7571,6 +7556,16 @@
       "vendor_item_id": null,
       "at": "2026-11-21T10:58:35.502155+00:00",
       "run_id": "44896785654"
+    },
+    "96738": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BD%94%EC%BD%94%EB%8F%84%EB%A5%B4-%EA%B3%A0%EC%B2%B4%ED%83%88%EC%B7%A8%EC%A0%9C-%EC%96%91%EC%9E%AC%EB%8F%99%EA%BD%83%EC%8B%9C%EC%9E%A5-3%EA%B0%9C-300g-40%ED%95%A0%EC%9D%B8-dGByeL3P?from=write",
+      "posted_at_utc": "2026-11-21T11:44:54+00:00",
+      "product_id": "9587333729",
+      "item_id": "28662546112",
+      "vendor_item_id": "95604700221",
+      "at": "2026-11-21T11:46:09.476151+00:00",
+      "run_id": "44900607709"
     }
   },
   "skipped_non_coupang": 915,
