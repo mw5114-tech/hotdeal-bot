@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96717,
-  "pending": [
-    {
-      "id": 96717,
-      "source_post_url": "https://t.me/jirum/96717",
-      "original_purchase_url": "https://link.coupang.com/a/iQ3DPBtpHo",
-      "source_text": "👍대박 9,410원 (30.0% 할인)\n다르다팝콘 시네마 믹스 15개\n📌 가격 현황\n- 정상가: 13,443원\n- 할인: 4,033원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQ3DPBtpHo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T07:28:10+00:00",
-      "title": "다르다팝콘 시네마 믹스 15개",
-      "sale_price_krw": 9410
-    }
-  ],
-  "in_flight": {
-    "id": 96717,
-    "status": "CLAIMED",
-    "run_id": "44880435539",
-    "at": "2026-11-21T07:30:09.209609+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7501,6 +7486,16 @@
       "vendor_item_id": "86285149634",
       "at": "2026-11-21T07:27:31.525706+00:00",
       "run_id": "44880217699"
+    },
+    "96717": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%EB%A5%B4%EB%8B%A4%ED%8C%9D%EC%BD%98-%EC%8B%9C%EB%84%A4%EB%A7%88-%EB%AF%B9%EC%8A%A4-30g-15%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dYLWay2P?from=write",
+      "posted_at_utc": "2026-11-21T07:28:10+00:00",
+      "product_id": "216228024",
+      "item_id": "663578407",
+      "vendor_item_id": "4717119973",
+      "at": "2026-11-21T07:30:27.206855+00:00",
+      "run_id": "44880435539"
     }
   },
   "skipped_non_coupang": 902,
