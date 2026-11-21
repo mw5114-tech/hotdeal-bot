@@ -24,7 +24,13 @@ from gh_only.daangn_editor_probe import read_one_draft
 from gh_only.official_link_receipts import load_receipt
 
 STATE_PATH = "state/daangn_jirum_manual_fifo.json"
+SECONDARY_STATE_PATH = "state/daangn_geojijeol_over30_fifo.json"
 SCHEMA = "daangn-jirum-manual-fifo-v1"
+
+
+def secondary_cafe_mode() -> bool:
+    return os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
+
 START_AFTER = 94743
 MAX_PAGES = 40
 MAX_PENDING = 300
@@ -515,7 +521,8 @@ class GithubState:
         if (not self.token or not self.repo or len(self.repo.split("/")) != 2
                 or self.repo != "mw5114-tech/hotdeal-bot"):
             raise RuntimeError("GITHUB_REPOSITORY_OR_STATE_TOKEN_MISSING")
-        self.url = f"https://api.github.com/repos/{self.repo}/contents/{STATE_PATH}"
+        path = SECONDARY_STATE_PATH if secondary_cafe_mode() else STATE_PATH
+        self.url = f"https://api.github.com/repos/{self.repo}/contents/{path}"
 
     def api(self, method: str, payload=None):
         body = json.dumps(payload).encode("utf-8") if payload is not None else None
@@ -1088,7 +1095,80 @@ def build_next(s: dict) -> dict:
     }, ensure_ascii=False, indent=2) + "\n", "utf-8")
     article = validate_draft(DRAFT_DIR, row["id"])
     return {**article, "posted_at_utc": row.get("posted_at_utc"),
-            "manual_replay_approved": row.get("manual_replay_approved") is True}
+            "manual_replay_approved": row.get("manual_replay_approved") is True,
+            # No arbitrary percentage from Telegram or from the post title.
+            # This is validated exact-SKU price evidence from the draft.
+            "secondary_discount_evidence": {
+                "display_pct": candidate.get("caption", {}).get(
+                    "approx_discount_vs_reference_pct"),
+                "reference_source": candidate.get("caption", {}).get(
+                    "comparison_reference_source"),
+                "comparison_price_krw": candidate.get("caption", {}).get(
+                    "comparison_reference_price_krw"),
+                "sale_price_krw": candidate.get("caption", {}).get(
+                    "sale_price_krw"),
+                "similar_product_only": candidate.get("caption", {}).get(
+                    "comparison_is_similar_product_only"),
+            }}
+
+
+# The new cafe accepts only the actual item's verified comparison prices.
+# A price from a similar product, or an unverified Telegram discount badge,
+# must never qualify for a >30% affiliate post.
+SECONDARY_VERIFIED_PRICE_BASES = frozenset((
+    "lowchart_public_history",
+    "lowchart_observed_high",
+    "lowchart_observed_current",
+    "lowchart_observed_low",
+    "fallcent_observed_high",
+    "fallcent_observed_average",
+    "fallcent_observed_current",
+    "fallcent_observed_low",
+    "fallcent_high_low_midpoint",
+))
+
+
+def secondary_discount_eligible(article: dict) -> bool:
+    evidence = article.get("secondary_discount_evidence")
+    if not isinstance(evidence, dict):
+        return False
+    pct = evidence.get("display_pct")
+    sale = evidence.get("sale_price_krw")
+    reference = evidence.get("comparison_price_krw")
+    source = evidence.get("reference_source")
+    if (type(pct) is not int or not 30 < pct <= 95
+            or type(sale) is not int or type(reference) is not int
+            or sale <= 0 or not 100 <= reference <= 100_000_000
+            or source not in SECONDARY_VERIFIED_PRICE_BASES
+            or evidence.get("similar_product_only") is True
+            or not isinstance(article.get("title"), str)
+            or not article["title"].endswith(f" [{pct}%할인]")):
+        return False
+    # Raw comparison must ALSO exceed 30%. A rounded display alone is
+    # not sufficient evidence to publish a strict >30% claim.
+    return (reference - sale) * 100 > reference * 30
+
+
+def skip_secondary_unqualified(store: GithubState, source_id: int, article: dict) -> None:
+    """Commit an audited non-publish result; do not claim or click Post."""
+    state, sha = store.read()
+    if (state["in_flight"] is not None or not state["pending"]
+            or state["pending"][0]["id"] != source_id
+            or str(source_id) in state["published"]):
+        raise RuntimeError("DAANGN_SECONDARY_SKIP_QUEUE_CHANGED")
+    evidence = article.get("secondary_discount_evidence")
+    state["pending"].pop(0)
+    state.setdefault("skipped_secondary_discount", {})[str(source_id)] = {
+        "status": "NOT_OVER_30_VERIFIED",
+        "display_pct": evidence.get("display_pct") if isinstance(evidence, dict) else None,
+        "reference_source": evidence.get("reference_source") if isinstance(evidence, dict) else None,
+        "at": now_utc(),
+    }
+    store.write(state, sha, "state: secondary cafe skip product not verified over 30pct")
+    print("DAANGN_SECONDARY_DISCOUNT_SKIPPED " + json.dumps({
+        "source_id": source_id, "reason": "NOT_VERIFIED_OVER_30",
+        "no_post_submitted": True,
+    }))
 
 
 def claim(store: GithubState, source_id: int, run_id: str) -> None:
@@ -1260,6 +1340,9 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 kakao_operator_notice(reason, len(state["pending"]))
                 return 2
             raise
+        if secondary_cafe_mode() and not secondary_discount_eligible(article):
+            skip_secondary_unqualified(store, article["source_id"], article)
+            continue
         if enforcing_freshness() and freshness_status(state["pending"][0]) != "FRESH":
             latest, sha = store.read()
             pruned, skipped = expire_pending(latest)
