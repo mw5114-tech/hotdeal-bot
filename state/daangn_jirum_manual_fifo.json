@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96695,
-  "pending": [
-    {
-      "id": 96695,
-      "source_post_url": "https://t.me/jirum/96695",
-      "original_purchase_url": "https://link.coupang.com/a/iQDdIQhHLE",
-      "source_text": "☆특가 9,900원\n오휘 얼티밋 커버 데니어 기미 크림 미니 팩트 6.5g, 21호, 1 개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iQDdIQhHLE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-21T01:18:27+00:00",
-      "title": "☆특가 9,900원",
-      "sale_price_krw": 9900
-    }
-  ],
-  "in_flight": {
-    "id": 96695,
-    "status": "CLAIMED",
-    "run_id": "44849421351",
-    "at": "2026-11-21T01:19:15.737524+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7421,6 +7406,16 @@
       "vendor_item_id": "3034901717",
       "at": "2026-11-21T00:35:59.329462+00:00",
       "run_id": "44844760768"
+    },
+    "96695": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%ED%9C%98-%EC%96%BC%ED%8B%B0%EB%B0%8B-%EC%BB%A4%EB%B2%84-%EB%8D%B0%EB%8B%88%EC%96%B4-%EA%B8%B0%EB%AF%B8-%ED%81%AC%EB%A6%BC-%EB%AF%B8%EB%8B%88-%ED%8C%A9%ED%8A%B8-65g-21-30%ED%95%A0%EC%9D%B8-A4nlog1d?from=write",
+      "posted_at_utc": "2026-11-21T01:18:27+00:00",
+      "product_id": "9653103782",
+      "item_id": "28853532431",
+      "vendor_item_id": null,
+      "at": "2026-11-21T01:19:35.710276+00:00",
+      "run_id": "44849421351"
     }
   },
   "skipped_non_coupang": 890,
