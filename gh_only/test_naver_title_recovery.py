@@ -54,7 +54,11 @@ class FakeLocator:
         raise AssertionError("Unexpected read selector " + self.selector)
 
     def click(self, timeout=None):
+        prior = sum(1 for x in self.doc.actions
+                    if isinstance(x, tuple) and x[0] == "title_click")
         self.doc.actions.append(("title_click", timeout))
+        if self.doc.mode == "empty" and prior >= 1:
+            self.doc.phase = "recovery"
 
 
 class FakeKeyboard:
