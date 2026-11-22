@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96845,
-  "pending": [
-    {
-      "id": 96845,
-      "source_post_url": "https://t.me/jirum/96845",
-      "original_purchase_url": "https://link.coupang.com/a/iS5Eq6cGd2",
-      "source_text": "❤️초대박 7,790원 (40.0% 할인)\n퍼울 화이트 드럼용 세탁세제 리필1.7L, 1개\n📌 가격 현황\n- 정상가: 12,983원\n- 할인: 5,193원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iS5Eq6cGd2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T12:51:30+00:00",
-      "title": "퍼울 화이트 드럼용 세탁세제 리필1.7L, 1개",
-      "sale_price_krw": 7790
-    }
-  ],
-  "in_flight": {
-    "id": 96845,
-    "status": "CLAIMED",
-    "run_id": "45024492656",
-    "at": "2026-11-22T12:53:22.924841+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7851,6 +7836,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T12:50:36.114350+00:00",
       "run_id": "45024302795"
+    },
+    "96845": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8D%BC%EC%9A%B8-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%93%9C%EB%9F%BC%EC%9A%A9-%EC%84%B8%ED%83%81%EC%84%B8%EC%A0%9C-%EB%A6%AC%ED%95%84-17L-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pov5yGXA?from=write",
+      "posted_at_utc": "2026-11-22T12:51:30+00:00",
+      "product_id": "7972788485",
+      "item_id": "27215827125",
+      "vendor_item_id": "89135755440",
+      "at": "2026-11-22T12:53:41.601402+00:00",
+      "run_id": "45024492656"
     }
   },
   "skipped_non_coupang": 992,
