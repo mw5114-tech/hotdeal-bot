@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96785,
+  "last_scanned_id": 96787,
   "pending": [
     {
       "id": 96785,
@@ -11,6 +11,15 @@
       "title": "☆특가 9,730원",
       "sale_price_krw": 9730,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96787,
+      "source_post_url": "https://t.me/jirum/96787",
+      "original_purchase_url": "https://link.coupang.com/a/iSnLiA173k",
+      "source_text": "🔥🔥🔥무지성 29,800원 (52.0% 할인)🔥🔥🔥\n블롬 듀얼 모터 휴대용 전기면도기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 62,083원\n- 할인: 32,283원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSnLiA173k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T02:37:20+00:00",
+      "title": "블롬 듀얼 모터 휴대용 전기면도기",
+      "sale_price_krw": 29800
     }
   ],
   "in_flight": null,
@@ -7679,7 +7688,7 @@
       "run_id": "44974305092"
     }
   },
-  "skipped_non_coupang": 950,
+  "skipped_non_coupang": 951,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
