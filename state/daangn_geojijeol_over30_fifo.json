@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96812,
-  "pending": [
-    {
-      "id": 96812,
-      "source_post_url": "https://t.me/jirum/96812",
-      "original_purchase_url": "https://link.coupang.com/a/iSMN7yVELQ",
-      "source_text": "🔥🔥🔥무지성 15,860원 (45.0% 할인)🔥🔥🔥\n[로켓프레시] 곰곰 완숙 토마토\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 28,836원\n- 할인: 12,976원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSMN7yVELQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T08:27:49+00:00",
-      "title": "[로켓프레시] 곰곰 완숙 토마토",
-      "sale_price_krw": 15860
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -120,6 +110,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-22T08:28:36.478894+00:00"
+    },
+    "96812": {
+      "status": "NOT_OVER_30_VERIFIED",
+      "display_pct": 10,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-22T08:28:44.332821+00:00"
     }
   }
 }
