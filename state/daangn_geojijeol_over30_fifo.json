@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96830,
-  "pending": [
-    {
-      "id": 96830,
-      "source_post_url": "https://t.me/jirum/96830",
-      "original_purchase_url": "https://link.coupang.com/a/iSVS4b4CtM",
-      "source_text": "☆특가 7,900원\n완전두유 검은콩 17곡 고칼슘, 190ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSVS4b4CtM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T10:34:52+00:00",
-      "title": "☆특가 7,900원",
-      "sale_price_krw": 7900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -142,6 +132,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-22T08:28:44.332821+00:00"
+    },
+    "96830": {
+      "status": "NOT_OVER_30_VERIFIED",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-22T10:36:16.453247+00:00"
     }
   }
 }
