@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96795,
-  "pending": [
-    {
-      "id": 96795,
-      "source_post_url": "https://t.me/jirum/96795",
-      "original_purchase_url": "https://link.coupang.com/a/iSvsaP2ZfE",
-      "source_text": "☆특가 10,900원\n퓨어그램 제주 그린티 딥클렌징폼 120ml×3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSvsaP2ZfE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T04:24:58+00:00",
-      "title": "☆특가 10,900원",
-      "sale_price_krw": 10900
-    }
-  ],
-  "in_flight": {
-    "id": 96795,
-    "status": "CLAIMED",
-    "run_id": "44985029186",
-    "at": "2026-11-22T04:27:22.639226+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7721,6 +7706,16 @@
       "vendor_item_id": "94266908911",
       "at": "2026-11-22T04:21:29.078408+00:00",
       "run_id": "44984601568"
+    },
+    "96795": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-21-%EC%B6%9C%EC%8B%9C%ED%95%98%EC%9E%90%EB%A7%88%EC%9E%90-1%EC%9C%84-%ED%93%A8%EC%96%B4%EA%B7%B8%EB%9E%A8-%EB%AA%A8%EA%B3%B5%EC%9D%B4%EB%B3%84-%EB%94%A5%ED%81%B4%EB%A0%8C%EC%A7%95%ED%8F%BC-%EC%A0%9C%EC%A3%BC-%EA%B7%B8-20%ED%95%A0%EC%9D%B8-d9a1gpod?from=write",
+      "posted_at_utc": "2026-11-22T04:24:58+00:00",
+      "product_id": "9187340574",
+      "item_id": "27104410614",
+      "vendor_item_id": null,
+      "at": "2026-11-22T04:27:41.048569+00:00",
+      "run_id": "44985029186"
     }
   },
   "skipped_non_coupang": 956,
