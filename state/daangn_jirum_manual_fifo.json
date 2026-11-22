@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96782,
-  "pending": [],
+  "last_scanned_id": 96785,
+  "pending": [
+    {
+      "id": 96785,
+      "source_post_url": "https://t.me/jirum/96785",
+      "original_purchase_url": "https://link.coupang.com/a/iSmeduVE6u",
+      "source_text": "☆특가 9,730원\n듀라셀 알카라인 AA 건전지, 20개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSmeduVE6u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T02:15:52+00:00",
+      "title": "☆특가 9,730원",
+      "sale_price_krw": 9730
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7668,7 +7678,7 @@
       "run_id": "44974305092"
     }
   },
-  "skipped_non_coupang": 948,
+  "skipped_non_coupang": 950,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
