@@ -3,16 +3,6 @@
   "last_scanned_id": 96842,
   "pending": [
     {
-      "id": 96840,
-      "source_post_url": "https://t.me/jirum/96840",
-      "original_purchase_url": "https://link.coupang.com/a/iSZQeTEHaD",
-      "source_text": "👍대박 15,900원 (36.0% 할인)\n오아 퀵롤차저 일체형 케이블 65W GaN C타입 초고속 2포트 멀티 고속 핸드폰 충전기\n📌 가격 현황\n- 정상가: 24,844원\n- 할인: 8,944원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSZQeTEHaD\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T11:30:12+00:00",
-      "title": "오아 퀵롤차저 일체형 케이블 65W GaN C타입 초고속 2포트 멀티 고속 핸드폰 충전기",
-      "sale_price_krw": 15900,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96841,
       "source_post_url": "https://t.me/jirum/96841",
       "original_purchase_url": "https://link.coupang.com/a/iSZX6Rqpu8",
@@ -31,12 +21,7 @@
       "sale_price_krw": 5390
     }
   ],
-  "in_flight": {
-    "id": 96840,
-    "status": "CLAIMED",
-    "run_id": "45017875705",
-    "at": "2026-11-22T11:35:10.712975+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -116,6 +101,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T11:08:36.604958+00:00",
       "run_id": "45015710696"
+    },
+    "96840": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/geojijeol-yagje/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EC%95%84-%ED%80%B5%EB%A1%A4%EC%B0%A8%EC%A0%80-%EC%9D%BC%EC%B2%B4%ED%98%95-%EC%BC%80%EC%9D%B4%EB%B8%94-65W-GaN-C%ED%83%80%EC%9E%85-%EC%B4%88%EA%B3%A0%EC%86%8D-2%ED%8F%AC-35%ED%95%A0%EC%9D%B8-PN2JpavP?from=write",
+      "posted_at_utc": "2026-11-22T11:30:12+00:00",
+      "product_id": "9278208833",
+      "item_id": "27467221745",
+      "vendor_item_id": "94432456523",
+      "at": "2026-11-22T11:35:29.261361+00:00",
+      "run_id": "45017875705"
     }
   },
   "skipped_non_coupang": 51,
