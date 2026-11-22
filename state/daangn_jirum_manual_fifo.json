@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96876,
-  "pending": [
-    {
-      "id": 96876,
-      "source_post_url": "https://t.me/jirum/96876",
-      "original_purchase_url": "https://link.coupang.com/a/iTMIxmfcB2",
-      "source_text": "☆특가 9,630원\n사미헌 갈비탕 (냉동) 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTMIxmfcB2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T22:54:09+00:00",
-      "title": "☆특가 9,630원",
-      "sale_price_krw": 9630
-    }
-  ],
-  "in_flight": {
-    "id": 96876,
-    "status": "CLAIMED",
-    "run_id": "45080324308",
-    "at": "2026-11-22T22:55:11.998702+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7941,6 +7926,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T22:42:26.547839+00:00",
       "run_id": "45079142510"
+    },
+    "96876": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%AC%EB%AF%B8%ED%97%8C-%EA%B0%88%EB%B9%84%ED%83%95-%EB%83%89%EB%8F%99-1kg-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-P1XMgx5A?from=write",
+      "posted_at_utc": "2026-11-22T22:54:09+00:00",
+      "product_id": "207594024",
+      "item_id": "614788815",
+      "vendor_item_id": null,
+      "at": "2026-11-22T22:55:30.985731+00:00",
+      "run_id": "45080324308"
     }
   },
   "skipped_non_coupang": 1014,
