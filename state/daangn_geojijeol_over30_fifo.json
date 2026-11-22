@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96840,
+  "last_scanned_id": 96842,
   "pending": [
     {
       "id": 96840,
@@ -11,6 +11,24 @@
       "title": "오아 퀵롤차저 일체형 케이블 65W GaN C타입 초고속 2포트 멀티 고속 핸드폰 충전기",
       "sale_price_krw": 15900,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96841,
+      "source_post_url": "https://t.me/jirum/96841",
+      "original_purchase_url": "https://link.coupang.com/a/iSZX6Rqpu8",
+      "source_text": "👍대박 11,480원 (34.0% 할인)\n[로켓프레시] 오뚜기 X O 딤섬 샤오롱바오 만두 (냉동)330g, 4개\n📌 가격 현황\n- 정상가: 17,394원\n- 할인: 5,914원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSZX6Rqpu8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T11:31:59+00:00",
+      "title": "[로켓프레시] 오뚜기 X O 딤섬 샤오롱바오 만두 (냉동)330g, 4개",
+      "sale_price_krw": 11480
+    },
+    {
+      "id": 96842,
+      "source_post_url": "https://t.me/jirum/96842",
+      "original_purchase_url": "https://link.coupang.com/a/iSZ3QjKQma",
+      "source_text": "👍대박 5,390원 (35.0% 할인)\n무균무때 곰팡이용 세정제900ml, 2개\n📌 가격 현황\n- 정상가: 8,292원\n- 할인: 2,902원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSZ3QjKQma\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T11:33:17+00:00",
+      "title": "무균무때 곰팡이용 세정제900ml, 2개",
+      "sale_price_krw": 5390
     }
   ],
   "in_flight": null,
