@@ -217,6 +217,14 @@ def publish_one(article: dict, state_secret: str | None = None,
         os.getenv("DAANGN_CAFE_TARGET_URL",
                   "https://cafe.daangn.com/i-gagyeog-mos-c")
     )
+    # Defense in depth: even a malformed secondary draft may never publish
+    # the removed promotional invitation to join/enable cafe alerts.
+    if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true":
+        body_text = article.get("body")
+        if (not isinstance(body_text, str)
+                or "🔥 핫딜 정보를 확인해 소개합니다." in body_text
+                or "카페 가입 알림 설정하고 꿀템 챙겨가세요." in body_text):
+            raise RuntimeError("DAANGN_SECONDARY_PROMO_NOT_REMOVED")
     board_label = restored_board_label()
     result = {
         "status": "NOT_STARTED",
@@ -569,11 +577,14 @@ def publish_one(article: dict, state_secret: str | None = None,
                     "(nodes,minCount)=>nodes.filter(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0).length>=minCount",
                     2 if chart is not None else 1,
                 )
-                footer = all(term in content for term in (
+                required_footer = (
+                    "※ 실시간 핫딜 특성상", DISCLOSURE,
+                ) if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true" else (
                     "※ 실시간 핫딜 특성상",
                     "카페 가입 알림 설정하고 꿀템 챙겨가세요.",
                     DISCLOSURE,
-                ))
+                )
+                footer = all(term in content for term in required_footer)
                 title_ok = post_title in content
                 board_ok = (norm(board_label) in norm(content)
                             if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
