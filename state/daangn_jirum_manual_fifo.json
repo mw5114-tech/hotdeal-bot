@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96787,
-  "pending": [],
+  "last_scanned_id": 96791,
+  "pending": [
+    {
+      "id": 96791,
+      "source_post_url": "https://t.me/jirum/96791",
+      "original_purchase_url": "https://link.coupang.com/a/iSp5VZdR3k",
+      "source_text": "☆특가 5,930원\n해태제과 맛동산 밤라떼맛, 290g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSp5VZdR3k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T03:09:59+00:00",
+      "title": "☆특가 5,930원",
+      "sale_price_krw": 5930
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -7688,7 +7698,7 @@
       "run_id": "44976989934"
     }
   },
-  "skipped_non_coupang": 951,
+  "skipped_non_coupang": 954,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
