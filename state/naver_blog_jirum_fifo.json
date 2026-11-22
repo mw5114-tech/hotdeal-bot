@@ -2180,7 +2180,12 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 96787,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "44976989934",
+    "at": "2026-11-22T02:39:27.719205+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
