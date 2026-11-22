@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96871,
-  "pending": [
-    {
-      "id": 96871,
-      "source_post_url": "https://t.me/jirum/96871",
-      "original_purchase_url": "https://link.coupang.com/a/iTxxvPV4IS",
-      "source_text": "☆특가 9,310원 (29.8% 할인)\n오피아이 네일 락커, H007, 15ml, 1개\n📌 가격 현황\n- 정상가: 13,270원\n- 할인: 3,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTxxvPV4IS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T19:21:46+00:00",
-      "title": "오피아이 네일 락커, H007, 15ml, 1개",
-      "sale_price_krw": 9310
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -228,6 +218,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-22T12:53:24.202048+00:00"
+    },
+    "96871": {
+      "status": "NOT_OVER_30_VERIFIED",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-22T19:23:27.660083+00:00"
     }
   }
 }
