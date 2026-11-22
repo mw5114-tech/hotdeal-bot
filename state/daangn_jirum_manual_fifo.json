@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96877,
-  "pending": [
-    {
-      "id": 96877,
-      "source_post_url": "https://t.me/jirum/96877",
-      "original_purchase_url": "https://link.coupang.com/a/iTORQeUKrc",
-      "source_text": "☆특가 2,980원\n해태제과 맛동산, 70g, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTORQeUKrc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T23:24:15+00:00",
-      "title": "☆특가 2,980원",
-      "sale_price_krw": 2980
-    }
-  ],
-  "in_flight": {
-    "id": 96877,
-    "status": "CLAIMED",
-    "run_id": "45083121738",
-    "at": "2026-11-22T23:26:00.371695+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7951,6 +7936,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T22:55:30.985731+00:00",
       "run_id": "45080324308"
+    },
+    "96877": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%83%9C%EC%A0%9C%EA%B3%BC-%EB%A7%9B%EB%8F%99%EC%82%B0-70g-4%EA%B0%9C-20%ED%95%A0%EC%9D%B8-j8aQ9DqA?from=write",
+      "posted_at_utc": "2026-11-22T23:24:15+00:00",
+      "product_id": "164112049",
+      "item_id": "18559157499",
+      "vendor_item_id": null,
+      "at": "2026-11-22T23:26:19.768060+00:00",
+      "run_id": "45083121738"
     }
   },
   "skipped_non_coupang": 1014,
