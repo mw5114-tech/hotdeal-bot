@@ -1,24 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96873,
-  "pending": [
-    {
-      "id": 96873,
-      "source_post_url": "https://t.me/jirum/96873",
-      "original_purchase_url": "https://link.coupang.com/a/iTIIJdeTYa",
-      "source_text": "🔥🔥🔥무지성 5,600원 (48.0% 할인)🔥🔥🔥\n에코맘의산골이유식 산골 과일참 통째로 사과칩10g, 4개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 10,769원\n- 할인: 5,169원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTIIJdeTYa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T21:58:14+00:00",
-      "title": "에코맘의산골이유식 산골 과일참 통째로 사과칩10g, 4개",
-      "sale_price_krw": 5600,
-      "photo_prepare_failure_count": 1
-    }
-  ],
-  "in_flight": {
-    "id": 96873,
-    "status": "CLAIMED",
-    "run_id": "45076607996",
-    "at": "2026-11-22T22:14:58.838419+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7912,6 +7896,16 @@
       "vendor_item_id": "95876430324",
       "at": "2026-11-22T21:59:08.118826+00:00",
       "run_id": "45074958664"
+    },
+    "96873": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EC%BD%94%EB%A7%98%EC%9D%98%EC%82%B0%EA%B3%A8%EC%9D%B4%EC%9C%A0%EC%8B%9D-%EC%82%B0%EA%B3%A8-%EA%B3%BC%EC%9D%BC%EC%B0%B8-%ED%86%B5%EC%A7%B8%EB%A1%9C-%EC%82%AC%EA%B3%BC%EC%B9%A9-10g-4%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dpYOZ3xj?from=write",
+      "posted_at_utc": "2026-11-22T21:58:14+00:00",
+      "product_id": "8821104302",
+      "item_id": "26431628455",
+      "vendor_item_id": "93407394339",
+      "at": "2026-11-22T22:15:19.429771+00:00",
+      "run_id": "45076607996"
     }
   },
   "skipped_non_coupang": 1014,
