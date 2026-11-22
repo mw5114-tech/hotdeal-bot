@@ -5,6 +5,8 @@ on:
     paths:
       - 'gh_only/jirum_manual_queue.py'
       - 'gh_only/jirum_manual_publisher.py'
+      - 'gh_only/daangn_editor_probe.py'
+      - 'gh_only/test_daangn_editor_probe.py'
       - 'gh_only/test_daangn_secondary_over30.py'
       - 'gh_only/test_jirum_manual_queue.py'
       - 'gh_only/test_jirum_manual_publisher.py'
@@ -30,7 +32,7 @@ jobs:
       - name: Compile and test independent cafe thresholds and existing FIFO
         run: |
           python -m compileall -q gh_only/jirum_manual_queue.py gh_only/jirum_manual_publisher.py gh_only/test_daangn_secondary_over30.py
-          python -m unittest -q gh_only.test_daangn_secondary_over30 gh_only.test_jirum_manual_queue gh_only.test_jirum_manual_publisher
+          python -m unittest -q gh_only.test_daangn_editor_probe gh_only.test_daangn_secondary_over30 gh_only.test_jirum_manual_queue gh_only.test_jirum_manual_publisher
       - name: Verify realtime dispatch and independent workflow gates
         run: |
           python - <<'PY'
