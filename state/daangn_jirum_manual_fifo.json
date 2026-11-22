@@ -3,15 +3,6 @@
   "last_scanned_id": 96812,
   "pending": [
     {
-      "id": 96811,
-      "source_post_url": "https://t.me/jirum/96811",
-      "original_purchase_url": "https://link.coupang.com/a/iSMKe1tDEq",
-      "source_text": "🔥🔥🔥무지성 7,400원 (64.0% 할인)🔥🔥🔥\n겟리비온 차량용 충전기 동시4대충전 릴타입 고속충전\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 20,556원\n- 할인: 13,156원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSMKe1tDEq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T08:26:56+00:00",
-      "title": "겟리비온 차량용 충전기 동시4대충전 릴타입 고속충전",
-      "sale_price_krw": 7400
-    },
-    {
       "id": 96812,
       "source_post_url": "https://t.me/jirum/96812",
       "original_purchase_url": "https://link.coupang.com/a/iSMN7yVELQ",
@@ -21,12 +12,7 @@
       "sale_price_krw": 15860
     }
   ],
-  "in_flight": {
-    "id": 96811,
-    "status": "CLAIMED",
-    "run_id": "45002946503",
-    "at": "2026-11-22T08:29:20.707629+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7760,6 +7746,16 @@
       "vendor_item_id": "91732862842",
       "at": "2026-11-22T06:30:03.426475+00:00",
       "run_id": "44993843454"
+    },
+    "96811": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B2%9F%EB%A6%AC%EB%B9%84%EC%98%A8-%EC%B0%A8%EB%9F%89%EC%9A%A9-%EC%B6%A9%EC%A0%84%EA%B8%B0-%EB%8F%99%EC%8B%9C4%EB%8C%80%EC%B6%A9%EC%A0%84-%EB%A6%B4%ED%83%80%EC%9E%85-%EA%B3%A0%EC%86%8D%EC%B6%A9%EC%A0%84-PT-S-10%ED%95%A0%EC%9D%B8-PmvkLrXd?from=write",
+      "posted_at_utc": "2026-11-22T08:26:56+00:00",
+      "product_id": "7555788606",
+      "item_id": "19894924100",
+      "vendor_item_id": "93370941409",
+      "at": "2026-11-22T08:29:40.941427+00:00",
+      "run_id": "45002946503"
     }
   },
   "skipped_non_coupang": 969,
