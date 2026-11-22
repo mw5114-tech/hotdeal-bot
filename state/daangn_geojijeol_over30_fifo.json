@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96842,
-  "pending": [
-    {
-      "id": 96842,
-      "source_post_url": "https://t.me/jirum/96842",
-      "original_purchase_url": "https://link.coupang.com/a/iSZ3QjKQma",
-      "source_text": "👍대박 5,390원 (35.0% 할인)\n무균무때 곰팡이용 세정제900ml, 2개\n📌 가격 현황\n- 정상가: 8,292원\n- 할인: 2,902원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSZ3QjKQma\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T11:33:17+00:00",
-      "title": "무균무때 곰팡이용 세정제900ml, 2개",
-      "sale_price_krw": 5390
-    }
-  ],
-  "in_flight": {
-    "id": 96842,
-    "status": "CLAIMED",
-    "run_id": "45017875705",
-    "at": "2026-11-22T11:37:12.291397+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -106,6 +91,16 @@
       "item_id": "27467221745",
       "vendor_item_id": "94432456523",
       "at": "2026-11-22T11:35:29.261361+00:00",
+      "run_id": "45017875705"
+    },
+    "96842": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/geojijeol-yagje/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AC%B4%EA%B7%A0%EB%AC%B4%EB%95%8C-%EA%B3%B0%ED%8C%A1%EC%9D%B4%EC%9A%A9-%EC%84%B8%EC%A0%95%EC%A0%9C-900ml-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dyJoNNVj?from=write",
+      "posted_at_utc": "2026-11-22T11:33:17+00:00",
+      "product_id": "7520169483",
+      "item_id": "24053445966",
+      "vendor_item_id": "91073417552",
+      "at": "2026-11-22T11:37:29.368071+00:00",
       "run_id": "45017875705"
     }
   },
