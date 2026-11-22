@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96804,
-  "pending": [],
+  "last_scanned_id": 96805,
+  "pending": [
+    {
+      "id": 96805,
+      "source_post_url": "https://t.me/jirum/96805",
+      "original_purchase_url": "https://link.coupang.com/a/iSEdlDjtx6",
+      "source_text": "❤️초대박 9,680원 (41.0% 할인)\n케라시스 케라마이드 극손상 노워시 트리트먼트200ml, 2개\n📌 가격 현황\n- 정상가: 16,407원\n- 할인: 6,727원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSEdlDjtx6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-22T06:27:34+00:00",
+      "title": "케라시스 케라마이드 극손상 노워시 트리트먼트200ml, 2개",
+      "sale_price_krw": 9680
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
