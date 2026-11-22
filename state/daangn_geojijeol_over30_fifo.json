@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96816,
+  "last_scanned_id": 96827,
   "pending": [
     {
       "id": 96816,
@@ -85,7 +85,7 @@
       "run_id": "45003039761"
     }
   },
-  "skipped_non_coupang": 31,
+  "skipped_non_coupang": 42,
   "skipped_expired": {},
   "skipped_unverifiable": {
     "96779": {
