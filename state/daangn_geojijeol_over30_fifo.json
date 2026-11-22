@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96805,
-  "pending": [
-    {
-      "id": 96805,
-      "source_post_url": "https://t.me/jirum/96805",
-      "original_purchase_url": "https://link.coupang.com/a/iSEdlDjtx6",
-      "source_text": "❤️초대박 9,680원 (41.0% 할인)\n케라시스 케라마이드 극손상 노워시 트리트먼트200ml, 2개\n📌 가격 현황\n- 정상가: 16,407원\n- 할인: 6,727원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSEdlDjtx6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T06:27:34+00:00",
-      "title": "케라시스 케라마이드 극손상 노워시 트리트먼트200ml, 2개",
-      "sale_price_krw": 9680
-    }
-  ],
-  "in_flight": {
-    "id": 96805,
-    "status": "CLAIMED",
-    "run_id": "44993843454",
-    "at": "2026-11-22T06:29:44.294673+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -67,6 +52,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T05:28:36.442813+00:00",
       "run_id": "44989460461"
+    },
+    "96805": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/geojijeol-yagje/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%BC%80%EB%9D%BC%EC%8B%9C%EC%8A%A4-%EC%BC%80%EB%9D%BC%EB%A7%88%EC%9D%B4%EB%93%9C-%EA%B7%B9%EC%86%90%EC%83%81-%EB%85%B8%EC%9B%8C%EC%8B%9C-%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%A8%BC%ED%8A%B8-200ml-2-35%ED%95%A0%EC%9D%B8-AROqExkP?from=write",
+      "posted_at_utc": "2026-11-22T06:27:34+00:00",
+      "product_id": "8539725816",
+      "item_id": "24723674154",
+      "vendor_item_id": "91732862842",
+      "at": "2026-11-22T06:30:02.413502+00:00",
+      "run_id": "44993843454"
     }
   },
   "skipped_non_coupang": 24,
