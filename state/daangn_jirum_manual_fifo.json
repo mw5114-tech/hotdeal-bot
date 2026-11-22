@@ -3,15 +3,6 @@
   "last_scanned_id": 96842,
   "pending": [
     {
-      "id": 96841,
-      "source_post_url": "https://t.me/jirum/96841",
-      "original_purchase_url": "https://link.coupang.com/a/iSZX6Rqpu8",
-      "source_text": "👍대박 11,480원 (34.0% 할인)\n[로켓프레시] 오뚜기 X O 딤섬 샤오롱바오 만두 (냉동)330g, 4개\n📌 가격 현황\n- 정상가: 17,394원\n- 할인: 5,914원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSZX6Rqpu8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T11:31:59+00:00",
-      "title": "[로켓프레시] 오뚜기 X O 딤섬 샤오롱바오 만두 (냉동)330g, 4개",
-      "sale_price_krw": 11480
-    },
-    {
       "id": 96842,
       "source_post_url": "https://t.me/jirum/96842",
       "original_purchase_url": "https://link.coupang.com/a/iSZ3QjKQma",
@@ -21,12 +12,7 @@
       "sale_price_krw": 5390
     }
   ],
-  "in_flight": {
-    "id": 96841,
-    "status": "CLAIMED",
-    "run_id": "45017875705",
-    "at": "2026-11-22T11:34:42.707755+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7829,6 +7815,16 @@
       "item_id": "27467221745",
       "vendor_item_id": "94432456523",
       "at": "2026-11-22T11:34:31.700479+00:00",
+      "run_id": "45017875705"
+    },
+    "96841": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9A%9C%EA%B8%B0-X-O-%EB%94%A4%EC%84%AC-%EC%83%A4%EC%98%A4%EB%A1%B1%EB%B0%94%EC%98%A4-%EB%A7%8C%EB%91%90-%EB%83%89%EB%8F%99-330g-4%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dXnveYwA?from=write",
+      "posted_at_utc": "2026-11-22T11:31:59+00:00",
+      "product_id": "8412903806",
+      "item_id": "24357203713",
+      "vendor_item_id": "91372577280",
+      "at": "2026-11-22T11:35:01.399361+00:00",
       "run_id": "45017875705"
     }
   },
