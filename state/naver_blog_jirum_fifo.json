@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96879,
-  "pending": [
-    {
-      "id": 96879,
-      "source_message_id": 96879,
-      "source_post_url": "https://t.me/jirum/96879",
-      "original_purchase_url": "https://link.coupang.com/a/iTQM9XA7qu",
-      "title": "☆특가 2,900원",
-      "source_text": "☆특가 2,900원\n신라면 120g, 5개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTQM9XA7qu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2900,
-      "posted_at_utc": "2026-11-22T23:51:11+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1923,6 +1912,10 @@
     "96878": {
       "url": "https://blog.naver.com/mw5114/224487920147",
       "at": "2026-11-22T23:53:11.157053+00:00"
+    },
+    "96879": {
+      "url": "https://blog.naver.com/mw5114/224487921233",
+      "at": "2026-11-22T23:54:11.899190+00:00"
     }
   },
   "skipped": {
@@ -2296,12 +2289,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96879,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45085528465",
-    "at": "2026-11-22T23:53:29.644060+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
