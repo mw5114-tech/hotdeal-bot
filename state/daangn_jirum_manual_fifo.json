@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96812,
-  "pending": [
-    {
-      "id": 96812,
-      "source_post_url": "https://t.me/jirum/96812",
-      "original_purchase_url": "https://link.coupang.com/a/iSMN7yVELQ",
-      "source_text": "🔥🔥🔥무지성 15,860원 (45.0% 할인)🔥🔥🔥\n[로켓프레시] 곰곰 완숙 토마토\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 28,836원\n- 할인: 12,976원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSMN7yVELQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T08:27:49+00:00",
-      "title": "[로켓프레시] 곰곰 완숙 토마토",
-      "sale_price_krw": 15860
-    }
-  ],
-  "in_flight": {
-    "id": 96812,
-    "status": "CLAIMED",
-    "run_id": "45002946503",
-    "at": "2026-11-22T08:30:32.520605+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7760,6 +7745,16 @@
       "item_id": "19894924100",
       "vendor_item_id": "93370941409",
       "at": "2026-11-22T08:29:40.941427+00:00",
+      "run_id": "45002946503"
+    },
+    "96812": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%B0%EA%B3%B0-%EC%99%84%EC%88%99-%ED%86%A0%EB%A7%88%ED%86%A0-5kg-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-dQzoQ92j?from=write",
+      "posted_at_utc": "2026-11-22T08:27:49+00:00",
+      "product_id": "7665795963",
+      "item_id": "5911957943",
+      "vendor_item_id": "88002923177",
+      "at": "2026-11-22T08:30:51.728140+00:00",
       "run_id": "45002946503"
     }
   },
