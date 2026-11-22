@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96791,
-  "pending": [
-    {
-      "id": 96791,
-      "source_post_url": "https://t.me/jirum/96791",
-      "original_purchase_url": "https://link.coupang.com/a/iSp5VZdR3k",
-      "source_text": "☆특가 5,930원\n해태제과 맛동산 밤라떼맛, 290g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSp5VZdR3k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T03:09:59+00:00",
-      "title": "☆특가 5,930원",
-      "sale_price_krw": 5930
-    }
-  ],
-  "in_flight": {
-    "id": 96791,
-    "status": "CLAIMED",
-    "run_id": "44979451406",
-    "at": "2026-11-22T03:11:28.554677+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7701,6 +7686,16 @@
       "vendor_item_id": "94217611443",
       "at": "2026-11-22T02:40:47.966718+00:00",
       "run_id": "44976989934"
+    },
+    "96791": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%B4%ED%83%9C%EC%A0%9C%EA%B3%BC-%EB%A7%9B%EB%8F%99%EC%82%B0-%EB%B0%A4%EB%9D%BC%EB%96%BC%EB%A7%9B-290g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A4nLEgkd?from=write",
+      "posted_at_utc": "2026-11-22T03:09:59+00:00",
+      "product_id": "9689377688",
+      "item_id": "29132374525",
+      "vendor_item_id": null,
+      "at": "2026-11-22T03:11:48.096995+00:00",
+      "run_id": "44979451406"
     }
   },
   "skipped_non_coupang": 954,
