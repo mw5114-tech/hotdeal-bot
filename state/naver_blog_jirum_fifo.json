@@ -3,16 +3,6 @@
   "last_scanned_id": 96812,
   "pending": [
     {
-      "id": 96811,
-      "source_message_id": 96811,
-      "source_post_url": "https://t.me/jirum/96811",
-      "original_purchase_url": "https://link.coupang.com/a/iSMKe1tDEq",
-      "title": "겟리비온 차량용 충전기 동시4대충전 릴타입 고속충전",
-      "source_text": "🔥🔥🔥무지성 7,400원 (64.0% 할인)🔥🔥🔥\n겟리비온 차량용 충전기 동시4대충전 릴타입 고속충전\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 20,556원\n- 할인: 13,156원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSMKe1tDEq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7400,
-      "posted_at_utc": "2026-11-22T08:26:56+00:00"
-    },
-    {
       "id": 96812,
       "source_message_id": 96812,
       "source_post_url": "https://t.me/jirum/96812",
@@ -1841,6 +1831,10 @@
     "96805": {
       "url": "https://blog.naver.com/mw5114/224487073265",
       "at": "2026-11-22T06:29:39.246853+00:00"
+    },
+    "96811": {
+      "url": "https://blog.naver.com/mw5114/224487180018",
+      "at": "2026-11-22T08:30:15.456448+00:00"
     }
   },
   "skipped": {
@@ -2214,12 +2208,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96811,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45002946503",
-    "at": "2026-11-22T08:29:31.399431+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
