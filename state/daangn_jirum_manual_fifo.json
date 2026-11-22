@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96871,
-  "pending": [
-    {
-      "id": 96871,
-      "source_post_url": "https://t.me/jirum/96871",
-      "original_purchase_url": "https://link.coupang.com/a/iTxxvPV4IS",
-      "source_text": "☆특가 9,310원 (29.8% 할인)\n오피아이 네일 락커, H007, 15ml, 1개\n📌 가격 현황\n- 정상가: 13,270원\n- 할인: 3,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTxxvPV4IS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T19:21:46+00:00",
-      "title": "오피아이 네일 락커, H007, 15ml, 1개",
-      "sale_price_krw": 9310
-    }
-  ],
-  "in_flight": {
-    "id": 96871,
-    "status": "CLAIMED",
-    "run_id": "45060435744",
-    "at": "2026-11-22T19:24:19.034086+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7891,6 +7876,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T14:41:35.138802+00:00",
       "run_id": "45034121088"
+    },
+    "96871": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%ED%94%BC%EC%95%84%EC%9D%B4-%EB%84%A4%EC%9D%BC-%EB%9D%BD%EC%BB%A4-H007-1%EA%B0%9C-15ml-30%ED%95%A0%EC%9D%B8-ArnG8xQA?from=write",
+      "posted_at_utc": "2026-11-22T19:21:46+00:00",
+      "product_id": "5141616366",
+      "item_id": "7048936322",
+      "vendor_item_id": "74341421012",
+      "at": "2026-11-22T19:24:37.061026+00:00",
+      "run_id": "45060435744"
     }
   },
   "skipped_non_coupang": 1014,
