@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96795,
-  "pending": [
-    {
-      "id": 96795,
-      "source_message_id": 96795,
-      "source_post_url": "https://t.me/jirum/96795",
-      "original_purchase_url": "https://link.coupang.com/a/iSvsaP2ZfE",
-      "title": "☆특가 10,900원",
-      "source_text": "☆특가 10,900원\n퓨어그램 제주 그린티 딥클렌징폼 120ml×3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSvsaP2ZfE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10900,
-      "posted_at_utc": "2026-11-22T04:24:58+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1819,6 +1808,10 @@
     "96794": {
       "url": "https://blog.naver.com/mw5114/224486957837",
       "at": "2026-11-22T04:21:52.445396+00:00"
+    },
+    "96795": {
+      "url": "https://blog.naver.com/mw5114/224486963848",
+      "at": "2026-11-22T04:28:08.024044+00:00"
     }
   },
   "skipped": {
@@ -2192,12 +2185,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96795,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44985029186",
-    "at": "2026-11-22T04:27:24.000901+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
