@@ -3,17 +3,6 @@
   "last_scanned_id": 96879,
   "pending": [
     {
-      "id": 96878,
-      "source_message_id": 96878,
-      "source_post_url": "https://t.me/jirum/96878",
-      "original_purchase_url": "https://link.coupang.com/a/iTO2FlK1im",
-      "title": "센소다인 멀티케어 치약100g, 3개",
-      "source_text": "👍대박 8,250원 (31.0% 할인)\n센소다인 멀티케어 치약100g, 3개\n📌 가격 현황\n- 정상가: 11,957원\n- 할인: 3,707원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTO2FlK1im\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8250,
-      "posted_at_utc": "2026-11-22T23:26:41+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96879,
       "source_message_id": 96879,
       "source_post_url": "https://t.me/jirum/96879",
@@ -1930,6 +1919,10 @@
     "96877": {
       "url": "https://blog.naver.com/mw5114/224487894457",
       "at": "2026-11-22T23:26:37.537678+00:00"
+    },
+    "96878": {
+      "url": "https://blog.naver.com/mw5114/224487920147",
+      "at": "2026-11-22T23:53:11.157053+00:00"
     }
   },
   "skipped": {
@@ -2303,12 +2296,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96878,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45085528465",
-    "at": "2026-11-22T23:52:25.803343+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
