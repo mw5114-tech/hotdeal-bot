@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96877,
-  "pending": [
-    {
-      "id": 96877,
-      "source_message_id": 96877,
-      "source_post_url": "https://t.me/jirum/96877",
-      "original_purchase_url": "https://link.coupang.com/a/iTORQeUKrc",
-      "title": "☆특가 2,980원",
-      "source_text": "☆특가 2,980원\n해태제과 맛동산, 70g, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTORQeUKrc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2980,
-      "posted_at_utc": "2026-11-22T23:24:15+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1915,6 +1904,10 @@
     "96876": {
       "url": "https://blog.naver.com/mw5114/224487867753",
       "at": "2026-11-22T22:55:56.532923+00:00"
+    },
+    "96877": {
+      "url": "https://blog.naver.com/mw5114/224487894457",
+      "at": "2026-11-22T23:26:37.537678+00:00"
     }
   },
   "skipped": {
@@ -2288,12 +2281,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96877,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45083121738",
-    "at": "2026-11-22T23:25:55.086682+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
