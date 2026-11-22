@@ -3,16 +3,6 @@
   "last_scanned_id": 96787,
   "pending": [
     {
-      "id": 96785,
-      "source_post_url": "https://t.me/jirum/96785",
-      "original_purchase_url": "https://link.coupang.com/a/iSmeduVE6u",
-      "source_text": "☆특가 9,730원\n듀라셀 알카라인 AA 건전지, 20개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSmeduVE6u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T02:15:52+00:00",
-      "title": "☆특가 9,730원",
-      "sale_price_krw": 9730,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96787,
       "source_post_url": "https://t.me/jirum/96787",
       "original_purchase_url": "https://link.coupang.com/a/iSnLiA173k",
@@ -22,12 +12,7 @@
       "sale_price_krw": 29800
     }
   ],
-  "in_flight": {
-    "id": 96785,
-    "status": "CLAIMED",
-    "run_id": "44976989934",
-    "at": "2026-11-22T02:39:20.124287+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7691,6 +7676,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T02:05:24.285888+00:00",
       "run_id": "44974305092"
+    },
+    "96785": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%93%80%EB%9D%BC%EC%85%80-%EC%95%8C%EC%B9%B4%EB%9D%BC%EC%9D%B8-AA-%EA%B1%B4%EC%A0%84%EC%A7%80-20%EA%B0%9C%EC%9E%85-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dQzo9rNj?from=write",
+      "posted_at_utc": "2026-11-22T02:15:52+00:00",
+      "product_id": "130164876",
+      "item_id": "21326386046",
+      "vendor_item_id": null,
+      "at": "2026-11-22T02:39:37.786812+00:00",
+      "run_id": "44976989934"
     }
   },
   "skipped_non_coupang": 951,
