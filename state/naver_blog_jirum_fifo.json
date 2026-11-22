@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96779,
-  "pending": [
-    {
-      "id": 96779,
-      "source_message_id": 96779,
-      "source_post_url": "https://t.me/jirum/96779",
-      "original_purchase_url": "https://link.coupang.com/a/iSfI8b1tlI",
-      "title": "퍼실 라벤더젤 플러스 드럼용 액상세제 라벤더 코튼향 본품 2.7L 2개",
-      "source_text": "🔥🔥🔥무지성 24,300원 (48.0% 할인)🔥🔥🔥\n퍼실 라벤더젤 플러스 드럼용 액상세제 라벤더 코튼향 본품 2.7L 2개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 46,731원\n- 할인: 22,431원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSfI8b1tlI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 24300,
-      "posted_at_utc": "2026-11-22T00:44:54+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -1796,6 +1784,10 @@
     "96776": {
       "url": "https://blog.naver.com/mw5114/224486732387",
       "at": "2026-11-21T23:42:00.736792+00:00"
+    },
+    "96779": {
+      "url": "https://blog.naver.com/mw5114/224486786368",
+      "at": "2026-11-22T01:02:53.278886+00:00"
     }
   },
   "skipped": {
@@ -2169,12 +2161,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96779,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "44969358885",
-    "at": "2026-11-22T01:02:10.277806+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
