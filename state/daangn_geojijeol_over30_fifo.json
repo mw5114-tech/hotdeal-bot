@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96787,
-  "pending": [
-    {
-      "id": 96787,
-      "source_post_url": "https://t.me/jirum/96787",
-      "original_purchase_url": "https://link.coupang.com/a/iSnLiA173k",
-      "source_text": "🔥🔥🔥무지성 29,800원 (52.0% 할인)🔥🔥🔥\n블롬 듀얼 모터 휴대용 전기면도기\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 62,083원\n- 할인: 32,283원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSnLiA173k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T02:37:20+00:00",
-      "title": "블롬 듀얼 모터 휴대용 전기면도기",
-      "sale_price_krw": 29800
-    }
-  ],
-  "in_flight": {
-    "id": 96787,
-    "status": "CLAIMED",
-    "run_id": "44976989934",
-    "at": "2026-11-22T02:40:09.570430+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -37,6 +22,16 @@
       "vendor_item_id": null,
       "at": "2026-11-22T02:38:44.714286+00:00",
       "run_id": "44976823562"
+    },
+    "96787": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/geojijeol-yagje/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B8%94%EB%A1%AC-%EB%93%80%EC%96%BC-%EB%AA%A8%ED%84%B0-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%A0%84%EA%B8%B0%EB%A9%B4%EB%8F%84%EA%B8%B0-MS002-%ED%99%94%EC%9D%B4%ED%8A%B8-45%ED%95%A0%EC%9D%B8-daD07veP?from=write",
+      "posted_at_utc": "2026-11-22T02:37:20+00:00",
+      "product_id": "8844584387",
+      "item_id": "25779869511",
+      "vendor_item_id": "94217611443",
+      "at": "2026-11-22T02:40:26.861334+00:00",
+      "run_id": "44976989934"
     }
   },
   "skipped_non_coupang": 11,
