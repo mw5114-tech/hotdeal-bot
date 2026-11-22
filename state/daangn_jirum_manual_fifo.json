@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96782,
-  "pending": [
-    {
-      "id": 96782,
-      "source_post_url": "https://t.me/jirum/96782",
-      "original_purchase_url": "https://link.coupang.com/a/iSliGRQ1Iq",
-      "source_text": "☆특가 7,720원\n잘풀리는집 천연펄프 키친타올, 4롤, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iSliGRQ1Iq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-22T02:02:54+00:00",
-      "title": "☆특가 7,720원",
-      "sale_price_krw": 7720
-    }
-  ],
-  "in_flight": {
-    "id": 96782,
-    "status": "CLAIMED",
-    "run_id": "44974305092",
-    "at": "2026-11-22T02:05:05.395598+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -7671,6 +7656,16 @@
       "vendor_item_id": "91767017884",
       "at": "2026-11-21T23:41:39.201538+00:00",
       "run_id": "44962897188"
+    },
+    "96782": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9E%98%ED%92%80%EB%A6%AC%EB%8A%94%EC%A7%91-%EC%B2%9C%EC%97%B0%ED%8E%84%ED%94%84-%ED%82%A4%EC%B9%9C%ED%83%80%EC%98%AC-4%EB%A1%A4-3%EA%B0%9C-25%ED%95%A0%EC%9D%B8-P5aMrbrP?from=write",
+      "posted_at_utc": "2026-11-22T02:02:54+00:00",
+      "product_id": "14567",
+      "item_id": "20421782538",
+      "vendor_item_id": null,
+      "at": "2026-11-22T02:05:24.285888+00:00",
+      "run_id": "44974305092"
     }
   },
   "skipped_non_coupang": 948,
