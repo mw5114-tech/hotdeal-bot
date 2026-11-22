@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96844,
-  "pending": [],
+  "last_scanned_id": 96845,
+  "pending": [
+    {
+      "id": 96845,
+      "source_message_id": 96845,
+      "source_post_url": "https://t.me/jirum/96845",
+      "original_purchase_url": "https://link.coupang.com/a/iS5Eq6cGd2",
+      "title": "퍼울 화이트 드럼용 세탁세제 리필1.7L, 1개",
+      "source_text": "❤️초대박 7,790원 (40.0% 할인)\n퍼울 화이트 드럼용 세탁세제 리필1.7L, 1개\n📌 가격 현황\n- 정상가: 12,983원\n- 할인: 5,193원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iS5Eq6cGd2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7790,
+      "posted_at_utc": "2026-11-22T12:51:30+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
