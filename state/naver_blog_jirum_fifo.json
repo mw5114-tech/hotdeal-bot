@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96921,
-  "pending": [],
+  "last_scanned_id": 96923,
+  "pending": [
+    {
+      "id": 96922,
+      "source_message_id": 96922,
+      "source_post_url": "https://t.me/jirum/96922",
+      "original_purchase_url": "https://link.coupang.com/a/iUBFBrFK3M",
+      "title": "[로켓프레시] 애슐리 크런치즈엣지 페퍼로니피자 (냉동)",
+      "source_text": "👍대박 5,540원 (37.0% 할인)\n[로켓프레시] 애슐리 크런치즈엣지 페퍼로니피자 (냉동)\n📌 가격 현황\n- 정상가: 8,794원\n- 할인: 3,254원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUBFBrFK3M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5540,
+      "posted_at_utc": "2026-11-23T10:47:10+00:00"
+    },
+    {
+      "id": 96923,
+      "source_message_id": 96923,
+      "source_post_url": "https://t.me/jirum/96923",
+      "original_purchase_url": "https://link.coupang.com/a/iUBKhX3UQK",
+      "title": "[로켓프레시] 한끼통살 닭가슴살 스테이크 믹스 5종 세트 (냉동) 10개입",
+      "source_text": "👍대박 11,650원 (39.0% 할인)\n[로켓프레시] 한끼통살 닭가슴살 스테이크 믹스 5종 세트 (냉동) 10개입\n📌 가격 현황\n- 정상가: 19,098원\n- 할인: 7,448원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUBKhX3UQK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11650,
+      "posted_at_utc": "2026-11-23T10:48:14+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
