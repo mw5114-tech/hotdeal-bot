@@ -258,12 +258,6 @@ def read_one_draft(folder: Path) -> dict:
                         "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.")
     promo = (verified_claim if row.get("observed_low_verified_for_deal") is True
              else unverified_claim)
-    # The secondary >30% cafe keeps product details, price, photo, link and
-    # required affiliate disclosure but omits the promotional recruitment
-    # paragraph (both verified and ordinary variants). The original cafe
-    # must keep its established copy exactly as before.
-    secondary_cafe = os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
-    promo_block = "" if secondary_cafe else "\n\n" + promo
     # The link is ONE exact text paragraph, with no intervening blank line
     # between its label and URL, or immediately before/after the link row.
     # This also prevents an extra empty ProseMirror paragraph around the URL
@@ -282,8 +276,7 @@ def read_one_draft(folder: Path) -> dict:
         image_notice = "\n※ 이미지는 네이버 이미지 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
     else:
         image_notice = ""
-    clean_body = (compact_body + "\n" + stock_notice + image_notice
-                  + promo_block + "\n\n\n\n" + DISCLOSURE)
+    clean_body = compact_body + "\n" + stock_notice + image_notice + "\n\n" + promo + "\n\n\n\n" + DISCLOSURE
     return {
         "title": title,
         "body": clean_body,
