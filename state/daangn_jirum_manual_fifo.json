@@ -3,16 +3,6 @@
   "last_scanned_id": 96927,
   "pending": [
     {
-      "id": 96925,
-      "source_post_url": "https://t.me/jirum/96925",
-      "original_purchase_url": "https://link.coupang.com/a/iUCjuXLdQG",
-      "source_text": "❤️초대박 6,670원 (43.0% 할인)\nMYCHEF 이비가 짬뽕 순두부 밀키트 2인분\n📌 가격 현황\n- 정상가: 11,702원\n- 할인: 5,032원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUCjuXLdQG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T10:56:11+00:00",
-      "title": "MYCHEF 이비가 짬뽕 순두부 밀키트 2인분",
-      "sale_price_krw": 6670,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96927,
       "source_post_url": "https://t.me/jirum/96927",
       "original_purchase_url": "https://link.coupang.com/a/iUEvb6QKTB",
@@ -22,12 +12,7 @@
       "sale_price_krw": 7840
     }
   ],
-  "in_flight": {
-    "id": 96925,
-    "status": "CLAIMED",
-    "run_id": "45165347423",
-    "at": "2026-11-23T11:27:41.151977+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8231,6 +8216,16 @@
       "vendor_item_id": "85666598547",
       "at": "2026-11-23T10:57:13.670461+00:00",
       "run_id": "45159602695"
+    },
+    "96925": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-MYCHEF-%EC%9D%B4%EB%B9%84%EA%B0%80-%EC%A7%AC%EB%BD%95-%EC%88%9C%EB%91%90%EB%B6%80-%EB%B0%80%ED%82%A4%ED%8A%B8-2%EC%9D%B8%EB%B6%84-1025kg-40%ED%95%A0%EC%9D%B8-PnnYovWP?from=write",
+      "posted_at_utc": "2026-11-23T10:56:11+00:00",
+      "product_id": "6658612350",
+      "item_id": "15279219078",
+      "vendor_item_id": "82499716371",
+      "at": "2026-11-23T11:28:02.386375+00:00",
+      "run_id": "45165347423"
     }
   },
   "skipped_non_coupang": 1034,
