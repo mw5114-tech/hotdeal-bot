@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96904,
-  "pending": [
-    {
-      "id": 96904,
-      "source_post_url": "https://t.me/jirum/96904",
-      "original_purchase_url": "https://link.coupang.com/a/iUhbU3Mx3s",
-      "source_text": "🔥🔥🔥무지성 5,650원 (57.0% 할인)🔥🔥🔥\n[로켓프레시] 사옹원 부침명장 해물파전 (냉동)\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,140원\n- 할인: 7,490원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUhbU3Mx3s\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T06:00:36+00:00",
-      "title": "[로켓프레시] 사옹원 부침명장 해물파전 (냉동)",
-      "sale_price_krw": 5650
-    }
-  ],
-  "in_flight": {
-    "id": 96904,
-    "status": "CLAIMED",
-    "run_id": "45121361424",
-    "at": "2026-11-23T06:01:40.471832+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8111,6 +8096,16 @@
       "vendor_item_id": null,
       "at": "2026-11-23T05:36:31.885328+00:00",
       "run_id": "45118706719"
+    },
+    "96904": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%AC%EC%98%B9%EC%9B%90-%EB%B6%80%EC%B9%A8%EB%AA%85%EC%9E%A5-%ED%95%B4%EB%AC%BC%ED%8C%8C%EC%A0%84-%EB%83%89%EB%8F%99-500g-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-AO3p6lgA?from=write",
+      "posted_at_utc": "2026-11-23T06:00:36+00:00",
+      "product_id": "7180729608",
+      "item_id": "18110006134",
+      "vendor_item_id": "85261696768",
+      "at": "2026-11-23T06:01:59.255618+00:00",
+      "run_id": "45121361424"
     }
   },
   "skipped_non_coupang": 1025,
