@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96884,
-  "pending": [
-    {
-      "id": 96884,
-      "source_post_url": "https://t.me/jirum/96884",
-      "original_purchase_url": "https://link.coupang.com/a/iTUPbufVPE",
-      "source_text": "☆특가 10,200원 (27.0% 할인)\n다향 1등급 훈제오리, 300g, 2개\n📌 가격 현황\n- 정상가: 13,973원\n- 할인: 3,773원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTUPbufVPE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T00:47:36+00:00",
-      "title": "다향 1등급 훈제오리, 300g, 2개",
-      "sale_price_krw": 10200
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -312,6 +302,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-22T23:58:20.750672+00:00"
+    },
+    "96884": {
+      "status": "NOT_OVER_30_VERIFIED",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-23T00:49:21.956007+00:00"
     }
   }
 }
