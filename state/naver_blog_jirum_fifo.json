@@ -2423,7 +2423,12 @@
       "at": "2026-11-23T11:11:51.999406+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 96931,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "45182263722",
+    "at": "2026-11-23T13:16:43.585768+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
