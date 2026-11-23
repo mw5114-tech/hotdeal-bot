@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96930,
-  "pending": [
-    {
-      "id": 96930,
-      "source_post_url": "https://t.me/jirum/96930",
-      "original_purchase_url": "https://link.coupang.com/a/iUJmSuQVAi",
-      "source_text": "☆특가 8,460원 (28.8% 할인)\n한돈 뒷다리 다짐용 (냉장), 1kg, 1개\n📌 가격 현황\n- 정상가: 11,890원\n- 할인: 3,430원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUJmSuQVAi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T12:34:54+00:00",
-      "title": "한돈 뒷다리 다짐용 (냉장), 1kg, 1개",
-      "sale_price_krw": 8460
-    }
-  ],
-  "in_flight": {
-    "id": 96930,
-    "status": "CLAIMED",
-    "run_id": "45175845382",
-    "at": "2026-11-23T12:37:28.808744+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8251,6 +8236,16 @@
       "vendor_item_id": "84883937281",
       "at": "2026-11-23T11:34:33.439172+00:00",
       "run_id": "45166321910"
+    },
+    "96930": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EB%8F%88-%EB%92%B7%EB%8B%A4%EB%A6%AC-%EB%8B%A4%EC%A7%90%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dGBwxJRP?from=write",
+      "posted_at_utc": "2026-11-23T12:34:54+00:00",
+      "product_id": "5463258005",
+      "item_id": "8368977569",
+      "vendor_item_id": "75656712270",
+      "at": "2026-11-23T12:37:46.748003+00:00",
+      "run_id": "45175845382"
     }
   },
   "skipped_non_coupang": 1035,
