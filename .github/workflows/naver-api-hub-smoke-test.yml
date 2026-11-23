@@ -60,7 +60,7 @@ jobs:
                   "timeUnit": "date", "category": "50000003",
                   "keyword": [{"name": "가습기", "param": ["가습기"]}]
               }),
-              ("SEARCH_TREND", "https://naverapihub.apigw.ntruss.com/datalab/v1/search", {
+              ("SEARCH_TREND", "https://naverapihub.apigw.ntruss.com/search-trend/v1/search", {
                   "startDate": str(start), "endDate": str(yesterday),
                   "timeUnit": "date",
                   "keywordGroups": [{"groupName": "가습기", "keywords": ["가습기"]}]
