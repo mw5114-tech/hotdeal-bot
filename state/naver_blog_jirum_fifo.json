@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 96919,
-  "pending": [],
+  "last_scanned_id": 96920,
+  "pending": [
+    {
+      "id": 96920,
+      "source_message_id": 96920,
+      "source_post_url": "https://t.me/jirum/96920",
+      "original_purchase_url": "https://link.coupang.com/a/iUzA1EMPbo",
+      "title": "하림 자연실록 무항생제 인증 닭다리 북채 (냉장)",
+      "source_text": "☆특가 9,670원 (26.0% 할인)\n하림 자연실록 무항생제 인증 닭다리 북채 (냉장)\n📌 가격 현황\n- 정상가: 13,068원\n- 할인: 3,398원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUzA1EMPbo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9670,
+      "posted_at_utc": "2026-11-23T10:18:09+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
