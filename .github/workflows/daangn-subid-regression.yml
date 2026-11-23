@@ -92,6 +92,19 @@ jobs:
           assert 'python -m gh_only.jirum_manual_queue drain' in restored
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
           assert 'daangn-cafe-independent:' in main
+          # Only two live destinations are authorized. A deleted secondary
+          # cafe must never reappear in Oracle dispatch or scheduled backup.
+          workflow_dir = Path('.github/workflows')
+          assert not (workflow_dir / 'daangn-cafe-geojijeol-over30.yml').exists()
+          assert not (workflow_dir / 'daangn-secondary-editor-preflight.yml').exists()
+          assert 'geojijeol' not in main.lower()
+          assert 'daangn-geojijeol-over30:' not in main
+          assert 'DAANGN_SECONDARY_CAFE_MODE' not in restored
+          publisher_code = Path('gh_only/jirum_manual_publisher.py').read_text()
+          queue_code = Path('gh_only/jirum_manual_queue.py').read_text()
+          assert 'geojijeol-yagje' not in publisher_code
+          assert 'SECONDARY_STATE_PATH' not in queue_code
+          assert "state/daangn_jirum_manual_fifo.json" in queue_code
           assert "github.event_name != 'schedule'" in main
           assert "cron: '7,22,37,52 * * * *'" in main
           assert "cron: '14,29,44,59 * * * *'" in restored
