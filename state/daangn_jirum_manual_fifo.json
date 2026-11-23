@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96928,
-  "pending": [
-    {
-      "id": 96928,
-      "source_post_url": "https://t.me/jirum/96928",
-      "original_purchase_url": "https://link.coupang.com/a/iUEXVDC4Ky",
-      "source_text": "🔥🔥🔥무지성 3,860원 (45.0% 할인)🔥🔥🔥\n아브카 딥클린 탄력 소프트 모 대왕칫솔 10개입\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,018원\n- 할인: 3,158원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUEXVDC4Ky\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T11:33:17+00:00",
-      "title": "아브카 딥클린 탄력 소프트 모 대왕칫솔 10개입",
-      "sale_price_krw": 3860
-    }
-  ],
-  "in_flight": {
-    "id": 96928,
-    "status": "CLAIMED",
-    "run_id": "45166321910",
-    "at": "2026-11-23T11:34:15.325136+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8241,6 +8226,16 @@
       "vendor_item_id": null,
       "at": "2026-11-23T11:28:30.469793+00:00",
       "run_id": "45165347423"
+    },
+    "96928": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EB%B8%8C%EC%B9%B4-%EB%94%A5%ED%81%B4%EB%A6%B0-%ED%83%84%EB%A0%A5-%EC%86%8C%ED%94%84%ED%8A%B8-%EB%AA%A8-%EB%8C%80%EC%99%95%EC%B9%AB%EC%86%94-10%EA%B0%9C%EC%9E%85-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-AeeklmLA?from=write",
+      "posted_at_utc": "2026-11-23T11:33:17+00:00",
+      "product_id": "7099807245",
+      "item_id": "17719104614",
+      "vendor_item_id": "84883937281",
+      "at": "2026-11-23T11:34:33.439172+00:00",
+      "run_id": "45166321910"
     }
   },
   "skipped_non_coupang": 1034,
