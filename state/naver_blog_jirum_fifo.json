@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96948,
-  "pending": [
-    {
-      "id": 96948,
-      "source_message_id": 96948,
-      "source_post_url": "https://t.me/jirum/96948",
-      "original_purchase_url": "https://link.coupang.com/a/iVstVqnkfQ",
-      "title": "알텐바흐 인덕션 헥사 통5중 스텐 프라이팬 28cm",
-      "source_text": "👍대박 32,780원 (33.0% 할인)\n알텐바흐 인덕션 헥사 통5중 스텐 프라이팬 28cm\n📌 가격 현황\n- 정상가: 48,925원\n- 할인: 16,145원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVstVqnkfQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 32780,
-      "posted_at_utc": "2026-11-23T23:06:12+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2044,6 +2032,10 @@
     "96931": {
       "url": "https://blog.naver.com/mw5114/224489013485",
       "at": "2026-11-23T13:17:27.456083+00:00"
+    },
+    "96948": {
+      "url": "https://blog.naver.com/mw5114/224489440607",
+      "at": "2026-11-23T23:27:06.442110+00:00"
     }
   },
   "skipped": {
@@ -2437,12 +2429,7 @@
       "at": "2026-11-23T23:14:32.711745+00:00"
     }
   },
-  "in_flight": {
-    "id": 96948,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45288750860",
-    "at": "2026-11-23T23:26:22.406589+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
