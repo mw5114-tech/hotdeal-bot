@@ -3,16 +3,6 @@
   "last_scanned_id": 96908,
   "pending": [
     {
-      "id": 96903,
-      "source_post_url": "https://t.me/jirum/96903",
-      "original_purchase_url": "https://link.coupang.com/a/iUflAsryeq",
-      "source_text": "☆특가 11,950원\n나랑드사이다 제로, 500ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUflAsryeq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T05:34:48+00:00",
-      "title": "☆특가 11,950원",
-      "sale_price_krw": 11950,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96904,
       "source_post_url": "https://t.me/jirum/96904",
       "original_purchase_url": "https://link.coupang.com/a/iUhbU3Mx3s",
@@ -246,6 +236,12 @@
       "source_post_url": "https://t.me/jirum/96902",
       "source_title": "요즘 그릭요거트 플레인, 100g, 5개",
       "at": "2026-11-23T06:23:00.703038+00:00"
+    },
+    "96903": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96903",
+      "source_title": "☆특가 11,950원",
+      "at": "2026-11-23T06:30:11.619052+00:00"
     }
   },
   "skipped_secondary_discount": {
