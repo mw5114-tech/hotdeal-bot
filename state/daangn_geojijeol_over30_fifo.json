@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96882,
-  "pending": [],
+  "last_scanned_id": 96884,
+  "pending": [
+    {
+      "id": 96883,
+      "source_post_url": "https://t.me/jirum/96883",
+      "original_purchase_url": "https://link.coupang.com/a/iTUMD1ZwmO",
+      "source_text": "❤️초대박 8,080원 (42.0% 할인)\n롯데웰푸드 티코 밀크초코 아이스크림 (냉동) 15개입 2개\n📌 가격 현황\n- 정상가: 13,931원\n- 할인: 5,851원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTUMD1ZwmO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T00:47:02+00:00",
+      "title": "롯데웰푸드 티코 밀크초코 아이스크림 (냉동) 15개입 2개",
+      "sale_price_krw": 8080
+    },
+    {
+      "id": 96884,
+      "source_post_url": "https://t.me/jirum/96884",
+      "original_purchase_url": "https://link.coupang.com/a/iTUPbufVPE",
+      "source_text": "☆특가 10,200원 (27.0% 할인)\n다향 1등급 훈제오리, 300g, 2개\n📌 가격 현황\n- 정상가: 13,973원\n- 할인: 3,773원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTUPbufVPE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T00:47:36+00:00",
+      "title": "다향 1등급 훈제오리, 300g, 2개",
+      "sale_price_krw": 10200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
