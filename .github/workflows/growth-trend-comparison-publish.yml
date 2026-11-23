@@ -41,8 +41,7 @@ jobs:
           if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
             python -m playwright install --with-deps --only-shell chromium
           fi
-      - name: Analyze trend and select an exact two-product comparison
-        if: github.event_name != 'push'
+      - name: Analyze trend and select an exact two-product comparison (push/manual = safe preview)
         env:
           NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
           NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
