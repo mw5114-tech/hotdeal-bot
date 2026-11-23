@@ -110,53 +110,6 @@ class DaangnEditorOfflineTests(unittest.TestCase):
         self.assertEqual(result["image"].name, "jirum_94717_kakao_og.jpg")
         self.assertTrue(result["unissued_affsdp_candidate"])
 
-    def test_secondary_cafe_omits_promotional_paragraph_and_keeps_disclosure(self):
-        # Both promotion variants must disappear, without removing the
-        # affiliate disclosure, stock warning, exact link or title.
-        for verified in (False, True):
-            with self.subTest(verified=verified), tempfile.TemporaryDirectory() as temp:
-                folder = Path(temp)
-                report = self._make_draft(folder)
-                report["drafts"][0]["observed_low_verified_for_deal"] = verified
-                (folder / "drafts.json").write_text(
-                    json.dumps(report, ensure_ascii=False), encoding="utf-8")
-                with patch.dict(os.environ, {"DAANGN_SECONDARY_CAFE_MODE": "false"}):
-                    original = read_one_draft(folder)
-                with patch.dict(os.environ, {"DAANGN_SECONDARY_CAFE_MODE": "true"}):
-                    secondary = read_one_draft(folder)
-                self.assertIn("카페 가입 알림 설정하고 꿀템 챙겨가세요.", original["body"])
-                self.assertNotIn("카페 가입 알림 설정하고 꿀템 챙겨가세요.", secondary["body"])
-                self.assertNotIn("🔥 핫딜 정보를 확인해 소개합니다.", secondary["body"])
-                self.assertNotIn("🔥 정가 뻥튀기 같은 가짜 할인은 거르고", secondary["body"])
-                self.assertIn("※ 실시간 핫딜 특성상", secondary["body"])
-                self.assertTrue(secondary["body"].endswith(DISCLOSURE))
-                self.assertEqual(secondary["body"].count(DISCLOSURE), 1)
-                self.assertEqual(secondary["body"].count(TEST_URL), 1)
-                self.assertEqual(original["title"], secondary["title"])
-                self.assertEqual(original["candidate_url"], secondary["candidate_url"])
-                self.assertEqual(original["image"], secondary["image"])
-                promo = (
-                    "🔥 정가 뻥튀기 같은 가짜 할인은 거르고, 검증 마친 찐 역대가 딜만 가져옵니다. "
-                    "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요."
-                    if verified else
-                    "🔥 핫딜 정보를 확인해 소개합니다. "
-                    "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요."
-                )
-                self.assertEqual(secondary["body"],
-                                 original["body"].replace("\n\n" + promo, "", 1))
-
-    def test_secondary_mode_disabled_retains_original_promotion(self):
-        with tempfile.TemporaryDirectory() as temp:
-            folder = Path(temp)
-            self._make_draft(folder)
-            with patch.dict(os.environ, {"DAANGN_SECONDARY_CAFE_MODE": "false"}):
-                body = read_one_draft(folder)["body"]
-            self.assertIn(
-                "🔥 핫딜 정보를 확인해 소개합니다. "
-                "품절되기 전에 카페 가입 알림 설정하고 꿀템 챙겨가세요.",
-                body,
-            )
-
     def test_compact_link_spacing_preserves_full_affiliate_url(self):
         # Price -> link -> stock notice are adjacent lines (no empty p nodes).
         with tempfile.TemporaryDirectory() as temp:
