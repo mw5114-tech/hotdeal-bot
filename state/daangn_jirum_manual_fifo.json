@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96924,
-  "pending": [
-    {
-      "id": 96924,
-      "source_post_url": "https://t.me/jirum/96924",
-      "original_purchase_url": "https://link.coupang.com/a/iUBWP3YDfw",
-      "source_text": "👍대박 4,870원 (33.0% 할인)\n풀무원 크림 파스타150g, 3개\n📌 가격 현황\n- 정상가: 7,269원\n- 할인: 2,399원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUBWP3YDfw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T10:51:04+00:00",
-      "title": "풀무원 크림 파스타150g, 3개",
-      "sale_price_krw": 4870
-    }
-  ],
-  "in_flight": {
-    "id": 96924,
-    "status": "CLAIMED",
-    "run_id": "45159602695",
-    "at": "2026-11-23T10:56:55.182588+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8210,6 +8195,16 @@
       "item_id": "23082486024",
       "vendor_item_id": "90115985657",
       "at": "2026-11-23T10:56:02.302675+00:00",
+      "run_id": "45159602695"
+    },
+    "96924": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%ED%81%AC%EB%A6%BC-%ED%8C%8C%EC%8A%A4%ED%83%80-150g-3%EA%B0%9C-40%ED%95%A0%EC%9D%B8-P5azNWyP?from=write",
+      "posted_at_utc": "2026-11-23T10:51:04+00:00",
+      "product_id": "7240127862",
+      "item_id": "18528120100",
+      "vendor_item_id": "85666598547",
+      "at": "2026-11-23T10:57:13.670461+00:00",
       "run_id": "45159602695"
     }
   },
