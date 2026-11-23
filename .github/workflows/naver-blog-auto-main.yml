@@ -53,7 +53,7 @@ jobs:
       - name: Confirm no-publish dispatch path
         run: echo 'JIRUM_GITHUB_DISPATCH_SMOKE_OK — NO_SCAN_NO_POST'
 
-  # An Oracle/legacy dispatch forks two independent channel jobs.
+  # An Oracle/legacy dispatch forks Naver and the existing Daangn channel only.
   # Scheduled Naver backup must NOT call a nested Daangn workflow:
   # Daangn already has its own :26/:56 backup and invoking nested jobs
   # on schedule caused a 2026-11-11 22:29 KST ghost run failure while
@@ -62,17 +62,6 @@ jobs:
   daangn-cafe-independent:
     if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule' && github.event_name != 'push'
     uses: ./.github/workflows/daangn-cafe-restored.yml
-    with:
-      source_post_id: ${{ inputs.source_post_id }}
-      smoke_test: ${{ inputs.smoke_test }}
-    secrets: inherit
-
-  # Oracle's real-time event also fans out to the third, independent
-  # Daangn cafe. It has its OWN state file and strictly verified >30% gate.
-  # The secondary workflow's schedule provides a 15-minute backup.
-  daangn-geojijeol-over30:
-    if: github.ref == 'refs/heads/main' && github.run_attempt == 1 && github.event_name != 'schedule' && github.event_name != 'push'
-    uses: ./.github/workflows/daangn-cafe-geojijeol-over30.yml
     with:
       source_post_id: ${{ inputs.source_post_id }}
       smoke_test: ${{ inputs.smoke_test }}
