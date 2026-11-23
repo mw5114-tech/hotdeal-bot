@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96896,
-  "pending": [
-    {
-      "id": 96896,
-      "source_post_url": "https://t.me/jirum/96896",
-      "original_purchase_url": "https://link.coupang.com/a/iT58Zl3BNk",
-      "source_text": "☆특가 10,930원\n온더바디 코튼풋 발을씻자 풋샴푸 레몬민트향 385ml×3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iT58Zl3BNk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T03:26:00+00:00",
-      "title": "☆특가 10,930원",
-      "sale_price_krw": 10930
-    }
-  ],
-  "in_flight": {
-    "id": 96896,
-    "status": "CLAIMED",
-    "run_id": "45106024756",
-    "at": "2026-11-23T03:27:18.526603+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8061,6 +8046,16 @@
       "vendor_item_id": null,
       "at": "2026-11-23T03:09:31.956402+00:00",
       "run_id": "45104209100"
+    },
+    "96896": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A8%EB%8D%94%EB%B0%94%EB%94%94-%EC%BD%94%ED%8A%BC%ED%92%8B-%EB%B0%9C%EC%9D%84%EC%94%BB%EC%9E%90-%ED%92%8B%EC%83%B4%ED%91%B8-%EB%A0%88%EB%AA%AC%EB%AF%BC%ED%8A%B8%ED%96%A5-1%EA%B0%9C%EC%9E%85-3%EA%B0%9C-20%ED%95%A0%EC%9D%B8-Pwnz16vA?from=write",
+      "posted_at_utc": "2026-11-23T03:26:00+00:00",
+      "product_id": "116651697",
+      "item_id": "14745628255",
+      "vendor_item_id": null,
+      "at": "2026-11-23T03:27:36.914928+00:00",
+      "run_id": "45106024756"
     }
   },
   "skipped_non_coupang": 1022,
