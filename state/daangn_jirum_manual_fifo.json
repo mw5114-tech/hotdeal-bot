@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96917,
-  "pending": [],
+  "last_scanned_id": 96919,
+  "pending": [
+    {
+      "id": 96919,
+      "source_post_url": "https://t.me/jirum/96919",
+      "original_purchase_url": "https://link.coupang.com/a/iUztgD4Vc4",
+      "source_text": "❤️초대박 5,820원 (43.0% 할인)\n[로켓프레시] 하림 닭가슴살 (냉장)1KG\n📌 가격 현황\n- 정상가: 10,211원\n- 할인: 4,391원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUztgD4Vc4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T10:16:24+00:00",
+      "title": "[로켓프레시] 하림 닭가슴살 (냉장)1KG",
+      "sale_price_krw": 5820
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8158,7 +8168,7 @@
       "run_id": "45138170322"
     }
   },
-  "skipped_non_coupang": 1032,
+  "skipped_non_coupang": 1033,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
