@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96884,
-  "pending": [
-    {
-      "id": 96884,
-      "source_post_url": "https://t.me/jirum/96884",
-      "original_purchase_url": "https://link.coupang.com/a/iTUPbufVPE",
-      "source_text": "☆특가 10,200원 (27.0% 할인)\n다향 1등급 훈제오리, 300g, 2개\n📌 가격 현황\n- 정상가: 13,973원\n- 할인: 3,773원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTUPbufVPE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T00:47:36+00:00",
-      "title": "다향 1등급 훈제오리, 300g, 2개",
-      "sale_price_krw": 10200
-    }
-  ],
-  "in_flight": {
-    "id": 96884,
-    "status": "CLAIMED",
-    "run_id": "45090918304",
-    "at": "2026-11-23T00:51:22.181869+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8010,6 +7995,16 @@
       "item_id": "19224582167",
       "vendor_item_id": "86341244718",
       "at": "2026-11-23T00:50:30.213497+00:00",
+      "run_id": "45090918304"
+    },
+    "96884": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%ED%96%A5-1%EB%93%B1%EA%B8%89-%ED%9B%88%EC%A0%9C%EC%98%A4%EB%A6%AC-300g-2%EA%B0%9C-20%ED%95%A0%EC%9D%B8-Pxqv0mLd?from=write",
+      "posted_at_utc": "2026-11-23T00:47:36+00:00",
+      "product_id": "8830227246",
+      "item_id": "27239575619",
+      "vendor_item_id": "94206640651",
+      "at": "2026-11-23T00:51:42.021286+00:00",
       "run_id": "45090918304"
     }
   },
