@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96911,
-  "pending": [
-    {
-      "id": 96911,
-      "source_post_url": "https://t.me/jirum/96911",
-      "original_purchase_url": "https://link.coupang.com/a/iUrh2dmzrU",
-      "source_text": "👍대박 8,540원 (30.0% 할인)\n비앤비 유아 섬유 세제 알러젠프리향 캡리필형, 1.5L, 2개\n📌 가격 현황\n- 정상가: 12,200원\n- 할인: 3,660원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUrh2dmzrU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T08:21:55+00:00",
-      "title": "비앤비 유아 섬유 세제 알러젠프리향 캡리필형, 1.5L, 2개",
-      "sale_price_krw": 8540
-    }
-  ],
-  "in_flight": {
-    "id": 96911,
-    "status": "CLAIMED",
-    "run_id": "45138170322",
-    "at": "2026-11-23T08:24:22.923521+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8161,6 +8146,16 @@
       "vendor_item_id": null,
       "at": "2026-11-23T08:19:49.187422+00:00",
       "run_id": "45137627398"
+    },
+    "96911": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EC%95%A4%EB%B9%84-%EC%9C%A0%EC%95%84-%EC%84%AC%EC%9C%A0-%EC%84%B8%EC%A0%9C-%EC%95%8C%EB%9F%AC%EC%A0%A0%ED%94%84%EB%A6%AC%ED%96%A5-%EC%BA%A1%EB%A6%AC%ED%95%84%ED%98%95-15L-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-d9aG1ond?from=write",
+      "posted_at_utc": "2026-11-23T08:21:55+00:00",
+      "product_id": "6079111522",
+      "item_id": "24635775363",
+      "vendor_item_id": "91646720933",
+      "at": "2026-11-23T08:24:40.655797+00:00",
+      "run_id": "45138170322"
     }
   },
   "skipped_non_coupang": 1026,
