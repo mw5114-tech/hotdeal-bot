@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96925,
+  "last_scanned_id": 96927,
   "pending": [
     {
       "id": 96925,
@@ -11,6 +11,15 @@
       "title": "MYCHEF 이비가 짬뽕 순두부 밀키트 2인분",
       "sale_price_krw": 6670,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96927,
+      "source_post_url": "https://t.me/jirum/96927",
+      "original_purchase_url": "https://link.coupang.com/a/iUEvb6QKTB",
+      "source_text": "☆특가 7,840원\n리퀴드 라벤더 실내건조 중성 액체 세탁세제 2.5L 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUEvb6QKTB\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T11:26:48+00:00",
+      "title": "☆특가 7,840원",
+      "sale_price_krw": 7840
     }
   ],
   "in_flight": null,
@@ -8219,7 +8228,7 @@
       "run_id": "45159602695"
     }
   },
-  "skipped_non_coupang": 1033,
+  "skipped_non_coupang": 1034,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
