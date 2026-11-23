@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96927,
-  "pending": [
-    {
-      "id": 96927,
-      "source_message_id": 96927,
-      "source_post_url": "https://t.me/jirum/96927",
-      "original_purchase_url": "https://link.coupang.com/a/iUEvb6QKTB",
-      "title": "☆특가 7,840원",
-      "source_text": "☆특가 7,840원\n리퀴드 라벤더 실내건조 중성 액체 세탁세제 2.5L 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUEvb6QKTB\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7840,
-      "posted_at_utc": "2026-11-23T11:26:48+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2027,6 +2016,10 @@
     "96924": {
       "url": "https://blog.naver.com/mw5114/224488859482",
       "at": "2026-11-23T10:57:26.828467+00:00"
+    },
+    "96927": {
+      "url": "https://blog.naver.com/mw5114/224488892506",
+      "at": "2026-11-23T11:29:16.072426+00:00"
     }
   },
   "skipped": {
@@ -2410,12 +2403,7 @@
       "at": "2026-11-23T11:11:51.999406+00:00"
     }
   },
-  "in_flight": {
-    "id": 96927,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45165347423",
-    "at": "2026-11-23T11:28:32.541773+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
