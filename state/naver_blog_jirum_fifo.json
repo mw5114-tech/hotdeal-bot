@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96949,
-  "pending": [
-    {
-      "id": 96949,
-      "source_message_id": 96949,
-      "source_post_url": "https://t.me/jirum/96949",
-      "original_purchase_url": "https://link.coupang.com/a/iVv6c7E5JI",
-      "title": "비앤비 비자극 유아 섬유유연제 시그니처 알러젠프리 자스민앤로즈향 리필형1.5L, 1개",
-      "source_text": "❤️초대박 3,780원 (43.0% 할인)\n비앤비 비자극 유아 섬유유연제 시그니처 알러젠프리 자스민앤로즈향 리필형1.5L, 1개\n📌 가격 현황\n- 정상가: 6,632원\n- 할인: 2,852원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVv6c7E5JI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3780,
-      "posted_at_utc": "2026-11-23T23:56:49+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2047,6 +2036,10 @@
     "96948": {
       "url": "https://blog.naver.com/mw5114/224489440607",
       "at": "2026-11-23T23:27:06.442110+00:00"
+    },
+    "96949": {
+      "url": "https://blog.naver.com/mw5114/224489472988",
+      "at": "2026-11-23T23:58:54.507359+00:00"
     }
   },
   "skipped": {
@@ -2440,12 +2433,7 @@
       "at": "2026-11-23T23:14:32.711745+00:00"
     }
   },
-  "in_flight": {
-    "id": 96949,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45293145286",
-    "at": "2026-11-23T23:58:10.664197+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
