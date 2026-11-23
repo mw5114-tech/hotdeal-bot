@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96894,
+  "last_scanned_id": 96895,
   "pending": [
     {
       "id": 96894,
@@ -11,6 +11,15 @@
       "title": "☆특가 10,890원",
       "sale_price_krw": 10890,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 96895,
+      "source_post_url": "https://t.me/jirum/96895",
+      "original_purchase_url": "https://link.coupang.com/a/iT4RlBioyO",
+      "source_text": "☆특가 4,740원\n역대급최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iT4RlBioyO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T03:08:02+00:00",
+      "title": "☆특가 4,740원",
+      "sale_price_krw": 4740
     }
   ],
   "in_flight": null,
