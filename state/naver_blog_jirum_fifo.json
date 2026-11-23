@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96921,
-  "pending": [
-    {
-      "id": 96921,
-      "source_message_id": 96921,
-      "source_post_url": "https://t.me/jirum/96921",
-      "original_purchase_url": "https://link.coupang.com/a/iUBBM0nBzU",
-      "title": "리스토란테 모짜렐라 피자 (냉동)355g, 1개입, 3개",
-      "source_text": "👍대박 10,450원 (39.0% 할인)\n리스토란테 모짜렐라 피자 (냉동)355g, 1개입, 3개\n📌 가격 현황\n- 정상가: 17,131원\n- 할인: 6,681원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUBBM0nBzU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10450,
-      "posted_at_utc": "2026-11-23T10:46:19+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2011,6 +2000,10 @@
     "96920": {
       "url": "https://blog.naver.com/mw5114/224488818501",
       "at": "2026-11-23T10:20:26.836351+00:00"
+    },
+    "96921": {
+      "url": "https://blog.naver.com/mw5114/224488850812",
+      "at": "2026-11-23T10:49:02.144112+00:00"
     }
   },
   "skipped": {
@@ -2389,12 +2382,7 @@
       "at": "2026-11-23T06:25:16.873256+00:00"
     }
   },
-  "in_flight": {
-    "id": 96921,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45159217764",
-    "at": "2026-11-23T10:48:18.248109+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
