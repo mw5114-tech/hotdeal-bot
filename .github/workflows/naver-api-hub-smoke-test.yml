@@ -1,0 +1,96 @@
+name: NAVER API HUB | safe authentication smoke test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: naver-api-hub-smoke-test
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Shopping Insight and Search Trend without printing credentials or response
+        env:
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import sys
+          from datetime import datetime, timedelta, timezone
+          from urllib import request, error
+
+          key_id = os.getenv("NAVER_API_HUB_KEY_ID", "").strip()
+          key = os.getenv("NAVER_API_HUB_KEY", "").strip()
+          if not key_id or not key:
+              print("NAVER_HUB_SECRET_CHECK=FAIL_MISSING")
+              sys.exit(1)
+          if any(c in key_id + key for c in "\r\n") or len(key_id) > 256 or len(key) > 256:
+              print("NAVER_HUB_SECRET_CHECK=FAIL_FORMAT")
+              sys.exit(1)
+          print("NAVER_HUB_SECRET_CHECK=PASS")
+          headers = {
+              "X-NCP-APIGW-API-KEY-ID": key_id,
+              "X-NCP-APIGW-API-KEY": key,
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+          }
+          yesterday = datetime.now(timezone(timedelta(hours=9))).date() - timedelta(days=1)
+          start = yesterday - timedelta(days=27)
+          tests = [
+              ("SHOPPING_INSIGHT", "https://naverapihub.apigw.ntruss.com/shopping/v1/category/keywords", {
+                  "startDate": str(start), "endDate": str(yesterday),
+                  "timeUnit": "date", "category": "50000003",
+                  "keyword": [{"name": "가습기", "param": ["가습기"]}]
+              }),
+              ("SEARCH_TREND", "https://naverapihub.apigw.ntruss.com/datalab/v1/search", {
+                  "startDate": str(start), "endDate": str(yesterday),
+                  "timeUnit": "date",
+                  "keywordGroups": [{"groupName": "가습기", "keywords": ["가습기"]}]
+              }),
+          ]
+          failed = False
+          for label, url, payload in tests:
+              req = request.Request(url, data=json.dumps(payload).encode("utf-8"),
+                                    method="POST", headers=headers)
+              try:
+                  with request.urlopen(req, timeout=15) as res:
+                      if res.status != 200:
+                          print(label + "=FAIL_HTTP_UNEXPECTED")
+                          failed = True
+                          continue
+                      raw = res.read(120001)
+                  if len(raw) > 120000:
+                      print(label + "=FAIL_OVERSIZE")
+                      failed = True
+                      continue
+                  data = json.loads(raw)
+                  if not isinstance(data, dict) or not isinstance(data.get("results"), list):
+                      print(label + "=FAIL_SCHEMA")
+                      failed = True
+                  else:
+                      print(label + "=PASS_HTTP_200_SCHEMA")
+              except error.HTTPError as exc:
+                  print(label + "=FAIL_HTTP_" + str(exc.code))
+                  failed = True
+              except (error.URLError, TimeoutError, OSError):
+                  print(label + "=FAIL_NETWORK")
+                  failed = True
+              except (ValueError, UnicodeError):
+                  print(label + "=FAIL_JSON")
+                  failed = True
+          sys.exit(1 if failed else 0)
+          PY
