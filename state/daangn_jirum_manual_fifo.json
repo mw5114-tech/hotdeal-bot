@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96927,
-  "pending": [
-    {
-      "id": 96927,
-      "source_post_url": "https://t.me/jirum/96927",
-      "original_purchase_url": "https://link.coupang.com/a/iUEvb6QKTB",
-      "source_text": "☆특가 7,840원\n리퀴드 라벤더 실내건조 중성 액체 세탁세제 2.5L 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUEvb6QKTB\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T11:26:48+00:00",
-      "title": "☆특가 7,840원",
-      "sale_price_krw": 7840
-    }
-  ],
-  "in_flight": {
-    "id": 96927,
-    "status": "CLAIMED",
-    "run_id": "45165347423",
-    "at": "2026-11-23T11:28:11.471941+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8230,6 +8215,16 @@
       "item_id": "15279219078",
       "vendor_item_id": "82499716371",
       "at": "2026-11-23T11:28:02.386375+00:00",
+      "run_id": "45165347423"
+    },
+    "96927": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%ED%80%B4%EB%93%9C-%EB%9D%BC%EB%B2%A4%EB%8D%94-%EC%8B%A4%EB%82%B4%EA%B1%B4%EC%A1%B0-%EC%A4%91%EC%84%B1-%EC%95%A1%EC%B2%B4-%EC%84%B8%ED%83%81%EC%84%B8%EC%A0%9C-4%EA%B0%9C-25L-2%ED%95%A0%EC%9D%B8-PmvX8W9d?from=write",
+      "posted_at_utc": "2026-11-23T11:26:48+00:00",
+      "product_id": "9204805782",
+      "item_id": "27182187149",
+      "vendor_item_id": null,
+      "at": "2026-11-23T11:28:30.469793+00:00",
       "run_id": "45165347423"
     }
   },
