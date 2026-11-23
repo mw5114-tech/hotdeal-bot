@@ -3,15 +3,6 @@
   "last_scanned_id": 96908,
   "pending": [
     {
-      "id": 96907,
-      "source_post_url": "https://t.me/jirum/96907",
-      "original_purchase_url": "https://link.coupang.com/a/iUiy6fBVu0",
-      "source_text": "☆특가 9,220원\n위칙 소독 섬유유연제 본품, 2.3L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUiy6fBVu0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T06:19:49+00:00",
-      "title": "☆특가 9,220원",
-      "sale_price_krw": 9220
-    },
-    {
       "id": 96908,
       "source_post_url": "https://t.me/jirum/96908",
       "original_purchase_url": "https://link.coupang.com/a/iUi3qnjbFY",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6650
     }
   ],
-  "in_flight": {
-    "id": 96907,
-    "status": "CLAIMED",
-    "run_id": "45124184980",
-    "at": "2026-11-23T06:31:36.192823+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8139,6 +8125,16 @@
       "item_id": "24635773457",
       "vendor_item_id": "91646719108",
       "at": "2026-11-23T06:30:43.497521+00:00",
+      "run_id": "45124184980"
+    },
+    "96907": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9C%84%EC%B9%99-%EC%86%8C%EB%8F%85-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%B3%B8%ED%92%88-23L-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-P1XzXe1A?from=write",
+      "posted_at_utc": "2026-11-23T06:19:49+00:00",
+      "product_id": "7429410266",
+      "item_id": "25320198732",
+      "vendor_item_id": null,
+      "at": "2026-11-23T06:31:53.333727+00:00",
       "run_id": "45124184980"
     }
   },
