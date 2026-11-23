@@ -18,21 +18,16 @@ BOARD = "🔥 오늘의 핫딜"
 
 # The restored workflow overrides the archived cafe; no old posts are moved.
 RESTORED_CAFE = "https://cafe.daangn.com/kupang-teuggaye"
-SECONDARY_CAFE = "https://cafe.daangn.com/geojijeol-yagje"
-SECONDARY_BOARD_LABEL = "🧡절약 정보🥕"
 
 def target_for_cafe(base_url: str) -> tuple[str, str]:
     """Use a fixed, known Daangn-owned cafe; never allow arbitrary destinations."""
     parsed = urlsplit(base_url)
-    import os
-    secondary = os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
-    allowed = ("/geojijeol-yagje",) if secondary else (
-        "/i-gagyeog-mos-c", "/kupang-teuggaye",
-    )
     if (parsed.scheme != "https" or parsed.hostname != "cafe.daangn.com"
             or parsed.port is not None or parsed.username is not None
             or parsed.password is not None or parsed.query or parsed.fragment
-            or parsed.path.rstrip("/") not in allowed):
+            or parsed.path.rstrip("/") not in (
+                "/i-gagyeog-mos-c", "/kupang-teuggaye"
+            )):
         raise RuntimeError("DAANGN_CAFE_TARGET_NOT_APPROVED")
     prefix = parsed.path.rstrip("/") + "/posts/"
     return "https://cafe.daangn.com" + prefix + "new", prefix
@@ -41,11 +36,6 @@ def target_for_cafe(base_url: str) -> tuple[str, str]:
 def restored_board_label() -> str:
     """Exact board label observed on user's new cafe in a no-post probe."""
     import os
-    if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true":
-        label = os.getenv("DAANGN_CAFE_BOARD_LABEL")
-        if label != SECONDARY_BOARD_LABEL:
-            raise RuntimeError("DAANGN_SECONDARY_BOARD_LABEL_UNVERIFIED")
-        return label
     if os.getenv("DAANGN_CAFE_RESTORED") == "true":
         label = os.getenv("DAANGN_CAFE_BOARD_LABEL")
         if label != "🔥 오늘의핫딜":
@@ -65,11 +55,6 @@ def restored_live_gate() -> bool:
         os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true",
         os.getenv("COUPANG_PARTNER_SUBID", "") == "",
     ))
-    if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true":
-        return (general
-                and os.getenv("DAANGN_SECONDARY_CAFE_ADMIN_PERMISSION_CONFIRMED") == "true"
-                and os.getenv("DAANGN_CAFE_TARGET_URL") == SECONDARY_CAFE
-                and os.getenv("DAANGN_CAFE_BOARD_LABEL") == SECONDARY_BOARD_LABEL)
     return general
 
 
@@ -196,14 +181,8 @@ def publish_one(article: dict, state_secret: str | None = None,
     if os.getenv("DAANGN_CAFE_RESTORED") == "true":
         if not restored_live_gate():
             raise RuntimeError("DAANGN_CAFE_PARTNERS_PERMISSION_NOT_CONFIRMED")
-        secondary = os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
-        expected_target = SECONDARY_CAFE if secondary else RESTORED_CAFE
-        if os.getenv("DAANGN_CAFE_TARGET_URL") != expected_target:
+        if os.getenv("DAANGN_CAFE_TARGET_URL") != RESTORED_CAFE:
             raise RuntimeError("DAANGN_CAFE_RESTORED_TARGET_MISMATCH")
-        if secondary:
-            from gh_only.jirum_manual_queue import secondary_discount_eligible
-            if not secondary_discount_eligible(article):
-                raise RuntimeError("DAANGN_SECONDARY_DISCOUNT_BELOW_OR_UNVERIFIED")
         from gh_only.coupang_partners_api import issued_link_url
         receipt = article.get("official_link_receipt")
         if (not isinstance(receipt, dict)
@@ -217,14 +196,6 @@ def publish_one(article: dict, state_secret: str | None = None,
         os.getenv("DAANGN_CAFE_TARGET_URL",
                   "https://cafe.daangn.com/i-gagyeog-mos-c")
     )
-    # Defense in depth: even a malformed secondary draft may never publish
-    # the removed promotional invitation to join/enable cafe alerts.
-    if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true":
-        body_text = article.get("body")
-        if (not isinstance(body_text, str)
-                or "🔥 핫딜 정보를 확인해 소개합니다." in body_text
-                or "카페 가입 알림 설정하고 꿀템 챙겨가세요." in body_text):
-            raise RuntimeError("DAANGN_SECONDARY_PROMO_NOT_REMOVED")
     board_label = restored_board_label()
     result = {
         "status": "NOT_STARTED",
@@ -577,18 +548,13 @@ def publish_one(article: dict, state_secret: str | None = None,
                     "(nodes,minCount)=>nodes.filter(e=>e.complete&&e.naturalWidth>0&&e.naturalHeight>0).length>=minCount",
                     2 if chart is not None else 1,
                 )
-                required_footer = (
-                    "※ 실시간 핫딜 특성상", DISCLOSURE,
-                ) if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true" else (
+                footer = all(term in content for term in (
                     "※ 실시간 핫딜 특성상",
                     "카페 가입 알림 설정하고 꿀템 챙겨가세요.",
                     DISCLOSURE,
-                )
-                footer = all(term in content for term in required_footer)
+                ))
                 title_ok = post_title in content
-                board_ok = (norm(board_label) in norm(content)
-                            if os.getenv("DAANGN_SECONDARY_CAFE_MODE") == "true"
-                            else "오늘의핫딜" in norm(content))
+                board_ok = "오늘의핫딜" in norm(content)
                 result.update({
                     "affiliate_href_full": same_link,
                     "photo_visible": photo_visible,
