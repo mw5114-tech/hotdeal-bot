@@ -143,7 +143,7 @@ def ranked_topics(now: datetime) -> list[dict]:
 
 def size_tokens(name: str) -> set[str]:
     return set(re.sub(r"\s+", "", m.group().upper())
-               for m in re.finditer(r"(?<!\d)\d+(?:\.\d+)?\s*(?:TB|GB|ML|MAH|KG|매|개)\b",
+               for m in re.finditer(r"(?<!\d)\d+(?:\.\d+)?\s*(?:TB|GB|ML|MAH|KG|L|매|개)\b",
                                     name, flags=re.I))
 
 
