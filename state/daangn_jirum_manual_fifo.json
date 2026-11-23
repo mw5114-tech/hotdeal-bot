@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96927,
-  "pending": [],
+  "last_scanned_id": 96928,
+  "pending": [
+    {
+      "id": 96928,
+      "source_post_url": "https://t.me/jirum/96928",
+      "original_purchase_url": "https://link.coupang.com/a/iUEXVDC4Ky",
+      "source_text": "🔥🔥🔥무지성 3,860원 (45.0% 할인)🔥🔥🔥\n아브카 딥클린 탄력 소프트 모 대왕칫솔 10개입\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 7,018원\n- 할인: 3,158원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUEXVDC4Ky\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T11:33:17+00:00",
+      "title": "아브카 딥클린 탄력 소프트 모 대왕칫솔 10개입",
+      "sale_price_krw": 3860
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
