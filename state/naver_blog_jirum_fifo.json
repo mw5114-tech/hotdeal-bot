@@ -3,17 +3,6 @@
   "last_scanned_id": 96908,
   "pending": [
     {
-      "id": 96906,
-      "source_message_id": 96906,
-      "source_post_url": "https://t.me/jirum/96906",
-      "original_purchase_url": "https://link.coupang.com/a/iUiylm83JQ",
-      "title": "비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개",
-      "source_text": "👍대박 11,340원 (30.0% 할인)\n비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개\n📌 가격 현황\n- 정상가: 16,200원\n- 할인: 4,860원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUiylm83JQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11340,
-      "posted_at_utc": "2026-11-23T06:19:39+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96907,
       "source_message_id": 96907,
       "source_post_url": "https://t.me/jirum/96907",
@@ -2004,6 +1993,10 @@
     "96904": {
       "url": "https://blog.naver.com/mw5114/224488434448",
       "at": "2026-11-23T06:02:31.063641+00:00"
+    },
+    "96906": {
+      "url": "https://blog.naver.com/mw5114/224488478664",
+      "at": "2026-11-23T06:31:05.510459+00:00"
     }
   },
   "skipped": {
@@ -2382,12 +2375,7 @@
       "at": "2026-11-23T06:25:16.873256+00:00"
     }
   },
-  "in_flight": {
-    "id": 96906,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45124184980",
-    "at": "2026-11-23T06:30:21.938710+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
