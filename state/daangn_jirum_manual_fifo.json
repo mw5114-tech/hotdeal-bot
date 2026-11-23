@@ -3,16 +3,6 @@
   "last_scanned_id": 96903,
   "pending": [
     {
-      "id": 96902,
-      "source_post_url": "https://t.me/jirum/96902",
-      "original_purchase_url": "https://link.coupang.com/a/iUeLivgCYu",
-      "source_text": "☆특가 11,580원 (24.3% 할인)\n요즘 그릭요거트 플레인, 100g, 5개\n📌 가격 현황\n- 정상가: 15,290원\n- 할인: 3,710원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUeLivgCYu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T05:26:36+00:00",
-      "title": "요즘 그릭요거트 플레인, 100g, 5개",
-      "sale_price_krw": 11580,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96903,
       "source_post_url": "https://t.me/jirum/96903",
       "original_purchase_url": "https://link.coupang.com/a/iUflAsryeq",
@@ -22,12 +12,7 @@
       "sale_price_krw": 11950
     }
   ],
-  "in_flight": {
-    "id": 96902,
-    "status": "CLAIMED",
-    "run_id": "45118706719",
-    "at": "2026-11-23T05:35:41.585898+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8101,6 +8086,16 @@
       "vendor_item_id": null,
       "at": "2026-11-23T04:40:52.866441+00:00",
       "run_id": "45113226489"
+    },
+    "96902": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9A%94%EC%A6%98-%EA%B7%B8%EB%A6%AD%EC%9A%94%EA%B1%B0%ED%8A%B8-%ED%94%8C%EB%A0%88%EC%9D%B8-100g-5%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PmvX6gXd?from=write",
+      "posted_at_utc": "2026-11-23T05:26:36+00:00",
+      "product_id": "331527359",
+      "item_id": "20053732649",
+      "vendor_item_id": "87149894036",
+      "at": "2026-11-23T05:36:01.090226+00:00",
+      "run_id": "45118706719"
     }
   },
   "skipped_non_coupang": 1025,
