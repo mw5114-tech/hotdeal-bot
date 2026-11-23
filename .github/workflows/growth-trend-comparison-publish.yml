@@ -1,0 +1,57 @@
+name: Growth Lab 4 | Naver trend x Coupang A/B blog comparison
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'growth_lab/trend_comparison.py'
+      - 'growth_lab/test_trend_comparison.py'
+      - 'gh_only/naver_blog_comparison_publisher.py'
+      - '.github/workflows/growth-trend-comparison-publish.yml'
+  schedule:
+    # 07:10 KST daily, before Goldbox's 08:22 first publish window.
+    - cron: '10 22 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    concurrency:
+      # Same browser mutex as existing blog publishing, no simultaneous submit.
+      group: naver-blog-jirum-state-and-publisher
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Safe offline comparison rules tests
+        run: python -m unittest -v growth_lab.test_trend_comparison
+      - name: Install browser on live schedule only
+        if: github.event_name == 'schedule'
+        run: |
+          python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
+          python -m playwright install --only-shell chromium
+          if ! python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'; then
+            python -m playwright install --with-deps --only-shell chromium
+          fi
+      - name: Analyze trend and select an exact two-product comparison
+        if: github.event_name != 'push'
+        env:
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+          COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
+          COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
+          NAVER_BLOG_STORAGE_STATE_JSON: ${{ secrets.NAVER_BLOG_STORAGE_STATE_JSON }}
+          GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
+          API_RADAR_GITHUB_TOKEN: ${{ github.token }}
+          # Manual Run workflow is always preview; only scheduled runs publish.
+          TREND_COMPARISON_PREVIEW_ONLY: ${{ github.event_name != 'schedule' }}
+          TREND_COMPARISON_PUBLISH_ENABLED: ${{ github.event_name == 'schedule' }}
+        run: python -m growth_lab.trend_comparison
