@@ -3,16 +3,6 @@
   "last_scanned_id": 96884,
   "pending": [
     {
-      "id": 96883,
-      "source_message_id": 96883,
-      "source_post_url": "https://t.me/jirum/96883",
-      "original_purchase_url": "https://link.coupang.com/a/iTUMD1ZwmO",
-      "title": "롯데웰푸드 티코 밀크초코 아이스크림 (냉동) 15개입 2개",
-      "source_text": "❤️초대박 8,080원 (42.0% 할인)\n롯데웰푸드 티코 밀크초코 아이스크림 (냉동) 15개입 2개\n📌 가격 현황\n- 정상가: 13,931원\n- 할인: 5,851원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iTUMD1ZwmO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8080,
-      "posted_at_utc": "2026-11-23T00:47:02+00:00"
-    },
-    {
       "id": 96884,
       "source_message_id": 96884,
       "source_post_url": "https://t.me/jirum/96884",
@@ -1945,6 +1935,10 @@
     "96882": {
       "url": "https://blog.naver.com/mw5114/224487989327",
       "at": "2026-11-23T00:49:15.191204+00:00"
+    },
+    "96883": {
+      "url": "https://blog.naver.com/mw5114/224487991251",
+      "at": "2026-11-23T00:50:36.427594+00:00"
     }
   },
   "skipped": {
@@ -2318,12 +2312,7 @@
       "at": "2026-11-21T09:09:33.330010+00:00"
     }
   },
-  "in_flight": {
-    "id": 96883,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45090918304",
-    "at": "2026-11-23T00:49:52.204967+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
