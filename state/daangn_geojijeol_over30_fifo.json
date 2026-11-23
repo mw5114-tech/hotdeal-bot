@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96905,
+  "last_scanned_id": 96907,
   "pending": [
     {
       "id": 96902,
@@ -38,6 +38,24 @@
       "posted_at_utc": "2026-11-23T06:01:42+00:00",
       "title": "데니그리스 유기농 사과식초500ml, 1개",
       "sale_price_krw": 3780
+    },
+    {
+      "id": 96906,
+      "source_post_url": "https://t.me/jirum/96906",
+      "original_purchase_url": "https://link.coupang.com/a/iUiylm83JQ",
+      "source_text": "👍대박 11,340원 (30.0% 할인)\n비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개\n📌 가격 현황\n- 정상가: 16,200원\n- 할인: 4,860원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUiylm83JQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T06:19:39+00:00",
+      "title": "비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개",
+      "sale_price_krw": 11340
+    },
+    {
+      "id": 96907,
+      "source_post_url": "https://t.me/jirum/96907",
+      "original_purchase_url": "https://link.coupang.com/a/iUiy6fBVu0",
+      "source_text": "☆특가 9,220원\n위칙 소독 섬유유연제 본품, 2.3L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUiy6fBVu0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-23T06:19:49+00:00",
+      "title": "☆특가 9,220원",
+      "sale_price_krw": 9220
     }
   ],
   "in_flight": null,
