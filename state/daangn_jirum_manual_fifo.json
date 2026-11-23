@@ -3,16 +3,6 @@
   "last_scanned_id": 96908,
   "pending": [
     {
-      "id": 96906,
-      "source_post_url": "https://t.me/jirum/96906",
-      "original_purchase_url": "https://link.coupang.com/a/iUiylm83JQ",
-      "source_text": "👍대박 11,340원 (30.0% 할인)\n비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개\n📌 가격 현황\n- 정상가: 16,200원\n- 할인: 4,860원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iUiylm83JQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-23T06:19:39+00:00",
-      "title": "비앤비 비자극 유아 섬유유연제 자스민앤로즈향 리필형, 1.5L, 3개",
-      "sale_price_krw": 11340,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 96907,
       "source_post_url": "https://t.me/jirum/96907",
       "original_purchase_url": "https://link.coupang.com/a/iUiy6fBVu0",
@@ -31,12 +21,7 @@
       "sale_price_krw": 6650
     }
   ],
-  "in_flight": {
-    "id": 96906,
-    "status": "CLAIMED",
-    "run_id": "45124184980",
-    "at": "2026-11-23T06:30:24.810766+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8140,6 +8125,16 @@
       "vendor_item_id": "85261696768",
       "at": "2026-11-23T06:01:59.255618+00:00",
       "run_id": "45121361424"
+    },
+    "96906": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EC%95%A4%EB%B9%84-%EC%9C%A0%EC%95%84-%EB%B9%84%EC%9E%90%EA%B7%B9-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EC%9E%90%EC%8A%A4%EB%AF%BC%EC%95%A4%EB%A1%9C%EC%A6%88%ED%96%A5-%EB%A6%AC%ED%95%84%ED%98%95-15L-40%ED%95%A0%EC%9D%B8-PxqWqXBd?from=write",
+      "posted_at_utc": "2026-11-23T06:19:39+00:00",
+      "product_id": "1031016",
+      "item_id": "24635773457",
+      "vendor_item_id": "91646719108",
+      "at": "2026-11-23T06:30:43.497521+00:00",
+      "run_id": "45124184980"
     }
   },
   "skipped_non_coupang": 1025,
