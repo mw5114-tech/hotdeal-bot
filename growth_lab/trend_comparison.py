@@ -14,7 +14,8 @@ import re
 from urllib import request, error
 
 from api_radar.collector import SEARCH, get_api, extract_rows, RadarApiError
-from api_radar.quality import download_verified_image, QualityError
+from api_radar.quality import QualityError
+from growth_lab.comparison_photos import choose_photo
 from api_radar.publisher import cooldown_remaining_seconds
 from api_radar.state_store import load_state, RadarStateError
 from growth_lab.seo_drafts import products_for_comparison
@@ -225,13 +226,14 @@ def run(*, now: datetime | None = None, preview=False) -> int:
         return 0
     try:
         radar, _ = load_state()
-        if cooldown_remaining_seconds(radar, now):
+        if not preview and cooldown_remaining_seconds(radar, now):
             print("TREND_COMPARISON_SAFE_STOP radar_cooldown=true")
             return 0
     except RadarStateError:
         raise
     topics = ranked_topics(now)
     print("TREND_COMPARISON_CANDIDATE_TOPICS=" + str(len(topics)))
+    image_failures = 0
     for t in topics:
         # No repeat topic within two weeks.
         if any(x.get("topic") == t["keyword"]
@@ -250,14 +252,20 @@ def run(*, now: datetime | None = None, preview=False) -> int:
         print("TREND_COMPARISON_PAIR_READY category=" + t["category_name"]
               + " keyword=" + t["keyword"] + " prices_verified=observed_only"
               + " pair_count=2")
+        photo = choose_photo(a, b, radar, WORK_DIR)
+        if photo.get("status") != "IMAGE_SAVED":
+            image_failures += 1
+            print("TREND_COMPARISON_IMAGE_NOT_APPROVED posts=0")
         if preview or os.getenv("TREND_COMPARISON_PUBLISH_ENABLED", "false").lower() != "true":
-            print("TREND_COMPARISON_PREVIEW_ONLY posts=0")
+            print("TREND_COMPARISON_PREVIEW_ONLY posts=0 image_ready=" + str(photo.get("status") == "IMAGE_SAVED").lower())
             return 0
+        if photo.get("status") != "IMAGE_SAVED":
+            continue
         if not os.getenv("NAVER_BLOG_STORAGE_STATE_JSON"):
             raise ComparisonError("NAVER_SESSION_MISSING")
         links = (tracked_link(a), tracked_link(b))
-        photo = download_verified_image(a["image"], WORK_DIR, a["id"])
-        article = compose(t, a, b, links, photo, now)
+        article = compose(t, a, b, links, photo["path"], now)
+        article["paragraphs"].insert(0, "위 사진은 비교 대상 상품 " + photo["label"] + "의 로우차트 상품 이미지입니다.")
         # Claim before touching Naver: an ambiguous result cannot be re-posted.
         claims[key] = {"at": now_utc().isoformat(), "product_ids": article["product_ids"],
                        "status": "MANUAL_REVIEW_ON_UNCERTAIN_RESULT"}
@@ -287,6 +295,9 @@ def run(*, now: datetime | None = None, preview=False) -> int:
         save(PATH, final, fresh_sha, schema=SCHEMA)
         print("TREND_COMPARISON_PUBLISHED_CONFIRMED count=1")
         return 0
+    if image_failures:
+        print("TREND_COMPARISON_NO_APPROVED_IMAGE posts=0 pairs=" + str(image_failures))
+        return 1
     print("TREND_COMPARISON_NO_VERIFIED_PAIR posts=0")
     return 0
 
