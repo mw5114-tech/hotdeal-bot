@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97030,
-  "pending": [
-    {
-      "id": 97030,
-      "source_post_url": "https://t.me/jirum/97030",
-      "original_purchase_url": "https://link.coupang.com/a/iW25Dz3Hae",
-      "source_text": "👍대박 6,530원 (34.0% 할인)\n가그린 어린이용 구강세정제 딸기향 랜덤발송 380ml, 3개\n📌 가격 현황\n- 정상가: 9,894원\n- 할인: 3,364원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iW25Dz3Hae\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T22:06:05+00:00",
-      "title": "가그린 어린이용 구강세정제 딸기향 랜덤발송 380ml, 3개",
-      "sale_price_krw": 6530
-    }
-  ],
-  "in_flight": {
-    "id": 97030,
-    "status": "CLAIMED",
-    "run_id": "45497768632",
-    "at": "2026-11-24T22:08:15.584972+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -27,6 +12,16 @@
     },
     "94743": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
+    },
+    "97030": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B0%80%EA%B7%B8%EB%A6%B0-%EC%96%B4%EB%A6%B0%EC%9D%B4%EC%9A%A9-%EA%B5%AC%EA%B0%95%EC%84%B8%EC%A0%95%EC%A0%9C-%EB%94%B8%EA%B8%B0%ED%96%A5-%EB%9E%9C%EB%8D%A4%EB%B0%9C%EC%86%A1-380ml-3%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dgx7qmvj?from=write",
+      "posted_at_utc": "2026-11-24T22:06:05+00:00",
+      "product_id": "9334580988",
+      "item_id": "70364034",
+      "vendor_item_id": "85322648279",
+      "at": "2026-11-24T22:08:32.383855+00:00",
+      "run_id": "45497768632"
     }
   },
   "skipped_non_coupang": 27,
