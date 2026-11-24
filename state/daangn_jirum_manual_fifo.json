@@ -13,7 +13,12 @@
       "photo_prepare_failure_count": 1
     }
   ],
-  "in_flight": null,
+  "in_flight": {
+    "id": 97031,
+    "status": "CLAIMED",
+    "run_id": "45504256200",
+    "at": "2026-11-24T22:49:37.202147+00:00"
+  },
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
