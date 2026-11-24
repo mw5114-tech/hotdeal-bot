@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97001,
-  "pending": [
-    {
-      "id": 97001,
-      "source_post_url": "https://t.me/jirum/97001",
-      "original_purchase_url": "https://link.coupang.com/a/iWi2KDN9Nc",
-      "source_text": "☆특가 11,120원\n하늘보리 에코 무라벨, 1.5L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWi2KDN9Nc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T11:21:44+00:00",
-      "title": "☆특가 11,120원",
-      "sale_price_krw": 11120
-    }
-  ],
-  "in_flight": {
-    "id": 97001,
-    "status": "CLAIMED",
-    "run_id": "45383572680",
-    "at": "2026-11-24T11:22:53.719224+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8441,6 +8426,16 @@
       "vendor_item_id": null,
       "at": "2026-11-24T11:17:23.938562+00:00",
       "run_id": "45382674561"
+    },
+    "97001": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EB%8A%98%EB%B3%B4%EB%A6%AC-%EC%97%90%EC%BD%94-%EB%AC%B4%EB%9D%BC%EB%B2%A8-15L-12%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dyJKw9Yj?from=write",
+      "posted_at_utc": "2026-11-24T11:21:44+00:00",
+      "product_id": "7420809688",
+      "item_id": "21947270614",
+      "vendor_item_id": null,
+      "at": "2026-11-24T11:23:12.353396+00:00",
+      "run_id": "45383572680"
     }
   },
   "skipped_non_coupang": 1080,
