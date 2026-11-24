@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96994,
-  "pending": [
-    {
-      "id": 96994,
-      "source_message_id": 96994,
-      "source_post_url": "https://t.me/jirum/96994",
-      "original_purchase_url": "https://link.coupang.com/a/iV84tqw9eK",
-      "title": "☆특가 15,870원",
-      "source_text": "☆특가 15,870원\n역대급최저가\n📦 특가 바로가기\nhttps://link.coupang.com/a/iV84tqw9eK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15870,
-      "posted_at_utc": "2026-11-24T09:02:11+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2504,6 +2492,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-24T06:47:43.711620+00:00"
+    },
+    "96994": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-24T09:34:42.874548+00:00"
     }
   },
   "in_flight": null,
