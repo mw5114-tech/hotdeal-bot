@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97005,
-  "pending": [],
+  "last_scanned_id": 97007,
+  "pending": [
+    {
+      "id": 97007,
+      "source_message_id": 97007,
+      "source_post_url": "https://t.me/jirum/97007",
+      "original_purchase_url": "https://link.coupang.com/a/iWpNnYJ3AW",
+      "title": "한성기업 프리미엄 유부김밥 재료세트640g, 2개",
+      "source_text": "👍대박 17,010원 (31.0% 할인)\n한성기업 프리미엄 유부김밥 재료세트640g, 2개\n📌 가격 현황\n- 정상가: 24,652원\n- 할인: 7,642원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWpNnYJ3AW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 17010,
+      "posted_at_utc": "2026-11-24T12:56:13+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
