@@ -273,7 +273,9 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
             raise ComparisonError("NAVER_SESSION_MISSING")
         links = (tracked_link(a), tracked_link(b))
         article = compose(t, a, b, links, photo["path"], now)
-        article["paragraphs"].insert(0, "위 사진은 비교 대상 상품 " + photo["label"] + "의 로우차트 상품 이미지입니다.")
+        source_label = ("로우차트 상품 이미지" if photo["source"] == "lowchart_exact_item_public_page"
+                        else "네이버 이미지 검색에서 확인한 쿠팡 공식 제휴 상품 이미지")
+        article["paragraphs"].insert(0, "위 사진은 비교 대상 상품 " + photo["label"] + "의 " + source_label + "입니다.")
         # Claim before touching Naver: an ambiguous result cannot be re-posted.
         claims[key] = {"at": now_utc().isoformat(), "product_ids": article["product_ids"],
                        "status": "MANUAL_REVIEW_ON_UNCERTAIN_RESULT"}
