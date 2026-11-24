@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97032,
-  "pending": [
-    {
-      "id": 97032,
-      "source_post_url": "https://t.me/jirum/97032",
-      "original_purchase_url": "https://link.coupang.com/a/iW7Ny363vU",
-      "source_text": "☆특가 4,980원\n소와나무 동원 쿨피스 파인애플, 190ml, 15개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iW7Ny363vU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T23:11:59+00:00",
-      "title": "☆특가 4,980원",
-      "sale_price_krw": 4980
-    }
-  ],
-  "in_flight": {
-    "id": 97032,
-    "status": "CLAIMED",
-    "run_id": "45508005511",
-    "at": "2026-11-24T23:14:02.596212+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8491,6 +8476,16 @@
       "vendor_item_id": "94942747967",
       "at": "2026-11-24T22:49:53.671439+00:00",
       "run_id": "45504256200"
+    },
+    "97032": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%86%8C%EC%99%80%EB%82%98%EB%AC%B4-%EB%8F%99%EC%9B%90-%EC%BF%A8%ED%94%BC%EC%8A%A4-%ED%8C%8C%EC%9D%B8%EC%95%A0%ED%94%8C-190ml-15%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dgx7okZj?from=write",
+      "posted_at_utc": "2026-11-24T23:11:59+00:00",
+      "product_id": "8775610557",
+      "item_id": "25529772782",
+      "vendor_item_id": null,
+      "at": "2026-11-24T23:14:22.234551+00:00",
+      "run_id": "45508005511"
     }
   },
   "skipped_non_coupang": 1106,
