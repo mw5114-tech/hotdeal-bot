@@ -34,7 +34,7 @@ jobs:
       - name: Safe offline comparison rules tests
         run: python -m unittest -v growth_lab.test_trend_comparison
       - name: Install browser on live schedule only
-        if: (github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci: owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1'))
+        if: (github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1'))
         run: |
           python -m pip install --disable-pip-version-check --quiet playwright==1.64.1
           python -m playwright install --only-shell chromium
@@ -51,7 +51,7 @@ jobs:
           GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
           # Manual and ordinary push runs are previews. One exact owner-requested commit permits a single live attempt.
-          TREND_COMPARISON_PREVIEW_ONLY: ${{ !(github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci: owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1')) }}
-          TREND_COMPARISON_PUBLISH_ENABLED: ${{ (github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci: owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1')) }}
-          TREND_COMPARISON_TOPIC: ${{ (github.event_name == 'push' && github.event.head_commit.message == 'ci: owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1') && '가습기' || '' }}
+          TREND_COMPARISON_PREVIEW_ONLY: ${{ !(github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1')) }}
+          TREND_COMPARISON_PUBLISH_ENABLED: ${{ (github.event_name == 'schedule' || (github.event_name == 'push' && github.event.head_commit.message == 'ci owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1')) }}
+          TREND_COMPARISON_TOPIC: ${{ (github.event_name == 'push' && github.event.head_commit.message == 'ci owner requested one humidifier comparison publication 2026-11-24' && github.run_attempt == '1') && '가습기' || '' }}
         run: python -m growth_lab.trend_comparison
