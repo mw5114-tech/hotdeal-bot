@@ -18,16 +18,20 @@ BOARD = "🔥 오늘의 핫딜"
 
 # The restored workflow overrides the archived cafe; no old posts are moved.
 RESTORED_CAFE = "https://cafe.daangn.com/kupang-teuggaye"
+BUSAN_CAFE = "https://cafe.daangn.com/f97o44"
+BUSAN_BOARD = "🔥 오늘의 핫딜"
 
 def target_for_cafe(base_url: str) -> tuple[str, str]:
     """Use a fixed, known Daangn-owned cafe; never allow arbitrary destinations."""
+    import os
     parsed = urlsplit(base_url)
+    allowed = ("/f97o44",) if os.getenv("DAANGN_BUSAN_CAFE_MODE") == "true" else (
+        "/i-gagyeog-mos-c", "/kupang-teuggaye",
+    )
     if (parsed.scheme != "https" or parsed.hostname != "cafe.daangn.com"
             or parsed.port is not None or parsed.username is not None
             or parsed.password is not None or parsed.query or parsed.fragment
-            or parsed.path.rstrip("/") not in (
-                "/i-gagyeog-mos-c", "/kupang-teuggaye"
-            )):
+            or parsed.path.rstrip("/") not in allowed):
         raise RuntimeError("DAANGN_CAFE_TARGET_NOT_APPROVED")
     prefix = parsed.path.rstrip("/") + "/posts/"
     return "https://cafe.daangn.com" + prefix + "new", prefix
@@ -36,6 +40,11 @@ def target_for_cafe(base_url: str) -> tuple[str, str]:
 def restored_board_label() -> str:
     """Exact board label observed on user's new cafe in a no-post probe."""
     import os
+    if os.getenv("DAANGN_BUSAN_CAFE_MODE") == "true":
+        label = os.getenv("DAANGN_CAFE_BOARD_LABEL")
+        if label != BUSAN_BOARD:
+            raise RuntimeError("DAANGN_BUSAN_BOARD_LABEL_UNVERIFIED")
+        return label
     if os.getenv("DAANGN_CAFE_RESTORED") == "true":
         label = os.getenv("DAANGN_CAFE_BOARD_LABEL")
         if label != "🔥 오늘의핫딜":
@@ -55,6 +64,11 @@ def restored_live_gate() -> bool:
         os.getenv("DAANGN_OFFICIAL_API_LINK_ENABLED") == "true",
         os.getenv("COUPANG_PARTNER_SUBID", "") == "",
     ))
+    if os.getenv("DAANGN_BUSAN_CAFE_MODE") == "true":
+        return (general
+                and os.getenv("DAANGN_BUSAN_OWNER_PERMISSION") == "true"
+                and os.getenv("DAANGN_CAFE_TARGET_URL") == BUSAN_CAFE
+                and os.getenv("DAANGN_CAFE_BOARD_LABEL") == BUSAN_BOARD)
     return general
 
 
@@ -178,11 +192,17 @@ def publish_one(article: dict, state_secret: str | None = None,
     import os
     from playwright.sync_api import sync_playwright
 
-    if os.getenv("DAANGN_CAFE_RESTORED") == "true":
+    busan = os.getenv("DAANGN_BUSAN_CAFE_MODE") == "true"
+    if busan or os.getenv("DAANGN_CAFE_RESTORED") == "true":
         if not restored_live_gate():
             raise RuntimeError("DAANGN_CAFE_PARTNERS_PERMISSION_NOT_CONFIRMED")
-        if os.getenv("DAANGN_CAFE_TARGET_URL") != RESTORED_CAFE:
+        expected_target = BUSAN_CAFE if busan else RESTORED_CAFE
+        if os.getenv("DAANGN_CAFE_TARGET_URL") != expected_target:
             raise RuntimeError("DAANGN_CAFE_RESTORED_TARGET_MISMATCH")
+        if busan:
+            from gh_only.jirum_manual_queue import busan_discount_eligible
+            if not busan_discount_eligible(article):
+                raise RuntimeError("DAANGN_BUSAN_DISCOUNT_NOT_VERIFIED_OVER_30")
         from gh_only.coupang_partners_api import issued_link_url
         receipt = article.get("official_link_receipt")
         if (not isinstance(receipt, dict)
