@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97036,
-  "pending": [
-    {
-      "id": 97036,
-      "source_post_url": "https://t.me/jirum/97036",
-      "original_purchase_url": "https://link.coupang.com/a/iXaBllB0G4",
-      "source_text": "☆특가 24,140원\nnow 어덜트 강아지 그레인프리 스몰브리드 건식사료, 칠면조, 2kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXaBllB0G4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T23:51:12+00:00",
-      "title": "☆특가 24,140원",
-      "sale_price_krw": 24140
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -102,6 +92,12 @@
       "display_pct": null,
       "reference_source": "fallcent_similar_search_current",
       "at": "2026-11-24T22:44:31.836429+00:00"
+    },
+    "97036": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-24T23:52:14.670962+00:00"
     }
   }
 }
