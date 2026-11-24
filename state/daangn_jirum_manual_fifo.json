@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96968,
-  "pending": [
-    {
-      "id": 96968,
-      "source_post_url": "https://t.me/jirum/96968",
-      "original_purchase_url": "https://link.coupang.com/a/iVRU2ZRBNk",
-      "source_text": "❤️초대박 24,380원 (42.0% 할인)\n스탠리 아이스플로우 에어로라이트 캡&캐리 + 텀블러\n📌 가격 현황\n- 정상가: 42,034원\n- 할인: 17,654원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVRU2ZRBNk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T05:02:10+00:00",
-      "title": "스탠리 아이스플로우 에어로라이트 캡&캐리 + 텀블러",
-      "sale_price_krw": 24380
-    }
-  ],
-  "in_flight": {
-    "id": 96968,
-    "status": "CLAIMED",
-    "run_id": "45330556883",
-    "at": "2026-11-24T05:04:19.167250+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8381,6 +8366,16 @@
       "vendor_item_id": "91672762947",
       "at": "2026-11-24T04:34:40.079430+00:00",
       "run_id": "45326973605"
+    },
+    "96968": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%A0%EB%A6%AC-%EC%95%84%EC%9D%B4%EC%8A%A4%ED%94%8C%EB%A1%9C%EC%9A%B0-%EC%97%90%EC%96%B4%EB%A1%9C%EB%9D%BC%EC%9D%B4%ED%8A%B8-%EC%BA%A1%EC%BA%90%EB%A6%AC-%ED%85%80%EB%B8%94%EB%9F%AC-%EB%A1%9C%EC%A6%88%EC%BF%BC%EC%B8%A0-40%ED%95%A0%EC%9D%B8-PxqWoJBd?from=write",
+      "posted_at_utc": "2026-11-24T05:02:10+00:00",
+      "product_id": "7858128502",
+      "item_id": "22002722336",
+      "vendor_item_id": "89050234473",
+      "at": "2026-11-24T05:04:38.718844+00:00",
+      "run_id": "45330556883"
     }
   },
   "skipped_non_coupang": 1057,
