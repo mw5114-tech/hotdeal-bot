@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97005,
-  "pending": [
-    {
-      "id": 97005,
-      "source_message_id": 97005,
-      "source_post_url": "https://t.me/jirum/97005",
-      "original_purchase_url": "https://link.coupang.com/a/iWnEHYk5AG",
-      "title": "☆특가 26,740원",
-      "source_text": "☆특가 26,740원\n그린핑거 힘센보습 인텐시브 유아크림, 300g, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWnEHYk5AG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 26740,
-      "posted_at_utc": "2026-11-24T12:26:16+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2123,6 +2112,10 @@
     "97001": {
       "url": "https://blog.naver.com/mw5114/224490399197",
       "at": "2026-11-24T11:24:44.283214+00:00"
+    },
+    "97005": {
+      "url": "https://blog.naver.com/mw5114/224490469953",
+      "at": "2026-11-24T12:29:17.175476+00:00"
     }
   },
   "skipped": {
@@ -2531,12 +2524,7 @@
       "at": "2026-11-24T11:21:38.602694+00:00"
     }
   },
-  "in_flight": {
-    "id": 97005,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45393578520",
-    "at": "2026-11-24T12:28:34.411169+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
