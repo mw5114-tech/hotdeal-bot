@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96999,
-  "pending": [
-    {
-      "id": 96999,
-      "source_post_url": "https://t.me/jirum/96999",
-      "original_purchase_url": "https://link.coupang.com/a/iWiDPuu3EG",
-      "source_text": "☆특가 10,640원\nKUAHAI 보풀제거기 1위 휴대용 충전식 6중날 대용량 옷 니트 세탁소용\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWiDPuu3EG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T11:16:06+00:00",
-      "title": "☆특가 10,640원",
-      "sale_price_krw": 10640
-    }
-  ],
-  "in_flight": {
-    "id": 96999,
-    "status": "CLAIMED",
-    "run_id": "45382674561",
-    "at": "2026-11-24T11:17:03.240714+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8431,6 +8416,16 @@
       "vendor_item_id": null,
       "at": "2026-11-24T10:24:07.569414+00:00",
       "run_id": "45374317253"
+    },
+    "96999": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-KUAHAI-%EB%B3%B4%ED%92%80%EC%A0%9C%EA%B1%B0%EA%B8%B0-1%EC%9C%84-%ED%9C%B4%EB%8C%80%EC%9A%A9-%EC%B6%A9%EC%A0%84%EC%8B%9D-6%EC%A4%91%EB%82%A0-%EB%8C%80%EC%9A%A9%EB%9F%89-%EC%98%B7-20%ED%95%A0%EC%9D%B8-dE38yLJA?from=write",
+      "posted_at_utc": "2026-11-24T11:16:06+00:00",
+      "product_id": "9681680316",
+      "item_id": "28951194431",
+      "vendor_item_id": null,
+      "at": "2026-11-24T11:17:23.938562+00:00",
+      "run_id": "45382674561"
     }
   },
   "skipped_non_coupang": 1079,
