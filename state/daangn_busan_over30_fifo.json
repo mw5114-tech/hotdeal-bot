@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96998,
+  "last_scanned_id": 97029,
   "pending": [],
   "in_flight": null,
   "published": {
@@ -14,8 +14,37 @@
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
     }
   },
-  "skipped_non_coupang": 0,
-  "skipped_expired": {},
+  "skipped_non_coupang": 27,
+  "skipped_expired": {
+    "96999": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/96999",
+      "source_title": "☆특가 10,640원",
+      "posted_at_utc": "2026-11-24T11:16:06+00:00",
+      "at": "2026-11-24T21:13:18.420106+00:00"
+    },
+    "97001": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97001",
+      "source_title": "☆특가 11,120원",
+      "posted_at_utc": "2026-11-24T11:21:44+00:00",
+      "at": "2026-11-24T21:13:18.420114+00:00"
+    },
+    "97005": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97005",
+      "source_title": "☆특가 26,740원",
+      "posted_at_utc": "2026-11-24T12:26:16+00:00",
+      "at": "2026-11-24T21:13:18.420117+00:00"
+    },
+    "97007": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97007",
+      "source_title": "한성기업 프리미엄 유부김밥 재료세트640g, 2개",
+      "posted_at_utc": "2026-11-24T12:56:13+00:00",
+      "at": "2026-11-24T21:13:18.420120+00:00"
+    }
+  },
   "skipped_unverifiable": {},
   "skipped_busan_discount": {}
 }
