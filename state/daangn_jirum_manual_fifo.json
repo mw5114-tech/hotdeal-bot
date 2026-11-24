@@ -1,18 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96986,
-  "pending": [
-    {
-      "id": 96984,
-      "source_post_url": "https://t.me/jirum/96984",
-      "original_purchase_url": "https://link.coupang.com/a/iV6z7gnjuS",
-      "source_text": "👍대박 7,870원 (36.0% 할인)\n켈로그 단백질바K, 450g, 1개\n📌 가격 현황\n- 정상가: 12,297원\n- 할인: 4,427원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iV6z7gnjuS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T08:27:20+00:00",
-      "title": "켈로그 단백질바K, 450g, 1개",
-      "sale_price_krw": 7870,
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -10424,6 +10413,12 @@
       "source_post_url": "https://t.me/jirum/96973",
       "source_title": "이치란 라멘 하카타 가는 면 5개입",
       "at": "2026-11-24T07:02:43.774511+00:00"
+    },
+    "96984": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/96984",
+      "source_title": "켈로그 단백질바K, 450g, 1개",
+      "at": "2026-11-24T08:36:39.239126+00:00"
     }
   },
   "single_test_repost_20261103": {
