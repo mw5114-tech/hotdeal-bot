@@ -94,8 +94,8 @@ jobs:
           assert 'python -m gh_only.jirum_manual_queue drain' in restored
           assert "uses: ./.github/workflows/daangn-cafe-restored.yml" in main
           assert 'daangn-cafe-independent:' in main
-          # Only two live destinations are authorized. A deleted secondary
-          # cafe must never reappear in Oracle dispatch or scheduled backup.
+          # Only approved destinations: original Daangn, Busan and Naver.
+          # The retired Geojijeol cafe must never return.
           workflow_dir = Path('.github/workflows')
           assert not (workflow_dir / 'daangn-cafe-geojijeol-over30.yml').exists()
           assert not (workflow_dir / 'daangn-secondary-editor-preflight.yml').exists()
@@ -107,6 +107,35 @@ jobs:
           assert 'geojijeol-yagje' not in publisher_code
           assert 'SECONDARY_STATE_PATH' not in queue_code
           assert "state/daangn_jirum_manual_fifo.json" in queue_code
+          busan = (workflow_dir / 'daangn-cafe-busan-over30.yml').read_text()
+          assert 'daangn-busan-over30:' in main
+          assert 'uses: ./.github/workflows/daangn-cafe-busan-over30.yml' in main
+          assert 'https://cafe.daangn.com/f97o44' in busan
+          assert "DAANGN_BUSAN_CAFE_MODE: 'true'" in busan
+          assert 'DAANGN_BUSAN_CAFE_MODE:' not in restored
+          assert 'group: daangn-busan-over30-fifo' in busan
+          assert 'group: daangn-restored-fifo' in restored
+          assert "cron: '4,19,34,49 * * * *'" in busan
+          from gh_only.jirum_manual_queue import busan_discount_eligible, GithubState
+          from gh_only.jirum_manual_publisher import target_for_cafe
+          import os
+          from unittest.mock import patch
+          def deal(pct, sale, basis="lowchart_public_history"):
+              return {"title": f"상품 [{pct}%할인]", "busan_price_evidence": {
+                  "display_pct": pct, "sale": sale, "reference": 10000,
+                  "reference_source": basis, "similar_only": False}}
+          assert busan_discount_eligible(deal(35, 6500))
+          assert busan_discount_eligible(deal(45, 5500))
+          assert not busan_discount_eligible(deal(30, 7000))
+          assert not busan_discount_eligible(deal(35, 7000))
+          assert not busan_discount_eligible(deal(40, 6000, "fallcent_similar_search_current"))
+          assert not busan_discount_eligible({"title": "상품 [50%할인]"})
+          with patch.dict(os.environ, {"DAANGN_BUSAN_CAFE_MODE": "true",
+                                       "GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",
+                                       "GH_STATE_TOKEN": "offline-test-only"}):
+              assert GithubState().url.endswith('/state/daangn_busan_over30_fifo.json')
+              assert target_for_cafe("https://cafe.daangn.com/f97o44")[0].endswith("/f97o44/posts/new")
+          print("BUSAN_THRESHOLD_AND_FIFO_ISOLATION_OK")
           assert "github.event_name != 'schedule'" in main
           assert "cron: '7,22,37,52 * * * *'" in main
           assert "cron: '14,29,44,59 * * * *'" in restored
