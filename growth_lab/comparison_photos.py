@@ -1,7 +1,7 @@
 """Lowchart-first image selection for trend comparison; Naver image API probe.
 
 Do not infer item IDs or visit opaque affiliate tracking URLs. Search thumbnails
-are diagnostic only; search indexing alone does not establish image-use rights
+are diagnostic unless the original matches the official affiliate asset; indexing alone does not establish image-use rights
 or exact product identity. No arbitrary remote hosts or secret-bearing redirects.
 """
 from __future__ import annotations
@@ -156,7 +156,7 @@ def image_bytes(url: str, *, opener=None) -> dict:
             or (mime == "image/webp" and raw.startswith(b"RIFF") and raw[8:12] == b"WEBP"))
     if not good or not 1000 <= len(raw) <= MAX_IMAGE:
         return {"status": "NAVER_IMAGE_INVALID_BYTES"}
-    return {"status": "NAVER_IMAGE_BYTES_OK", "bytes": len(raw)}
+    return {"status": "NAVER_IMAGE_BYTES_OK", "bytes": len(raw), "_raw": raw, "_mime": mime}
 
 
 def probe_naver_photo(product: dict) -> dict:
@@ -187,13 +187,40 @@ def probe_naver_photo(product: dict) -> dict:
 
 
 def choose_photo(a: dict, b: dict, radar: dict, folder: Path) -> dict:
-    # Use only the existing Lowchart-verified photo method for live posting.
-    # If both items are unavailable, exercise the official Naver API fallback
-    # without claiming copyright permission or exact option verification.
+    # Prefer the existing Lowchart method, then an exact-title search result
+    # whose original is the official affiliate image asset.
     for label, product in (("A", a), ("B", b)):
         photo = lowchart_photo(product, radar, folder)
         print("TREND_LOWCHART_IMAGE product=" + label + " status=" + photo["status"])
         if photo["status"] == "IMAGE_SAVED":
             return {**photo, "label": label}
+    for label, product in (("A", a), ("B", b)):
+        result = naver_image_search(product["name"])
+        exact = [r for r in result["items"] if isinstance(r.get("title"), str)
+                 and title_match(product["name"], r["title"])]
+        print("TREND_NAVER_FALLBACK status=" + result["status"]
+              + " exact_title_hits=" + str(len(exact)))
+        # Restrict public reuse to the very same official affiliate image URL.
+        # A search thumbnail may be downloaded if its original matches that
+        # authorized source exactly; unrelated search images are diagnostic only.
+        official = product.get("image")
+        for item in exact:
+            original = item.get("link")
+            if not isinstance(official, str) or original != official:
+                continue
+            url = item.get("thumbnail")
+            if not safe_thumbnail(url):
+                continue
+            data = image_bytes(url)
+            if data.get("status") != "NAVER_IMAGE_BYTES_OK":
+                continue
+            ext = {"image/jpeg": ".jpg", "image/png": ".png",
+                   "image/webp": ".webp"}[data["_mime"]]
+            folder.mkdir(parents=True, exist_ok=True)
+            target = folder / ("naver_verified_" + product["id"] + ext)
+            target.write_bytes(data["_raw"])
+            print("TREND_NAVER_FALLBACK_OFFICIAL_IMAGE_SAVED product=" + label)
+            return {"status": "IMAGE_SAVED", "path": target,
+                    "source": "naver_search_official_affiliate_asset", "label": label}
     probe_naver_photo(a)
     return {"status": "NO_PUBLISH_APPROVED_PRODUCT_IMAGE"}
