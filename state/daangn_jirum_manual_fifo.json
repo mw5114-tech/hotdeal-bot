@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96949,
-  "pending": [],
+  "last_scanned_id": 96950,
+  "pending": [
+    {
+      "id": 96950,
+      "source_post_url": "https://t.me/jirum/96950",
+      "original_purchase_url": "https://link.coupang.com/a/iVwmA1onYq",
+      "source_text": "☆특가 4,950원\n아리얼 애플 사이다 탱글 젤리 팩 투 폼, 2개, 150ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVwmA1onYq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-24T00:00:31+00:00",
+      "title": "☆특가 4,950원",
+      "sale_price_krw": 4950
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
