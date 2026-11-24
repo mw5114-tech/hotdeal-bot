@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97007,
-  "pending": [
-    {
-      "id": 97007,
-      "source_post_url": "https://t.me/jirum/97007",
-      "original_purchase_url": "https://link.coupang.com/a/iWpNnYJ3AW",
-      "source_text": "👍대박 17,010원 (31.0% 할인)\n한성기업 프리미엄 유부김밥 재료세트640g, 2개\n📌 가격 현황\n- 정상가: 24,652원\n- 할인: 7,642원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWpNnYJ3AW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T12:56:13+00:00",
-      "title": "한성기업 프리미엄 유부김밥 재료세트640g, 2개",
-      "sale_price_krw": 17010
-    }
-  ],
-  "in_flight": {
-    "id": 97007,
-    "status": "CLAIMED",
-    "run_id": "45398453273",
-    "at": "2026-11-24T12:57:25.989253+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8461,6 +8446,16 @@
       "vendor_item_id": null,
       "at": "2026-11-24T12:27:55.826242+00:00",
       "run_id": "45393578520"
+    },
+    "97007": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EC%84%B1%EA%B8%B0%EC%97%85-%ED%94%84%EB%A6%AC%EB%AF%B8%EC%97%84-%EC%9C%A0%EB%B6%80%EA%B9%80%EB%B0%A5-%EC%9E%AC%EB%A3%8C%EC%84%B8%ED%8A%B8-640g-2%EA%B0%9C-25%ED%95%A0%EC%9D%B8-AeeWB7xA?from=write",
+      "posted_at_utc": "2026-11-24T12:56:13+00:00",
+      "product_id": "280767535",
+      "item_id": "19233171374",
+      "vendor_item_id": "86349639276",
+      "at": "2026-11-24T12:57:45.080031+00:00",
+      "run_id": "45398453273"
     }
   },
   "skipped_non_coupang": 1084,
