@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 96999,
-  "pending": [],
+  "last_scanned_id": 97001,
+  "pending": [
+    {
+      "id": 97001,
+      "source_post_url": "https://t.me/jirum/97001",
+      "original_purchase_url": "https://link.coupang.com/a/iWi2KDN9Nc",
+      "source_text": "☆특가 11,120원\n하늘보리 에코 무라벨, 1.5L, 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWi2KDN9Nc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-24T11:21:44+00:00",
+      "title": "☆특가 11,120원",
+      "sale_price_krw": 11120
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -8428,7 +8438,7 @@
       "run_id": "45382674561"
     }
   },
-  "skipped_non_coupang": 1079,
+  "skipped_non_coupang": 1080,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
