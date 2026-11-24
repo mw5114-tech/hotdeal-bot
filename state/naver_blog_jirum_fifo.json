@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96954,
-  "pending": [
-    {
-      "id": 96954,
-      "source_message_id": 96954,
-      "source_post_url": "https://t.me/jirum/96954",
-      "original_purchase_url": "https://link.coupang.com/a/iVBPA7s6E0",
-      "title": "☆특가 11,200원",
-      "source_text": "☆특가 11,200원\n루카스나인 시그니처 더블샷 라떼, 14.9g, 10개입, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVBPA7s6E0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11200,
-      "posted_at_utc": "2026-11-24T01:17:02+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2063,6 +2052,10 @@
     "96953": {
       "url": "https://blog.naver.com/mw5114/224489550637",
       "at": "2026-11-24T00:59:07.951238+00:00"
+    },
+    "96954": {
+      "url": "https://blog.naver.com/mw5114/224489580825",
+      "at": "2026-11-24T01:19:18.610888+00:00"
     }
   },
   "skipped": {
@@ -2456,12 +2449,7 @@
       "at": "2026-11-23T23:14:32.711745+00:00"
     }
   },
-  "in_flight": {
-    "id": 96954,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45304013154",
-    "at": "2026-11-24T01:18:32.482878+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
