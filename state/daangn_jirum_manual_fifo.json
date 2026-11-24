@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96963,
-  "pending": [
-    {
-      "id": 96963,
-      "source_post_url": "https://t.me/jirum/96963",
-      "original_purchase_url": "https://link.coupang.com/a/iVPaNA48gC",
-      "source_text": "🔥🔥🔥무지성 8,880원 (45.0% 할인)🔥🔥🔥\n딜라잇가든 망고 (냉동)1kg, 2봉\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 16,145원\n- 할인: 7,265원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVPaNA48gC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T04:23:44+00:00",
-      "title": "딜라잇가든 망고 (냉동)1kg, 2봉",
-      "sale_price_krw": 8880
-    }
-  ],
-  "in_flight": {
-    "id": 96963,
-    "status": "CLAIMED",
-    "run_id": "45326156432",
-    "at": "2026-11-24T04:25:55.997747+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8351,6 +8336,16 @@
       "vendor_item_id": null,
       "at": "2026-11-24T03:53:10.892678+00:00",
       "run_id": "45322458902"
+    },
+    "96963": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%94%9C%EB%9D%BC%EC%9E%87%EA%B0%80%EB%93%A0-%EB%A7%9D%EA%B3%A0-%EB%83%89%EB%8F%99-1kg-2%EB%B4%89-50%ED%95%A0%EC%9D%B8-AO3pJZyA?from=write",
+      "posted_at_utc": "2026-11-24T04:23:44+00:00",
+      "product_id": "7510678857",
+      "item_id": "19225636157",
+      "vendor_item_id": "86342277368",
+      "at": "2026-11-24T04:26:15.075066+00:00",
+      "run_id": "45326156432"
     }
   },
   "skipped_non_coupang": 1055,
