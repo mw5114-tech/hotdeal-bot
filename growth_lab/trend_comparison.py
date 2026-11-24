@@ -209,7 +209,7 @@ def tracked_link(p: dict) -> str:
     return request_deeplink(canonical, identity=None, subid="naverblog")
 
 
-def run(*, now: datetime | None = None, preview=False) -> int:
+def run(*, now: datetime | None = None, preview=False, requested_topic: str | None = None) -> int:
     now = now or now_utc()
     today = now.astimezone(KST).date().isoformat()
     state, sha = load(PATH, schema=SCHEMA)
@@ -232,6 +232,11 @@ def run(*, now: datetime | None = None, preview=False) -> int:
     except RadarStateError:
         raise
     topics = ranked_topics(now)
+    if requested_topic:
+        topics = [t for t in topics if t["keyword"] == requested_topic]
+        if not topics:
+            print("TREND_COMPARISON_REQUESTED_TOPIC_NOT_ELIGIBLE posts=0")
+            return 0
     print("TREND_COMPARISON_CANDIDATE_TOPICS=" + str(len(topics)))
     image_failures = 0
     for t in topics:
@@ -307,7 +312,8 @@ def run(*, now: datetime | None = None, preview=False) -> int:
 
 if __name__ == "__main__":
     try:
-        raise SystemExit(run(preview=os.getenv("TREND_COMPARISON_PREVIEW_ONLY") == "true"))
+        raise SystemExit(run(preview=os.getenv("TREND_COMPARISON_PREVIEW_ONLY") == "true",
+                             requested_topic=os.getenv("TREND_COMPARISON_TOPIC") or None))
     except (ComparisonError, RadarApiError, CoupangPartnersError,
             GrowthStoreError, RadarStateError, QualityError) as exc:
         # All errors in these types are fixed non-secret codes.
