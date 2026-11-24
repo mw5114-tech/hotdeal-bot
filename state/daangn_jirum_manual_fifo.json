@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 96996,
-  "pending": [
-    {
-      "id": 96996,
-      "source_post_url": "https://t.me/jirum/96996",
-      "original_purchase_url": "https://link.coupang.com/a/iWePi7YaJM",
-      "source_text": "☆특가 10,600원\n요리락 고추장 제육 불고기, 1kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWePi7YaJM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T10:22:43+00:00",
-      "title": "☆특가 10,600원",
-      "sale_price_krw": 10600
-    }
-  ],
-  "in_flight": {
-    "id": 96996,
-    "status": "CLAIMED",
-    "run_id": "45374317253",
-    "at": "2026-11-24T10:23:45.453862+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8421,6 +8406,16 @@
       "vendor_item_id": "85318864484",
       "at": "2026-11-24T09:55:49.652367+00:00",
       "run_id": "45369582440"
+    },
+    "96996": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9A%94%EB%A6%AC%EB%9D%BD-%EA%B3%A0%EC%B6%94%EC%9E%A5-%EC%A0%9C%EC%9C%A1-%EB%B6%88%EA%B3%A0%EA%B8%B0-1kg-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-AeeW7gzA?from=write",
+      "posted_at_utc": "2026-11-24T10:22:43+00:00",
+      "product_id": "7403444126",
+      "item_id": "19166986934",
+      "vendor_item_id": null,
+      "at": "2026-11-24T10:24:07.569414+00:00",
+      "run_id": "45374317253"
     }
   },
   "skipped_non_coupang": 1078,
