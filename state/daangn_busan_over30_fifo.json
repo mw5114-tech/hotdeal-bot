@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97031,
-  "pending": [
-    {
-      "id": 97031,
-      "source_post_url": "https://t.me/jirum/97031",
-      "original_purchase_url": "https://link.coupang.com/a/iW5FHAjeZE",
-      "source_text": "👍대박 19,360원 (33.0% 할인)\n하이뮨 프로틴 밸런스 음료 초코\n📌 가격 현황\n- 정상가: 28,896원\n- 할인: 9,536원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iW5FHAjeZE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-24T22:42:13+00:00",
-      "title": "하이뮨 프로틴 밸런스 음료 초코",
-      "sale_price_krw": 19360
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -66,5 +56,12 @@
     }
   },
   "skipped_unverifiable": {},
-  "skipped_busan_discount": {}
+  "skipped_busan_discount": {
+    "97031": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": null,
+      "reference_source": "fallcent_similar_search_current",
+      "at": "2026-11-24T22:44:31.836429+00:00"
+    }
+  }
 }
