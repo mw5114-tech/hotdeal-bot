@@ -24,6 +24,13 @@ from gh_only.daangn_editor_probe import read_one_draft
 from gh_only.official_link_receipts import load_receipt
 
 STATE_PATH = "state/daangn_jirum_manual_fifo.json"
+BUSAN_STATE_PATH = "state/daangn_busan_over30_fifo.json"
+
+
+def busan_cafe_mode() -> bool:
+    return os.getenv("DAANGN_BUSAN_CAFE_MODE") == "true"
+
+
 SCHEMA = "daangn-jirum-manual-fifo-v1"
 START_AFTER = 94743
 MAX_PAGES = 40
@@ -376,6 +383,16 @@ def validate_state(s: dict) -> None:
             or any(str(i) in skipped_unverifiable for i in ids)
             or any(k in published or k in skipped_expired for k in skipped_unverifiable)):
         raise ValueError("INVALID_UNVERIFIABLE_AUDIT")
+    busan_skips = s.get("skipped_busan_discount", {})
+    if (not isinstance(busan_skips, dict) or len(busan_skips) > 10000
+            or any(not isinstance(k, str) or not k.isdigit()
+                   or not isinstance(v, dict)
+                   or v.get("status") != "NOT_VERIFIED_OVER_30"
+                   for k, v in busan_skips.items())
+            or any(str(i) in busan_skips for i in ids)
+            or any(k in published or k in skipped_expired or k in skipped_unverifiable
+                   for k in busan_skips)):
+        raise ValueError("INVALID_BUSAN_DISCOUNT_AUDIT")
     block = s.get("kakao_auth_block")
     if block is not None and (
         not isinstance(block, dict)
@@ -515,7 +532,8 @@ class GithubState:
         if (not self.token or not self.repo or len(self.repo.split("/")) != 2
                 or self.repo != "mw5114-tech/hotdeal-bot"):
             raise RuntimeError("GITHUB_REPOSITORY_OR_STATE_TOKEN_MISSING")
-        self.url = f"https://api.github.com/repos/{self.repo}/contents/{STATE_PATH}"
+        path = BUSAN_STATE_PATH if busan_cafe_mode() else STATE_PATH
+        self.url = f"https://api.github.com/repos/{self.repo}/contents/{path}"
 
     def api(self, method: str, payload=None):
         body = json.dumps(payload).encode("utf-8") if payload is not None else None
@@ -1087,8 +1105,63 @@ def build_next(s: dict) -> dict:
         "drafts": [candidate],
     }, ensure_ascii=False, indent=2) + "\n", "utf-8")
     article = validate_draft(DRAFT_DIR, row["id"])
-    return {**article, "posted_at_utc": row.get("posted_at_utc"),
-            "manual_replay_approved": row.get("manual_replay_approved") is True}
+    article = {**article, "posted_at_utc": row.get("posted_at_utc"),
+               "manual_replay_approved": row.get("manual_replay_approved") is True}
+    if busan_cafe_mode():
+        caption = candidate.get("caption", {})
+        article["manual_replay_approved"] = False
+        article["busan_price_evidence"] = {
+            "display_pct": caption.get("approx_discount_vs_reference_pct"),
+            "reference_source": caption.get("comparison_reference_source"),
+            "reference": caption.get("comparison_reference_price_krw"),
+            "sale": caption.get("sale_price_krw"),
+            "similar_only": caption.get("comparison_is_similar_product_only"),
+        }
+    return article
+
+
+BUSAN_VERIFIED_PRICE_BASES = frozenset((
+    "lowchart_public_history", "lowchart_observed_high",
+    "lowchart_observed_current", "lowchart_observed_low",
+    "fallcent_observed_high", "fallcent_observed_average",
+    "fallcent_observed_current", "fallcent_observed_low",
+    "fallcent_high_low_midpoint",
+))
+
+
+def busan_discount_eligible(article: dict) -> bool:
+    proof = article.get("busan_price_evidence")
+    if not isinstance(proof, dict):
+        return False
+    pct, sale, reference = (proof.get(k) for k in ("display_pct", "sale", "reference"))
+    title = article.get("title")
+    return bool(
+        type(pct) is int and 30 < pct <= 95
+        and type(sale) is int and type(reference) is int
+        and 0 < sale < reference <= 100_000_000
+        and proof.get("reference_source") in BUSAN_VERIFIED_PRICE_BASES
+        and proof.get("similar_only") is not True
+        and (reference - sale) * 100 > reference * 30
+        and isinstance(title, str) and title.endswith(f" [{pct}%할인]")
+    )
+
+
+def skip_busan_discount(store, source_id: int, article: dict) -> None:
+    state, sha = store.read()
+    if (state["in_flight"] is not None or not state["pending"]
+            or state["pending"][0]["id"] != source_id
+            or str(source_id) in state["published"]):
+        raise RuntimeError("BUSAN_DISCOUNT_QUEUE_CHANGED")
+    proof = article.get("busan_price_evidence") or {}
+    state["pending"].pop(0)
+    state.setdefault("skipped_busan_discount", {})[str(source_id)] = {
+        "status": "NOT_VERIFIED_OVER_30",
+        "display_pct": proof.get("display_pct"),
+        "reference_source": proof.get("reference_source"),
+        "at": now_utc(),
+    }
+    store.write(state, sha, "state: Busan cafe skip deal not verified over 30pct [skip ci]")
+    print("BUSAN_DISCOUNT_SKIPPED source_id=" + str(source_id))
 
 
 def claim(store: GithubState, source_id: int, run_id: str) -> None:
@@ -1260,6 +1333,9 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 kakao_operator_notice(reason, len(state["pending"]))
                 return 2
             raise
+        if busan_cafe_mode() and not busan_discount_eligible(article):
+            skip_busan_discount(store, article["source_id"], article)
+            continue
         if enforcing_freshness() and freshness_status(state["pending"][0]) != "FRESH":
             latest, sha = store.read()
             pruned, skipped = expire_pending(latest)
