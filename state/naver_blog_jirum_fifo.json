@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96973,
-  "pending": [
-    {
-      "id": 96973,
-      "source_message_id": 96973,
-      "source_post_url": "https://t.me/jirum/96973",
-      "original_purchase_url": "https://link.coupang.com/a/iVYK8TkkOO",
-      "title": "이치란 라멘 하카타 가는 면 5개입",
-      "source_text": "👍대박 16,740원 (34.0% 할인)\n이치란 라멘 하카타 가는 면 5개입\n📌 가격 현황\n- 정상가: 25,364원\n- 할인: 8,624원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iVYK8TkkOO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 16740,
-      "posted_at_utc": "2026-11-24T06:37:53+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2491,6 +2479,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-23T23:14:32.711745+00:00"
+    },
+    "96973": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-24T06:47:43.711620+00:00"
     }
   },
   "in_flight": null,
