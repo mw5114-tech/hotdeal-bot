@@ -15,7 +15,7 @@ from urllib import request, error
 
 from api_radar.collector import SEARCH, get_api, extract_rows, RadarApiError
 from api_radar.quality import QualityError
-from growth_lab.comparison_photos import choose_photo
+from growth_lab.comparison_photos import choose_photo, probe_naver_photo
 from api_radar.publisher import cooldown_remaining_seconds
 from api_radar.state_store import load_state, RadarStateError
 from growth_lab.seo_drafts import products_for_comparison
@@ -257,6 +257,9 @@ def run(*, now: datetime | None = None, preview=False) -> int:
             image_failures += 1
             print("TREND_COMPARISON_IMAGE_NOT_APPROVED posts=0")
         if preview or os.getenv("TREND_COMPARISON_PUBLISH_ENABLED", "false").lower() != "true":
+            # Exercise the backup API even when Lowchart succeeds, in preview only.
+            if photo.get("status") == "IMAGE_SAVED":
+                probe_naver_photo(a)
             print("TREND_COMPARISON_PREVIEW_ONLY posts=0 image_ready=" + str(photo.get("status") == "IMAGE_SAVED").lower())
             return 0
         if photo.get("status") != "IMAGE_SAVED":
