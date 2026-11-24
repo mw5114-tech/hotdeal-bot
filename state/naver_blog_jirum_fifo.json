@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 96996,
-  "pending": [
-    {
-      "id": 96996,
-      "source_message_id": 96996,
-      "source_post_url": "https://t.me/jirum/96996",
-      "original_purchase_url": "https://link.coupang.com/a/iWePi7YaJM",
-      "title": "☆특가 10,600원",
-      "source_text": "☆특가 10,600원\n요리락 고추장 제육 불고기, 1kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iWePi7YaJM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10600,
-      "posted_at_utc": "2026-11-24T10:22:43+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2111,6 +2100,10 @@
     "96995": {
       "url": "https://blog.naver.com/mw5114/224490310306",
       "at": "2026-11-24T09:55:28.125910+00:00"
+    },
+    "96996": {
+      "url": "https://blog.naver.com/mw5114/224490339603",
+      "at": "2026-11-24T10:24:29.064106+00:00"
     }
   },
   "skipped": {
@@ -2514,12 +2507,7 @@
       "at": "2026-11-24T09:34:42.874548+00:00"
     }
   },
-  "in_flight": {
-    "id": 96996,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45374317253",
-    "at": "2026-11-24T10:23:44.984419+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
