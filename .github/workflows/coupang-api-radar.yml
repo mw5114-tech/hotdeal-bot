@@ -115,7 +115,7 @@ jobs:
         env:
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
           GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
-          API_RADAR_VERIFIED_ONLY: 'false'
+          API_RADAR_VERIFIED_ONLY: 'true'
           API_RADAR_PENDING_ONLY: 'true'
         run: python -m api_radar.publisher
       - name: Install Naver editor browser only when a backlog exists
@@ -130,7 +130,7 @@ jobs:
         if: steps.ready.outputs.ready == 'true' && steps.backlog.outputs.pending == 'true'
         env:
           API_RADAR_PUBLISH_ENABLED: 'true'
-          API_RADAR_VERIFIED_ONLY: 'false'
+          API_RADAR_VERIFIED_ONLY: 'true'
           API_RADAR_GITHUB_TOKEN: ${{ github.token }}
           GROWTH_LAB_GITHUB_TOKEN: ${{ github.token }}
           API_RADAR_TREND_MODE: 'curated'
