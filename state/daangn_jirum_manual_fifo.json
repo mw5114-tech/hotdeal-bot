@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97029,
-  "pending": [],
+  "last_scanned_id": 97030,
+  "pending": [
+    {
+      "id": 97030,
+      "source_post_url": "https://t.me/jirum/97030",
+      "original_purchase_url": "https://link.coupang.com/a/iW25Dz3Hae",
+      "source_text": "👍대박 6,530원 (34.0% 할인)\n가그린 어린이용 구강세정제 딸기향 랜덤발송 380ml, 3개\n📌 가격 현황\n- 정상가: 9,894원\n- 할인: 3,364원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iW25Dz3Hae\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-24T22:06:05+00:00",
+      "title": "가그린 어린이용 구강세정제 딸기향 랜덤발송 380ml, 3개",
+      "sale_price_krw": 6530
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
