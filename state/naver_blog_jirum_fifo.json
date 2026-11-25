@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97077,
-  "pending": [
-    {
-      "id": 97077,
-      "source_message_id": 97077,
-      "source_post_url": "https://t.me/jirum/97077",
-      "original_purchase_url": "https://link.coupang.com/a/iXVzKyh7Js",
-      "title": "☆특가 15,840원",
-      "source_text": "☆특가 15,840원\n에낙 라면과자 30g × 48개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVzKyh7Js\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15840,
-      "posted_at_utc": "2026-11-25T10:48:32+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2227,6 +2216,10 @@
     "97076": {
       "url": "https://blog.naver.com/mw5114/224491951348",
       "at": "2026-11-25T10:49:03.335666+00:00"
+    },
+    "97077": {
+      "url": "https://blog.naver.com/mw5114/224491953103",
+      "at": "2026-11-25T10:50:28.458778+00:00"
     }
   },
   "skipped": {
@@ -2654,12 +2647,7 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": {
-    "id": 97077,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45598558183",
-    "at": "2026-11-25T10:49:45.070771+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
