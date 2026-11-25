@@ -214,6 +214,9 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     if len(rows) != 1 or not isinstance(rows[0], dict):
         return None
     row = rows[0]
+    from gh_only.naver_api_image_photo import eligible_draft as naver_api_eligible
+    if naver_api_eligible(row):
+        return None
     # A documented search representative (Fallcent or Naver) may replace
     # a missing Lowchart image; other unverified photo types may not.
     if (row.get("photo", {}).get("status") == "IMAGE_SAVED"
@@ -782,6 +785,8 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
         raise RuntimeError("DRAFT_SOURCE_MISMATCH")
     row = rows[0]
     article = read_one_draft(folder)
+    from gh_only.naver_api_image_photo import eligible_draft as naver_api_eligible
+    api_image_ok = naver_api_eligible(row)
     if (article["source_id"] != expected_id or article["image"] is None
         or not article["image"].is_file() or row.get("photo", {}).get("status") != "IMAGE_SAVED"
         or row.get("product_identity", {}).get("status") != "EXACT_ITEM_IDENTIFIED"
@@ -789,6 +794,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
             (row.get("image_product_match") is True
              and row.get("image_source") == "lowchart_exact_item_public_page"
              and row.get("image_exact_item_page_verified") is True)
+            or api_image_ok
             or (row.get("image_source") == "telegram_attached_photo"
                 and row.get("source_photo_verified") is True
                 and row.get("photo", {}).get("image_source") == "telegram_attached_photo")
@@ -814,6 +820,7 @@ def validate_draft(folder: Path, expected_id: int) -> dict:
                 (row.get("lowchart_title_verified") is True
                  and row.get("product_name_source") == "lowchart_exact_item_page"
                  and isinstance(row.get("lowchart_product_title"), str))
+                or api_image_ok
                 or (row.get("image_source") == "fallcent_search_representative"
                     and row.get("representative_fallcent_image") is True
                     and row.get("product_name_source") == "telegram_product_title"
