@@ -3,16 +3,6 @@
   "last_scanned_id": 97120,
   "pending": [
     {
-      "id": 97119,
-      "source_message_id": 97119,
-      "source_post_url": "https://t.me/jirum/97119",
-      "original_purchase_url": "https://link.coupang.com/a/iYfbygro6K",
-      "title": "☆특가 11,170원",
-      "source_text": "☆특가 11,170원\n곰곰 버팔로윙봉 700g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYfbygro6K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11170,
-      "posted_at_utc": "2026-11-25T15:22:57+00:00"
-    },
-    {
       "id": 97120,
       "source_message_id": 97120,
       "source_post_url": "https://t.me/jirum/97120",
@@ -2313,6 +2303,10 @@
     "97118": {
       "url": "https://blog.naver.com/mw5114/224492253089",
       "at": "2026-11-25T15:25:52.189736+00:00"
+    },
+    "97119": {
+      "url": "https://blog.naver.com/mw5114/224492254613",
+      "at": "2026-11-25T15:27:27.952355+00:00"
     }
   },
   "skipped": {
@@ -2745,12 +2739,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97119,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45645089426",
-    "at": "2026-11-25T15:26:45.092346+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
