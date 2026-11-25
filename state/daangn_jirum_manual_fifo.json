@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97089,
-  "pending": [
-    {
-      "id": 97089,
-      "source_post_url": "https://t.me/jirum/97089",
-      "original_purchase_url": "https://link.coupang.com/a/iX2uAyV0AC",
-      "source_text": "☆특가 6,060원\n16% 할인🔥 세라마이드 보습 케어, 향 부담 없는 무향 핸드크림\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2uAyV0AC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:25:20+00:00",
-      "title": "☆특가 6,060원",
-      "sale_price_krw": 6060
-    }
-  ],
-  "in_flight": {
-    "id": 97089,
-    "status": "CLAIMED",
-    "run_id": "45613527784",
-    "at": "2026-11-25T12:26:48.249779+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8820,6 +8805,16 @@
       "item_id": "53270283",
       "vendor_item_id": null,
       "at": "2026-11-25T12:26:07.130361+00:00",
+      "run_id": "45613527784"
+    },
+    "97089": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%BC%EB%A6%AC%EC%9C%A4-%EC%84%B8%EB%9D%BC%EB%A7%88%EC%9D%B4%EB%93%9C-%EB%B9%84%EA%B1%B4-%ED%95%B8%EB%93%9C%ED%81%AC%EB%A6%BC-%EB%AC%B4%ED%96%A5-50ml-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-P5aZ4nrP?from=write",
+      "posted_at_utc": "2026-11-25T12:25:20+00:00",
+      "product_id": "8254940545",
+      "item_id": "24616923410",
+      "vendor_item_id": "87840807653",
+      "at": "2026-11-25T12:27:07.032202+00:00",
       "run_id": "45613527784"
     }
   },
