@@ -3,15 +3,6 @@
   "last_scanned_id": 97118,
   "pending": [
     {
-      "id": 97117,
-      "source_post_url": "https://t.me/jirum/97117",
-      "original_purchase_url": "https://link.coupang.com/a/iYe6Put26u",
-      "source_text": "☆특가 6,470원\n지도표성경 참돌자반 김 80g × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYe6Put26u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T15:21:53+00:00",
-      "title": "☆특가 6,470원",
-      "sale_price_krw": 6470
-    },
-    {
       "id": 97118,
       "source_post_url": "https://t.me/jirum/97118",
       "original_purchase_url": "https://link.coupang.com/a/iYe9FxTK1Y",
@@ -21,12 +12,7 @@
       "sale_price_krw": 5900
     }
   ],
-  "in_flight": {
-    "id": 97117,
-    "status": "CLAIMED",
-    "run_id": "45644506523",
-    "at": "2026-11-25T15:23:48.653910+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8900,6 +8886,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T15:22:47.716670+00:00",
       "run_id": "45644325119"
+    },
+    "97117": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A7%80%EB%8F%84%ED%91%9C%EC%84%B1%EA%B2%BD-%EC%B0%B8%EB%8F%8C%EC%9E%90%EB%B0%98-%EA%B9%80-80g-2%EA%B0%9C-15%ED%95%A0%EC%9D%B8-d9am1bed?from=write",
+      "posted_at_utc": "2026-11-25T15:21:53+00:00",
+      "product_id": "7360003427",
+      "item_id": "21523164490",
+      "vendor_item_id": null,
+      "at": "2026-11-25T15:24:07.489976+00:00",
+      "run_id": "45644506523"
     }
   },
   "skipped_non_coupang": 1147,
