@@ -187,7 +187,7 @@ def _fetch_one_once(product_id: str, item_id: str, expected_tokens: tuple[str, .
 
 
 def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
-              deal_price: int, opener=None, *, sleeper=None) -> dict:
+              deal_price: int, opener=None, *, sleeper=None, ready=None) -> dict:
     """Bounded recovery for transient 403 from the exact public item page.
 
     A 200 is accepted only if the existing strict parser verifies this
@@ -201,7 +201,22 @@ def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
     sleeper = sleeper or time.sleep
     result = None
     for attempt, delay in enumerate(delays):
-        if delay:
+        if delay and ready is not None:
+            # Inspect only the already-verified sibling cache during the
+            # existing bounded backoff. Do not issue another provider request
+            # once a complete, validated bundle is available.
+            remaining = delay
+            while remaining > 0:
+                shared = ready()
+                if shared is not None:
+                    return shared
+                part = min(2, remaining)
+                sleeper(part)
+                remaining -= part
+            shared = ready()
+            if shared is not None:
+                return shared
+        elif delay:
             sleeper(delay)
         result = _fetch_one_once(product_id, item_id, expected_tokens,
                                  deal_price, opener=opener)
@@ -211,6 +226,10 @@ def fetch_one(product_id: str, item_id: str, expected_tokens: tuple[str, ...],
             "product_id": product_id, "item_id": item_id,
             "attempt": attempt + 1, "max_attempts": len(delays),
         }))
+    if ready is not None:
+        shared = ready()
+        if shared is not None:
+            return shared
     result["http_403_attempts"] = len(delays)
     result["retry_exhausted"] = True
     return result
