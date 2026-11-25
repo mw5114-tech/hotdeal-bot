@@ -102,6 +102,54 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
                      "source_url": build_url(PID, IID)},
                     Path(dest), SOURCE_ID))
 
+    def test_ready_cache_miss_does_not_sleep(self):
+        calls = []
+        with TemporaryDirectory() as td:
+            result = recover_bundle(
+                SOURCE_ID, IDENTITY, Path(td), token="fake", wait=False,
+                reader=lambda sid, token: calls.append(sid) or None,
+                sleeper=lambda delay: self.fail("cache probe must not sleep"))
+        self.assertIsNone(result)
+        self.assertEqual(calls, [SOURCE_ID])
+
+    def test_ready_cache_skips_external_collection(self):
+        for delayed in (False, True):
+            with self.subTest(delayed=delayed), TemporaryDirectory() as td:
+                folder = Path(td)
+                photo = folder / f"jirum_{SOURCE_ID}_lowchart_photo.jpg"
+                chart = folder / f"jirum_{SOURCE_ID}_lowchart_chart.png"
+                photo.write_bytes(photo_bytes())
+                chart.write_bytes(chart_bytes())
+                cached = {
+                    "title": TITLE, "image_url": CDN, "photo_path": photo,
+                    "chart_path": chart, "history": exact_history(),
+                }
+                with patch.dict(os.environ, {
+                    "JIRUM_LOWCHART_BUNDLE_ENABLED": "true",
+                    "JIRUM_LOWCHART_CACHE_FIRST_ENABLED": "true",
+                    "GH_STATE_TOKEN": "fake",
+                }), patch("gh_only.lowchart_shared_bundle.recover_bundle",
+                          side_effect=[None, cached] if delayed else [cached]) as load, \
+                     patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                           return_value={"http_status": 403,
+                                         "status": "LOWCHART_IMAGE_PAGE_REQUEST_ERROR"}) as lookup, \
+                     patch("gh_only.lowchart_price_reference._fetch_one_once") as price, \
+                     patch("gh_only.default_deal_automation.download_exact_photo") as download, \
+                     patch("gh_only.lowchart_shared_reference.maybe_share_or_recover") as share, \
+                     patch("gh_only.lowchart_shared_bundle.prepare_native_chart") as capture, \
+                     patch("gh_only.lowchart_shared_bundle.publish_bundle") as publish:
+                    row = enrich_deal(DEAL, folder, resolver=lambda _: IDENTITY,
+                                      owner_tag="AF9668915")
+                self.assertEqual(lookup.call_count, int(delayed))
+                self.assertEqual(load.call_count, 2 if delayed else 1)
+                self.assertTrue(all(c.kwargs.get("wait") is False for c in load.call_args_list))
+                for mock in (price, download, share, capture, publish):
+                    mock.assert_not_called()
+                self.assertEqual(row["caption"]["observed_average_krw"], 34575)
+                self.assertEqual(row["photo"]["saved_name"], photo.name)
+                self.assertTrue(row["image_exact_item_page_verified"])
+                self.assertTrue(row["history"]["shared_from_verified_sibling"])
+
     def test_local_lowchart_200_publishes_both_original_assets_before_post(self):
         og = {
             "status": "LOWCHART_EXACT_ITEM_IMAGE",
