@@ -121,6 +121,7 @@ jobs:
       # chart PNG between independent channel jobs. Disable unrelated
       # search-first image fallbacks; never trade identity for volume.
       JIRUM_LOWCHART_BUNDLE_ENABLED: 'true'
+      JIRUM_LOWCHART_CACHE_FIRST_ENABLED: 'true'
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
