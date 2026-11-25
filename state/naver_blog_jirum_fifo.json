@@ -2662,7 +2662,12 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 97079,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "45599070148",
+    "at": "2026-11-25T10:55:55.094414+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
