@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97069,
-  "pending": [
-    {
-      "id": 97069,
-      "source_post_url": "https://t.me/jirum/97069",
-      "original_purchase_url": "https://link.coupang.com/a/iXRzd4tcJ2",
-      "source_text": "☆특가 5,980원 (14.6% 할인)\n풀무원 장칼국수 2인분, 439g, 1개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 1,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXRzd4tcJ2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T09:52:27+00:00",
-      "title": "풀무원 장칼국수 2인분, 439g, 1개",
-      "sale_price_krw": 5980
-    }
-  ],
-  "in_flight": {
-    "id": 97069,
-    "status": "CLAIMED",
-    "run_id": "45589608224",
-    "at": "2026-11-25T09:54:23.746131+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8651,6 +8636,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T09:45:31.582212+00:00",
       "run_id": "45588313514"
+    },
+    "97069": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%9E%A5%EC%B9%BC%EA%B5%AD%EC%88%98-2%EC%9D%B8%EB%B6%84-439g-1%EA%B0%9C-15%ED%95%A0%EC%9D%B8-AeeBzqwA?from=write",
+      "posted_at_utc": "2026-11-25T09:52:27+00:00",
+      "product_id": "1354128902",
+      "item_id": "2382699346",
+      "vendor_item_id": null,
+      "at": "2026-11-25T09:54:42.494346+00:00",
+      "run_id": "45589608224"
     }
   },
   "skipped_non_coupang": 1123,
