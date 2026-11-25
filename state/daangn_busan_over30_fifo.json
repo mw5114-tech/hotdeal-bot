@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97051,
-  "pending": [
-    {
-      "id": 97051,
-      "source_post_url": "https://t.me/jirum/97051",
-      "original_purchase_url": "https://link.coupang.com/a/iXsOXU2AA8",
-      "source_text": "☆특가 8,950원\n밀크앤허니 스위트크림 치즈케익 (냉동)\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXsOXU2AA8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T04:06:10+00:00",
-      "title": "☆특가 8,950원",
-      "sale_price_krw": 8950
-    }
-  ],
-  "in_flight": {
-    "id": 97051,
-    "status": "CLAIMED",
-    "run_id": "45544530688",
-    "at": "2026-11-25T04:07:20.737596+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -77,6 +62,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T02:41:48.629571+00:00",
       "run_id": "45534662378"
+    },
+    "97051": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%80%ED%81%AC%EC%95%A4%ED%97%88%EB%8B%88-%EC%8A%A4%EC%9C%84%ED%8A%B8%ED%81%AC%EB%A6%BC-%EC%B9%98%EC%A6%88%EC%BC%80%EC%9D%B5-%EB%83%89%EB%8F%99-520g-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dJ35zlkj?from=write",
+      "posted_at_utc": "2026-11-25T04:06:10+00:00",
+      "product_id": "6004352096",
+      "item_id": "10877760349",
+      "vendor_item_id": null,
+      "at": "2026-11-25T04:07:39.985010+00:00",
+      "run_id": "45544530688"
     }
   },
   "skipped_non_coupang": 39,
