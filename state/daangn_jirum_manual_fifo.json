@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97076,
-  "pending": [
-    {
-      "id": 97076,
-      "source_post_url": "https://t.me/jirum/97076",
-      "original_purchase_url": "https://link.coupang.com/a/iXVo2qOEFg",
-      "source_text": "☆특가 9,800원\n대식가 부대찌개 1kg × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVo2qOEFg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T10:46:07+00:00",
-      "title": "☆특가 9,800원",
-      "sale_price_krw": 9800
-    }
-  ],
-  "in_flight": {
-    "id": 97076,
-    "status": "CLAIMED",
-    "run_id": "45598248368",
-    "at": "2026-11-25T10:47:55.707960+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8700,6 +8685,16 @@
       "item_id": "26070884713",
       "vendor_item_id": null,
       "at": "2026-11-25T10:47:46.441963+00:00",
+      "run_id": "45598248368"
+    },
+    "97076": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8C%80%EC%8B%9D%EA%B0%80-%EB%B6%80%EB%8C%80%EC%B0%8C%EA%B0%9C-%EB%83%89%EB%8F%99-1kg-2%EA%B0%9C-20%ED%95%A0%EC%9D%B8-dJ3GL62j?from=write",
+      "posted_at_utc": "2026-11-25T10:46:07+00:00",
+      "product_id": "7478433577",
+      "item_id": "19528947402",
+      "vendor_item_id": null,
+      "at": "2026-11-25T10:48:16.316410+00:00",
       "run_id": "45598248368"
     }
   },
