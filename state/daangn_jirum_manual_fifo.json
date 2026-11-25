@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97078,
+  "last_scanned_id": 97079,
   "pending": [
     {
       "id": 97078,
@@ -11,6 +11,15 @@
       "title": "☆특가 13,950원",
       "sale_price_krw": 13950,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97079,
+      "source_post_url": "https://t.me/jirum/97079",
+      "original_purchase_url": "https://link.coupang.com/a/iXVNaZlHfU",
+      "source_text": "👍대박 157,000원 (36.0% 할인)\n닌자 Foodi 파워 & 프로세서 블렌더\n📌 가격 현황\n- 정상가: 245,312원\n- 할인: 88,312원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVNaZlHfU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-25T10:51:34+00:00",
+      "title": "닌자 Foodi 파워 & 프로세서 블렌더",
+      "sale_price_krw": 157000
     }
   ],
   "in_flight": null,
