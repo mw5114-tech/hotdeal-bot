@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97082,
-  "pending": [
-    {
-      "id": 97082,
-      "source_post_url": "https://t.me/jirum/97082",
-      "original_purchase_url": "https://link.coupang.com/a/iX0Bvv4U8q",
-      "source_text": "☆특가 4,700원 (29.9% 할인)\n기린 한입쏙 미니만쥬\n📌 가격 현황\n- 정상가: 6,700원\n- 할인: 2,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX0Bvv4U8q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T11:58:54+00:00",
-      "title": "기린 한입쏙 미니만쥬",
-      "sale_price_krw": 4700
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -301,6 +291,12 @@
       "display_pct": 5,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T11:13:22.848004+00:00"
+    },
+    "97082": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T11:59:33.363211+00:00"
     }
   }
 }
