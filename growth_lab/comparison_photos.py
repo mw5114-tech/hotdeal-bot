@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from html.parser import HTMLParser
 from pathlib import Path
+import os
 import re
 import unicodedata
 from urllib import error, parse, request
@@ -209,6 +210,30 @@ def choose_photo(a: dict, b: dict, radar: dict, folder: Path) -> dict:
         print("TREND_LOWCHART_IMAGE product=" + label + " status=" + photo["status"])
         if photo["status"] == "IMAGE_SAVED":
             return {**photo, "label": label}
+    # The comparison workflow has its own image policy: it may use
+    # representative search images even if Lowchart is unavailable. The
+    # Jirum unlisted-only fallback is unchanged.
+    if os.getenv("TREND_COMPARISON_NAVER_IMAGE_API_ENABLED") == "true":
+        from gh_only.naver_api_image_photo import fetch_matched_photo, matching_title
+        for label, product in (("A", a), ("B", b)):
+            pid, name = product.get("id"), product.get("name")
+            if not isinstance(pid, str) or not re.fullmatch(r"\d{5,18}", pid):
+                continue
+            result = fetch_matched_photo(name, folder, int(pid))
+            print("TREND_NAVER_IMAGE_API product=" + label + " status=" + result["status"])
+            if (result.get("status") != "IMAGE_SAVED"
+                    or result.get("representative_naver_api_image") is not True
+                    or not matching_title(name, result.get("image_provider_title"))):
+                continue
+            filename = result.get("saved_name")
+            if not isinstance(filename, str) or not re.fullmatch(
+                    r"jirum_" + pid + r"_naver_api_photo\.(?:jpg|png|webp)", filename):
+                continue
+            target = folder / filename
+            if not target.is_file() or not 1000 <= target.stat().st_size <= MAX_IMAGE:
+                continue
+            return {"status": "IMAGE_SAVED", "path": target,
+                    "source": "naver_api_matched_image", "label": label}
     for label, product in (("A", a), ("B", b)):
         pid = product.get("id")
         if not isinstance(pid, str) or not re.fullmatch(r"\d{5,18}", pid):
