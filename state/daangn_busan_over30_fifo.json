@@ -3,16 +3,6 @@
   "last_scanned_id": 97121,
   "pending": [
     {
-      "id": 97120,
-      "source_post_url": "https://t.me/jirum/97120",
-      "original_purchase_url": "https://link.coupang.com/a/iYflOd88oC",
-      "source_text": "☆특가 22,600원\n개성 김치왕만두 1.2kg × 3봉 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYflOd88oC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T15:25:16+00:00",
-      "title": "☆특가 22,600원",
-      "sale_price_krw": 22600,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97121,
       "source_post_url": "https://t.me/jirum/97121",
       "original_purchase_url": "https://link.coupang.com/a/iYfoBiMC8y",
@@ -417,6 +407,12 @@
       "display_pct": 15,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T15:25:10.144612+00:00"
+    },
+    "97120": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": null,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T15:29:30.806394+00:00"
     }
   }
 }
