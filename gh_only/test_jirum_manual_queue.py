@@ -323,6 +323,47 @@ class ManualQueueTests(unittest.TestCase):
                 await_busan_skip_checkpoint(store, 94744, receipt, sleeper=lambda _: None)
             self.assertEqual(store.writes, [])
 
+    def test_busan_inclusive_30_percent_requires_actual_discount_at_least_30(self):
+        from gh_only.jirum_manual_queue import busan_discount_eligible
+        for pct, sale, expected in ((29, 7100, False), (30, 7001, False),
+                                    (30, 7000, True), (30, 6999, True),
+                                    (31, 6900, True), (95, 500, True),
+                                    (96, 400, False)):
+            with self.subTest(pct=pct, sale=sale):
+                article = {"title": f"상품 [{pct}%할인]", "busan_price_evidence": {
+                    "display_pct": pct, "sale": sale, "reference": 10000,
+                    "reference_source": "lowchart_public_history"}}
+                self.assertEqual(busan_discount_eligible(article), expected)
+        article = {"title": "상품 [30%할인]", "busan_price_evidence": {
+            "display_pct": 30, "sale": 7000, "reference": 10000,
+            "reference_source": "fallcent_observed_average", "similar_only": True}}
+        self.assertFalse(busan_discount_eligible(article))
+
+    def test_busan_exact_30_percent_drains_and_checkpoints_verified_post(self):
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(initial)
+        def build(st):
+            sid = st["pending"][0]["id"]
+            pct = 29 if sid == 94744 else 30
+            return {"source_id": sid, "title": f"상품 [{pct}%할인]",
+                    "busan_price_evidence": {"display_pct": pct, "sale": 10000 - pct * 100,
+                        "reference": 10000, "reference_source": "lowchart_public_history"}}
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "busan-inclusive-30",
+                                     "DAANGN_BUSAN_CAFE_MODE": "true",
+                                     "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.build_next", side_effect=build), \
+             patch("gh_only.jirum_manual_publisher.publish_one", return_value={
+                 "status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                 "post_url": "https://cafe.daangn.com/f97o44/posts/verified30",
+                 "submit_attempted": True}) as publish:
+            self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(publish.call_count, 1)
+        self.assertEqual(publish.call_args.args[0]["source_id"], 94745)
+        self.assertIn("94744", store.value["skipped_busan_discount"])
+        self.assertEqual(store.value["published"]["94745"]["status"], "PUBLISHED_VERIFIED")
+        self.assertEqual(store.value["pending"], [])
+        self.assertIsNone(store.value["in_flight"])
+
     def test_busan_malformed_discount_basis_fails_closed(self):
         from gh_only.jirum_manual_queue import busan_discount_eligible
         self.assertFalse(busan_discount_eligible({

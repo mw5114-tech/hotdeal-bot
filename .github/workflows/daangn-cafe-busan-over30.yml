@@ -1,4 +1,4 @@
-name: DAANGN CAFE | Busan Altteuljido over 30%
+name: DAANGN CAFE | Busan Altteuljido 30% and above
 on:
   workflow_call:
     inputs:

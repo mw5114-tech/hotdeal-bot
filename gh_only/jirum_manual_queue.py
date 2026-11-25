@@ -1143,13 +1143,13 @@ def busan_discount_eligible(article: dict) -> bool:
     pct, sale, reference = (proof.get(k) for k in ("display_pct", "sale", "reference"))
     title = article.get("title")
     return bool(
-        type(pct) is int and 30 < pct <= 95
+        type(pct) is int and 30 <= pct <= 95
         and type(sale) is int and type(reference) is int
         and 0 < sale < reference <= 100_000_000
         and isinstance(proof.get("reference_source"), str)
         and proof.get("reference_source") in BUSAN_VERIFIED_PRICE_BASES
         and proof.get("similar_only") is not True
-        and (reference - sale) * 100 > reference * 30
+        and (reference - sale) * 100 >= reference * 30
         and isinstance(title, str) and title.endswith(f" [{pct}%할인]")
     )
 
@@ -1218,11 +1218,13 @@ def skip_busan_discount(store, source_id: int, article: dict, *, sleeper=None) -
             or any(key in state.get(bucket, {}) for bucket in
                    ("skipped_expired", "skipped_unverifiable"))):
         raise RuntimeError("BUSAN_DISCOUNT_QUEUE_CHANGED")
+    # Retain the historical audit status for compatibility with existing FIFO records.
+    # The eligibility check now uses the inclusive 30% threshold.
     receipt = {"status": "NOT_VERIFIED_OVER_30", "display_pct": pct,
                "reference_source": basis, "at": now_utc()}
     state["pending"].pop(0)
     state.setdefault("skipped_busan_discount", {})[key] = receipt
-    store.write(state, sha, "state: Busan cafe skip deal not verified over 30pct [skip ci]")
+    store.write(state, sha, "state: Busan cafe skip deal not verified at least 30pct [skip ci]")
     print("BUSAN_DISCOUNT_SKIPPED source_id=" + key)
     return await_busan_skip_checkpoint(store, source_id, receipt, sleeper=sleeper)
 
