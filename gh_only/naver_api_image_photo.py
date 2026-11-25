@@ -142,6 +142,9 @@ def fetch_matched_photo(title: str, folder: Path, source_id: int, *, opener=None
 def eligible_draft(row):
     photo = row.get("photo") or {}
     title = (row.get("caption") or {}).get("product_name")
+    query = row.get("naver_api_query_title")
+    if not isinstance(title, str) or not title.strip() or not isinstance(query, str):
+        return False
     return bool(
         row.get("image_source") == SOURCE
         and row.get("image_metadata_status") == "LOWCHART_CONFIRMED_UNLISTED_200"
@@ -152,5 +155,10 @@ def eligible_draft(row):
         and photo.get("image_source") == SOURCE
         and photo.get("status") == "IMAGE_SAVED"
         and matching_title(row.get("naver_api_query_title"), row.get("image_provider_title"))
-        and title == row.get("naver_api_query_title")[:len(title)] if isinstance(title, str) and isinstance(row.get("naver_api_query_title"), str) else False
+        and title == query[:len(title)].rstrip()
+        and photo.get("saved_name") in (
+            f"jirum_{row.get('source_message_id')}_naver_api_photo.jpg",
+            f"jirum_{row.get('source_message_id')}_naver_api_photo.png",
+            f"jirum_{row.get('source_message_id')}_naver_api_photo.webp",
+        )
     )
