@@ -152,7 +152,34 @@ def _lookup_exact_item_photo_once(identity: dict, telegram_title: str, opener=No
     # two independent HTTP requests previously caused 200(photo)/403(price).
     # The HTML is NEVER copied into a post, stored in GitHub or logged.
     html = content.decode("utf-8", "replace")
+    # A 200 alone is not a missing-product proof. Accept only explicit
+    # visible missing-product text on the exact route, not script strings,
+    # generic errors, missing images, or missing IDs by themselves.
+    class MissingText(HTMLParser):
+        def __init__(self):
+            super().__init__(convert_charrefs=True)
+            self.hidden = 0
+            self.parts = []
+        def handle_starttag(self, tag, attrs):
+            if tag in ("script", "style", "template", "noscript"):
+                self.hidden += 1
+        def handle_endtag(self, tag):
+            if tag in ("script", "style", "template", "noscript"):
+                self.hidden = max(0, self.hidden - 1)
+        def handle_data(self, data):
+            if not self.hidden:
+                self.parts.append(data.strip())
     out = parse_item_photo(html, identity, telegram_title)
+    missing = MissingText()
+    missing.feed(html)
+    visible = re.sub(r"\\s+", " ", " ".join(missing.parts))
+    if (out.get("status") != "LOWCHART_EXACT_ITEM_IMAGE"
+            and not out.get("lowchart_title_verified")
+            and re.search(r"(?:등록되지 않은 상품(?:입니다)?|해당 상품(?:이|은) 등록되어 있지 않습니다|상품을 찾을 수 없습니다|상품이 존재하지 않습니다)", visible)):
+        return {"status": "LOWCHART_CONFIRMED_UNLISTED_200",
+                "http_status": 200, "og_image": None,
+                "lowchart_title_verified": False}
+    out["http_status"] = 200
     if (out.get("lowchart_title_verified") is True
             and out.get("og_url") == url
             and pid in html and iid in html):
@@ -161,7 +188,7 @@ def _lookup_exact_item_photo_once(identity: dict, telegram_title: str, opener=No
 
 
 def lookup_exact_item_photo(identity: dict, telegram_title: str,
-                            opener=None, *, sleeper=None) -> dict:
+                            opener=None, *, sleeper=None, ready=None) -> dict:
     """Only retry a public exact-item 403, bounded by four total attempts."""
     delays = ((0, 3, 7, 14)
               if os.getenv("JIRUM_LOWCHART_403_RETRY_ENABLED") == "true"
@@ -169,7 +196,22 @@ def lookup_exact_item_photo(identity: dict, telegram_title: str,
     sleeper = sleeper or time.sleep
     result = None
     for attempt, delay in enumerate(delays):
-        if delay:
+        if delay and ready is not None:
+            # Inspect only the already-verified sibling cache during the
+            # existing bounded backoff. Do not issue another provider request
+            # once a complete, validated bundle is available.
+            remaining = delay
+            while remaining > 0:
+                shared = ready()
+                if shared is not None:
+                    return shared
+                part = min(2, remaining)
+                sleeper(part)
+                remaining -= part
+            shared = ready()
+            if shared is not None:
+                return shared
+        elif delay:
             sleeper(delay)
         result = _lookup_exact_item_photo_once(
             identity, telegram_title, opener=opener)
@@ -178,6 +220,10 @@ def lookup_exact_item_photo(identity: dict, telegram_title: str,
         print("LOWCHART_PHOTO_HTTP_403 " + str({
             "attempt": attempt + 1, "max_attempts": len(delays),
         }))
+    if ready is not None:
+        shared = ready()
+        if shared is not None:
+            return shared
     result["http_403_attempts"] = len(delays)
     result["retry_exhausted"] = True
     return result
