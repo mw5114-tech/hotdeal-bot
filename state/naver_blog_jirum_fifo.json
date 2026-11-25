@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97118,
-  "pending": [],
+  "last_scanned_id": 97120,
+  "pending": [
+    {
+      "id": 97119,
+      "source_message_id": 97119,
+      "source_post_url": "https://t.me/jirum/97119",
+      "original_purchase_url": "https://link.coupang.com/a/iYfbygro6K",
+      "title": "☆특가 11,170원",
+      "source_text": "☆특가 11,170원\n곰곰 버팔로윙봉 700g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYfbygro6K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11170,
+      "posted_at_utc": "2026-11-25T15:22:57+00:00"
+    },
+    {
+      "id": 97120,
+      "source_message_id": 97120,
+      "source_post_url": "https://t.me/jirum/97120",
+      "original_purchase_url": "https://link.coupang.com/a/iYflOd88oC",
+      "title": "☆특가 22,600원",
+      "source_text": "☆특가 22,600원\n개성 김치왕만두 1.2kg × 3봉 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYflOd88oC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 22600,
+      "posted_at_utc": "2026-11-25T15:25:16+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
