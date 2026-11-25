@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97138,
-  "pending": [
-    {
-      "id": 97138,
-      "source_post_url": "https://t.me/jirum/97138",
-      "original_purchase_url": "https://link.coupang.com/a/iYOwDGDiXk",
-      "source_text": "☆특가 9,900원\n유니프랜드 피치웜 기모9부 상하의 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYOwDGDiXk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T23:37:29+00:00",
-      "title": "☆특가 9,900원",
-      "sale_price_krw": 9900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -11152,6 +11142,12 @@
       "source_post_url": "https://t.me/jirum/97123",
       "source_title": "키즈꼬모 아동용 기모 곰베베 상하의 세트",
       "at": "2026-11-25T21:38:50.024902+00:00"
+    },
+    "97138": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97138",
+      "source_title": "☆특가 9,900원",
+      "at": "2026-11-25T23:39:50.920451+00:00"
     }
   },
   "single_test_repost_20261103": {
