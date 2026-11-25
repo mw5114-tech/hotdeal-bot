@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97087,
-  "pending": [],
+  "last_scanned_id": 97089,
+  "pending": [
+    {
+      "id": 97088,
+      "source_message_id": 97088,
+      "source_post_url": "https://t.me/jirum/97088",
+      "original_purchase_url": "https://link.coupang.com/a/iX2q7VowkC",
+      "title": "☆특가 5,460원",
+      "source_text": "☆특가 5,460원\n크라운제과 참쌀 선과 253g × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2q7VowkC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5460,
+      "posted_at_utc": "2026-11-25T12:24:33+00:00"
+    },
+    {
+      "id": 97089,
+      "source_message_id": 97089,
+      "source_post_url": "https://t.me/jirum/97089",
+      "original_purchase_url": "https://link.coupang.com/a/iX2uAyV0AC",
+      "title": "☆특가 6,060원",
+      "source_text": "☆특가 6,060원\n16% 할인🔥 세라마이드 보습 케어, 향 부담 없는 무향 핸드크림\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2uAyV0AC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 6060,
+      "posted_at_utc": "2026-11-25T12:25:20+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
