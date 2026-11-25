@@ -3,15 +3,6 @@
   "last_scanned_id": 97094,
   "pending": [
     {
-      "id": 97093,
-      "source_post_url": "https://t.me/jirum/97093",
-      "original_purchase_url": "https://link.coupang.com/a/iX3dkTwbGC",
-      "source_text": "☆특가 15,480원\n꾸브닝 호주청정우 소불고기 350g × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX3dkTwbGC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:35:26+00:00",
-      "title": "☆특가 15,480원",
-      "sale_price_krw": 15480
-    },
-    {
       "id": 97094,
       "source_post_url": "https://t.me/jirum/97094",
       "original_purchase_url": "https://link.coupang.com/a/iX3jq4L12a",
@@ -376,6 +367,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T12:36:59.367919+00:00"
+    },
+    "97093": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 5,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T12:37:34.017619+00:00"
     }
   }
 }
