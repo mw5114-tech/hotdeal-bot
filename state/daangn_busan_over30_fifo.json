@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97125,
-  "pending": [],
+  "last_scanned_id": 97126,
+  "pending": [
+    {
+      "id": 97126,
+      "source_post_url": "https://t.me/jirum/97126",
+      "original_purchase_url": "https://link.coupang.com/a/iYGhlgCMoK",
+      "source_text": "❤️초대박 14,390원 (42.4% 할인)\n베키아에누보 파베 초콜릿 생크림 케이크 (냉동)\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 10,610원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGhlgCMoK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-25T21:42:05+00:00",
+      "title": "베키아에누보 파베 초콜릿 생크림 케이크 (냉동)",
+      "sale_price_krw": 14390
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
