@@ -182,6 +182,61 @@ class ComparisonPhotoTests(unittest.TestCase):
                                           {"id": "22222", "name": "다른 상품"}, {}, Path(".")),
                              {"status": "NO_MATCHING_PRODUCT_IMAGE"})
 
+    def test_image_api_fallback_after_both_lowchart_fail(self):
+        with TemporaryDirectory() as tmp, patch.dict("os.environ", {
+            "TREND_COMPARISON_NAVER_IMAGE_API_ENABLED": "true"
+        }), patch("growth_lab.comparison_photos.lowchart_photo",
+                  return_value={"status": "HTTP_403"}), patch(
+            "growth_lab.comparison_photos.shopping_photos"
+        ) as web, patch("gh_only.naver_api_image_photo.fetch_matched_photo") as api:
+            path = Path(tmp) / "jirum_11111_naver_api_photo.jpg"
+            path.write_bytes(b"x" * 1500)
+            api.return_value = {"status": "IMAGE_SAVED",
+                                "saved_name": path.name,
+                                "representative_naver_api_image": True,
+                                "image_provider_title": NAME}
+            result = choose_photo({"id": "11111", "name": NAME},
+                                  {"id": "22222", "name": NAME}, {}, Path(tmp))
+            self.assertEqual(result["source"], "naver_api_matched_image")
+            self.assertEqual(result["path"], path)
+            api.assert_called_once()
+            web.assert_not_called()
+
+    def test_image_api_wrong_option_does_not_pass(self):
+        with patch.dict("os.environ", {"TREND_COMPARISON_NAVER_IMAGE_API_ENABLED": "true"}), \
+             patch("growth_lab.comparison_photos.lowchart_photo",
+                   return_value={"status": "HTTP_403"}), \
+             patch("gh_only.naver_api_image_photo.fetch_matched_photo", return_value={
+                 "status": "IMAGE_SAVED", "representative_naver_api_image": True,
+                 "image_provider_title": NAME.replace("1TB", "2TB")
+             }), patch("growth_lab.comparison_photos.shopping_photos",
+                       return_value={"status": "SHOPPING_NO_EXACT_CARD", "images": []}):
+            self.assertEqual(choose_photo({"id": "11111", "name": NAME},
+                                          {"id": "22222", "name": NAME}, {}, Path(".")),
+                             {"status": "NO_MATCHING_PRODUCT_IMAGE"})
+
+    def test_missing_photo_is_safe_defer_without_claim_or_link(self):
+        topic = {"keyword": "외장 SSD", "category_name": "가전"}
+        offers = [{"id": pid, "name": NAME, "price": 29900, "image": None}
+                  for pid in ("11111", "22222")]
+        with patch.dict("os.environ", {"TREND_COMPARISON_PUBLISH_ENABLED": "true"}), \
+             patch("growth_lab.trend_comparison.load", return_value=(None, None)), \
+             patch("growth_lab.trend_comparison.load_state", return_value=({}, None)), \
+             patch("growth_lab.trend_comparison.cooldown_remaining_seconds", return_value=0), \
+             patch("growth_lab.trend_comparison.ranked_topics", return_value=[topic]), \
+             patch("growth_lab.trend_comparison.get_api"), \
+             patch("growth_lab.trend_comparison.extract_rows", return_value=[]), \
+             patch("growth_lab.trend_comparison.products_for_comparison", return_value=offers), \
+             patch("growth_lab.trend_comparison.choose_photo",
+                   return_value={"status": "NO_MATCHING_PRODUCT_IMAGE"}), \
+             patch("growth_lab.trend_comparison.save") as save, \
+             patch("growth_lab.trend_comparison.tracked_link") as link, \
+             contextlib.redirect_stdout(io.StringIO()) as log:
+            self.assertEqual(run(preview=False), 0)
+        self.assertIn("TREND_COMPARISON_NO_APPROVED_IMAGE", log.getvalue())
+        save.assert_not_called()
+        link.assert_not_called()
+
     def test_missing_coupang_image_is_allowed_only_on_opted_in_path(self):
         row = {"productId": 12345, "productName": NAME, "productPrice": 19900,
                "productUrl": "https://www.coupang.com/vp/products/12345"}
