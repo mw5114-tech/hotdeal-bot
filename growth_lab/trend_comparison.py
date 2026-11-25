@@ -212,7 +212,7 @@ def compose(topic: dict, a: dict, b: dict, links: tuple[str, str],
         keyword, ("제품을 구매할 때는 실제로 필요한 조건부터 살펴보는 것이 좋습니다.",
                   keyword + " 고르는 법", "구매 전 확인할 조건",
                   "사용 목적에 맞는 규격과 구성, 관리 방법을 확인해 보세요."))
-    title = "[쿠팡📊비교] " + angle + ", 추천 제품 2가지"
+    title = angle + ", 추천 제품 2가지"
     def ship(o: dict) -> str:
         parts = []
         if o["is_rocket"]:
@@ -222,6 +222,11 @@ def compose(topic: dict, a: dict, b: dict, links: tuple[str, str],
         return ", ".join(parts) + " 표시" if parts else "배송비와 도착일은 상세 페이지에서 확인"
     def price(o: dict) -> str:
         return format(o["price"], ",") + "원"
+    def product_details(o: dict) -> str:
+        tokens = sorted(size_tokens(o["name"]))
+        if tokens:
+            return "상품명에는 " + ", ".join(tokens) + " 규격 또는 구성이 표시되어 있습니다. "
+        return ""
     # Keep the original product/link association even when prices are reversed.
     lower, higher = sorted((a, b), key=lambda o: o["price"])
     if a["price"] == b["price"]:
@@ -239,10 +244,10 @@ def compose(topic: dict, a: dict, b: dict, links: tuple[str, str],
         "먼저 살펴볼 구매 기준 | " + heading,
         guidance,
         "첫 번째 추천 후보 | " + a["name"],
-        "확인 당시 가격은 " + price(a) + "입니다. 배송 조건: " + ship(a)
+        product_details(a) + "확인 당시 가격은 " + price(a) + "입니다. 배송 조건: " + ship(a)
         + ". 필요한 구성과 옵션이 맞는지 확인해 보세요.",
         "두 번째 추천 후보 | " + b["name"],
-        "확인 당시 가격은 " + price(b) + "입니다. 배송 조건: " + ship(b)
+        product_details(b) + "확인 당시 가격은 " + price(b) + "입니다. 배송 조건: " + ship(b)
         + ". 첫 번째 후보와 실제 구성 및 규격을 비교해 보세요.",
         "저라면 어떤 제품을 고를까요?",
         verdict,
@@ -279,7 +284,7 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
     if claims:
         print("TREND_COMPARISON_SAFE_STOP unresolved_claims=true")
         return 0
-    if any(x.get("kst_date") == today for x in posts.values()):
+    if not preview and any(x.get("kst_date") == today for x in posts.values()):
         print("TREND_COMPARISON_ALREADY_POSTED_TODAY")
         return 0
     try:
@@ -330,7 +335,8 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
         article = compose(t, a, b, links, photo["path"], now)
         source_label = ("로우차트 상품 이미지" if photo["source"] == "lowchart_exact_item_public_page"
                         else "네이버쇼핑 검색 결과에 표시된 상품 대표 이미지")
-        article["paragraphs"].insert(0, "위 사진은 비교 대상 상품 " + photo["label"] + "의 " + source_label + "입니다.")
+        pictured = a if photo["label"] == "A" else b
+        article["paragraphs"].insert(2, "상품 사진: " + pictured["name"] + " (" + source_label + ")")
         # Claim before touching Naver: an ambiguous result cannot be re-posted.
         claims[key] = {"at": now_utc().isoformat(), "product_ids": article["product_ids"],
                        "status": "MANUAL_REVIEW_ON_UNCERTAIN_RESULT"}
