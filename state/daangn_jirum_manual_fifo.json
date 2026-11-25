@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97137,
-  "pending": [
-    {
-      "id": 97137,
-      "source_post_url": "https://t.me/jirum/97137",
-      "original_purchase_url": "https://link.coupang.com/a/iYOnmcXnVs",
-      "source_text": "☆특가 4,590원\n찹쌀약과, 40g, 10개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYOnmcXnVs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T23:35:24+00:00",
-      "title": "☆특가 4,590원",
-      "sale_price_krw": 4590
-    }
-  ],
-  "in_flight": {
-    "id": 97137,
-    "status": "CLAIMED",
-    "run_id": "45722647420",
-    "at": "2026-11-25T23:36:39.447465+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9071,6 +9056,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T23:35:45.262654+00:00",
       "run_id": "45722479230"
+    },
+    "97137": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B0%B9%EC%8C%80%EC%95%BD%EA%B3%BC-40g-1%EA%B0%9C-10%EA%B0%9C%EC%9E%85-40%ED%95%A0%EC%9D%B8-PovX8BkA?from=write",
+      "posted_at_utc": "2026-11-25T23:35:24+00:00",
+      "product_id": "9114232603",
+      "item_id": "26802814637",
+      "vendor_item_id": null,
+      "at": "2026-11-25T23:36:57.562924+00:00",
+      "run_id": "45722647420"
     }
   },
   "skipped_non_coupang": 1148,
