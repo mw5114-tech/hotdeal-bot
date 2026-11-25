@@ -3,16 +3,6 @@
   "last_scanned_id": 97079,
   "pending": [
     {
-      "id": 97078,
-      "source_post_url": "https://t.me/jirum/97078",
-      "original_purchase_url": "https://link.coupang.com/a/iXVH5UvtlY",
-      "source_text": "☆특가 13,950원\n동아오츠카 데미소다 애플 250ml × 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVH5UvtlY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T10:50:25+00:00",
-      "title": "☆특가 13,950원",
-      "sale_price_krw": 13950,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97079,
       "source_post_url": "https://t.me/jirum/97079",
       "original_purchase_url": "https://link.coupang.com/a/iXVNaZlHfU",
@@ -293,6 +283,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T10:50:11.470229+00:00"
+    },
+    "97078": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 10,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T10:54:09.811018+00:00"
     }
   }
 }
