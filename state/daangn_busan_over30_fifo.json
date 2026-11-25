@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97131,
-  "pending": [
-    {
-      "id": 97131,
-      "source_post_url": "https://t.me/jirum/97131",
-      "original_purchase_url": "https://link.coupang.com/a/iYKhpLoU32",
-      "source_text": "☆특가 10,200원\n스너글 딥클린 캡슐 세탁세제 허거블 코튼 27개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYKhpLoU32\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T22:38:05+00:00",
-      "title": "☆특가 10,200원",
-      "sale_price_krw": 10200
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -483,6 +473,12 @@
       "display_pct": 5,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T22:14:28.165375+00:00"
+    },
+    "97131": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T22:39:32.920666+00:00"
     }
   }
 }
