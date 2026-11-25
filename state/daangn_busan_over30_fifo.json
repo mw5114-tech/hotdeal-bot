@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97128,
-  "pending": [
-    {
-      "id": 97128,
-      "source_post_url": "https://t.me/jirum/97128",
-      "original_purchase_url": "https://link.coupang.com/a/iYGMz0RE60",
-      "source_text": "☆특가 13,590원\n컬러별 가격 상이🔥 뛰어난 잡티 커버력과 보송한 세미매트 피부 표현\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGMz0RE60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T21:49:08+00:00",
-      "title": "☆특가 13,590원",
-      "sale_price_krw": 13590
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -471,6 +461,12 @@
       "display_pct": 15,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T21:47:18.596072+00:00"
+    },
+    "97128": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T21:50:28.978986+00:00"
     }
   }
 }
