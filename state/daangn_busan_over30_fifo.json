@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97125,
-  "pending": [
-    {
-      "id": 97125,
-      "source_post_url": "https://t.me/jirum/97125",
-      "original_purchase_url": "https://link.coupang.com/a/iYF3IdvtHU",
-      "source_text": "🔥🔥🔥무지성 22,500원 (50.0% 할인)🔥🔥🔥\n봄키즈 아동용 미니 낮은 스탠드 행거\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 45,000원\n- 할인: 22,500원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYF3IdvtHU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T21:39:01+00:00",
-      "title": "봄키즈 아동용 미니 낮은 스탠드 행거",
-      "sale_price_krw": 22500
-    }
-  ],
-  "in_flight": {
-    "id": 97125,
-    "status": "CLAIMED",
-    "run_id": "45706382830",
-    "at": "2026-11-25T21:42:43.810471+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -187,6 +172,16 @@
       "vendor_item_id": "94792041636",
       "at": "2026-11-25T16:22:11.234841+00:00",
       "run_id": "45652825236"
+    },
+    "97125": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B4%84%ED%82%A4%EC%A6%88-%EC%95%84%EB%8F%99%EC%9A%A9-%EB%AF%B8%EB%8B%88-%EB%82%AE%EC%9D%80-%EC%8A%A4%ED%83%A0%EB%93%9C-%ED%96%89%EA%B1%B0-%ED%99%94%EC%9D%B4%ED%8A%B8-45%ED%95%A0%EC%9D%B8-Pk9DDmMj?from=write",
+      "posted_at_utc": "2026-11-25T21:39:01+00:00",
+      "product_id": "8364354831",
+      "item_id": "24166460368",
+      "vendor_item_id": null,
+      "at": "2026-11-25T21:43:01.326118+00:00",
+      "run_id": "45706382830"
     }
   },
   "skipped_non_coupang": 68,
