@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97090,
+  "last_scanned_id": 97091,
   "pending": [
     {
       "id": 97090,
@@ -11,6 +11,15 @@
       "title": "☆특가 15,980원",
       "sale_price_krw": 15980,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97091,
+      "source_post_url": "https://t.me/jirum/97091",
+      "original_purchase_url": "https://link.coupang.com/a/iX23oYNUZg",
+      "source_text": "☆특가 7,640원\n지엔씨푸드 오사카식 타코야끼 1kg 50개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX23oYNUZg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-25T12:33:11+00:00",
+      "title": "☆특가 7,640원",
+      "sale_price_krw": 7640
     }
   ],
   "in_flight": null,
