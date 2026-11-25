@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97094,
-  "pending": [
-    {
-      "id": 97094,
-      "source_post_url": "https://t.me/jirum/97094",
-      "original_purchase_url": "https://link.coupang.com/a/iX3jq4L12a",
-      "source_text": "☆특가 11,590원\n인우 더맛나 파김치 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX3jq4L12a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:36:48+00:00",
-      "title": "☆특가 11,590원",
-      "sale_price_krw": 11590
-    }
-  ],
-  "in_flight": {
-    "id": 97094,
-    "status": "CLAIMED",
-    "run_id": "45615390022",
-    "at": "2026-11-25T12:38:24.206499+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8870,6 +8855,16 @@
       "item_id": "20612382356",
       "vendor_item_id": null,
       "at": "2026-11-25T12:38:18.746110+00:00",
+      "run_id": "45615390022"
+    },
+    "97094": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B8%EC%9A%B0-%EB%8D%94%EB%A7%9B%EB%82%98-%ED%8C%8C%EA%B9%80%EC%B9%98-1kg-1%EA%B0%9C-5%ED%95%A0%EC%9D%B8-dZ7o6ERj?from=write",
+      "posted_at_utc": "2026-11-25T12:36:48+00:00",
+      "product_id": "8176227194",
+      "item_id": "23365333900",
+      "vendor_item_id": null,
+      "at": "2026-11-25T12:38:41.935515+00:00",
       "run_id": "45615390022"
     }
   },
