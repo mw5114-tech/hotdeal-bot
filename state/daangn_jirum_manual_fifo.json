@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97079,
-  "pending": [
-    {
-      "id": 97079,
-      "source_post_url": "https://t.me/jirum/97079",
-      "original_purchase_url": "https://link.coupang.com/a/iXVNaZlHfU",
-      "source_text": "👍대박 157,000원 (36.0% 할인)\n닌자 Foodi 파워 & 프로세서 블렌더\n📌 가격 현황\n- 정상가: 245,312원\n- 할인: 88,312원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVNaZlHfU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T10:51:34+00:00",
-      "title": "닌자 Foodi 파워 & 프로세서 블렌더",
-      "sale_price_krw": 157000
-    }
-  ],
-  "in_flight": {
-    "id": 97079,
-    "status": "CLAIMED",
-    "run_id": "45599070148",
-    "at": "2026-11-25T10:54:39.261459+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8730,6 +8715,16 @@
       "item_id": "19106629483",
       "vendor_item_id": null,
       "at": "2026-11-25T10:54:31.093286+00:00",
+      "run_id": "45599070148"
+    },
+    "97079": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%EC%9E%90-Foodi-%ED%8C%8C%EC%9B%8C-%ED%94%84%EB%A1%9C%EC%84%B8%EC%84%9C-%EB%B8%94%EB%A0%8C%EB%8D%94-CB350KR-15%ED%95%A0%EC%9D%B8-dQzr9N2j?from=write",
+      "posted_at_utc": "2026-11-25T10:51:34+00:00",
+      "product_id": "7575886760",
+      "item_id": "19989063694",
+      "vendor_item_id": "90288908808",
+      "at": "2026-11-25T10:54:58.251661+00:00",
       "run_id": "45599070148"
     }
   },
