@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97140,
-  "pending": [
-    {
-      "id": 97139,
-      "source_post_url": "https://t.me/jirum/97139",
-      "original_purchase_url": "https://link.coupang.com/a/iYONBVmSZg",
-      "source_text": "☆특가 8,500원 (10.5% 할인)\n티지엠 국내 제조 실리콘 과일 치발기\n📌 가격 현황\n- 정상가: 9,500원\n- 할인: 1,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYONBVmSZg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T23:41:19+00:00",
-      "title": "티지엠 국내 제조 실리콘 과일 치발기",
-      "sale_price_krw": 8500
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -547,6 +537,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T23:08:25.525968+00:00"
+    },
+    "97139": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 5,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T23:43:57.799464+00:00"
     }
   }
 }
