@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97094,
-  "pending": [
-    {
-      "id": 97094,
-      "source_post_url": "https://t.me/jirum/97094",
-      "original_purchase_url": "https://link.coupang.com/a/iX3jq4L12a",
-      "source_text": "☆특가 11,590원\n인우 더맛나 파김치 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX3jq4L12a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:36:48+00:00",
-      "title": "☆특가 11,590원",
-      "sale_price_krw": 11590
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -373,6 +363,12 @@
       "display_pct": 5,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T12:37:34.017619+00:00"
+    },
+    "97094": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 5,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T12:37:46.504832+00:00"
     }
   }
 }
