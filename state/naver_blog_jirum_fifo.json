@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97089,
-  "pending": [
-    {
-      "id": 97089,
-      "source_message_id": 97089,
-      "source_post_url": "https://t.me/jirum/97089",
-      "original_purchase_url": "https://link.coupang.com/a/iX2uAyV0AC",
-      "title": "☆특가 6,060원",
-      "source_text": "☆특가 6,060원\n16% 할인🔥 세라마이드 보습 케어, 향 부담 없는 무향 핸드크림\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2uAyV0AC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6060,
-      "posted_at_utc": "2026-11-25T12:25:20+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2267,6 +2256,10 @@
     "97088": {
       "url": "https://blog.naver.com/mw5114/224492066869",
       "at": "2026-11-25T12:26:26.791571+00:00"
+    },
+    "97089": {
+      "url": "https://blog.naver.com/mw5114/224492068075",
+      "at": "2026-11-25T12:27:32.591975+00:00"
     }
   },
   "skipped": {
@@ -2699,12 +2692,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97089,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45613527784",
-    "at": "2026-11-25T12:26:47.426475+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
