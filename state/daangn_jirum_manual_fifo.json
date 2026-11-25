@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97060,
-  "pending": [
-    {
-      "id": 97060,
-      "source_post_url": "https://t.me/jirum/97060",
-      "original_purchase_url": "https://link.coupang.com/a/iXFb0L1OsC",
-      "source_text": "👍대박 5,920원 (32.0% 할인)\n르샤트라1802 섬유탈취제 뮤게부케 본품\n📌 가격 현황\n- 정상가: 8,706원\n- 할인: 2,786원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXFb0L1OsC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T06:59:17+00:00",
-      "title": "르샤트라1802 섬유탈취제 뮤게부케 본품",
-      "sale_price_krw": 5920
-    }
-  ],
-  "in_flight": {
-    "id": 97060,
-    "status": "CLAIMED",
-    "run_id": "45564715521",
-    "at": "2026-11-25T07:00:16.560734+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8591,6 +8576,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T06:08:03.515094+00:00",
       "run_id": "45558218119"
+    },
+    "97060": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A5%B4%EC%83%A4%ED%8A%B8%EB%9D%BC1802-%EC%84%AC%EC%9C%A0%ED%83%88%EC%B7%A8%EC%A0%9C-%EB%AE%A4%EA%B2%8C%EB%B6%80%EC%BC%80-%EB%B3%B8%ED%92%88-400ml-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-AL1p4GRP?from=write",
+      "posted_at_utc": "2026-11-25T06:59:17+00:00",
+      "product_id": "7837874758",
+      "item_id": "24928052616",
+      "vendor_item_id": "91934257025",
+      "at": "2026-11-25T07:00:36.995592+00:00",
+      "run_id": "45564715521"
     }
   },
   "skipped_non_coupang": 1121,
