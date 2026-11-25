@@ -172,7 +172,7 @@ def _lookup_exact_item_photo_once(identity: dict, telegram_title: str, opener=No
     out = parse_item_photo(html, identity, telegram_title)
     missing = MissingText()
     missing.feed(html)
-    visible = re.sub(r"\\s+", " ", " ".join(missing.parts))
+    visible = re.sub(r"\s+", " ", " ".join(missing.parts))
     if (out.get("status") != "LOWCHART_EXACT_ITEM_IMAGE"
             and not out.get("lowchart_title_verified")
             and re.search(r"(?:등록되지 않은 상품(?:입니다)?|해당 상품(?:이|은) 등록되어 있지 않습니다|상품을 찾을 수 없습니다|상품이 존재하지 않습니다)", visible)):
