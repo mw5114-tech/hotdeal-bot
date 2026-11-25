@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97079,
-  "pending": [
-    {
-      "id": 97079,
-      "source_message_id": 97079,
-      "source_post_url": "https://t.me/jirum/97079",
-      "original_purchase_url": "https://link.coupang.com/a/iXVNaZlHfU",
-      "title": "닌자 Foodi 파워 & 프로세서 블렌더",
-      "source_text": "👍대박 157,000원 (36.0% 할인)\n닌자 Foodi 파워 & 프로세서 블렌더\n📌 가격 현황\n- 정상가: 245,312원\n- 할인: 88,312원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVNaZlHfU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 157000,
-      "posted_at_utc": "2026-11-25T10:51:34+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2235,6 +2224,10 @@
     "97078": {
       "url": "https://blog.naver.com/mw5114/224491958929",
       "at": "2026-11-25T10:55:13.662261+00:00"
+    },
+    "97079": {
+      "url": "https://blog.naver.com/mw5114/224491960643",
+      "at": "2026-11-25T10:56:40.110002+00:00"
     }
   },
   "skipped": {
@@ -2662,12 +2655,7 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": {
-    "id": 97079,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45599070148",
-    "at": "2026-11-25T10:55:55.094414+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
