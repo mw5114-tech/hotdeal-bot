@@ -170,33 +170,69 @@ def pair_key(keyword: str, a: dict, b: dict) -> str:
     return keyword + ":" + ":".join(sorted((a["id"], b["id"])))
 
 
+# Editorial buying-guide criteria, not measured product performance.
+BUYING_CHECKS = {
+    "가습기": ("침실이나 책상에서 쓸지", "물통 용량, 세척 편의성, 분무 방식과 소음"),
+    "외장 SSD": ("사진·영상 백업용인지", "실제 용량, 연결 규격, 보증 기간과 전송 속도"),
+    "무선 키보드": ("사무용인지 게임용인지", "배열, 스위치, 연결 방식과 배터리"),
+    "보조배터리": ("외출할 때 휴대할 용도인지", "용량, 충전 출력, 무게와 케이블 호환성"),
+    "에어프라이어": ("한 끼 분량인지 가족용인지", "조리 용량, 바스켓 세척 방식과 설치 공간"),
+    "캡슐세제": ("평소 세탁량과 세탁기 종류", "캡슐 수량, 1회 사용량과 사용 가능 세탁기"),
+    "물티슈": ("휴대용인지 집에서 쓸 용도인지", "매수, 크기, 원단과 성분"),
+    "세탁세제": ("평소 세탁량과 세탁기 종류", "용량, 권장 사용량과 세탁기 호환성"),
+    "핸드워시": ("본품이 필요한지 리필이 필요한지", "용량, 구성, 향과 성분"),
+    "전기요": ("혼자 쓸지 침대에서 함께 쓸지", "크기, 온도 조절, 안전 인증과 세탁 방법"),
+}
+
+
 def compose(topic: dict, a: dict, b: dict, links: tuple[str, str],
             photo: Path, now: datetime) -> dict:
     if not all(issued_link_url(u) for u in links) or links[0] == links[1]:
         raise ComparisonError("COMPARISON_LINKS_NOT_VERIFIED")
     keyword = topic["keyword"]
     date = now.astimezone(KST).date().isoformat()
-    # The lower displayed API price is not a universal cheaper option.
-    title = "[쿠팡📊비교] " + keyword + " A vs B, 가격·배송 조건 비교"
+    title = "[쿠팡📊비교] " + keyword + " 추천, 구매 전 비교할 두 가지 선택지"
+    situation, checks = BUYING_CHECKS.get(
+        keyword, ("어떤 용도로 쓸지", "규격, 구성, 옵션과 배송 조건"))
     def ship(o: dict) -> str:
-        return ("로켓배송 표시" if o["is_rocket"] else "로켓배송 확인되지 않음") + " / " + (
-            "무료배송 표시" if o["free_shipping"] else "무료배송 확인되지 않음")
+        parts = []
+        if o["is_rocket"]:
+            parts.append("로켓배송")
+        if o["free_shipping"]:
+            parts.append("무료배송")
+        return ", ".join(parts) + " 표시" if parts else "배송비와 도착일은 상세 페이지에서 확인"
+    def price(o: dict) -> str:
+        return format(o["price"], ",") + "원"
+    # Keep the original product/link association even when prices are reversed.
+    lower, higher = sorted((a, b), key=lambda o: o["price"])
+    if a["price"] == b["price"]:
+        verdict = ("두 제품의 확인 당시 표시가격은 같습니다. 가격보다 "
+                   + checks + "을 확인한 뒤 필요한 조건에 맞는 제품을 고르는 편을 추천합니다.")
+    else:
+        verdict = ("가격을 우선한다면 저는 " + lower["name"] + "을 먼저 살펴보겠습니다. "
+                   + higher["name"] + "보다 확인 당시 "
+                   + format(higher["price"] - lower["price"], ",")
+                   + "원 저렴하게 표시됐습니다. 다만 구성이나 옵션이 다를 수 있어 "
+                   "동일한 조건인지 확인한 후 결정하는 게 좋겠습니다.")
     paragraphs = [
-        "네이버 쇼핑인사이트의 후보 검색어 클릭 추이를 확인한 뒤, 쿠팡 공식 파트너스 검색 API에서 찾은 두 상품을 비교했습니다. 전체 네이버 검색어 순위나 실제 월간 검색량은 아닙니다.",
-        "비교 시점: " + date + " / 분야: " + topic["category_name"] + " / 품목: " + keyword,
-        "상품 A: " + a["name"],
-        "상품 A 수집 당시 검색 API 표시가격: " + format(a["price"], ",") + "원 / " + ship(a),
-        "상품 B: " + b["name"],
-        "상품 B 수집 당시 검색 API 표시가격: " + format(b["price"], ",") + "원 / " + ship(b),
-        "비교 분석: 같은 검색어로 조회된 서로 다른 상품입니다. A의 표시가격은 B보다 "
-        + format(b["price"] - a["price"], ",")
-        + "원 낮습니다. 다만 옵션·구성·규격이 동일하다는 뜻은 아닙니다.",
-        "왜 A를 고려할까? 표시가격을 우선하고 상세 옵션이 필요한 조건과 맞는다면 A를 먼저 비교해 볼 수 있습니다. B 역시 실제 사양이나 구성에 따라 더 적합할 수 있습니다.",
-        "구매 전 반드시 확인: 상세 페이지의 용량·구성·옵션, 실제 결제가격, 배송비 및 재고를 확인하세요. 제품 성능·품질·할인율·후기 우열은 검증되지 않아 주장하지 않습니다.",
+        keyword + "를 알아보고 있다면 가격만 보기보다 " + situation
+        + "부터 생각해 보는 게 좋겠습니다. 저라면 아래 두 가지 선택지를 놓고 비교해 보겠습니다.",
+        "직접 구매하거나 사용한 체험기는 아닙니다. 공개 상품 정보와 확인 당시 가격·배송 조건을 바탕으로 정리한 구매 가이드입니다.",
+        "첫 번째 추천 후보 | " + a["name"],
+        "확인 당시 표시가격은 " + price(a) + "입니다. 배송 조건은 " + ship(a)
+        + ". 구매 전에는 " + checks + "을 확인해 보세요.",
+        "두 번째 추천 후보 | " + b["name"],
+        "확인 당시 표시가격은 " + price(b) + "입니다. 배송 조건은 " + ship(b)
+        + ". 첫 번째 후보와 구성 및 옵션이 같은지 살펴보는 게 좋겠습니다.",
+        "저라면 이렇게 고르겠습니다. " + verdict,
+        "구매 전에 확인할 점 | " + checks
+        + ". 실제 사용감과 성능, 후기 우열은 직접 확인하지 않았으니 상세 정보와 실제 구매자 후기를 함께 참고해 주세요.",
+        "아래 상품별 링크에서 현재 가격, 옵션과 배송 조건을 확인할 수 있습니다. 위 가격은 "
+        + date + " 수집 시점 기준이며 실제 결제가격과 다를 수 있습니다.",
     ]
     return {"title": title, "photo": photo, "paragraphs": paragraphs,
-            "links": [{"label": "📦 상품 A 쿠팡에서 확인", "url": links[0]},
-                      {"label": "📦 상품 B 쿠팡에서 확인", "url": links[1]}],
+            "links": [{"label": "📦 상품 1 | " + a["name"] + " 가격 확인", "url": links[0]},
+                      {"label": "📦 상품 2 | " + b["name"] + " 가격 확인", "url": links[1]}],
             "product_ids": [a["id"], b["id"]], "topic": keyword}
 
 
