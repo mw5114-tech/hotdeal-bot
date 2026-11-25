@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97091,
-  "pending": [
-    {
-      "id": 97091,
-      "source_post_url": "https://t.me/jirum/97091",
-      "original_purchase_url": "https://link.coupang.com/a/iX23oYNUZg",
-      "source_text": "☆특가 7,640원\n지엔씨푸드 오사카식 타코야끼 1kg 50개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX23oYNUZg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:33:11+00:00",
-      "title": "☆특가 7,640원",
-      "sale_price_krw": 7640
-    }
-  ],
-  "in_flight": {
-    "id": 97091,
-    "status": "CLAIMED",
-    "run_id": "45614970211",
-    "at": "2026-11-25T12:34:59.407974+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8840,6 +8825,16 @@
       "item_id": "926408953",
       "vendor_item_id": null,
       "at": "2026-11-25T12:34:52.467026+00:00",
+      "run_id": "45614970211"
+    },
+    "97091": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A7%80%EC%97%94%EC%94%A8%ED%91%B8%EB%93%9C-%EC%98%A4%EC%82%AC%EC%B9%B4%EC%8B%9D-%ED%83%80%EC%BD%94%EC%95%BC%EB%81%BC-%EB%AC%B8%EC%96%B4-18-50%EC%9E%85-%EB%83%89%EB%8F%99-1k-2%ED%95%A0%EC%9D%B8-dzr6g5ld?from=write",
+      "posted_at_utc": "2026-11-25T12:33:11+00:00",
+      "product_id": "8279420904",
+      "item_id": "23868684959",
+      "vendor_item_id": null,
+      "at": "2026-11-25T12:35:18.184378+00:00",
       "run_id": "45614970211"
     }
   },
