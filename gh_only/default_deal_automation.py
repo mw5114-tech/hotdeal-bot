@@ -215,15 +215,59 @@ def enrich_deal(deal: dict, output_dir: Path,
     # Explicit injectable overrides retain existing read-only regression
     # contracts; production never calls the login-based Kakao debugger.
     using_public_lowchart = og_lookup is None
+    bundle_enabled = (
+        using_public_lowchart and
+        os.getenv("JIRUM_LOWCHART_BUNDLE_ENABLED") == "true" and
+        identity.get("status") == "EXACT_ITEM_IDENTIFIED" and
+        isinstance(p, str) and isinstance(i, str) and
+        type(source_id) is int
+    )
+    cache_first = (bundle_enabled and history_fetch is fetch_one
+                   and os.getenv("JIRUM_LOWCHART_CACHE_FIRST_ENABLED") == "true"
+                   and type(sale) is int and 0 < sale <= 100_000_000)
+
+    def read_ready_bundle():
+        if not cache_first:
+            return None
+        from gh_only.lowchart_shared_bundle import recover_bundle
+        shared = recover_bundle(source_id, identity, output_dir, wait=False)
+        if (shared is not None
+                and validated_history(shared["history"], p, i, shared["title"]) is not None):
+            print("LOWCHART_CACHE_FIRST_HIT source_id=" + str(source_id))
+            return shared
+        return None
+
+    cached = read_ready_bundle()
     if using_public_lowchart:
         og_lookup = lambda _link, _session: lookup_exact_item_photo(identity, fallback_title)
         photo_downloader = photo_downloader or download_exact_photo
     else:
         photo_downloader = photo_downloader or download_og_photo
-    og = (og_lookup(link, session_secret)
-          if identity.get("status") == "EXACT_ITEM_IDENTIFIED"
-          else {"status": "UNRESOLVED_COUPANG_ITEM", "og_title": None,
-                "og_url": None, "og_image": None})
+    def cached_og(shared):
+        return {
+            "status": "LOWCHART_EXACT_ITEM_IMAGE",
+            "og_title": shared["title"],
+            "og_url": build_url(p, i),
+            "og_image": shared["image_url"],
+            "lowchart_title_verified": True,
+            "image_source": "lowchart_exact_item_public_page",
+            "image_match_basis": "EXACT_LOWCHART_PRODUCT_ID_AND_ITEM_ID",
+            "image_same_named_option": False,
+        }
+
+    if cached is not None:
+        og = cached_og(cached)
+    else:
+        og = (og_lookup(link, session_secret)
+              if identity.get("status") == "EXACT_ITEM_IDENTIFIED"
+              else {"status": "UNRESOLVED_COUPANG_ITEM", "og_title": None,
+                    "og_url": None, "og_image": None})
+        # A sibling may finish during the normal photo request. Read the
+        # ready verified bundle once before issuing a separate price request.
+        if og.get("http_status") == 403:
+            cached = read_ready_bundle()
+            if cached is not None:
+                og = cached_og(cached)
     og_title = og.get("og_title") if isinstance(og.get("og_title"), str) else None
     # Safety: if OG explicitly contradicts link product/vendor, do not use its
     # image or price-title identity. Still keep the source sale.
@@ -263,7 +307,9 @@ def enrich_deal(deal: dict, output_dir: Path,
             # the photo. One public request per SKU instead of two reduces
             # transient WAF/403 mismatches and saves runner/network time.
             snapshot = og.get("_verified_public_item_html")
-            if (using_public_lowchart and history_fetch is fetch_one
+            if cached is not None:
+                history = {**cached["history"], "shared_from_verified_sibling": True}
+            elif (using_public_lowchart and history_fetch is fetch_one
                     and lowchart_title_verified
                     and isinstance(snapshot, str) and snapshot):
                 from gh_only.lowchart_price_reference import parse_reference
@@ -289,7 +335,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     # Publish only locally verified public historical means, and if a runner
     # was denied, briefly consult the OTHER runner's immutable exact-SKU
     # receipt. Never substitute current price or another source's item.
-    if (using_public_lowchart and history_fetch is fetch_one
+    if (cached is None and using_public_lowchart and history_fetch is fetch_one
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and isinstance(p, str) and isinstance(i, str)
             and type(source_id) is int):
@@ -346,7 +392,14 @@ def enrich_deal(deal: dict, output_dir: Path,
         # A legacy diagnostic OG photo must not require Playwright at import
         # time; the same strict Coupang CDN allowlist is already available.
         eligible_cdn = is_coupang_cdn_url(og.get("og_image"))
-    if matching and eligible_cdn:
+    if cached is not None:
+        imgpath = cached["photo_path"]
+        photo = {
+            "status": "IMAGE_SAVED", "saved_name": imgpath.name,
+            "bytes": imgpath.stat().st_size,
+            "image_source": "lowchart_exact_item_public_page",
+        }
+    elif matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
 
     # One runner's successful exact Lowchart page is the source of truth for
@@ -354,14 +407,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     # image bytes and original chart PNG, not merely a price or guessed URL.
     # Product/item/source binding and independent image integrity checks are
     # applied on both write and read. No other product's image is accepted.
-    bundle_enabled = (
-        using_public_lowchart and
-        os.getenv("JIRUM_LOWCHART_BUNDLE_ENABLED") == "true" and
-        identity.get("status") == "EXACT_ITEM_IDENTIFIED" and
-        isinstance(p, str) and isinstance(i, str) and
-        type(source_id) is int
-    )
-    if bundle_enabled:
+    if bundle_enabled and cached is None:
         from gh_only.lowchart_shared_bundle import (
             publish_bundle, recover_bundle, prepare_native_chart,
         )
