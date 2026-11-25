@@ -1146,6 +1146,7 @@ def busan_discount_eligible(article: dict) -> bool:
         type(pct) is int and 30 < pct <= 95
         and type(sale) is int and type(reference) is int
         and 0 < sale < reference <= 100_000_000
+        and isinstance(proof.get("reference_source"), str)
         and proof.get("reference_source") in BUSAN_VERIFIED_PRICE_BASES
         and proof.get("similar_only") is not True
         and (reference - sale) * 100 > reference * 30
@@ -1153,22 +1154,77 @@ def busan_discount_eligible(article: dict) -> bool:
     )
 
 
-def skip_busan_discount(store, source_id: int, article: dict) -> None:
+def await_busan_skip_checkpoint(store, source_id: int, receipt: dict,
+                                *, sleeper=None) -> dict:
+    """Read-only barrier after a non-publishing skip; never repeat a PUT.
+
+    GitHub Contents GET may temporarily show the old queue after PUT.
+    Continue only when this exact skip receipt is visible and the item is
+    no longer pending. Conflicting or unresolved state stops the job safely.
+    """
+    sleeper = sleeper or time.sleep
+    key = str(source_id)
+    for attempt in range(PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS):
+        state, _ = store.read()
+        if state["in_flight"] is not None or key in state["published"]:
+            raise RuntimeError("BUSAN_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        if any(key in state.get(bucket, {}) for bucket in
+               ("skipped_expired", "skipped_unverifiable")):
+            raise RuntimeError("BUSAN_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        saved = state.get("skipped_busan_discount", {}).get(key)
+        ids = [row["id"] for row in state["pending"]]
+        if saved is not None:
+            if saved != receipt or source_id in ids:
+                raise RuntimeError("BUSAN_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+            print("BUSAN_SKIP_CHECKPOINT_VISIBLE source_id=" + key)
+            return state
+        # Only the old, still-unclaimed head is consistent with a stale read.
+        if not ids or ids[0] != source_id:
+            raise RuntimeError("BUSAN_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        if attempt + 1 < PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS:
+            print("BUSAN_SKIP_CHECKPOINT_WAIT source_id=" + key
+                  + " attempt=" + str(attempt + 1))
+            sleeper(1)
+    raise RuntimeError("BUSAN_SKIP_CHECKPOINT_NOT_YET_VISIBLE_NO_POST")
+
+
+def skip_busan_discount(store, source_id: int, article: dict, *, sleeper=None) -> dict:
+    if (not busan_cafe_mode() or type(source_id) is not int
+            or article.get("source_id") != source_id
+            or busan_discount_eligible(article)):
+        raise RuntimeError("BUSAN_SKIP_REQUEST_INVALID")
     state, sha = store.read()
-    if (state["in_flight"] is not None or not state["pending"]
-            or state["pending"][0]["id"] != source_id
-            or str(source_id) in state["published"]):
+    key = str(source_id)
+    proof = article.get("busan_price_evidence")
+    proof = proof if isinstance(proof, dict) else {}
+    pct = proof.get("display_pct")
+    basis = proof.get("reference_source")
+    pct = pct if type(pct) is int else None
+    basis = basis if isinstance(basis, str) else None
+    if state["in_flight"] is not None or key in state["published"]:
         raise RuntimeError("BUSAN_DISCOUNT_QUEUE_CHANGED")
-    proof = article.get("busan_price_evidence") or {}
+    saved = state.get("skipped_busan_discount", {}).get(key)
+    if saved is not None:
+        # Idempotent only for the same documented decision. Never overwrite
+        # an existing receipt or remove another queue row.
+        if (saved.get("status") != "NOT_VERIFIED_OVER_30"
+                or saved.get("display_pct") != pct
+                or saved.get("reference_source") != basis
+                or any(row["id"] == source_id for row in state["pending"])):
+            raise RuntimeError("BUSAN_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        print("BUSAN_SKIP_ALREADY_RECORDED source_id=" + key)
+        return state
+    if (not state["pending"] or state["pending"][0]["id"] != source_id
+            or any(key in state.get(bucket, {}) for bucket in
+                   ("skipped_expired", "skipped_unverifiable"))):
+        raise RuntimeError("BUSAN_DISCOUNT_QUEUE_CHANGED")
+    receipt = {"status": "NOT_VERIFIED_OVER_30", "display_pct": pct,
+               "reference_source": basis, "at": now_utc()}
     state["pending"].pop(0)
-    state.setdefault("skipped_busan_discount", {})[str(source_id)] = {
-        "status": "NOT_VERIFIED_OVER_30",
-        "display_pct": proof.get("display_pct"),
-        "reference_source": proof.get("reference_source"),
-        "at": now_utc(),
-    }
+    state.setdefault("skipped_busan_discount", {})[key] = receipt
     store.write(state, sha, "state: Busan cafe skip deal not verified over 30pct [skip ci]")
-    print("BUSAN_DISCOUNT_SKIPPED source_id=" + str(source_id))
+    print("BUSAN_DISCOUNT_SKIPPED source_id=" + key)
+    return await_busan_skip_checkpoint(store, source_id, receipt, sleeper=sleeper)
 
 
 def claim(store: GithubState, source_id: int, run_id: str) -> None:
@@ -1274,8 +1330,25 @@ def publish_pending(store: GithubState, *, drain: bool = False,
     if not run_id:
         raise RuntimeError("GITHUB_RUN_ID_MISSING")
     completed = 0
+    discount_skipped = 0
+    verified_skip_state = None
+    skip_receipts = {}
     while True:
-        state, _ = store.read()
+        if verified_skip_state is not None:
+            # Use the confirmed snapshot once; do not rebuild a skipped deal
+            # because another immediately subsequent GET was stale.
+            state, verified_skip_state = verified_skip_state, None
+        else:
+            state, _ = store.read()
+        if skip_receipts:
+            # A later read must not regress behind any skip in this drain.
+            # Poll read-only on lag; never re-enrich, re-write, or submit it.
+            for skipped_id, receipt in skip_receipts.items():
+                if state.get("skipped_busan_discount", {}).get(str(skipped_id)) != receipt:
+                    state = await_busan_skip_checkpoint(store, skipped_id, receipt)
+            if any(state.get("skipped_busan_discount", {}).get(str(sid)) != receipt
+                   for sid, receipt in skip_receipts.items()):
+                raise RuntimeError("BUSAN_SKIP_CHECKPOINT_REGRESSED_NO_POST")
         if state["in_flight"] is not None:
             raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
         if enforcing_freshness() and state["pending"]:
@@ -1301,7 +1374,7 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             }))
             return 0
         # Check budget only BETWEEN posts; never cut off mid-submission.
-        if drain and completed and clock() - started >= DRAIN_TIME_BUDGET_SECONDS:
+        if drain and (completed or discount_skipped) and clock() - started >= DRAIN_TIME_BUDGET_SECONDS:
             print("JIRUM_FIFO_DRAIN_PAUSED " + json.dumps({
                 "published_this_run": completed,
                 "pending": len(state["pending"]),
@@ -1341,7 +1414,10 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                 return 2
             raise
         if busan_cafe_mode() and not busan_discount_eligible(article):
-            skip_busan_discount(store, article["source_id"], article)
+            skipped_id = article["source_id"]
+            verified_skip_state = skip_busan_discount(store, skipped_id, article)
+            skip_receipts[skipped_id] = verified_skip_state["skipped_busan_discount"][str(skipped_id)]
+            discount_skipped += 1
             continue
         if enforcing_freshness() and freshness_status(state["pending"][0]) != "FRESH":
             latest, sha = store.read()
