@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97090,
-  "pending": [
-    {
-      "id": 97090,
-      "source_message_id": 97090,
-      "source_post_url": "https://t.me/jirum/97090",
-      "original_purchase_url": "https://link.coupang.com/a/iX2Jt0OLiC",
-      "title": "☆특가 15,980원",
-      "source_text": "☆특가 15,980원\nMYCHEF 밀푀유나베 & 칼국수 밀키트 2~3인분, 1.05kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2Jt0OLiC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15980,
-      "posted_at_utc": "2026-11-25T12:28:42+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2271,6 +2260,10 @@
     "97089": {
       "url": "https://blog.naver.com/mw5114/224492068075",
       "at": "2026-11-25T12:27:32.591975+00:00"
+    },
+    "97090": {
+      "url": "https://blog.naver.com/mw5114/224492076410",
+      "at": "2026-11-25T12:35:11.860677+00:00"
     }
   },
   "skipped": {
@@ -2703,12 +2696,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97090,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45614249535",
-    "at": "2026-11-25T12:34:27.700544+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
