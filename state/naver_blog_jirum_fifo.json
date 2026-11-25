@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97128,
-  "pending": [
-    {
-      "id": 97128,
-      "source_message_id": 97128,
-      "source_post_url": "https://t.me/jirum/97128",
-      "original_purchase_url": "https://link.coupang.com/a/iYGMz0RE60",
-      "title": "☆특가 13,590원",
-      "source_text": "☆특가 13,590원\n컬러별 가격 상이🔥 뛰어난 잡티 커버력과 보송한 세미매트 피부 표현\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGMz0RE60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13590,
-      "posted_at_utc": "2026-11-25T21:49:08+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2335,6 +2324,10 @@
     "97127": {
       "url": "https://blog.naver.com/mw5114/224492477747",
       "at": "2026-11-25T21:52:04.280958+00:00"
+    },
+    "97128": {
+      "url": "https://blog.naver.com/mw5114/224492478311",
+      "at": "2026-11-25T21:53:02.191384+00:00"
     }
   },
   "skipped": {
@@ -2772,12 +2765,7 @@
       "at": "2026-11-25T21:43:04.867549+00:00"
     }
   },
-  "in_flight": {
-    "id": 97128,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45707885968",
-    "at": "2026-11-25T21:52:18.607150+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
