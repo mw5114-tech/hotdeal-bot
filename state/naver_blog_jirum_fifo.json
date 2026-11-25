@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97136,
-  "pending": [
-    {
-      "id": 97136,
-      "source_message_id": 97136,
-      "source_post_url": "https://t.me/jirum/97136",
-      "original_purchase_url": "https://link.coupang.com/a/iYOg15cgFg",
-      "title": "☆특가 2,790원",
-      "source_text": "☆특가 2,790원\n풀무원 특등급 국산콩 네컵연두부, 360g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYOg15cgFg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2790,
-      "posted_at_utc": "2026-11-25T23:33:58+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2363,6 +2352,10 @@
     "97135": {
       "url": "https://blog.naver.com/mw5114/224492536670",
       "at": "2026-11-25T23:09:59.582072+00:00"
+    },
+    "97136": {
+      "url": "https://blog.naver.com/mw5114/224492562552",
+      "at": "2026-11-25T23:36:13.237257+00:00"
     }
   },
   "skipped": {
@@ -2800,12 +2793,7 @@
       "at": "2026-11-25T21:43:04.867549+00:00"
     }
   },
-  "in_flight": {
-    "id": 97136,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45722479230",
-    "at": "2026-11-25T23:35:29.374989+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
