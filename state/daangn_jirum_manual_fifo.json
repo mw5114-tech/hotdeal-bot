@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97055,
+  "last_scanned_id": 97056,
   "pending": [
     {
       "id": 97055,
@@ -11,6 +11,15 @@
       "title": "☆특가 7,350원",
       "sale_price_krw": 7350,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97056,
+      "source_post_url": "https://t.me/jirum/97056",
+      "original_purchase_url": "https://link.coupang.com/a/iXBmcobG3w",
+      "source_text": "☆특가 10,800원\n웅진 유기농 순한작두콩차\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXBmcobG3w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-25T06:05:37+00:00",
+      "title": "☆특가 10,800원",
+      "sale_price_krw": 10800
     }
   ],
   "in_flight": null,
