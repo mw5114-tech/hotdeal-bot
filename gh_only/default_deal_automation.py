@@ -555,8 +555,24 @@ def enrich_deal(deal: dict, output_dir: Path,
             title = fallback_title or title
         else:
             photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
+    if (bundle_enabled and lowchart_unlisted
+            and photo.get("status") != "IMAGE_SAVED"
+            and os.getenv("JIRUM_NAVER_API_UNLISTED_FALLBACK") == "true"):
+        from gh_only.naver_api_image_photo import fetch_matched_photo
+        provider_photo = fetch_matched_photo(fallback_title, output_dir, source_id)
+        photo_attempts.append({"provider": "naver_api", "status": provider_photo.get("status")})
+        if provider_photo.get("status") == "IMAGE_SAVED":
+            photo = {k: provider_photo[k] for k in ("status", "saved_name", "bytes", "image_source")}
+            image_source = provider_photo["image_source"]
+            title = fallback_title
+            print("NAVER_API_UNLISTED_PHOTO_READY source_id=" + str(source_id))
     if bundle_enabled and photo.get("status") != "IMAGE_SAVED":
         photo = {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None}
+    representative_naver_api_image = (
+        lowchart_unlisted and provider_photo.get("status") == "IMAGE_SAVED"
+        and provider_photo.get("representative_naver_api_image") is True
+        and image_source == "naver_api_matched_image"
+    )
     provider_verified = False
     representative_fallcent_image = (
         provider_photo.get("status") == "IMAGE_SAVED"
@@ -728,7 +744,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "product_name_source": (
             "lowchart_exact_item_page" if lowchart_title_verified
             else "telegram_product_title" if (
-                representative_naver_image or representative_fallcent_image)
+                representative_naver_api_image or representative_naver_image or representative_fallcent_image)
             else "unverified_fallback"
         ) if using_public_lowchart else "legacy_kakao",
         "search_product_title": search_title,
@@ -750,6 +766,7 @@ def enrich_deal(deal: dict, output_dir: Path,
         "image_match_basis": (
             "UNVERIFIED_FALLCENT_SEARCH_RESULT" if representative_fallcent_image
             else "UNVERIFIED_FIRST_NAVER_IMAGE_RESULT" if representative_naver_image
+            else "NAVER_API_TITLE_OPTION_MATCH_REPRESENTATIVE" if representative_naver_api_image
             else og.get("image_match_basis")
         ),
         "image_same_named_option": (
@@ -758,6 +775,8 @@ def enrich_deal(deal: dict, output_dir: Path,
         ),
         "image_provider_verified": provider_verified,
         "representative_naver_image": representative_naver_image,
+        "representative_naver_api_image": representative_naver_api_image,
+        "naver_api_query_title": provider_photo.get("image_query_title") if representative_naver_api_image else None,
         "representative_fallcent_image": representative_fallcent_image,
         "image_provider_title": provider_photo.get("image_provider_title"),
         "image_provider_product_id": provider_photo.get("image_provider_product_id"),
