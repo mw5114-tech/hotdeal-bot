@@ -190,6 +190,110 @@ class ManualQueueTests(unittest.TestCase):
                 sleeper=lambda _: None
             )
 
+    def test_busan_skip_waits_for_visibility_and_drains_next_without_rebuilding(self):
+        from gh_only.jirum_manual_queue import skip_busan_discount
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        class LaggingStore(FakeStore):
+            def __init__(self, value):
+                super().__init__(value)
+                self.old = None
+                self.remaining = 0
+            def write(self, state, sha, message):
+                before = copy.deepcopy(self.value)
+                super().write(state, sha, message)
+                if "Busan cafe skip" in message:
+                    self.old = before
+                    self.remaining = 2
+            def read(self):
+                if self.remaining:
+                    self.remaining -= 1
+                    return copy.deepcopy(self.old), "sha-test"
+                return super().read()
+        store = LaggingStore(initial)
+        built = []
+        def build(st):
+            sid = st["pending"][0]["id"]
+            built.append(sid)
+            return {"source_id": sid, "title": "상품 [5%할인]",
+                    "busan_price_evidence": {"display_pct": 5, "sale": 9500,
+                        "reference": 10000, "reference_source": "lowchart_public_history"}}
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "busan-lag",
+                                     "DAANGN_BUSAN_CAFE_MODE": "true",
+                                     "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.build_next", side_effect=build), \
+             patch("gh_only.jirum_manual_queue.time.sleep") as sleep, \
+             patch("gh_only.jirum_manual_publisher.publish_one") as publish:
+            self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(built, [94744, 94745])
+        self.assertEqual(len(store.writes), 2)
+        self.assertEqual(sleep.call_count, 4)
+        self.assertEqual(store.value["pending"], [])
+        self.assertEqual(set(store.value["skipped_busan_discount"]), {"94744", "94745"})
+        self.assertIsNone(store.value["in_flight"])
+        publish.assert_not_called()
+
+    def test_busan_skip_is_idempotent_but_does_not_remove_next_or_conflicting_row(self):
+        from gh_only.jirum_manual_queue import skip_busan_discount
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(initial)
+        article = {"source_id": 94744, "title": "상품 [5%할인]",
+                   "busan_price_evidence": {"display_pct": 5, "sale": 9500,
+                       "reference": 10000, "reference_source": "lowchart_public_history"}}
+        with patch.dict(os.environ, {"DAANGN_BUSAN_CAFE_MODE": "true"}):
+            first = skip_busan_discount(store, 94744, article)
+            second = skip_busan_discount(store, 94744, article)
+            self.assertEqual(first, second)
+            with self.assertRaisesRegex(RuntimeError, "BUSAN_SKIP_CHECKPOINT_CONFLICT"):
+                skip_busan_discount(store, 94744, {**article,
+                    "busan_price_evidence": {**article["busan_price_evidence"], "display_pct": 10}})
+        self.assertEqual(len(store.writes), 1)
+        self.assertEqual([r["id"] for r in store.value["pending"]], [94745])
+
+    def test_busan_unconfirmed_skip_stops_without_another_write_or_publish(self):
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        class NeverVisible(FakeStore):
+            def read(self):
+                return copy.deepcopy(initial), "sha-test"
+        store = NeverVisible(initial)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "busan-timeout",
+                                     "DAANGN_BUSAN_CAFE_MODE": "true",
+                                     "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.build_next",
+                   return_value={"source_id": 94744}) as build, \
+             patch("gh_only.jirum_manual_queue.time.sleep"), \
+             patch("gh_only.jirum_manual_publisher.publish_one") as publish:
+            with self.assertRaisesRegex(RuntimeError, "BUSAN_SKIP_CHECKPOINT_NOT_YET_VISIBLE"):
+                publish_pending(store, drain=True, clock=lambda: 0)
+        self.assertEqual(len(store.writes), 1)
+        build.assert_called_once()
+        publish.assert_not_called()
+
+    def test_busan_skip_refuses_conflicting_claim_or_published_receipt(self):
+        from gh_only.jirum_manual_queue import await_busan_skip_checkpoint
+        before, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        receipt = {"status": "NOT_VERIFIED_OVER_30", "display_pct": 5,
+                   "reference_source": "lowchart_public_history", "at": "time"}
+        claimed = copy.deepcopy(before)
+        claimed["in_flight"] = {"id": 94744, "status": "CLAIMED"}
+        published = copy.deepcopy(before)
+        published["pending"].pop(0)
+        published["published"]["94744"] = {"status": "PUBLISHED_VERIFIED"}
+        conflicting = copy.deepcopy(before)
+        conflicting["pending"].pop(0)
+        conflicting["skipped_busan_discount"] = {"94744": {**receipt, "display_pct": 10}}
+        for value in (claimed, published, conflicting):
+            store = FakeStore(value)
+            with self.assertRaisesRegex(RuntimeError, "BUSAN_SKIP_CHECKPOINT_CONFLICT"):
+                await_busan_skip_checkpoint(store, 94744, receipt, sleeper=lambda _: None)
+            self.assertEqual(store.writes, [])
+
+    def test_busan_malformed_discount_basis_fails_closed(self):
+        from gh_only.jirum_manual_queue import busan_discount_eligible
+        self.assertFalse(busan_discount_eligible({
+            "title": "상품 [40%할인]", "busan_price_evidence": {
+                "display_pct": 40, "sale": 6000, "reference": 10000,
+                "reference_source": ["lowchart_public_history"]}}))
+
     def test_exact_source_timestamp_recovers_new_untimed_coupang_deal(self):
         now = datetime.now(timezone.utc)
         source = deal(94744)
