@@ -239,7 +239,10 @@ def enrich_deal(deal: dict, output_dir: Path,
 
     cached = read_ready_bundle()
     if using_public_lowchart:
-        og_lookup = lambda _link, _session: lookup_exact_item_photo(identity, fallback_title)
+        def og_lookup(_link, _session):
+            if cache_first:
+                return lookup_exact_item_photo(identity, fallback_title, ready=ready_photo)
+            return lookup_exact_item_photo(identity, fallback_title)
         photo_downloader = photo_downloader or download_exact_photo
     else:
         photo_downloader = photo_downloader or download_og_photo
@@ -255,6 +258,20 @@ def enrich_deal(deal: dict, output_dir: Path,
             "image_same_named_option": False,
         }
 
+    def ready_photo():
+        nonlocal cached
+        shared = read_ready_bundle()
+        if shared is None or shared.get("chart_path") is None:
+            return None
+        cached = shared
+        print("LOWCHART_RETRY_STOP_SHARED_READY source_id=" + str(source_id))
+        return cached_og(shared)
+
+    def ready_history():
+        if ready_photo() is None:
+            return None
+        return {**cached["history"], "shared_from_verified_sibling": True}
+
     if cached is not None:
         og = cached_og(cached)
     else:
@@ -268,6 +285,8 @@ def enrich_deal(deal: dict, output_dir: Path,
             cached = read_ready_bundle()
             if cached is not None:
                 og = cached_og(cached)
+    lowchart_unlisted = (og.get("http_status") == 200
+                         and og.get("status") == "LOWCHART_CONFIRMED_UNLISTED_200")
     og_title = og.get("og_title") if isinstance(og.get("og_title"), str) else None
     # Safety: if OG explicitly contradicts link product/vendor, do not use its
     # image or price-title identity. Still keep the source sale.
@@ -319,6 +338,17 @@ def enrich_deal(deal: dict, output_dir: Path,
                                       get_title_tokens(price_title), sale)
                 }
                 history["read_from_verified_photo_response"] = True
+            elif lowchart_unlisted:
+                history = {"http_status": 200, "reason": "LOWCHART_CONFIRMED_UNLISTED_200",
+                           "usable_historical_reference": False}
+            elif cache_first:
+                history = history_fetch(p, i, get_title_tokens(price_title), sale,
+                                        ready=ready_history)
+                if cached is not None:
+                    og = cached_og(cached)
+                    og_title = title = price_title = cached["title"]
+                    matching = og_matches_product(og, identity)
+                    lowchart_title_verified = True
             else:
                 history = history_fetch(p, i, get_title_tokens(price_title), sale)
             average = validated_history(history, p, i, price_title)
@@ -335,7 +365,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     # Publish only locally verified public historical means, and if a runner
     # was denied, briefly consult the OTHER runner's immutable exact-SKU
     # receipt. Never substitute current price or another source's item.
-    if (cached is None and using_public_lowchart and history_fetch is fetch_one
+    if (cached is None and not lowchart_unlisted and using_public_lowchart and history_fetch is fetch_one
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and isinstance(p, str) and isinstance(i, str)
             and type(source_id) is int):
@@ -407,7 +437,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     # image bytes and original chart PNG, not merely a price or guessed URL.
     # Product/item/source binding and independent image integrity checks are
     # applied on both write and read. No other product's image is accepted.
-    if bundle_enabled and cached is None:
+    if bundle_enabled and cached is None and not lowchart_unlisted:
         from gh_only.lowchart_shared_bundle import (
             publish_bundle, recover_bundle, prepare_native_chart,
         )
