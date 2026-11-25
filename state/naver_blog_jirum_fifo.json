@@ -3,16 +3,6 @@
   "last_scanned_id": 97089,
   "pending": [
     {
-      "id": 97088,
-      "source_message_id": 97088,
-      "source_post_url": "https://t.me/jirum/97088",
-      "original_purchase_url": "https://link.coupang.com/a/iX2q7VowkC",
-      "title": "☆특가 5,460원",
-      "source_text": "☆특가 5,460원\n크라운제과 참쌀 선과 253g × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2q7VowkC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5460,
-      "posted_at_utc": "2026-11-25T12:24:33+00:00"
-    },
-    {
       "id": 97089,
       "source_message_id": 97089,
       "source_post_url": "https://t.me/jirum/97089",
@@ -2273,6 +2263,10 @@
     "97087": {
       "url": "https://blog.naver.com/mw5114/224492064418",
       "at": "2026-11-25T12:24:09.228866+00:00"
+    },
+    "97088": {
+      "url": "https://blog.naver.com/mw5114/224492066869",
+      "at": "2026-11-25T12:26:26.791571+00:00"
     }
   },
   "skipped": {
@@ -2705,12 +2699,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97088,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45613527784",
-    "at": "2026-11-25T12:25:43.219068+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
