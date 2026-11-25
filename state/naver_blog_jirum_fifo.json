@@ -2699,7 +2699,12 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": null,
+  "in_flight": {
+    "id": 97089,
+    "status": "REVIEW_REQUIRED",
+    "run_id": "45613527784",
+    "at": "2026-11-25T12:26:47.426475+00:00"
+  },
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
