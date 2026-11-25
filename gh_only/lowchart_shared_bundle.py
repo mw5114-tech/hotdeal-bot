@@ -316,7 +316,7 @@ def publish_bundle(source_id: int, identity: dict,
 
 def recover_bundle(source_id: int, identity: dict, folder: Path,
                    *, token: str | None = None, reader=None,
-                   blob_reader=None, sleeper=None) -> dict | None:
+                   blob_reader=None, sleeper=None, wait: bool = True) -> dict | None:
     """Consumer: read actual media bytes + exact price and restore local files.
 
     No alias-based photo fallback; bundle must be valid and photo fully
@@ -337,7 +337,7 @@ def recover_bundle(source_id: int, identity: dict, folder: Path,
     fetch = reader or _manifest_read
     get_blob = blob_reader or _git_blob_read
     sleeper = sleeper or time.sleep
-    for delay in POLL_SECONDS:
+    for delay in (POLL_SECONDS if wait else (0,)):
         if delay:
             sleeper(delay)
         try:
@@ -373,7 +373,8 @@ def recover_bundle(source_id: int, identity: dict, folder: Path,
         except (error.HTTPError, error.URLError, OSError, TypeError,
                 ValueError, KeyError):
             continue
-    print("LOWCHART_BUNDLE_UNAVAILABLE source_id=" + str(source_id))
+    if wait:
+        print("LOWCHART_BUNDLE_UNAVAILABLE source_id=" + str(source_id))
     return None
 
 
