@@ -98,3 +98,49 @@ jobs:
                   failed = True
           sys.exit(1 if failed else 0)
           PY
+
+      - name: Read-only Jirum image search sample
+        if: always()
+        env:
+          NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+          NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
+        run: |
+          python - <<'PY'
+          import os, json, html, re
+          from urllib import request, error, parse
+          from time import monotonic
+          headers = {
+              "X-NCP-APIGW-API-KEY-ID": os.environ["NAVER_API_HUB_KEY_ID"],
+              "X-NCP-APIGW-API-KEY": os.environ["NAVER_API_HUB_KEY"],
+              "Accept": "application/json",
+          }
+          samples = [
+              ("97079", "닌자 Foodi 파워 프로세서 블렌더 CB350KR"),
+              ("97078", "동아오츠카 데미소다 애플 250ml 30개"),
+              ("97077", "에낙 라면과자 30g 48개"),
+          ]
+          for source, term in samples:
+              t = monotonic()
+              url = "https://naverapihub.apigw.ntruss.com/search/v1/image?" + parse.urlencode({
+                  "query": term, "display": 5, "sort": "sim", "format": "json",
+              })
+              try:
+                  with request.urlopen(request.Request(url, headers=headers), timeout=15) as res:
+                      status = res.status
+                      data = json.loads(res.read(200001))
+                  print("JIRUM_IMAGE_PROBE " + json.dumps({
+                      "source_id": source, "query": term, "http": status,
+                      "seconds": round(monotonic()-t, 2), "total": data.get("total"),
+                      "items": [
+                          {"title": html.unescape(re.sub(r"<[^>]*>", "", str(item.get("title", ""))))[:180],
+                           "image": item.get("link"), "thumbnail": item.get("thumbnail"),
+                           "width": item.get("sizewidth"), "height": item.get("sizeheight")}
+                          for item in data.get("items", [])[:5]
+                          if isinstance(item, dict)
+                      ],
+                  }, ensure_ascii=False))
+              except error.HTTPError as exc:
+                  print("JIRUM_IMAGE_PROBE " + json.dumps({"source_id": source, "http": exc.code, "seconds": round(monotonic()-t, 2)}))
+              except (OSError, ValueError) as exc:
+                  print("JIRUM_IMAGE_PROBE " + json.dumps({"source_id": source, "error": type(exc).__name__}))
+          PY
