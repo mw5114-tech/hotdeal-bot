@@ -122,6 +122,10 @@ jobs:
       # search-first image fallbacks; never trade identity for volume.
       JIRUM_LOWCHART_BUNDLE_ENABLED: 'true'
       JIRUM_LOWCHART_CACHE_FIRST_ENABLED: 'true'
+      # Official API search is allowed only for an explicit unlisted 200.
+      JIRUM_NAVER_API_UNLISTED_FALLBACK: 'true'
+      NAVER_API_HUB_KEY_ID: ${{ secrets.NAVER_API_HUB_KEY_ID }}
+      NAVER_API_HUB_KEY: ${{ secrets.NAVER_API_HUB_KEY }}
       JIRUM_REQUIRE_OFFICIAL_PARTNERS_LINK: 'false'
       JIRUM_PUBLISH_BEFORE_MUSE_REWRITE: 'false'
     steps:
