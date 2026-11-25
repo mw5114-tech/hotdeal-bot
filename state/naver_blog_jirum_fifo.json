@@ -3,16 +3,6 @@
   "last_scanned_id": 97135,
   "pending": [
     {
-      "id": 97134,
-      "source_message_id": 97134,
-      "source_post_url": "https://t.me/jirum/97134",
-      "original_purchase_url": "https://link.coupang.com/a/iYMeEx512W",
-      "title": "☆특가 3,870원",
-      "source_text": "☆특가 3,870원\n크라운 츄러스, 84g, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYMeEx512W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3870,
-      "posted_at_utc": "2026-11-25T23:05:26+00:00"
-    },
-    {
       "id": 97135,
       "source_message_id": 97135,
       "source_post_url": "https://t.me/jirum/97135",
@@ -2365,6 +2355,10 @@
     "97133": {
       "url": "https://blog.naver.com/mw5114/224492534739",
       "at": "2026-11-25T23:08:01.347458+00:00"
+    },
+    "97134": {
+      "url": "https://blog.naver.com/mw5114/224492535731",
+      "at": "2026-11-25T23:09:01.883236+00:00"
     }
   },
   "skipped": {
@@ -2802,12 +2796,7 @@
       "at": "2026-11-25T21:43:04.867549+00:00"
     }
   },
-  "in_flight": {
-    "id": 97134,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45718392200",
-    "at": "2026-11-25T23:08:18.796206+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
