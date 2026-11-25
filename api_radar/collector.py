@@ -139,7 +139,7 @@ def safe_url(value: str, *, image=False) -> bool:
             and u.path.startswith(("/a/", "/re/", "/vp/products/", "/np/")))
 
 
-def normalize(row: dict, source: str) -> dict | None:
+def normalize(row: dict, source: str, *, require_image: bool = True) -> dict | None:
     raw_id = row.get("productId")
     if type(raw_id) is float and raw_id.is_integer():
         raw_id = int(raw_id)
@@ -148,11 +148,13 @@ def normalize(row: dict, source: str) -> dict | None:
     raw_price = row.get("productPrice")
     price = int(raw_price) if type(raw_price) is float and raw_price.is_integer() else raw_price
     image = row.get("productImage")
+    if not safe_url(image, image=True):
+        image = None
     url = row.get("productUrl")
     if not (re.fullmatch(r"\d{5,18}", pid) and isinstance(name, str)
             and 6 <= len(name.strip()) <= 160 and len(name) < 500
             and type(price) is int and 1000 <= price <= 4_000_000
-            and safe_url(image, image=True) and safe_url(url)
+            and (not require_image or image is not None) and safe_url(url)
             and not any(bad in name for bad in BLACKLIST)):
         return None
     name = " ".join(name.split())[:150]

@@ -1,11 +1,33 @@
 """Offline tests: no credential, browser, Naver or Coupang network use."""
-import unittest
+import contextlib
+from email.message import Message
+import io
 from pathlib import Path
+from tempfile import TemporaryDirectory
+import unittest
 from unittest.mock import patch
+from urllib.error import HTTPError
+from urllib.parse import parse_qs, urlsplit
 from datetime import datetime, timezone
 from growth_lab.trend_comparison import (
-    shop_payload, score_group, choose_pair, size_tokens, pair_key, compose,
+    shop_payload, score_group, choose_pair, size_tokens, pair_key, run, compose,
 )
+
+from api_radar.collector import normalize
+from growth_lab.comparison_photos import choose_photo, image_bytes, shopping_photos, title_match
+
+PHOTO = "https://shopping-phinf.pstatic.net/main_1234567/12345678901.20250101120000.jpg?type=f300"
+CARD = "https://cr3.shopping.naver.com/v2/bridge/searchGate?nv_mid=12345678901"
+NAME = "삼성전자 외장 SSD T7 1TB"
+
+
+def response(req, content, mime, url=None):
+    result = io.BytesIO(content)
+    result.status = 200
+    result.geturl = lambda: url or req.full_url
+    result.headers = Message()
+    result.headers["content-type"] = mime
+    return result
 
 
 class ComparisonTests(unittest.TestCase):
@@ -54,6 +76,7 @@ class ComparisonTests(unittest.TestCase):
         second = {"id": "22222"}
         self.assertEqual(pair_key("SSD", first, second), pair_key("SSD", second, first))
 
+
     def test_review_style_recommends_by_price_without_claiming_experience(self):
         now = datetime(2026, 11, 23, 4, 0, tzinfo=timezone.utc)
         a = {"id": "11111", "name": "가습기 첫 제품 2L", "price": 30000,
@@ -77,6 +100,117 @@ class ComparisonTests(unittest.TestCase):
         self.assertIn(a["name"], article["links"][0]["label"])
         self.assertIn(b["name"], article["links"][1]["label"])
         self.assertIn("표시가격은 같습니다", "\n".join(tied["paragraphs"]))
+
+
+class ComparisonPhotoTests(unittest.TestCase):
+    def test_exact_name_retains_option_model_and_bundle(self):
+        self.assertTrue(title_match(NAME, "삼성전자   외장 SSD T7, 1TB"))
+        for a, b in [(NAME, "삼성전자 외장 SSD T7 2TB"),
+                     (NAME, NAME + " 블랙"), (NAME + " - 블랙", NAME + " - 블루"),
+                     ("통세척 가습기 2.5L X1", "통세척 가습기 25L X1"),
+                     (NAME + " 1개", NAME + " 2개")]:
+            self.assertFalse(title_match(a, b), (a, b))
+
+    def test_public_search_extracts_only_exact_shopping_cards_on_known_cdn(self):
+        raw = f"""
+          <img src="{PHOTO}" alt="{NAME}">
+          <a href="{CARD}"><img src="{PHOTO}" alt="{NAME} 2개"></a>
+          <a href="https://example.org/"><img src="{PHOTO}" alt="{NAME}"></a>
+          <a href="{CARD}"><img src="https://shopping-phinf.pstatic.net.example.org/product.jpg" alt="{NAME}"></a>
+          <a href="{CARD}"><img src="{PHOTO}" alt="{NAME}"></a>
+          <a href="{CARD}"><img src="{PHOTO}" alt="{NAME}"></a>
+        """.encode()
+        def open_search(req, *, timeout):
+            self.assertTrue(req.full_url.startswith("https://m.search.naver.com/search.naver?query="))
+            return response(req, raw, "text/html")
+        self.assertEqual(shopping_photos(NAME, opener=open_search),
+                         {"status": "SHOPPING_MATCH", "images": [PHOTO]})
+
+    def test_shorter_query_does_not_relax_model_or_option_check(self):
+        name = "쿠쿠전자 가습기 CH-BS302FW 3.8L"
+        queries = []
+        def open_search(req, *, timeout):
+            query = parse_qs(urlsplit(req.full_url).query)["query"][0]
+            queries.append(query)
+            title = name if query == "CH-BS302FW" else name.replace("3.8L", "3L")
+            raw = f'<a href="{CARD}"><img src="{PHOTO}" alt="{title}"></a>'.encode()
+            return response(req, raw, "text/html")
+        self.assertEqual(shopping_photos(name, opener=open_search)["images"], [PHOTO])
+        self.assertEqual(queries, [name, "CH-BS302FW"])
+
+    def test_blocked_page_and_bad_image_fail_closed(self):
+        def blocked(req, *, timeout):
+            raise HTTPError(req.full_url, 403, "", {}, None)
+        self.assertEqual(shopping_photos(NAME, opener=blocked),
+                         {"status": "SHOPPING_HTTP_403", "images": []})
+        self.assertEqual(image_bytes(
+            PHOTO, opener=lambda req, **_: response(req, b"<html>" * 300, "image/jpeg")
+        )["status"], "SHOPPING_IMAGE_INVALID_BYTES")
+        self.assertEqual(image_bytes(
+            PHOTO, opener=lambda req, **_: response(req, b"x", "image/jpeg", "https://example.org/a")
+        )["status"], "SHOPPING_IMAGE_DOWNLOAD_UNEXPECTED")
+
+    def test_lowchart_on_either_product_wins_before_naver_shopping(self):
+        with patch("growth_lab.comparison_photos.lowchart_photo", side_effect=[
+            {"status": "NO_LOWCHART"}, {"status": "IMAGE_SAVED", "source": "lowchart_exact_item_public_page"}
+        ]), patch("growth_lab.comparison_photos.shopping_photos") as shopping:
+            photo = choose_photo({"id": "11111"}, {"id": "22222"}, {}, Path("."))
+        self.assertEqual(photo["label"], "B")
+        shopping.assert_not_called()
+
+    def test_fallback_saves_shopping_photo_with_no_coupang_photo(self):
+        with TemporaryDirectory() as tmp, patch(
+            "growth_lab.comparison_photos.lowchart_photo", return_value={"status": "NO_LOWCHART"}
+        ), patch("growth_lab.comparison_photos.shopping_photos", return_value={
+            "status": "SHOPPING_MATCH", "images": [PHOTO]
+        }), patch("growth_lab.comparison_photos.image_bytes", return_value={
+            "status": "SHOPPING_IMAGE_OK", "raw": b"photo", "mime": "image/jpeg"
+        }):
+            photo = choose_photo({"id": "11111", "name": NAME}, {"id": "22222"}, {}, Path(tmp))
+            self.assertEqual(photo["source"], "naver_shopping_product_card")
+            self.assertEqual(photo["path"].read_bytes(), b"photo")
+            self.assertEqual(photo["path"].suffix, ".jpg")
+
+    def test_no_matching_image_never_returns_publishable_photo(self):
+        with patch("growth_lab.comparison_photos.lowchart_photo", return_value={"status": "NO_LOWCHART"}), patch(
+            "growth_lab.comparison_photos.shopping_photos", return_value={"status": "SHOPPING_NO_EXACT_CARD", "images": []}
+        ):
+            self.assertEqual(choose_photo({"id": "11111", "name": NAME},
+                                          {"id": "22222", "name": "다른 상품"}, {}, Path(".")),
+                             {"status": "NO_MATCHING_PRODUCT_IMAGE"})
+
+    def test_missing_coupang_image_is_allowed_only_on_opted_in_path(self):
+        row = {"productId": 12345, "productName": NAME, "productPrice": 19900,
+               "productUrl": "https://www.coupang.com/vp/products/12345"}
+        self.assertIsNone(normalize(row, "search"))
+        self.assertIsNone(normalize(row, "search", require_image=False)["image"])
+        offers = [normalize({**row, "productId": pid}, "search", require_image=False)
+                  for pid in (12345, 67890)]
+        self.assertIsNotNone(choose_pair(offers))
+
+    def test_workflow_entry_preview_uses_fallback_but_never_writes_or_publishes(self):
+        topic = {"keyword": "외장 SSD", "category_name": "가전"}
+        offers = [{"id": pid, "name": NAME, "price": 29900, "image": None}
+                  for pid in ("11111", "22222")]
+        with patch("growth_lab.trend_comparison.load", return_value=(None, None)), patch(
+            "growth_lab.trend_comparison.load_state", return_value=({}, None)
+        ), patch("growth_lab.trend_comparison.ranked_topics", return_value=[topic]), patch(
+            "growth_lab.trend_comparison.get_api"
+        ), patch("growth_lab.trend_comparison.extract_rows", return_value=[]), patch(
+            "growth_lab.trend_comparison.products_for_comparison", return_value=offers
+        ) as candidates, patch(
+            "growth_lab.trend_comparison.choose_photo", return_value={
+                "status": "IMAGE_SAVED", "source": "naver_shopping_product_card"
+            }
+        ) as select, patch("growth_lab.trend_comparison.save") as save, patch(
+            "growth_lab.trend_comparison.tracked_link"
+        ) as link, contextlib.redirect_stdout(io.StringIO()) as log:
+            self.assertEqual(run(preview=True), 0)
+        candidates.assert_called_once_with([], topic["keyword"], require_image=False)
+        select.assert_called_once()
+        save.assert_not_called()
+        link.assert_not_called()
+        self.assertIn("PREVIEW_ONLY posts=0 image_ready=true", log.getvalue())
 
 
 if __name__ == "__main__":

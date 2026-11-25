@@ -40,12 +40,12 @@ def topic_for_day(now: datetime) -> tuple[str, str, str]:
     return TOPICS[now.astimezone(KST).date().toordinal() % len(TOPICS)]
 
 
-def products_for_comparison(rows: list[dict], keyword: str) -> list[dict]:
+def products_for_comparison(rows: list[dict], keyword: str, *, require_image: bool = True) -> list[dict]:
     """Same-query candidates only. Do not assert equivalent size/capacity."""
     offers = []
     seen = set()
     for raw in rows:
-        p = normalize(raw, "search")
+        p = normalize(raw, "search", require_image=require_image)
         if not p or keyword.replace(" ", "").lower() not in p["name"].replace(" ", "").lower():
             continue
         raw_identity = extract_exact_identity(p["url"], p["id"])

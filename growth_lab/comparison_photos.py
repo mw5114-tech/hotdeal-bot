@@ -1,27 +1,21 @@
-"""Lowchart-first image selection for trend comparison; Naver image API probe.
-
-Do not infer item IDs or visit opaque affiliate tracking URLs. Search thumbnails
-are diagnostic unless the original matches the official affiliate asset; indexing alone does not establish image-use rights
-or exact product identity. No arbitrary remote hosts or secret-bearing redirects.
-"""
+"""Comparison photos from exact Lowchart items or Naver Shopping product cards."""
 from __future__ import annotations
 
-import html
-import json
-import os
+from html.parser import HTMLParser
 from pathlib import Path
 import re
+import unicodedata
 from urllib import error, parse, request
 
 from api_radar.quality import extract_exact_identity, NoRedirect
 from gh_only.default_deal_format import normalized_product_name
 from gh_only.lowchart_product_photo import (
-    lookup_exact_item_photo, download_exact_photo, is_coupang_cdn_url,
+    lookup_exact_item_photo, download_exact_photo,
 )
 
-HUB_IMAGE = "https://naverapihub.apigw.ntruss.com/search/v1/image"
+NAVER_SEARCH = "https://m.search.naver.com/search.naver"
 MAX_IMAGE = 2_500_000
-MAX_RESPONSE = 250_000
+MAX_RESPONSE = 4_000_000
 
 
 def exact_identity(product: dict, radar: dict) -> dict | None:
@@ -80,147 +74,156 @@ def lowchart_photo(product: dict, radar: dict, folder: Path) -> dict:
     return {"status": result.get("status", "LOWCHART_DOWNLOAD_UNKNOWN")}
 
 
-def safe_thumbnail(url: str) -> bool:
-    if not isinstance(url, str) or len(url) > 3000:
-        return False
+def _https_location(url: str | None):
+    if not isinstance(url, str) or not 1 <= len(url) <= 3000:
+        return None
+    if any(ord(c) < 33 for c in url):
+        return None
     try:
         u = parse.urlsplit(url)
-        return (u.scheme == "https" and u.hostname == "search.pstatic.net"
-                and u.port in (None, 443) and not u.username and not u.password
-                and not u.fragment and u.path in ("/sunny/", "/common/")
-                and bool(parse.parse_qs(u.query).get("src")))
+        if (u.scheme == "https" and u.port in (None, 443) and not u.username
+                and not u.password and not u.fragment):
+            return u
     except ValueError:
-        return False
+        pass
+    return None
 
 
-def title_match(product: str, search_title: str) -> bool:
-    cleaned = html.unescape(re.sub(r"</?b>", "", search_title, flags=re.I))
-    a, b = normalized_product_name(product), normalized_product_name(cleaned)
-    return len(a) >= 6 and a == b
+def _shopping_card(url: str | None) -> bool:
+    u = _https_location(url)
+    return u is not None and (
+        (u.hostname == "cr3.shopping.naver.com" and u.path == "/v2/bridge/searchGate")
+        or (u.hostname == "search.shopping.naver.com"
+            and re.fullmatch(r"/(?:ns/)?catalog/\d+", u.path) is not None)
+    )
 
 
-def naver_image_search(title: str, *, opener=None) -> dict:
-    kid = os.getenv("NAVER_API_HUB_KEY_ID", "").strip()
-    key = os.getenv("NAVER_API_HUB_KEY", "").strip()
-    if not kid or not key:
-        return {"status": "NAVER_IMAGE_KEYS_MISSING", "items": []}
-    if any(c in kid + key for c in "\r\n") or len(kid) > 256 or len(key) > 256:
-        return {"status": "NAVER_IMAGE_KEYS_INVALID", "items": []}
-    query = parse.urlencode({"query": title[:150], "display": 5,
-                             "start": 1, "sort": "sim", "filter": "all",
-                             "format": "json"})
-    url = HUB_IMAGE + "?" + query
+def _shopping_image(url: str | None) -> bool:
+    u = _https_location(url)
+    return (u is not None and u.hostname == "shopping-phinf.pstatic.net"
+            and re.fullmatch(r"/(?:[A-Za-z0-9_-]+/)*[A-Za-z0-9_-]+(?:\.[A-Za-z0-9_-]+)*\.(?:jpe?g|png|webp)", u.path, re.I) is not None
+            and (not u.query or re.fullmatch(r"type=[A-Za-z0-9_]+", u.query) is not None))
+
+
+def title_match(product: str, card_title: str) -> bool:
+    # Preserve punctuation inside option/model tokens (2.5 vs 25, G-304
+    # vs G304). Never strip text after a hyphen or use a substring match.
+    def tokens(value: str) -> list[str]:
+        return re.findall(r"[^\W_]+(?:[./+_-][^\W_]+)*",
+                          unicodedata.normalize("NFKC", value).casefold())
+    a, b = tokens(product), tokens(card_title)
+    return sum(map(len, a)) >= 6 and a == b
+
+
+class _ShoppingCards(HTMLParser):
+    def __init__(self, title: str):
+        super().__init__(convert_charrefs=True)
+        self.title = title
+        self.in_card = False
+        self.images: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        values = dict(attrs)
+        if tag == "a":
+            self.in_card = _shopping_card(values.get("href"))
+        if tag != "img" or not self.in_card or len(self.images) >= 5:
+            return
+        alt = values.get("alt") or ""
+        if not title_match(self.title, alt):
+            return
+        src = values.get("src")
+        if _shopping_image(src) and src not in self.images:
+            self.images.append(src)
+
+    def handle_endtag(self, tag):
+        if tag == "a":
+            self.in_card = False
+
+
+def _search_cards(title: str, query: str, *, opener=None) -> dict:
+    url = NAVER_SEARCH + "?" + parse.urlencode({"query": query})
     req = request.Request(url, headers={
-        "X-NCP-APIGW-API-KEY-ID": kid, "X-NCP-APIGW-API-KEY": key,
-        "Accept": "application/json",
+        "Accept": "text/html", "Accept-Language": "ko-KR,ko;q=0.9",
     })
     op = opener or request.build_opener(NoRedirect()).open
     try:
-        with op(req, timeout=15) as res:
-            if res.status != 200 or res.geturl() != url:
-                return {"status": "NAVER_IMAGE_RESPONSE_UNEXPECTED", "items": []}
+        with op(req, timeout=12) as res:
+            if (res.status != 200 or res.geturl() != url
+                    or res.headers.get_content_type() != "text/html"):
+                return {"status": "SHOPPING_RESPONSE_UNEXPECTED", "images": []}
             raw = res.read(MAX_RESPONSE + 1)
     except error.HTTPError as exc:
-        return {"status": "NAVER_IMAGE_HTTP_" + str(exc.code), "items": []}
-    except (error.URLError, OSError, TimeoutError):
-        return {"status": "NAVER_IMAGE_NETWORK_ERROR", "items": []}
+        return {"status": "SHOPPING_HTTP_" + str(exc.code), "images": []}
+    except (error.URLError, OSError):
+        return {"status": "SHOPPING_NETWORK_ERROR", "images": []}
     if len(raw) > MAX_RESPONSE:
-        return {"status": "NAVER_IMAGE_RESPONSE_OVERSIZE", "items": []}
-    try:
-        data = json.loads(raw)
-    except (ValueError, UnicodeError):
-        return {"status": "NAVER_IMAGE_BAD_JSON", "items": []}
-    if not isinstance(data, dict) or not isinstance(data.get("items"), list):
-        return {"status": "NAVER_IMAGE_SCHEMA_INVALID", "items": []}
-    items = [i for i in data["items"][:5] if isinstance(i, dict)]
-    return {"status": "NAVER_IMAGE_HTTP_200", "items": items}
+        return {"status": "SHOPPING_RESPONSE_OVERSIZE", "images": []}
+    cards = _ShoppingCards(title)
+    cards.feed(raw.decode("utf-8", errors="replace"))
+    cards.close()
+    return {"status": "SHOPPING_MATCH" if cards.images else "SHOPPING_NO_EXACT_CARD",
+            "images": cards.images}
+
+
+def shopping_photos(title: str, *, opener=None) -> dict:
+    """Read public shopping cards; a shorter query never relaxes the title check."""
+    if not isinstance(title, str) or not 6 <= len(title.strip()) <= 160:
+        return {"status": "SHOPPING_TITLE_INVALID", "images": []}
+    result = _search_cards(title, title.strip(), opener=opener)
+    if result["status"] != "SHOPPING_NO_EXACT_CARD":
+        return result
+    for token in re.findall(r"(?<![0-9A-Za-z])[0-9A-Za-z][0-9A-Za-z-]{2,23}(?![0-9A-Za-z])", title):
+        if (re.search(r"[a-z]", token, re.I) and re.search(r"[0-9]", token)
+                and not re.fullmatch(r"[0-9]+(?:ml|l|kg|g|gb|tb|hz|w|v|mah|cm|mm)", token, re.I)
+                and token.casefold() != title.strip().casefold()):
+            return _search_cards(title, token, opener=opener)
+    return result
 
 
 def image_bytes(url: str, *, opener=None) -> dict:
-    if not (safe_thumbnail(url) or is_coupang_cdn_url(url)):
-        return {"status": "NAVER_IMAGE_HOST_REJECTED"}
-    req = request.Request(url, headers={"Accept": "image/*", "User-Agent": "Mozilla/5.0"})
+    if not _shopping_image(url):
+        return {"status": "SHOPPING_IMAGE_HOST_REJECTED"}
+    req = request.Request(url, headers={"Accept": "image/jpeg,image/png,image/webp"})
     op = opener or request.build_opener(NoRedirect()).open
     try:
-        with op(req, timeout=15) as res:
+        with op(req, timeout=12) as res:
             if res.status != 200 or res.geturl() != url:
-                return {"status": "NAVER_IMAGE_DOWNLOAD_UNEXPECTED"}
+                return {"status": "SHOPPING_IMAGE_DOWNLOAD_UNEXPECTED"}
             mime = res.headers.get_content_type()
             raw = res.read(MAX_IMAGE + 1)
     except error.HTTPError as exc:
-        return {"status": "NAVER_IMAGE_DOWNLOAD_HTTP_" + str(exc.code)}
-    except (error.URLError, OSError, TimeoutError):
-        return {"status": "NAVER_IMAGE_DOWNLOAD_NETWORK_ERROR"}
+        return {"status": "SHOPPING_IMAGE_HTTP_" + str(exc.code)}
+    except (error.URLError, OSError):
+        return {"status": "SHOPPING_IMAGE_NETWORK_ERROR"}
     good = ((mime == "image/jpeg" and raw.startswith(b"\xff\xd8\xff"))
             or (mime == "image/png" and raw.startswith(b"\x89PNG\r\n\x1a\n"))
             or (mime == "image/webp" and raw.startswith(b"RIFF") and raw[8:12] == b"WEBP"))
     if not good or not 1000 <= len(raw) <= MAX_IMAGE:
-        return {"status": "NAVER_IMAGE_INVALID_BYTES"}
-    return {"status": "NAVER_IMAGE_BYTES_OK", "bytes": len(raw), "_raw": raw, "_mime": mime}
-
-
-def probe_naver_photo(product: dict) -> dict:
-    """Test actual returned image bytes in memory, never publish a search hit."""
-    result = naver_image_search(product["name"])
-    items = result["items"]
-    matching = [r for r in items if isinstance(r.get("title"), str)
-                and title_match(product["name"], r["title"])]
-    ordered = matching + [r for r in items if r not in matching]
-    print("TREND_NAVER_IMAGE_API status=" + result["status"]
-          + " results=" + str(len(items)) + " exact_title_hits=" + str(len(matching)))
-    outcome = {"status": "NAVER_IMAGE_NO_DOWNLOADABLE_RESULT"}
-    for item in ordered[:3]:
-        # Only known provider hosts. No requests to arbitrary third-party URLs.
-        urls = (item.get("thumbnail"), item.get("link"))
-        for url in urls:
-            if not (safe_thumbnail(url) or is_coupang_cdn_url(url)):
-                continue
-            outcome = image_bytes(url)
-            if outcome["status"] == "NAVER_IMAGE_BYTES_OK":
-                print("TREND_NAVER_IMAGE_DOWNLOAD status=NAVER_IMAGE_BYTES_OK"
-                      + " bytes=" + str(outcome["bytes"])
-                      + " exact_title=" + str(item in matching).lower()
-                      + " approved_for_publish=false")
-                return outcome
-    print("TREND_NAVER_IMAGE_DOWNLOAD status=" + outcome["status"])
-    return outcome
+        return {"status": "SHOPPING_IMAGE_INVALID_BYTES"}
+    return {"status": "SHOPPING_IMAGE_OK", "raw": raw, "mime": mime}
 
 
 def choose_photo(a: dict, b: dict, radar: dict, folder: Path) -> dict:
-    # Prefer the existing Lowchart method, then an exact-title search result
-    # whose original is the official affiliate image asset.
     for label, product in (("A", a), ("B", b)):
         photo = lowchart_photo(product, radar, folder)
         print("TREND_LOWCHART_IMAGE product=" + label + " status=" + photo["status"])
         if photo["status"] == "IMAGE_SAVED":
             return {**photo, "label": label}
     for label, product in (("A", a), ("B", b)):
-        result = naver_image_search(product["name"])
-        exact = [r for r in result["items"] if isinstance(r.get("title"), str)
-                 and title_match(product["name"], r["title"])]
-        print("TREND_NAVER_FALLBACK status=" + result["status"]
-              + " exact_title_hits=" + str(len(exact)))
-        # Restrict public reuse to the very same official affiliate image URL.
-        # A search thumbnail may be downloaded if its original matches that
-        # authorized source exactly; unrelated search images are diagnostic only.
-        official = product.get("image")
-        for item in exact:
-            original = item.get("link")
-            if not isinstance(official, str) or original != official:
-                continue
-            url = item.get("thumbnail")
-            if not safe_thumbnail(url):
-                continue
+        pid = product.get("id")
+        if not isinstance(pid, str) or not re.fullmatch(r"\d{5,18}", pid):
+            continue
+        result = shopping_photos(product["name"])
+        print("TREND_NAVER_SHOPPING product=" + label + " status=" + result["status"])
+        for url in result["images"][:2]:
             data = image_bytes(url)
-            if data.get("status") != "NAVER_IMAGE_BYTES_OK":
+            print("TREND_NAVER_SHOPPING_DOWNLOAD product=" + label + " status=" + data["status"])
+            if data["status"] != "SHOPPING_IMAGE_OK":
                 continue
-            ext = {"image/jpeg": ".jpg", "image/png": ".png",
-                   "image/webp": ".webp"}[data["_mime"]]
+            ext = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}[data["mime"]]
             folder.mkdir(parents=True, exist_ok=True)
-            target = folder / ("naver_verified_" + product["id"] + ext)
-            target.write_bytes(data["_raw"])
-            print("TREND_NAVER_FALLBACK_OFFICIAL_IMAGE_SAVED product=" + label)
+            target = folder / ("naver_shopping_" + pid + ext)
+            target.write_bytes(data["raw"])
             return {"status": "IMAGE_SAVED", "path": target,
-                    "source": "naver_search_official_affiliate_asset", "label": label}
-    probe_naver_photo(a)
-    return {"status": "NO_PUBLISH_APPROVED_PRODUCT_IMAGE"}
+                    "source": "naver_shopping_product_card", "label": label}
+    return {"status": "NO_MATCHING_PRODUCT_IMAGE"}

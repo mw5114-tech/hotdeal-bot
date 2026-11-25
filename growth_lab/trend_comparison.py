@@ -15,7 +15,7 @@ from urllib import request, error
 
 from api_radar.collector import SEARCH, get_api, extract_rows, RadarApiError
 from api_radar.quality import QualityError
-from growth_lab.comparison_photos import choose_photo, probe_naver_photo
+from growth_lab.comparison_photos import choose_photo
 from api_radar.publisher import cooldown_remaining_seconds
 from api_radar.state_store import load_state, RadarStateError
 from growth_lab.seo_drafts import products_for_comparison
@@ -160,7 +160,7 @@ def choose_pair(offers: list[dict]) -> tuple[dict, dict] | None:
             a, b = size_tokens(first["name"]), size_tokens(second["name"])
             if a != b:
                 continue
-            if first["image"] == second["image"]:
+            if first.get("image") and first["image"] == second.get("image"):
                 continue
             return first, second
     return None
@@ -282,7 +282,7 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
                for x in posts.values() if isinstance(x, dict) and isinstance(x.get("at"), str)):
             continue
         body = get_api(SEARCH, {"keyword": t["keyword"], "limit": 10})
-        offers = products_for_comparison(extract_rows(body), t["keyword"])
+        offers = products_for_comparison(extract_rows(body), t["keyword"], require_image=False)
         pair = choose_pair(offers)
         if pair is None:
             continue
@@ -298,9 +298,6 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
             image_failures += 1
             print("TREND_COMPARISON_IMAGE_NOT_APPROVED posts=0")
         if preview or os.getenv("TREND_COMPARISON_PUBLISH_ENABLED", "false").lower() != "true":
-            # Exercise the backup API even when Lowchart succeeds, in preview only.
-            if photo.get("status") == "IMAGE_SAVED":
-                probe_naver_photo(a)
             print("TREND_COMPARISON_PREVIEW_ONLY posts=0 image_ready=" + str(photo.get("status") == "IMAGE_SAVED").lower())
             return 0
         if photo.get("status") != "IMAGE_SAVED":
@@ -310,7 +307,7 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
         links = (tracked_link(a), tracked_link(b))
         article = compose(t, a, b, links, photo["path"], now)
         source_label = ("로우차트 상품 이미지" if photo["source"] == "lowchart_exact_item_public_page"
-                        else "네이버 이미지 검색에서 확인한 쿠팡 공식 제휴 상품 이미지")
+                        else "네이버쇼핑 검색 결과에 표시된 상품 대표 이미지")
         article["paragraphs"].insert(0, "위 사진은 비교 대상 상품 " + photo["label"] + "의 " + source_label + "입니다.")
         # Claim before touching Naver: an ambiguous result cannot be re-posted.
         claims[key] = {"at": now_utc().isoformat(), "product_ids": article["product_ids"],
