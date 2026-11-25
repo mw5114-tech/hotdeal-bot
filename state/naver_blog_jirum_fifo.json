@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97090,
-  "pending": [],
+  "last_scanned_id": 97092,
+  "pending": [
+    {
+      "id": 97091,
+      "source_message_id": 97091,
+      "source_post_url": "https://t.me/jirum/97091",
+      "original_purchase_url": "https://link.coupang.com/a/iX23oYNUZg",
+      "title": "☆특가 7,640원",
+      "source_text": "☆특가 7,640원\n지엔씨푸드 오사카식 타코야끼 1kg 50개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX23oYNUZg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7640,
+      "posted_at_utc": "2026-11-25T12:33:11+00:00"
+    },
+    {
+      "id": 97092,
+      "source_message_id": 97092,
+      "source_post_url": "https://t.me/jirum/97092",
+      "original_purchase_url": "https://link.coupang.com/a/iX27Xp79fE",
+      "title": "☆특가 8,990원",
+      "source_text": "☆특가 8,990원\n해슬로 가시없는 어린이 순살가자미 400g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX27Xp79fE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8990,
+      "posted_at_utc": "2026-11-25T12:34:13+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
