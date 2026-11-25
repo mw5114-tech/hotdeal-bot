@@ -3,15 +3,6 @@
   "last_scanned_id": 97094,
   "pending": [
     {
-      "id": 97093,
-      "source_post_url": "https://t.me/jirum/97093",
-      "original_purchase_url": "https://link.coupang.com/a/iX3dkTwbGC",
-      "source_text": "☆특가 15,480원\n꾸브닝 호주청정우 소불고기 350g × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX3dkTwbGC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:35:26+00:00",
-      "title": "☆특가 15,480원",
-      "sale_price_krw": 15480
-    },
-    {
       "id": 97094,
       "source_post_url": "https://t.me/jirum/97094",
       "original_purchase_url": "https://link.coupang.com/a/iX3jq4L12a",
@@ -21,12 +12,7 @@
       "sale_price_krw": 11590
     }
   ],
-  "in_flight": {
-    "id": 97093,
-    "status": "CLAIMED",
-    "run_id": "45615390022",
-    "at": "2026-11-25T12:38:00.197377+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8870,6 +8856,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T12:37:20.520018+00:00",
       "run_id": "45615183718"
+    },
+    "97093": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%BE%B8%EB%B8%8C%EB%8B%9D-%ED%98%B8%EC%A3%BC%EC%B2%AD%EC%A0%95%EC%9A%B0-%EC%86%8C%EB%B6%88%EA%B3%A0%EA%B8%B0-350g-2%EA%B0%9C-5%ED%95%A0%EC%9D%B8-A6ax248j?from=write",
+      "posted_at_utc": "2026-11-25T12:35:26+00:00",
+      "product_id": "7699783322",
+      "item_id": "20612382356",
+      "vendor_item_id": null,
+      "at": "2026-11-25T12:38:18.746110+00:00",
+      "run_id": "45615390022"
     }
   },
   "skipped_non_coupang": 1126,
