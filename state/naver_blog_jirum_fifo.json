@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97076,
-  "pending": [
-    {
-      "id": 97076,
-      "source_message_id": 97076,
-      "source_post_url": "https://t.me/jirum/97076",
-      "original_purchase_url": "https://link.coupang.com/a/iXVo2qOEFg",
-      "title": "☆특가 9,800원",
-      "source_text": "☆특가 9,800원\n대식가 부대찌개 1kg × 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVo2qOEFg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9800,
-      "posted_at_utc": "2026-11-25T10:46:07+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2223,6 +2212,10 @@
     "97075": {
       "url": "https://blog.naver.com/mw5114/224491950075",
       "at": "2026-11-25T10:48:01.719430+00:00"
+    },
+    "97076": {
+      "url": "https://blog.naver.com/mw5114/224491951348",
+      "at": "2026-11-25T10:49:03.335666+00:00"
     }
   },
   "skipped": {
@@ -2650,12 +2643,7 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": {
-    "id": 97076,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45598248368",
-    "at": "2026-11-25T10:48:19.920912+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
