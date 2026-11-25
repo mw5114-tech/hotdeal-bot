@@ -187,7 +187,7 @@ def build_blocks(draft: dict, verified: dict, source: dict,
             kind="test_notice"
         ))
     if draft.get("image_source") in (
-        "fallcent_search_representative", "naver_web_first_image"
+        "fallcent_search_representative", "naver_web_first_image", "naver_api_matched_image"
     ):
         blocks.append(_block(
             "※ 사진은 검색 결과의 대표 이미지이며 실제 상품·옵션과 다를 수 있습니다.",
