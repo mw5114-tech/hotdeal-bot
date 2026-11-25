@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97087,
-  "pending": [
-    {
-      "id": 97087,
-      "source_message_id": 97087,
-      "source_post_url": "https://t.me/jirum/97087",
-      "original_purchase_url": "https://link.coupang.com/a/iX2htICGKO",
-      "title": "☆특가 10,350원",
-      "source_text": "☆특가 10,350원\n앤쿡 어린이 한우 사골 곰국 (냉동), 200g, 8개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2htICGKO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10350,
-      "posted_at_utc": "2026-11-25T12:22:22+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2259,6 +2248,10 @@
     "97086": {
       "url": "https://blog.naver.com/mw5114/224492059195",
       "at": "2026-11-25T12:19:24.315093+00:00"
+    },
+    "97087": {
+      "url": "https://blog.naver.com/mw5114/224492064418",
+      "at": "2026-11-25T12:24:09.228866+00:00"
     }
   },
   "skipped": {
@@ -2691,12 +2684,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97087,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45613204726",
-    "at": "2026-11-25T12:23:25.274209+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
