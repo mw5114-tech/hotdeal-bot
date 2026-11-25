@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97077,
-  "pending": [
-    {
-      "id": 97077,
-      "source_post_url": "https://t.me/jirum/97077",
-      "original_purchase_url": "https://link.coupang.com/a/iXVzKyh7Js",
-      "source_text": "☆특가 15,840원\n에낙 라면과자 30g × 48개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVzKyh7Js\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T10:48:32+00:00",
-      "title": "☆특가 15,840원",
-      "sale_price_krw": 15840
-    }
-  ],
-  "in_flight": {
-    "id": 97077,
-    "status": "CLAIMED",
-    "run_id": "45598558183",
-    "at": "2026-11-25T10:50:20.804724+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8711,6 +8696,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T10:48:16.316410+00:00",
       "run_id": "45598248368"
+    },
+    "97077": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%82%99-%EB%9D%BC%EB%A9%B4%EA%B3%BC%EC%9E%90-30g-48%EA%B0%9C-10%ED%95%A0%EC%9D%B8-PW7mlmZP?from=write",
+      "posted_at_utc": "2026-11-25T10:48:32+00:00",
+      "product_id": "8243618135",
+      "item_id": "548275837",
+      "vendor_item_id": null,
+      "at": "2026-11-25T10:50:39.495604+00:00",
+      "run_id": "45598558183"
     }
   },
   "skipped_non_coupang": 1125,
