@@ -1277,7 +1277,7 @@ def finish(store: GithubState, source_id: int, run_id: str, outcome: dict) -> No
 
 
 def await_published_checkpoint(store, source_id: int, run_id: str,
-                               expected_url: str, *, sleeper=None) -> None:
+                               expected_url: str, *, sleeper=None) -> dict:
     """Wait for the verified persisted receipt; do not click Publish again.
 
     A successful GitHub PUT may not immediately appear in Contents GET.
@@ -1297,7 +1297,7 @@ def await_published_checkpoint(store, source_id: int, run_id: str,
                     and flight is None
                     and all(row["id"] != source_id for row in state["pending"])):
                 print("JIRUM_PUBLISHED_CHECKPOINT_VISIBLE source_id=" + str(source_id))
-                return
+                return state
             raise RuntimeError("DAANGN_PUBLISHED_RECEIPT_CONFLICT_NO_REPOST")
         if flight is None or (flight.get("id") != source_id
                               or flight.get("run_id") != run_id):
@@ -1331,15 +1331,29 @@ def publish_pending(store: GithubState, *, drain: bool = False,
         raise RuntimeError("GITHUB_RUN_ID_MISSING")
     completed = 0
     discount_skipped = 0
-    verified_skip_state = None
+    verified_checkpoint_state = None
     skip_receipts = {}
+    published_receipts = {}
     while True:
-        if verified_skip_state is not None:
+        if verified_checkpoint_state is not None:
             # Use the confirmed snapshot once; do not rebuild a skipped deal
             # because another immediately subsequent GET was stale.
-            state, verified_skip_state = verified_skip_state, None
+            state, verified_checkpoint_state = verified_checkpoint_state, None
         else:
             state, _ = store.read()
+        # An already confirmed publication may briefly regress to its old
+        # claim in a later Contents GET. Never build or submit from that view.
+        for sid, url in published_receipts.items():
+            receipt = state["published"].get(str(sid))
+            if (receipt is None or receipt.get("run_id") != run_id
+                    or receipt.get("post_url") != url
+                    or any(row["id"] == sid for row in state["pending"])):
+                state = await_published_checkpoint(store, sid, run_id, url)
+        if any(state["published"].get(str(sid), {}).get("run_id") != run_id
+               or state["published"].get(str(sid), {}).get("post_url") != url
+               or any(row["id"] == sid for row in state["pending"])
+               for sid, url in published_receipts.items()):
+            raise RuntimeError("DAANGN_PUBLISHED_CHECKPOINT_REGRESSED_NO_REPOST")
         if skip_receipts:
             # A later read must not regress behind any skip in this drain.
             # Poll read-only on lag; never re-enrich, re-write, or submit it.
@@ -1349,6 +1363,11 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             if any(state.get("skipped_busan_discount", {}).get(str(sid)) != receipt
                    for sid, receipt in skip_receipts.items()):
                 raise RuntimeError("BUSAN_SKIP_CHECKPOINT_REGRESSED_NO_POST")
+        if any(state["published"].get(str(sid), {}).get("run_id") != run_id
+               or state["published"].get(str(sid), {}).get("post_url") != url
+               or any(row["id"] == sid for row in state["pending"])
+               for sid, url in published_receipts.items()):
+            raise RuntimeError("DAANGN_PUBLISHED_CHECKPOINT_REGRESSED_NO_REPOST")
         if state["in_flight"] is not None:
             raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
         if enforcing_freshness() and state["pending"]:
@@ -1415,8 +1434,8 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             raise
         if busan_cafe_mode() and not busan_discount_eligible(article):
             skipped_id = article["source_id"]
-            verified_skip_state = skip_busan_discount(store, skipped_id, article)
-            skip_receipts[skipped_id] = verified_skip_state["skipped_busan_discount"][str(skipped_id)]
+            verified_checkpoint_state = skip_busan_discount(store, skipped_id, article)
+            skip_receipts[skipped_id] = verified_checkpoint_state["skipped_busan_discount"][str(skipped_id)]
             discount_skipped += 1
             continue
         if enforcing_freshness() and freshness_status(state["pending"][0]) != "FRESH":
@@ -1466,9 +1485,10 @@ def publish_pending(store: GithubState, *, drain: bool = False,
         finish(store, source_id, run_id, outcome)
         if (outcome.get("status") == "POST_PUBLISHED_AND_FORMAT_VERIFIED"
                 and outcome.get("post_url")):
-            await_published_checkpoint(
+            verified_checkpoint_state = await_published_checkpoint(
                 store, source_id, run_id, outcome["post_url"]
             )
+            published_receipts[source_id] = outcome["post_url"]
         print("JIRUM_MANUAL_PUBLISH " + json.dumps({
             "source_id": source_id, "status": outcome.get("status"),
             "post_url": outcome.get("post_url"),
