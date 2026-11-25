@@ -3,16 +3,6 @@
   "last_scanned_id": 97091,
   "pending": [
     {
-      "id": 97090,
-      "source_post_url": "https://t.me/jirum/97090",
-      "original_purchase_url": "https://link.coupang.com/a/iX2Jt0OLiC",
-      "source_text": "☆특가 15,980원\nMYCHEF 밀푀유나베 & 칼국수 밀키트 2~3인분, 1.05kg, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX2Jt0OLiC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T12:28:42+00:00",
-      "title": "☆특가 15,980원",
-      "sale_price_krw": 15980,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97091,
       "source_post_url": "https://t.me/jirum/97091",
       "original_purchase_url": "https://link.coupang.com/a/iX23oYNUZg",
@@ -22,12 +12,7 @@
       "sale_price_krw": 7640
     }
   ],
-  "in_flight": {
-    "id": 97090,
-    "status": "CLAIMED",
-    "run_id": "45614970211",
-    "at": "2026-11-25T12:34:33.084013+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8841,6 +8826,16 @@
       "vendor_item_id": "87840807653",
       "at": "2026-11-25T12:27:07.032202+00:00",
       "run_id": "45613527784"
+    },
+    "97090": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-MYCHEF-%EB%B0%80%ED%91%80%EC%9C%A0%EB%82%98%EB%B2%A0-%EC%B9%BC%EA%B5%AD%EC%88%98-%EB%B0%80%ED%82%A4%ED%8A%B8-23%EC%9D%B8%EB%B6%84-105-15%ED%95%A0%EC%9D%B8-dDWz0ZzP?from=write",
+      "posted_at_utc": "2026-11-25T12:28:42+00:00",
+      "product_id": "293421715",
+      "item_id": "926408953",
+      "vendor_item_id": null,
+      "at": "2026-11-25T12:34:52.467026+00:00",
+      "run_id": "45614970211"
     }
   },
   "skipped_non_coupang": 1126,
