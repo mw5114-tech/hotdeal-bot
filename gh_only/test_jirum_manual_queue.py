@@ -172,6 +172,42 @@ class ManualQueueTests(unittest.TestCase):
         self.assertEqual(store.n, 3)
         self.assertEqual(sleeps, [1, 1])
 
+    def test_drain_does_not_read_old_claim_again_after_confirmed_last_post(self):
+        state, _, _ = ingest(baseline(), [deal(94744)])
+        class RegressingStore(FakeStore):
+            def __init__(self, value):
+                super().__init__(value)
+                self.old_claim = None
+                self.after_finish = 0
+            def write(self, state, sha, message):
+                before = copy.deepcopy(self.value)
+                super().write(state, sha, message)
+                if "finalize Jirum" in message:
+                    self.old_claim = before
+            def read(self):
+                if self.old_claim is not None:
+                    self.after_finish += 1
+                    if self.after_finish == 2:
+                        return copy.deepcopy(self.old_claim), "sha-test"
+                return super().read()
+        store = RegressingStore(state)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "run-regression",
+                                     "DAANGN_BUSAN_CAFE_MODE": "false",
+                                     "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.build_next",
+                   return_value={"source_id": 94744}) as build, \
+             patch("gh_only.jirum_manual_publisher.publish_one",
+                   return_value={"status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                                 "post_url": "https://cafe.daangn.com/posts/94744",
+                                 "submit_attempted": True}) as publish:
+            self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(store.after_finish, 1)
+        self.assertEqual(store.value["pending"], [])
+        self.assertIsNone(store.value["in_flight"])
+        self.assertEqual(len(store.writes), 2)
+        publish.assert_called_once()
+        build.assert_called_once()
+
     def test_checkpoint_receipt_mismatch_stops_without_reposting(self):
         st, _, _ = ingest(baseline(), [deal(94744)])
         st["in_flight"] = None
