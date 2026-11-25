@@ -272,7 +272,7 @@ def read_one_draft(folder: Path) -> dict:
     # One Enter around the link block, while retaining the wider disclosure gap.
     if row.get("image_source") == "fallcent_search_representative":
         image_notice = "\n※ 이미지는 폴센트 상품 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
-    elif row.get("image_source") == "naver_web_first_image":
+    elif row.get("image_source") in ("naver_web_first_image", "naver_api_matched_image"):
         image_notice = "\n※ 이미지는 네이버 이미지 검색 대표 사진으로, 실제 상품 및 옵션과 다를 수 있습니다."
     else:
         image_notice = ""
