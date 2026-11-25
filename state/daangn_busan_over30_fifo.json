@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97068,
-  "pending": [],
+  "last_scanned_id": 97069,
+  "pending": [
+    {
+      "id": 97069,
+      "source_post_url": "https://t.me/jirum/97069",
+      "original_purchase_url": "https://link.coupang.com/a/iXRzd4tcJ2",
+      "source_text": "☆특가 5,980원 (14.6% 할인)\n풀무원 장칼국수 2인분, 439g, 1개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 1,020원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXRzd4tcJ2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-25T09:52:27+00:00",
+      "title": "풀무원 장칼국수 2인분, 439g, 1개",
+      "sale_price_krw": 5980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
