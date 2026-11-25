@@ -1,8 +1,10 @@
 """Offline tests: no credential, browser, Naver or Coupang network use."""
 import unittest
+from pathlib import Path
+from unittest.mock import patch
 from datetime import datetime, timezone
 from growth_lab.trend_comparison import (
-    shop_payload, score_group, choose_pair, size_tokens, pair_key,
+    shop_payload, score_group, choose_pair, size_tokens, pair_key, compose,
 )
 
 
@@ -51,6 +53,30 @@ class ComparisonTests(unittest.TestCase):
         first = {"id": "11111"}
         second = {"id": "22222"}
         self.assertEqual(pair_key("SSD", first, second), pair_key("SSD", second, first))
+
+    def test_review_style_recommends_by_price_without_claiming_experience(self):
+        now = datetime(2026, 11, 23, 4, 0, tzinfo=timezone.utc)
+        a = {"id": "11111", "name": "가습기 첫 제품 2L", "price": 30000,
+             "is_rocket": True, "free_shipping": False}
+        b = {"id": "22222", "name": "가습기 두 번째 2L", "price": 20000,
+             "is_rocket": False, "free_shipping": True}
+        links = ("https://link.coupang.com/a/first", "https://link.coupang.com/a/second")
+        with patch("growth_lab.trend_comparison.issued_link_url", return_value=True):
+            article = compose({"keyword": "가습기"}, a, b, links, Path("photo.jpg"), now)
+            tied = compose({"keyword": "가습기"}, a, dict(b, price=30000),
+                           links, Path("photo.jpg"), now)
+        body = "\n".join(article["paragraphs"])
+        self.assertIn("직접 구매하거나 사용한 체험기는 아닙니다", body)
+        self.assertIn("저는 " + b["name"], body)
+        self.assertIn("10,000원 저렴하게", body)
+        self.assertIn("물통 용량", body)
+        self.assertNotIn("검색 API", body)
+        self.assertTrue(article["title"].startswith("[쿠팡📊비교] "))
+        self.assertTrue(all(10 <= len(p) <= 900 for p in article["paragraphs"]))
+        self.assertEqual([item["url"] for item in article["links"]], list(links))
+        self.assertIn(a["name"], article["links"][0]["label"])
+        self.assertIn(b["name"], article["links"][1]["label"])
+        self.assertIn("표시가격은 같습니다", "\n".join(tied["paragraphs"]))
 
 
 if __name__ == "__main__":
