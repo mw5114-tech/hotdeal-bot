@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97133,
-  "pending": [],
+  "last_scanned_id": 97135,
+  "pending": [
+    {
+      "id": 97134,
+      "source_message_id": 97134,
+      "source_post_url": "https://t.me/jirum/97134",
+      "original_purchase_url": "https://link.coupang.com/a/iYMeEx512W",
+      "title": "☆특가 3,870원",
+      "source_text": "☆특가 3,870원\n크라운 츄러스, 84g, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYMeEx512W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3870,
+      "posted_at_utc": "2026-11-25T23:05:26+00:00"
+    },
+    {
+      "id": 97135,
+      "source_message_id": 97135,
+      "source_post_url": "https://t.me/jirum/97135",
+      "original_purchase_url": "https://link.coupang.com/a/iYMn95aeOq",
+      "title": "헤드앤숄더 두피 토탈 솔루션 딥클린 샴푸, 1.2L, 1개",
+      "source_text": "☆특가 10,900원 (16.2% 할인)\n헤드앤숄더 두피 토탈 솔루션 딥클린 샴푸, 1.2L, 1개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 2,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYMn95aeOq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10900,
+      "posted_at_utc": "2026-11-25T23:07:35+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
