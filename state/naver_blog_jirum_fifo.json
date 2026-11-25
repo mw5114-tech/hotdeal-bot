@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97050,
-  "pending": [
-    {
-      "id": 97049,
-      "source_message_id": 97049,
-      "source_post_url": "https://t.me/jirum/97049",
-      "original_purchase_url": "https://link.coupang.com/a/iXqOI9KR1o",
-      "title": "팔도도시락 컵라면 86g 15개",
-      "source_text": "🔥🔥🔥무지성 11,170원 (48.0% 할인)🔥🔥🔥\n팔도도시락 컵라면 86g 15개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 21,481원\n- 할인: 10,311원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXqOI9KR1o\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11170,
-      "posted_at_utc": "2026-11-25T03:38:07+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2571,6 +2559,11 @@
     "97038": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-25T01:55:44.895398+00:00"
+    },
+    "97049": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-25T04:06:33.761397+00:00"
     }
   },
   "in_flight": null,
