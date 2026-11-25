@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97125,
-  "pending": [
-    {
-      "id": 97125,
-      "source_message_id": 97125,
-      "source_post_url": "https://t.me/jirum/97125",
-      "original_purchase_url": "https://link.coupang.com/a/iYF3IdvtHU",
-      "title": "봄키즈 아동용 미니 낮은 스탠드 행거",
-      "source_text": "🔥🔥🔥무지성 22,500원 (50.0% 할인)🔥🔥🔥\n봄키즈 아동용 미니 낮은 스탠드 행거\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 45,000원\n- 할인: 22,500원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYF3IdvtHU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 22500,
-      "posted_at_utc": "2026-11-25T21:39:01+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2323,6 +2312,10 @@
     "97124": {
       "url": "https://blog.naver.com/mw5114/224492473679",
       "at": "2026-11-25T21:45:19.662904+00:00"
+    },
+    "97125": {
+      "url": "https://blog.naver.com/mw5114/224492474254",
+      "at": "2026-11-25T21:46:17.780333+00:00"
     }
   },
   "skipped": {
@@ -2760,12 +2753,7 @@
       "at": "2026-11-25T21:43:04.867549+00:00"
     }
   },
-  "in_flight": {
-    "id": 97125,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45706382830",
-    "at": "2026-11-25T21:45:34.583527+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
