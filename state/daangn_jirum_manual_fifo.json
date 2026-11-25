@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97130,
-  "pending": [
-    {
-      "id": 97130,
-      "source_post_url": "https://t.me/jirum/97130",
-      "original_purchase_url": "https://link.coupang.com/a/iYIvUfZjcO",
-      "source_text": "☆특가 16,650원\n아카페라 스위트 아메리카노 240ml 20개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYIvUfZjcO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T22:13:22+00:00",
-      "title": "☆특가 16,650원",
-      "sale_price_krw": 16650
-    }
-  ],
-  "in_flight": {
-    "id": 97130,
-    "status": "CLAIMED",
-    "run_id": "45711426496",
-    "at": "2026-11-25T22:14:31.097923+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9001,6 +8986,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T21:50:46.280952+00:00",
       "run_id": "45707885968"
+    },
+    "97130": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%84%EC%B9%B4%ED%8E%98%EB%9D%BC-%EC%8A%A4%EC%9C%84%ED%8A%B8-%EC%95%84%EB%A9%94%EB%A6%AC%EC%B9%B4%EB%85%B8-240ml-20%EA%B0%9C-5%ED%95%A0%EC%9D%B8-PMlrrX2A?from=write",
+      "posted_at_utc": "2026-11-25T22:13:22+00:00",
+      "product_id": "1301524806",
+      "item_id": "2315369898",
+      "vendor_item_id": null,
+      "at": "2026-11-25T22:14:49.714069+00:00",
+      "run_id": "45711426496"
     }
   },
   "skipped_non_coupang": 1148,
