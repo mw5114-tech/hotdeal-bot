@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97122,
-  "pending": [
-    {
-      "id": 97122,
-      "source_post_url": "https://t.me/jirum/97122",
-      "original_purchase_url": "https://link.coupang.com/a/iYjiQ2nIvQ",
-      "source_text": "☆특가 33,200원 (27.1% 할인)\n칠성사이다 제로 라임, 355ml, 72개\n📌 가격 현황\n- 정상가: 45,520원\n- 할인: 12,320원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYjiQ2nIvQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T16:20:34+00:00",
-      "title": "칠성사이다 제로 라임, 355ml, 72개",
-      "sale_price_krw": 33200
-    }
-  ],
-  "in_flight": {
-    "id": 97122,
-    "status": "CLAIMED",
-    "run_id": "45652825236",
-    "at": "2026-11-25T16:21:59.168356+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8941,6 +8926,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T15:30:09.838368+00:00",
       "run_id": "45645335569"
+    },
+    "97122": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B9%A0%EC%84%B1%EC%82%AC%EC%9D%B4%EB%8B%A4-%EC%A0%9C%EB%A1%9C-%EB%9D%BC%EC%9E%84-355ml-72%EA%B0%9C-35%ED%95%A0%EC%9D%B8-A4neG3Od?from=write",
+      "posted_at_utc": "2026-11-25T16:20:34+00:00",
+      "product_id": "9199268135",
+      "item_id": "27832488807",
+      "vendor_item_id": "94792041636",
+      "at": "2026-11-25T16:22:20.345564+00:00",
+      "run_id": "45652825236"
     }
   },
   "skipped_non_coupang": 1147,
