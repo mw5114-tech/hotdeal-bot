@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97065,
-  "pending": [
-    {
-      "id": 97065,
-      "source_message_id": 97065,
-      "source_post_url": "https://t.me/jirum/97065",
-      "original_purchase_url": "https://link.coupang.com/a/iXLGPocFjM",
-      "title": "해피콜 몬드 IH 궁중팬",
-      "source_text": "🔥🔥🔥무지성 28,680원 (56.0% 할인)🔥🔥🔥\n해피콜 몬드 IH 궁중팬\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 65,182원\n- 할인: 36,502원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXLGPocFjM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 28680,
-      "posted_at_utc": "2026-11-25T08:30:12+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2192,6 +2180,10 @@
     "97064": {
       "url": "https://blog.naver.com/mw5114/224491782596",
       "at": "2026-11-25T08:31:30.952644+00:00"
+    },
+    "97065": {
+      "url": "https://blog.naver.com/mw5114/224491814501",
+      "at": "2026-11-25T08:53:46.859186+00:00"
     }
   },
   "skipped": {
@@ -2619,12 +2611,7 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": {
-    "id": 97065,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45580146980",
-    "at": "2026-11-25T08:53:03.856507+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
