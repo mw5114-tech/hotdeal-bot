@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97082,
-  "pending": [
-    {
-      "id": 97082,
-      "source_post_url": "https://t.me/jirum/97082",
-      "original_purchase_url": "https://link.coupang.com/a/iX0Bvv4U8q",
-      "source_text": "☆특가 4,700원 (29.9% 할인)\n기린 한입쏙 미니만쥬\n📌 가격 현황\n- 정상가: 6,700원\n- 할인: 2,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iX0Bvv4U8q\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T11:58:54+00:00",
-      "title": "기린 한입쏙 미니만쥬",
-      "sale_price_krw": 4700
-    }
-  ],
-  "in_flight": {
-    "id": 97082,
-    "status": "CLAIMED",
-    "run_id": "45609472908",
-    "at": "2026-11-25T11:59:55.678061+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8751,6 +8736,16 @@
       "vendor_item_id": null,
       "at": "2026-11-25T11:13:43.822030+00:00",
       "run_id": "45602333111"
+    },
+    "97082": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B8%B0%EB%A6%B0-%ED%95%9C%EC%9E%85%EC%8F%99-%EB%AF%B8%EB%8B%88%EB%A7%8C%EC%A5%AC-350g-1%EA%B0%9C%EC%9E%85-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-dDWzLkKP?from=write",
+      "posted_at_utc": "2026-11-25T11:58:54+00:00",
+      "product_id": "7358175116",
+      "item_id": "18951250176",
+      "vendor_item_id": null,
+      "at": "2026-11-25T12:00:14.045754+00:00",
+      "run_id": "45609472908"
     }
   },
   "skipped_non_coupang": 1126,
