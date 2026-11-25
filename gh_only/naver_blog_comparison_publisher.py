@@ -76,7 +76,7 @@ def submit_comparison(article: dict, session_json: str) -> str:
     paragraphs = article.get("paragraphs")
     links = article.get("links")
     photo = article.get("photo")
-    if (not isinstance(title, str) or not title.startswith("[쿠팡📊비교] ")
+    if (not isinstance(title, str) or not title.endswith(", 추천 제품 2가지")
             or len(title.encode("utf-16-le")) // 2 > NAVER_TITLE_MAX_UTF16_UNITS):
         raise RuntimeError("COMPARISON_TITLE_INVALID")
     if (not isinstance(paragraphs, list) or not 7 <= len(paragraphs) <= 15
