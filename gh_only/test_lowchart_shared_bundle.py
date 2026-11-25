@@ -150,6 +150,102 @@ class LowchartVerifiedBundleTests(unittest.TestCase):
                 self.assertTrue(row["image_exact_item_page_verified"])
                 self.assertTrue(row["history"]["shared_from_verified_sibling"])
 
+    def test_403_retry_interrupts_without_another_provider_request(self):
+        from gh_only.lowchart_product_photo import lookup_exact_item_photo
+        from gh_only.lowchart_price_reference import fetch_one
+        for photo_mode in (True, False):
+            with self.subTest(photo_mode=photo_mode):
+                fn = lookup_exact_item_photo if photo_mode else fetch_one
+                args = (IDENTITY, TITLE) if photo_mode else (PID, IID, (), 12050)
+                path = ("gh_only.lowchart_product_photo._lookup_exact_item_photo_once" if photo_mode
+                        else "gh_only.lowchart_price_reference._fetch_one_once")
+                delays = []
+                result = {"status": "shared", "http_status": 200}
+                with patch.dict(os.environ, {"JIRUM_LOWCHART_403_RETRY_ENABLED": "true"}), \
+                     patch(path, return_value={"http_status": 403}) as once:
+                    actual = fn(*args, sleeper=delays.append, ready=lambda: result if delays else None)
+                self.assertEqual(actual, result)
+                self.assertEqual(once.call_count, 1)
+                self.assertEqual(delays, [2])
+
+    def test_unlisted_200_requires_visible_missing_product_marker(self):
+        from gh_only.lowchart_product_photo import lookup_exact_item_photo
+        from gh_only.test_lowchart_product_photo import MockResponse
+        for raw, expected in (
+            ("<html><body>등록되지 않은 상품입니다.</body></html>", True),
+            ("<html><script>var s='등록되지 않은 상품입니다';</script></html>", False),
+            ("<html><body>잠시 후 다시 이용해주세요.</body></html>", False),
+            ("<html><body>Access Denied</body></html>", False),
+        ):
+            out = lookup_exact_item_photo(IDENTITY, TITLE,
+                opener=lambda req, timeout: MockResponse(req.full_url, raw.encode()))
+            self.assertEqual(out["http_status"], 200)
+            self.assertEqual(out["status"] == "LOWCHART_CONFIRMED_UNLISTED_200", expected)
+
+    def test_naver_api_fallback_selects_matching_options_and_validates_draft(self):
+        from gh_only.naver_api_image_photo import fetch_matched_photo, matching_title
+        from gh_only.test_lowchart_product_photo import MockResponse
+        from gh_only.jirum_manual_queue import validate_draft, permanent_lowchart_failure
+        import json
+        self.assertTrue(matching_title("닌자 Foodi 파워 프로세서 블렌더 CB350KR",
+                         "닌자 CB350KR 스마트 파워 업 초고속 프로세서 블렌더 믹서기 | 텐바이텐"))
+        self.assertFalse(matching_title("에낙 라면과자 30g 48개", "에낙 라면과자 30g 24개 - 쿠팡"))
+        self.assertFalse(matching_title("닌자 블렌더 CB350KR", "닌자 블렌더 CB350KR 교체 칼날"))
+        url = "https://shop-phinf.pstatic.net/test/valid.jpg"
+        requests = []
+        def op(req, timeout):
+            requests.append(req)
+            if "naverapihub" in req.full_url:
+                data = {"items": [
+                    {"title": TITLE.replace("20개", "10개"), "link": url},
+                    {"title": TITLE, "link": url},
+                ]}
+                return MockResponse(req.full_url, json.dumps(data).encode(), "application/json")
+            self.assertEqual(req.full_url, url)
+            self.assertFalse(any("key" in k.lower() for k in req.headers))
+            return MockResponse(url, photo_bytes(), "image/jpeg")
+        with TemporaryDirectory() as td:
+            folder = Path(td)
+            with patch.dict(os.environ, {
+                "JIRUM_IMAGE_SOURCE": "lowchart",
+                "JIRUM_LOWCHART_BUNDLE_ENABLED": "true",
+                "JIRUM_LOWCHART_CACHE_FIRST_ENABLED": "true",
+                "JIRUM_NAVER_API_UNLISTED_FALLBACK": "true",
+                "NAVER_API_HUB_KEY_ID": "offline-test",
+                "NAVER_API_HUB_KEY": "offline-test",
+                "COUPANG_PARTNER_LPTAG": "AF9668915",
+                "COUPANG_PARTNER_SUBID": "",
+            }), patch("gh_only.lowchart_shared_bundle.recover_bundle", return_value=None), \
+                patch("gh_only.default_deal_automation.lookup_exact_item_photo",
+                    return_value={"http_status": 200, "status": "LOWCHART_CONFIRMED_UNLISTED_200"}), \
+                patch("gh_only.lowchart_price_reference._fetch_one_once") as price, \
+                patch("gh_only.naver_api_image_photo.fetch_matched_photo",
+                      side_effect=lambda *a: fetch_matched_photo(*a, opener=op)) as api:
+                deal = {**DEAL, "source_text": TITLE + "\n12,050원", "title": TITLE}
+                row = enrich_deal(deal, folder, resolver=lambda _: IDENTITY,
+                                  owner_tag="AF9668915",
+                                  fallcent_high_lookup=lambda *a: {"status": "NO_PRICE"},
+                                  fallcent_similar_current_lookup=lambda *a: {"status": "NO_PRICE"})
+                price.assert_not_called()
+                api.assert_called_once()
+                self.assertEqual(len(requests), 2)
+                self.assertEqual(row["image_source"], "naver_api_matched_image")
+                self.assertFalse(row["image_exact_item_page_verified"])
+                self.assertIsNone(row["caption"]["observed_average_krw"])
+                (folder / "drafts.json").write_text(json.dumps({
+                    "schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [row]
+                }), encoding="utf-8")
+                self.assertIsNone(permanent_lowchart_failure(folder))
+                verified = validate_draft(folder, SOURCE_ID)
+                self.assertIsNone(verified["chart_identity"])
+                self.assertIn("네이버 이미지 검색 대표 사진", verified["body"])
+                row["image_http_status"] = 403
+                (folder / "drafts.json").write_text(json.dumps({
+                    "schema": "github-jirum-default-price-photo-affsdp-draft-v2", "drafts": [row]
+                }), encoding="utf-8")
+                with self.assertRaises(RuntimeError):
+                    validate_draft(folder, SOURCE_ID)
+
     def test_local_lowchart_200_publishes_both_original_assets_before_post(self):
         og = {
             "status": "LOWCHART_EXACT_ITEM_IMAGE",
