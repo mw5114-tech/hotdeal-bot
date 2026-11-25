@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97072,
-  "pending": [
-    {
-      "id": 97072,
-      "source_message_id": 97072,
-      "source_post_url": "https://t.me/jirum/97072",
-      "original_purchase_url": "https://link.coupang.com/a/iXSj6dHg4W",
-      "title": "☆특가 4,460원",
-      "source_text": "☆특가 4,460원\n삼립 밀크후레쉬팡\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXSj6dHg4W\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4460,
-      "posted_at_utc": "2026-11-25T10:03:02+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2215,6 +2204,10 @@
     "97071": {
       "url": "https://blog.naver.com/mw5114/224491892869",
       "at": "2026-11-25T09:59:55.194332+00:00"
+    },
+    "97072": {
+      "url": "https://blog.naver.com/mw5114/224491899839",
+      "at": "2026-11-25T10:05:57.220272+00:00"
     }
   },
   "skipped": {
@@ -2642,12 +2635,7 @@
       "at": "2026-11-25T07:04:49.844993+00:00"
     }
   },
-  "in_flight": {
-    "id": 97072,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45591347823",
-    "at": "2026-11-25T10:05:14.668160+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
