@@ -32,7 +32,7 @@ NAVER_BLOG_SUBID = None  # No optional subId in official API requests.
 NAVER_TITLE_MAX_UTF16_UNITS = 88
 STALE_PUBLISH_CLAIM_SECONDS = 30 * 60
 # One Oracle event can drain a bounded FIFO burst without another runner.
-MAX_BATCH_POSTS = 4
+MAX_BATCH_POSTS = 6
 BATCH_POST_GAP_SECONDS = 10
 BATCH_MAX_ELAPSED_SECONDS = 10 * 60
 BATCH_MIN_NEXT_POST_BUDGET_SECONDS = 120
@@ -313,7 +313,9 @@ def scan_with_source_wait(store: Store, expected_source_id: int = 0, *,
     sleeper = sleeper or time.sleep
     for attempt in range(4):
         result = scanner(store)
-        if (not expected_source_id or result.get("review")
+        # Never delay an already-ready oldest deal for a newer Oracle event.
+        # The live batch rescans once after draining the known backlog.
+        if (not expected_source_id or result.get("review") or result.get("ready")
                 or result.get("last_scanned_id", 0) >= expected_source_id):
             return result
         if attempt < 3:
@@ -779,7 +781,8 @@ def expire_unclaimed_before_next(store: Store) -> int:
     raise RuntimeError("NAVER_BATCH_EXPIRE_409_EXHAUSTED")
 
 
-def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
+def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS,
+                  rescan=None) -> int:
     """Publish the oldest fresh Telegram deals sequentially and with a hard cap.
 
     Reuse the existing claim/submit/receipt/checkpoint path for each item.
@@ -789,6 +792,7 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
         raise ValueError("NAVER_BATCH_LIMIT_INVALID")
     started = time.monotonic()
     published_ids = []
+    rescanned = False
     print("NAVER_BATCH_BEGIN " + json.dumps({
         "max_posts": max_posts,
         "gap_seconds": BATCH_POST_GAP_SECONDS,
@@ -799,19 +803,33 @@ def publish_batch(store: Store, *, max_posts: int = MAX_BATCH_POSTS) -> int:
         if elapsed > BATCH_MAX_ELAPSED_SECONDS - BATCH_MIN_NEXT_POST_BUDGET_SECONDS:
             print("NAVER_BATCH_TIME_BUDGET_STOP")
             break
-        if published_ids:
-            # Avoid burst-posting affiliate articles without a pause.
-            time.sleep(BATCH_POST_GAP_SECONDS)
         expire_unclaimed_before_next(store)
         state, _ = store.read()
         if state["in_flight"] is not None:
             raise RuntimeError("NAVER_PREVIOUS_SUBMIT_NEEDS_MANUAL_REVIEW")
+        if not state["pending"] and rescan is not None and not rescanned:
+            # Catch arrivals during the previous publish without waiting for
+            # another runner. This is bounded to one scan per live batch.
+            rescanned = True
+            result = rescan(store)
+            if result.get("review"):
+                break
+            expire_unclaimed_before_next(store)
+            state, _ = store.read()
+            if state["in_flight"] is not None:
+                raise RuntimeError("NAVER_PREVIOUS_SUBMIT_NEEDS_MANUAL_REVIEW")
         if not state["pending"]:
             break
         # Never reuse an older cached queue snapshot for the next article.
         # Every previous receipt in this run must still be visible.
         if any(str(i) not in state["published"] for i in published_ids):
             print("NAVER_BATCH_PREVIOUS_CHECKPOINT_NOT_VISIBLE_SAFE_STOP")
+            break
+        if published_ids:
+            # Keep the original anti-burst interval only between actual posts.
+            time.sleep(BATCH_POST_GAP_SECONDS)
+        if time.monotonic() - started > BATCH_MAX_ELAPSED_SECONDS - BATCH_MIN_NEXT_POST_BUDGET_SECONDS:
+            print("NAVER_BATCH_TIME_BUDGET_STOP")
             break
         oldest_id = state["pending"][0]["id"]
         print("NAVER_BATCH_NEXT " + json.dumps({
@@ -944,7 +962,8 @@ def main():
         print("NAVER_BLOG_PUBLISH_PAUSED")
         return 0
     if args.action == "batch":
-        return publish_batch(store)
+        expected = int(os.getenv("JIRUM_EXPECTED_SOURCE_ID") or "0")
+        return publish_batch(store, rescan=lambda current: scan_with_source_wait(current, expected))
     return publish_one(store)
 
 

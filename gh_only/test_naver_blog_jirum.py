@@ -387,9 +387,43 @@ class NaverQueueTests(unittest.TestCase):
             with self.subTest(expected=expected), self.assertRaises(ValueError):
                 scan_with_source_wait("fake-store", expected, scanner=lambda s: None)
 
-    def test_batch_oldest_first_max_four_with_gap(self):
+    def test_ready_backlog_does_not_wait_for_newer_oracle_event(self):
+        ready = {"ready": True, "last_scanned_id": 96110, "pending": 1}
+        with patch("gh_only.naver_blog_jirum.time.sleep") as sleep:
+            result = scan_with_source_wait("fake-store", 96111, scanner=lambda _: ready)
+        self.assertEqual(result, ready)
+        sleep.assert_not_called()
+
+    def test_batch_rescans_once_to_catch_new_arrival_after_verified_post(self):
         s = state()
-        ingest(s, [deal(mid, minutes=5) for mid in range(95496, 95501)])
+        ingest(s, [deal(95496, minutes=5)])
+        store = ConflictStore(initial=s, conflicts=0)
+        order = []
+        def confirmed_publish(current, *, with_receipt=False):
+            row, _ = current.read()
+            mid = row["pending"][0]["id"]
+            url = f"https://blog.naver.com/mw5114/{224472000000 + mid}"
+            claim_before_publish(current, mid)
+            checkpoint_published(current, mid, url)
+            order.append(mid)
+            return {"source_id": mid, "url": url}
+        def new_arrival(current):
+            row, sha = current.read()
+            self.assertIn("95496", row["published"])
+            ingest(row, [deal(95497, minutes=5)])
+            current.write(row, sha, "test new arrival")
+            return {"ready": True}
+        with patch("gh_only.naver_blog_jirum.publish_one", side_effect=confirmed_publish), patch("gh_only.naver_blog_jirum.time.sleep") as sleep, patch("gh_only.naver_blog_jirum.scan", side_effect=new_arrival) as rescan:
+            self.assertEqual(publish_batch(store, rescan=rescan), 0)
+        self.assertEqual(order, [95496, 95497])
+        rescan.assert_called_once_with(store)
+        sleep.assert_called_once()
+        self.assertEqual(store.current["pending"], [])
+        self.assertIsNone(store.current["in_flight"])
+
+    def test_batch_oldest_first_max_six_with_gap(self):
+        s = state()
+        ingest(s, [deal(mid, minutes=5) for mid in range(95496, 95503)])
         store = ConflictStore(initial=s, conflicts=0)
         order = []
         def confirmed_publish(current, *, with_receipt=False):
@@ -404,10 +438,10 @@ class NaverQueueTests(unittest.TestCase):
                    side_effect=confirmed_publish) as publish, patch(
                 "gh_only.naver_blog_jirum.time.sleep") as sleep:
             self.assertEqual(publish_batch(store), 0)
-        self.assertEqual(order, [95496, 95497, 95498, 95499])
-        self.assertEqual([r["id"] for r in store.current["pending"]], [95500])
-        self.assertEqual(publish.call_count, 4)
-        self.assertEqual(sleep.call_count, 3)
+        self.assertEqual(order, [95496, 95497, 95498, 95499, 95500, 95501])
+        self.assertEqual([r["id"] for r in store.current["pending"]], [95502])
+        self.assertEqual(publish.call_count, 6)
+        self.assertEqual(sleep.call_count, 5)
         self.assertIsNone(store.current["in_flight"])
 
     def test_batch_skips_expired_oldest_and_posts_next(self):
@@ -546,7 +580,7 @@ class NaverQueueTests(unittest.TestCase):
 
     def test_batch_limit_is_bounded(self):
         store = ConflictStore(initial=state(), conflicts=0)
-        for invalid in (0, 5, -1, True, "4"):
+        for invalid in (0, 7, -1, True, "4"):
             with self.subTest(value=invalid):
                 with self.assertRaisesRegex(ValueError, "NAVER_BATCH_LIMIT_INVALID"):
                     publish_batch(store, max_posts=invalid)

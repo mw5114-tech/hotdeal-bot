@@ -93,7 +93,7 @@ jobs:
       COUPANG_PARTNERS_ACCESS_KEY: ${{ secrets.COUPANG_PARTNERS_ACCESS_KEY }}
       COUPANG_PARTNERS_SECRET_KEY: ${{ secrets.COUPANG_PARTNERS_SECRET_KEY }}
       # Owner approved live Naver Blog publishing on 2026-11-09.
-      # Up to four fresh FIFO items per run, oldest first. New Daangn
+      # Up to six fresh FIFO items per run, oldest first. New Daangn
       # cafe runs in its independent workflow; legacy cafe stays archived.
       # Every Naver link is now issued by official signed Coupang Partners API;
       # no fallback to an unissued synthetic AFFSDP link if API fails.
@@ -173,8 +173,10 @@ jobs:
             python -c 'from playwright.sync_api import sync_playwright; p=sync_playwright().start(); b=p.chromium.launch(headless=True); b.close(); p.stop()'
             echo "NAVER_BROWSER_FALLBACK_READY"
           fi
-      - name: Publish oldest Naver FIFO items sequentially (max 4 per run)
+      - name: Publish oldest Naver FIFO items sequentially (max 6 per run)
         if: steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'
+        env:
+          JIRUM_EXPECTED_SOURCE_ID: ${{ inputs.source_post_id }}
         run: python -m gh_only.naver_blog_jirum batch
       - name: Keep public-only Naver draft receipt if available
         if: always() && steps.naver_scan.outputs.ready == 'true' && env.NAVER_BLOG_PUBLISH_ENABLED == 'true'

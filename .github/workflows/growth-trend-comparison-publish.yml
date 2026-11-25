@@ -23,8 +23,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     concurrency:
-      # Same browser mutex as existing blog publishing, no simultaneous submit.
-      group: naver-blog-jirum-state-and-publisher
+      # Only live publishing needs the shared browser mutex. Read-only previews
+      # must not replace a pending urgent Telegram FIFO run.
+      group: ${{ github.event_name == 'schedule' && 'naver-blog-jirum-state-and-publisher' || 'growth-trend-comparison-preview' }}
       cancel-in-progress: false
     steps:
       - uses: actions/checkout@v4
