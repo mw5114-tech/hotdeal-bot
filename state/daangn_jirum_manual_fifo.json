@@ -3,15 +3,6 @@
   "last_scanned_id": 97076,
   "pending": [
     {
-      "id": 97075,
-      "source_post_url": "https://t.me/jirum/97075",
-      "original_purchase_url": "https://link.coupang.com/a/iXVoAVvi1c",
-      "source_text": "👍대박 12,680원 (39.6% 할인)\n폴앤박 스마트팜 딸기\n📌 가격 현황\n- 정상가: 21,000원\n- 할인: 8,320원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXVoAVvi1c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T10:46:01+00:00",
-      "title": "폴앤박 스마트팜 딸기",
-      "sale_price_krw": 12680
-    },
-    {
       "id": 97076,
       "source_post_url": "https://t.me/jirum/97076",
       "original_purchase_url": "https://link.coupang.com/a/iXVo2qOEFg",
@@ -21,12 +12,7 @@
       "sale_price_krw": 9800
     }
   ],
-  "in_flight": {
-    "id": 97075,
-    "status": "CLAIMED",
-    "run_id": "45598248368",
-    "at": "2026-11-25T10:47:26.182826+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8700,6 +8686,16 @@
       "vendor_item_id": "4442319504",
       "at": "2026-11-25T10:05:29.458603+00:00",
       "run_id": "45591347823"
+    },
+    "97075": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%B4%EC%95%A4%EB%B0%95-%EC%8A%A4%EB%A7%88%ED%8A%B8%ED%8C%9C-%EB%94%B8%EA%B8%B0-1%EA%B0%9C-350g-40%ED%95%A0%EC%9D%B8-PmvW1Ded?from=write",
+      "posted_at_utc": "2026-11-25T10:46:01+00:00",
+      "product_id": "8921485411",
+      "item_id": "26070884713",
+      "vendor_item_id": null,
+      "at": "2026-11-25T10:47:46.441963+00:00",
+      "run_id": "45598248368"
     }
   },
   "skipped_non_coupang": 1125,
