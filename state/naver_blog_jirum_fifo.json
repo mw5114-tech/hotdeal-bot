@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97125,
-  "pending": [],
+  "last_scanned_id": 97128,
+  "pending": [
+    {
+      "id": 97126,
+      "source_message_id": 97126,
+      "source_post_url": "https://t.me/jirum/97126",
+      "original_purchase_url": "https://link.coupang.com/a/iYGhlgCMoK",
+      "title": "베키아에누보 파베 초콜릿 생크림 케이크 (냉동)",
+      "source_text": "❤️초대박 14,390원 (42.4% 할인)\n베키아에누보 파베 초콜릿 생크림 케이크 (냉동)\n📌 가격 현황\n- 정상가: 25,000원\n- 할인: 10,610원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGhlgCMoK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 14390,
+      "posted_at_utc": "2026-11-25T21:42:05+00:00"
+    },
+    {
+      "id": 97127,
+      "source_message_id": 97127,
+      "source_post_url": "https://t.me/jirum/97127",
+      "original_purchase_url": "https://link.coupang.com/a/iYGzxLVuZE",
+      "title": "☆특가 11,060원",
+      "source_text": "☆특가 11,060원\n포스트 크리치오 마시멜로 시리얼 400g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGzxLVuZE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 11060,
+      "posted_at_utc": "2026-11-25T21:46:12+00:00"
+    },
+    {
+      "id": 97128,
+      "source_message_id": 97128,
+      "source_post_url": "https://t.me/jirum/97128",
+      "original_purchase_url": "https://link.coupang.com/a/iYGMz0RE60",
+      "title": "☆특가 13,590원",
+      "source_text": "☆특가 13,590원\n컬러별 가격 상이🔥 뛰어난 잡티 커버력과 보송한 세미매트 피부 표현\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYGMz0RE60\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 13590,
+      "posted_at_utc": "2026-11-25T21:49:08+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
