@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97054,
-  "pending": [
-    {
-      "id": 97054,
-      "source_post_url": "https://t.me/jirum/97054",
-      "original_purchase_url": "https://link.coupang.com/a/iXvWRRfnP2",
-      "source_text": "👍대박 9,450원 (34.0% 할인)\n아이러브베베 시그니앙 오블루 물티슈 캡형 77매 10개\n📌 가격 현황\n- 정상가: 14,318원\n- 할인: 4,868원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXvWRRfnP2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T04:49:55+00:00",
-      "title": "아이러브베베 시그니앙 오블루 물티슈 캡형 77매 10개",
-      "sale_price_krw": 9450
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -147,6 +137,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T04:51:54.973958+00:00"
+    },
+    "97054": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 15,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T04:52:46.555746+00:00"
     }
   }
 }
