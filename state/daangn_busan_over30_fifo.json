@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97135,
-  "pending": [
-    {
-      "id": 97135,
-      "source_post_url": "https://t.me/jirum/97135",
-      "original_purchase_url": "https://link.coupang.com/a/iYMn95aeOq",
-      "source_text": "☆특가 10,900원 (16.2% 할인)\n헤드앤숄더 두피 토탈 솔루션 딥클린 샴푸, 1.2L, 1개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 2,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYMn95aeOq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T23:07:35+00:00",
-      "title": "헤드앤숄더 두피 토탈 솔루션 딥클린 샴푸, 1.2L, 1개",
-      "sale_price_krw": 10900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -515,6 +505,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-25T23:07:49.299865+00:00"
+    },
+    "97135": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-25T23:08:25.525968+00:00"
     }
   }
 }
