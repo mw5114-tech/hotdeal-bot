@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97060,
-  "pending": [],
+  "last_scanned_id": 97061,
+  "pending": [
+    {
+      "id": 97061,
+      "source_message_id": 97061,
+      "source_post_url": "https://t.me/jirum/97061",
+      "original_purchase_url": "https://link.coupang.com/a/iXFXPgHZnw",
+      "title": "미국산 프라임 등심 구이용 (냉장), 500g, 1개",
+      "source_text": "👍대박 16,110원 (32.5% 할인)\n미국산 프라임 등심 구이용 (냉장), 500g, 1개\n📌 가격 현황\n- 정상가: 23,860원\n- 할인: 7,750원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXFXPgHZnw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 16110,
+      "posted_at_utc": "2026-11-25T07:10:05+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
