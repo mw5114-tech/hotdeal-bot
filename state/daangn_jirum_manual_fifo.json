@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97062,
-  "pending": [
-    {
-      "id": 97062,
-      "source_post_url": "https://t.me/jirum/97062",
-      "original_purchase_url": "https://link.coupang.com/a/iXGhEpK524",
-      "source_text": "☆특가 11,180원\n스타벅스 블론드 에스프레소 네스프레소 캡슐커피, 5.3g, 10개입, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iXGhEpK524\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-25T07:14:33+00:00",
-      "title": "☆특가 11,180원",
-      "sale_price_krw": 11180
-    }
-  ],
-  "in_flight": {
-    "id": 97062,
-    "status": "CLAIMED",
-    "run_id": "45566640932",
-    "at": "2026-11-25T07:15:24.048233+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -8611,6 +8596,16 @@
       "vendor_item_id": "4781784464",
       "at": "2026-11-25T07:12:33.051738+00:00",
       "run_id": "45566125376"
+    },
+    "97062": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%8A%A4%ED%83%80%EB%B2%85%EC%8A%A4-%EB%B8%94%EB%A1%A0%EB%93%9C-%EC%97%90%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C-%EB%84%A4%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C-%EC%BA%A1%EC%8A%90%EC%BB%A4%ED%94%BC-53g-1-15%ED%95%A0%EC%9D%B8-PnnvXapP?from=write",
+      "posted_at_utc": "2026-11-25T07:14:33+00:00",
+      "product_id": "8448651153",
+      "item_id": "24440822923",
+      "vendor_item_id": null,
+      "at": "2026-11-25T07:15:43.213345+00:00",
+      "run_id": "45566640932"
     }
   },
   "skipped_non_coupang": 1121,
