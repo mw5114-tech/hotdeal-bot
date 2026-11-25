@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97118,
-  "pending": [
-    {
-      "id": 97118,
-      "source_message_id": 97118,
-      "source_post_url": "https://t.me/jirum/97118",
-      "original_purchase_url": "https://link.coupang.com/a/iYe9FxTK1Y",
-      "title": "☆특가 5,900원",
-      "source_text": "☆특가 5,900원\n팜앤푸드 냉동 블루베리 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYe9FxTK1Y\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5900,
-      "posted_at_utc": "2026-11-25T15:22:32+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2299,6 +2288,10 @@
     "97117": {
       "url": "https://blog.naver.com/mw5114/224492252129",
       "at": "2026-11-25T15:24:52.719177+00:00"
+    },
+    "97118": {
+      "url": "https://blog.naver.com/mw5114/224492253089",
+      "at": "2026-11-25T15:25:52.189736+00:00"
     }
   },
   "skipped": {
@@ -2731,12 +2724,7 @@
       "at": "2026-11-25T12:17:39.297900+00:00"
     }
   },
-  "in_flight": {
-    "id": 97118,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45644582426",
-    "at": "2026-11-25T15:25:09.173498+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
