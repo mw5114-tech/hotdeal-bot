@@ -333,8 +333,11 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
             raise ComparisonError("NAVER_SESSION_MISSING")
         links = (tracked_link(a), tracked_link(b))
         article = compose(t, a, b, links, photo["path"], now)
-        source_label = ("로우차트 상품 이미지" if photo["source"] == "lowchart_exact_item_public_page"
-                        else "네이버쇼핑 검색 결과에 표시된 상품 대표 이미지")
+        source_label = {
+            "lowchart_exact_item_public_page": "로우차트 상품 이미지",
+            "naver_api_matched_image": "네이버 이미지 API 검색 대표 이미지(실제 옵션과 다를 수 있음)",
+            "naver_shopping_product_card": "네이버쇼핑 검색 결과에 표시된 상품 대표 이미지",
+        }[photo["source"]]
         pictured = a if photo["label"] == "A" else b
         article["paragraphs"].insert(2, "상품 사진: " + pictured["name"] + " (" + source_label + ")")
         # Claim before touching Naver: an ambiguous result cannot be re-posted.
@@ -367,8 +370,10 @@ def run(*, now: datetime | None = None, preview=False, requested_topic: str | No
         print("TREND_COMPARISON_PUBLISHED_CONFIRMED count=1")
         return 0
     if image_failures:
-        print("TREND_COMPARISON_NO_APPROVED_IMAGE posts=0 pairs=" + str(image_failures))
-        return 1
+        # A verified photo is a publication prerequisite, not a job crash.
+        # No claim was made and the next scheduled run can try new evidence.
+        print("::warning::TREND_COMPARISON_NO_APPROVED_IMAGE posts=0 pairs=" + str(image_failures))
+        return 0
     print("TREND_COMPARISON_NO_VERIFIED_PAIR posts=0")
     return 0
 
