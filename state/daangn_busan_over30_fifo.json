@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97184,
+  "last_scanned_id": 97186,
   "pending": [
     {
       "id": 97184,
@@ -11,6 +11,15 @@
       "title": "☆특가 171,930원",
       "sale_price_krw": 171930,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97185,
+      "source_post_url": "https://t.me/jirum/97185",
+      "original_purchase_url": "https://link.coupang.com/a/iZliqSS5vM",
+      "source_text": "👍대박 3,270원 (30.4% 할인)\n오리온 오감자 그라탕 스낵, 50g, 4개\n📌 가격 현황\n- 정상가: 4,700원\n- 할인: 1,430원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZliqSS5vM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T07:16:04+00:00",
+      "title": "오리온 오감자 그라탕 스낵, 50g, 4개",
+      "sale_price_krw": 3270
     }
   ],
   "in_flight": null,
@@ -345,7 +354,7 @@
       "run_id": "45773669507"
     }
   },
-  "skipped_non_coupang": 88,
+  "skipped_non_coupang": 89,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
