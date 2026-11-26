@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97197,
-  "pending": [
-    {
-      "id": 97197,
-      "source_post_url": "https://t.me/jirum/97197",
-      "original_purchase_url": "https://link.coupang.com/a/iZrWIyJXZ6",
-      "source_text": "☆특가 41,900원 (17.8% 할인)\n르크루제 U머그 소 320ml x 2종 + 쇼핑백포함\n📌 가격 현황\n- 정상가: 51,000원\n- 할인: 9,100원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZrWIyJXZ6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T08:49:08+00:00",
-      "title": "르크루제 U머그 소 320ml x 2종 + 쇼핑백포함",
-      "sale_price_krw": 41900
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -821,6 +811,12 @@
       "display_pct": 15,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T08:44:09.275559+00:00"
+    },
+    "97197": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T08:50:03.038683+00:00"
     }
   }
 }
