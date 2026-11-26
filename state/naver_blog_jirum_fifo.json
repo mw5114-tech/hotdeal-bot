@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97254,
-  "pending": [
-    {
-      "id": 97254,
-      "source_message_id": 97254,
-      "source_post_url": "https://t.me/jirum/97254",
-      "original_purchase_url": "https://link.coupang.com/a/i0t6P5v1j2",
-      "title": "에뛰드 마이 쁘띠 팔레트 7.2g",
-      "source_text": "👍대박 9,100원 (39.3% 할인)\n에뛰드 마이 쁘띠 팔레트 7.2g\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0t6P5v1j2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9100,
-      "posted_at_utc": "2026-11-26T23:47:00+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2635,6 +2624,10 @@
     "97253": {
       "url": "https://blog.naver.com/mw5114/224494093102",
       "at": "2026-11-26T23:22:19.357154+00:00"
+    },
+    "97254": {
+      "url": "https://blog.naver.com/mw5114/224494118030",
+      "at": "2026-11-26T23:49:12.039313+00:00"
     }
   },
   "skipped": {
@@ -3107,12 +3100,7 @@
       "at": "2026-11-26T11:32:12.493075+00:00"
     }
   },
-  "in_flight": {
-    "id": 97254,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45912980321",
-    "at": "2026-11-26T23:48:28.307861+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
