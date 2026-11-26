@@ -3,15 +3,6 @@
   "last_scanned_id": 97240,
   "pending": [
     {
-      "id": 97238,
-      "source_post_url": "https://t.me/jirum/97238",
-      "original_purchase_url": "https://link.coupang.com/a/iZUTI17J1M",
-      "source_text": "☆특가 9,840원\n포크밸리 1등급 이상 안심 다짐육 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUTI17J1M\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:34:16+00:00",
-      "title": "☆특가 9,840원",
-      "sale_price_krw": 9840
-    },
-    {
       "id": 97239,
       "source_post_url": "https://t.me/jirum/97239",
       "original_purchase_url": "https://link.coupang.com/a/iZUUhIjcku",
@@ -30,12 +21,7 @@
       "sale_price_krw": 6640
     }
   ],
-  "in_flight": {
-    "id": 97238,
-    "status": "CLAIMED",
-    "run_id": "45850601573",
-    "at": "2026-11-26T15:36:11.610729+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9569,6 +9555,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T15:35:24.134031+00:00",
       "run_id": "45850378278"
+    },
+    "97238": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%AC%ED%81%AC%EB%B0%B8%EB%A6%AC-%EC%95%88%EC%8B%AC-1%EB%93%B1%EA%B8%89%EC%9D%B4%EC%83%81-%EB%8B%A4%EC%A7%90%EC%9C%A1-%EB%83%89%EC%9E%A5-500g-1%ED%8C%A9-AeevXJNA?from=write",
+      "posted_at_utc": "2026-11-26T15:34:16+00:00",
+      "product_id": "6055469171",
+      "item_id": "11114019248",
+      "vendor_item_id": null,
+      "at": "2026-11-26T15:36:29.257561+00:00",
+      "run_id": "45850601573"
     }
   },
   "skipped_non_coupang": 1191,
