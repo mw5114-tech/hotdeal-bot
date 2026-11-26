@@ -3,16 +3,6 @@
   "last_scanned_id": 97191,
   "pending": [
     {
-      "id": 97190,
-      "source_post_url": "https://t.me/jirum/97190",
-      "original_purchase_url": "https://link.coupang.com/a/iZnliajSjQ",
-      "source_text": "❤️초대박 4,800원 (40.0% 할인)\n무네오 재물운 성공운 소원성취 옥 진주 팔찌세트\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 3,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZnliajSjQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T07:44:42+00:00",
-      "title": "무네오 재물운 성공운 소원성취 옥 진주 팔찌세트",
-      "sale_price_krw": 4800,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97191,
       "source_post_url": "https://t.me/jirum/97191",
       "original_purchase_url": "https://link.coupang.com/a/iZoajCuDcq",
@@ -455,6 +445,12 @@
       "source_post_url": "https://t.me/jirum/97184",
       "source_title": "☆특가 171,930원",
       "at": "2026-11-26T07:20:19.575866+00:00"
+    },
+    "97190": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97190",
+      "source_title": "무네오 재물운 성공운 소원성취 옥 진주 팔찌세트",
+      "at": "2026-11-26T07:58:45.861400+00:00"
     }
   },
   "skipped_busan_discount": {
