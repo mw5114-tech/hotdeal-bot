@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97242,
+  "last_scanned_id": 97244,
   "pending": [
     {
       "id": 97242,
@@ -11,6 +11,26 @@
       "source_text": "☆특가 7,000원\n미샤 수퍼 아쿠아 울트라 히알론 클렌징폼 200ml 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU1NQdaq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 7000,
       "posted_at_utc": "2026-11-26T15:36:05+00:00"
+    },
+    {
+      "id": 97243,
+      "source_message_id": 97243,
+      "source_post_url": "https://t.me/jirum/97243",
+      "original_purchase_url": "https://link.coupang.com/a/iZU8RPYKlM",
+      "title": "☆특가 16,360원",
+      "source_text": "☆특가 16,360원\n레이비 산양유 바디로션 플로럴향 750ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU8RPYKlM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 16360,
+      "posted_at_utc": "2026-11-26T15:37:41+00:00"
+    },
+    {
+      "id": 97244,
+      "source_message_id": 97244,
+      "source_post_url": "https://t.me/jirum/97244",
+      "original_purchase_url": "https://link.coupang.com/a/iZU9lzv3IG",
+      "title": "☆특가 10,080원",
+      "source_text": "☆특가 10,080원\n마니커에프앤지 바사삭 매콤치킨 떡볶이 550g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU9lzv3IG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10080,
+      "posted_at_utc": "2026-11-26T15:37:47+00:00"
     }
   ],
   "published": {
