@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97207,
-  "pending": [
-    {
-      "id": 97207,
-      "source_post_url": "https://t.me/jirum/97207",
-      "original_purchase_url": "https://link.coupang.com/a/iZwf4Nbo6u",
-      "source_text": "☆특가 5,230원 (25.3% 할인)\n호밍스 사골진곰탕, 500g, 6개\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 1,770원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZwf4Nbo6u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T09:49:28+00:00",
-      "title": "호밍스 사골진곰탕, 500g, 6개",
-      "sale_price_krw": 5230
-    }
-  ],
-  "in_flight": {
-    "id": 97207,
-    "status": "CLAIMED",
-    "run_id": "45795642867",
-    "at": "2026-11-26T09:50:33.052534+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9451,6 +9436,16 @@
       "vendor_item_id": "76358677658",
       "at": "2026-11-26T09:44:02.635993+00:00",
       "run_id": "45794357186"
+    },
+    "97207": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%98%B8%EB%B0%8D%EC%8A%A4-%EC%82%AC%EA%B3%A8%EC%A7%84%EA%B3%B0%ED%83%95-500g-6%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PW7mkEZP?from=write",
+      "posted_at_utc": "2026-11-26T09:49:28+00:00",
+      "product_id": "6467679904",
+      "item_id": "24734452720",
+      "vendor_item_id": null,
+      "at": "2026-11-26T09:50:52.120235+00:00",
+      "run_id": "45795642867"
     }
   },
   "skipped_non_coupang": 1173,
