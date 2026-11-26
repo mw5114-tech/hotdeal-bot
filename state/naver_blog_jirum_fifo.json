@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97179,
-  "pending": [
-    {
-      "id": 97179,
-      "source_message_id": 97179,
-      "source_post_url": "https://t.me/jirum/97179",
-      "original_purchase_url": "https://link.coupang.com/a/iZjIov2Twy",
-      "title": "☆특가 7,150원",
-      "source_text": "☆특가 7,150원\n미떼 제로슈거 핫초코 170g 10개입 × 2박스\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZjIov2Twy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7150,
-      "posted_at_utc": "2026-11-26T06:53:57+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2451,6 +2440,10 @@
     "97178": {
       "url": "https://blog.naver.com/mw5114/224493223325",
       "at": "2026-11-26T06:56:14.810335+00:00"
+    },
+    "97179": {
+      "url": "https://blog.naver.com/mw5114/224493224783",
+      "at": "2026-11-26T06:57:10.268289+00:00"
     }
   },
   "skipped": {
@@ -2903,12 +2896,7 @@
       "at": "2026-11-26T06:19:49.824499+00:00"
     }
   },
-  "in_flight": {
-    "id": 97179,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45771526418",
-    "at": "2026-11-26T06:56:27.865623+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
