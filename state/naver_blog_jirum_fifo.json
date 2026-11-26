@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97186,
-  "pending": [
-    {
-      "id": 97185,
-      "source_message_id": 97185,
-      "source_post_url": "https://t.me/jirum/97185",
-      "original_purchase_url": "https://link.coupang.com/a/iZliqSS5vM",
-      "title": "오리온 오감자 그라탕 스낵, 50g, 4개",
-      "source_text": "👍대박 3,270원 (30.4% 할인)\n오리온 오감자 그라탕 스낵, 50g, 4개\n📌 가격 현황\n- 정상가: 4,700원\n- 할인: 1,430원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZliqSS5vM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3270,
-      "posted_at_utc": "2026-11-26T07:16:04+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2467,6 +2456,10 @@
     "97183": {
       "url": "https://blog.naver.com/mw5114/224493250976",
       "at": "2026-11-26T07:14:33.380398+00:00"
+    },
+    "97185": {
+      "url": "https://blog.naver.com/mw5114/224493263773",
+      "at": "2026-11-26T07:22:59.060806+00:00"
     }
   },
   "skipped": {
@@ -2924,12 +2917,7 @@
       "at": "2026-11-26T07:22:12.855713+00:00"
     }
   },
-  "in_flight": {
-    "id": 97185,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45774166560",
-    "at": "2026-11-26T07:22:16.725768+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
