@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97167,
-  "pending": [
-    {
-      "id": 97167,
-      "source_message_id": 97167,
-      "source_post_url": "https://t.me/jirum/97167",
-      "original_purchase_url": "https://link.coupang.com/a/iY23m7DrWu",
-      "title": "☆특가 16,230원",
-      "source_text": "☆특가 16,230원\n등받이가 아기 몸을 받쳐주고 물 빠짐이 편리한 구조라 목욕시키기 좋아요\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY23m7DrWu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 16230,
-      "posted_at_utc": "2026-11-26T03:00:47+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2423,6 +2412,10 @@
     "97166": {
       "url": "https://blog.naver.com/mw5114/224492867271",
       "at": "2026-11-26T03:02:14.476246+00:00"
+    },
+    "97167": {
+      "url": "https://blog.naver.com/mw5114/224492868717",
+      "at": "2026-11-26T03:03:12.196706+00:00"
     }
   },
   "skipped": {
@@ -2865,12 +2858,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97167,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45746173517",
-    "at": "2026-11-26T03:02:28.385334+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
