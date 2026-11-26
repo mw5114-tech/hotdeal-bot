@@ -3,15 +3,6 @@
   "last_scanned_id": 97200,
   "pending": [
     {
-      "id": 97199,
-      "source_post_url": "https://t.me/jirum/97199",
-      "original_purchase_url": "https://link.coupang.com/a/iZsbc318bk",
-      "source_text": "☆특가 1,990원\n돌 바나나, 800g 내외, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZsbc318bk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T08:52:24+00:00",
-      "title": "☆특가 1,990원",
-      "sale_price_krw": 1990
-    },
-    {
       "id": 97200,
       "source_post_url": "https://t.me/jirum/97200",
       "original_purchase_url": "https://link.coupang.com/a/iZsfjNPRHo",
@@ -842,6 +833,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T08:52:58.510491+00:00"
+    },
+    "97199": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T08:54:40.561380+00:00"
     }
   }
 }
