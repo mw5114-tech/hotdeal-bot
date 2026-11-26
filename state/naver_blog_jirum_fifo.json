@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97164,
-  "pending": [
-    {
-      "id": 97164,
-      "source_message_id": 97164,
-      "source_post_url": "https://t.me/jirum/97164",
-      "original_purchase_url": "https://link.coupang.com/a/iY2NECAfee",
-      "title": "☆특가 11,790원",
-      "source_text": "☆특가 11,790원\n킨더 해피 모먼츠 미니 믹스 초콜릿 161g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY2NECAfee\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11790,
-      "posted_at_utc": "2026-11-26T02:57:14+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2415,6 +2404,10 @@
     "97162": {
       "url": "https://blog.naver.com/mw5114/224492861685",
       "at": "2026-11-26T02:58:34.423498+00:00"
+    },
+    "97164": {
+      "url": "https://blog.naver.com/mw5114/224492863645",
+      "at": "2026-11-26T02:59:49.524551+00:00"
     }
   },
   "skipped": {
@@ -2857,12 +2850,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97164,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45745884792",
-    "at": "2026-11-26T02:59:06.250786+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
