@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97145,
-  "pending": [
-    {
-      "id": 97145,
-      "source_post_url": "https://t.me/jirum/97145",
-      "original_purchase_url": "https://link.coupang.com/a/iYSUV02OzI",
-      "source_text": "☆특가 15,550원\n풀무원 탱글뽀득 점보 핫도그 (냉동) 100g 4개입, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYSUV02OzI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T00:38:57+00:00",
-      "title": "☆특가 15,550원",
-      "sale_price_krw": 15550
-    }
-  ],
-  "in_flight": {
-    "id": 97145,
-    "status": "CLAIMED",
-    "run_id": "45730286001",
-    "at": "2026-11-26T00:40:26.747041+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9100,6 +9085,16 @@
       "item_id": "24339427562",
       "vendor_item_id": null,
       "at": "2026-11-26T00:40:18.809107+00:00",
+      "run_id": "45730286001"
+    },
+    "97145": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%ED%83%B1%EA%B8%80%EB%BD%80%EB%93%9D-%EC%A0%90%EB%B3%B4-%ED%95%AB%EB%8F%84%EA%B7%B8-%EB%83%89%EB%8F%99-100g-4%EA%B0%9C%EC%9E%85-3-30%ED%95%A0%EC%9D%B8-dgxJLyvj?from=write",
+      "posted_at_utc": "2026-11-26T00:38:57+00:00",
+      "product_id": "1278086994",
+      "item_id": "19233180476",
+      "vendor_item_id": null,
+      "at": "2026-11-26T00:40:45.174189+00:00",
       "run_id": "45730286001"
     }
   },
