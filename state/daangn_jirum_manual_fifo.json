@@ -1,18 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97171,
-  "pending": [
-    {
-      "id": 97171,
-      "source_post_url": "https://t.me/jirum/97171",
-      "original_purchase_url": "https://link.coupang.com/a/iY7BGiwYHQ",
-      "source_text": "☆특가 16,180원\n풀무원 노엣지피자 스위트포테이토&콘 (냉동), 365g, 1개입, 5박스\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY7BGiwYHQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T04:04:30+00:00",
-      "title": "☆특가 16,180원",
-      "sale_price_krw": 16180,
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -11319,6 +11308,12 @@
       "source_post_url": "https://t.me/jirum/97138",
       "source_title": "☆특가 9,900원",
       "at": "2026-11-25T23:39:50.920451+00:00"
+    },
+    "97171": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97171",
+      "source_title": "☆특가 16,180원",
+      "at": "2026-11-26T04:14:49.986078+00:00"
     }
   },
   "single_test_repost_20261103": {
