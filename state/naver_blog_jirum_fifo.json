@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97218,
-  "pending": [
-    {
-      "id": 97218,
-      "source_message_id": 97218,
-      "source_post_url": "https://t.me/jirum/97218",
-      "original_purchase_url": "https://link.coupang.com/a/iZHrusX7nw",
-      "title": "☆특가 2,580원",
-      "source_text": "☆특가 2,580원\n오리온 예감 치즈그라탕, 64g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZHrusX7nw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2580,
-      "posted_at_utc": "2026-11-26T12:25:59+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2551,6 +2540,10 @@
     "97217": {
       "url": "https://blog.naver.com/mw5114/224493659170",
       "at": "2026-11-26T12:27:39.618826+00:00"
+    },
+    "97218": {
+      "url": "https://blog.naver.com/mw5114/224493660457",
+      "at": "2026-11-26T12:28:41.668459+00:00"
     }
   },
   "skipped": {
@@ -3023,12 +3016,7 @@
       "at": "2026-11-26T11:32:12.493075+00:00"
     }
   },
-  "in_flight": {
-    "id": 97218,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45819666057",
-    "at": "2026-11-26T12:27:58.402241+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
