@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97182,
-  "pending": [
-    {
-      "id": 97182,
-      "source_post_url": "https://t.me/jirum/97182",
-      "original_purchase_url": "https://link.coupang.com/a/iZkE2FmDIa",
-      "source_text": "👍대박 4,100원 (31.7% 할인)\n오리온 미쯔 황치즈 6p, 222g, 2개\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 1,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZkE2FmDIa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T07:07:11+00:00",
-      "title": "오리온 미쯔 황치즈 6p, 222g, 2개",
-      "sale_price_krw": 4100
-    }
-  ],
-  "in_flight": {
-    "id": 97182,
-    "status": "CLAIMED",
-    "run_id": "45773066239",
-    "at": "2026-11-26T07:08:39.973542+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9291,6 +9276,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T07:06:52.227759+00:00",
       "run_id": "45772822377"
+    },
+    "97182": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EB%AF%B8%EC%AF%94-%ED%99%A9%EC%B9%98%EC%A6%88-6p-222g-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-ArnQKWoA?from=write",
+      "posted_at_utc": "2026-11-26T07:07:11+00:00",
+      "product_id": "9611076956",
+      "item_id": "28699396358",
+      "vendor_item_id": null,
+      "at": "2026-11-26T07:08:58.753492+00:00",
+      "run_id": "45773066239"
     }
   },
   "skipped_non_coupang": 1167,
