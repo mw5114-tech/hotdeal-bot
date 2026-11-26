@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97175,
-  "pending": [
-    {
-      "id": 97175,
-      "source_post_url": "https://t.me/jirum/97175",
-      "original_purchase_url": "https://link.coupang.com/a/iZddAUQECW",
-      "source_text": "☆특가 8,550원\n다향 무항생제 우리땅 오리 가슴살 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZddAUQECW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T05:23:02+00:00",
-      "title": "☆특가 8,550원",
-      "sale_price_krw": 8550
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -689,6 +679,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T04:50:01.050215+00:00"
+    },
+    "97175": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T05:29:15.633012+00:00"
     }
   }
 }
