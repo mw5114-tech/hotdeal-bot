@@ -3,15 +3,6 @@
   "last_scanned_id": 97245,
   "pending": [
     {
-      "id": 97244,
-      "source_post_url": "https://t.me/jirum/97244",
-      "original_purchase_url": "https://link.coupang.com/a/iZU9lzv3IG",
-      "source_text": "☆특가 10,080원\n마니커에프앤지 바사삭 매콤치킨 떡볶이 550g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU9lzv3IG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:37:47+00:00",
-      "title": "☆특가 10,080원",
-      "sale_price_krw": 10080
-    },
-    {
       "id": 97245,
       "source_post_url": "https://t.me/jirum/97245",
       "original_purchase_url": "https://link.coupang.com/a/iZVpbHB6WG",
@@ -21,12 +12,7 @@
       "sale_price_krw": 17400
     }
   ],
-  "in_flight": {
-    "id": 97244,
-    "status": "CLAIMED",
-    "run_id": "45851699872",
-    "at": "2026-11-26T15:43:03.936416+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9619,6 +9605,16 @@
       "item_id": "23597734115",
       "vendor_item_id": null,
       "at": "2026-11-26T15:42:59.124449+00:00",
+      "run_id": "45851699872"
+    },
+    "97244": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%AC%EC%84%B8-%EB%A7%A4%EC%BD%A4%EB%8B%AC%EC%BD%A4-%EB%8B%AD%EA%B0%95%EC%A0%95-%EB%83%89%EB%8F%99-440g-2%EA%B0%9C-PW73DQWP?from=write",
+      "posted_at_utc": "2026-11-26T15:37:47+00:00",
+      "product_id": "9579377940",
+      "item_id": "28617520208",
+      "vendor_item_id": null,
+      "at": "2026-11-26T15:43:23.881063+00:00",
       "run_id": "45851699872"
     }
   },
