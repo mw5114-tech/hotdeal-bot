@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97143,
-  "pending": [],
+  "last_scanned_id": 97145,
+  "pending": [
+    {
+      "id": 97144,
+      "source_message_id": 97144,
+      "source_post_url": "https://t.me/jirum/97144",
+      "original_purchase_url": "https://link.coupang.com/a/iYSUKWPE5c",
+      "title": "스프라이트 제로 사이다, 350ml, 24개",
+      "source_text": "👍대박 10,000원 (33.3% 할인)\n스프라이트 제로 사이다, 350ml, 24개\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYSUKWPE5c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10000,
+      "posted_at_utc": "2026-11-26T00:38:54+00:00"
+    },
+    {
+      "id": 97145,
+      "source_message_id": 97145,
+      "source_post_url": "https://t.me/jirum/97145",
+      "original_purchase_url": "https://link.coupang.com/a/iYSUV02OzI",
+      "title": "☆특가 15,550원",
+      "source_text": "☆특가 15,550원\n풀무원 탱글뽀득 점보 핫도그 (냉동) 100g 4개입, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYSUV02OzI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 15550,
+      "posted_at_utc": "2026-11-26T00:38:57+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
