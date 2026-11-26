@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97219,
+  "last_scanned_id": 97220,
   "pending": [
     {
       "id": 97219,
@@ -11,6 +11,15 @@
       "title": "완숙 토마토, 1kg, 4팩",
       "sale_price_krw": 14220,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97220,
+      "source_post_url": "https://t.me/jirum/97220",
+      "original_purchase_url": "https://link.coupang.com/a/iZMADku6zQ",
+      "source_text": "☆특가 21,430원 (28.6% 할인)\n웰넛 자연두레 탈각 피스타치오, 500g, 1개\n📌 가격 현황\n- 정상가: 30,010원\n- 할인: 8,580원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZMADku6zQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T13:38:01+00:00",
+      "title": "웰넛 자연두레 탈각 피스타치오, 500g, 1개",
+      "sale_price_krw": 21430
     }
   ],
   "in_flight": null,
