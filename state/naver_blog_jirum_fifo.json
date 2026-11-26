@@ -3,16 +3,6 @@
   "last_scanned_id": 97215,
   "pending": [
     {
-      "id": 97213,
-      "source_message_id": 97213,
-      "source_post_url": "https://t.me/jirum/97213",
-      "original_purchase_url": "https://link.coupang.com/a/iZC312Ga3U",
-      "title": "☆특가 10,200원",
-      "source_text": "☆특가 10,200원\n초정탄산수, 190ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZC312Ga3U\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10200,
-      "posted_at_utc": "2026-11-26T11:24:42+00:00"
-    },
-    {
       "id": 97214,
       "source_message_id": 97214,
       "source_post_url": "https://t.me/jirum/97214",
@@ -2555,6 +2545,10 @@
     "97209": {
       "url": "https://blog.naver.com/mw5114/224493513119",
       "at": "2026-11-26T10:22:12.117123+00:00"
+    },
+    "97213": {
+      "url": "https://blog.naver.com/mw5114/224493593003",
+      "at": "2026-11-26T11:32:59.992057+00:00"
     }
   },
   "skipped": {
@@ -3027,12 +3021,7 @@
       "at": "2026-11-26T11:32:12.493075+00:00"
     }
   },
-  "in_flight": {
-    "id": 97213,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45810887428",
-    "at": "2026-11-26T11:32:16.899299+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
