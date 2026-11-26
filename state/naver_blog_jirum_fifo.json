@@ -3,17 +3,6 @@
   "last_scanned_id": 97205,
   "pending": [
     {
-      "id": 97200,
-      "source_message_id": 97200,
-      "source_post_url": "https://t.me/jirum/97200",
-      "original_purchase_url": "https://link.coupang.com/a/iZsfjNPRHo",
-      "title": "☆특가 8,900원",
-      "source_text": "☆특가 8,900원\n블랙홀 당도선별 11brix 황금향, 1.5kg(소과), 1박스\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZsfjNPRHo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8900,
-      "posted_at_utc": "2026-11-26T08:53:19+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97205,
       "source_message_id": 97205,
       "source_post_url": "https://t.me/jirum/97205",
@@ -2526,6 +2515,10 @@
     "97199": {
       "url": "https://blog.naver.com/mw5114/224493399626",
       "at": "2026-11-26T08:54:47.830958+00:00"
+    },
+    "97200": {
+      "url": "https://blog.naver.com/mw5114/224493437203",
+      "at": "2026-11-26T09:19:52.269432+00:00"
     }
   },
   "skipped": {
@@ -2988,12 +2981,7 @@
       "at": "2026-11-26T07:51:50.789794+00:00"
     }
   },
-  "in_flight": {
-    "id": 97200,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45790780996",
-    "at": "2026-11-26T09:19:08.384056+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
