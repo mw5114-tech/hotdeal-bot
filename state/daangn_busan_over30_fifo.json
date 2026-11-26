@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97240,
-  "pending": [],
+  "last_scanned_id": 97242,
+  "pending": [
+    {
+      "id": 97241,
+      "source_post_url": "https://t.me/jirum/97241",
+      "original_purchase_url": "https://link.coupang.com/a/iZUZZDjI8i",
+      "source_text": "☆특가 7,690원\n다향 무항생제 우리땅 오리 다리살 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUZZDjI8i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T15:35:41+00:00",
+      "title": "☆특가 7,690원",
+      "sale_price_krw": 7690
+    },
+    {
+      "id": 97242,
+      "source_post_url": "https://t.me/jirum/97242",
+      "original_purchase_url": "https://link.coupang.com/a/iZU1NQdaq4",
+      "source_text": "☆특가 7,000원\n미샤 수퍼 아쿠아 울트라 히알론 클렌징폼 200ml 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU1NQdaq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T15:36:05+00:00",
+      "title": "☆특가 7,000원",
+      "sale_price_krw": 7000
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
