@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97170,
-  "pending": [
-    {
-      "id": 97170,
-      "source_post_url": "https://t.me/jirum/97170",
-      "original_purchase_url": "https://link.coupang.com/a/iY5lpnkqCy",
-      "source_text": "☆특가 49,800원\n도트 극세사 겨울 침구세트 (이불+패드+베개커버) 퀸\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY5lpnkqCy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T03:32:51+00:00",
-      "title": "☆특가 49,800원",
-      "sale_price_krw": 49800
-    }
-  ],
-  "in_flight": {
-    "id": 97170,
-    "status": "CLAIMED",
-    "run_id": "45749649954",
-    "at": "2026-11-26T03:33:39.065730+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9231,6 +9216,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T03:03:10.816328+00:00",
       "run_id": "45746315604"
+    },
+    "97170": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-KURUA-%EB%94%B0%EB%9C%BB%ED%95%9C-%EB%8F%84%ED%8A%B8-%EA%B7%B9%EC%84%B8%EC%82%AC-%EC%9D%B4%EB%B6%88-%EC%84%B8%ED%8A%B8-%EA%B2%A8%EC%9A%B8-%EC%9D%B4%EB%B6%88%ED%8C%A8%EB%93%9C%EB%B2%A0%EA%B0%9C%EC%BB%A4%EB%B2%84-%EC%B9%A8%EA%B5%AC-%EC%84%B8%ED%8A%B8-P5aZy9rP?from=write",
+      "posted_at_utc": "2026-11-26T03:32:51+00:00",
+      "product_id": "9715494837",
+      "item_id": "29071039946",
+      "vendor_item_id": null,
+      "at": "2026-11-26T03:34:01.142104+00:00",
+      "run_id": "45749649954"
     }
   },
   "skipped_non_coupang": 1164,
