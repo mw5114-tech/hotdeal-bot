@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97176,
-  "pending": [
-    {
-      "id": 97176,
-      "source_message_id": 97176,
-      "source_post_url": "https://t.me/jirum/97176",
-      "original_purchase_url": "https://link.coupang.com/a/iZd2uua2EK",
-      "title": "☆특가 16,700원",
-      "source_text": "☆특가 16,700원\n부루앤쥬디 여성용 마카롱 패딩 12 BORLJPE03C\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZd2uua2EK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 16700,
-      "posted_at_utc": "2026-11-26T05:34:31+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2893,6 +2881,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-26T05:12:45.183360+00:00"
+    },
+    "97176": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-26T06:19:49.824499+00:00"
     }
   },
   "in_flight": null,
