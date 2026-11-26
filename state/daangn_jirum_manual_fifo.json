@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97242,
-  "pending": [
-    {
-      "id": 97242,
-      "source_post_url": "https://t.me/jirum/97242",
-      "original_purchase_url": "https://link.coupang.com/a/iZU1NQdaq4",
-      "source_text": "☆특가 7,000원\n미샤 수퍼 아쿠아 울트라 히알론 클렌징폼 200ml 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZU1NQdaq4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:36:05+00:00",
-      "title": "☆특가 7,000원",
-      "sale_price_krw": 7000
-    }
-  ],
-  "in_flight": {
-    "id": 97242,
-    "status": "CLAIMED",
-    "run_id": "45850817775",
-    "at": "2026-11-26T15:38:27.080015+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9590,6 +9575,16 @@
       "item_id": "15078633649",
       "vendor_item_id": null,
       "at": "2026-11-26T15:38:14.249766+00:00",
+      "run_id": "45850817775"
+    },
+    "97242": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-2%EC%9E%85%EA%B8%B0%ED%9A%8D-%EB%AF%B8%EC%83%A4-%EC%88%98%ED%8D%BC-%EC%95%84%EC%BF%A0%EC%95%84-%EC%9A%B8%ED%8A%B8%EB%9D%BC-%ED%9E%88%EC%95%8C%EB%A1%A0-%ED%81%B4%EB%A0%8C%EC%A7%95-%ED%8F%BC-20-20%ED%95%A0%EC%9D%B8-AROKaL3P?from=write",
+      "posted_at_utc": "2026-11-26T15:36:05+00:00",
+      "product_id": "1601751214",
+      "item_id": "22948704040",
+      "vendor_item_id": null,
+      "at": "2026-11-26T15:38:48.045024+00:00",
       "run_id": "45850817775"
     }
   },
