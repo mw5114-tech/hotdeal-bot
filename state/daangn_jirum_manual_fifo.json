@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97161,
-  "pending": [
-    {
-      "id": 97161,
-      "source_post_url": "https://t.me/jirum/97161",
-      "original_purchase_url": "https://link.coupang.com/a/iY2BKwGFum",
-      "source_text": "☆특가 10,650원\n르샤트라1802 초고농축 실내건조 섬유유연제 피오니부케향 리필 2L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY2BKwGFum\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T02:54:33+00:00",
-      "title": "☆특가 10,650원",
-      "sale_price_krw": 10650
-    }
-  ],
-  "in_flight": {
-    "id": 97161,
-    "status": "CLAIMED",
-    "run_id": "45745548648",
-    "at": "2026-11-26T02:56:22.556242+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9170,6 +9155,16 @@
       "item_id": "23804197823",
       "vendor_item_id": null,
       "at": "2026-11-26T02:56:15.949707+00:00",
+      "run_id": "45745548648"
+    },
+    "97161": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A5%B4%EC%83%A4%ED%8A%B8%EB%9D%BC1802-%EC%9D%B8%ED%93%A8%EC%A0%84-%EC%B4%88%EA%B3%A0%EB%86%8D%EC%B6%95-%EC%8B%A4%EB%82%B4%EA%B1%B4%EC%A1%B0-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%ED%94%BC%EC%98%A4%EB%8B%88%EB%B6%80%EC%BC%80-30%ED%95%A0%EC%9D%B8-AL1rwrWP?from=write",
+      "posted_at_utc": "2026-11-26T02:54:33+00:00",
+      "product_id": "6612343792",
+      "item_id": "18037611250",
+      "vendor_item_id": null,
+      "at": "2026-11-26T02:56:42.232700+00:00",
       "run_id": "45745548648"
     }
   },
