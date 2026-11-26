@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97187,
-  "pending": [
-    {
-      "id": 97187,
-      "source_post_url": "https://t.me/jirum/97187",
-      "original_purchase_url": "https://link.coupang.com/a/iZlzBLT89c",
-      "source_text": "☆특가 7,620원 (23.8% 할인)\n꼬북칩 초코츄러스, 120g, 6개\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 2,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZlzBLT89c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T07:19:57+00:00",
-      "title": "꼬북칩 초코츄러스, 120g, 6개",
-      "sale_price_krw": 7620
-    }
-  ],
-  "in_flight": {
-    "id": 97187,
-    "status": "CLAIMED",
-    "run_id": "45774654155",
-    "at": "2026-11-26T07:23:25.192125+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9321,6 +9306,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T07:19:41.480980+00:00",
       "run_id": "45774166560"
+    },
+    "97187": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%BC%AC%EB%B6%81%EC%B9%A9-%EC%B4%88%EC%BD%94%EC%B8%84%EB%9F%AC%EC%8A%A4-120g-6%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PmvWKNxd?from=write",
+      "posted_at_utc": "2026-11-26T07:19:57+00:00",
+      "product_id": "2315399066",
+      "item_id": "25085289903",
+      "vendor_item_id": null,
+      "at": "2026-11-26T07:23:44.175902+00:00",
+      "run_id": "45774654155"
     }
   },
   "skipped_non_coupang": 1168,
