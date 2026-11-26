@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97247,
-  "pending": [
-    {
-      "id": 97247,
-      "source_post_url": "https://t.me/jirum/97247",
-      "original_purchase_url": "https://link.coupang.com/a/i0luGhUhAy",
-      "source_text": "☆특가 1,790원\n곰곰 완숙 토마토 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0luGhUhAy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T21:46:26+00:00",
-      "title": "☆특가 1,790원",
-      "sale_price_krw": 1790
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1025,6 +1015,12 @@
       "display_pct": 15,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T15:42:50.833589+00:00"
+    },
+    "97247": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T21:47:37.289337+00:00"
     }
   }
 }
