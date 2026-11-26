@@ -3,15 +3,6 @@
   "last_scanned_id": 97196,
   "pending": [
     {
-      "id": 97195,
-      "source_post_url": "https://t.me/jirum/97195",
-      "original_purchase_url": "https://link.coupang.com/a/iZrvdAGsxM",
-      "source_text": "☆특가 12,800원\n설향 딸기 중과, 500g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZrvdAGsxM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T08:42:55+00:00",
-      "title": "☆특가 12,800원",
-      "sale_price_krw": 12800
-    },
-    {
       "id": 97196,
       "source_post_url": "https://t.me/jirum/97196",
       "original_purchase_url": "https://link.coupang.com/a/iZrvHZBTfF",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6980
     }
   ],
-  "in_flight": {
-    "id": 97195,
-    "status": "CLAIMED",
-    "run_id": "45785587568",
-    "at": "2026-11-26T08:44:02.729819+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9390,6 +9376,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T08:37:24.898194+00:00",
       "run_id": "45784605770"
+    },
+    "97195": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%A4%ED%96%A5-%EB%94%B8%EA%B8%B0-%EC%A4%91%EA%B3%BC-500g-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-jvOaJvmA?from=write",
+      "posted_at_utc": "2026-11-26T08:42:55+00:00",
+      "product_id": "8785655895",
+      "item_id": "25820485069",
+      "vendor_item_id": null,
+      "at": "2026-11-26T08:44:23.711879+00:00",
+      "run_id": "45785587568"
     }
   },
   "skipped_non_coupang": 1169,
