@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97170,
-  "pending": [
-    {
-      "id": 97170,
-      "source_message_id": 97170,
-      "source_post_url": "https://t.me/jirum/97170",
-      "original_purchase_url": "https://link.coupang.com/a/iY5lpnkqCy",
-      "title": "☆특가 49,800원",
-      "source_text": "☆특가 49,800원\n도트 극세사 겨울 침구세트 (이불+패드+베개커버) 퀸\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY5lpnkqCy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 49800,
-      "posted_at_utc": "2026-11-26T03:32:51+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2431,6 +2420,10 @@
     "97168": {
       "url": "https://blog.naver.com/mw5114/224492870285",
       "at": "2026-11-26T03:04:14.774148+00:00"
+    },
+    "97170": {
+      "url": "https://blog.naver.com/mw5114/224492911539",
+      "at": "2026-11-26T03:34:24.585895+00:00"
     }
   },
   "skipped": {
@@ -2873,12 +2866,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97170,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45749649954",
-    "at": "2026-11-26T03:33:41.381142+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
