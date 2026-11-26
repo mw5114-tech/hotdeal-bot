@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97209,
-  "pending": [
-    {
-      "id": 97209,
-      "source_message_id": 97209,
-      "source_post_url": "https://t.me/jirum/97209",
-      "original_purchase_url": "https://link.coupang.com/a/iZytlvFiYm",
-      "title": "☆특가 9,980원",
-      "source_text": "☆특가 9,980원\nCJ제일제당 소바바 황금홀릭 후라이드 뼈있는 치킨 반마리양 (냉동), 410g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZytlvFiYm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9980,
-      "posted_at_utc": "2026-11-26T10:20:27+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2531,6 +2520,10 @@
     "97208": {
       "url": "https://blog.naver.com/mw5114/224493480769",
       "at": "2026-11-26T09:54:06.441310+00:00"
+    },
+    "97209": {
+      "url": "https://blog.naver.com/mw5114/224493513119",
+      "at": "2026-11-26T10:22:12.117123+00:00"
     }
   },
   "skipped": {
@@ -2998,12 +2991,7 @@
       "at": "2026-11-26T09:47:06.601616+00:00"
     }
   },
-  "in_flight": {
-    "id": 97209,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45800481092",
-    "at": "2026-11-26T10:21:26.938741+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
