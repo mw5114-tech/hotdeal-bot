@@ -3,17 +3,6 @@
   "last_scanned_id": 97175,
   "pending": [
     {
-      "id": 97174,
-      "source_message_id": 97174,
-      "source_post_url": "https://t.me/jirum/97174",
-      "original_purchase_url": "https://link.coupang.com/a/iZdbCX5Ml2",
-      "title": "☆특가 3,510원",
-      "source_text": "☆특가 3,510원\n비비드키친 저당 닭가슴살 브리또 볶음고추장 125g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZdbCX5Ml2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3510,
-      "posted_at_utc": "2026-11-26T05:22:35+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97175,
       "source_message_id": 97175,
       "source_post_url": "https://t.me/jirum/97175",
@@ -2450,6 +2439,10 @@
     "97171": {
       "url": "https://blog.naver.com/mw5114/224493025709",
       "at": "2026-11-26T04:50:41.711699+00:00"
+    },
+    "97174": {
+      "url": "https://blog.naver.com/mw5114/224493083872",
+      "at": "2026-11-26T05:29:28.841620+00:00"
     }
   },
   "skipped": {
@@ -2897,12 +2890,7 @@
       "at": "2026-11-26T05:12:45.183360+00:00"
     }
   },
-  "in_flight": {
-    "id": 97174,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45761373817",
-    "at": "2026-11-26T05:28:45.356170+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
