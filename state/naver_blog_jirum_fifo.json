@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97165,
-  "pending": [],
+  "last_scanned_id": 97167,
+  "pending": [
+    {
+      "id": 97166,
+      "source_message_id": 97166,
+      "source_post_url": "https://t.me/jirum/97166",
+      "original_purchase_url": "https://link.coupang.com/a/iY21fgAzoi",
+      "title": "☆특가 8,690원",
+      "source_text": "☆특가 8,690원\n조인 무항생제 백색 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY21fgAzoi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8690,
+      "posted_at_utc": "2026-11-26T03:00:19+00:00"
+    },
+    {
+      "id": 97167,
+      "source_message_id": 97167,
+      "source_post_url": "https://t.me/jirum/97167",
+      "original_purchase_url": "https://link.coupang.com/a/iY23m7DrWu",
+      "title": "☆특가 16,230원",
+      "source_text": "☆특가 16,230원\n등받이가 아기 몸을 받쳐주고 물 빠짐이 편리한 구조라 목욕시키기 좋아요\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY23m7DrWu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 16230,
+      "posted_at_utc": "2026-11-26T03:00:47+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
