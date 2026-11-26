@@ -3,15 +3,6 @@
   "last_scanned_id": 97161,
   "pending": [
     {
-      "id": 97160,
-      "source_post_url": "https://t.me/jirum/97160",
-      "original_purchase_url": "https://link.coupang.com/a/iY2BeLSTiS",
-      "source_text": "☆특가 7,950원\n액츠 퍼펙트 실내건조 일반용 액상세제 프레시 플로럴향 본품 3.2L\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY2BeLSTiS\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T02:54:26+00:00",
-      "title": "☆특가 7,950원",
-      "sale_price_krw": 7950
-    },
-    {
       "id": 97161,
       "source_post_url": "https://t.me/jirum/97161",
       "original_purchase_url": "https://link.coupang.com/a/iY2BKwGFum",
@@ -616,6 +607,12 @@
       "display_pct": 25,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T02:40:33.091044+00:00"
+    },
+    "97160": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T02:55:46.077395+00:00"
     }
   }
 }
