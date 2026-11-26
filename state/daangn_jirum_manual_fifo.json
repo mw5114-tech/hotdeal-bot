@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97212,
-  "pending": [],
+  "last_scanned_id": 97213,
+  "pending": [
+    {
+      "id": 97213,
+      "source_post_url": "https://t.me/jirum/97213",
+      "original_purchase_url": "https://link.coupang.com/a/iZC312Ga3U",
+      "source_text": "☆특가 10,200원\n초정탄산수, 190ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZC312Ga3U\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T11:24:42+00:00",
+      "title": "☆특가 10,200원",
+      "sale_price_krw": 10200
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
