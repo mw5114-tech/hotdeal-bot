@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97206,
-  "pending": [
-    {
-      "id": 97206,
-      "source_post_url": "https://t.me/jirum/97206",
-      "original_purchase_url": "https://link.coupang.com/a/iZvEdyg7Ua",
-      "source_text": "☆특가 11,830원 (23.7% 할인)\n프레샤인 못난이사과, 3kg, 1개\n📌 가격 현황\n- 정상가: 15,500원\n- 할인: 3,670원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZvEdyg7Ua\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T09:40:56+00:00",
-      "title": "프레샤인 못난이사과, 3kg, 1개",
-      "sale_price_krw": 11830
-    }
-  ],
-  "in_flight": {
-    "id": 97206,
-    "status": "CLAIMED",
-    "run_id": "45794357186",
-    "at": "2026-11-26T09:43:42.311295+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9441,6 +9426,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T09:19:30.473268+00:00",
       "run_id": "45790780996"
+    },
+    "97206": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%84%EB%A0%88%EC%83%A4%EC%9D%B8-%EB%AA%BB%EB%82%9C%EC%9D%B4%EC%82%AC%EA%B3%BC-3kg-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-P5aZOxVP?from=write",
+      "posted_at_utc": "2026-11-26T09:40:56+00:00",
+      "product_id": "5611991510",
+      "item_id": "9072375286",
+      "vendor_item_id": "76358677658",
+      "at": "2026-11-26T09:44:02.635993+00:00",
+      "run_id": "45794357186"
     }
   },
   "skipped_non_coupang": 1173,
