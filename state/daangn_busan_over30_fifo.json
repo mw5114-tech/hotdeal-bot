@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97155,
-  "pending": [
-    {
-      "id": 97155,
-      "source_post_url": "https://t.me/jirum/97155",
-      "original_purchase_url": "https://link.coupang.com/a/iYZs7rYARo",
-      "source_text": "☆특가 7,330원\n풀무원 생가득 육즙듬뿍만두 (냉동), 400g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYZs7rYARo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T02:10:37+00:00",
-      "title": "☆특가 7,330원",
-      "sale_price_krw": 7330
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -589,6 +579,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T01:54:34.439751+00:00"
+    },
+    "97155": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T02:11:33.831463+00:00"
     }
   }
 }
