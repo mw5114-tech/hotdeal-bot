@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97183,
-  "pending": [
-    {
-      "id": 97183,
-      "source_post_url": "https://t.me/jirum/97183",
-      "original_purchase_url": "https://link.coupang.com/a/iZk2slU6Bo",
-      "source_text": "🔥🔥🔥무지성 7,870원 (47.5% 할인)🔥🔥🔥\n엘라스틴 시그니처 극손상 헤어팩 트리트먼트 생화향, 1L, 1개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 7,130원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZk2slU6Bo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T07:12:28+00:00",
-      "title": "엘라스틴 시그니처 극손상 헤어팩 트리트먼트 생화향, 1L, 1개",
-      "sale_price_krw": 7870
-    }
-  ],
-  "in_flight": {
-    "id": 97183,
-    "status": "CLAIMED",
-    "run_id": "45773669507",
-    "at": "2026-11-26T07:13:51.569163+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -337,6 +322,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T07:08:48.556791+00:00",
       "run_id": "45773066239"
+    },
+    "97183": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B4-%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98-%EA%B7%B9%EC%86%90%EC%83%81-%ED%97%A4%EC%96%B4%ED%8C%A9-%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%A8%BC%ED%8A%B8-%EC%83%9D%ED%99%94%ED%96%A5-1L-1-45%ED%95%A0%EC%9D%B8-dgxJKlvj?from=write",
+      "posted_at_utc": "2026-11-26T07:12:28+00:00",
+      "product_id": "8497222107",
+      "item_id": "24339963873",
+      "vendor_item_id": null,
+      "at": "2026-11-26T07:14:09.704171+00:00",
+      "run_id": "45773669507"
     }
   },
   "skipped_non_coupang": 88,
