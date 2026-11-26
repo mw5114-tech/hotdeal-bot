@@ -3,17 +3,6 @@
   "last_scanned_id": 97206,
   "pending": [
     {
-      "id": 97205,
-      "source_message_id": 97205,
-      "source_post_url": "https://t.me/jirum/97205",
-      "original_purchase_url": "https://link.coupang.com/a/iZt0mNYt9o",
-      "title": "☆특가 7,040원",
-      "source_text": "☆특가 7,040원\n모리나가 솔티드 캐러멜, 83g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZt0mNYt9o\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 7040,
-      "posted_at_utc": "2026-11-26T09:17:56+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97206,
       "source_message_id": 97206,
       "source_post_url": "https://t.me/jirum/97206",
@@ -2990,6 +2979,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-26T07:51:50.789794+00:00"
+    },
+    "97205": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-26T09:47:06.601616+00:00"
     }
   },
   "in_flight": null,
