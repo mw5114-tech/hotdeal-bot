@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97155,
-  "pending": [
-    {
-      "id": 97155,
-      "source_post_url": "https://t.me/jirum/97155",
-      "original_purchase_url": "https://link.coupang.com/a/iYZs7rYARo",
-      "source_text": "☆특가 7,330원\n풀무원 생가득 육즙듬뿍만두 (냉동), 400g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYZs7rYARo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T02:10:37+00:00",
-      "title": "☆특가 7,330원",
-      "sale_price_krw": 7330
-    }
-  ],
-  "in_flight": {
-    "id": 97155,
-    "status": "CLAIMED",
-    "run_id": "45740700169",
-    "at": "2026-11-26T02:11:37.958123+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9131,6 +9116,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T01:54:54.475584+00:00",
       "run_id": "45738798551"
+    },
+    "97155": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%EC%83%9D%EA%B0%80%EB%93%9D-%EC%9C%A1%EC%A6%99%EB%93%AC%EB%BF%8D%EB%A7%8C%EB%91%90-%EB%83%89%EB%8F%99-400g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Aqq6eb4A?from=write",
+      "posted_at_utc": "2026-11-26T02:10:37+00:00",
+      "product_id": "1392584750",
+      "item_id": "2428034642",
+      "vendor_item_id": null,
+      "at": "2026-11-26T02:11:55.870531+00:00",
+      "run_id": "45740700169"
     }
   },
   "skipped_non_coupang": 1159,
