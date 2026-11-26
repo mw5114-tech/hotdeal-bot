@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97244,
+  "last_scanned_id": 97245,
   "pending": [
     {
       "id": 97243,
@@ -20,6 +20,15 @@
       "posted_at_utc": "2026-11-26T15:37:47+00:00",
       "title": "☆특가 10,080원",
       "sale_price_krw": 10080
+    },
+    {
+      "id": 97245,
+      "source_post_url": "https://t.me/jirum/97245",
+      "original_purchase_url": "https://link.coupang.com/a/iZVpbHB6WG",
+      "source_text": "☆특가 17,400원\n카프리썬 오렌지망고 200ml 40개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZVpbHB6WG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T15:41:22+00:00",
+      "title": "☆특가 17,400원",
+      "sale_price_krw": 17400
     }
   ],
   "in_flight": null,
