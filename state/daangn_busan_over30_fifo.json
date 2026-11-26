@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97167,
-  "pending": [
-    {
-      "id": 97167,
-      "source_post_url": "https://t.me/jirum/97167",
-      "original_purchase_url": "https://link.coupang.com/a/iY23m7DrWu",
-      "source_text": "☆특가 16,230원\n등받이가 아기 몸을 받쳐주고 물 빠짐이 편리한 구조라 목욕시키기 좋아요\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY23m7DrWu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T03:00:47+00:00",
-      "title": "☆특가 16,230원",
-      "sale_price_krw": 16230
-    }
-  ],
-  "in_flight": {
-    "id": 97167,
-    "status": "CLAIMED",
-    "run_id": "45746173517",
-    "at": "2026-11-26T03:01:37.971312+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -297,6 +282,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T02:57:55.747373+00:00",
       "run_id": "45745754422"
+    },
+    "97167": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A6%AC%ED%8B%80%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EB%93%B1%EB%B0%9B%EC%9D%B4-%EC%9C%A0%EC%95%84%EC%9A%95%EC%A1%B0-%EB%B2%A0%EC%9D%B4%EC%A7%80-40%ED%95%A0%EC%9D%B8-A6axqkXj?from=write",
+      "posted_at_utc": "2026-11-26T03:00:47+00:00",
+      "product_id": "7060172516",
+      "item_id": "17503399251",
+      "vendor_item_id": null,
+      "at": "2026-11-26T03:01:57.546561+00:00",
+      "run_id": "45746173517"
     }
   },
   "skipped_non_coupang": 84,
