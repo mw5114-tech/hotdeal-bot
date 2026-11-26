@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97237,
-  "pending": [
-    {
-      "id": 97237,
-      "source_post_url": "https://t.me/jirum/97237",
-      "original_purchase_url": "https://link.coupang.com/a/iZUQvISEdU",
-      "source_text": "☆특가 8,260원\n바디홀릭 스테이누디 헤어 앤 바디미스트 그래시 튤립향 100ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUQvISEdU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:33:32+00:00",
-      "title": "☆특가 8,260원",
-      "sale_price_krw": 8260
-    }
-  ],
-  "in_flight": {
-    "id": 97237,
-    "status": "CLAIMED",
-    "run_id": "45850378278",
-    "at": "2026-11-26T15:35:05.502865+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -436,6 +421,16 @@
       "item_id": "26763392424",
       "vendor_item_id": null,
       "at": "2026-11-26T15:35:01.471839+00:00",
+      "run_id": "45850378278"
+    },
+    "97237": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B0%94%EB%94%94%ED%99%80%EB%A6%AD-%EC%8A%A4%ED%85%8C%EC%9D%B4%EB%88%84%EB%94%94-%ED%97%A4%EC%96%B4-%EC%95%A4-%EB%B0%94%EB%94%94%EB%AF%B8%EC%8A%A4%ED%8A%B8-%EA%B7%B8%EB%9E%98%EC%8B%9C-%ED%8A%A4%EB%A6%BD%ED%96%A5-100-30%ED%95%A0%EC%9D%B8-dE3QGpnA?from=write",
+      "posted_at_utc": "2026-11-26T15:33:32+00:00",
+      "product_id": "5608472294",
+      "item_id": "20317472083",
+      "vendor_item_id": null,
+      "at": "2026-11-26T15:35:24.408373+00:00",
       "run_id": "45850378278"
     }
   },
