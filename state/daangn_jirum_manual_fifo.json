@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97180,
-  "pending": [
-    {
-      "id": 97180,
-      "source_post_url": "https://t.me/jirum/97180",
-      "original_purchase_url": "https://link.coupang.com/a/iZkv8niMLI",
-      "source_text": "👍대박 7,280원 (33.8% 할인)\n오리온 진한 디저트 케익 오뜨 치즈, 156g, 4개\n📌 가격 현황\n- 정상가: 11,000원\n- 할인: 3,720원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZkv8niMLI\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T07:05:10+00:00",
-      "title": "오리온 진한 디저트 케익 오뜨 치즈, 156g, 4개",
-      "sale_price_krw": 7280
-    }
-  ],
-  "in_flight": {
-    "id": 97180,
-    "status": "CLAIMED",
-    "run_id": "45772822377",
-    "at": "2026-11-26T07:06:32.371501+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9281,6 +9266,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T06:56:22.225227+00:00",
       "run_id": "45771526418"
+    },
+    "97180": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EC%A7%84%ED%95%9C-%EB%94%94%EC%A0%80%ED%8A%B8-%EC%BC%80%EC%9D%B5-%EC%98%A4%EB%9C%A8-%EC%B9%98%EC%A6%88-156g-4%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A3oE71rA?from=write",
+      "posted_at_utc": "2026-11-26T07:05:10+00:00",
+      "product_id": "6326075123",
+      "item_id": "13209020537",
+      "vendor_item_id": null,
+      "at": "2026-11-26T07:06:52.227759+00:00",
+      "run_id": "45772822377"
     }
   },
   "skipped_non_coupang": 1166,
