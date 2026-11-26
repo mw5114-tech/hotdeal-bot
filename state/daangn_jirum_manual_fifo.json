@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97180,
-  "pending": [],
+  "last_scanned_id": 97182,
+  "pending": [
+    {
+      "id": 97182,
+      "source_post_url": "https://t.me/jirum/97182",
+      "original_purchase_url": "https://link.coupang.com/a/iZkE2FmDIa",
+      "source_text": "👍대박 4,100원 (31.7% 할인)\n오리온 미쯔 황치즈 6p, 222g, 2개\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 1,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZkE2FmDIa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T07:07:11+00:00",
+      "title": "오리온 미쯔 황치즈 6p, 222g, 2개",
+      "sale_price_krw": 4100
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -9278,7 +9288,7 @@
       "run_id": "45772822377"
     }
   },
-  "skipped_non_coupang": 1166,
+  "skipped_non_coupang": 1167,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
