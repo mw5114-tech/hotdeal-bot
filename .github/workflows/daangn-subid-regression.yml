@@ -82,7 +82,7 @@ jobs:
           assert 'secrets.COUPANG_PARTNERS_SECRET_KEY' in main
           assert 'apply_official_api_link' in Path('gh_only/naver_blog_jirum.py').read_text()
           assert 'python -m gh_only.naver_blog_jirum batch' in main
-          assert 'MAX_BATCH_POSTS = 4' in Path('gh_only/naver_blog_jirum.py').read_text()
+          assert 'MAX_BATCH_POSTS = 6' in Path('gh_only/naver_blog_jirum.py').read_text()
           restored = Path('.github/workflows/daangn-cafe-restored.yml').read_text()
           assert 'https://cafe.daangn.com/kupang-teuggaye' in restored
           assert "DAANGN_PUBLISH_PAUSED: 'false'" in restored
@@ -126,8 +126,9 @@ jobs:
                   "reference_source": basis, "similar_only": False}}
           assert busan_discount_eligible(deal(35, 6500))
           assert busan_discount_eligible(deal(45, 5500))
-          assert not busan_discount_eligible(deal(30, 7000))
-          assert not busan_discount_eligible(deal(35, 7000))
+          assert busan_discount_eligible(deal(30, 7000))
+          assert not busan_discount_eligible(deal(30, 7001))
+          assert not busan_discount_eligible(deal(35, 7100))
           assert not busan_discount_eligible(deal(40, 6000, "fallcent_similar_search_current"))
           assert not busan_discount_eligible({"title": "상품 [50%할인]"})
           with patch.dict(os.environ, {"DAANGN_BUSAN_CAFE_MODE": "true",

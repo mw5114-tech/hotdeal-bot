@@ -930,6 +930,87 @@ class ManualQueueTests(unittest.TestCase):
             "posted_at_utc":"2026-11-02T04:00:00"
         },reference=now),"POSTED_AT_UNKNOWN")
 
+    def test_image_skip_waits_for_stale_reads_then_publishes_next_only_once(self):
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        class LaggingImageSkipStore(FakeStore):
+            def __init__(self, value):
+                super().__init__(value)
+                self.old = None
+                self.remaining = 0
+            def write(self, state, sha, message):
+                before = copy.deepcopy(self.value)
+                super().write(state, sha, message)
+                if "archive unverifiable Lowchart" in message:
+                    self.old = before
+                    self.remaining = 2
+            def read(self):
+                if self.remaining:
+                    self.remaining -= 1
+                    return copy.deepcopy(self.old), "sha-test"
+                return super().read()
+        store = LaggingImageSkipStore(initial)
+        built = []
+        def build(current):
+            sid = current["pending"][0]["id"]
+            built.append(sid)
+            if sid == 94744:
+                raise RuntimeError("POST_EVIDENCE_NOT_READY")
+            return {"source_id": sid}
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "image-lag",
+                                      "JIRUM_IMAGE_SOURCE": "lowchart",
+                                      "DAANGN_BUSAN_CAFE_MODE": "false",
+                                      "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.permanent_lowchart_failure",
+                   return_value="LOWCHART_ITEM_PAGE_NOT_FOUND"), \
+             patch("gh_only.jirum_manual_queue.build_next", side_effect=build), \
+             patch("gh_only.jirum_manual_queue.time.sleep") as sleep, \
+             patch("gh_only.jirum_manual_publisher.publish_one", return_value={
+                 "status": "POST_PUBLISHED_AND_FORMAT_VERIFIED",
+                 "post_url": "https://cafe.daangn.com/posts/94745",
+                 "submit_attempted": True}) as publish:
+            self.assertEqual(publish_pending(store, drain=True, clock=lambda: 0), 0)
+        self.assertEqual(built, [94744, 94745])
+        self.assertEqual(sleep.call_count, 2)
+        self.assertEqual(len(store.writes), 3)
+        self.assertEqual(store.value["pending"], [])
+        self.assertIn("94744", store.value["skipped_unverifiable"])
+        self.assertIn("94745", store.value["published"])
+        publish.assert_called_once()
+
+    def test_image_skip_idempotent_and_conflict_fails_closed(self):
+        from gh_only.jirum_manual_queue import archive_unverifiable
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        store = FakeStore(initial)
+        first = archive_unverifiable(store, 94744, "LOWCHART_ITEM_PAGE_NOT_FOUND")
+        second = archive_unverifiable(store, 94744, "LOWCHART_ITEM_PAGE_NOT_FOUND")
+        self.assertEqual(first, second)
+        self.assertEqual(len(store.writes), 1)
+        with self.assertRaisesRegex(RuntimeError, "IMAGE_SKIP_CHECKPOINT_CONFLICT"):
+            archive_unverifiable(store, 94744, "PHOTO_EVIDENCE_UNAVAILABLE")
+        self.assertEqual([row["id"] for row in store.value["pending"]], [94745])
+
+    def test_image_skip_visibility_timeout_never_repeats_write_or_publishes(self):
+        initial, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
+        class NeverVisible(FakeStore):
+            def read(self):
+                return copy.deepcopy(initial), "sha-test"
+        store = NeverVisible(initial)
+        with patch.dict(os.environ, {"GITHUB_RUN_ID": "image-timeout",
+                                      "JIRUM_IMAGE_SOURCE": "lowchart",
+                                      "DAANGN_BUSAN_CAFE_MODE": "false",
+                                      "JIRUM_REQUIRE_FRESH_POST": "false"}), \
+             patch("gh_only.jirum_manual_queue.permanent_lowchart_failure",
+                   return_value="LOWCHART_ITEM_PAGE_NOT_FOUND"), \
+             patch("gh_only.jirum_manual_queue.build_next",
+                   side_effect=RuntimeError("POST_EVIDENCE_NOT_READY")) as build, \
+             patch("gh_only.jirum_manual_queue.time.sleep"), \
+             patch("gh_only.jirum_manual_publisher.publish_one") as publish:
+            with self.assertRaisesRegex(RuntimeError, "IMAGE_SKIP_CHECKPOINT_NOT_YET_VISIBLE"):
+                publish_pending(store, drain=True, clock=lambda: 0)
+        self.assertEqual(len(store.writes), 1)
+        build.assert_called_once()
+        publish.assert_not_called()
+
     def test_unverifiable_lowchart_photo_skips_only_bad_deal(self):
         state, _, _ = ingest(baseline(), [deal(94744), deal(94745)])
         store = FakeStore(state)

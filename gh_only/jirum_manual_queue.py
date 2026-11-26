@@ -251,19 +251,57 @@ def permanent_lowchart_failure(folder: Path) -> str | None:
     return None
 
 
-def archive_unverifiable(store, source_id: int, reason: str) -> None:
+def await_unverifiable_checkpoint(store, source_id: int, receipt: dict,
+                                  *, sleeper=None) -> dict:
+    """Read-only visibility barrier for an image skip, never repeat a write."""
+    sleeper = sleeper or time.sleep
+    key = str(source_id)
+    for attempt in range(PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS):
+        state, _ = store.read()
+        if (state["in_flight"] is not None or key in state["published"]
+                or any(key in state.get(bucket, {}) for bucket in
+                       ("skipped_expired", "skipped_busan_discount"))):
+            raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        saved = state.get("skipped_unverifiable", {}).get(key)
+        ids = [row["id"] for row in state["pending"]]
+        if saved is not None:
+            if saved != receipt or source_id in ids:
+                raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+            print("DAANGN_IMAGE_SKIP_CHECKPOINT_VISIBLE source_id=" + key)
+            return state
+        if not ids or ids[0] != source_id:
+            raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        if attempt + 1 < PUBLISHED_CHECKPOINT_VISIBILITY_ATTEMPTS:
+            print("DAANGN_IMAGE_SKIP_CHECKPOINT_WAIT source_id=" + key)
+            sleeper(1)
+    raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_NOT_YET_VISIBLE_NO_POST")
+
+
+def archive_unverifiable(store, source_id: int, reason: str, *, sleeper=None) -> dict:
     if reason not in PERMANENT_LOWCHART_ISSUES:
         raise ValueError("NOT_PERMANENT_IMAGE_MISMATCH")
     state, sha = store.read()
-    if (state["in_flight"] is not None or not state["pending"]
-            or state["pending"][0]["id"] != source_id):
+    key = str(source_id)
+    if (state["in_flight"] is not None or key in state["published"]
+            or any(key in state.get(bucket, {}) for bucket in
+                   ("skipped_expired", "skipped_busan_discount"))):
+        raise RuntimeError("QUEUE_CHANGED_BEFORE_IMAGE_SKIP")
+    saved = state.get("skipped_unverifiable", {}).get(key)
+    if saved is not None:
+        if (saved.get("status") != reason
+                or any(row["id"] == source_id for row in state["pending"])):
+            raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_CONFLICT_NO_POST")
+        return state
+    if not state["pending"] or state["pending"][0]["id"] != source_id:
         raise RuntimeError("QUEUE_CHANGED_BEFORE_IMAGE_SKIP")
     row = state["pending"].pop(0)
-    state.setdefault("skipped_unverifiable", {})[str(source_id)] = {
+    receipt = {
         "status": reason, "source_post_url": row["source_post_url"],
         "source_title": row.get("title", "")[:180], "at": now_utc()
     }
+    state.setdefault("skipped_unverifiable", {})[key] = receipt
     store.write(state, sha, "state: archive unverifiable Lowchart photo without posting")
+    return await_unverifiable_checkpoint(store, source_id, receipt, sleeper=sleeper)
 
 
 def defer_transient_lowchart_photo(store, source_id: int, folder: Path) -> bool:
@@ -1333,7 +1371,9 @@ def publish_pending(store: GithubState, *, drain: bool = False,
         raise RuntimeError("GITHUB_RUN_ID_MISSING")
     completed = 0
     discount_skipped = 0
+    image_skipped = 0
     verified_checkpoint_state = None
+    image_skip_receipts = {}
     skip_receipts = {}
     published_receipts = {}
     while True:
@@ -1343,6 +1383,9 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             state, verified_checkpoint_state = verified_checkpoint_state, None
         else:
             state, _ = store.read()
+        for sid, receipt in image_skip_receipts.items():
+            if state.get("skipped_unverifiable", {}).get(str(sid)) != receipt:
+                state = await_unverifiable_checkpoint(store, sid, receipt)
         # An already confirmed publication may briefly regress to its old
         # claim in a later Contents GET. Never build or submit from that view.
         for sid, url in published_receipts.items():
@@ -1370,6 +1413,10 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                or any(row["id"] == sid for row in state["pending"])
                for sid, url in published_receipts.items()):
             raise RuntimeError("DAANGN_PUBLISHED_CHECKPOINT_REGRESSED_NO_REPOST")
+        if any(state.get("skipped_unverifiable", {}).get(str(sid)) != receipt
+               or any(row["id"] == sid for row in state["pending"])
+               for sid, receipt in image_skip_receipts.items()):
+            raise RuntimeError("DAANGN_IMAGE_SKIP_CHECKPOINT_REGRESSED_NO_POST")
         if state["in_flight"] is not None:
             raise RuntimeError("PREVIOUS_POST_REQUIRES_MANUAL_REVIEW")
         if enforcing_freshness() and state["pending"]:
@@ -1395,7 +1442,7 @@ def publish_pending(store: GithubState, *, drain: bool = False,
             }))
             return 0
         # Check budget only BETWEEN posts; never cut off mid-submission.
-        if drain and (completed or discount_skipped) and clock() - started >= DRAIN_TIME_BUDGET_SECONDS:
+        if drain and (completed or discount_skipped or image_skipped) and clock() - started >= DRAIN_TIME_BUDGET_SECONDS:
             print("JIRUM_FIFO_DRAIN_PAUSED " + json.dumps({
                 "published_this_run": completed,
                 "pending": len(state["pending"]),
@@ -1419,7 +1466,9 @@ def publish_pending(store: GithubState, *, drain: bool = False,
                         # Wait for a later scheduled run / shared exact-item
                         # bundle instead of permanently skipping on one IP 403.
                         return 0
-                    archive_unverifiable(store, source_id, permanent)
+                    verified_checkpoint_state = archive_unverifiable(store, source_id, permanent)
+                    image_skip_receipts[source_id] = verified_checkpoint_state["skipped_unverifiable"][str(source_id)]
+                    image_skipped += 1
                     print("JIRUM_LOWCHART_UNVERIFIABLE_ARCHIVED " + json.dumps({
                         "source_id": source_id, "reason": permanent,
                         "no_post_submitted": True,
