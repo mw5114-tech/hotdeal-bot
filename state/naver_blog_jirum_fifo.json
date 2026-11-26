@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97171,
+  "last_scanned_id": 97172,
   "pending": [
     {
       "id": 97171,
@@ -12,6 +12,16 @@
       "sale_price_krw": 16180,
       "posted_at_utc": "2026-11-26T04:04:30+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97172,
+      "source_message_id": 97172,
+      "source_post_url": "https://t.me/jirum/97172",
+      "original_purchase_url": "https://link.coupang.com/a/iZaNmZ5qay",
+      "title": "☆특가 25,900원",
+      "source_text": "☆특가 25,900원\n[2026년산 햅쌀][당일도정] 하동통합 별천지 하동쌀 영호진미 상등급, 10kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZaNmZ5qay\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 25900,
+      "posted_at_utc": "2026-11-26T04:49:07+00:00"
     }
   ],
   "published": {
