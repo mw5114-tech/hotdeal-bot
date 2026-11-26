@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97252,
+  "last_scanned_id": 97253,
   "pending": [
     {
       "id": 97252,
@@ -11,6 +11,15 @@
       "title": "코카콜라 제로, 350ml, 24개",
       "sale_price_krw": 16120,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97253,
+      "source_post_url": "https://t.me/jirum/97253",
+      "original_purchase_url": "https://link.coupang.com/a/i0r8p3SCKO",
+      "source_text": "☆특가 21,990원\n아카페라 빙그레 사이즈업 벤티 헤이즐넛아메리카노, 600ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0r8p3SCKO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T23:19:22+00:00",
+      "title": "☆특가 21,990원",
+      "sale_price_krw": 21990
     }
   ],
   "in_flight": null,
