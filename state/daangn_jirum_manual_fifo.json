@@ -3,16 +3,6 @@
   "last_scanned_id": 97220,
   "pending": [
     {
-      "id": 97219,
-      "source_post_url": "https://t.me/jirum/97219",
-      "original_purchase_url": "https://link.coupang.com/a/iZKPDjZ9b2",
-      "source_text": "☆특가 14,220원 (23.6% 할인)\n완숙 토마토, 1kg, 4팩\n📌 가격 현황\n- 정상가: 18,610원\n- 할인: 4,390원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZKPDjZ9b2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T13:13:24+00:00",
-      "title": "완숙 토마토, 1kg, 4팩",
-      "sale_price_krw": 14220,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97220,
       "source_post_url": "https://t.me/jirum/97220",
       "original_purchase_url": "https://link.coupang.com/a/iZMADku6zQ",
@@ -22,12 +12,7 @@
       "sale_price_krw": 21430
     }
   ],
-  "in_flight": {
-    "id": 97219,
-    "status": "CLAIMED",
-    "run_id": "45831169180",
-    "at": "2026-11-26T13:39:13.317213+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9521,6 +9506,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T12:28:11.243828+00:00",
       "run_id": "45819666057"
+    },
+    "97219": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%99%84%EC%88%99-%ED%86%A0%EB%A7%88%ED%86%A0-1kg-4%ED%8C%A9-30%ED%95%A0%EC%9D%B8-dDWQXZgP?from=write",
+      "posted_at_utc": "2026-11-26T13:13:24+00:00",
+      "product_id": "7662459345",
+      "item_id": "20806855630",
+      "vendor_item_id": "87875901699",
+      "at": "2026-11-26T13:39:34.349220+00:00",
+      "run_id": "45831169180"
     }
   },
   "skipped_non_coupang": 1176,
