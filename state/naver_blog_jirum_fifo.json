@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97146,
-  "pending": [
-    {
-      "id": 97146,
-      "source_message_id": 97146,
-      "source_post_url": "https://t.me/jirum/97146",
-      "original_purchase_url": "https://link.coupang.com/a/iYTq7WyXhQ",
-      "title": "☆특가 9,530원",
-      "source_text": "☆특가 9,530원\n배스킨라빈스 민트초코 우유, 190ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iYTq7WyXhQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9530,
-      "posted_at_utc": "2026-11-26T00:46:13+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2383,6 +2372,10 @@
     "97145": {
       "url": "https://blog.naver.com/mw5114/224492640641",
       "at": "2026-11-26T00:41:39.223626+00:00"
+    },
+    "97146": {
+      "url": "https://blog.naver.com/mw5114/224492650109",
+      "at": "2026-11-26T00:48:24.111464+00:00"
     }
   },
   "skipped": {
@@ -2825,12 +2818,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97146,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45731144830",
-    "at": "2026-11-26T00:47:41.647213+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
