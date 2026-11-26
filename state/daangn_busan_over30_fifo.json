@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97220,
-  "pending": [],
+  "last_scanned_id": 97237,
+  "pending": [
+    {
+      "id": 97236,
+      "source_post_url": "https://t.me/jirum/97236",
+      "original_purchase_url": "https://link.coupang.com/a/iZUPJnOC6u",
+      "source_text": "☆특가 7,860원\n뷰카 오브제 듀얼 초미세 탄력모 칫솔 18개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUPJnOC6u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T15:33:22+00:00",
+      "title": "☆특가 7,860원",
+      "sale_price_krw": 7860
+    },
+    {
+      "id": 97237,
+      "source_post_url": "https://t.me/jirum/97237",
+      "original_purchase_url": "https://link.coupang.com/a/iZUQvISEdU",
+      "source_text": "☆특가 8,260원\n바디홀릭 스테이누디 헤어 앤 바디미스트 그래시 튤립향 100ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUQvISEdU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T15:33:32+00:00",
+      "title": "☆특가 8,260원",
+      "sale_price_krw": 8260
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -414,7 +433,7 @@
       "run_id": "45831169180"
     }
   },
-  "skipped_non_coupang": 97,
+  "skipped_non_coupang": 112,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
