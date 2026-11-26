@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97168,
-  "pending": [
-    {
-      "id": 97168,
-      "source_post_url": "https://t.me/jirum/97168",
-      "original_purchase_url": "https://link.coupang.com/a/iY26TR7yO4",
-      "source_text": "☆특가 4,920원\n피죤 레귤러 섬유유연제 블루비앙카 리필 2.3L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY26TR7yO4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T03:01:35+00:00",
-      "title": "☆특가 4,920원",
-      "sale_price_krw": 4920
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -655,6 +645,12 @@
       "display_pct": null,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T03:01:29.979574+00:00"
+    },
+    "97168": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T03:02:44.147646+00:00"
     }
   }
 }
