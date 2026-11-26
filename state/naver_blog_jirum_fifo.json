@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97237,
-  "pending": [
-    {
-      "id": 97237,
-      "source_message_id": 97237,
-      "source_post_url": "https://t.me/jirum/97237",
-      "original_purchase_url": "https://link.coupang.com/a/iZUQvISEdU",
-      "title": "☆특가 8,260원",
-      "source_text": "☆특가 8,260원\n바디홀릭 스테이누디 헤어 앤 바디미스트 그래시 튤립향 100ml\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUQvISEdU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8260,
-      "posted_at_utc": "2026-11-26T15:33:32+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2567,6 +2556,10 @@
     "97236": {
       "url": "https://blog.naver.com/mw5114/224493866171",
       "at": "2026-11-26T15:35:30.591097+00:00"
+    },
+    "97237": {
+      "url": "https://blog.naver.com/mw5114/224493867119",
+      "at": "2026-11-26T15:36:31.904134+00:00"
     }
   },
   "skipped": {
@@ -3039,12 +3032,7 @@
       "at": "2026-11-26T11:32:12.493075+00:00"
     }
   },
-  "in_flight": {
-    "id": 97237,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45850378278",
-    "at": "2026-11-26T15:35:46.401796+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
