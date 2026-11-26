@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97190,
-  "pending": [
-    {
-      "id": 97190,
-      "source_message_id": 97190,
-      "source_post_url": "https://t.me/jirum/97190",
-      "original_purchase_url": "https://link.coupang.com/a/iZnliajSjQ",
-      "title": "무네오 재물운 성공운 소원성취 옥 진주 팔찌세트",
-      "source_text": "❤️초대박 4,800원 (40.0% 할인)\n무네오 재물운 성공운 소원성취 옥 진주 팔찌세트\n📌 가격 현황\n- 정상가: 8,000원\n- 할인: 3,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZnliajSjQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4800,
-      "posted_at_utc": "2026-11-26T07:44:42+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2935,6 +2923,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-26T07:22:12.855713+00:00"
+    },
+    "97190": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-26T07:51:50.789794+00:00"
     }
   },
   "in_flight": null,
