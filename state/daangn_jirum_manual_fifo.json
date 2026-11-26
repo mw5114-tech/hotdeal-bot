@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97168,
-  "pending": [
-    {
-      "id": 97168,
-      "source_post_url": "https://t.me/jirum/97168",
-      "original_purchase_url": "https://link.coupang.com/a/iY26TR7yO4",
-      "source_text": "☆특가 4,920원\n피죤 레귤러 섬유유연제 블루비앙카 리필 2.3L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY26TR7yO4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T03:01:35+00:00",
-      "title": "☆특가 4,920원",
-      "sale_price_krw": 4920
-    }
-  ],
-  "in_flight": {
-    "id": 97168,
-    "status": "CLAIMED",
-    "run_id": "45746315604",
-    "at": "2026-11-26T03:02:50.407338+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9221,6 +9206,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T03:02:15.667905+00:00",
       "run_id": "45746173517"
+    },
+    "97168": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%94%BC%EC%A3%A4-%EB%A0%88%EA%B7%A4%EB%9F%AC-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%B8%94%EB%A3%A8%EB%B9%84%EC%95%99%EC%B9%B4-%EB%A6%AC%ED%95%84-23L-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pk9Dyy4j?from=write",
+      "posted_at_utc": "2026-11-26T03:01:35+00:00",
+      "product_id": "7757681676",
+      "item_id": "6089494102",
+      "vendor_item_id": null,
+      "at": "2026-11-26T03:03:10.816328+00:00",
+      "run_id": "45746315604"
     }
   },
   "skipped_non_coupang": 1163,
