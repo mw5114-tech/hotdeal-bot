@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97161,
-  "pending": [
-    {
-      "id": 97161,
-      "source_message_id": 97161,
-      "source_post_url": "https://t.me/jirum/97161",
-      "original_purchase_url": "https://link.coupang.com/a/iY2BKwGFum",
-      "title": "☆특가 10,650원",
-      "source_text": "☆특가 10,650원\n르샤트라1802 초고농축 실내건조 섬유유연제 피오니부케향 리필 2L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY2BKwGFum\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10650,
-      "posted_at_utc": "2026-11-26T02:54:33+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2407,6 +2396,10 @@
     "97160": {
       "url": "https://blog.naver.com/mw5114/224492858611",
       "at": "2026-11-26T02:56:32.282038+00:00"
+    },
+    "97161": {
+      "url": "https://blog.naver.com/mw5114/224492860072",
+      "at": "2026-11-26T02:57:30.698741+00:00"
     }
   },
   "skipped": {
@@ -2849,12 +2842,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97161,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45745548648",
-    "at": "2026-11-26T02:56:46.420868+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
