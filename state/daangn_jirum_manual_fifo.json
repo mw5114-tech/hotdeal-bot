@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97218,
-  "pending": [
-    {
-      "id": 97218,
-      "source_post_url": "https://t.me/jirum/97218",
-      "original_purchase_url": "https://link.coupang.com/a/iZHrusX7nw",
-      "source_text": "☆특가 2,580원\n오리온 예감 치즈그라탕, 64g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZHrusX7nw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T12:25:59+00:00",
-      "title": "☆특가 2,580원",
-      "sale_price_krw": 2580
-    }
-  ],
-  "in_flight": {
-    "id": 97218,
-    "status": "CLAIMED",
-    "run_id": "45819666057",
-    "at": "2026-11-26T12:27:53.172419+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9500,6 +9485,16 @@
       "item_id": "18072939064",
       "vendor_item_id": null,
       "at": "2026-11-26T12:27:48.652573+00:00",
+      "run_id": "45819666057"
+    },
+    "97218": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%A6%AC%EC%98%A8-%EC%98%88%EA%B0%90-%EC%B9%98%EC%A6%88%EA%B7%B8%EB%9D%BC%ED%83%95-64g-2%EA%B0%9C-5%ED%95%A0%EC%9D%B8-jKar4W8P?from=write",
+      "posted_at_utc": "2026-11-26T12:25:59+00:00",
+      "product_id": "9499047567",
+      "item_id": "28297563845",
+      "vendor_item_id": null,
+      "at": "2026-11-26T12:28:11.243828+00:00",
       "run_id": "45819666057"
     }
   },
