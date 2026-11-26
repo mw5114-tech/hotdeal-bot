@@ -3,15 +3,6 @@
   "last_scanned_id": 97240,
   "pending": [
     {
-      "id": 97239,
-      "source_post_url": "https://t.me/jirum/97239",
-      "original_purchase_url": "https://link.coupang.com/a/iZUUhIjcku",
-      "source_text": "☆특가 22,700원\n동원참치 라이트 스탠다드 150g 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUUhIjcku\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:34:23+00:00",
-      "title": "☆특가 22,700원",
-      "sale_price_krw": 22700
-    },
-    {
       "id": 97240,
       "source_post_url": "https://t.me/jirum/97240",
       "original_purchase_url": "https://link.coupang.com/a/iZUXOiRyrA",
@@ -978,6 +969,12 @@
       "display_pct": null,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-26T15:35:58.069218+00:00"
+    },
+    "97239": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 5,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-26T15:36:07.415893+00:00"
     }
   }
 }
