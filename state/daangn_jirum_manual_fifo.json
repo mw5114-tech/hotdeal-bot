@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97254,
-  "pending": [
-    {
-      "id": 97254,
-      "source_post_url": "https://t.me/jirum/97254",
-      "original_purchase_url": "https://link.coupang.com/a/i0t6P5v1j2",
-      "source_text": "👍대박 9,100원 (39.3% 할인)\n에뛰드 마이 쁘띠 팔레트 7.2g\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 5,900원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0t6P5v1j2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T23:47:00+00:00",
-      "title": "에뛰드 마이 쁘띠 팔레트 7.2g",
-      "sale_price_krw": 9100
-    }
-  ],
-  "in_flight": {
-    "id": 97254,
-    "status": "CLAIMED",
-    "run_id": "45912980321",
-    "at": "2026-11-26T23:48:28.406808+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9711,6 +9696,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T23:21:16.416151+00:00",
       "run_id": "45910319284"
+    },
+    "97254": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%90%EB%9B%B0%EB%93%9C-%EB%A7%88%EC%9D%B4-%EC%81%98%EB%9D%A0-%ED%8C%94%EB%A0%88%ED%8A%B8-72g-04-%EB%84%8C-%EB%82%98%EB%A7%8C-%EB%B0%94%EB%9D%BC%EB%B0%A4-1-40%ED%95%A0%EC%9D%B8-d9aJ2led?from=write",
+      "posted_at_utc": "2026-11-26T23:47:00+00:00",
+      "product_id": "9340030631",
+      "item_id": "27698440480",
+      "vendor_item_id": null,
+      "at": "2026-11-26T23:48:52.244729+00:00",
+      "run_id": "45912980321"
     }
   },
   "skipped_non_coupang": 1191,
