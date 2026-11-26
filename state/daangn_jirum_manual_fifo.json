@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97249,
-  "pending": [
-    {
-      "id": 97249,
-      "source_post_url": "https://t.me/jirum/97249",
-      "original_purchase_url": "https://link.coupang.com/a/i0lPWXJPk4",
-      "source_text": "☆특가 9,620원 (26.0% 할인)\n하림 치킨너겟 (냉동), 1.2kg, 1개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 3,380원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0lPWXJPk4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T21:51:15+00:00",
-      "title": "하림 치킨너겟 (냉동), 1.2kg, 1개",
-      "sale_price_krw": 9620
-    }
-  ],
-  "in_flight": {
-    "id": 97249,
-    "status": "CLAIMED",
-    "run_id": "45900997277",
-    "at": "2026-11-26T21:52:15.293169+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9661,6 +9646,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T21:49:57.330087+00:00",
       "run_id": "45900694582"
+    },
+    "97249": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EB%A6%BC-%EC%B9%98%ED%82%A8%EB%84%88%EA%B2%9F-%EB%83%89%EB%8F%99-12kg-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-PW737GMP?from=write",
+      "posted_at_utc": "2026-11-26T21:51:15+00:00",
+      "product_id": "4567751809",
+      "item_id": "5575412259",
+      "vendor_item_id": null,
+      "at": "2026-11-26T21:52:33.565668+00:00",
+      "run_id": "45900997277"
     }
   },
   "skipped_non_coupang": 1191,
