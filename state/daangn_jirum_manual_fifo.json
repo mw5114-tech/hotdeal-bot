@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97246,
-  "pending": [
-    {
-      "id": 97246,
-      "source_post_url": "https://t.me/jirum/97246",
-      "original_purchase_url": "https://link.coupang.com/a/i0lfV8JSOy",
-      "source_text": "🔥🔥🔥무지성 13,670원 (49.4% 할인)🔥🔥🔥\n퀘이커 마시는 오트밀 오트 딸기, 50g, 20개\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 27,000원\n- 할인: 13,330원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0lfV8JSOy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T21:43:07+00:00",
-      "title": "퀘이커 마시는 오트밀 오트 딸기, 50g, 20개",
-      "sale_price_krw": 13670
-    }
-  ],
-  "in_flight": {
-    "id": 97246,
-    "status": "CLAIMED",
-    "run_id": "45900112552",
-    "at": "2026-11-26T21:44:13.474678+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9631,6 +9616,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T15:43:50.173073+00:00",
       "run_id": "45851699872"
+    },
+    "97246": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%80%98%EC%9D%B4%EC%BB%A4-%EB%A7%88%EC%8B%9C%EB%8A%94-%EC%98%A4%ED%8A%B8%EB%B0%80-%EC%98%A4%ED%8A%B8-%EB%94%B8%EA%B8%B0-50g-20%EA%B0%9C-50%ED%95%A0%EC%9D%B8-AeeveKZA?from=write",
+      "posted_at_utc": "2026-11-26T21:43:07+00:00",
+      "product_id": "5414916833",
+      "item_id": "28005618345",
+      "vendor_item_id": null,
+      "at": "2026-11-26T21:44:32.710528+00:00",
+      "run_id": "45900112552"
     }
   },
   "skipped_non_coupang": 1191,
