@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97196,
-  "pending": [
-    {
-      "id": 97196,
-      "source_post_url": "https://t.me/jirum/97196",
-      "original_purchase_url": "https://link.coupang.com/a/iZrvHZBTfF",
-      "source_text": "☆특가 6,980원 (11.6% 할인)\n덴마크 신선한 국산원유 모짜렐라 치즈\n📌 가격 현황\n- 정상가: 7,900원\n- 할인: 920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZrvHZBTfF\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T08:43:02+00:00",
-      "title": "덴마크 신선한 국산원유 모짜렐라 치즈",
-      "sale_price_krw": 6980
-    }
-  ],
-  "in_flight": {
-    "id": 97196,
-    "status": "CLAIMED",
-    "run_id": "45785587568",
-    "at": "2026-11-26T08:44:27.899384+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9390,6 +9375,16 @@
       "item_id": "25820485069",
       "vendor_item_id": null,
       "at": "2026-11-26T08:44:23.711879+00:00",
+      "run_id": "45785587568"
+    },
+    "97196": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B4%EB%A7%88%ED%81%AC-%EC%8B%A0%EC%84%A0%ED%95%9C-%EA%B5%AD%EC%82%B0%EC%9B%90%EC%9C%A0-%EB%AA%A8%EC%A7%9C%EB%A0%90%EB%9D%BC-%EC%B9%98%EC%A6%88-70g-4%EA%B0%9C%EC%9E%85-1%EA%B0%9C-15%ED%95%A0%EC%9D%B8-AO3XopBA?from=write",
+      "posted_at_utc": "2026-11-26T08:43:02+00:00",
+      "product_id": "7914701213",
+      "item_id": "21725917719",
+      "vendor_item_id": null,
+      "at": "2026-11-26T08:44:47.104680+00:00",
       "run_id": "45785587568"
     }
   },
