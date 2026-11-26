@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97194,
-  "pending": [
-    {
-      "id": 97194,
-      "source_post_url": "https://t.me/jirum/97194",
-      "original_purchase_url": "https://link.coupang.com/a/iZqZVg2snc",
-      "source_text": "☆특가 7,100원\n이니스프리 유채꿀 립밤, 초보습, 3.5g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZqZVg2snc\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T08:35:51+00:00",
-      "title": "☆특가 7,100원",
-      "sale_price_krw": 7100
-    }
-  ],
-  "in_flight": {
-    "id": 97194,
-    "status": "CLAIMED",
-    "run_id": "45784605770",
-    "at": "2026-11-26T08:37:05.978878+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9371,6 +9356,16 @@
       "vendor_item_id": null,
       "at": "2026-11-26T08:27:54.697315+00:00",
       "run_id": "45783255597"
+    },
+    "97194": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%EB%8B%88%EC%8A%A4%ED%94%84%EB%A6%AC-%EC%9C%A0%EC%B1%84%EA%BF%80-%EB%A6%BD%EB%B0%A4-%EC%B4%88%EB%B3%B4%EC%8A%B5-35g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-AL1rYZQP?from=write",
+      "posted_at_utc": "2026-11-26T08:35:51+00:00",
+      "product_id": "8502038937",
+      "item_id": "24671865072",
+      "vendor_item_id": null,
+      "at": "2026-11-26T08:37:24.898194+00:00",
+      "run_id": "45784605770"
     }
   },
   "skipped_non_coupang": 1169,
