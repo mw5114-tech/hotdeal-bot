@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97173,
-  "pending": [],
+  "last_scanned_id": 97175,
+  "pending": [
+    {
+      "id": 97174,
+      "source_post_url": "https://t.me/jirum/97174",
+      "original_purchase_url": "https://link.coupang.com/a/iZdbCX5Ml2",
+      "source_text": "☆특가 3,510원\n비비드키친 저당 닭가슴살 브리또 볶음고추장 125g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZdbCX5Ml2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T05:22:35+00:00",
+      "title": "☆특가 3,510원",
+      "sale_price_krw": 3510
+    },
+    {
+      "id": 97175,
+      "source_post_url": "https://t.me/jirum/97175",
+      "original_purchase_url": "https://link.coupang.com/a/iZddAUQECW",
+      "source_text": "☆특가 8,550원\n다향 무항생제 우리땅 오리 가슴살 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZddAUQECW\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T05:23:02+00:00",
+      "title": "☆특가 8,550원",
+      "sale_price_krw": 8550
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
