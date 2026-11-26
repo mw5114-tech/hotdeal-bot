@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97191,
-  "pending": [],
+  "last_scanned_id": 97192,
+  "pending": [
+    {
+      "id": 97192,
+      "source_message_id": 97192,
+      "source_post_url": "https://t.me/jirum/97192",
+      "original_purchase_url": "https://link.coupang.com/a/iZpvU91FjU",
+      "title": "☆특가 4,280원",
+      "source_text": "☆특가 4,280원\n도루코 페이스 파이브 5중 면도날, 4개입, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZpvU91FjU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4280,
+      "posted_at_utc": "2026-11-26T08:15:05+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
