@@ -3,15 +3,6 @@
   "last_scanned_id": 97237,
   "pending": [
     {
-      "id": 97236,
-      "source_post_url": "https://t.me/jirum/97236",
-      "original_purchase_url": "https://link.coupang.com/a/iZUPJnOC6u",
-      "source_text": "☆특가 7,860원\n뷰카 오브제 듀얼 초미세 탄력모 칫솔 18개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZUPJnOC6u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-26T15:33:22+00:00",
-      "title": "☆특가 7,860원",
-      "sale_price_krw": 7860
-    },
-    {
       "id": 97237,
       "source_post_url": "https://t.me/jirum/97237",
       "original_purchase_url": "https://link.coupang.com/a/iZUQvISEdU",
@@ -21,12 +12,7 @@
       "sale_price_krw": 8260
     }
   ],
-  "in_flight": {
-    "id": 97236,
-    "status": "CLAIMED",
-    "run_id": "45850378278",
-    "at": "2026-11-26T15:34:35.396564+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9540,6 +9526,16 @@
       "vendor_item_id": "3378094706",
       "at": "2026-11-26T13:39:57.776235+00:00",
       "run_id": "45831169180"
+    },
+    "97236": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B7%B0%EC%B9%B4-%EC%98%A4%EB%B8%8C%EC%A0%9C-%EB%93%80%EC%96%BC-%EC%B4%88%EB%AF%B8%EC%84%B8-%ED%83%84%EB%A0%A5%EB%AA%A8-%EC%B9%AB%EC%86%94-18%EA%B0%9C%EC%9E%85-1%EC%84%B8%ED%8A%B8-45%ED%95%A0%EC%9D%B8-jvOBqnmA?from=write",
+      "posted_at_utc": "2026-11-26T15:33:22+00:00",
+      "product_id": "9103582233",
+      "item_id": "26763392424",
+      "vendor_item_id": null,
+      "at": "2026-11-26T15:34:55.217954+00:00",
+      "run_id": "45850378278"
     }
   },
   "skipped_non_coupang": 1191,
