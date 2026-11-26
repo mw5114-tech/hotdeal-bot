@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97194,
-  "pending": [],
+  "last_scanned_id": 97196,
+  "pending": [
+    {
+      "id": 97195,
+      "source_message_id": 97195,
+      "source_post_url": "https://t.me/jirum/97195",
+      "original_purchase_url": "https://link.coupang.com/a/iZrvdAGsxM",
+      "title": "☆특가 12,800원",
+      "source_text": "☆특가 12,800원\n설향 딸기 중과, 500g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZrvdAGsxM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 12800,
+      "posted_at_utc": "2026-11-26T08:42:55+00:00"
+    },
+    {
+      "id": 97196,
+      "source_message_id": 97196,
+      "source_post_url": "https://t.me/jirum/97196",
+      "original_purchase_url": "https://link.coupang.com/a/iZrvHZBTfF",
+      "title": "덴마크 신선한 국산원유 모짜렐라 치즈",
+      "source_text": "☆특가 6,980원 (11.6% 할인)\n덴마크 신선한 국산원유 모짜렐라 치즈\n📌 가격 현황\n- 정상가: 7,900원\n- 할인: 920원\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZrvHZBTfF\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 6980,
+      "posted_at_utc": "2026-11-26T08:43:02+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
