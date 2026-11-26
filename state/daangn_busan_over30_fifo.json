@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97190,
+  "last_scanned_id": 97191,
   "pending": [
     {
       "id": 97190,
@@ -11,6 +11,15 @@
       "title": "무네오 재물운 성공운 소원성취 옥 진주 팔찌세트",
       "sale_price_krw": 4800,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97191,
+      "source_post_url": "https://t.me/jirum/97191",
+      "original_purchase_url": "https://link.coupang.com/a/iZoajCuDcq",
+      "source_text": "☆특가 13,110원\n남양과수원 제로 사과, 190ml, 48개\n📦 특가 바로가기\nhttps://link.coupang.com/a/iZoajCuDcq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-26T07:56:13+00:00",
+      "title": "☆특가 13,110원",
+      "sale_price_krw": 13110
     }
   ],
   "in_flight": null,
