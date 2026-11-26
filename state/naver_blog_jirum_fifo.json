@@ -3,16 +3,6 @@
   "last_scanned_id": 97167,
   "pending": [
     {
-      "id": 97166,
-      "source_message_id": 97166,
-      "source_post_url": "https://t.me/jirum/97166",
-      "original_purchase_url": "https://link.coupang.com/a/iY21fgAzoi",
-      "title": "☆특가 8,690원",
-      "source_text": "☆특가 8,690원\n조인 무항생제 백색 대란 30구\n📦 특가 바로가기\nhttps://link.coupang.com/a/iY21fgAzoi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8690,
-      "posted_at_utc": "2026-11-26T03:00:19+00:00"
-    },
-    {
       "id": 97167,
       "source_message_id": 97167,
       "source_post_url": "https://t.me/jirum/97167",
@@ -2429,6 +2419,10 @@
     "97164": {
       "url": "https://blog.naver.com/mw5114/224492863645",
       "at": "2026-11-26T02:59:49.524551+00:00"
+    },
+    "97166": {
+      "url": "https://blog.naver.com/mw5114/224492867271",
+      "at": "2026-11-26T03:02:14.476246+00:00"
     }
   },
   "skipped": {
@@ -2871,12 +2865,7 @@
       "at": "2026-11-25T23:46:43.494662+00:00"
     }
   },
-  "in_flight": {
-    "id": 97166,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45746173517",
-    "at": "2026-11-26T03:01:32.036990+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
