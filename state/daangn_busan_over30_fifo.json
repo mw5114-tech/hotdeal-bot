@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97324,
-  "pending": [
-    {
-      "id": 97324,
-      "source_post_url": "https://t.me/jirum/97324",
-      "original_purchase_url": "https://link.coupang.com/a/i08Du0p40a",
-      "source_text": "❤️초대박 4,000원 (42.9% 할인)\n폴앤박 유레카 블루베리\n📌 가격 현황\n- 정상가: 7,000원\n- 할인: 3,000원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i08Du0p40a\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T09:14:07+00:00",
-      "title": "폴앤박 유레카 블루베리",
-      "sale_price_krw": 4000
-    }
-  ],
-  "in_flight": {
-    "id": 97324,
-    "status": "CLAIMED",
-    "run_id": "45972125674",
-    "at": "2026-11-27T09:15:35.474445+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -617,6 +602,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T08:41:59.060769+00:00",
       "run_id": "45967588376"
+    },
+    "97324": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8F%B4%EC%95%A4%EB%B0%95-%EC%9C%A0%EB%A0%88%EC%B9%B4-%EB%B8%94%EB%A3%A8%EB%B2%A0%EB%A6%AC-125g-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-dYLzb4NP?from=write",
+      "posted_at_utc": "2026-11-27T09:14:07+00:00",
+      "product_id": "6067627488",
+      "item_id": "16094436594",
+      "vendor_item_id": null,
+      "at": "2026-11-27T09:15:53.043225+00:00",
+      "run_id": "45972125674"
     }
   },
   "skipped_non_coupang": 140,
