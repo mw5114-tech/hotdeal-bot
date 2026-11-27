@@ -3,16 +3,6 @@
   "last_scanned_id": 97319,
   "pending": [
     {
-      "id": 97318,
-      "source_post_url": "https://t.me/jirum/97318",
-      "original_purchase_url": "https://link.coupang.com/a/i02SGZ9ODs",
-      "source_text": "☆특가 29,990원\n미국산 초이스 척아이롤 구이용 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i02SGZ9ODs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T07:53:35+00:00",
-      "title": "☆특가 29,990원",
-      "sale_price_krw": 29990,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97319,
       "source_post_url": "https://t.me/jirum/97319",
       "original_purchase_url": "https://link.coupang.com/a/i03KICu2lE",
@@ -22,12 +12,7 @@
       "sale_price_krw": 11650
     }
   ],
-  "in_flight": {
-    "id": 97318,
-    "status": "CLAIMED",
-    "run_id": "45963163415",
-    "at": "2026-11-27T08:07:07.764612+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10011,6 +9996,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T07:32:05.861509+00:00",
       "run_id": "45959003567"
+    },
+    "97318": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EA%B5%AD%EC%82%B0-%EC%B4%88%EC%9D%B4%EC%8A%A4-%EC%B2%99%EC%95%84%EC%9D%B4%EB%A1%A4-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-5%ED%95%A0%EC%9D%B8-dYLzGEXP?from=write",
+      "posted_at_utc": "2026-11-27T07:53:35+00:00",
+      "product_id": "7171006710",
+      "item_id": "23640812854",
+      "vendor_item_id": "90666227631",
+      "at": "2026-11-27T08:07:28.223770+00:00",
+      "run_id": "45963163415"
     }
   },
   "skipped_non_coupang": 1218,
