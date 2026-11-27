@@ -1,27 +1,16 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97294,
+  "last_scanned_id": 97309,
   "pending": [
     {
-      "id": 97293,
-      "source_message_id": 97293,
-      "source_post_url": "https://t.me/jirum/97293",
-      "original_purchase_url": "https://link.coupang.com/a/i0Q0NMuOA0",
-      "title": "☆특가 24,410원",
-      "source_text": "☆특가 24,410원\n선물로도 굿\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Q0NMuOA0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 24410,
-      "posted_at_utc": "2026-11-27T05:07:30+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
-      "id": 97294,
-      "source_message_id": 97294,
-      "source_post_url": "https://t.me/jirum/97294",
-      "original_purchase_url": "https://link.coupang.com/a/i0Q2kOzMwC",
-      "title": "☆특가 2,950원",
-      "source_text": "☆특가 2,950원\n미정당 쌀 국물떡볶이 530g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Q2kOzMwC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 2950,
-      "posted_at_utc": "2026-11-27T05:07:50+00:00"
+      "id": 97309,
+      "source_message_id": 97309,
+      "source_post_url": "https://t.me/jirum/97309",
+      "original_purchase_url": "https://link.coupang.com/a/i0VIQ0RLOu",
+      "title": "☆특가 20,110원",
+      "source_text": "☆특가 20,110원\n카누 실키 라이트 로스트 캡슐커피, 7g, 16개입, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0VIQ0RLOu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 20110,
+      "posted_at_utc": "2026-11-27T06:13:25+00:00"
     }
   ],
   "published": {
@@ -3232,6 +3221,14 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-27T03:24:24.470435+00:00"
+    },
+    "97293": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-27T06:14:22.292669+00:00"
+    },
+    "97294": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-27T06:14:22.292676+00:00"
     }
   },
   "in_flight": null,
