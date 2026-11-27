@@ -3,17 +3,6 @@
   "last_scanned_id": 97285,
   "pending": [
     {
-      "id": 97282,
-      "source_message_id": 97282,
-      "source_post_url": "https://t.me/jirum/97282",
-      "original_purchase_url": "https://link.coupang.com/a/i0H3xYOI2K",
-      "title": "더바디샵 후레그런스 바디미스트 화이트 머스크향, 100ml, 1개",
-      "source_text": "👍대박 14,210원 (30.4% 할인)\n더바디샵 후레그런스 바디미스트 화이트 머스크향, 100ml, 1개\n📌 가격 현황\n- 정상가: 20,430원\n- 할인: 6,220원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0H3xYOI2K\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14210,
-      "posted_at_utc": "2026-11-27T03:02:10+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97285,
       "source_message_id": 97285,
       "source_post_url": "https://t.me/jirum/97285",
@@ -3203,6 +3192,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-27T03:02:43.161376+00:00"
+    },
+    "97282": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-27T03:24:24.470435+00:00"
     }
   },
   "in_flight": null,
