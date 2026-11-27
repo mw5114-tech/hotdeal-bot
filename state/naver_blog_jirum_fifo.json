@@ -3,16 +3,6 @@
   "last_scanned_id": 97333,
   "pending": [
     {
-      "id": 97332,
-      "source_message_id": 97332,
-      "source_post_url": "https://t.me/jirum/97332",
-      "original_purchase_url": "https://link.coupang.com/a/i1fLotGuNo",
-      "title": "☆특가 9,380원",
-      "source_text": "☆특가 9,380원\n덴티본조르노 구취케어 치약 170g 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fLotGuNo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9380,
-      "posted_at_utc": "2026-11-27T10:53:51+00:00"
-    },
-    {
       "id": 97333,
       "source_message_id": 97333,
       "source_post_url": "https://t.me/jirum/97333",
@@ -2801,6 +2791,10 @@
     "97331": {
       "url": "https://blog.naver.com/mw5114/224494992129",
       "at": "2026-11-27T10:58:15.607110+00:00"
+    },
+    "97332": {
+      "url": "https://blog.naver.com/mw5114/224494992959",
+      "at": "2026-11-27T10:59:12.280438+00:00"
     }
   },
   "skipped": {
@@ -3311,12 +3305,7 @@
       "at": "2026-11-27T10:56:27.724723+00:00"
     }
   },
-  "in_flight": {
-    "id": 97332,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45985570393",
-    "at": "2026-11-27T10:58:29.614302+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
