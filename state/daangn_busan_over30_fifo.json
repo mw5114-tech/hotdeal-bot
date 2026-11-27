@@ -3,16 +3,6 @@
   "last_scanned_id": 97379,
   "pending": [
     {
-      "id": 97378,
-      "source_post_url": "https://t.me/jirum/97378",
-      "original_purchase_url": "https://link.coupang.com/a/i18T0MNKgu",
-      "source_text": "☆특가 7,860원\n뷰카 오브제 듀얼 초미세 탄력모 칫솔, 18개, 1세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i18T0MNKgu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T23:45:27+00:00",
-      "title": "☆특가 7,860원",
-      "sale_price_krw": 7860,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97379,
       "source_post_url": "https://t.me/jirum/97379",
       "original_purchase_url": "https://link.coupang.com/a/i19K9X8npA",
@@ -1557,6 +1547,12 @@
       "display_pct": 40,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T22:42:20.279824+00:00"
+    },
+    "97378": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 40,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T23:59:06.500771+00:00"
     }
   }
 }
