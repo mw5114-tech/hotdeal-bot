@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97260,
-  "pending": [
-    {
-      "id": 97260,
-      "source_post_url": "https://t.me/jirum/97260",
-      "original_purchase_url": "https://link.coupang.com/a/i0zzKPCoCq",
-      "source_text": "☆특가 8,900원\n크리스마스 풍선세트 파티 장식용품 풍선QIQ-, C세트-전구 포함, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0zzKPCoCq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T01:03:30+00:00",
-      "title": "☆특가 8,900원",
-      "sale_price_krw": 8900
-    }
-  ],
-  "in_flight": {
-    "id": 97260,
-    "status": "CLAIMED",
-    "run_id": "45920414725",
-    "at": "2026-11-27T01:04:42.431708+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9741,6 +9726,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T00:31:01.855955+00:00",
       "run_id": "45917076121"
+    },
+    "97260": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%81%AC%EB%A6%AC%EC%8A%A4%EB%A7%88%EC%8A%A4-%ED%92%8D%EC%84%A0%EC%84%B8%ED%8A%B8-%ED%8C%8C%ED%8B%B0-%EC%9E%A5%EC%8B%9D%EC%9A%A9%ED%92%88-%ED%92%8D%EC%84%A0QIQ-1%EA%B0%9C-C%EC%84%B8%ED%8A%B8-15%ED%95%A0%EC%9D%B8-A6aJwB9j?from=write",
+      "posted_at_utc": "2026-11-27T01:03:30+00:00",
+      "product_id": "7695260189",
+      "item_id": "20588605163",
+      "vendor_item_id": null,
+      "at": "2026-11-27T01:05:01.848650+00:00",
+      "run_id": "45920414725"
     }
   },
   "skipped_non_coupang": 1194,
