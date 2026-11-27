@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97371,
-  "pending": [
-    {
-      "id": 97371,
-      "source_message_id": 97371,
-      "source_post_url": "https://t.me/jirum/97371",
-      "original_purchase_url": "https://link.coupang.com/a/i12AAPmxno",
-      "title": "사세 치킨가라아게 (냉동), 1kg, 1개",
-      "source_text": "☆특가 11,050원 (21.1% 할인)\n사세 치킨가라아게 (냉동), 1kg, 1개\n📌 가격 현황\n- 정상가: 14,000원\n- 할인: 2,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i12AAPmxno\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11050,
-      "posted_at_utc": "2026-11-27T22:17:06+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2847,6 +2836,10 @@
     "97370": {
       "url": "https://blog.naver.com/mw5114/224495464463",
       "at": "2026-11-27T22:15:17.934132+00:00"
+    },
+    "97371": {
+      "url": "https://blog.naver.com/mw5114/224495466593",
+      "at": "2026-11-27T22:18:42.890743+00:00"
     }
   },
   "skipped": {
@@ -3370,12 +3363,7 @@
       "at": "2026-11-27T19:30:32.605142+00:00"
     }
   },
-  "in_flight": {
-    "id": 97371,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46075726311",
-    "at": "2026-11-27T22:17:59.718318+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
