@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97277,
-  "pending": [
-    {
-      "id": 97277,
-      "source_post_url": "https://t.me/jirum/97277",
-      "original_purchase_url": "https://link.coupang.com/a/i0HbeS0BQi",
-      "source_text": "☆특가 13,710원\n종가 어린이 한입 백김치 300g 4개 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0HbeS0BQi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:49:55+00:00",
-      "title": "☆특가 13,710원",
-      "sale_price_krw": 13710
-    }
-  ],
-  "in_flight": {
-    "id": 97277,
-    "status": "CLAIMED",
-    "run_id": "45930635313",
-    "at": "2026-11-27T02:50:57.356353+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9840,6 +9825,16 @@
       "item_id": "28708015272",
       "vendor_item_id": null,
       "at": "2026-11-27T02:50:47.565676+00:00",
+      "run_id": "45930635313"
+    },
+    "97277": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%A2%85%EA%B0%80-%EC%96%B4%EB%A6%B0%EC%9D%B4-%ED%95%9C%EC%9E%85-%EB%B0%B1%EA%B9%80%EC%B9%98-300g-1%EA%B0%9C-Pwn4NvEA?from=write",
+      "posted_at_utc": "2026-11-27T02:49:55+00:00",
+      "product_id": "5388040972",
+      "item_id": "349377034",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:51:16.381642+00:00",
       "run_id": "45930635313"
     }
   },
