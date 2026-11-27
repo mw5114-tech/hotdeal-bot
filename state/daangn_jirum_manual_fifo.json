@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97309,
-  "pending": [
-    {
-      "id": 97309,
-      "source_post_url": "https://t.me/jirum/97309",
-      "original_purchase_url": "https://link.coupang.com/a/i0VIQ0RLOu",
-      "source_text": "☆특가 20,110원\n카누 실키 라이트 로스트 캡슐커피, 7g, 16개입, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0VIQ0RLOu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T06:13:25+00:00",
-      "title": "☆특가 20,110원",
-      "sale_price_krw": 20110
-    }
-  ],
-  "in_flight": {
-    "id": 97309,
-    "status": "CLAIMED",
-    "run_id": "45950552084",
-    "at": "2026-11-27T06:14:42.427670+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9941,6 +9926,16 @@
       "vendor_item_id": "73096293638",
       "at": "2026-11-27T05:09:18.739390+00:00",
       "run_id": "45943750628"
+    },
+    "97309": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B9%B4%EB%88%84-%EC%8B%A4%ED%82%A4-%EB%9D%BC%EC%9D%B4%ED%8A%B8-%EB%A1%9C%EC%8A%A4%ED%8A%B8-%EC%BA%A1%EC%8A%90%EC%BB%A4%ED%94%BC-7g-16%EA%B0%9C%EC%9E%85-3%EA%B0%9C-15%ED%95%A0%EC%9D%B8-daDvqZ7P?from=write",
+      "posted_at_utc": "2026-11-27T06:13:25+00:00",
+      "product_id": "7763232495",
+      "item_id": "20998230952",
+      "vendor_item_id": null,
+      "at": "2026-11-27T06:15:00.793458+00:00",
+      "run_id": "45950552084"
     }
   },
   "skipped_non_coupang": 1216,
