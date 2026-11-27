@@ -1,18 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97281,
-  "pending": [
-    {
-      "id": 97281,
-      "source_post_url": "https://t.me/jirum/97281",
-      "original_purchase_url": "https://link.coupang.com/a/i0Hx071Fls",
-      "source_text": "☆특가 6,460원\n비비고 갈비 납작교자 315g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Hx071Fls\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:55:03+00:00",
-      "title": "☆특가 6,460원",
-      "sale_price_krw": 6460,
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -12032,6 +12021,12 @@
       "source_post_url": "https://t.me/jirum/97265",
       "source_title": "맥시칸 크리스피 순살 (냉동), 600g, 3개",
       "at": "2026-11-27T02:10:38.807679+00:00"
+    },
+    "97281": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97281",
+      "source_title": "☆특가 6,460원",
+      "at": "2026-11-27T03:01:00.766205+00:00"
     }
   },
   "single_test_repost_20261103": {
