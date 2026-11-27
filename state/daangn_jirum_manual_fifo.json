@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97313,
-  "pending": [
-    {
-      "id": 97313,
-      "source_post_url": "https://t.me/jirum/97313",
-      "original_purchase_url": "https://link.coupang.com/a/i00vIVWgNh",
-      "source_text": "☆특가 10,700원\n깊은 숙성 풍미와 고소한 감칠맛, 파스타나 샐러드에 갈아 올리면 풍미 UP\n📦 특가 바로가기\nhttps://link.coupang.com/a/i00vIVWgNh\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T07:20:25+00:00",
-      "title": "☆특가 10,700원",
-      "sale_price_krw": 10700
-    }
-  ],
-  "in_flight": {
-    "id": 97313,
-    "status": "CLAIMED",
-    "run_id": "45957856456",
-    "at": "2026-11-27T07:21:49.473776+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9971,6 +9956,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T07:21:20.657052+00:00",
       "run_id": "45957664314"
+    },
+    "97313": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%88%ED%8B%B0%EB%85%B8%EC%B9%B4%EC%84%B8%EC%9D%B4%ED%94%BC%EC%B4%88-%ED%8C%8C%EB%A5%B4%EB%AF%B8%EC%A7%80%EC%95%84%EB%85%B8-%EB%A0%88%EC%A7%80%EC%95%84%EB%85%B8-%EC%B9%98%EC%A6%88-150g-1%EA%B0%9C%EC%9E%85-15%ED%95%A0%EC%9D%B8-daDvR4xP?from=write",
+      "posted_at_utc": "2026-11-27T07:20:25+00:00",
+      "product_id": "166481485",
+      "item_id": "476862360",
+      "vendor_item_id": null,
+      "at": "2026-11-27T07:22:11.252627+00:00",
+      "run_id": "45957856456"
     }
   },
   "skipped_non_coupang": 1217,
