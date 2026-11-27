@@ -3,16 +3,6 @@
   "last_scanned_id": 97363,
   "pending": [
     {
-      "id": 97360,
-      "source_post_url": "https://t.me/jirum/97360",
-      "original_purchase_url": "https://link.coupang.com/a/i1AfKxss6m",
-      "source_text": "☆특가 9,900원\n크리스피 순살치킨 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AfKxss6m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:40:35+00:00",
-      "title": "☆특가 9,900원",
-      "sale_price_krw": 9900,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97361,
       "source_post_url": "https://t.me/jirum/97361",
       "original_purchase_url": "https://link.coupang.com/a/i1AiFLQEsm",
@@ -1484,6 +1474,12 @@
       "display_pct": 35,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T15:41:10.264361+00:00"
+    },
+    "97360": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T15:45:26.263509+00:00"
     }
   }
 }
