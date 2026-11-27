@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97370,
-  "pending": [
-    {
-      "id": 97370,
-      "source_post_url": "https://t.me/jirum/97370",
-      "original_purchase_url": "https://link.coupang.com/a/i117vZ6gqi",
-      "source_text": "👍대박 4,690원 (37.5% 할인)\n비타500 광도르방 비타민음료, 100ml, 10개\n📌 가격 현황\n- 정상가: 7,500원\n- 할인: 2,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i117vZ6gqi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T22:10:33+00:00",
-      "title": "비타500 광도르방 비타민음료, 100ml, 10개",
-      "sale_price_krw": 4690
-    }
-  ],
-  "in_flight": {
-    "id": 97370,
-    "status": "CLAIMED",
-    "run_id": "46075093836",
-    "at": "2026-11-27T22:13:57.866387+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10220,6 +10205,16 @@
       "item_id": "28853709767",
       "vendor_item_id": null,
       "at": "2026-11-27T22:13:54.642149+00:00",
+      "run_id": "46075093836"
+    },
+    "97370": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%ED%83%80500-%EA%B4%91%EB%8F%84%EB%A5%B4%EB%B0%A9-%EB%B9%84%ED%83%80%EB%AF%BC%EC%9D%8C%EB%A3%8C-100ml-10%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PBzOa0zP?from=write",
+      "posted_at_utc": "2026-11-27T22:10:33+00:00",
+      "product_id": "6370193769",
+      "item_id": "16759967181",
+      "vendor_item_id": null,
+      "at": "2026-11-27T22:14:17.112316+00:00",
       "run_id": "46075093836"
     }
   },
