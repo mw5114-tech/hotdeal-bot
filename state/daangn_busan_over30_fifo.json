@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97258,
-  "pending": [
-    {
-      "id": 97258,
-      "source_post_url": "https://t.me/jirum/97258",
-      "original_purchase_url": "https://link.coupang.com/a/i0w9NFwKKy",
-      "source_text": "☆특가 8,120원\n모던하우스 타원볼 + 미니볼 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0w9NFwKKy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T00:29:39+00:00",
-      "title": "☆특가 8,120원",
-      "sale_price_krw": 8120
-    }
-  ],
-  "in_flight": {
-    "id": 97258,
-    "status": "CLAIMED",
-    "run_id": "45917076121",
-    "at": "2026-11-27T00:30:40.742326+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -497,6 +482,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T00:27:18.254572+00:00",
       "run_id": "45916718786"
+    },
+    "97258": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%A8%EB%8D%98%ED%95%98%EC%9A%B0%EC%8A%A4-%ED%83%80%EC%9B%90%EB%B3%BC-%EB%AF%B8%EB%8B%88%EB%B3%BC-%EC%84%B8%ED%8A%B8-1%EC%84%B8%ED%8A%B8-%ED%83%80%EC%9B%90%EB%B3%BC-4p-45%ED%95%A0%EC%9D%B8-AO3qpkYA?from=write",
+      "posted_at_utc": "2026-11-27T00:29:39+00:00",
+      "product_id": "8466495046",
+      "item_id": "24496692819",
+      "vendor_item_id": null,
+      "at": "2026-11-27T00:31:00.486672+00:00",
+      "run_id": "45917076121"
     }
   },
   "skipped_non_coupang": 114,
