@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97366,
-  "pending": [
-    {
-      "id": 97366,
-      "source_post_url": "https://t.me/jirum/97366",
-      "original_purchase_url": "https://link.coupang.com/a/i1AFos4OPs",
-      "source_text": "☆특가 18,400원\n회전식 원형 칫솔모로 치아 구석구석 플라그 제거에 굿\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AFos4OPs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:46:22+00:00",
-      "title": "☆특가 18,400원",
-      "sale_price_krw": 18400
-    }
-  ],
-  "in_flight": {
-    "id": 97366,
-    "status": "CLAIMED",
-    "run_id": "46027962799",
-    "at": "2026-11-27T15:48:41.552097+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10190,6 +10175,16 @@
       "item_id": "21259800466",
       "vendor_item_id": null,
       "at": "2026-11-27T15:48:31.686186+00:00",
+      "run_id": "46027962799"
+    },
+    "97366": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%98%A4%EB%9E%84%EB%B9%84-%EB%B0%94%EC%9D%B4%ED%83%88%EB%A6%AC%ED%8B%B0-%ED%81%AC%EB%A1%9C%EC%8A%A4%EC%95%A1%EC%85%98-%EC%A0%84%EB%8F%99%EC%B9%AB%EC%86%94-%EB%B8%94%EB%9E%99-1%EA%B0%9C-D100-30%ED%95%A0%EC%9D%B8-A0nW0nYd?from=write",
+      "posted_at_utc": "2026-11-27T15:46:22+00:00",
+      "product_id": "8549496709",
+      "item_id": "18036264644",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:48:59.785488+00:00",
       "run_id": "46027962799"
     }
   },
