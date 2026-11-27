@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97372,
-  "pending": [
-    {
-      "id": 97372,
-      "source_post_url": "https://t.me/jirum/97372",
-      "original_purchase_url": "https://link.coupang.com/a/i13xArMMFg",
-      "source_text": "☆특가 19,040원 (13.5% 할인)\n손바닥 사운드북 고래야 놀자\n📌 가격 현황\n- 정상가: 22,000원\n- 할인: 2,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i13xArMMFg\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T22:30:25+00:00",
-      "title": "손바닥 사운드북 고래야 놀자",
-      "sale_price_krw": 19040
-    }
-  ],
-  "in_flight": {
-    "id": 97372,
-    "status": "CLAIMED",
-    "run_id": "46077133177",
-    "at": "2026-11-27T22:31:47.937061+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10241,6 +10226,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T22:18:20.624896+00:00",
       "run_id": "46075726311"
+    },
+    "97372": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%86%90%EB%B0%94%EB%8B%A5-%EC%82%AC%EC%9A%B4%EB%93%9C%EB%B6%81-%EA%B3%A0%EB%9E%98%EC%95%BC-%EB%86%80%EC%9E%90-%ED%98%BC%ED%95%A9%EC%83%89%EC%83%81-15%ED%95%A0%EC%9D%B8-PBzOaqxP?from=write",
+      "posted_at_utc": "2026-11-27T22:30:25+00:00",
+      "product_id": "1321447693",
+      "item_id": "2342542947",
+      "vendor_item_id": null,
+      "at": "2026-11-27T22:32:06.192606+00:00",
+      "run_id": "46077133177"
     }
   },
   "skipped_non_coupang": 1244,
