@@ -3,15 +3,6 @@
   "last_scanned_id": 97363,
   "pending": [
     {
-      "id": 97361,
-      "source_post_url": "https://t.me/jirum/97361",
-      "original_purchase_url": "https://link.coupang.com/a/i1AiFLQEsm",
-      "source_text": "☆특가 275,770원\n원두 분쇄부터 추출까지 전자동, 밀크 스팀봉으로 라떼까지! 홈카페 특가\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AiFLQEsm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:41:14+00:00",
-      "title": "☆특가 275,770원",
-      "sale_price_krw": 275770
-    },
-    {
       "id": 97362,
       "source_post_url": "https://t.me/jirum/97362",
       "original_purchase_url": "https://link.coupang.com/a/i1AlwV1nsO",
@@ -30,12 +21,7 @@
       "sale_price_krw": 15910
     }
   ],
-  "in_flight": {
-    "id": 97361,
-    "status": "CLAIMED",
-    "run_id": "46027420585",
-    "at": "2026-11-27T15:45:57.989788+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10158,6 +10144,16 @@
       "item_id": "19093929384",
       "vendor_item_id": null,
       "at": "2026-11-27T15:45:51.207173+00:00",
+      "run_id": "46027420585"
+    },
+    "97361": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%84%EB%A6%BD%EC%8A%A4-1200-%EC%A0%84%EC%9E%90%EB%8F%99-%EC%97%90%EC%8A%A4%ED%94%84%EB%A0%88%EC%86%8C-%EC%BB%A4%ED%94%BC%EB%A8%B8%EC%8B%A0-%EB%B0%80%ED%81%AC-%EC%8A%A4%ED%8C%80%EB%B4%89-20%ED%95%A0%EC%9D%B8-d9aJ8WWd?from=write",
+      "posted_at_utc": "2026-11-27T15:41:14+00:00",
+      "product_id": "9128942418",
+      "item_id": "26859269975",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:46:19.653165+00:00",
       "run_id": "46027420585"
     }
   },
