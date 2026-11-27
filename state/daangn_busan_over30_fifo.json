@@ -3,16 +3,6 @@
   "last_scanned_id": 97271,
   "pending": [
     {
-      "id": 97269,
-      "source_post_url": "https://t.me/jirum/97269",
-      "original_purchase_url": "https://link.coupang.com/a/i0D61R0Cvk",
-      "source_text": "☆특가 5,400원\n솔리몬 스퀴즈드 레몬즙, 1L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0D61R0Cvk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:06:59+00:00",
-      "title": "☆특가 5,400원",
-      "sale_price_krw": 5400,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97270,
       "source_post_url": "https://t.me/jirum/97270",
       "original_purchase_url": "https://link.coupang.com/a/i0EDTzcDka",
@@ -31,12 +21,7 @@
       "sale_price_krw": 10550
     }
   ],
-  "in_flight": {
-    "id": 97269,
-    "status": "CLAIMED",
-    "run_id": "45927191279",
-    "at": "2026-11-27T02:16:09.999364+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -526,6 +511,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T00:31:00.486672+00:00",
       "run_id": "45917076121"
+    },
+    "97269": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%86%94%EB%A6%AC%EB%AA%AC-%EC%8A%A4%ED%80%B4%EC%A6%88%EB%93%9C-%EB%A0%88%EB%AA%AC%EC%A6%99-1L-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A3oJJeOA?from=write",
+      "posted_at_utc": "2026-11-27T02:06:59+00:00",
+      "product_id": "7473901049",
+      "item_id": "102560",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:16:28.917991+00:00",
+      "run_id": "45927191279"
     }
   },
   "skipped_non_coupang": 119,
