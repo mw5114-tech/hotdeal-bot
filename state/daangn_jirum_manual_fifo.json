@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97288,
-  "pending": [
-    {
-      "id": 97288,
-      "source_post_url": "https://t.me/jirum/97288",
-      "original_purchase_url": "https://link.coupang.com/a/i0MYF0e4jY",
-      "source_text": "🔥🔥🔥무지성 5,710원 (56.1% 할인)🔥🔥🔥\n엘라스틴 프로틴 클리닉 10000 고영양 단백질 트리트먼트 피치블로썸향, 1L\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 7,290원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0MYF0e4jY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T04:11:02+00:00",
-      "title": "엘라스틴 프로틴 클리닉 10000 고영양 단백질 트리트먼트 피치블로썸향, 1L",
-      "sale_price_krw": 5710
-    }
-  ],
-  "in_flight": {
-    "id": 97288,
-    "status": "CLAIMED",
-    "run_id": "45938552734",
-    "at": "2026-11-27T04:12:46.965347+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9921,6 +9906,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T03:33:00.800802+00:00",
       "run_id": "45934738629"
+    },
+    "97288": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%98%EB%9D%BC%EC%8A%A4%ED%8B%B4-%ED%94%84%EB%A1%9C%ED%8B%B4-%ED%81%B4%EB%A6%AC%EB%8B%89-10000-%EA%B3%A0%EC%98%81%EC%96%91-%EB%8B%A8%EB%B0%B1%EC%A7%88-%ED%8A%B8%EB%A6%AC%ED%8A%B8%EB%A8%BC%ED%8A%B8-%ED%94%BC-60%ED%95%A0%EC%9D%B8-dGBQW1vP?from=write",
+      "posted_at_utc": "2026-11-27T04:11:02+00:00",
+      "product_id": "8509334764",
+      "item_id": "24630116829",
+      "vendor_item_id": null,
+      "at": "2026-11-27T04:13:07.129777+00:00",
+      "run_id": "45938552734"
     }
   },
   "skipped_non_coupang": 1200,
