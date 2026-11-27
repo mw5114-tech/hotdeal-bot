@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97374,
-  "pending": [
-    {
-      "id": 97374,
-      "source_post_url": "https://t.me/jirum/97374",
-      "original_purchase_url": "https://link.coupang.com/a/i14jlQWJVs",
-      "source_text": "❤️초대박 8,950원 (40.3% 할인)\n스프라이트 제로 사이다, 350ml, 24개\n📌 가격 현황\n- 정상가: 15,000원\n- 할인: 6,050원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i14jlQWJVs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T22:41:12+00:00",
-      "title": "스프라이트 제로 사이다, 350ml, 24개",
-      "sale_price_krw": 8950
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1541,6 +1531,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T22:37:48.650809+00:00"
+    },
+    "97374": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 40,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T22:42:20.279824+00:00"
     }
   }
 }
