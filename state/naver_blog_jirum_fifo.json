@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97368,
-  "pending": [
-    {
-      "id": 97368,
-      "source_message_id": 97368,
-      "source_post_url": "https://t.me/jirum/97368",
-      "original_purchase_url": "https://link.coupang.com/a/i1CKTiOXRY",
-      "title": "오뚜기 실쏙 토마토 스파게티소스, 2kg, 1개",
-      "source_text": "❤️초대박 6,940원 (42.1% 할인)\n오뚜기 실쏙 토마토 스파게티소스, 2kg, 1개\n📌 가격 현황\n- 정상가: 11,980원\n- 할인: 5,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1CKTiOXRY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6940,
-      "posted_at_utc": "2026-11-27T16:15:36+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -3357,6 +3345,10 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-27T14:53:29.092977+00:00"
+    },
+    "97368": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-27T19:30:32.605142+00:00"
     }
   },
   "in_flight": null,
