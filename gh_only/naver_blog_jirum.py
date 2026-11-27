@@ -411,11 +411,22 @@ def _photo_unavailable_before_submit(folder: Path, source_id: int) -> bool:
             and isinstance(ids.get("item_id"), str)
             and photo.get("status") == "PHOTO_EVIDENCE_UNAVAILABLE"
             and not photo.get("saved_name")
-            and row.get("image_metadata_status") in (
-                "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
-                "LOWCHART_ITEM_PAGE_NOT_FOUND",
-                "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
-                "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
+            and (
+                row.get("image_metadata_status") in (
+                    "LOWCHART_IMAGE_PAGE_REQUEST_ERROR",
+                    "LOWCHART_ITEM_PAGE_NOT_FOUND",
+                    "LOWCHART_PRODUCT_IMAGE_NOT_FOUND",
+                    "LOWCHART_PRODUCT_IMAGE_AMBIGUOUS",
+                )
+                # 97311: HTTP 200 and exact-item metadata were verified, but
+                # downloading the actual product image failed. No submit
+                # claim exists yet; use the same bounded pre-submit recovery.
+                or (row.get("image_metadata_status") == "LOWCHART_EXACT_ITEM_IMAGE"
+                    and row.get("image_http_status") == 200
+                    and row.get("image_source") == "lowchart_exact_item_public_page"
+                    and row.get("image_product_match") is True
+                    and row.get("image_exact_item_page_verified") is True
+                    and row.get("lowchart_title_verified") is True)
             )
             and isinstance(row.get("photo_provider_attempts"), list)
         )

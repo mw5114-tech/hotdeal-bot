@@ -179,6 +179,50 @@ class NaverQueueTests(unittest.TestCase):
                 json.dumps({"drafts": [row]}), encoding="utf-8")
             self.assertFalse(_photo_unavailable_before_submit(folder, 96223))
 
+    def test_exact_lowchart_metadata_but_missing_cdn_photo_uses_safe_retry(self):
+        import json
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        source = deal(97311)
+        source["source_message_id"] = 97311
+        row = {
+            "source_message_id": 97311,
+            "product_identity": {"status": "EXACT_ITEM_IDENTIFIED",
+                                 "product_id": "8312005887", "item_id": "24263309563"},
+            "image_metadata_status": "LOWCHART_EXACT_ITEM_IMAGE",
+            "image_http_status": 200,
+            "image_source": "lowchart_exact_item_public_page",
+            "image_product_match": True,
+            "image_exact_item_page_verified": True,
+            "lowchart_title_verified": True,
+            "photo": {"status": "PHOTO_EVIDENCE_UNAVAILABLE", "saved_name": None},
+            "photo_provider_attempts": [],
+        }
+        with TemporaryDirectory() as td, \
+             patch("gh_only.naver_blog_jirum.enrich_deal", return_value=row), \
+             patch("gh_only.naver_blog_jirum.old.validate_draft",
+                   side_effect=RuntimeError("POST_EVIDENCE_NOT_READY")), \
+             patch("gh_only.naver_blog_jirum.apply_official_api_link") as link:
+            folder = Path(td)
+            with self.assertRaises(NaverPreSubmitPhotoUnavailable) as cm:
+                make_article(source, folder, tag="AF9668915")
+            self.assertEqual(cm.exception.source_id, 97311)
+            link.assert_not_called()
+            # A metadata identity mismatch or a saved image must not be
+            # mistaken for a recoverable missing-file condition.
+            for key, invalid in (("image_product_match", False),
+                                 ("image_exact_item_page_verified", False),
+                                 ("lowchart_title_verified", False),
+                                 ("image_http_status", 403)):
+                bad = {**row, key: invalid}
+                (folder / "drafts.json").write_text(
+                    json.dumps({"drafts": [bad]}), encoding="utf-8")
+                self.assertFalse(_photo_unavailable_before_submit(folder, 97311))
+            bad = {**row, "photo": {"status": "IMAGE_SAVED", "saved_name": "x.jpg"}}
+            (folder / "drafts.json").write_text(
+                json.dumps({"drafts": [bad]}), encoding="utf-8")
+            self.assertFalse(_photo_unavailable_before_submit(folder, 97311))
+
     def test_only_missing_photo_pre_submit_becomes_safe_retryable_exception(self):
         import json
         from pathlib import Path

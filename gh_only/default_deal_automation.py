@@ -431,6 +431,19 @@ def enrich_deal(deal: dict, output_dir: Path,
         }
     elif matching and eligible_cdn:
         photo = photo_downloader(og["og_image"], output_dir, source_id)
+    # Preserve the underlying download outcome before bundle/fallback logic
+    # replaces an unavailable image with the generic missing-photo status.
+    exact_photo_attempt = None
+    if using_public_lowchart and cached is None and matching and eligible_cdn:
+        exact_photo_attempt = {
+            "provider": "lowchart_exact_cdn",
+            "status": photo.get("status"),
+            "error_type": photo.get("error_type"),
+        }
+        if photo.get("status") != "IMAGE_SAVED":
+            print("LOWCHART_EXACT_PHOTO_DOWNLOAD " + json.dumps({
+                "source_id": source_id, **exact_photo_attempt,
+            }, ensure_ascii=False))
 
     # One runner's successful exact Lowchart page is the source of truth for
     # BOTH channels. The dedicated GitHub cache branch now transports actual
@@ -516,7 +529,7 @@ def enrich_deal(deal: dict, output_dir: Path,
     search_photo_verified = False
     search_title = None
     provider_photo = {}
-    photo_attempts = []
+    photo_attempts = [exact_photo_attempt] if exact_photo_attempt is not None else []
     if (using_public_lowchart and not bundle_enabled
             and identity.get("status") == "EXACT_ITEM_IDENTIFIED"
             and photo.get("status") != "IMAGE_SAVED"):
