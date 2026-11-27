@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97328,
+  "last_scanned_id": 97330,
   "pending": [
     {
       "id": 97328,
@@ -11,6 +11,15 @@
       "title": "☆특가 16,160원",
       "sale_price_krw": 16160,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97330,
+      "source_post_url": "https://t.me/jirum/97330",
+      "original_purchase_url": "https://link.coupang.com/a/i1fv2c9S2e",
+      "source_text": "☆특가 11,340원\n넛츠그린 저당 마일드 초코볼 마카다미아 150g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fv2c9S2e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T10:50:23+00:00",
+      "title": "☆특가 11,340원",
+      "sale_price_krw": 11340
     }
   ],
   "in_flight": null,
@@ -10069,7 +10078,7 @@
       "run_id": "45975762033"
     }
   },
-  "skipped_non_coupang": 1221,
+  "skipped_non_coupang": 1222,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
