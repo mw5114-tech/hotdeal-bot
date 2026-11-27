@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97346,
-  "pending": [
-    {
-      "id": 97346,
-      "source_message_id": 97346,
-      "source_post_url": "https://t.me/jirum/97346",
-      "original_purchase_url": "https://link.coupang.com/a/i1wAnV5WH6",
-      "title": "프레샤인 충주 당도선별 사과, 5kg(17~19입), 1박스",
-      "source_text": "☆특가 20,970원 (26.4% 할인)\n프레샤인 충주 당도선별 사과, 5kg(17~19입), 1박스\n📌 가격 현황\n- 정상가: 28,500원\n- 할인: 7,530원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1wAnV5WH6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 20970,
-      "posted_at_utc": "2026-11-27T14:49:16+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2799,6 +2788,10 @@
     "97333": {
       "url": "https://blog.naver.com/mw5114/224494993829",
       "at": "2026-11-27T11:00:09.574303+00:00"
+    },
+    "97346": {
+      "url": "https://blog.naver.com/mw5114/224495227300",
+      "at": "2026-11-27T14:54:17.496441+00:00"
     }
   },
   "skipped": {
@@ -3318,12 +3311,7 @@
       "at": "2026-11-27T14:53:29.092977+00:00"
     }
   },
-  "in_flight": {
-    "id": 97346,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46019479802",
-    "at": "2026-11-27T14:53:32.831509+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
