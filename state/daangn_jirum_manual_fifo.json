@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97359,
-  "pending": [
-    {
-      "id": 97359,
-      "source_post_url": "https://t.me/jirum/97359",
-      "original_purchase_url": "https://link.coupang.com/a/i1AcK7QVhY",
-      "source_text": "☆특가 13,970원\n마즈 스니커즈 트윅스 미니스 버라이어티 팩 870g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AcK7QVhY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:39:54+00:00",
-      "title": "☆특가 13,970원",
-      "sale_price_krw": 13970
-    }
-  ],
-  "in_flight": {
-    "id": 97359,
-    "status": "CLAIMED",
-    "run_id": "46027039719",
-    "at": "2026-11-27T15:41:11.755911+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10121,6 +10106,16 @@
       "vendor_item_id": "5379874457",
       "at": "2026-11-27T14:51:06.269484+00:00",
       "run_id": "46019479802"
+    },
+    "97359": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EC%A6%88-%EC%8A%A4%EB%8B%88%EC%BB%A4%EC%A6%88-%ED%8A%B8%EC%9C%85%EC%8A%A4-%EB%AF%B8%EB%8B%88%EC%8A%A4-%EB%B2%84%EB%9D%BC%EC%9D%B4%EC%96%B4%ED%8B%B0-%ED%8C%A9-870g-1%EA%B0%9C-35%ED%95%A0%EC%9D%B8-PnnDl3RP?from=write",
+      "posted_at_utc": "2026-11-27T15:39:54+00:00",
+      "product_id": "7396315285",
+      "item_id": "19133562687",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:41:32.329107+00:00",
+      "run_id": "46027039719"
     }
   },
   "skipped_non_coupang": 1244,
