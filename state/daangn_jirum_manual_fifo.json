@@ -3,15 +3,6 @@
   "last_scanned_id": 97281,
   "pending": [
     {
-      "id": 97280,
-      "source_post_url": "https://t.me/jirum/97280",
-      "original_purchase_url": "https://link.coupang.com/a/i0HuMURn76",
-      "source_text": "☆특가 8,890원\n르샤트라1802 오드퍼퓸 섬유유연제 블랑 리필 1.5L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0HuMURn76\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:54:20+00:00",
-      "title": "☆특가 8,890원",
-      "sale_price_krw": 8890
-    },
-    {
       "id": 97281,
       "source_post_url": "https://t.me/jirum/97281",
       "original_purchase_url": "https://link.coupang.com/a/i0Hx071Fls",
@@ -21,12 +12,7 @@
       "sale_price_krw": 6460
     }
   ],
-  "in_flight": {
-    "id": 97280,
-    "status": "CLAIMED",
-    "run_id": "45931109562",
-    "at": "2026-11-27T02:55:31.928789+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9880,6 +9866,16 @@
       "vendor_item_id": "81100690361",
       "at": "2026-11-27T02:54:54.686926+00:00",
       "run_id": "45930922206"
+    },
+    "97280": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A5%B4%EC%83%A4%ED%8A%B8%EB%9D%BC1802-%EC%98%A4%EB%93%9C%ED%8D%BC%ED%93%B8-%EC%84%AC%EC%9C%A0%EC%9C%A0%EC%97%B0%EC%A0%9C-%EB%B8%94%EB%9E%91-%EB%A6%AC%ED%95%84-15L-2-30%ED%95%A0%EC%9D%B8-dYLzBZgP?from=write",
+      "posted_at_utc": "2026-11-27T02:54:20+00:00",
+      "product_id": "7310838165",
+      "item_id": "18728855470",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:55:52.864627+00:00",
+      "run_id": "45931109562"
     }
   },
   "skipped_non_coupang": 1198,
