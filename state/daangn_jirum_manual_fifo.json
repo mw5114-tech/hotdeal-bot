@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97275,
-  "pending": [
-    {
-      "id": 97275,
-      "source_post_url": "https://t.me/jirum/97275",
-      "original_purchase_url": "https://link.coupang.com/a/i0F0pjGnNQ",
-      "source_text": "☆특가 9,320원\n서울마님죽 떡볶이 떡마리 (냉동)\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0F0pjGnNQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:33:29+00:00",
-      "title": "☆특가 9,320원",
-      "sale_price_krw": 9320
-    }
-  ],
-  "in_flight": {
-    "id": 97275,
-    "status": "CLAIMED",
-    "run_id": "45929076628",
-    "at": "2026-11-27T02:34:30.923078+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9821,6 +9806,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T02:32:41.172091+00:00",
       "run_id": "45928805142"
+    },
+    "97275": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%9C%EC%9A%B8%EB%A7%88%EB%8B%98%EC%A3%BD-%EB%96%A1%EB%B3%B6%EC%9D%B4-%EB%96%A1%EB%A7%88%EB%A6%AC-%EB%83%89%EB%8F%99-100g-1%EA%B0%9C%EC%9E%85-5%EA%B0%9C-10%ED%95%A0%EC%9D%B8-PVpbbR3j?from=write",
+      "posted_at_utc": "2026-11-27T02:33:29+00:00",
+      "product_id": "7258046926",
+      "item_id": "18479532187",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:34:48.536458+00:00",
+      "run_id": "45929076628"
     }
   },
   "skipped_non_coupang": 1198,
