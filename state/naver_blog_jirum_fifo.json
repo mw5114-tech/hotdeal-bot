@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97372,
-  "pending": [],
+  "last_scanned_id": 97373,
+  "pending": [
+    {
+      "id": 97373,
+      "source_message_id": 97373,
+      "source_post_url": "https://t.me/jirum/97373",
+      "original_purchase_url": "https://link.coupang.com/a/i13ZhPvi4i",
+      "title": "☆특가 8,540원",
+      "source_text": "☆특가 8,540원\n해태제과 홈런볼 피스타치오 & 카라멜\n📦 특가 바로가기\nhttps://link.coupang.com/a/i13ZhPvi4i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8540,
+      "posted_at_utc": "2026-11-27T22:36:41+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
