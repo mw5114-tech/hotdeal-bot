@@ -3,15 +3,6 @@
   "last_scanned_id": 97367,
   "pending": [
     {
-      "id": 97366,
-      "source_post_url": "https://t.me/jirum/97366",
-      "original_purchase_url": "https://link.coupang.com/a/i1AFos4OPs",
-      "source_text": "☆특가 18,400원\n회전식 원형 칫솔모로 치아 구석구석 플라그 제거에 굿\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AFos4OPs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:46:22+00:00",
-      "title": "☆특가 18,400원",
-      "sale_price_krw": 18400
-    },
-    {
       "id": 97367,
       "source_post_url": "https://t.me/jirum/97367",
       "original_purchase_url": "https://link.coupang.com/a/i1ALlITveC",
@@ -1501,6 +1492,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T15:48:16.017360+00:00"
+    },
+    "97366": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T15:48:49.367182+00:00"
     }
   }
 }
