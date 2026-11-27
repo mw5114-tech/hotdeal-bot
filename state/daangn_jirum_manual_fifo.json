@@ -3,15 +3,6 @@
   "last_scanned_id": 97277,
   "pending": [
     {
-      "id": 97276,
-      "source_post_url": "https://t.me/jirum/97276",
-      "original_purchase_url": "https://link.coupang.com/a/i0G7ag574S",
-      "source_text": "☆특가 7,320원\n맥시칸 저당 닭강정 450g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0G7ag574S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:49:00+00:00",
-      "title": "☆특가 7,320원",
-      "sale_price_krw": 7320
-    },
-    {
       "id": 97277,
       "source_post_url": "https://t.me/jirum/97277",
       "original_purchase_url": "https://link.coupang.com/a/i0HbeS0BQi",
@@ -21,12 +12,7 @@
       "sale_price_krw": 13710
     }
   ],
-  "in_flight": {
-    "id": 97276,
-    "status": "CLAIMED",
-    "run_id": "45930635313",
-    "at": "2026-11-27T02:50:28.511728+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9840,6 +9826,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T02:34:48.536458+00:00",
       "run_id": "45929076628"
+    },
+    "97276": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%A5%EC%8B%9C%EC%B9%B8-%EC%A0%80%EB%8B%B9-%EB%8B%AD%EA%B0%95%EC%A0%95-%EB%83%89%EB%8F%99-450g-1%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dGBQl9kP?from=write",
+      "posted_at_utc": "2026-11-27T02:49:00+00:00",
+      "product_id": "9614833369",
+      "item_id": "28708015272",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:50:47.565676+00:00",
+      "run_id": "45930635313"
     }
   },
   "skipped_non_coupang": 1198,
