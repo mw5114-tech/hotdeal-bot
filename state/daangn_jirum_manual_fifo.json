@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97332,
-  "pending": [
-    {
-      "id": 97332,
-      "source_post_url": "https://t.me/jirum/97332",
-      "original_purchase_url": "https://link.coupang.com/a/i1fLotGuNo",
-      "source_text": "☆특가 9,380원\n덴티본조르노 구취케어 치약 170g 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fLotGuNo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T10:53:51+00:00",
-      "title": "☆특가 9,380원",
-      "sale_price_krw": 9380
-    }
-  ],
-  "in_flight": {
-    "id": 97332,
-    "status": "CLAIMED",
-    "run_id": "45985890995",
-    "at": "2026-11-27T10:55:16.554544+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10090,6 +10075,16 @@
       "item_id": "2607553003",
       "vendor_item_id": null,
       "at": "2026-11-27T10:55:06.443851+00:00",
+      "run_id": "45985890995"
+    },
+    "97332": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B4%ED%8B%B0%EB%B3%B8%EC%A1%B0%EB%A5%B4%EB%85%B8-%EA%B5%AC%EC%B7%A8%EC%BC%80%EC%96%B4-%EC%B9%98%EC%95%BD-170g-3%EA%B0%9C-55%ED%95%A0%EC%9D%B8-P2nvXlYP?from=write",
+      "posted_at_utc": "2026-11-27T10:53:51+00:00",
+      "product_id": "32087607",
+      "item_id": "848368165",
+      "vendor_item_id": null,
+      "at": "2026-11-27T10:55:35.870017+00:00",
       "run_id": "45985890995"
     }
   },
