@@ -1,7 +1,38 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97330,
-  "pending": [],
+  "last_scanned_id": 97333,
+  "pending": [
+    {
+      "id": 97331,
+      "source_message_id": 97331,
+      "source_post_url": "https://t.me/jirum/97331",
+      "original_purchase_url": "https://link.coupang.com/a/i1fGWix8hw",
+      "title": "☆특가 4,310원",
+      "source_text": "☆특가 4,310원\n곰곰 한돈 뒷다리살 다짐육 400g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fGWix8hw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4310,
+      "posted_at_utc": "2026-11-27T10:52:51+00:00"
+    },
+    {
+      "id": 97332,
+      "source_message_id": 97332,
+      "source_post_url": "https://t.me/jirum/97332",
+      "original_purchase_url": "https://link.coupang.com/a/i1fLotGuNo",
+      "title": "☆특가 9,380원",
+      "source_text": "☆특가 9,380원\n덴티본조르노 구취케어 치약 170g 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fLotGuNo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9380,
+      "posted_at_utc": "2026-11-27T10:53:51+00:00"
+    },
+    {
+      "id": 97333,
+      "source_message_id": 97333,
+      "source_post_url": "https://t.me/jirum/97333",
+      "original_purchase_url": "https://link.coupang.com/a/i1fOVjyY9c",
+      "title": "☆특가 7,980원",
+      "source_text": "☆특가 7,980원\n삼양 임꺽정 두툼 한입 떡갈비 600g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fOVjyY9c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7980,
+      "posted_at_utc": "2026-11-27T10:54:39+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
