@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97263,
+  "last_scanned_id": 97265,
   "pending": [
     {
       "id": 97263,
@@ -12,6 +12,26 @@
       "sale_price_krw": 14210,
       "posted_at_utc": "2026-11-27T01:39:06+00:00",
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97264,
+      "source_message_id": 97264,
+      "source_post_url": "https://t.me/jirum/97264",
+      "original_purchase_url": "https://link.coupang.com/a/i0CbLBrRJs",
+      "title": "빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개",
+      "source_text": "☆특가 15,050원 (11.5% 할인)\n빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 1,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0CbLBrRJs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 15050,
+      "posted_at_utc": "2026-11-27T01:40:04+00:00"
+    },
+    {
+      "id": 97265,
+      "source_message_id": 97265,
+      "source_post_url": "https://t.me/jirum/97265",
+      "original_purchase_url": "https://link.coupang.com/a/i0Cr2n2t6i",
+      "title": "맥시칸 크리스피 순살 (냉동), 600g, 3개",
+      "source_text": "👍대박 26,020원 (33.2% 할인)\n맥시칸 크리스피 순살 (냉동), 600g, 3개\n📌 가격 현황\n- 정상가: 38,980원\n- 할인: 12,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Cr2n2t6i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 26020,
+      "posted_at_utc": "2026-11-27T01:43:44+00:00"
     }
   ],
   "published": {
