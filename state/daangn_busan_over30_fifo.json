@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97378,
+  "last_scanned_id": 97379,
   "pending": [
     {
       "id": 97378,
@@ -11,6 +11,15 @@
       "title": "☆특가 7,860원",
       "sale_price_krw": 7860,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97379,
+      "source_post_url": "https://t.me/jirum/97379",
+      "original_purchase_url": "https://link.coupang.com/a/i19K9X8npA",
+      "source_text": "☆특가 17,510원 (25.4% 할인)\n가루비 자가리코 샐러드 L사이즈 12개 쟈가리코, 68g, 12개\n📌 가격 현황\n- 정상가: 23,460원\n- 할인: 5,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i19K9X8npA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T23:57:27+00:00",
+      "title": "가루비 자가리코 샐러드 L사이즈 12개 쟈가리코, 68g, 12개",
+      "sale_price_krw": 17510
     }
   ],
   "in_flight": null,
