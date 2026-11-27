@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97289,
+  "last_scanned_id": 97292,
   "pending": [
     {
       "id": 97289,
@@ -11,6 +11,15 @@
       "title": "☆특가 9,000원",
       "sale_price_krw": 9000,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97292,
+      "source_post_url": "https://t.me/jirum/97292",
+      "original_purchase_url": "https://link.coupang.com/a/i0QR0MvWUK",
+      "source_text": "☆특가 13,330원\n곰곰 국내산 딸기 대과 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0QR0MvWUK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T05:05:31+00:00",
+      "title": "☆특가 13,330원",
+      "sale_price_krw": 13330
     }
   ],
   "in_flight": null,
@@ -9929,7 +9938,7 @@
       "run_id": "45938552734"
     }
   },
-  "skipped_non_coupang": 1200,
+  "skipped_non_coupang": 1202,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
