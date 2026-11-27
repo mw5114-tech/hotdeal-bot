@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97321,
-  "pending": [
-    {
-      "id": 97321,
-      "source_post_url": "https://t.me/jirum/97321",
-      "original_purchase_url": "https://link.coupang.com/a/i06fgc417c",
-      "source_text": "☆특가 4,250원\n잉가 벨벳 슈 틴트, 4.5g, 탠저린 파이, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i06fgc417c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T08:40:40+00:00",
-      "title": "☆특가 4,250원",
-      "sale_price_krw": 4250
-    }
-  ],
-  "in_flight": {
-    "id": 97321,
-    "status": "CLAIMED",
-    "run_id": "45967588376",
-    "at": "2026-11-27T08:41:35.657469+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10031,6 +10016,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T08:18:35.396080+00:00",
       "run_id": "45964562099"
+    },
+    "97321": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9E%89%EA%B0%80-%EB%B2%A8%EB%B2%B3-%EC%8A%88-%ED%8B%B4%ED%8A%B8-1%EA%B0%9C-45g-%ED%83%A0%EC%A0%80%EB%A6%B0-%ED%8C%8C%EC%9D%B4-55%ED%95%A0%EC%9D%B8-AROK9okP?from=write",
+      "posted_at_utc": "2026-11-27T08:40:40+00:00",
+      "product_id": "8490427973",
+      "item_id": "24612526756",
+      "vendor_item_id": null,
+      "at": "2026-11-27T08:41:56.460448+00:00",
+      "run_id": "45967588376"
     }
   },
   "skipped_non_coupang": 1218,
