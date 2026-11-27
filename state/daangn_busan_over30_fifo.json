@@ -3,15 +3,6 @@
   "last_scanned_id": 97363,
   "pending": [
     {
-      "id": 97361,
-      "source_post_url": "https://t.me/jirum/97361",
-      "original_purchase_url": "https://link.coupang.com/a/i1AiFLQEsm",
-      "source_text": "☆특가 275,770원\n원두 분쇄부터 추출까지 전자동, 밀크 스팀봉으로 라떼까지! 홈카페 특가\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AiFLQEsm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:41:14+00:00",
-      "title": "☆특가 275,770원",
-      "sale_price_krw": 275770
-    },
-    {
       "id": 97362,
       "source_post_url": "https://t.me/jirum/97362",
       "original_purchase_url": "https://link.coupang.com/a/i1AlwV1nsO",
@@ -1480,6 +1471,12 @@
       "display_pct": 25,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T15:45:26.263509+00:00"
+    },
+    "97361": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T15:45:34.945621+00:00"
     }
   }
 }
