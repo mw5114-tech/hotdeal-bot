@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97270,
+  "last_scanned_id": 97271,
   "pending": [
     {
       "id": 97269,
@@ -20,6 +20,15 @@
       "posted_at_utc": "2026-11-27T02:14:24+00:00",
       "title": "☆특가 8,080원",
       "sale_price_krw": 8080
+    },
+    {
+      "id": 97271,
+      "source_post_url": "https://t.me/jirum/97271",
+      "original_purchase_url": "https://link.coupang.com/a/i0EFE4207w",
+      "source_text": "☆특가 10,550원\n고기듬뿍 양념 소불고기 (냉장), 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EFE4207w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T02:14:48+00:00",
+      "title": "☆특가 10,550원",
+      "sale_price_krw": 10550
     }
   ],
   "in_flight": null,
