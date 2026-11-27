@@ -1,16 +1,15 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97337,
+  "last_scanned_id": 97345,
   "pending": [
     {
-      "id": 97337,
-      "source_post_url": "https://t.me/jirum/97337",
-      "original_purchase_url": "https://link.coupang.com/a/i1nAuyDy32",
-      "source_text": "☆특가 11,960원 (25.2% 할인)\n델몬트 드링크팩 망고, 190ml, 48개\n📌 가격 현황\n- 정상가: 16,000원\n- 할인: 4,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1nAuyDy32\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T12:43:21+00:00",
-      "title": "델몬트 드링크팩 망고, 190ml, 48개",
-      "sale_price_krw": 11960,
-      "photo_prepare_failure_count": 1
+      "id": 97345,
+      "source_post_url": "https://t.me/jirum/97345",
+      "original_purchase_url": "https://link.coupang.com/a/i1v4SuYuTA",
+      "source_text": "☆특가 15,250원 (25.6% 할인)\nQCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰, HT10\n📌 가격 현황\n- 정상가: 20,500원\n- 할인: 5,250원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1v4SuYuTA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T14:42:09+00:00",
+      "title": "QCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰, HT10",
+      "sale_price_krw": 15250
     }
   ],
   "in_flight": null,
@@ -10109,7 +10108,7 @@
       "run_id": "45986070131"
     }
   },
-  "skipped_non_coupang": 1225,
+  "skipped_non_coupang": 1232,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -11790,6 +11789,13 @@
       "source_title": "☆특가 2,950원",
       "posted_at_utc": "2026-11-27T05:07:50+00:00",
       "at": "2026-11-27T06:14:26.660265+00:00"
+    },
+    "97337": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97337",
+      "source_title": "델몬트 드링크팩 망고, 190ml, 48개",
+      "posted_at_utc": "2026-11-27T12:43:21+00:00",
+      "at": "2026-11-27T14:42:43.551018+00:00"
     }
   },
   "skipped_unverifiable": {
