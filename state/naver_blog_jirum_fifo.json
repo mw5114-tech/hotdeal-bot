@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97320,
-  "pending": [
-    {
-      "id": 97320,
-      "source_message_id": 97320,
-      "source_post_url": "https://t.me/jirum/97320",
-      "original_purchase_url": "https://link.coupang.com/a/i04zYYTFx6",
-      "title": "☆특가 18,400원",
-      "source_text": "☆특가 18,400원\n오랄비 바이탈리티 크로스액션 전동칫솔\n📦 특가 바로가기\nhttps://link.coupang.com/a/i04zYYTFx6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 18400,
-      "posted_at_utc": "2026-11-27T08:17:21+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2763,6 +2752,10 @@
     "97319": {
       "url": "https://blog.naver.com/mw5114/224494809352",
       "at": "2026-11-27T08:08:51.216093+00:00"
+    },
+    "97320": {
+      "url": "https://blog.naver.com/mw5114/224494822434",
+      "at": "2026-11-27T08:19:02.247276+00:00"
     }
   },
   "skipped": {
@@ -3268,12 +3261,7 @@
       "at": "2026-11-27T07:59:26.348786+00:00"
     }
   },
-  "in_flight": {
-    "id": 97320,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45964562099",
-    "at": "2026-11-27T08:18:18.597503+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
