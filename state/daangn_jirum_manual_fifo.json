@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97271,
-  "pending": [
-    {
-      "id": 97271,
-      "source_post_url": "https://t.me/jirum/97271",
-      "original_purchase_url": "https://link.coupang.com/a/i0EFE4207w",
-      "source_text": "☆특가 10,550원\n고기듬뿍 양념 소불고기 (냉장), 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EFE4207w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:14:48+00:00",
-      "title": "☆특가 10,550원",
-      "sale_price_krw": 10550
-    }
-  ],
-  "in_flight": {
-    "id": 97271,
-    "status": "CLAIMED",
-    "run_id": "45927191279",
-    "at": "2026-11-27T02:17:12.775824+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9780,6 +9765,16 @@
       "item_id": "5748205588",
       "vendor_item_id": null,
       "at": "2026-11-27T02:17:01.858758+00:00",
+      "run_id": "45927191279"
+    },
+    "97271": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B3%A0%EA%B8%B0%EB%93%AC%EB%BF%8D-%EC%96%91%EB%85%90-%EC%86%8C%EB%B6%88%EA%B3%A0%EA%B8%B0-%EB%83%89%EC%9E%A5-500g-1%EA%B0%9C-5%ED%95%A0%EC%9D%B8-AO3qqqDA?from=write",
+      "posted_at_utc": "2026-11-27T02:14:48+00:00",
+      "product_id": "7158225439",
+      "item_id": "18010092405",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:17:34.932229+00:00",
       "run_id": "45927191279"
     }
   },
