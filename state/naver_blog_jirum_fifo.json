@@ -3,16 +3,6 @@
   "last_scanned_id": 97366,
   "pending": [
     {
-      "id": 97364,
-      "source_message_id": 97364,
-      "source_post_url": "https://t.me/jirum/97364",
-      "original_purchase_url": "https://link.coupang.com/a/i1AA9gapoG",
-      "title": "☆특가 10,470원",
-      "source_text": "☆특가 10,470원\n액츠 수퍼클린 액상세제 본품 5.7L\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AA9gapoG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10470,
-      "posted_at_utc": "2026-11-27T15:45:25+00:00"
-    },
-    {
       "id": 97365,
       "source_message_id": 97365,
       "source_post_url": "https://t.me/jirum/97365",
@@ -2843,6 +2833,10 @@
     "97363": {
       "url": "https://blog.naver.com/mw5114/224495272068",
       "at": "2026-11-27T15:49:16.626966+00:00"
+    },
+    "97364": {
+      "url": "https://blog.naver.com/mw5114/224495272704",
+      "at": "2026-11-27T15:50:12.724633+00:00"
     }
   },
   "skipped": {
@@ -3362,12 +3356,7 @@
       "at": "2026-11-27T14:53:29.092977+00:00"
     }
   },
-  "in_flight": {
-    "id": 97364,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46027962799",
-    "at": "2026-11-27T15:49:29.897693+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
