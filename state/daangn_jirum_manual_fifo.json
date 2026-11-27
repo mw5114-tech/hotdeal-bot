@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97287,
-  "pending": [
-    {
-      "id": 97287,
-      "source_post_url": "https://t.me/jirum/97287",
-      "original_purchase_url": "https://link.coupang.com/a/i0J74BnfQ4",
-      "source_text": "☆특가 6,900원\n덴마크 테이크 얼라이브 머스캣 청포도 주스, 120ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0J74BnfQ4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T03:31:11+00:00",
-      "title": "☆특가 6,900원",
-      "sale_price_krw": 6900
-    }
-  ],
-  "in_flight": {
-    "id": 97287,
-    "status": "CLAIMED",
-    "run_id": "45934738629",
-    "at": "2026-11-27T03:32:40.320954+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9911,6 +9896,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T03:22:33.606373+00:00",
       "run_id": "45933662047"
+    },
+    "97287": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B4%EB%A7%88%ED%81%AC-%ED%85%8C%EC%9D%B4%ED%81%AC-%EC%96%BC%EB%9D%BC%EC%9D%B4%EB%B8%8C-%EB%A8%B8%EC%8A%A4%EC%BA%A3-%EC%B2%AD%ED%8F%AC%EB%8F%84-%EC%A3%BC%EC%8A%A4-120ml-24-25%ED%95%A0%EC%9D%B8-dyJz32Yj?from=write",
+      "posted_at_utc": "2026-11-27T03:31:11+00:00",
+      "product_id": "6659187040",
+      "item_id": "15281505125",
+      "vendor_item_id": null,
+      "at": "2026-11-27T03:33:00.800802+00:00",
+      "run_id": "45934738629"
     }
   },
   "skipped_non_coupang": 1200,
