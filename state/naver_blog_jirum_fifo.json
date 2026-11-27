@@ -1,7 +1,58 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97361,
-  "pending": [],
+  "last_scanned_id": 97366,
+  "pending": [
+    {
+      "id": 97362,
+      "source_message_id": 97362,
+      "source_post_url": "https://t.me/jirum/97362",
+      "original_purchase_url": "https://link.coupang.com/a/i1AlwV1nsO",
+      "title": "☆특가 4,990원",
+      "source_text": "☆특가 4,990원\n진한 버터 풍미와 바삭하고 사르르 부서지는 식감! 커피랑 같이\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AlwV1nsO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 4990,
+      "posted_at_utc": "2026-11-27T15:41:53+00:00"
+    },
+    {
+      "id": 97363,
+      "source_message_id": 97363,
+      "source_post_url": "https://t.me/jirum/97363",
+      "original_purchase_url": "https://link.coupang.com/a/i1AotoYqv6",
+      "title": "☆특가 15,910원",
+      "source_text": "☆특가 15,910원\n민감해진 피부의 진정과 피부 장벽 보습 케어! 겨울 필수템\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AotoYqv6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 15910,
+      "posted_at_utc": "2026-11-27T15:42:33+00:00"
+    },
+    {
+      "id": 97364,
+      "source_message_id": 97364,
+      "source_post_url": "https://t.me/jirum/97364",
+      "original_purchase_url": "https://link.coupang.com/a/i1AA9gapoG",
+      "title": "☆특가 10,470원",
+      "source_text": "☆특가 10,470원\n액츠 수퍼클린 액상세제 본품 5.7L\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AA9gapoG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10470,
+      "posted_at_utc": "2026-11-27T15:45:25+00:00"
+    },
+    {
+      "id": 97365,
+      "source_message_id": 97365,
+      "source_post_url": "https://t.me/jirum/97365",
+      "original_purchase_url": "https://link.coupang.com/a/i1ACsDz0Q8",
+      "title": "☆특가 7,830원",
+      "source_text": "☆특가 7,830원\n엠앤엠즈 밀크 초콜릿 펀사이즈 175.5g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1ACsDz0Q8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 7830,
+      "posted_at_utc": "2026-11-27T15:45:42+00:00"
+    },
+    {
+      "id": 97366,
+      "source_message_id": 97366,
+      "source_post_url": "https://t.me/jirum/97366",
+      "original_purchase_url": "https://link.coupang.com/a/i1AFos4OPs",
+      "title": "☆특가 18,400원",
+      "source_text": "☆특가 18,400원\n회전식 원형 칫솔모로 치아 구석구석 플라그 제거에 굿\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AFos4OPs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 18400,
+      "posted_at_utc": "2026-11-27T15:46:22+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
