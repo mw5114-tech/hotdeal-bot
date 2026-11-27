@@ -3,16 +3,6 @@
   "last_scanned_id": 97312,
   "pending": [
     {
-      "id": 97311,
-      "source_message_id": 97311,
-      "source_post_url": "https://t.me/jirum/97311",
-      "original_purchase_url": "https://link.coupang.com/a/i0Z1DHCTC0",
-      "title": "☆특가 11,490원",
-      "source_text": "☆특가 11,490원\n샘표 조선 국산 100% 고추장 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Z1DHCTC0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 11490,
-      "posted_at_utc": "2026-11-27T07:13:38+00:00"
-    },
-    {
       "id": 97312,
       "source_message_id": 97312,
       "source_post_url": "https://t.me/jirum/97312",
@@ -2745,6 +2735,10 @@
     "97309": {
       "url": "https://blog.naver.com/mw5114/224494661781",
       "at": "2026-11-27T06:15:20.435424+00:00"
+    },
+    "97311": {
+      "url": "https://blog.naver.com/mw5114/224494747137",
+      "at": "2026-11-27T07:20:40.785163+00:00"
     }
   },
   "skipped": {
@@ -3245,12 +3239,7 @@
       "at": "2026-11-27T06:14:22.292676+00:00"
     }
   },
-  "in_flight": {
-    "id": 97311,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45957664314",
-    "at": "2026-11-27T07:19:56.996783+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
