@@ -1,19 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97290,
-  "pending": [
-    {
-      "id": 97289,
-      "source_message_id": 97289,
-      "source_post_url": "https://t.me/jirum/97289",
-      "original_purchase_url": "https://link.coupang.com/a/i0M5Ozxjdk",
-      "title": "☆특가 9,000원",
-      "source_text": "☆특가 9,000원\n아텍스 산리오캐릭터즈 립케어, 시나모롤, 4.5g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0M5Ozxjdk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 9000,
-      "posted_at_utc": "2026-11-27T04:12:39+00:00",
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2724,6 +2712,10 @@
     "97288": {
       "url": "https://blog.naver.com/mw5114/224494492819",
       "at": "2026-11-27T04:13:32.890596+00:00"
+    },
+    "97289": {
+      "url": "https://blog.naver.com/mw5114/224494501540",
+      "at": "2026-11-27T04:19:47.172239+00:00"
     }
   },
   "skipped": {
@@ -3216,12 +3208,7 @@
       "at": "2026-11-27T03:24:24.470435+00:00"
     }
   },
-  "in_flight": {
-    "id": 97289,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45938676877",
-    "at": "2026-11-27T04:19:03.107019+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
