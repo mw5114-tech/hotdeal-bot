@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97309,
-  "pending": [],
+  "last_scanned_id": 97311,
+  "pending": [
+    {
+      "id": 97311,
+      "source_post_url": "https://t.me/jirum/97311",
+      "original_purchase_url": "https://link.coupang.com/a/i0Z1DHCTC0",
+      "source_text": "☆특가 11,490원\n샘표 조선 국산 100% 고추장 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Z1DHCTC0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T07:13:38+00:00",
+      "title": "☆특가 11,490원",
+      "sale_price_krw": 11490
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -9938,7 +9948,7 @@
       "run_id": "45950552084"
     }
   },
-  "skipped_non_coupang": 1216,
+  "skipped_non_coupang": 1217,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
