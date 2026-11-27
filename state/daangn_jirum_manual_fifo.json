@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97315,
-  "pending": [
-    {
-      "id": 97315,
-      "source_post_url": "https://t.me/jirum/97315",
-      "original_purchase_url": "https://link.coupang.com/a/i01d1SbyQC",
-      "source_text": "☆특가 23,490원\n호주산 메가 소고기 모둠 다짐육 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i01d1SbyQC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T07:30:25+00:00",
-      "title": "☆특가 23,490원",
-      "sale_price_krw": 23490
-    }
-  ],
-  "in_flight": {
-    "id": 97315,
-    "status": "CLAIMED",
-    "run_id": "45959003567",
-    "at": "2026-11-27T07:31:47.221577+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9991,6 +9976,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T07:28:47.715703+00:00",
       "run_id": "45958586414"
+    },
+    "97315": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%98%B8%EC%A3%BC%EC%82%B0-%EB%A9%94%EA%B0%80-%EC%86%8C%EA%B3%A0%EA%B8%B0-%EB%AA%A8%EB%91%A0-%EB%8B%A4%EC%A7%90%EC%9C%A1-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-5%ED%95%A0%EC%9D%B8-dyJzDY3j?from=write",
+      "posted_at_utc": "2026-11-27T07:30:25+00:00",
+      "product_id": "7485959604",
+      "item_id": "19565425390",
+      "vendor_item_id": null,
+      "at": "2026-11-27T07:32:05.861509+00:00",
+      "run_id": "45959003567"
     }
   },
   "skipped_non_coupang": 1217,
