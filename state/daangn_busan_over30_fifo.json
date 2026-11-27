@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97275,
-  "pending": [
-    {
-      "id": 97275,
-      "source_post_url": "https://t.me/jirum/97275",
-      "original_purchase_url": "https://link.coupang.com/a/i0F0pjGnNQ",
-      "source_text": "☆특가 9,320원\n서울마님죽 떡볶이 떡마리 (냉동)\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0F0pjGnNQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:33:29+00:00",
-      "title": "☆특가 9,320원",
-      "sale_price_krw": 9320
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1179,6 +1169,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T02:17:42.933848+00:00"
+    },
+    "97275": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 10,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T02:34:25.357874+00:00"
     }
   }
 }
