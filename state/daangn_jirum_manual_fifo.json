@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97333,
-  "pending": [],
+  "last_scanned_id": 97337,
+  "pending": [
+    {
+      "id": 97337,
+      "source_post_url": "https://t.me/jirum/97337",
+      "original_purchase_url": "https://link.coupang.com/a/i1nAuyDy32",
+      "source_text": "☆특가 11,960원 (25.2% 할인)\n델몬트 드링크팩 망고, 190ml, 48개\n📌 가격 현황\n- 정상가: 16,000원\n- 할인: 4,040원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1nAuyDy32\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T12:43:21+00:00",
+      "title": "델몬트 드링크팩 망고, 190ml, 48개",
+      "sale_price_krw": 11960
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -10098,7 +10108,7 @@
       "run_id": "45986070131"
     }
   },
-  "skipped_non_coupang": 1222,
+  "skipped_non_coupang": 1225,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
