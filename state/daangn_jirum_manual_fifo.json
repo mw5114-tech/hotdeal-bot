@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97325,
-  "pending": [
-    {
-      "id": 97325,
-      "source_post_url": "https://t.me/jirum/97325",
-      "original_purchase_url": "https://link.coupang.com/a/i1ausMZO5k",
-      "source_text": "☆특가 3,000원\n덴마크 드링킹 요구르트 포스트 바이오틱스 딸기\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1ausMZO5k\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T09:40:04+00:00",
-      "title": "☆특가 3,000원",
-      "sale_price_krw": 3000
-    }
-  ],
-  "in_flight": {
-    "id": 97325,
-    "status": "CLAIMED",
-    "run_id": "45975762033",
-    "at": "2026-11-27T09:41:35.180366+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10061,6 +10046,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T09:15:49.776811+00:00",
       "run_id": "45972125674"
+    },
+    "97325": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B4%EB%A7%88%ED%81%AC-%EB%93%9C%EB%A7%81%ED%82%B9-%EC%9A%94%EA%B5%AC%EB%A5%B4%ED%8A%B8-%ED%8F%AC%EC%8A%A4%ED%8A%B8-%EB%B0%94%EC%9D%B4%EC%98%A4%ED%8B%B1%EC%8A%A4-%EB%94%B8%EA%B8%B0-750ml-20%ED%95%A0%EC%9D%B8-dYLz7vmP?from=write",
+      "posted_at_utc": "2026-11-27T09:40:04+00:00",
+      "product_id": "7180739801",
+      "item_id": "18110045502",
+      "vendor_item_id": null,
+      "at": "2026-11-27T09:41:55.256559+00:00",
+      "run_id": "45975762033"
     }
   },
   "skipped_non_coupang": 1219,
