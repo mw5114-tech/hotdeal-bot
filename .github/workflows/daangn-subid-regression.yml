@@ -124,12 +124,13 @@ jobs:
               return {"title": f"상품 [{pct}%할인]", "busan_price_evidence": {
                   "display_pct": pct, "sale": sale, "reference": 10000,
                   "reference_source": basis, "similar_only": False}}
-          assert busan_discount_eligible(deal(35, 6500))
+          assert not busan_discount_eligible(deal(35, 6500))
           assert busan_discount_eligible(deal(45, 5500))
-          assert busan_discount_eligible(deal(30, 7000))
-          assert not busan_discount_eligible(deal(30, 7001))
-          assert not busan_discount_eligible(deal(35, 7100))
-          assert not busan_discount_eligible(deal(40, 6000, "fallcent_similar_search_current"))
+          assert busan_discount_eligible(deal(50, 5000))
+          assert not busan_discount_eligible(deal(30, 7000))
+          assert not busan_discount_eligible(deal(45, 5501))
+          assert not busan_discount_eligible(deal(50, 5600))
+          assert not busan_discount_eligible(deal(50, 5000, "fallcent_similar_search_current"))
           assert not busan_discount_eligible({"title": "상품 [50%할인]"})
           with patch.dict(os.environ, {"DAANGN_BUSAN_CAFE_MODE": "true",
                                        "GITHUB_REPOSITORY": "mw5114-tech/hotdeal-bot",

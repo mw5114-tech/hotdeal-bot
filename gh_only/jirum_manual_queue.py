@@ -428,7 +428,8 @@ def validate_state(s: dict) -> None:
     if (not isinstance(busan_skips, dict) or len(busan_skips) > 10000
             or any(not isinstance(k, str) or not k.isdigit()
                    or not isinstance(v, dict)
-                   or v.get("status") != "NOT_VERIFIED_OVER_30"
+                   or v.get("status") not in ("NOT_VERIFIED_OVER_30",
+                                              "NOT_VERIFIED_AT_LEAST_45")
                    for k, v in busan_skips.items())
             or any(str(i) in busan_skips for i in ids)
             or any(k in published or k in skipped_expired or k in skipped_unverifiable
@@ -1181,13 +1182,13 @@ def busan_discount_eligible(article: dict) -> bool:
     pct, sale, reference = (proof.get(k) for k in ("display_pct", "sale", "reference"))
     title = article.get("title")
     return bool(
-        type(pct) is int and 30 <= pct <= 95
+        type(pct) is int and 45 <= pct <= 95
         and type(sale) is int and type(reference) is int
         and 0 < sale < reference <= 100_000_000
         and isinstance(proof.get("reference_source"), str)
         and proof.get("reference_source") in BUSAN_VERIFIED_PRICE_BASES
         and proof.get("similar_only") is not True
-        and (reference - sale) * 100 >= reference * 30
+        and (reference - sale) * 100 >= reference * 45
         and isinstance(title, str) and title.endswith(f" [{pct}%할인]")
     )
 
@@ -1245,7 +1246,8 @@ def skip_busan_discount(store, source_id: int, article: dict, *, sleeper=None) -
     if saved is not None:
         # Idempotent only for the same documented decision. Never overwrite
         # an existing receipt or remove another queue row.
-        if (saved.get("status") != "NOT_VERIFIED_OVER_30"
+        if (saved.get("status") not in ("NOT_VERIFIED_OVER_30",
+                                       "NOT_VERIFIED_AT_LEAST_45")
                 or saved.get("display_pct") != pct
                 or saved.get("reference_source") != basis
                 or any(row["id"] == source_id for row in state["pending"])):
@@ -1256,13 +1258,12 @@ def skip_busan_discount(store, source_id: int, article: dict, *, sleeper=None) -
             or any(key in state.get(bucket, {}) for bucket in
                    ("skipped_expired", "skipped_unverifiable"))):
         raise RuntimeError("BUSAN_DISCOUNT_QUEUE_CHANGED")
-    # Retain the historical audit status for compatibility with existing FIFO records.
-    # The eligibility check now uses the inclusive 30% threshold.
-    receipt = {"status": "NOT_VERIFIED_OVER_30", "display_pct": pct,
+    # Keep old 30% receipts readable; new skips explicitly record the new policy.
+    receipt = {"status": "NOT_VERIFIED_AT_LEAST_45", "display_pct": pct,
                "reference_source": basis, "at": now_utc()}
     state["pending"].pop(0)
     state.setdefault("skipped_busan_discount", {})[key] = receipt
-    store.write(state, sha, "state: Busan cafe skip deal not verified at least 30pct [skip ci]")
+    store.write(state, sha, "state: Busan cafe skip deal not verified at least 45pct [skip ci]")
     print("BUSAN_DISCOUNT_SKIPPED source_id=" + key)
     return await_busan_skip_checkpoint(store, source_id, receipt, sleeper=sleeper)
 
