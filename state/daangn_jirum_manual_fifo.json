@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97311,
+  "last_scanned_id": 97312,
   "pending": [
     {
       "id": 97311,
@@ -11,6 +11,15 @@
       "title": "☆특가 11,490원",
       "sale_price_krw": 11490,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97312,
+      "source_post_url": "https://t.me/jirum/97312",
+      "original_purchase_url": "https://link.coupang.com/a/i00oFoTuFw",
+      "source_text": "☆특가 8,180원\n켈로그 후루트링 시리얼 530g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i00oFoTuFw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T07:18:49+00:00",
+      "title": "☆특가 8,180원",
+      "sale_price_krw": 8180
     }
   ],
   "in_flight": null,
