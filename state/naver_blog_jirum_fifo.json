@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97367,
-  "pending": [
-    {
-      "id": 97367,
-      "source_message_id": 97367,
-      "source_post_url": "https://t.me/jirum/97367",
-      "original_purchase_url": "https://link.coupang.com/a/i1ALlITveC",
-      "title": "☆특가 57,710원",
-      "source_text": "☆특가 57,710원\n홈베이킹부터 피자, 통닭구이까지 다양하게 활용 가능한 가정용 오븐 특가\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1ALlITveC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 57710,
-      "posted_at_utc": "2026-11-27T15:47:43+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2835,6 +2824,10 @@
     "97366": {
       "url": "https://blog.naver.com/mw5114/224495274030",
       "at": "2026-11-27T15:52:06.604365+00:00"
+    },
+    "97367": {
+      "url": "https://blog.naver.com/mw5114/224495274764",
+      "at": "2026-11-27T15:53:05.906475+00:00"
     }
   },
   "skipped": {
@@ -3354,12 +3347,7 @@
       "at": "2026-11-27T14:53:29.092977+00:00"
     }
   },
-  "in_flight": {
-    "id": 97367,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46027962799",
-    "at": "2026-11-27T15:52:22.858961+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
