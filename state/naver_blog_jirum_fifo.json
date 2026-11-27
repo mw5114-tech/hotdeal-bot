@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97313,
-  "pending": [
-    {
-      "id": 97313,
-      "source_message_id": 97313,
-      "source_post_url": "https://t.me/jirum/97313",
-      "original_purchase_url": "https://link.coupang.com/a/i00vIVWgNh",
-      "title": "☆특가 10,700원",
-      "source_text": "☆특가 10,700원\n깊은 숙성 풍미와 고소한 감칠맛, 파스타나 샐러드에 갈아 올리면 풍미 UP\n📦 특가 바로가기\nhttps://link.coupang.com/a/i00vIVWgNh\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10700,
-      "posted_at_utc": "2026-11-27T07:20:25+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2743,6 +2732,10 @@
     "97312": {
       "url": "https://blog.naver.com/mw5114/224494748490",
       "at": "2026-11-27T07:21:44.966766+00:00"
+    },
+    "97313": {
+      "url": "https://blog.naver.com/mw5114/224494749912",
+      "at": "2026-11-27T07:22:49.350441+00:00"
     }
   },
   "skipped": {
@@ -3243,12 +3236,7 @@
       "at": "2026-11-27T06:14:22.292676+00:00"
     }
   },
-  "in_flight": {
-    "id": 97313,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45957664314",
-    "at": "2026-11-27T07:22:04.749315+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
