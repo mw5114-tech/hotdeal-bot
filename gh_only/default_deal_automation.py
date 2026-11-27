@@ -434,7 +434,8 @@ def enrich_deal(deal: dict, output_dir: Path,
     # Preserve the underlying download outcome before bundle/fallback logic
     # replaces an unavailable image with the generic missing-photo status.
     exact_photo_attempt = None
-    if using_public_lowchart and cached is None and matching and eligible_cdn:
+    if (using_public_lowchart and cached is None and matching and eligible_cdn
+            and photo.get("status") != "IMAGE_SAVED"):
         exact_photo_attempt = {
             "provider": "lowchart_exact_cdn",
             "status": photo.get("status"),
