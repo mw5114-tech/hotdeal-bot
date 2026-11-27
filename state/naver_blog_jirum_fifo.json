@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97272,
-  "pending": [
-    {
-      "id": 97272,
-      "source_message_id": 97272,
-      "source_post_url": "https://t.me/jirum/97272",
-      "original_purchase_url": "https://link.coupang.com/a/i0EKUf7Dt6",
-      "title": "미닛메이드 레몬에이드 탄산음료, 355ml, 24개",
-      "source_text": "☆특가 10,930원 (15.9% 할인)\n미닛메이드 레몬에이드 탄산음료, 355ml, 24개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 2,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EKUf7Dt6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10930,
-      "posted_at_utc": "2026-11-27T02:15:59+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2671,6 +2660,10 @@
     "97271": {
       "url": "https://blog.naver.com/mw5114/224494334223",
       "at": "2026-11-27T02:22:41.980529+00:00"
+    },
+    "97272": {
+      "url": "https://blog.naver.com/mw5114/224494335970",
+      "at": "2026-11-27T02:23:44.148409+00:00"
     }
   },
   "skipped": {
@@ -3153,12 +3146,7 @@
       "at": "2026-11-27T02:13:13.641362+00:00"
     }
   },
-  "in_flight": {
-    "id": 97272,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45927391651",
-    "at": "2026-11-27T02:22:59.672106+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
