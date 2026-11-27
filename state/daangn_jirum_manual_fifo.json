@@ -3,15 +3,6 @@
   "last_scanned_id": 97271,
   "pending": [
     {
-      "id": 97270,
-      "source_post_url": "https://t.me/jirum/97270",
-      "original_purchase_url": "https://link.coupang.com/a/i0EDTzcDka",
-      "source_text": "☆특가 8,080원\n레이비 산양유 바디로션 플로럴향, 350ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EDTzcDka\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:14:24+00:00",
-      "title": "☆특가 8,080원",
-      "sale_price_krw": 8080
-    },
-    {
       "id": 97271,
       "source_post_url": "https://t.me/jirum/97271",
       "original_purchase_url": "https://link.coupang.com/a/i0EFE4207w",
@@ -21,12 +12,7 @@
       "sale_price_krw": 10550
     }
   ],
-  "in_flight": {
-    "id": 97270,
-    "status": "CLAIMED",
-    "run_id": "45927191279",
-    "at": "2026-11-27T02:16:39.070748+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9779,6 +9765,16 @@
       "item_id": "102560",
       "vendor_item_id": null,
       "at": "2026-11-27T02:16:27.587136+00:00",
+      "run_id": "45927191279"
+    },
+    "97270": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A0%88%EC%9D%B4%EB%B9%84-%EC%82%B0%EC%96%91%EC%9C%A0-%EB%B0%94%EB%94%94%EB%A1%9C%EC%85%98-%ED%94%8C%EB%A1%9C%EB%9F%B4%ED%96%A5-350ml-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-jbEvvond?from=write",
+      "posted_at_utc": "2026-11-27T02:14:24+00:00",
+      "product_id": "4629892339",
+      "item_id": "5748205588",
+      "vendor_item_id": null,
+      "at": "2026-11-27T02:17:01.858758+00:00",
       "run_id": "45927191279"
     }
   },
