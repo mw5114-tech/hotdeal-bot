@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97315,
-  "pending": [
-    {
-      "id": 97315,
-      "source_message_id": 97315,
-      "source_post_url": "https://t.me/jirum/97315",
-      "original_purchase_url": "https://link.coupang.com/a/i01d1SbyQC",
-      "title": "☆특가 23,490원",
-      "source_text": "☆특가 23,490원\n호주산 메가 소고기 모둠 다짐육 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i01d1SbyQC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 23490,
-      "posted_at_utc": "2026-11-27T07:30:25+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2751,6 +2740,10 @@
     "97314": {
       "url": "https://blog.naver.com/mw5114/224494758229",
       "at": "2026-11-27T07:29:12.443877+00:00"
+    },
+    "97315": {
+      "url": "https://blog.naver.com/mw5114/224494762402",
+      "at": "2026-11-27T07:32:26.843753+00:00"
     }
   },
   "skipped": {
@@ -3251,12 +3244,7 @@
       "at": "2026-11-27T06:14:22.292676+00:00"
     }
   },
-  "in_flight": {
-    "id": 97315,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45959003567",
-    "at": "2026-11-27T07:31:43.861842+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
