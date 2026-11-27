@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97312,
-  "pending": [
-    {
-      "id": 97312,
-      "source_post_url": "https://t.me/jirum/97312",
-      "original_purchase_url": "https://link.coupang.com/a/i00oFoTuFw",
-      "source_text": "☆특가 8,180원\n켈로그 후루트링 시리얼 530g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i00oFoTuFw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T07:18:49+00:00",
-      "title": "☆특가 8,180원",
-      "sale_price_krw": 8180
-    }
-  ],
-  "in_flight": {
-    "id": 97312,
-    "status": "CLAIMED",
-    "run_id": "45957664314",
-    "at": "2026-11-27T07:21:02.659739+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9960,6 +9945,16 @@
       "item_id": "24263309563",
       "vendor_item_id": "91280000243",
       "at": "2026-11-27T07:20:28.353001+00:00",
+      "run_id": "45957664314"
+    },
+    "97312": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%9B%84%EB%A3%A8%ED%8A%B8%EB%A7%81-%EC%8B%9C%EB%A6%AC%EC%96%BC-530g-2%EA%B0%9C-35%ED%95%A0%EC%9D%B8-d7aJZ3RA?from=write",
+      "posted_at_utc": "2026-11-27T07:18:49+00:00",
+      "product_id": "7975402228",
+      "item_id": "22106504848",
+      "vendor_item_id": null,
+      "at": "2026-11-27T07:21:20.657052+00:00",
       "run_id": "45957664314"
     }
   },
