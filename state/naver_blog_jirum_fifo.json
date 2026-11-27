@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97258,
-  "pending": [
-    {
-      "id": 97258,
-      "source_message_id": 97258,
-      "source_post_url": "https://t.me/jirum/97258",
-      "original_purchase_url": "https://link.coupang.com/a/i0w9NFwKKy",
-      "title": "☆특가 8,120원",
-      "source_text": "☆특가 8,120원\n모던하우스 타원볼 + 미니볼 세트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0w9NFwKKy\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8120,
-      "posted_at_utc": "2026-11-27T00:29:39+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2643,6 +2632,10 @@
     "97255": {
       "url": "https://blog.naver.com/mw5114/224494162492",
       "at": "2026-11-27T00:27:41.742625+00:00"
+    },
+    "97258": {
+      "url": "https://blog.naver.com/mw5114/224494167364",
+      "at": "2026-11-27T00:31:26.537058+00:00"
     }
   },
   "skipped": {
@@ -3115,12 +3108,7 @@
       "at": "2026-11-26T11:32:12.493075+00:00"
     }
   },
-  "in_flight": {
-    "id": 97258,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45917076121",
-    "at": "2026-11-27T00:30:42.313708+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
