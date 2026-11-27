@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97331,
-  "pending": [
-    {
-      "id": 97331,
-      "source_post_url": "https://t.me/jirum/97331",
-      "original_purchase_url": "https://link.coupang.com/a/i1fGWix8hw",
-      "source_text": "☆특가 4,310원\n곰곰 한돈 뒷다리살 다짐육 400g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fGWix8hw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T10:52:51+00:00",
-      "title": "☆특가 4,310원",
-      "sale_price_krw": 4310
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1409,6 +1399,12 @@
       "display_pct": 40,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T10:53:04.783968+00:00"
+    },
+    "97331": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 20,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T10:53:54.763027+00:00"
     }
   }
 }
