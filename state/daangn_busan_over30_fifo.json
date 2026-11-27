@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97333,
-  "pending": [
-    {
-      "id": 97333,
-      "source_post_url": "https://t.me/jirum/97333",
-      "original_purchase_url": "https://link.coupang.com/a/i1fOVjyY9c",
-      "source_text": "☆특가 7,980원\n삼양 임꺽정 두툼 한입 떡갈비 600g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fOVjyY9c\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T10:54:39+00:00",
-      "title": "☆특가 7,980원",
-      "sale_price_krw": 7980
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1425,6 +1415,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T10:53:54.763027+00:00"
+    },
+    "97333": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T10:56:38.218579+00:00"
     }
   }
 }
