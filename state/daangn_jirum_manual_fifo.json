@@ -3,15 +3,6 @@
   "last_scanned_id": 97366,
   "pending": [
     {
-      "id": 97365,
-      "source_post_url": "https://t.me/jirum/97365",
-      "original_purchase_url": "https://link.coupang.com/a/i1ACsDz0Q8",
-      "source_text": "☆특가 7,830원\n엠앤엠즈 밀크 초콜릿 펀사이즈 175.5g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1ACsDz0Q8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:45:42+00:00",
-      "title": "☆특가 7,830원",
-      "sale_price_krw": 7830
-    },
-    {
       "id": 97366,
       "source_post_url": "https://t.me/jirum/97366",
       "original_purchase_url": "https://link.coupang.com/a/i1AFos4OPs",
@@ -21,12 +12,7 @@
       "sale_price_krw": 18400
     }
   ],
-  "in_flight": {
-    "id": 97365,
-    "status": "CLAIMED",
-    "run_id": "46027962799",
-    "at": "2026-11-27T15:48:13.192494+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10189,6 +10175,16 @@
       "item_id": "24000255881",
       "vendor_item_id": null,
       "at": "2026-11-27T15:48:02.768452+00:00",
+      "run_id": "46027962799"
+    },
+    "97365": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%97%A0%EC%95%A4%EC%97%A0%EC%A6%88-%EB%B0%80%ED%81%AC-%EC%B4%88%EC%BD%9C%EB%A6%BF-%ED%8E%80%EC%82%AC%EC%9D%B4%EC%A6%88-1755g-2%EA%B0%9C-30%ED%95%A0%EC%9D%B8-A6aJZX8j?from=write",
+      "posted_at_utc": "2026-11-27T15:45:42+00:00",
+      "product_id": "8288956292",
+      "item_id": "21259800466",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:48:31.686186+00:00",
       "run_id": "46027962799"
     }
   },
