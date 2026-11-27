@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97292,
-  "pending": [
-    {
-      "id": 97292,
-      "source_message_id": 97292,
-      "source_post_url": "https://t.me/jirum/97292",
-      "original_purchase_url": "https://link.coupang.com/a/i0QR0MvWUK",
-      "title": "☆특가 13,330원",
-      "source_text": "☆특가 13,330원\n곰곰 국내산 딸기 대과 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0QR0MvWUK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13330,
-      "posted_at_utc": "2026-11-27T05:05:31+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2727,6 +2716,10 @@
     "97289": {
       "url": "https://blog.naver.com/mw5114/224494501540",
       "at": "2026-11-27T04:19:47.172239+00:00"
+    },
+    "97292": {
+      "url": "https://blog.naver.com/mw5114/224494569044",
+      "at": "2026-11-27T05:07:12.032447+00:00"
     }
   },
   "skipped": {
@@ -3219,12 +3212,7 @@
       "at": "2026-11-27T03:24:24.470435+00:00"
     }
   },
-  "in_flight": {
-    "id": 97292,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45943750628",
-    "at": "2026-11-27T05:06:28.741375+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
