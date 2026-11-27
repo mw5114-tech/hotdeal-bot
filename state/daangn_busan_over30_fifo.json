@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97261,
-  "pending": [],
+  "last_scanned_id": 97263,
+  "pending": [
+    {
+      "id": 97263,
+      "source_post_url": "https://t.me/jirum/97263",
+      "original_purchase_url": "https://link.coupang.com/a/i0B7uCNSmG",
+      "source_text": "👍대박 14,210원 (32.3% 할인)\n더바디샵 화이트 머스크 후레그런스 바디 미스트, 100ml, 1개\n📌 가격 현황\n- 정상가: 21,000원\n- 할인: 6,790원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0B7uCNSmG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T01:39:06+00:00",
+      "title": "더바디샵 화이트 머스크 후레그런스 바디 미스트, 100ml, 1개",
+      "sale_price_krw": 14210
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -494,7 +504,7 @@
       "run_id": "45917076121"
     }
   },
-  "skipped_non_coupang": 115,
+  "skipped_non_coupang": 116,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
