@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97318,
+  "last_scanned_id": 97319,
   "pending": [
     {
       "id": 97318,
@@ -11,6 +11,15 @@
       "title": "☆특가 29,990원",
       "sale_price_krw": 29990,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97319,
+      "source_post_url": "https://t.me/jirum/97319",
+      "original_purchase_url": "https://link.coupang.com/a/i03KICu2lE",
+      "source_text": "☆특가 11,650원\n모위 프리미엄 생연어 횟감용 250g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i03KICu2lE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T08:05:47+00:00",
+      "title": "☆특가 11,650원",
+      "sale_price_krw": 11650
     }
   ],
   "in_flight": null,
