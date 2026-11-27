@@ -3,15 +3,6 @@
   "last_scanned_id": 97281,
   "pending": [
     {
-      "id": 97280,
-      "source_post_url": "https://t.me/jirum/97280",
-      "original_purchase_url": "https://link.coupang.com/a/i0HuMURn76",
-      "source_text": "☆특가 8,890원\n르샤트라1802 오드퍼퓸 섬유유연제 블랑 리필 1.5L 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0HuMURn76\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:54:20+00:00",
-      "title": "☆특가 8,890원",
-      "sale_price_krw": 8890
-    },
-    {
       "id": 97281,
       "source_post_url": "https://t.me/jirum/97281",
       "original_purchase_url": "https://link.coupang.com/a/i0Hx071Fls",
@@ -1226,6 +1217,12 @@
       "display_pct": 5,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T02:54:33.207677+00:00"
+    },
+    "97280": {
+      "status": "NOT_VERIFIED_OVER_30",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T02:55:26.740992+00:00"
     }
   }
 }
