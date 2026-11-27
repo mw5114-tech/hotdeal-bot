@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97316,
+  "last_scanned_id": 97318,
   "pending": [
     {
       "id": 97316,
@@ -11,6 +11,15 @@
       "title": "☆특가 70,360원",
       "sale_price_krw": 70360,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97318,
+      "source_post_url": "https://t.me/jirum/97318",
+      "original_purchase_url": "https://link.coupang.com/a/i02SGZ9ODs",
+      "source_text": "☆특가 29,990원\n미국산 초이스 척아이롤 구이용 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i02SGZ9ODs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T07:53:35+00:00",
+      "title": "☆특가 29,990원",
+      "sale_price_krw": 29990
     }
   ],
   "in_flight": null,
@@ -9999,7 +10008,7 @@
       "run_id": "45959003567"
     }
   },
-  "skipped_non_coupang": 1217,
+  "skipped_non_coupang": 1218,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
