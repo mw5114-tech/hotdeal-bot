@@ -3,15 +3,6 @@
   "last_scanned_id": 97363,
   "pending": [
     {
-      "id": 97362,
-      "source_post_url": "https://t.me/jirum/97362",
-      "original_purchase_url": "https://link.coupang.com/a/i1AlwV1nsO",
-      "source_text": "☆특가 4,990원\n진한 버터 풍미와 바삭하고 사르르 부서지는 식감! 커피랑 같이\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AlwV1nsO\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:41:53+00:00",
-      "title": "☆특가 4,990원",
-      "sale_price_krw": 4990
-    },
-    {
       "id": 97363,
       "source_post_url": "https://t.me/jirum/97363",
       "original_purchase_url": "https://link.coupang.com/a/i1AotoYqv6",
@@ -21,12 +12,7 @@
       "sale_price_krw": 15910
     }
   ],
-  "in_flight": {
-    "id": 97362,
-    "status": "CLAIMED",
-    "run_id": "46027420585",
-    "at": "2026-11-27T15:46:24.113305+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10159,6 +10145,16 @@
       "item_id": "26859269975",
       "vendor_item_id": null,
       "at": "2026-11-27T15:46:19.653165+00:00",
+      "run_id": "46027420585"
+    },
+    "97362": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%A4%EB%84%A4%EC%8B%9C%ED%83%80-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90-%EB%8D%B0%EB%8B%88%EC%89%AC-%EB%A0%88%EC%8B%9C%ED%94%BC-%EB%B2%84%ED%84%B0%EC%BF%A0%ED%82%A4-%ED%8B%B4-1%EA%B0%9C-340g-45%ED%95%A0%EC%9D%B8-dpY3LDej?from=write",
+      "posted_at_utc": "2026-11-27T15:41:53+00:00",
+      "product_id": "6830518120",
+      "item_id": "28670274607",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:46:44.041833+00:00",
       "run_id": "46027420585"
     }
   },
