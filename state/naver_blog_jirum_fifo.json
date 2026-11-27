@@ -3,16 +3,6 @@
   "last_scanned_id": 97279,
   "pending": [
     {
-      "id": 97278,
-      "source_message_id": 97278,
-      "source_post_url": "https://t.me/jirum/97278",
-      "original_purchase_url": "https://link.coupang.com/a/i0Hm2aUwwe",
-      "title": "☆특가 3,490원",
-      "source_text": "☆특가 3,490원\n짬뽕 순두부탕 277g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Hm2aUwwe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 3490,
-      "posted_at_utc": "2026-11-27T02:52:35+00:00"
-    },
-    {
       "id": 97279,
       "source_message_id": 97279,
       "source_post_url": "https://t.me/jirum/97279",
@@ -2705,6 +2695,10 @@
     "97277": {
       "url": "https://blog.naver.com/mw5114/224494380361",
       "at": "2026-11-27T02:52:08.405018+00:00"
+    },
+    "97278": {
+      "url": "https://blog.naver.com/mw5114/224494383358",
+      "at": "2026-11-27T02:54:13.273882+00:00"
     }
   },
   "skipped": {
@@ -3187,12 +3181,7 @@
       "at": "2026-11-27T02:13:13.641362+00:00"
     }
   },
-  "in_flight": {
-    "id": 97278,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45930922206",
-    "at": "2026-11-27T02:53:28.942346+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
