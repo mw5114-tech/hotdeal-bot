@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97265,
+  "last_scanned_id": 97269,
   "pending": [
     {
       "id": 97264,
@@ -22,6 +22,16 @@
       "source_text": "👍대박 26,020원 (33.2% 할인)\n맥시칸 크리스피 순살 (냉동), 600g, 3개\n📌 가격 현황\n- 정상가: 38,980원\n- 할인: 12,960원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Cr2n2t6i\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 26020,
       "posted_at_utc": "2026-11-27T01:43:44+00:00"
+    },
+    {
+      "id": 97269,
+      "source_message_id": 97269,
+      "source_post_url": "https://t.me/jirum/97269",
+      "original_purchase_url": "https://link.coupang.com/a/i0D61R0Cvk",
+      "title": "☆특가 5,400원",
+      "source_text": "☆특가 5,400원\n솔리몬 스퀴즈드 레몬즙, 1L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0D61R0Cvk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5400,
+      "posted_at_utc": "2026-11-27T02:06:59+00:00"
     }
   ],
   "published": {
