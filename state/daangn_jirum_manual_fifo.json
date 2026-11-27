@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97265,
+  "last_scanned_id": 97269,
   "pending": [
     {
       "id": 97265,
@@ -11,6 +11,15 @@
       "title": "맥시칸 크리스피 순살 (냉동), 600g, 3개",
       "sale_price_krw": 26020,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97269,
+      "source_post_url": "https://t.me/jirum/97269",
+      "original_purchase_url": "https://link.coupang.com/a/i0D61R0Cvk",
+      "source_text": "☆특가 5,400원\n솔리몬 스퀴즈드 레몬즙, 1L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0D61R0Cvk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T02:06:59+00:00",
+      "title": "☆특가 5,400원",
+      "sale_price_krw": 5400
     }
   ],
   "in_flight": null,
@@ -9759,7 +9768,7 @@
       "run_id": "45921692755"
     }
   },
-  "skipped_non_coupang": 1195,
+  "skipped_non_coupang": 1198,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
