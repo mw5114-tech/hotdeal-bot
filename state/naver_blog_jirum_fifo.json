@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97359,
-  "pending": [],
+  "last_scanned_id": 97361,
+  "pending": [
+    {
+      "id": 97360,
+      "source_message_id": 97360,
+      "source_post_url": "https://t.me/jirum/97360",
+      "original_purchase_url": "https://link.coupang.com/a/i1AfKxss6m",
+      "title": "☆특가 9,900원",
+      "source_text": "☆특가 9,900원\n크리스피 순살치킨 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AfKxss6m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9900,
+      "posted_at_utc": "2026-11-27T15:40:35+00:00"
+    },
+    {
+      "id": 97361,
+      "source_message_id": 97361,
+      "source_post_url": "https://t.me/jirum/97361",
+      "original_purchase_url": "https://link.coupang.com/a/i1AiFLQEsm",
+      "title": "☆특가 275,770원",
+      "source_text": "☆특가 275,770원\n원두 분쇄부터 추출까지 전자동, 밀크 스팀봉으로 라떼까지! 홈카페 특가\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AiFLQEsm\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 275770,
+      "posted_at_utc": "2026-11-27T15:41:14+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
