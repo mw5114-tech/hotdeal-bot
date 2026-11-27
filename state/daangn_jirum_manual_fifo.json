@@ -3,16 +3,6 @@
   "last_scanned_id": 97265,
   "pending": [
     {
-      "id": 97264,
-      "source_post_url": "https://t.me/jirum/97264",
-      "original_purchase_url": "https://link.coupang.com/a/i0CbLBrRJs",
-      "source_text": "☆특가 15,050원 (11.5% 할인)\n빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 1,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0CbLBrRJs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T01:40:04+00:00",
-      "title": "빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개",
-      "sale_price_krw": 15050,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97265,
       "source_post_url": "https://t.me/jirum/97265",
       "original_purchase_url": "https://link.coupang.com/a/i0Cr2n2t6i",
@@ -11909,6 +11899,12 @@
       "source_post_url": "https://t.me/jirum/97263",
       "source_title": "더바디샵 화이트 머스크 후레그런스 바디 미스트, 100ml, 1개",
       "at": "2026-11-27T01:45:27.193032+00:00"
+    },
+    "97264": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97264",
+      "source_title": "빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개",
+      "at": "2026-11-27T01:50:33.278437+00:00"
     }
   },
   "single_test_repost_20261103": {
