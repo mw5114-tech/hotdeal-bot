@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97275,
-  "pending": [],
+  "last_scanned_id": 97277,
+  "pending": [
+    {
+      "id": 97276,
+      "source_post_url": "https://t.me/jirum/97276",
+      "original_purchase_url": "https://link.coupang.com/a/i0G7ag574S",
+      "source_text": "☆특가 7,320원\n맥시칸 저당 닭강정 450g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0G7ag574S\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T02:49:00+00:00",
+      "title": "☆특가 7,320원",
+      "sale_price_krw": 7320
+    },
+    {
+      "id": 97277,
+      "source_post_url": "https://t.me/jirum/97277",
+      "original_purchase_url": "https://link.coupang.com/a/i0HbeS0BQi",
+      "source_text": "☆특가 13,710원\n종가 어린이 한입 백김치 300g 4개 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0HbeS0BQi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-27T02:49:55+00:00",
+      "title": "☆특가 13,710원",
+      "sale_price_krw": 13710
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
