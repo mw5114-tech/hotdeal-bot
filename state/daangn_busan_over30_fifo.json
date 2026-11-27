@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97365,
-  "pending": [
-    {
-      "id": 97365,
-      "source_post_url": "https://t.me/jirum/97365",
-      "original_purchase_url": "https://link.coupang.com/a/i1ACsDz0Q8",
-      "source_text": "☆특가 7,830원\n엠앤엠즈 밀크 초콜릿 펀사이즈 175.5g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1ACsDz0Q8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:45:42+00:00",
-      "title": "☆특가 7,830원",
-      "sale_price_krw": 7830
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1486,6 +1476,12 @@
       "display_pct": 25,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T15:47:44.757669+00:00"
+    },
+    "97365": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T15:48:16.017360+00:00"
     }
   }
 }
