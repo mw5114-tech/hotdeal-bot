@@ -3,15 +3,6 @@
   "last_scanned_id": 97366,
   "pending": [
     {
-      "id": 97364,
-      "source_post_url": "https://t.me/jirum/97364",
-      "original_purchase_url": "https://link.coupang.com/a/i1AA9gapoG",
-      "source_text": "☆특가 10,470원\n액츠 수퍼클린 액상세제 본품 5.7L\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AA9gapoG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:45:25+00:00",
-      "title": "☆특가 10,470원",
-      "sale_price_krw": 10470
-    },
-    {
       "id": 97365,
       "source_post_url": "https://t.me/jirum/97365",
       "original_purchase_url": "https://link.coupang.com/a/i1ACsDz0Q8",
@@ -30,12 +21,7 @@
       "sale_price_krw": 18400
     }
   ],
-  "in_flight": {
-    "id": 97364,
-    "status": "CLAIMED",
-    "run_id": "46027962799",
-    "at": "2026-11-27T15:47:42.606141+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10189,6 +10175,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T15:47:07.805801+00:00",
       "run_id": "46027420585"
+    },
+    "97364": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%95%A1%EC%B8%A0-%EC%88%98%ED%8D%BC%ED%81%B4%EB%A6%B0-%EC%95%A1%EC%83%81%EC%84%B8%EC%A0%9C-%EB%B3%B8%ED%92%88-57L-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-P5aJenKP?from=write",
+      "posted_at_utc": "2026-11-27T15:45:25+00:00",
+      "product_id": "8316162153",
+      "item_id": "24000255881",
+      "vendor_item_id": null,
+      "at": "2026-11-27T15:48:02.768452+00:00",
+      "run_id": "46027962799"
     }
   },
   "skipped_non_coupang": 1244,
