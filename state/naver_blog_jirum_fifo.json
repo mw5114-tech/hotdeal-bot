@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97370,
-  "pending": [
-    {
-      "id": 97370,
-      "source_message_id": 97370,
-      "source_post_url": "https://t.me/jirum/97370",
-      "original_purchase_url": "https://link.coupang.com/a/i117vZ6gqi",
-      "title": "비타500 광도르방 비타민음료, 100ml, 10개",
-      "source_text": "👍대박 4,690원 (37.5% 할인)\n비타500 광도르방 비타민음료, 100ml, 10개\n📌 가격 현황\n- 정상가: 7,500원\n- 할인: 2,810원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i117vZ6gqi\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 4690,
-      "posted_at_utc": "2026-11-27T22:10:33+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2843,6 +2832,10 @@
     "97369": {
       "url": "https://blog.naver.com/mw5114/224495463867",
       "at": "2026-11-27T22:14:21.000954+00:00"
+    },
+    "97370": {
+      "url": "https://blog.naver.com/mw5114/224495464463",
+      "at": "2026-11-27T22:15:17.934132+00:00"
     }
   },
   "skipped": {
@@ -3366,12 +3359,7 @@
       "at": "2026-11-27T19:30:32.605142+00:00"
     }
   },
-  "in_flight": {
-    "id": 97370,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46074950703",
-    "at": "2026-11-27T22:14:36.011481+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
