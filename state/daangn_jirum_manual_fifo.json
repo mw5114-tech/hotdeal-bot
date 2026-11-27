@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97330,
-  "pending": [
-    {
-      "id": 97330,
-      "source_post_url": "https://t.me/jirum/97330",
-      "original_purchase_url": "https://link.coupang.com/a/i1fv2c9S2e",
-      "source_text": "☆특가 11,340원\n넛츠그린 저당 마일드 초코볼 마카다미아 150g 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1fv2c9S2e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T10:50:23+00:00",
-      "title": "☆특가 11,340원",
-      "sale_price_krw": 11340
-    }
-  ],
-  "in_flight": {
-    "id": 97330,
-    "status": "CLAIMED",
-    "run_id": "45985570393",
-    "at": "2026-11-27T10:54:03.666934+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10071,6 +10056,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T09:41:55.256559+00:00",
       "run_id": "45975762033"
+    },
+    "97330": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%84%9B%EC%B8%A0%EA%B7%B8%EB%A6%B0-%EC%A0%80%EB%8B%B9-%EB%A7%88%EC%9D%BC%EB%93%9C-%EC%B4%88%EC%BD%94%EB%B3%BC-%EB%A7%88%EC%B9%B4%EB%8B%A4%EB%AF%B8%EC%95%84-2%EA%B0%9C-150g-40%ED%95%A0%EC%9D%B8-j8aJvQQA?from=write",
+      "posted_at_utc": "2026-11-27T10:50:23+00:00",
+      "product_id": "9393911742",
+      "item_id": "27897878399",
+      "vendor_item_id": null,
+      "at": "2026-11-27T10:54:22.471929+00:00",
+      "run_id": "45985570393"
     }
   },
   "skipped_non_coupang": 1222,
