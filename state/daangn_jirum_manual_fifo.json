@@ -3,16 +3,6 @@
   "last_scanned_id": 97370,
   "pending": [
     {
-      "id": 97369,
-      "source_post_url": "https://t.me/jirum/97369",
-      "original_purchase_url": "https://link.coupang.com/a/i111L4OKiG",
-      "source_text": "☆특가 4,550원 (24.2% 할인)\n깨끗한나라 아껴쓰는 천연펄프 키친타올, 140매, 8개\n📌 가격 현황\n- 정상가: 6,000원\n- 할인: 1,450원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i111L4OKiG\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T22:09:15+00:00",
-      "title": "깨끗한나라 아껴쓰는 천연펄프 키친타올, 140매, 8개",
-      "sale_price_krw": 4550,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97370,
       "source_post_url": "https://t.me/jirum/97370",
       "original_purchase_url": "https://link.coupang.com/a/i117vZ6gqi",
@@ -22,12 +12,7 @@
       "sale_price_krw": 4690
     }
   ],
-  "in_flight": {
-    "id": 97369,
-    "status": "CLAIMED",
-    "run_id": "46075093836",
-    "at": "2026-11-27T22:13:34.979085+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10221,6 +10206,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T15:49:58.306387+00:00",
       "run_id": "46028150045"
+    },
+    "97369": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EA%B9%A8%EB%81%97%ED%95%9C%EB%82%98%EB%9D%BC-%EC%95%84%EA%BB%B4%EC%93%B0%EB%8A%94-%EC%B2%9C%EC%97%B0%ED%8E%84%ED%94%84-%ED%82%A4%EC%B9%9C%ED%83%80%EC%98%AC-140%EB%A7%A4-8%EA%B0%9C-30%ED%95%A0%EC%9D%B8-PN2aw8zP?from=write",
+      "posted_at_utc": "2026-11-27T22:09:15+00:00",
+      "product_id": "8518559814",
+      "item_id": "28853709767",
+      "vendor_item_id": null,
+      "at": "2026-11-27T22:13:54.642149+00:00",
+      "run_id": "46075093836"
     }
   },
   "skipped_non_coupang": 1244,
