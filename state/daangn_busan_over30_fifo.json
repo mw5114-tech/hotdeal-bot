@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97363,
-  "pending": [
-    {
-      "id": 97363,
-      "source_post_url": "https://t.me/jirum/97363",
-      "original_purchase_url": "https://link.coupang.com/a/i1AotoYqv6",
-      "source_text": "☆특가 15,910원\n민감해진 피부의 진정과 피부 장벽 보습 케어! 겨울 필수템\n📦 특가 바로가기\nhttps://link.coupang.com/a/i1AotoYqv6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T15:42:33+00:00",
-      "title": "☆특가 15,910원",
-      "sale_price_krw": 15910
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1474,6 +1464,12 @@
       "display_pct": 45,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T15:45:43.061856+00:00"
+    },
+    "97363": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-27T15:45:51.347875+00:00"
     }
   }
 }
