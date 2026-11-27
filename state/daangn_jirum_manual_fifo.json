@@ -3,16 +3,6 @@
   "last_scanned_id": 97312,
   "pending": [
     {
-      "id": 97311,
-      "source_post_url": "https://t.me/jirum/97311",
-      "original_purchase_url": "https://link.coupang.com/a/i0Z1DHCTC0",
-      "source_text": "☆특가 11,490원\n샘표 조선 국산 100% 고추장 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Z1DHCTC0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T07:13:38+00:00",
-      "title": "☆특가 11,490원",
-      "sale_price_krw": 11490,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97312,
       "source_post_url": "https://t.me/jirum/97312",
       "original_purchase_url": "https://link.coupang.com/a/i00oFoTuFw",
@@ -22,12 +12,7 @@
       "sale_price_krw": 8180
     }
   ],
-  "in_flight": {
-    "id": 97311,
-    "status": "CLAIMED",
-    "run_id": "45957664314",
-    "at": "2026-11-27T07:20:10.153627+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9961,6 +9946,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T06:15:00.793458+00:00",
       "run_id": "45950552084"
+    },
+    "97311": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%83%98%ED%91%9C-%EC%A1%B0%EC%84%A0-%EA%B5%AD%EC%82%B0100-%EA%B3%A0%EC%B6%94%EC%9E%A5-1kg-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-AROKRNQP?from=write",
+      "posted_at_utc": "2026-11-27T07:13:38+00:00",
+      "product_id": "8312005887",
+      "item_id": "24263309563",
+      "vendor_item_id": "91280000243",
+      "at": "2026-11-27T07:20:28.353001+00:00",
+      "run_id": "45957664314"
     }
   },
   "skipped_non_coupang": 1217,
