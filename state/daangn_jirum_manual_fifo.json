@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97286,
-  "pending": [
-    {
-      "id": 97286,
-      "source_post_url": "https://t.me/jirum/97286",
-      "original_purchase_url": "https://link.coupang.com/a/i0Jmivhq2u",
-      "source_text": "☆특가 490,000원\n닌텐도 스위치 OLED 본체 네온 + 스포츠타이틀 + 필름 + 레그스트랩\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Jmivhq2u\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T03:20:24+00:00",
-      "title": "☆특가 490,000원",
-      "sale_price_krw": 490000
-    }
-  ],
-  "in_flight": {
-    "id": 97286,
-    "status": "CLAIMED",
-    "run_id": "45933662047",
-    "at": "2026-11-27T03:22:13.712488+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9901,6 +9886,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T03:21:44.613878+00:00",
       "run_id": "45933463381"
+    },
+    "97286": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8B%8C%ED%85%90%EB%8F%84-%EC%8A%A4%EC%9C%84%EC%B9%98-OLED-%EB%B3%B8%EC%B2%B4-%EB%84%A4%EC%98%A8-%EC%8A%A4%ED%8F%AC%EC%B8%A0%ED%83%80%EC%9D%B4%ED%8B%80-%ED%95%84%EB%A6%84-50%ED%95%A0%EC%9D%B8-jKaJ0rVP?from=write",
+      "posted_at_utc": "2026-11-27T03:20:24+00:00",
+      "product_id": "6538464784",
+      "item_id": "14547221039",
+      "vendor_item_id": null,
+      "at": "2026-11-27T03:22:33.606373+00:00",
+      "run_id": "45933662047"
     }
   },
   "skipped_non_coupang": 1200,
