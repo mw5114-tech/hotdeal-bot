@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97269,
+  "last_scanned_id": 97272,
   "pending": [
     {
       "id": 97265,
@@ -22,6 +22,36 @@
       "source_text": "☆특가 5,400원\n솔리몬 스퀴즈드 레몬즙, 1L, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0D61R0Cvk\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 5400,
       "posted_at_utc": "2026-11-27T02:06:59+00:00"
+    },
+    {
+      "id": 97270,
+      "source_message_id": 97270,
+      "source_post_url": "https://t.me/jirum/97270",
+      "original_purchase_url": "https://link.coupang.com/a/i0EDTzcDka",
+      "title": "☆특가 8,080원",
+      "source_text": "☆특가 8,080원\n레이비 산양유 바디로션 플로럴향, 350ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EDTzcDka\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 8080,
+      "posted_at_utc": "2026-11-27T02:14:24+00:00"
+    },
+    {
+      "id": 97271,
+      "source_message_id": 97271,
+      "source_post_url": "https://t.me/jirum/97271",
+      "original_purchase_url": "https://link.coupang.com/a/i0EFE4207w",
+      "title": "☆특가 10,550원",
+      "source_text": "☆특가 10,550원\n고기듬뿍 양념 소불고기 (냉장), 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EFE4207w\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10550,
+      "posted_at_utc": "2026-11-27T02:14:48+00:00"
+    },
+    {
+      "id": 97272,
+      "source_message_id": 97272,
+      "source_post_url": "https://t.me/jirum/97272",
+      "original_purchase_url": "https://link.coupang.com/a/i0EKUf7Dt6",
+      "title": "미닛메이드 레몬에이드 탄산음료, 355ml, 24개",
+      "source_text": "☆특가 10,930원 (15.9% 할인)\n미닛메이드 레몬에이드 탄산음료, 355ml, 24개\n📌 가격 현황\n- 정상가: 13,000원\n- 할인: 2,070원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0EKUf7Dt6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10930,
+      "posted_at_utc": "2026-11-27T02:15:59+00:00"
     }
   ],
   "published": {
