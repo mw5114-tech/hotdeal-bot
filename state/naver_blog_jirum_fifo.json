@@ -3,17 +3,6 @@
   "last_scanned_id": 97269,
   "pending": [
     {
-      "id": 97264,
-      "source_message_id": 97264,
-      "source_post_url": "https://t.me/jirum/97264",
-      "original_purchase_url": "https://link.coupang.com/a/i0CbLBrRJs",
-      "title": "빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개",
-      "source_text": "☆특가 15,050원 (11.5% 할인)\n빙그레 설탕이 들어가지 않은 초코우유, 190ml, 24개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 1,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0CbLBrRJs\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 15050,
-      "posted_at_utc": "2026-11-27T01:40:04+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97265,
       "source_message_id": 97265,
       "source_post_url": "https://t.me/jirum/97265",
@@ -3151,6 +3140,11 @@
       "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
       "attempts": 2,
       "at": "2026-11-27T01:50:05.720042+00:00"
+    },
+    "97264": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-27T02:13:13.641362+00:00"
     }
   },
   "in_flight": null,
