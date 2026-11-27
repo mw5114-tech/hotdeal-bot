@@ -3,15 +3,6 @@
   "last_scanned_id": 97279,
   "pending": [
     {
-      "id": 97278,
-      "source_post_url": "https://t.me/jirum/97278",
-      "original_purchase_url": "https://link.coupang.com/a/i0Hm2aUwwe",
-      "source_text": "☆특가 3,490원\n짬뽕 순두부탕 277g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0Hm2aUwwe\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T02:52:35+00:00",
-      "title": "☆특가 3,490원",
-      "sale_price_krw": 3490
-    },
-    {
       "id": 97279,
       "source_post_url": "https://t.me/jirum/97279",
       "original_purchase_url": "https://link.coupang.com/a/i0Hm67j7Zs",
@@ -21,12 +12,7 @@
       "sale_price_krw": 3490
     }
   ],
-  "in_flight": {
-    "id": 97278,
-    "status": "CLAIMED",
-    "run_id": "45930922206",
-    "at": "2026-11-27T02:53:53.839802+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -9860,6 +9846,16 @@
       "vendor_item_id": null,
       "at": "2026-11-27T02:51:16.381642+00:00",
       "run_id": "45930635313"
+    },
+    "97278": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%92%80%EB%AC%B4%EC%9B%90-%ED%95%9C%EB%81%BC-%EB%AA%BD%EA%B8%80-%EC%88%9C%EB%91%90%EB%B6%80-%EC%A7%AC%EB%BD%95-%EC%88%9C%EB%91%90%EB%B6%80%ED%83%95-%EB%83%89%EC%9E%A5-277g-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-PBzQO7zP?from=write",
+      "posted_at_utc": "2026-11-27T02:52:35+00:00",
+      "product_id": "6982143546",
+      "item_id": "17059536210",
+      "vendor_item_id": "84233906267",
+      "at": "2026-11-27T02:54:13.377198+00:00",
+      "run_id": "45930922206"
     }
   },
   "skipped_non_coupang": 1198,
