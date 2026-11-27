@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97287,
-  "pending": [
-    {
-      "id": 97287,
-      "source_message_id": 97287,
-      "source_post_url": "https://t.me/jirum/97287",
-      "original_purchase_url": "https://link.coupang.com/a/i0J74BnfQ4",
-      "title": "☆특가 6,900원",
-      "source_text": "☆특가 6,900원\n덴마크 테이크 얼라이브 머스캣 청포도 주스, 120ml, 24개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i0J74BnfQ4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6900,
-      "posted_at_utc": "2026-11-27T03:31:11+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2715,6 +2704,10 @@
     "97286": {
       "url": "https://blog.naver.com/mw5114/224494429864",
       "at": "2026-11-27T03:26:13.683155+00:00"
+    },
+    "97287": {
+      "url": "https://blog.naver.com/mw5114/224494439450",
+      "at": "2026-11-27T03:33:25.814039+00:00"
     }
   },
   "skipped": {
@@ -3207,12 +3200,7 @@
       "at": "2026-11-27T03:24:24.470435+00:00"
     }
   },
-  "in_flight": {
-    "id": 97287,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "45934738629",
-    "at": "2026-11-27T03:32:42.507626+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
