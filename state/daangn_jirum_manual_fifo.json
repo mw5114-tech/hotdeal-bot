@@ -3,16 +3,6 @@
   "last_scanned_id": 97443,
   "pending": [
     {
-      "id": 97442,
-      "source_post_url": "https://t.me/jirum/97442",
-      "original_purchase_url": "https://link.coupang.com/a/i2Kw6mOOxo",
-      "source_text": "☆특가 4,480원\n모나리자 천연펄프 미용티슈 2겹, 280매, 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2Kw6mOOxo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T08:32:02+00:00",
-      "title": "☆특가 4,480원",
-      "sale_price_krw": 4480,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97443,
       "source_post_url": "https://t.me/jirum/97443",
       "original_purchase_url": "https://link.coupang.com/a/i2LmRr03xc",
@@ -22,12 +12,7 @@
       "sale_price_krw": 18880
     }
   ],
-  "in_flight": {
-    "id": 97442,
-    "status": "CLAIMED",
-    "run_id": "46127198349",
-    "at": "2026-11-28T08:44:46.365101+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10581,6 +10566,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T08:29:42.811474+00:00",
       "run_id": "46125979562"
+    },
+    "97442": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%A8%EB%82%98%EB%A6%AC%EC%9E%90-%EC%B2%9C%EC%97%B0%ED%8E%84%ED%94%84-%EB%AF%B8%EC%9A%A9%ED%8B%B0%EC%8A%88-2%EA%B2%B9-280%EB%A7%A4-3%EA%B0%9C-10%ED%95%A0%EC%9D%B8-dYLBZG7P?from=write",
+      "posted_at_utc": "2026-11-28T08:32:02+00:00",
+      "product_id": "8636206095",
+      "item_id": "25058378466",
+      "vendor_item_id": null,
+      "at": "2026-11-28T08:45:05.943944+00:00",
+      "run_id": "46127198349"
     }
   },
   "skipped_non_coupang": 1278,
