@@ -3,16 +3,6 @@
   "last_scanned_id": 97409,
   "pending": [
     {
-      "id": 97397,
-      "source_message_id": 97397,
-      "source_post_url": "https://t.me/jirum/97397",
-      "original_purchase_url": "https://link.coupang.com/a/i2oavtgTdY",
-      "title": "☆특가 6,980원",
-      "source_text": "☆특가 6,980원\n오뚜기 육즙 가득 통등심 돈까스 420g  2봉\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oavtgTdY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 6980,
-      "posted_at_utc": "2026-11-28T03:19:05+00:00"
-    },
-    {
       "id": 97399,
       "source_message_id": 97399,
       "source_post_url": "https://t.me/jirum/97399",
@@ -3517,6 +3507,10 @@
       "claimed_at": "2026-11-28T03:24:19.795764+00:00",
       "source_post_url": "https://t.me/jirum/97396",
       "at": "2026-11-28T04:17:22.478334+00:00"
+    },
+    "97397": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:20:00.890418+00:00"
     }
   },
   "in_flight": null,
