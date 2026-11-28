@@ -1,16 +1,15 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97448,
+  "last_scanned_id": 97450,
   "pending": [
     {
-      "id": 97448,
-      "source_post_url": "https://t.me/jirum/97448",
-      "original_purchase_url": "https://link.coupang.com/a/i2RdY9t5dQ",
-      "source_text": "🔥🔥🔥무지성 4,800원 (60.0% 할인)🔥🔥🔥\n맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 7,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2RdY9t5dQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T10:05:41+00:00",
-      "title": "맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지",
-      "sale_price_krw": 4800,
-      "photo_prepare_failure_count": 1
+      "id": 97450,
+      "source_post_url": "https://t.me/jirum/97450",
+      "original_purchase_url": "https://link.coupang.com/a/i2VtkYkryC",
+      "source_text": "👍대박 10,800원 (36.5% 할인)\n도브 바디 스크럽 금목서향, 298g, 1개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 6,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2VtkYkryC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T11:05:07+00:00",
+      "title": "도브 바디 스크럽 금목서향, 298g, 1개",
+      "sale_price_krw": 10800
     }
   ],
   "in_flight": null,
@@ -10609,7 +10608,7 @@
       "run_id": "46133611580"
     }
   },
-  "skipped_non_coupang": 1279,
+  "skipped_non_coupang": 1280,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
@@ -12304,6 +12303,13 @@
       "source_title": "오뚜기 실쏙 토마토 스파게티소스, 2kg, 1개",
       "posted_at_utc": "2026-11-27T16:15:36+00:00",
       "at": "2026-11-27T19:11:33.249521+00:00"
+    },
+    "97448": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97448",
+      "source_title": "맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지",
+      "posted_at_utc": "2026-11-28T10:05:41+00:00",
+      "at": "2026-11-28T11:06:09.940777+00:00"
     }
   },
   "skipped_unverifiable": {
