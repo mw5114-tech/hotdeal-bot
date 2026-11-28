@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97403,
-  "pending": [
-    {
-      "id": 97403,
-      "source_post_url": "https://t.me/jirum/97403",
-      "original_purchase_url": "https://link.coupang.com/a/i2oXAlx1DZ",
-      "source_text": "☆특가 32,800원\n호주산 척아이롤 구이용 (냉장) 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oXAlx1DZ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:30:10+00:00",
-      "title": "☆특가 32,800원",
-      "sale_price_krw": 32800
-    }
-  ],
-  "in_flight": {
-    "id": 97403,
-    "status": "CLAIMED",
-    "run_id": "46103212307",
-    "at": "2026-11-28T03:31:24.104199+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10421,6 +10406,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T03:28:56.484410+00:00",
       "run_id": "46102843207"
+    },
+    "97403": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EA%B5%AD%EC%82%B0-%ED%94%84%EB%9D%BC%EC%9E%84-%EC%B2%99%EC%95%84%EC%9D%B4%EB%A1%A4-%EA%B5%AC%EC%9D%B4%EC%9A%A9-%EB%83%89%EC%9E%A5-1kg-1%EA%B0%9C-dZ7evnaj?from=write",
+      "posted_at_utc": "2026-11-28T03:30:10+00:00",
+      "product_id": "8660635594",
+      "item_id": "25137710544",
+      "vendor_item_id": null,
+      "at": "2026-11-28T03:31:43.648807+00:00",
+      "run_id": "46103212307"
     }
   },
   "skipped_non_coupang": 1255,
