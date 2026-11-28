@@ -3,15 +3,6 @@
   "last_scanned_id": 97439,
   "pending": [
     {
-      "id": 97438,
-      "source_post_url": "https://t.me/jirum/97438",
-      "original_purchase_url": "https://link.coupang.com/a/i2GZNmxgC4",
-      "source_text": "☆특가 5,860원\n한국야쿠르트 윌 저지방 에코 180ml x 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GZNmxgC4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T07:42:32+00:00",
-      "title": "☆특가 5,860원",
-      "sale_price_krw": 5860
-    },
-    {
       "id": 97439,
       "source_post_url": "https://t.me/jirum/97439",
       "original_purchase_url": "https://link.coupang.com/a/i2J6AbY5p6",
@@ -21,12 +12,7 @@
       "sale_price_krw": 1100
     }
   ],
-  "in_flight": {
-    "id": 97438,
-    "status": "CLAIMED",
-    "run_id": "46125882351",
-    "at": "2026-11-28T08:28:12.422221+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10549,6 +10535,16 @@
       "item_id": "19272261821",
       "vendor_item_id": null,
       "at": "2026-11-28T08:28:02.979714+00:00",
+      "run_id": "46125882351"
+    },
+    "97438": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%9C%EA%B5%AD%EC%95%BC%EC%BF%A0%EB%A5%B4%ED%8A%B8-%EC%9C%8C-%EC%A0%80%EC%A7%80%EB%B0%A9-%EC%97%90%EC%BD%94-180ml-6%EA%B0%9C%EC%9E%85-1%EA%B0%9C-25%ED%95%A0%EC%9D%B8-j8aeK4LA?from=write",
+      "posted_at_utc": "2026-11-28T07:42:32+00:00",
+      "product_id": "6839975977",
+      "item_id": "16262180856",
+      "vendor_item_id": null,
+      "at": "2026-11-28T08:28:31.066898+00:00",
       "run_id": "46125882351"
     }
   },
