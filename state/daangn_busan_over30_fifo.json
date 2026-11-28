@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97420,
-  "pending": [
-    {
-      "id": 97420,
-      "source_post_url": "https://t.me/jirum/97420",
-      "original_purchase_url": "https://link.coupang.com/a/i2AFK5nU9A",
-      "source_text": "☆특가 3,770원\n퀘이커 오트 그래놀라 시리얼 골든넛츠 350g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2AFK5nU9A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T06:14:04+00:00",
-      "title": "☆특가 3,770원",
-      "sale_price_krw": 3770
-    }
-  ],
-  "in_flight": {
-    "id": 97420,
-    "status": "CLAIMED",
-    "run_id": "46115692425",
-    "at": "2026-11-28T06:15:58.588375+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -657,6 +642,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T03:23:12.716269+00:00",
       "run_id": "46102375642"
+    },
+    "97420": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%80%98%EC%9D%B4%EC%BB%A4-%EC%98%A4%ED%8A%B8-%EA%B7%B8%EB%9E%98%EB%86%80%EB%9D%BC-%EC%8B%9C%EB%A6%AC%EC%96%BC-%EA%B3%A8%EB%93%A0%EB%84%9B%EC%B8%A0-350g-1%EA%B0%9C-55%ED%95%A0%EC%9D%B8-PxqM473d?from=write",
+      "posted_at_utc": "2026-11-28T06:14:04+00:00",
+      "product_id": "199764313",
+      "item_id": "579248935",
+      "vendor_item_id": "94941383313",
+      "at": "2026-11-28T06:16:17.775006+00:00",
+      "run_id": "46115692425"
     }
   },
   "skipped_non_coupang": 184,
