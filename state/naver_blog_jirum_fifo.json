@@ -1,6 +1,6 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97438,
+  "last_scanned_id": 97439,
   "pending": [
     {
       "id": 97437,
@@ -22,6 +22,16 @@
       "source_text": "☆특가 5,860원\n한국야쿠르트 윌 저지방 에코 180ml x 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GZNmxgC4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 5860,
       "posted_at_utc": "2026-11-28T07:42:32+00:00"
+    },
+    {
+      "id": 97439,
+      "source_message_id": 97439,
+      "source_post_url": "https://t.me/jirum/97439",
+      "original_purchase_url": "https://link.coupang.com/a/i2J6AbY5p6",
+      "title": "삼립 초당옥수수 크림빵",
+      "source_text": "☆특가 1,100원 (29.0% 할인)\n삼립 초당옥수수 크림빵\n📌 가격 현황\n- 정상가: 1,550원\n- 할인: 450원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2J6AbY5p6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 1100,
+      "posted_at_utc": "2026-11-28T08:26:03+00:00"
     }
   ],
   "published": {
