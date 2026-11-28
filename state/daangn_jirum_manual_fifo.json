@@ -3,16 +3,6 @@
   "last_scanned_id": 97384,
   "pending": [
     {
-      "id": 97382,
-      "source_post_url": "https://t.me/jirum/97382",
-      "original_purchase_url": "https://link.coupang.com/a/i2bQguaTpQ",
-      "source_text": "☆특가 3,910원\n이타리 오리지날 와플 초코크림맛, 1개, 280g (40개입)\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2bQguaTpQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T00:26:35+00:00",
-      "title": "☆특가 3,910원",
-      "sale_price_krw": 3910,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97384,
       "source_post_url": "https://t.me/jirum/97384",
       "original_purchase_url": "https://link.coupang.com/a/i2dKGbAIlo",
@@ -22,12 +12,7 @@
       "sale_price_krw": 2650
     }
   ],
-  "in_flight": {
-    "id": 97382,
-    "status": "CLAIMED",
-    "run_id": "46090357381",
-    "at": "2026-11-28T00:54:38.170211+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10311,6 +10296,16 @@
       "vendor_item_id": "86341249520",
       "at": "2026-11-28T00:14:57.683429+00:00",
       "run_id": "46086624881"
+    },
+    "97382": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%9D%B4%ED%83%80%EB%A6%AC-%EC%98%A4%EB%A6%AC%EC%A7%80%EB%82%A0-%EC%99%80%ED%94%8C-%EC%B4%88%EC%BD%94%ED%81%AC%EB%A6%BC%EB%A7%9B-1%EA%B0%9C-280g-25%ED%95%A0%EC%9D%B8-daDkMYeP?from=write",
+      "posted_at_utc": "2026-11-28T00:26:35+00:00",
+      "product_id": "8449841701",
+      "item_id": "25925047917",
+      "vendor_item_id": null,
+      "at": "2026-11-28T00:54:57.758729+00:00",
+      "run_id": "46090357381"
     }
   },
   "skipped_non_coupang": 1248,
