@@ -1,7 +1,35 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97458,
-  "pending": [],
+  "last_scanned_id": 97461,
+  "pending": [
+    {
+      "id": 97459,
+      "source_post_url": "https://t.me/jirum/97459",
+      "original_purchase_url": "https://link.coupang.com/a/i28t2lKMp2",
+      "source_text": "☆특가 2,640원\n알룰로스로 달콤함을 더한 꾸덕한 그릭요거트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28t2lKMp2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T14:07:12+00:00",
+      "title": "☆특가 2,640원",
+      "sale_price_krw": 2640
+    },
+    {
+      "id": 97460,
+      "source_post_url": "https://t.me/jirum/97460",
+      "original_purchase_url": "https://link.coupang.com/a/i28uG3Jcxo",
+      "source_text": "☆특가 12,710원\n신라명과 골드바 휘낭시에 252g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28uG3Jcxo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T14:07:21+00:00",
+      "title": "☆특가 12,710원",
+      "sale_price_krw": 12710
+    },
+    {
+      "id": 97461,
+      "source_post_url": "https://t.me/jirum/97461",
+      "original_purchase_url": "https://link.coupang.com/a/i28xritAey",
+      "source_text": "☆특가 17,100원\n셰프초이스 한돈 양념 돼지불고기 1kg 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28xritAey\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T14:07:58+00:00",
+      "title": "☆특가 17,100원",
+      "sale_price_krw": 17100
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
