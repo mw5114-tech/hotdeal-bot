@@ -3,17 +3,6 @@
   "last_scanned_id": 97416,
   "pending": [
     {
-      "id": 97409,
-      "source_message_id": 97409,
-      "source_post_url": "https://t.me/jirum/97409",
-      "original_purchase_url": "https://link.coupang.com/a/i2sfhH5GlU",
-      "title": "☆특가 13,980원",
-      "source_text": "☆특가 13,980원\n빽다방 아메리카노 스틱커피 1.6g 100개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2sfhH5GlU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 13980,
-      "posted_at_utc": "2026-11-28T04:16:08+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97410,
       "source_message_id": 97410,
       "source_post_url": "https://t.me/jirum/97410",
@@ -3490,6 +3479,11 @@
     "97405": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-28T04:49:28.292953+00:00"
+    },
+    "97409": {
+      "reason": "NO_VERIFIED_PHOTO_AFTER_TWO_PRE_SUBMIT_RUNS",
+      "attempts": 2,
+      "at": "2026-11-28T05:17:23.516135+00:00"
     }
   },
   "in_flight": null,
