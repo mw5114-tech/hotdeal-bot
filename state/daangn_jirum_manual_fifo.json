@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97418,
-  "pending": [
-    {
-      "id": 97418,
-      "source_post_url": "https://t.me/jirum/97418",
-      "original_purchase_url": "https://link.coupang.com/a/i2xXvem0DQ",
-      "source_text": "☆특가 37,300원\n360도 입체 열풍 순환과 6가지 자동 조리 메뉴🔥 투명창으로 조리 과정을 바로 확인 가능\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2xXvem0DQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T05:36:05+00:00",
-      "title": "☆특가 37,300원",
-      "sale_price_krw": 37300
-    }
-  ],
-  "in_flight": {
-    "id": 97418,
-    "status": "CLAIMED",
-    "run_id": "46112870721",
-    "at": "2026-11-28T05:39:05.357390+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10490,6 +10475,16 @@
       "item_id": "27216806621",
       "vendor_item_id": null,
       "at": "2026-11-28T05:38:20.143399+00:00",
+      "run_id": "46112870721"
+    },
+    "97418": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-OYEAH-%EC%A0%80%EC%86%8C%EC%9D%8C-%EC%97%90%EC%96%B4%ED%94%84%EB%9D%BC%EC%9D%B4%EC%96%B4-50L-%EC%8B%9C%EA%B0%81%ED%99%94-%EB%8C%80%EC%9A%A9%EB%9F%89-%EB%B8%94%EB%9E%99-20%ED%95%A0%EC%9D%B8-P1X1ol1A?from=write",
+      "posted_at_utc": "2026-11-28T05:36:05+00:00",
+      "product_id": "8653399396",
+      "item_id": "25121650346",
+      "vendor_item_id": null,
+      "at": "2026-11-28T05:39:23.819856+00:00",
       "run_id": "46112870721"
     }
   },
