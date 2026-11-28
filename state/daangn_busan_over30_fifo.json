@@ -3,16 +3,6 @@
   "last_scanned_id": 97381,
   "pending": [
     {
-      "id": 97380,
-      "source_post_url": "https://t.me/jirum/97380",
-      "original_purchase_url": "https://link.coupang.com/a/i2aEa4Cr0e",
-      "source_text": "☆특가 5,400원\n오리온 미쯔 황치즈 6p\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2aEa4Cr0e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T00:09:52+00:00",
-      "title": "☆특가 5,400원",
-      "sale_price_krw": 5400,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97381,
       "source_post_url": "https://t.me/jirum/97381",
       "original_purchase_url": "https://link.coupang.com/a/i2aMUXIyyq",
@@ -1569,6 +1559,12 @@
       "display_pct": 40,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-27T23:59:06.500771+00:00"
+    },
+    "97380": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 35,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T00:13:45.190788+00:00"
     }
   }
 }
