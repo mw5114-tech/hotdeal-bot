@@ -1,17 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97402,
-  "pending": [
-    {
-      "id": 97402,
-      "source_post_url": "https://t.me/jirum/97402",
-      "original_purchase_url": "https://link.coupang.com/a/i2oGOpsgw0",
-      "source_text": "☆특가 8,990원\n참프레 무화과 오리훈제 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oGOpsgw0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:26:22+00:00",
-      "title": "☆특가 8,990원",
-      "sale_price_krw": 8990
-    }
-  ],
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -1651,6 +1641,12 @@
       "display_pct": 10,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-28T03:27:58.368818+00:00"
+    },
+    "97402": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 10,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T03:28:07.729447+00:00"
     }
   }
 }
