@@ -3,15 +3,6 @@
   "last_scanned_id": 97461,
   "pending": [
     {
-      "id": 97459,
-      "source_post_url": "https://t.me/jirum/97459",
-      "original_purchase_url": "https://link.coupang.com/a/i28t2lKMp2",
-      "source_text": "☆특가 2,640원\n알룰로스로 달콤함을 더한 꾸덕한 그릭요거트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28t2lKMp2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:07:12+00:00",
-      "title": "☆특가 2,640원",
-      "sale_price_krw": 2640
-    },
-    {
       "id": 97460,
       "source_post_url": "https://t.me/jirum/97460",
       "original_purchase_url": "https://link.coupang.com/a/i28uG3Jcxo",
@@ -1854,6 +1845,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-28T11:39:43.368664+00:00"
+    },
+    "97459": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 25,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T14:08:31.434883+00:00"
     }
   }
 }
