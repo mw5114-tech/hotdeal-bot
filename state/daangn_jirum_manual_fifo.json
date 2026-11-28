@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97385,
-  "pending": [
-    {
-      "id": 97385,
-      "source_post_url": "https://t.me/jirum/97385",
-      "original_purchase_url": "https://link.coupang.com/a/i2h8EKK1fw",
-      "source_text": "☆특가 5,750원\n티젠 에너지티 부스트 스틱, 5g, 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2h8EKK1fw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T01:54:42+00:00",
-      "title": "☆특가 5,750원",
-      "sale_price_krw": 5750
-    }
-  ],
-  "in_flight": {
-    "id": 97385,
-    "status": "CLAIMED",
-    "run_id": "46095495292",
-    "at": "2026-11-28T01:56:01.882114+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10321,6 +10306,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T00:55:19.541545+00:00",
       "run_id": "46090357381"
+    },
+    "97385": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%8B%B0%EC%A0%A0-%EC%97%90%EB%84%88%EC%A7%80%ED%8B%B0-%EB%B6%80%EC%8A%A4%ED%8A%B8-%EC%8A%A4%ED%8B%B1-5g-30%EA%B0%9C-55%ED%95%A0%EC%9D%B8-dXn2E1GA?from=write",
+      "posted_at_utc": "2026-11-28T01:54:42+00:00",
+      "product_id": "8783207854",
+      "item_id": "25564190562",
+      "vendor_item_id": null,
+      "at": "2026-11-28T01:56:23.167012+00:00",
+      "run_id": "46095495292"
     }
   },
   "skipped_non_coupang": 1248,
