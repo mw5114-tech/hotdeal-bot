@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97462,
-  "pending": [
-    {
-      "id": 97462,
-      "source_post_url": "https://t.me/jirum/97462",
-      "original_purchase_url": "https://link.coupang.com/a/i28zplaNwa",
-      "source_text": "☆특가 16,890원\n테크 베이킹소다 플러스 구연산 실내건조 액체세제 드럼용 리필 2L 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28zplaNwa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:08:24+00:00",
-      "title": "☆특가 16,890원",
-      "sale_price_krw": 16890
-    }
-  ],
-  "in_flight": {
-    "id": 97462,
-    "status": "CLAIMED",
-    "run_id": "46153162369",
-    "at": "2026-11-28T14:11:35.176508+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10681,6 +10666,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T14:09:37.410140+00:00",
       "run_id": "46153052702"
+    },
+    "97462": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%85%8C%ED%81%AC-%EB%B2%A0%EC%9D%B4%ED%82%B9%EC%86%8C%EB%8B%A4-%ED%94%8C%EB%9F%AC%EC%8A%A4-%EA%B5%AC%EC%97%B0%EC%82%B0-%EC%8B%A4%EB%82%B4%EA%B1%B4%EC%A1%B0-%EC%95%A1%EC%B2%B4%EC%84%B8%EC%A0%9C-%EB%93%9C%EB%9F%BC%EC%9A%A9-%EB%A6%AC%ED%95%84-15%ED%95%A0%EC%9D%B8-dZ7eN5Nj?from=write",
+      "posted_at_utc": "2026-11-28T14:08:24+00:00",
+      "product_id": "25474551",
+      "item_id": "27212900",
+      "vendor_item_id": null,
+      "at": "2026-11-28T14:11:55.431860+00:00",
+      "run_id": "46153162369"
     }
   },
   "skipped_non_coupang": 1284,
