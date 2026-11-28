@@ -1,18 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
   "last_scanned_id": 97385,
-  "pending": [
-    {
-      "id": 97385,
-      "source_message_id": 97385,
-      "source_post_url": "https://t.me/jirum/97385",
-      "original_purchase_url": "https://link.coupang.com/a/i2h8EKK1fw",
-      "title": "☆특가 5,750원",
-      "source_text": "☆특가 5,750원\n티젠 에너지티 부스트 스틱, 5g, 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2h8EKK1fw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5750,
-      "posted_at_utc": "2026-11-28T01:54:42+00:00"
-    }
-  ],
+  "pending": [],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
@@ -2883,6 +2872,10 @@
     "97384": {
       "url": "https://blog.naver.com/mw5114/224495593580",
       "at": "2026-11-28T00:56:20.463784+00:00"
+    },
+    "97385": {
+      "url": "https://blog.naver.com/mw5114/224495660497",
+      "at": "2026-11-28T01:56:42.664408+00:00"
     }
   },
   "skipped": {
@@ -3411,12 +3404,7 @@
       "at": "2026-11-28T00:13:25.862988+00:00"
     }
   },
-  "in_flight": {
-    "id": 97385,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46095495292",
-    "at": "2026-11-28T01:55:59.519020+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
