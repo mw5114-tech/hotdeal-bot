@@ -3,16 +3,6 @@
   "last_scanned_id": 97402,
   "pending": [
     {
-      "id": 97400,
-      "source_post_url": "https://t.me/jirum/97400",
-      "original_purchase_url": "https://link.coupang.com/a/i2or8dfG0H",
-      "source_text": "☆특가 8,400원\n나주 GAP 인증 당도선별 알뜰배 3~6입 3kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2or8dfG0H\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:23:04+00:00",
-      "title": "☆특가 8,400원",
-      "sale_price_krw": 8400,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97401,
       "source_post_url": "https://t.me/jirum/97401",
       "original_purchase_url": "https://link.coupang.com/a/i2oD8xZzLo",
@@ -31,12 +21,7 @@
       "sale_price_krw": 8990
     }
   ],
-  "in_flight": {
-    "id": 97400,
-    "status": "CLAIMED",
-    "run_id": "46102843207",
-    "at": "2026-11-28T03:27:49.388863+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10410,6 +10395,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T03:24:04.937006+00:00",
       "run_id": "46102606583"
+    },
+    "97400": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%82%98%EC%A3%BC-GAP-%EC%9D%B8%EC%A6%9D-%EB%8B%B9%EB%8F%84%EC%84%A0%EB%B3%84-%EC%95%8C%EB%9C%B0%EB%B0%B0-36%EC%9E%85-3kg-1%EA%B0%9C-20%ED%95%A0%EC%9D%B8-jbEVYJxd?from=write",
+      "posted_at_utc": "2026-11-28T03:23:04+00:00",
+      "product_id": "8300212656",
+      "item_id": "23943837773",
+      "vendor_item_id": null,
+      "at": "2026-11-28T03:28:08.998804+00:00",
+      "run_id": "46102843207"
     }
   },
   "skipped_non_coupang": 1255,
