@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97452,
-  "pending": [
-    {
-      "id": 97452,
-      "source_post_url": "https://t.me/jirum/97452",
-      "original_purchase_url": "https://link.coupang.com/a/i2V8E4arVA",
-      "source_text": "☆특가 8,640원\n서울마님죽 바로렌지 치즈떡볶이 밀떡 280g 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2V8E4arVA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T11:14:27+00:00",
-      "title": "☆특가 8,640원",
-      "sale_price_krw": 8640
-    }
-  ],
-  "in_flight": {
-    "id": 97452,
-    "status": "CLAIMED",
-    "run_id": "46138975006",
-    "at": "2026-11-28T11:15:25.862512+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -687,6 +672,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T10:09:43.056982+00:00",
       "run_id": "46133611580"
+    },
+    "97452": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%84%9C%EC%9A%B8%EB%A7%88%EB%8B%98%EC%A3%BD-%EB%B0%94%EB%A1%9C%EB%A0%8C%EC%A7%80-%EC%B9%98%EC%A6%88%EB%96%A1%EB%B3%B6%EC%9D%B4-%EB%B0%80%EB%96%A1-%EB%83%89%EB%8F%99-280g-45%ED%95%A0%EC%9D%B8-PwnNmJJA?from=write",
+      "posted_at_utc": "2026-11-28T11:14:27+00:00",
+      "product_id": "9594110716",
+      "item_id": "28646544914",
+      "vendor_item_id": null,
+      "at": "2026-11-28T11:15:47.620433+00:00",
+      "run_id": "46138975006"
     }
   },
   "skipped_non_coupang": 201,
