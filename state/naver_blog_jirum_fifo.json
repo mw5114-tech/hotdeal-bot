@@ -3,17 +3,6 @@
   "last_scanned_id": 97417,
   "pending": [
     {
-      "id": 97414,
-      "source_message_id": 97414,
-      "source_post_url": "https://t.me/jirum/97414",
-      "original_purchase_url": "https://link.coupang.com/a/i2uwZ2hRTM",
-      "title": "☆특가 14,700원",
-      "source_text": "☆특가 14,700원\n더페이스샵 허브데이 마스터 블렌딩 클렌징폼 레몬, 170ml, 5개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2uwZ2hRTM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14700,
-      "posted_at_utc": "2026-11-28T04:48:07+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97417,
       "source_message_id": 97417,
       "source_post_url": "https://t.me/jirum/97417",
@@ -2910,6 +2899,10 @@
     "97392": {
       "url": "https://blog.naver.com/mw5114/224495688759",
       "at": "2026-11-28T02:23:30.993800+00:00"
+    },
+    "97414": {
+      "url": "https://blog.naver.com/mw5114/224495888176",
+      "at": "2026-11-28T05:37:38.989135+00:00"
     }
   },
   "skipped": {
@@ -3491,12 +3484,7 @@
       "at": "2026-11-28T05:17:24.599269+00:00"
     }
   },
-  "in_flight": {
-    "id": 97414,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46112870721",
-    "at": "2026-11-28T05:36:53.807369+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
