@@ -1,78 +1,7 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97409,
+  "last_scanned_id": 97414,
   "pending": [
-    {
-      "id": 97399,
-      "source_message_id": 97399,
-      "source_post_url": "https://t.me/jirum/97399",
-      "original_purchase_url": "https://link.coupang.com/a/i2oqXUEiTQ",
-      "title": "☆특가 14,390원",
-      "source_text": "☆특가 14,390원\n곰곰 얼큰 순대국 700g 3개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oqXUEiTQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 14390,
-      "posted_at_utc": "2026-11-28T03:22:48+00:00",
-      "photo_prepare_failure_count": 1
-    },
-    {
-      "id": 97400,
-      "source_message_id": 97400,
-      "source_post_url": "https://t.me/jirum/97400",
-      "original_purchase_url": "https://link.coupang.com/a/i2or8dfG0H",
-      "title": "☆특가 8,400원",
-      "source_text": "☆특가 8,400원\n나주 GAP 인증 당도선별 알뜰배 3~6입 3kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2or8dfG0H\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8400,
-      "posted_at_utc": "2026-11-28T03:23:04+00:00"
-    },
-    {
-      "id": 97401,
-      "source_message_id": 97401,
-      "source_post_url": "https://t.me/jirum/97401",
-      "original_purchase_url": "https://link.coupang.com/a/i2oD8xZzLo",
-      "title": "☆특가 5,500원",
-      "source_text": "☆특가 5,500원\n닭안심 350g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oD8xZzLo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5500,
-      "posted_at_utc": "2026-11-28T03:25:46+00:00"
-    },
-    {
-      "id": 97402,
-      "source_message_id": 97402,
-      "source_post_url": "https://t.me/jirum/97402",
-      "original_purchase_url": "https://link.coupang.com/a/i2oGOpsgw0",
-      "title": "☆특가 8,990원",
-      "source_text": "☆특가 8,990원\n참프레 무화과 오리훈제 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oGOpsgw0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 8990,
-      "posted_at_utc": "2026-11-28T03:26:22+00:00"
-    },
-    {
-      "id": 97403,
-      "source_message_id": 97403,
-      "source_post_url": "https://t.me/jirum/97403",
-      "original_purchase_url": "https://link.coupang.com/a/i2oXAlx1DZ",
-      "title": "☆특가 32,800원",
-      "source_text": "☆특가 32,800원\n호주산 척아이롤 구이용 (냉장) 1kg\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oXAlx1DZ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 32800,
-      "posted_at_utc": "2026-11-28T03:30:10+00:00"
-    },
-    {
-      "id": 97404,
-      "source_message_id": 97404,
-      "source_post_url": "https://t.me/jirum/97404",
-      "original_purchase_url": "https://link.coupang.com/a/i2o0q8WuES",
-      "title": "☆특가 12,890원",
-      "source_text": "☆특가 12,890원\n코카콜라 제로 레몬라임 190ml 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2o0q8WuES\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 12890,
-      "posted_at_utc": "2026-11-28T03:30:48+00:00"
-    },
-    {
-      "id": 97405,
-      "source_message_id": 97405,
-      "source_post_url": "https://t.me/jirum/97405",
-      "original_purchase_url": "https://link.coupang.com/a/i2o0UJ3czY",
-      "title": "☆특가 10,970원",
-      "source_text": "☆특가 10,970원\n파워에이드 마운틴 블라스트 900ml 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2o0UJ3czY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 10970,
-      "posted_at_utc": "2026-11-28T03:30:54+00:00"
-    },
     {
       "id": 97409,
       "source_message_id": 97409,
@@ -82,6 +11,26 @@
       "source_text": "☆특가 13,980원\n빽다방 아메리카노 스틱커피 1.6g 100개입\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2sfhH5GlU\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
       "sale_price_krw": 13980,
       "posted_at_utc": "2026-11-28T04:16:08+00:00"
+    },
+    {
+      "id": 97410,
+      "source_message_id": 97410,
+      "source_post_url": "https://t.me/jirum/97410",
+      "original_purchase_url": "https://link.coupang.com/a/i2sg085UIu",
+      "title": "☆특가 17,820원",
+      "source_text": "☆특가 17,820원\n풀무원 생만두 고기미나리 400g 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2sg085UIu\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 17820,
+      "posted_at_utc": "2026-11-28T04:16:31+00:00"
+    },
+    {
+      "id": 97414,
+      "source_message_id": 97414,
+      "source_post_url": "https://t.me/jirum/97414",
+      "original_purchase_url": "https://link.coupang.com/a/i2uwZ2hRTM",
+      "title": "☆특가 14,700원",
+      "source_text": "☆특가 14,700원\n더페이스샵 허브데이 마스터 블렌딩 클렌징폼 레몬, 170ml, 5개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2uwZ2hRTM\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 14700,
+      "posted_at_utc": "2026-11-28T04:48:07+00:00"
     }
   ],
   "published": {
@@ -3512,6 +3461,34 @@
     "97397": {
       "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
       "at": "2026-11-28T04:20:00.890418+00:00"
+    },
+    "97399": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292928+00:00"
+    },
+    "97400": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292935+00:00"
+    },
+    "97401": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292938+00:00"
+    },
+    "97402": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292941+00:00"
+    },
+    "97403": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292943+00:00"
+    },
+    "97404": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292950+00:00"
+    },
+    "97405": {
+      "reason": "STALE_OR_UNKNOWN_TIMESTAMP",
+      "at": "2026-11-28T04:49:28.292953+00:00"
     }
   },
   "in_flight": null,
