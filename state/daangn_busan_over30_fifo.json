@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97391,
-  "pending": [],
+  "last_scanned_id": 97393,
+  "pending": [
+    {
+      "id": 97392,
+      "source_post_url": "https://t.me/jirum/97392",
+      "original_purchase_url": "https://link.coupang.com/a/i2j1XjiVfE",
+      "source_text": "☆특가 11,310원 (23.8% 할인)\n완숙 토마토, 1.5kg, 2팩\n📌 가격 현황\n- 정상가: 14,840원\n- 할인: 3,530원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2j1XjiVfE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T02:21:11+00:00",
+      "title": "완숙 토마토, 1.5kg, 2팩",
+      "sale_price_krw": 11310
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -634,7 +644,7 @@
       "run_id": "46095495292"
     }
   },
-  "skipped_non_coupang": 173,
+  "skipped_non_coupang": 174,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
