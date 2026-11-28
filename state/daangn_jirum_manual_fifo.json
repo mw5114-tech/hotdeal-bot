@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97402,
-  "pending": [
-    {
-      "id": 97402,
-      "source_post_url": "https://t.me/jirum/97402",
-      "original_purchase_url": "https://link.coupang.com/a/i2oGOpsgw0",
-      "source_text": "☆특가 8,990원\n참프레 무화과 오리훈제 슬라이스 500g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oGOpsgw0\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:26:22+00:00",
-      "title": "☆특가 8,990원",
-      "sale_price_krw": 8990
-    }
-  ],
-  "in_flight": {
-    "id": 97402,
-    "status": "CLAIMED",
-    "run_id": "46102843207",
-    "at": "2026-11-28T03:28:37.144053+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10410,6 +10395,16 @@
       "item_id": "466799206",
       "vendor_item_id": null,
       "at": "2026-11-28T03:28:33.999267+00:00",
+      "run_id": "46102843207"
+    },
+    "97402": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%B0%B8%ED%94%84%EB%A0%88-%EB%AC%B4%ED%99%94%EA%B3%BC-%EC%98%A4%EB%A6%AC%ED%9B%88%EC%A0%9C-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EC%8A%A4-500g-1%EA%B0%9C-10%ED%95%A0%EC%9D%B8-AL1BxbJP?from=write",
+      "posted_at_utc": "2026-11-28T03:26:22+00:00",
+      "product_id": "8320625841",
+      "item_id": "24016178634",
+      "vendor_item_id": null,
+      "at": "2026-11-28T03:28:56.484410+00:00",
       "run_id": "46102843207"
     }
   },
