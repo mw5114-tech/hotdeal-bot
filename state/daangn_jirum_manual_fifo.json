@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97384,
-  "pending": [],
+  "last_scanned_id": 97385,
+  "pending": [
+    {
+      "id": 97385,
+      "source_post_url": "https://t.me/jirum/97385",
+      "original_purchase_url": "https://link.coupang.com/a/i2h8EKK1fw",
+      "source_text": "☆특가 5,750원\n티젠 에너지티 부스트 스틱, 5g, 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2h8EKK1fw\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T01:54:42+00:00",
+      "title": "☆특가 5,750원",
+      "sale_price_krw": 5750
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
