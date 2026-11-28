@@ -1,18 +1,7 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97455,
-  "pending": [
-    {
-      "id": 97455,
-      "source_post_url": "https://t.me/jirum/97455",
-      "original_purchase_url": "https://link.coupang.com/a/i2051W8brE",
-      "source_text": "☆특가 6,860원\n맘스럽 퍼퓸부케 섬유유연제 프랑스 향수첨가 에이프릴 핑크로즈향 실내건조형 구연산첨가 프리미엄, 2.5L, 4개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2051W8brE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T12:23:49+00:00",
-      "title": "☆특가 6,860원",
-      "sale_price_krw": 6860,
-      "photo_prepare_failure_count": 1
-    }
-  ],
+  "last_scanned_id": 97458,
+  "pending": [],
   "in_flight": null,
   "published": {
     "94737": {
@@ -695,7 +684,7 @@
       "run_id": "46138975006"
     }
   },
-  "skipped_non_coupang": 202,
+  "skipped_non_coupang": 205,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
@@ -752,6 +741,13 @@
       "source_title": "오뚜기 실쏙 토마토 스파게티소스, 2kg, 1개",
       "posted_at_utc": "2026-11-27T16:15:36+00:00",
       "at": "2026-11-27T19:30:29.433589+00:00"
+    },
+    "97455": {
+      "status": "DEAL_OVER_60_MINUTES_OLD",
+      "source_post_url": "https://t.me/jirum/97455",
+      "source_title": "☆특가 6,860원",
+      "posted_at_utc": "2026-11-28T12:23:49+00:00",
+      "at": "2026-11-28T14:07:53.135132+00:00"
     }
   },
   "skipped_unverifiable": {
