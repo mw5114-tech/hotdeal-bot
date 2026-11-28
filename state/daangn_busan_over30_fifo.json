@@ -3,16 +3,6 @@
   "last_scanned_id": 97418,
   "pending": [
     {
-      "id": 97417,
-      "source_post_url": "https://t.me/jirum/97417",
-      "original_purchase_url": "https://link.coupang.com/a/i2wdDLxCdE",
-      "source_text": "☆특가 15,020원\n스타벅스 바닐라 라떼 200ml 10개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2wdDLxCdE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T05:11:44+00:00",
-      "title": "☆특가 15,020원",
-      "sale_price_krw": 15020,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97418,
       "source_post_url": "https://t.me/jirum/97418",
       "original_purchase_url": "https://link.coupang.com/a/i2xXvem0DQ",
@@ -1703,6 +1693,12 @@
       "display_pct": 30,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-28T04:49:42.285297+00:00"
+    },
+    "97417": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 5,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T05:37:59.592761+00:00"
     }
   }
 }
