@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97448,
-  "pending": [],
+  "last_scanned_id": 97450,
+  "pending": [
+    {
+      "id": 97450,
+      "source_message_id": 97450,
+      "source_post_url": "https://t.me/jirum/97450",
+      "original_purchase_url": "https://link.coupang.com/a/i2VtkYkryC",
+      "title": "도브 바디 스크럽 금목서향, 298g, 1개",
+      "source_text": "👍대박 10,800원 (36.5% 할인)\n도브 바디 스크럽 금목서향, 298g, 1개\n📌 가격 현황\n- 정상가: 17,000원\n- 할인: 6,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2VtkYkryC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 10800,
+      "posted_at_utc": "2026-11-28T11:05:07+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
