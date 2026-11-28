@@ -3,16 +3,6 @@
   "last_scanned_id": 97464,
   "pending": [
     {
-      "id": 97463,
-      "source_post_url": "https://t.me/jirum/97463",
-      "original_purchase_url": "https://link.coupang.com/a/i28GPe9oNE",
-      "source_text": "☆특가 17,670원\n장당 약 9천원🔥 목까지 따뜻하게 감싸주는 반폴라 디자인 레이어드용으로 딱\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28GPe9oNE\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:10:05+00:00",
-      "title": "☆특가 17,670원",
-      "sale_price_krw": 17670,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97464,
       "source_post_url": "https://t.me/jirum/97464",
       "original_purchase_url": "https://link.coupang.com/a/i3aN1pomUm",
@@ -920,6 +910,12 @@
       "source_post_url": "https://t.me/jirum/97447",
       "source_title": "☆특가 4,800원",
       "at": "2026-11-28T10:09:14.013893+00:00"
+    },
+    "97463": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97463",
+      "source_title": "☆특가 17,670원",
+      "at": "2026-11-28T14:42:09.583411+00:00"
     }
   },
   "skipped_busan_discount": {
