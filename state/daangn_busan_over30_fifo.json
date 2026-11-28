@@ -3,15 +3,6 @@
   "last_scanned_id": 97461,
   "pending": [
     {
-      "id": 97460,
-      "source_post_url": "https://t.me/jirum/97460",
-      "original_purchase_url": "https://link.coupang.com/a/i28uG3Jcxo",
-      "source_text": "☆특가 12,710원\n신라명과 골드바 휘낭시에 252g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28uG3Jcxo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:07:21+00:00",
-      "title": "☆특가 12,710원",
-      "sale_price_krw": 12710
-    },
-    {
       "id": 97461,
       "source_post_url": "https://t.me/jirum/97461",
       "original_purchase_url": "https://link.coupang.com/a/i28xritAey",
@@ -1851,6 +1842,12 @@
       "display_pct": 25,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-28T14:08:31.434883+00:00"
+    },
+    "97460": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 30,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T14:08:40.596237+00:00"
     }
   }
 }
