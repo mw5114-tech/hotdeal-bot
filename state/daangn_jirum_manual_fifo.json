@@ -3,16 +3,6 @@
   "last_scanned_id": 97380,
   "pending": [
     {
-      "id": 97379,
-      "source_post_url": "https://t.me/jirum/97379",
-      "original_purchase_url": "https://link.coupang.com/a/i19K9X8npA",
-      "source_text": "☆특가 17,510원 (25.4% 할인)\n가루비 자가리코 샐러드 L사이즈 12개 쟈가리코, 68g, 12개\n📌 가격 현황\n- 정상가: 23,460원\n- 할인: 5,950원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i19K9X8npA\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-27T23:57:27+00:00",
-      "title": "가루비 자가리코 샐러드 L사이즈 12개 쟈가리코, 68g, 12개",
-      "sale_price_krw": 17510,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97380,
       "source_post_url": "https://t.me/jirum/97380",
       "original_purchase_url": "https://link.coupang.com/a/i2aEa4Cr0e",
@@ -12499,6 +12489,12 @@
       "source_post_url": "https://t.me/jirum/97345",
       "source_title": "QCY 에일리 버즈 프로 세미 인이어 ANC 블루투스 이어폰, HT10",
       "at": "2026-11-27T14:44:24.359123+00:00"
+    },
+    "97379": {
+      "status": "PHOTO_EVIDENCE_UNAVAILABLE",
+      "source_post_url": "https://t.me/jirum/97379",
+      "source_title": "가루비 자가리코 샐러드 L사이즈 12개 쟈가리코, 68g, 12개",
+      "at": "2026-11-28T00:13:27.541927+00:00"
     }
   },
   "single_test_repost_20261103": {
