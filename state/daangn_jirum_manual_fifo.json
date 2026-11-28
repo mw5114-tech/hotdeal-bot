@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97382,
+  "last_scanned_id": 97384,
   "pending": [
     {
       "id": 97382,
@@ -11,6 +11,15 @@
       "title": "☆특가 3,910원",
       "sale_price_krw": 3910,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97384,
+      "source_post_url": "https://t.me/jirum/97384",
+      "original_purchase_url": "https://link.coupang.com/a/i2dKGbAIlo",
+      "source_text": "☆특가 2,650원\n미정당 밀 국물떡볶이 (냉동), 1개, 580g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2dKGbAIlo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T00:53:19+00:00",
+      "title": "☆특가 2,650원",
+      "sale_price_krw": 2650
     }
   ],
   "in_flight": null,
@@ -10299,7 +10308,7 @@
       "run_id": "46086624881"
     }
   },
-  "skipped_non_coupang": 1247,
+  "skipped_non_coupang": 1248,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
