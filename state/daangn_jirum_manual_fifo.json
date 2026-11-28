@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97384,
-  "pending": [
-    {
-      "id": 97384,
-      "source_post_url": "https://t.me/jirum/97384",
-      "original_purchase_url": "https://link.coupang.com/a/i2dKGbAIlo",
-      "source_text": "☆특가 2,650원\n미정당 밀 국물떡볶이 (냉동), 1개, 580g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2dKGbAIlo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T00:53:19+00:00",
-      "title": "☆특가 2,650원",
-      "sale_price_krw": 2650
-    }
-  ],
-  "in_flight": {
-    "id": 97384,
-    "status": "CLAIMED",
-    "run_id": "46090357381",
-    "at": "2026-11-28T00:55:00.619656+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10310,6 +10295,16 @@
       "item_id": "25925047917",
       "vendor_item_id": null,
       "at": "2026-11-28T00:54:57.758729+00:00",
+      "run_id": "46090357381"
+    },
+    "97384": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AF%B8%EC%A0%95%EB%8B%B9-%EB%B0%80-%EA%B5%AD%EB%AC%BC%EB%96%A1%EB%B3%B6%EC%9D%B4-%EB%83%89%EB%8F%99-1%EA%B0%9C-580g-35%ED%95%A0%EC%9D%B8-dlkoDLwP?from=write",
+      "posted_at_utc": "2026-11-28T00:53:19+00:00",
+      "product_id": "7124670413",
+      "item_id": "17847067166",
+      "vendor_item_id": null,
+      "at": "2026-11-28T00:55:19.541545+00:00",
       "run_id": "46090357381"
     }
   },
