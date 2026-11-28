@@ -1,7 +1,28 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97379,
-  "pending": [],
+  "last_scanned_id": 97381,
+  "pending": [
+    {
+      "id": 97380,
+      "source_message_id": 97380,
+      "source_post_url": "https://t.me/jirum/97380",
+      "original_purchase_url": "https://link.coupang.com/a/i2aEa4Cr0e",
+      "title": "☆특가 5,400원",
+      "source_text": "☆특가 5,400원\n오리온 미쯔 황치즈 6p\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2aEa4Cr0e\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 5400,
+      "posted_at_utc": "2026-11-28T00:09:52+00:00"
+    },
+    {
+      "id": 97381,
+      "source_message_id": 97381,
+      "source_post_url": "https://t.me/jirum/97381",
+      "original_purchase_url": "https://link.coupang.com/a/i2aMUXIyyq",
+      "title": "대상 ALL 샌드위치햄, 200g, 4개",
+      "source_text": "☆특가 9,960원 (25.8% 할인)\n대상 ALL 샌드위치햄, 200g, 4개\n📌 가격 현황\n- 정상가: 13,430원\n- 할인: 3,470원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2aMUXIyyq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 9960,
+      "posted_at_utc": "2026-11-28T00:11:50+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
