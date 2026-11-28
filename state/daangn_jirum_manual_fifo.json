@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97403,
-  "pending": [],
+  "last_scanned_id": 97405,
+  "pending": [
+    {
+      "id": 97404,
+      "source_post_url": "https://t.me/jirum/97404",
+      "original_purchase_url": "https://link.coupang.com/a/i2o0q8WuES",
+      "source_text": "☆특가 12,890원\n코카콜라 제로 레몬라임 190ml 30개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2o0q8WuES\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T03:30:48+00:00",
+      "title": "☆특가 12,890원",
+      "sale_price_krw": 12890
+    },
+    {
+      "id": 97405,
+      "source_post_url": "https://t.me/jirum/97405",
+      "original_purchase_url": "https://link.coupang.com/a/i2o0UJ3czY",
+      "source_text": "☆특가 10,970원\n파워에이드 마운틴 블라스트 900ml 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2o0UJ3czY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T03:30:54+00:00",
+      "title": "☆특가 10,970원",
+      "sale_price_krw": 10970
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
