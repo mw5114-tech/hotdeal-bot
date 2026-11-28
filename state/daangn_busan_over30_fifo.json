@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97395,
-  "pending": [],
+  "last_scanned_id": 97398,
+  "pending": [
+    {
+      "id": 97396,
+      "source_post_url": "https://t.me/jirum/97396",
+      "original_purchase_url": "https://link.coupang.com/a/i2n5XfYsMK",
+      "source_text": "☆특가 10,920원\n클룹 애사비소다 오리지널 500ml 12개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2n5XfYsMK\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T03:18:03+00:00",
+      "title": "☆특가 10,920원",
+      "sale_price_krw": 10920
+    },
+    {
+      "id": 97397,
+      "source_post_url": "https://t.me/jirum/97397",
+      "original_purchase_url": "https://link.coupang.com/a/i2oavtgTdY",
+      "source_text": "☆특가 6,980원\n오뚜기 육즙 가득 통등심 돈까스 420g  2봉\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oavtgTdY\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T03:19:05+00:00",
+      "title": "☆특가 6,980원",
+      "sale_price_krw": 6980
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -634,7 +653,7 @@
       "run_id": "46095495292"
     }
   },
-  "skipped_non_coupang": 175,
+  "skipped_non_coupang": 176,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
