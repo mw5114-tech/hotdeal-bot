@@ -3,15 +3,6 @@
   "last_scanned_id": 97461,
   "pending": [
     {
-      "id": 97459,
-      "source_post_url": "https://t.me/jirum/97459",
-      "original_purchase_url": "https://link.coupang.com/a/i28t2lKMp2",
-      "source_text": "☆특가 2,640원\n알룰로스로 달콤함을 더한 꾸덕한 그릭요거트\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28t2lKMp2\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:07:12+00:00",
-      "title": "☆특가 2,640원",
-      "sale_price_krw": 2640
-    },
-    {
       "id": 97460,
       "source_post_url": "https://t.me/jirum/97460",
       "original_purchase_url": "https://link.coupang.com/a/i28uG3Jcxo",
@@ -30,12 +21,7 @@
       "sale_price_krw": 17100
     }
   ],
-  "in_flight": {
-    "id": 97459,
-    "status": "CLAIMED",
-    "run_id": "46153052702",
-    "at": "2026-11-28T14:08:33.014073+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10669,6 +10655,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T11:40:11.803219+00:00",
       "run_id": "46140876367"
+    },
+    "97459": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EC%9D%B4%EB%85%B8%EB%A9%80-%EC%9A%94%EC%A6%98-%EC%95%8C%EB%A3%B0%EB%A1%9C%EC%8A%A4-%EB%B8%94%EB%A0%8C%EB%94%A9-%EA%B7%B8%EB%A6%AD%EC%9A%94%EA%B1%B0%ED%8A%B8-1%EA%B0%9C-1%EA%B0%9C%EC%9E%85-1-25%ED%95%A0%EC%9D%B8-jbEVg4md?from=write",
+      "posted_at_utc": "2026-11-28T14:07:12+00:00",
+      "product_id": "8639997495",
+      "item_id": "25072753843",
+      "vendor_item_id": null,
+      "at": "2026-11-28T14:08:54.587703+00:00",
+      "run_id": "46153052702"
     }
   },
   "skipped_non_coupang": 1284,
