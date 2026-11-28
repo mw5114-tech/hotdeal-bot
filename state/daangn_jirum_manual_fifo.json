@@ -3,16 +3,6 @@
   "last_scanned_id": 97439,
   "pending": [
     {
-      "id": 97437,
-      "source_post_url": "https://t.me/jirum/97437",
-      "original_purchase_url": "https://link.coupang.com/a/i2GX8tIAc8",
-      "source_text": "☆특가 21,790원\n비비고 든든 한섬만두 384g x 8봉 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GX8tIAc8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T07:42:10+00:00",
-      "title": "☆특가 21,790원",
-      "sale_price_krw": 21790,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97438,
       "source_post_url": "https://t.me/jirum/97438",
       "original_purchase_url": "https://link.coupang.com/a/i2GZNmxgC4",
@@ -31,12 +21,7 @@
       "sale_price_krw": 1100
     }
   ],
-  "in_flight": {
-    "id": 97437,
-    "status": "CLAIMED",
-    "run_id": "46125882351",
-    "at": "2026-11-28T08:27:41.285248+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10550,6 +10535,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T06:28:31.713772+00:00",
       "run_id": "46116700980"
+    },
+    "97437": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%B9%84%EB%B9%84%EA%B3%A0-%EB%93%A0%EB%93%A0-%ED%95%9C%EC%84%AC%EB%A7%8C%EB%91%90-%EB%83%89%EB%8F%99-384g-6%EA%B0%9C-dXn2e05A?from=write",
+      "posted_at_utc": "2026-11-28T07:42:10+00:00",
+      "product_id": "8447946663",
+      "item_id": "19272261821",
+      "vendor_item_id": null,
+      "at": "2026-11-28T08:28:02.979714+00:00",
+      "run_id": "46125882351"
     }
   },
   "skipped_non_coupang": 1278,
