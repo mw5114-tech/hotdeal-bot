@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97381,
-  "pending": [
-    {
-      "id": 97381,
-      "source_post_url": "https://t.me/jirum/97381",
-      "original_purchase_url": "https://link.coupang.com/a/i2aMUXIyyq",
-      "source_text": "☆특가 9,960원 (25.8% 할인)\n대상 ALL 샌드위치햄, 200g, 4개\n📌 가격 현황\n- 정상가: 13,430원\n- 할인: 3,470원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2aMUXIyyq\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T00:11:50+00:00",
-      "title": "대상 ALL 샌드위치햄, 200g, 4개",
-      "sale_price_krw": 9960
-    }
-  ],
-  "in_flight": {
-    "id": 97381,
-    "status": "CLAIMED",
-    "run_id": "46086624881",
-    "at": "2026-11-28T00:14:38.512274+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10291,6 +10276,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T00:13:58.997983+00:00",
       "run_id": "46086441939"
+    },
+    "97381": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8C%80%EC%83%81-ALL-%EC%83%8C%EB%93%9C%EC%9C%84%EC%B9%98%ED%96%84-200g-4%EA%B0%9C-35%ED%95%A0%EC%9D%B8-dJ3WN5kj?from=write",
+      "posted_at_utc": "2026-11-28T00:11:50+00:00",
+      "product_id": "116656660",
+      "item_id": "19224586679",
+      "vendor_item_id": "86341249520",
+      "at": "2026-11-28T00:14:57.683429+00:00",
+      "run_id": "46086624881"
     }
   },
   "skipped_non_coupang": 1247,
