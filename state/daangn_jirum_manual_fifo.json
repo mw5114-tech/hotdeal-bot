@@ -3,15 +3,6 @@
   "last_scanned_id": 97402,
   "pending": [
     {
-      "id": 97401,
-      "source_post_url": "https://t.me/jirum/97401",
-      "original_purchase_url": "https://link.coupang.com/a/i2oD8xZzLo",
-      "source_text": "☆특가 5,500원\n닭안심 350g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oD8xZzLo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:25:46+00:00",
-      "title": "☆특가 5,500원",
-      "sale_price_krw": 5500
-    },
-    {
       "id": 97402,
       "source_post_url": "https://t.me/jirum/97402",
       "original_purchase_url": "https://link.coupang.com/a/i2oGOpsgw0",
@@ -21,12 +12,7 @@
       "sale_price_krw": 8990
     }
   ],
-  "in_flight": {
-    "id": 97401,
-    "status": "CLAIMED",
-    "run_id": "46102843207",
-    "at": "2026-11-28T03:28:12.289993+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10409,6 +10395,16 @@
       "item_id": "23943837773",
       "vendor_item_id": null,
       "at": "2026-11-28T03:28:08.998804+00:00",
+      "run_id": "46102843207"
+    },
+    "97401": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%ED%95%98%EB%A6%BC-%EC%9E%90%EC%97%B0%EC%8B%A4%EB%A1%9D-%EB%AC%B4%ED%95%AD%EC%83%9D%EC%A0%9C-%EC%9D%B8%EC%A6%9D-%EB%8B%AD-%EC%95%88%EC%8B%AC-%EB%83%89%EC%9E%A5-350g-1-10%ED%95%A0%EC%9D%B8-d9aZ269d?from=write",
+      "posted_at_utc": "2026-11-28T03:25:46+00:00",
+      "product_id": "162464625",
+      "item_id": "466799206",
+      "vendor_item_id": null,
+      "at": "2026-11-28T03:28:33.999267+00:00",
       "run_id": "46102843207"
     }
   },
