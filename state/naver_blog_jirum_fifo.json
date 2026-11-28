@@ -1,7 +1,18 @@
 {
   "schema": "naver-blog-jirum-fifo-v1",
-  "last_scanned_id": 97381,
-  "pending": [],
+  "last_scanned_id": 97382,
+  "pending": [
+    {
+      "id": 97382,
+      "source_message_id": 97382,
+      "source_post_url": "https://t.me/jirum/97382",
+      "original_purchase_url": "https://link.coupang.com/a/i2bQguaTpQ",
+      "title": "☆특가 3,910원",
+      "source_text": "☆특가 3,910원\n이타리 오리지날 와플 초코크림맛, 1개, 280g (40개입)\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2bQguaTpQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "sale_price_krw": 3910,
+      "posted_at_utc": "2026-11-28T00:26:35+00:00"
+    }
+  ],
   "published": {
     "95495": {
       "url": "https://blog.naver.com/mw5114/224470841603",
