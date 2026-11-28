@@ -1,7 +1,26 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97421,
-  "pending": [],
+  "last_scanned_id": 97438,
+  "pending": [
+    {
+      "id": 97437,
+      "source_post_url": "https://t.me/jirum/97437",
+      "original_purchase_url": "https://link.coupang.com/a/i2GX8tIAc8",
+      "source_text": "☆특가 21,790원\n비비고 든든 한섬만두 384g x 8봉 선택시\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GX8tIAc8\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T07:42:10+00:00",
+      "title": "☆특가 21,790원",
+      "sale_price_krw": 21790
+    },
+    {
+      "id": 97438,
+      "source_post_url": "https://t.me/jirum/97438",
+      "original_purchase_url": "https://link.coupang.com/a/i2GZNmxgC4",
+      "source_text": "☆특가 5,860원\n한국야쿠르트 윌 저지방 에코 180ml x 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GZNmxgC4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T07:42:32+00:00",
+      "title": "☆특가 5,860원",
+      "sale_price_krw": 5860
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -664,7 +683,7 @@
       "run_id": "46116700980"
     }
   },
-  "skipped_non_coupang": 184,
+  "skipped_non_coupang": 199,
   "skipped_expired": {
     "96999": {
       "status": "DEAL_OVER_60_MINUTES_OLD",
