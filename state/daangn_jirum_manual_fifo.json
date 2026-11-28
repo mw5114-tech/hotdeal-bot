@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97445,
-  "pending": [
-    {
-      "id": 97445,
-      "source_post_url": "https://t.me/jirum/97445",
-      "original_purchase_url": "https://link.coupang.com/a/i2OwOOJk1A",
-      "source_text": "☆특가 18,880원\n마이셰프 밀키트 빕스 클래식 스테이크 2인분, 576g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2OwOOJk1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T09:27:57+00:00",
-      "title": "☆특가 18,880원",
-      "sale_price_krw": 18880
-    }
-  ],
-  "in_flight": {
-    "id": 97445,
-    "status": "CLAIMED",
-    "run_id": "46130635169",
-    "at": "2026-11-28T09:28:53.117327+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10591,6 +10576,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T08:45:27.926404+00:00",
       "run_id": "46127198349"
+    },
+    "97445": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%88%EC%9D%B4%EC%85%B0%ED%94%84-%EB%B0%80%ED%82%A4%ED%8A%B8-%EB%B9%95%EC%8A%A4-%ED%81%B4%EB%9E%98%EC%8B%9D-%EC%8A%A4%ED%85%8C%EC%9D%B4%ED%81%AC-2%EC%9D%B8%EB%B6%84-576g-2%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dyJE5maj?from=write",
+      "posted_at_utc": "2026-11-28T09:27:57+00:00",
+      "product_id": "8478629664",
+      "item_id": "24558738717",
+      "vendor_item_id": "91570988666",
+      "at": "2026-11-28T09:29:15.992397+00:00",
+      "run_id": "46130635169"
     }
   },
   "skipped_non_coupang": 1279,
