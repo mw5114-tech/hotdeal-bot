@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97448,
-  "pending": [
-    {
-      "id": 97448,
-      "source_post_url": "https://t.me/jirum/97448",
-      "original_purchase_url": "https://link.coupang.com/a/i2RdY9t5dQ",
-      "source_text": "🔥🔥🔥무지성 4,800원 (60.0% 할인)🔥🔥🔥\n맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 7,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2RdY9t5dQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T10:05:41+00:00",
-      "title": "맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지",
-      "sale_price_krw": 4800
-    }
-  ],
-  "in_flight": {
-    "id": 97448,
-    "status": "CLAIMED",
-    "run_id": "46133611580",
-    "at": "2026-11-28T10:09:22.555005+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -677,6 +662,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T06:28:25.444718+00:00",
       "run_id": "46116700980"
+    },
+    "97448": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/f97o44/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%A7%98%ED%94%BC%EC%8A%A4-4in1-%EC%B0%A8%EB%9F%89%EC%9A%A9-%EB%92%B7%EC%A2%8C%EC%84%9D-%EC%BB%B5%ED%99%80%EB%8D%94-%EC%88%98%EB%82%A9%ED%95%A8-%EB%B2%A0%EC%9D%B4%EC%A7%80-1%EA%B0%9C-50%ED%95%A0%EC%9D%B8-PW7aEqVP?from=write",
+      "posted_at_utc": "2026-11-28T10:05:41+00:00",
+      "product_id": "9459958107",
+      "item_id": "28148198863",
+      "vendor_item_id": null,
+      "at": "2026-11-28T10:09:43.056982+00:00",
+      "run_id": "46133611580"
     }
   },
   "skipped_non_coupang": 200,
