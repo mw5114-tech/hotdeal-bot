@@ -3,16 +3,6 @@
   "last_scanned_id": 97391,
   "pending": [
     {
-      "id": 97390,
-      "source_post_url": "https://t.me/jirum/97390",
-      "original_purchase_url": "https://link.coupang.com/a/i2jwjHls2m",
-      "source_text": "☆특가 13,100원\n몰티져스 펀사이즈 믹스팩, 600g, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2jwjHls2m\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T02:14:02+00:00",
-      "title": "☆특가 13,100원",
-      "sale_price_krw": 13100,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97391,
       "source_post_url": "https://t.me/jirum/97391",
       "original_purchase_url": "https://link.coupang.com/a/i2jLWvqNKC",
@@ -22,12 +12,7 @@
       "sale_price_krw": 13500
     }
   ],
-  "in_flight": {
-    "id": 97390,
-    "status": "CLAIMED",
-    "run_id": "46097396509",
-    "at": "2026-11-28T02:18:47.493524+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10341,6 +10326,16 @@
       "vendor_item_id": null,
       "at": "2026-11-28T01:56:23.167012+00:00",
       "run_id": "46095495292"
+    },
+    "97390": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%AA%B0%ED%8B%B0%EC%A0%B8%EC%8A%A4-%ED%8E%80%EC%82%AC%EC%9D%B4%EC%A6%88-%EB%AF%B9%EC%8A%A4%ED%8C%A9-600g-1%EA%B0%9C-30%ED%95%A0%EC%9D%B8-Pov8vlXA?from=write",
+      "posted_at_utc": "2026-11-28T02:14:02+00:00",
+      "product_id": "7712237364",
+      "item_id": "17467407367",
+      "vendor_item_id": null,
+      "at": "2026-11-28T02:19:06.135615+00:00",
+      "run_id": "46097396509"
     }
   },
   "skipped_non_coupang": 1252,
