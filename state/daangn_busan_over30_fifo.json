@@ -3,15 +3,6 @@
   "last_scanned_id": 97402,
   "pending": [
     {
-      "id": 97401,
-      "source_post_url": "https://t.me/jirum/97401",
-      "original_purchase_url": "https://link.coupang.com/a/i2oD8xZzLo",
-      "source_text": "☆특가 5,500원\n닭안심 350g\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2oD8xZzLo\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T03:25:46+00:00",
-      "title": "☆특가 5,500원",
-      "sale_price_krw": 5500
-    },
-    {
       "id": 97402,
       "source_post_url": "https://t.me/jirum/97402",
       "original_purchase_url": "https://link.coupang.com/a/i2oGOpsgw0",
@@ -1654,6 +1645,12 @@
       "display_pct": 20,
       "reference_source": "lowchart_public_history",
       "at": "2026-11-28T03:27:48.627805+00:00"
+    },
+    "97401": {
+      "status": "NOT_VERIFIED_AT_LEAST_45",
+      "display_pct": 10,
+      "reference_source": "lowchart_public_history",
+      "at": "2026-11-28T03:27:58.368818+00:00"
     }
   }
 }
