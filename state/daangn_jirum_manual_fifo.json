@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97421,
-  "pending": [
-    {
-      "id": 97421,
-      "source_post_url": "https://t.me/jirum/97421",
-      "original_purchase_url": "https://link.coupang.com/a/i2BB3qnwOa",
-      "source_text": "☆특가 2,640원\n데니그리스 유기농 석류 식초, 500ml, 1개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2BB3qnwOa\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T06:27:13+00:00",
-      "title": "☆특가 2,640원",
-      "sale_price_krw": 2640
-    }
-  ],
-  "in_flight": {
-    "id": 97421,
-    "status": "CLAIMED",
-    "run_id": "46116700980",
-    "at": "2026-11-28T06:28:13.779637+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10521,6 +10506,16 @@
       "vendor_item_id": "94941383313",
       "at": "2026-11-28T06:16:17.946080+00:00",
       "run_id": "46115692425"
+    },
+    "97421": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EB%8D%B0%EB%8B%88%EA%B7%B8%EB%A6%AC%EC%8A%A4-%EC%9C%A0%EA%B8%B0%EB%86%8D-%EC%84%9D%EB%A5%98-%EC%8B%9D%EC%B4%88-500ml-1%EA%B0%9C-45%ED%95%A0%EC%9D%B8-Aqq94bEA?from=write",
+      "posted_at_utc": "2026-11-28T06:27:13+00:00",
+      "product_id": "6126581415",
+      "item_id": "11652049912",
+      "vendor_item_id": null,
+      "at": "2026-11-28T06:28:31.713772+00:00",
+      "run_id": "46116700980"
     }
   },
   "skipped_non_coupang": 1263,
