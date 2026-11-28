@@ -1,7 +1,17 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97443,
-  "pending": [],
+  "last_scanned_id": 97445,
+  "pending": [
+    {
+      "id": 97445,
+      "source_post_url": "https://t.me/jirum/97445",
+      "original_purchase_url": "https://link.coupang.com/a/i2OwOOJk1A",
+      "source_text": "☆특가 18,880원\n마이셰프 밀키트 빕스 클래식 스테이크 2인분, 576g, 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2OwOOJk1A\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T09:27:57+00:00",
+      "title": "☆특가 18,880원",
+      "sale_price_krw": 18880
+    }
+  ],
   "in_flight": null,
   "published": {
     "94737": {
@@ -10578,7 +10588,7 @@
       "run_id": "46127198349"
     }
   },
-  "skipped_non_coupang": 1278,
+  "skipped_non_coupang": 1279,
   "skipped_expired": {
     "94789": {
       "status": "POSTED_AT_UNKNOWN",
