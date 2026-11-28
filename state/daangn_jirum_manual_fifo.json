@@ -3,16 +3,6 @@
   "last_scanned_id": 97448,
   "pending": [
     {
-      "id": 97446,
-      "source_post_url": "https://t.me/jirum/97446",
-      "original_purchase_url": "https://link.coupang.com/a/i2Q5t4ptOC",
-      "source_text": "☆특가 9,090원 (9.1% 할인)\n삼립 리얼 후레쉬 치즈케익 10개입\n📌 가격 현황\n- 정상가: 10,000원\n- 할인: 910원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2Q5t4ptOC\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T10:03:46+00:00",
-      "title": "삼립 리얼 후레쉬 치즈케익 10개입",
-      "sale_price_krw": 9090,
-      "photo_prepare_failure_count": 1
-    },
-    {
       "id": 97447,
       "source_post_url": "https://t.me/jirum/97447",
       "original_purchase_url": "https://link.coupang.com/a/i2RaAM8cH6",
@@ -31,12 +21,7 @@
       "sale_price_krw": 4800
     }
   ],
-  "in_flight": {
-    "id": 97446,
-    "status": "CLAIMED",
-    "run_id": "46133611580",
-    "at": "2026-11-28T10:07:51.634748+00:00"
-  },
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10620,6 +10605,16 @@
       "vendor_item_id": "91570988666",
       "at": "2026-11-28T09:29:15.992397+00:00",
       "run_id": "46130635169"
+    },
+    "97446": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%82%BC%EB%A6%BD-%EB%A6%AC%EC%96%BC-%ED%9B%84%EB%A0%88%EC%89%AC-%EC%B9%98%EC%A6%88%EC%BC%80%EC%9D%B5-70g-10%EA%B0%9C%EC%9E%85-1%EA%B0%9C-15%ED%95%A0%EC%9D%B8-Pmvxy7Rd?from=write",
+      "posted_at_utc": "2026-11-28T10:03:46+00:00",
+      "product_id": "192137568",
+      "item_id": "549656318",
+      "vendor_item_id": null,
+      "at": "2026-11-28T10:08:09.954861+00:00",
+      "run_id": "46133611580"
     }
   },
   "skipped_non_coupang": 1279,
