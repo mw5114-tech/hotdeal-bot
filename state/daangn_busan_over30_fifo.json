@@ -1,6 +1,6 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
-  "last_scanned_id": 97446,
+  "last_scanned_id": 97448,
   "pending": [
     {
       "id": 97446,
@@ -11,6 +11,24 @@
       "title": "삼립 리얼 후레쉬 치즈케익 10개입",
       "sale_price_krw": 9090,
       "photo_prepare_failure_count": 1
+    },
+    {
+      "id": 97447,
+      "source_post_url": "https://t.me/jirum/97447",
+      "original_purchase_url": "https://link.coupang.com/a/i2RaAM8cH6",
+      "source_text": "☆특가 4,800원\n무네오 재물운 소원성취 옥 진주 팔찌세트 6mm\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2RaAM8cH6\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T10:04:55+00:00",
+      "title": "☆특가 4,800원",
+      "sale_price_krw": 4800
+    },
+    {
+      "id": 97448,
+      "source_post_url": "https://t.me/jirum/97448",
+      "original_purchase_url": "https://link.coupang.com/a/i2RdY9t5dQ",
+      "source_text": "🔥🔥🔥무지성 4,800원 (60.0% 할인)🔥🔥🔥\n맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지\n🔥선구매후고민, 🔥선구매후고민, 🔥선구매후고민\n📌 가격 현황\n- 정상가: 12,000원\n- 할인: 7,200원\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2RdY9t5dQ\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
+      "posted_at_utc": "2026-11-28T10:05:41+00:00",
+      "title": "맘피스 4in1 차량용 뒷좌석 컵홀더 수납함 베이지",
+      "sale_price_krw": 4800
     }
   ],
   "in_flight": null,
