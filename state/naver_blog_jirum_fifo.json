@@ -3,16 +3,6 @@
   "last_scanned_id": 97439,
   "pending": [
     {
-      "id": 97438,
-      "source_message_id": 97438,
-      "source_post_url": "https://t.me/jirum/97438",
-      "original_purchase_url": "https://link.coupang.com/a/i2GZNmxgC4",
-      "title": "☆특가 5,860원",
-      "source_text": "☆특가 5,860원\n한국야쿠르트 윌 저지방 에코 180ml x 6개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i2GZNmxgC4\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "sale_price_krw": 5860,
-      "posted_at_utc": "2026-11-28T07:42:32+00:00"
-    },
-    {
       "id": 97439,
       "source_message_id": 97439,
       "source_post_url": "https://t.me/jirum/97439",
@@ -2937,6 +2927,10 @@
     "97437": {
       "url": "https://blog.naver.com/mw5114/224496053846",
       "at": "2026-11-28T08:28:23.183994+00:00"
+    },
+    "97438": {
+      "url": "https://blog.naver.com/mw5114/224496054697",
+      "at": "2026-11-28T08:29:20.501178+00:00"
     }
   },
   "skipped": {
@@ -3518,12 +3512,7 @@
       "at": "2026-11-28T05:17:24.599269+00:00"
     }
   },
-  "in_flight": {
-    "id": 97438,
-    "status": "REVIEW_REQUIRED",
-    "run_id": "46125882351",
-    "at": "2026-11-28T08:28:36.354345+00:00"
-  },
+  "in_flight": null,
   "style_test_once_20261109": {
     "status": "PUBLISHED",
     "source_id": 95498,
