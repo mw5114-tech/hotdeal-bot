@@ -1,23 +1,8 @@
 {
   "schema": "daangn-jirum-manual-fifo-v1",
   "last_scanned_id": 97461,
-  "pending": [
-    {
-      "id": 97461,
-      "source_post_url": "https://t.me/jirum/97461",
-      "original_purchase_url": "https://link.coupang.com/a/i28xritAey",
-      "source_text": "☆특가 17,100원\n셰프초이스 한돈 양념 돼지불고기 1kg 2개\n📦 특가 바로가기\nhttps://link.coupang.com/a/i28xritAey\n이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받습니다.",
-      "posted_at_utc": "2026-11-28T14:07:58+00:00",
-      "title": "☆특가 17,100원",
-      "sale_price_krw": 17100
-    }
-  ],
-  "in_flight": {
-    "id": 97461,
-    "status": "CLAIMED",
-    "run_id": "46153052702",
-    "at": "2026-11-28T14:09:18.964314+00:00"
-  },
+  "pending": [],
+  "in_flight": null,
   "published": {
     "94737": {
       "status": "ALREADY_PUBLISHED_BEFORE_QUEUE"
@@ -10670,6 +10655,16 @@
       "item_id": "24771957554",
       "vendor_item_id": null,
       "at": "2026-11-28T14:09:15.694439+00:00",
+      "run_id": "46153052702"
+    },
+    "97461": {
+      "status": "PUBLISHED_VERIFIED",
+      "post_url": "https://cafe.daangn.com/kupang-teuggaye/posts/%EC%BF%A0%ED%8C%A1%F0%9F%94%A5%ED%95%AB%EB%94%9C-%EC%85%B0%ED%94%84%EC%B4%88%EC%9D%B4%EC%8A%A4-%ED%95%9C%EB%8F%88-%EC%96%91%EB%85%90-%EB%8F%BC%EC%A7%80-%EB%B6%88%EA%B3%A0%EA%B8%B0-1kg-2%EA%B0%9C-40%ED%95%A0%EC%9D%B8-dlkoQn6P?from=write",
+      "posted_at_utc": "2026-11-28T14:07:58+00:00",
+      "product_id": "1863085860",
+      "item_id": "19225066071",
+      "vendor_item_id": null,
+      "at": "2026-11-28T14:09:37.410140+00:00",
       "run_id": "46153052702"
     }
   },
